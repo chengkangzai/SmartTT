@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test',function (){
-    return DB::table('laravel')->get();
+    return DB::table('users')->get();
 });
