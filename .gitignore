@@ -3,8 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-/phpMyAdmin
-/phpMyAdmin/*
+/public/adminer/
 .env
 .idea/
 .env.backup

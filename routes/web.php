@@ -10,6 +10,4 @@ Route::get('/test',function (){
     return DB::table('users')->get();
 });
 
-Route::get('/phpMyAdmin', function () {
-    return redirect('/phpMyAdmin/index.php');
-});
+
