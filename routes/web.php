@@ -7,3 +7,4 @@ Route::get('/', function () {
 
 
 
+\http\Url::forceScheme('https');
