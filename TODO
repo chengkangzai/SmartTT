@@ -1,0 +1,2 @@
+1. 'COMPOSER install' to install spatie laravel permission
+2. 'php artisan migrate' to install spatie laravel permission
