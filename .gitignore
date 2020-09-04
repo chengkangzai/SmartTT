@@ -2,6 +2,8 @@
 /storage/*.key
 /vendor
 /public/adminer/
+/public/css/app.css
+/public/js/app.js
 .env
 .idea/
 .env.backup
