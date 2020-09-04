@@ -8,13 +8,10 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function () {
     Route::get('/', function () {
         return view('index');
     });
-    Route::get('/test', function () {
-    return Tour::all();
-    });
 });
 
 Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function () {
     Route::get('/', function () {
-        return view('smartTT/master');
+        return view('smartTT/test');
     });
 });
