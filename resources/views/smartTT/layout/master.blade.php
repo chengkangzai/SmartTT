@@ -18,14 +18,12 @@
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 @include('smartTT.layout.header')
-<!-- Left side column. contains the logo and sidebar -->
-@include('smartTT.layout.sidebar')
-    <div class="content-wrapper">
-    @yield('content')
 
+    @include('smartTT.layout.sidebar')
+    <div class="content-wrapper">
+        @yield('content')
     </div>
 
-<!-- Content Wrapper. Contains page content -->
 
 </div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>

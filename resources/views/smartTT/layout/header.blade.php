@@ -1,10 +1,9 @@
-
 <header class="main-header">
-    <a href="index2.html" class="logo">
+    <a href="{{route('index')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini">{{config('app.name')}}</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg">{{config('app.name')}}</span>
     </a>
 
     <nav class="navbar navbar-static-top " role="navigation">
@@ -129,17 +128,17 @@
                         <!-- Menu Body -->
                         <li class="user-body">
 
-{{--                            <div class="row mb-1 text-center">--}}
-{{--                                <button class="btn btn-primary text-white">Followers</button>--}}
-{{--                            </div>--}}
-{{--                            <div class="row mb-1 text-center">--}}
-{{--                                <button class="btn btn-primary text-white">Sales</button>--}}
-{{--                            </div>--}}
-{{--                            <div class="row mb-1 text-center">--}}
-{{--                                <button class="btn btn-primary text-white">Friends</button>--}}
-{{--                            </div>--}}
+                        {{--                            <div class="row mb-1 text-center">--}}
+                        {{--                                <button class="btn btn-primary text-white">Followers</button>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="row mb-1 text-center">--}}
+                        {{--                                <button class="btn btn-primary text-white">Sales</button>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="row mb-1 text-center">--}}
+                        {{--                                <button class="btn btn-primary text-white">Friends</button>--}}
+                        {{--                            </div>--}}
 
-                            <!-- /.row -->
+                        <!-- /.row -->
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
@@ -149,7 +148,8 @@
                             <div class="pull-right">
                                 <form action="{{route('logout')}}" method="POST">
                                     @csrf
-                                <button type="submit" role="button" class="btn btn-default btn-flat">Sign out</button>
+                                    <button type="submit" role="button" class="btn btn-default btn-flat">Sign out
+                                    </button>
                                 </form>
                             </div>
                         </li>
