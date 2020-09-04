@@ -17,7 +17,7 @@
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
-@include('smartTT.layout.header')
+    @include('smartTT.layout.header')
 
     @include('smartTT.layout.sidebar')
     <div class="content-wrapper">
