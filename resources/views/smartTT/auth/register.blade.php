@@ -22,7 +22,7 @@
     <div class="register-box-body">
         <p class="login-box-msg">Register a new membership</p>
 
-        <form action="post-register" method="post">
+        <form action="{{route('register')}}" method="post">
             @csrf
             <div class="form-group has-feedback">
                 <input name="name" type="text" class="form-control" placeholder="Full name">
@@ -34,31 +34,24 @@
                 <input name="password" type="password" class="form-control" placeholder="Password">
             </div>
             <div class="form-group has-feedback">
-                <input name="re-password" type="password" class="form-control" placeholder="Retype password">
+                <input name="password_confirmation" type="password" class="form-control" placeholder="Retype password">
             </div>
             <div class="row">
-            {{--                <div class="col-xs-8">--}}
-            {{--                    <div class="checkbox icheck">--}}
-            {{--                            <input type="checkbox"> I agree to the <a href="#">terms</a>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                 </div>
-                <!-- /.col -->
             </div>
         </form>
-
-        {{--    <div class="social-auth-links text-center">--}}
-        {{--      <p>- OR -</p>--}}
-        {{--      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using--}}
-        {{--        Facebook</a>--}}
-        {{--      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using--}}
-        {{--        Google+</a>--}}
-        {{--    </div>--}}
-
-        <a href="login" class="text-center">I already have a membership</a>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <a href="{{route('login')}}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
 </div>

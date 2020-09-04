@@ -1,6 +1,6 @@
 @extends('smartTT.layout.master')
 @section('title')
-    Dashboard - {{config('app.name')}}
+    Hello
 @endsection
 
 @section('header')

@@ -1,2 +1,11 @@
 1. 'COMPOSER install' to install spatie laravel permission
 2. 'php artisan migrate' to install spatie laravel permission
+
+composer require laravel/ui
+php artisan ui bootstrap
+npm install
+npm run dev
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+composer dump-autoload

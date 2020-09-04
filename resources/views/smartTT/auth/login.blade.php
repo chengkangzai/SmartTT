@@ -22,13 +22,15 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="post-login" method="POST">
+        <form action="{{route('login')}}" method="POST">
             @csrf
             <div class="form-group has-feedback">
-                <input name="email" type="email" class="form-control" placeholder="Email">
+                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                       placeholder="Email">
             </div>
             <div class="form-group has-feedback">
-                <input name="password" type="password" class="form-control" placeholder="Password">
+                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                       placeholder="Password">
             </div>
             <div class="row">
                 <div class="col-xs-8">
@@ -42,6 +44,15 @@
             </div>
         </form>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     {{--    <div class="social-auth-links text-center">--}}
     {{--      <p>- OR -</p>--}}
     {{--      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using--}}
@@ -51,8 +62,8 @@
     {{--    </div>--}}
     <!-- /.social-auth-links -->
 
-        <a href="#">I forgot my password</a><br>
-        <a href="register" class="text-center">Register a new membership</a>
+        <a href="{{route('password.request')}}">I forgot my password</a><br>
+        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
 
     </div>
     <!-- /.login-box-body -->
