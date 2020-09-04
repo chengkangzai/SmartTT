@@ -1,5 +1,4 @@
-@section('master')
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -12,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/skins/skin-green.min.css">
+    @yield('style')
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -46,6 +46,7 @@
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
+
                                                 <img src="dist/img/user2-160x160.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
@@ -135,30 +136,26 @@
                             <!-- The user image in the navbar-->
                             <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">{{Auth::user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
                                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
+                                <p>{{Auth::user()->name}}</p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
 
-                                    <div class="row mb-5 text-center">
-                                        <button class="btn btn-primary text-white">Followers</button>
-                                    </div>
-                                    <div class="row mb-5 text-center">
-                                        <button class="btn btn-primary text-white">Sales</button>
-                                    </div>
-                                    <div class="row mb-5 text-center">
-                                        <button class="btn btn-primary text-white">Friends</button>
-                                    </div>
+                                <div class="row mb-1 text-center">
+                                    <button class="btn btn-primary text-white">Followers</button>
+                                </div>
+                                <div class="row mb-1 text-center">
+                                    <button class="btn btn-primary text-white">Sales</button>
+                                </div>
+                                <div class="row mb-1 text-center">
+                                    <button class="btn btn-primary text-white">Friends</button>
+                                </div>
 
                                 <!-- /.row -->
                             </li>
@@ -168,7 +165,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -189,9 +186,7 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>{{Auth::user()->name}}</p>
                 </div>
             </div>
 
@@ -246,8 +241,8 @@
         <!-- Main content -->
         <section class="content container-fluid">
         @yield('content')
-{{--            TODO ::  make entire content-wrapper as content --}}
-{{--            TODO :: User handling --}}
+        {{--            TODO ::  make entire content-wrapper as content --}}
+        {{--            TODO :: User handling --}}
         <!--------------------------
               | Your Page Content Here |
               -------------------------->
@@ -269,5 +264,4 @@
 @yield('script')
 </body>
 </html>
-@endsection
-@yield('master')
+
