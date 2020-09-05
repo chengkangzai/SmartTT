@@ -23,4 +23,5 @@
         <!-- Content Goes Here -->
 
     </section>
+    <x-notify-model title="Titleeeee" message="Contentttt"></x-notify-model>
 @endsection
