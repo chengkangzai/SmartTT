@@ -19,6 +19,7 @@ class CreateTripsTable extends Migration
             $table->integer('capacity');
             $table->decimal('fee',9,2);
             $table->foreignId('tour_id')->references('id')->on('tours');
+            $table->foreignId('airline_id')->references('id')->on('airlines');
             $table->timestamps();
         });
     }
