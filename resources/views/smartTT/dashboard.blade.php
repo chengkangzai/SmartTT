@@ -3,14 +3,10 @@
     Dashboard - {{config('app.name')}}
 @endsection
 
-@section('header')
-    Test header
-@endsection
-
 @section('content')
     <section class="content-header">
         <h1>
-            @yield('header','Page Header')
+            Hi
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,5 +19,5 @@
         <!-- Content Goes Here -->
 
     </section>
-    <x-notify-model title="Titleeeee" message="Contentttt"></x-notify-model>
+
 @endsection

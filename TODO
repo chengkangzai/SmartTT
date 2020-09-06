@@ -9,3 +9,5 @@ php artisan ui bootstrap --auth
 npm install
 npm run dev
 composer dump-autoload
+
+php artisan storage:link
