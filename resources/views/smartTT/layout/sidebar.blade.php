@@ -1,20 +1,18 @@
 <aside class="main-sidebar">
     <section class="sidebar">
-        <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">HEADER</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
-                </ul>
-            </li>
+            <li class="header">Tour & Trip</li>
+            <li><a href="{{route('tour.index')}}"><i class="fa fa-link"></i> <span>Tour Management</span></a></li>
+            <li><a href="{{route('trip.index')}}"><i class="fa fa-link"></i> <span>Trip Management</span></a></li>
+            <li><a href="{{route('airline.index')}}"><i class="fa fa-link"></i> <span>Airline Management</span></a></li>
+
+            <li class="header">Booking</li>
+            <li><a href="{{route('booking.index')}}"><i class="fa fa-link"></i> <span>Booking Management</span></a></li>
+
+            <li class="header">User Management</li>
+            <li><a href="{{route('user.index')}}"><i class="fa fa-link"></i> <span>User Management</span></a></li>
+            <li><a href="{{route('role.index')}}"><i class="fa fa-link"></i> <span>User Role Management</span></a></li>
+            F
         </ul>
     </section>
 </aside>
