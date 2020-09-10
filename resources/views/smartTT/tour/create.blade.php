@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group @error('des.0') has-error @enderror">
                         <label for="des.1">Description 1</label>
-                            <textarea type="text" name="des[]" class="form-control" id="des.1"
+                            <textarea type="text" name="des[]" class="form-control" id="des.1" rows="5"
                                   placeholder="Enter Description 1">{{old('des.0')}}</textarea>
                         @error('des.0')
                         <span class="help-block" role="alert">
@@ -120,7 +120,7 @@
                     </div>
                     <div class="form-group @error('des.1') has-error @enderror">
                         <label for="des.2">Description 2</label>
-                        <textarea type="text" name="des[]" class="form-control" id="des.2"
+                        <textarea type="text" name="des[]" class="form-control" id="des.2" rows="5"
                                   placeholder="Enter Description 2">{{old('des.1')}}</textarea>
                         @error('des.1')
                         <span class="help-block" role="alert">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="form-group @error('des.2') has-error @enderror">
                         <label for="des.3">Description 3</label>
-                        <textarea type="text" name="des[]" class="form-control" id="des.3"
+                        <textarea type="text" name="des[]" class="form-control" id="des.3" rows="5"
                                   placeholder="Enter Description 3">{{old('des.2')}}</textarea>
                         @error('des.2')
                         <span class="help-block" role="alert">

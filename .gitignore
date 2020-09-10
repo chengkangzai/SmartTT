@@ -1,5 +1,6 @@
 /node_modules
 /storage/*.key
+/storage/app/
 /vendor
 /public/adminer/
 /public/css/app.css

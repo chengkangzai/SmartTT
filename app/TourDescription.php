@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $toArray)
+ * @method static insert(array $toArray)
  */
 class TourDescription extends Model
 {
@@ -14,7 +15,7 @@ class TourDescription extends Model
         'place', 'description', 'tour_id'
     ];
 
-    private function tour()
+    public function tour()
     {
         return $this->belongsTo('App\Tour');
     }

@@ -17,7 +17,7 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Auth::routes();
     Route::post('select2/getUserWithoutTheRole', 'Select2Controller@getUserWithoutTheRole')->name('select2.role.getUser');
 
-//    Auth::loginUsingId('1');
+    Auth::loginUsingId('1');
     Route::get('/dashboard', 'DashboardController@index')->name('home');
 
     Route::resource('user', 'UserController');
@@ -25,8 +25,9 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Route::resource('trip', 'TripController');
     Route::resource('airline', 'AirlineController');
     Route::resource('booking', 'BookingController');
+    Route::post('tourDescription/{tour}', 'TourDescriptionController@attachToTour')->name('tourDescription.attach');
     Route::resource('tourDescription', 'TourDescriptionController')->only([
-        'store', 'show', 'edit', 'update', 'destroy'
+        'edit','store', 'update', 'destroy'
     ]);
     Route::put('role/addUserToRole/{role}}', 'RoleController@attachUser')->name('role.attachUserToRole');
     Route::delete('role/removeUserToRole/{role}}', 'RoleController@detachUser')->name('role.detachUserToRole');

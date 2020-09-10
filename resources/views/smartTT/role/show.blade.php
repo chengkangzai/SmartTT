@@ -124,39 +124,40 @@
                 </ul>
             </div>
         @endif
-
-        <div class="modal fade" id="addUserModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Add user to role:{{$role->name}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{route('role.attachUserToRole',['role'=>$role->id])}}" method="POST"
-                              id="addUserForm">
-                            @csrf
-                            @method('PUT')
-                            <div class="form-group">
-                                <label for="usersToBeAdd">User to be add</label>
-                                <select class="form-control select2" id="usersToBeAdd" name="users[]"
-                                        multiple required data-placeholder="Select User to add"
-                                        style="width: 100%">
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="form-control btn btn-success" value="Submit">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    </div>
+    </section>
+@endsection
+@section('modal')
+    <div class="modal fade" id="addUserModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add user to role:{{$role->name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('role.attachUserToRole',['role'=>$role->id])}}" method="POST"
+                          id="addUserForm">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="usersToBeAdd">User to be add</label>
+                            <select class="form-control select2" id="usersToBeAdd" name="users[]"
+                                    multiple required data-placeholder="Select User to add"
+                                    style="width: 100%">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="form-control btn btn-success" value="Submit">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
 
 @section('script')
