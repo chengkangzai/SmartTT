@@ -13,11 +13,11 @@
     </section>
 
     <section class="content container-fluid w-75">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Create Tour</h3>
-            </div>
-            <form role="form" action="{{route('tour.store')}}" method="POST" enctype="multipart/form-data">
+        <form role="form" action="{{route('tour.store')}}" method="POST" enctype="multipart/form-data">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Tour</h3>
+                </div>
                 @csrf
                 <div class="box-body">
                     <div class="form-group @error('name') has-error @enderror">
@@ -79,10 +79,81 @@
                         @enderror
                     </div>
                 </div>
+
+
+            </div>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tour Description</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group @error('place.0') has-error @enderror">
+                        <label for="place.1">Place 1</label>
+                        <input type="text" name="place[]" class="form-control" id="place.1"
+                               value="{{old('place.0')}}" placeholder="Enter the main visit place 1">
+                        @error('place.0')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group @error('des.0') has-error @enderror">
+                        <label for="des.1">Description 1</label>
+                            <textarea type="text" name="des[]" class="form-control" id="des.1"
+                                  placeholder="Enter Description 1">{{old('des.0')}}</textarea>
+                        @error('des.0')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group @error('place.1') has-error @enderror">
+                        <label for="place.2">Place 2</label>
+                        <input type="text" name="place[]" class="form-control" id="place.2"
+                               value="{{old('place.1')}}" placeholder="Enter the main visit place 2">
+                        @error('place.1')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group @error('des.1') has-error @enderror">
+                        <label for="des.2">Description 2</label>
+                        <textarea type="text" name="des[]" class="form-control" id="des.2"
+                                  placeholder="Enter Description 2">{{old('des.1')}}</textarea>
+                        @error('des.1')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group @error('place.2') has-error @enderror">
+                        <label for="place.3">Place 3</label>
+                        <input type="text" name="place[]" class="form-control" id="place.3"
+                               value="{{old('place.2')}}" placeholder="Enter the main visit place 3">
+                        @error('place.2')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group @error('des.2') has-error @enderror">
+                        <label for="des.3">Description 3</label>
+                        <textarea type="text" name="des[]" class="form-control" id="des.3"
+                                  placeholder="Enter Description 3">{{old('des.2')}}</textarea>
+                        @error('des.2')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </section>
 @endsection

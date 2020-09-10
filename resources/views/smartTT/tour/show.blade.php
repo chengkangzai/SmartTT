@@ -20,7 +20,47 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Tour Information</h3>
-                        <div class="btn-group pull-right">
+                        <div class="pull-right">
+                            <a href="{{route('tour.edit',['tour'=>$tour->id])}}" class="btn btn-primary">Edit</a>
+                            <form action="{{route('tour.destroy',['tour'=>$tour->id])}}" method="POST"
+                                  style="display: inline">
+                                @method('DELETE')
+                                @csrf
+                                <input class="btn btn-danger" type="submit" value="Delete"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tour Name</th>
+                                <th>Tour Code</th>
+                                <th>Destination</th>
+                                <th>Category</th>
+                                <th>Itinerary</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{$tour->id}}</td>
+                                <td>{{$tour->name}}</td>
+                                <td>{{$tour->tour_code}}</td>
+                                <td>{{$tour->destination}}</td>
+                                <td>{{$tour->category}}</td>
+                                <td>
+                                    <a href="{{$itineraryUrl}}" class="btn btn-info">View</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Tour Description</h3>
+                        <div class="pull-right">
                             <a href="{{route('tour.edit',['tour'=>$tour->id])}}" class="btn btn-primary">Edit</a>
                             <form action="{{route('tour.destroy',['tour'=>$tour->id])}}" method="POST"
                                   style="display: inline">
@@ -59,6 +99,7 @@
                 </div>
         {{--TODO--}}
         {{--1. link trips--}}
+        {{--2. link Tour description--}}
             </div>
         </div>
     </section>

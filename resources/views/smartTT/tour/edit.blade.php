@@ -7,6 +7,7 @@
         <h1><b>Edit Tour : {{$tour->name}} </b></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('tour.index')}}"><i class="fa fa-dashboard"></i> Tour</a></li>
+            <li><a href="{{route('tour.show',['tour'=>$tour->id])}}">{{$tour->name}}</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
