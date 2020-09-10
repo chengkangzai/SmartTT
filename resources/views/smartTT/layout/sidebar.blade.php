@@ -11,8 +11,9 @@
 
             <li class="header">User Management</li>
             <li><a href="{{route('user.index')}}"><i class="fa fa-link"></i> <span>User Management</span></a></li>
+            @can('View User Role')
             <li><a href="{{route('role.index')}}"><i class="fa fa-link"></i> <span>User Role Management</span></a></li>
-            F
+            @endcan
         </ul>
     </section>
 </aside>
