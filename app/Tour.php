@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static create(array $array)
+ */
 class Tour extends Model
 {
     protected $fillable = [
@@ -11,12 +14,12 @@ class Tour extends Model
     ];
 
     //
-    private function trips()
+    public function trips()
     {
         return $this->hasMany('App\Trip');
     }
 
-    private function description()
+    public function description()
     {
         return $this->hasMany('App\TourDescription');
     }
