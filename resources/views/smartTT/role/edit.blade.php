@@ -5,6 +5,7 @@
         <h1><b>Edit User Role : {{$role->name}} </b></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('role.index')}}"><i class="fa fa-dashboard"></i> User Role</a></li>
+            <li><a href="{{route('role.show',['role'=>$role->id])}}">{{$role->name}}</a></li>
             <li class="active">Edit</li>
         </ol>
     </section>
@@ -29,9 +30,5 @@
                 </div>
             </form>
         </div>
-{{--TODO--}}
-{{--1. Tour Description --}}
-
-
     </section>
 @endsection

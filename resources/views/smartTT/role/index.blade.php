@@ -38,11 +38,6 @@
                             <td>
                                 <a href="{{route('role.show',['role'=>$role->id])}}" class="btn btn-info">Show</a>
                                 <a href="{{route('role.edit',['role'=>$role->id])}}" class="btn btn-primary">Edit</a>
-                                <form action="{{route('role.destroy',['role'=>$role->id])}}" style="display: inline" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input type="submit" role="button" value="Delete" class="btn btn-danger"/>
-                                </form>
                             </td>
                         </tr>
                     @endforeach

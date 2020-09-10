@@ -5,7 +5,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1> <b>Create User Role</b> </h1>
+        <h1><b>Create User Role</b></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('role.index')}}"><i class="fa fa-dashboard"></i> User Role</a></li>
             <li class="active">Create</li>
@@ -25,6 +25,20 @@
                         <input type="text" name="name" class="form-control" id="name"
                                placeholder="Enter User Role Name">
                     </div>
+                    <div class="form-group">
+                        <label>Permission</label>
+                        @php $holder="";@endphp
+                        @foreach($permissions as $permission)
+                            @if($permission->module !== $holder)
+                                <h4>{{$permission->module}}</h4>
+                                @php $holder=$permission->module;   @endphp
+                            @endif
+                            <label for="permissions">
+                                <input type="checkbox" name="permissions[]" class="checkmark-circled"
+                                       value="{{$permission->id}}">
+                                {{$permission->name}} </label>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -32,6 +46,4 @@
             </form>
         </div>
     </section>
-    {{--TODO--}}
-    {{--1. Tour Description--}}
 @endsection
