@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeTourRequest;
 use App\Tour;
+use App\TourDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use function collect;
 use function compact;
+use function count;
 use function redirect;
 use function view;
 
@@ -36,18 +40,13 @@ class TourController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(storeTourRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'tour_code' => 'required|unique:App\Tour,tour_code',
-            'destination' => 'required',
-            'category' => 'required',
-            'itinerary' => 'required|mimes:pdf',
-            'thumbnail' => 'required|mimes:jpeg,bmp,png',
-        ]);
+        $temp = collect([]);
+        $place = $request->get('place');
+        $des = $request->get('des');
 
-        Tour::create([
+        $tour = Tour::create([
             'tour_code' => $request->get('tour_code'),
             'name' => $request->get('name'),
             'destination' => $request->get('destination'),
@@ -55,6 +54,15 @@ class TourController extends Controller
             'itinerary_url' => Storage::putFile('public/Tour/itinerary', $request->file('itinerary'), 'public'),
             'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $request->file('thumbnail'), 'public'),
         ]);
+        for ($i = 0; $i < count($place); $i++) {
+            $temp->push([
+                'place' => $place[$i],
+                'description' => $des[$i],
+                'tour_id' => $tour->id
+            ]);
+        }
+
+        TourDescription::insert($temp->toArray());
         return Redirect::route('tour.index');
     }
 
@@ -121,6 +129,7 @@ class TourController extends Controller
      */
     public function destroy(Tour $tour)
     {
+        $tour->description()->delete();
         $tour->delete();
         Storage::delete($tour->itinerary_url);
         Storage::delete($tour->thumbnail_url);
