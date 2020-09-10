@@ -10,18 +10,21 @@
     <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/bower_components/iCheck/skins/square/blue.css">
+    <link rel='icon' href='icon.gif' type='image/gif' sizes='16x16'>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        html{
+            height: auto;
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-    <div class="login-logo">
-        <a href="#">{{config('app.name')}}</a>
-    </div>
+    <div class="login-logo"><a href="#">{{config('app.name')}}</a></div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <form action="{{route('login')}}" method="POST">
             @csrf
             <div class="form-group has-feedback">
@@ -53,23 +56,11 @@
                 </ul>
             </div>
         @endif
-    {{--    <div class="social-auth-links text-center">--}}
-    {{--      <p>- OR -</p>--}}
-    {{--      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using--}}
-    {{--        Facebook</a>--}}
-    {{--      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using--}}
-    {{--        Google+</a>--}}
-    {{--    </div>--}}
-    <!-- /.social-auth-links -->
-
         <a href="{{route('password.request')}}">I forgot my password</a><br>
         <a href="{{route('register')}}" class="text-center">Register a new membership</a>
-
     </div>
     <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
-
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bower_components/iCheck/icheck.min.js"></script>
@@ -78,7 +69,6 @@
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
         });
     });
 </script>

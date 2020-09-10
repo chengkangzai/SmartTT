@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Airline;
 use Illuminate\Http\Request;
 
-class Airline extends Controller
+class AirlineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,7 +43,7 @@ class Airline extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function show(Airline $airline)
+    public function show(AirlineController $airline)
     {
         //
     }
@@ -55,7 +54,7 @@ class Airline extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function edit(Airline $airline)
+    public function edit(AirlineController $airline)
     {
         //
     }
@@ -67,7 +66,7 @@ class Airline extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Airline $airline)
+    public function update(Request $request, AirlineController $airline)
     {
         //
     }
@@ -78,7 +77,7 @@ class Airline extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Airline $airline)
+    public function destroy(AirlineController $airline)
     {
         //
     }

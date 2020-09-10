@@ -4,82 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use function compact;
+use function view;
 
 class TripController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $trips = Trip::all();
+        return view('smartTT.trip.index', compact('trips'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('smartTT.trip.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'departure_datetime' => 'required',
+            'fee' => 'required',
+            'tour_id' => 'required',
+            'airline_id' => 'required',
+            'capacity' => 'required'
+        ]);
+        Trip::create([
+            'departure_datetime' => $request->get('departure_datetime') ?? "N/A",
+            'fee' => $request->get('fee') ?? "N/A",
+            'tour_id' => $request->get('tour_id') ?? "N/A",
+            'airline_id' => $request->get('airline_id') ?? "N/A",
+            'capacity' => $request->get('capacity') ?? "N/A",
+        ]);
+        return Redirect::route('trip.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Trip  $trip
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Trip $trip)
     {
-        //
+        return view('smartTT.trip.show', compact('trip'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Trip  $trip
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Trip $trip)
     {
-        //
+        return view('smartTT.trip.edit', compact('trip'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Trip  $trip
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Trip $trip)
     {
-        //
+        $trip->update($request->all());
+        return Redirect::route('trip.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Trip  $trip
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Trip $trip)
     {
-        //
+        $trip->delete();
+        return Redirect::route('tour.index');
     }
 }

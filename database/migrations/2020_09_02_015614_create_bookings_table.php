@@ -16,7 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('tour_id')->references('id')->on('tours');
+            $table->foreignId('trip_id')->references('id')->on('trips');
             $table->decimal('total_fee',9,2);
             $table->decimal('discount',9,2);
             $table->integer('adult');
