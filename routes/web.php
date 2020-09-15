@@ -1,5 +1,6 @@
 <?php
 
+use App\Tour;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,10 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Auth::routes();
     Route::post('select2/getUserWithoutTheRole', 'Select2Controller@getUserWithoutTheRole')->name('select2.role.getUser');
 
+    Route::get('/test', function () {
+        return factory(Tour::class,10)->create();
+    });
+
     Auth::loginUsingId('1');
     Route::get('/dashboard', 'DashboardController@index')->name('home');
 
@@ -27,7 +32,7 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Route::resource('booking', 'BookingController');
     Route::post('tourDescription/{tour}', 'TourDescriptionController@attachToTour')->name('tourDescription.attach');
     Route::resource('tourDescription', 'TourDescriptionController')->only([
-        'edit','store', 'update', 'destroy'
+        'edit', 'store', 'update', 'destroy'
     ]);
     Route::put('role/addUserToRole/{role}}', 'RoleController@attachUser')->name('role.attachUserToRole');
     Route::delete('role/removeUserToRole/{role}}', 'RoleController@detachUser')->name('role.detachUserToRole');
