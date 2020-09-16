@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use function compact;
+use function dd;
+use function dump;
 use function redirect;
 use function view;
 
 class TourController extends Controller
 {
-//TODO
-//1. Tour Description!
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -68,7 +69,7 @@ class TourController extends Controller
         $itineraryUrl = Storage::url($tour->itinerary_url);
         $thumbnailUrl = Storage::url($tour->thumbnail_url);
         $tourDes = $tour->description()->get();
-        return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl','tourDes'));
+        return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
     }
 
     /**
