@@ -14,24 +14,11 @@ use function view;
 class RoleController extends Controller
 {
     /**
-     * RoleController constructor.
-     */
-    public function __construct()
-    {
-        abort_unless(
-            auth()->user()->can('Create User Role') ||
-            auth()->user()->can('View User Role') ||
-            auth()->user()->can('Update User Role') ||
-            auth()->user()->can('Delete User Role')
-            , 403);
-    }
-
-
-    /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+        abort_unless(auth()->user()->can('View User Role'), 403);
         $roles = Role::all();
         return view('smartTT.role.index', compact('roles'));
     }
@@ -42,6 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        abort_unless(auth()->user()->can('Create User Role'), 403);
         $permissions = Permission::all();
         return view('smartTT.role.create', compact('permissions'));
     }
@@ -54,6 +42,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        abort_unless(auth()->user()->can('Create User Role'), 403);
         $request->validate([
             'name' => 'required'
         ]);
@@ -76,7 +65,7 @@ class RoleController extends Controller
     public function show(Role $role)
     {
 //        TODO
-//        $users = $role->users()->with('permissions')->get();
+        abort_unless(auth()->user()->can('View User Role'), 403);
         $permissions = $role->permissions()->get();
         $users = $role->users()->get();
         return view('smartTT.role.show', compact('role', 'permissions', 'users'));
@@ -89,6 +78,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        abort_unless(auth()->user()->can('Update User Role'), 403);
         return view('smartTT.role.edit', compact('role'));
     }
 
@@ -100,8 +90,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        abort_unless(auth()->user()->can('Update User Role'), 403);
         $role->update($request->all());
-        return Redirect::back();
+        return Redirect::route('role.show', ['role' => $role->id]);
     }
 
 
@@ -112,6 +103,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        abort_unless(auth()->user()->can('Delete User Role'), 403);
         if ($role->users()->count() == 0) {
             $role->delete();
             return Redirect::route('role.index');
