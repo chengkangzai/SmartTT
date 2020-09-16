@@ -10,7 +10,7 @@ $factory->define(TourDescription::class, function (Faker $faker) {
     $maxNumber = Tour::all()->count();
     return [
         'place' => $faker->name,
-        'description' => $faker->name,
+        'description' => $faker->text,
         'tour_id' => rand(1, $maxNumber)
     ];
 });
