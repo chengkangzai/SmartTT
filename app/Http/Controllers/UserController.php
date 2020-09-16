@@ -66,15 +66,11 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required',
             'name' => 'required',
-            'password' => 'required',
+            'password' => 'required|password:web',
         ]);
-        if (Hash::make($request->get('password')) !== $user->getAuthPassword())
-            return Redirect::back()->withErrors(['password' => 'Current Password do not match']);
-        $user->update([
-            'email' => $request->get('email'),
-            'name' => $request->get('name'),
-        ]);
-        return Redirect::route('logout');
+        $user->update($request->only(['email', 'name']));
+        auth()->logout();
+        return Redirect::route('home');
     }
 
 
@@ -95,8 +91,6 @@ class UserController extends Controller
         $user->update([
             'password' => Hash::make($request->get('new_password'))
         ]);
-        return response()->json([
-            'message' => 'Password Successfully update'
-        ]);
+        return response()->json(['message' => 'Password Successfully update']);
     }
 }

@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use function compact;
-use function dd;
-use function dump;
 use function redirect;
 use function view;
 
