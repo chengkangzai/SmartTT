@@ -69,8 +69,8 @@ class UserController extends Controller
             'password' => 'required|password:web',
         ]);
         $user->update($request->only(['email', 'name']));
-        auth()->logout();
-        return Redirect::route('home');
+
+        return Redirect::route('user.show');
     }
 
 
