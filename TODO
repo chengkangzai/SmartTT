@@ -11,3 +11,8 @@ npm run dev
 composer dump-autoload
 
 php artisan storage:link
+
+TODO
+https://github.com/spatie/laravel-activitylog
+config/databse->dump->change binary mysql path
+php artisan backup:run

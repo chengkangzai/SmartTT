@@ -23,12 +23,15 @@
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <a href="{{route('user.edit',['user'=>Auth::user()->id])}}">
+                                <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            </a>
                             <p>{{Auth::user()->name}}</p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{route('user.edit',['user'=>Auth::user()->id])}}"
+                                   class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <form action="{{route('logout')}}" method="POST">
