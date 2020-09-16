@@ -16,7 +16,7 @@
             <div class="col-lg-2">
                 <img src="{{$thumbnailUrl}}" alt="" class="img-responsive img-thumbnail image">
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 ">
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Tour Information</h3>
@@ -31,30 +31,32 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tour Name</th>
-                                <th>Tour Code</th>
-                                <th>Destination</th>
-                                <th>Category</th>
-                                <th>Itinerary</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{$tour->id}}</td>
-                                <td>{{$tour->name}}</td>
-                                <td>{{$tour->tour_code}}</td>
-                                <td>{{$tour->destination}}</td>
-                                <td>{{$tour->category}}</td>
-                                <td>
-                                    <a href="{{$itineraryUrl}}" class="btn btn-info">View</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tour Name</th>
+                                    <th>Tour Code</th>
+                                    <th>Destination</th>
+                                    <th>Category</th>
+                                    <th>Itinerary</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{$tour->id}}</td>
+                                    <td>{{$tour->name}}</td>
+                                    <td>{{$tour->tour_code}}</td>
+                                    <td>{{$tour->destination}}</td>
+                                    <td>{{$tour->category}}</td>
+                                    <td>
+                                        <a href="{{$itineraryUrl}}" class="btn btn-info">View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -72,7 +74,7 @@
                     </div>
                     <div class="box-body">
                         @forelse($tourDes as $des)
-                            <div class="card m-1 col-lg-3 pb-3 " style="width: 29% !important;">
+                            <div class="card m-1 col-lg-3 col-md-12  pb-3 ">
                                 <div class="card-body">
                                     <h3 class="card-title">{{$des->place}}</h3>
                                     <p class="card-text">{{$des->description}}</p>
