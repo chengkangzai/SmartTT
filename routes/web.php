@@ -18,7 +18,6 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Auth::routes(['confirm' => false]);
     Route::post('select2/getUserWithoutTheRole', 'Select2Controller@getUserWithoutTheRole')->name('select2.role.getUser');
 
-    Auth::loginUsingId('1');
     Route::get('/dashboard', 'DashboardController@index')->name('home');
 
     Route::post('user/changePassword/{user}', 'UserController@changePassword')->name('user.changePassword');
