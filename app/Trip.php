@@ -11,12 +11,12 @@ class Trip extends Model
     ];
 
     //
-    private function tour()
+    public function tour()
     {
         return $this->belongsTo('App\Tour');
     }
 
-    private function airline()
+    public function airline()
     {
         return $this->hasOne('App\Airline');
     }
