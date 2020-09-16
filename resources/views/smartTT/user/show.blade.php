@@ -32,12 +32,16 @@
                     <tr>
                         <th>ID</th>
                         <th>User Name</th>
+                        <th>User Email</th>
+                        <th>User Joined At</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->created_at}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -106,20 +110,11 @@
                     new_password_confirmation: $("#new_password_confirmation").val(),
                 },
                 success: function (response) {
-                    let alert = $("#changePasswordModalAlert");
-                    let list = $("#changePasswordModalErrorList");
-
-                    alert.removeClass('alert-danger').removeClass('hide').addClass('alert-success');
-                    list.html(`<ul id="changePasswordModalErrorList"></ul>`)
+                    $("#changePasswordModalAlert").removeClass('alert-danger').removeClass('hide').addClass('alert-success');
+                    $("#changePasswordModalErrorList").html(`<ul id="changePasswordModalErrorList"></ul>`)
                         .append(`${response.message}`);
 
                     setTimeout($("#changePasswordModal").modal('hide'), 100);
-
-                    alert.addClass('alert-danger').addClass('hide').removeClass('alert-success');
-                    list.html(`<ul id="changePasswordModalErrorList"></ul>`)
-                    $("#old_password").val("");
-                    $("#new_password").val("");
-                    $("#new_password_confirmation").val("");
                 },
 
                 error: function (error) {
@@ -138,5 +133,13 @@
                 }
             });
         });
+        $('#changePasswordModal').on('hidden.bs.modal', function () {
+            $("#changePasswordModalAlert").addClass('alert-danger').addClass('hide').removeClass('alert-success');
+            $("#changePasswordModalErrorList").html(`<ul id="changePasswordModalErrorList"></ul>`)
+            $("#old_password").val("");
+            $("#new_password").val("");
+            $("#new_password_confirmation").val("");
+        })
+
     </script>
 @endsection
