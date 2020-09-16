@@ -19,12 +19,6 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
 
     Route::get('/dashboard', 'DashboardController@index')->name('home');
 
-
-    Route::get('/test', function () {
-        if (auth()->user()->can('Create User Role')) {
-            return "Hi";
-        };
-    });
     Route::post('user/changePassword/{user}', 'UserController@changePassword')->name('user.changePassword');
     Route::resource('user', 'UserController');
 
