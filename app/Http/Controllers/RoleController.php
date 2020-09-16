@@ -6,11 +6,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use function abort_unless;
+use function auth;
 use function compact;
 use function view;
 
 class RoleController extends Controller
 {
+    /**
+     * RoleController constructor.
+     */
+    public function __construct()
+    {
+        abort_unless(
+            auth()->user()->can('Create User Role') ||
+            auth()->user()->can('View User Role') ||
+            auth()->user()->can('Update User Role') ||
+            auth()->user()->can('Delete User Role')
+            , 403);
+    }
+
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
