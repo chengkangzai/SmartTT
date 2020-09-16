@@ -61,7 +61,8 @@ class TourDescriptionController extends Controller
      */
     public function edit(TourDescription $tourDescription)
     {
-        return view('smartTT.tourDescription.edit', compact('tourDescription'));
+        $tourName = Tour::find($tourDescription->tour_id)->first()->name;
+        return view('smartTT.tourDescription.edit', compact('tourDescription', 'tourName'));
     }
 
 
