@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('profile_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
