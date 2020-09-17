@@ -1,7 +1,6 @@
 @extends('smartTT.layout.master')
 
 @section('cdn')
-    <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 @endsection
 
