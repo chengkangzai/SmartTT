@@ -6,10 +6,8 @@
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">--}}
-    <link rel="stylesheet" href="/dist/css/bootstrap-4-custom.css">
+
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/dist/css/skins/skin-green.min.css">
     <link rel="stylesheet" href="/css/app.css">
@@ -31,8 +29,8 @@
 
     @yield('modal')
 </div>
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/js/app.js"></script>
 <script src="/dist/js/adminlte.min.js"></script>
 <script>
     $.ajaxSetup({
