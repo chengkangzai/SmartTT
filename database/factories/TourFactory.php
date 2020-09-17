@@ -7,12 +7,13 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Storage;
 
 $factory->define(Tour::class, function (Faker $faker) {
+    $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
     return [
-        'tour_code' => $faker->text,
-        'name' => $faker->word,
+        'tour_code' => rand(1, 5) . strtoupper($faker->randomLetter) . strtoupper($faker->randomLetter) . strtoupper($faker->randomLetter),
+        'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $faker->country . " Trip",
         'destination' => $faker->city,
-        'category' => $faker->country,
-        'itinerary_url' => $faker->imageUrl(300,200),
-        'thumbnail_url' => $faker->imageUrl(300,200),
+        'category' => $selection[rand(0, 4)],
+        'itinerary_url' => Storage::putFile('public/Tour/itinerary', $faker->image(null,300, 200), 'public'),
+        'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $faker->image(null,300, 200), 'public'),
     ];
 });
