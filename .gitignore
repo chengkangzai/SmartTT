@@ -5,6 +5,7 @@
 /public/adminer/
 /public/css/app.css
 /public/js/app.js
+/public/storage/
 .env
 .idea/
 .env.backup

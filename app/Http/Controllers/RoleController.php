@@ -19,7 +19,7 @@ class RoleController extends Controller
     public function index()
     {
         abort_unless(auth()->user()->can('View User Role'), 403);
-        $roles = Role::all();
+        $roles = Role::paginate(10);
         return view('smartTT.role.index', compact('roles'));
     }
 
@@ -66,8 +66,8 @@ class RoleController extends Controller
     {
 //        TODO
         abort_unless(auth()->user()->can('View User Role'), 403);
-        $permissions = $role->permissions()->get();
-        $users = $role->users()->get();
+        $permissions = $role->permissions()->paginate(5,['*'],'permissions');
+        $users = $role->users()->paginate(5,['*'],'users');
         return view('smartTT.role.show', compact('role', 'permissions', 'users'));
     }
 

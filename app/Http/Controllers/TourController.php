@@ -20,7 +20,7 @@ class TourController extends Controller
      */
     public function index()
     {
-        $tours = Tour::all();
+        $tours = Tour::paginate(10);
         return view('smartTT.tour.index', compact('tours'));
     }
 
@@ -66,7 +66,7 @@ class TourController extends Controller
     {
         $itineraryUrl = Storage::url($tour->itinerary_url);
         $thumbnailUrl = Storage::url($tour->thumbnail_url);
-        $tourDes = $tour->description()->get();
+        $tourDes = $tour->description()->paginate(9);
         return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
     }
 

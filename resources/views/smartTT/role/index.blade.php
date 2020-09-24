@@ -45,6 +45,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="box-footer">
+                    {{$roles->links()}}
+                </div>
             </div>
         </div>
     </section>

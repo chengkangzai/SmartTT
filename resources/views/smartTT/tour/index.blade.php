@@ -8,7 +8,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1> <b>Tour Management</b> </h1>
+        <h1><b>Tour Management</b></h1>
         <ol class="breadcrumb">
             <li class="active"><a href="{{route('tour.index')}}"><i class="fa fa-dashboard"></i> Tour </a></li>
         </ol>
@@ -60,6 +60,9 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="box-footer">
+                        {{$tours->links()}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +73,9 @@
     <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script>
-        $('#indexTable').DataTable();
+        $('#indexTable').DataTable({
+            bInfo : false,
+            paging: false,
+        });
     </script>
 @endsection

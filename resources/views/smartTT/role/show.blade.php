@@ -90,6 +90,7 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="box-footer">{{$users->links()}}</div>
             </div>
         </div>
 
@@ -116,6 +117,7 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="box-footer">{{$users->links()}}</div>
             </div>
         </div>
 
@@ -171,11 +173,13 @@
     <script>
         $('#permissionTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
-            "pageLength": 5
+            "pageLength": 5,
+            paging: false
         });
         $('#usersTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
-            "pageLength": 5
+            "pageLength": 5,
+            paging: false
         });
 
 

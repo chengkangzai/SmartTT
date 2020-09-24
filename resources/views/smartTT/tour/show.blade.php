@@ -73,29 +73,32 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <div class="" >
-                        @forelse($tourDes as $des)
-                            <div class="card col-lg-4 col-md-12 " style="height: 200px;padding-bottom: 10px">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{$des->place}}</h3>
-                                    <p class="card-text text-truncate">{{$des->description}}</p>
-                                </div>
-                                <div class="mx-auto ">
-                                    <form class="form" style="display: inline;" method="POST"
-                                          action="{{route('tourDescription.destroy',['tourDescription'=>$des->id])}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                    </form>
-                                    <a href="{{route('tourDescription.edit',['tourDescription'=>$des->id])}}"
-                                       class="btn btn-info">Edit</a>
-                                </div>
+                        <div class="">
+                            @forelse($tourDes as $des)
+                                <div class="card col-lg-4 col-md-12 " style="height: 200px;padding-bottom: 10px">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{$des->place}}</h3>
+                                        <p class="card-text text-truncate">{{$des->description}}</p>
+                                    </div>
+                                    <div class="mx-auto ">
+                                        <form class="form" style="display: inline;" method="POST"
+                                              action="{{route('tourDescription.destroy',['tourDescription'=>$des->id])}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                        </form>
+                                        <a href="{{route('tourDescription.edit',['tourDescription'=>$des->id])}}"
+                                           class="btn btn-info">Edit</a>
+                                    </div>
 
-                            </div>
-                        @empty
-                            <h4 class="text-center">Nothing to show</h4>
-                        @endforelse
+                                </div>
+                            @empty
+                                <h4 class="text-center">Nothing to show</h4>
+                            @endforelse
                         </div>
+                    </div>
+                    <div class="box-footer">
+                        {{$tourDes->links()}}
                     </div>
                 </div>
 
