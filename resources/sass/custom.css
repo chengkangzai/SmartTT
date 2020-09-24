@@ -252,3 +252,8 @@
     margin-left: auto !important
 }
 
+@media (min-width: 576px) {
+    .table-responsive {
+        overflow-x: hidden;
+    }
+}
