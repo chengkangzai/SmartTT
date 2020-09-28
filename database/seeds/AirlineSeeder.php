@@ -18,7 +18,7 @@ class AirlineSeeder extends Seeder
             ['name' => 'Malindo'],
             ['name' => 'Qatar Airline'],
         ];
-        DB::table('Airlines')->insert($airlines);
+        DB::table('airlines')->insert($airlines);
     }
 }
 
