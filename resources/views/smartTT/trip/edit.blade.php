@@ -102,3 +102,12 @@
         </div>
     </section>
 @endsection
+
+@section('script')
+    <script>
+        $("#airlineSelect").select2({});
+        $('#depart_time').datetimepicker({
+            date: new Date("{{$trip->depart_time}}")
+        });
+    </script>
+@endsection
