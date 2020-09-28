@@ -1,10 +1,5 @@
 @extends('smartTT.layout.master')
 
-@section('cdn')
-    <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
-@endsection
 @section('title')
     Role : {{$role->name}}
 @endsection
@@ -96,7 +91,7 @@
 
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Permission of this role</h3>
+                <h3 class="box-title">Permission of this role </h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
@@ -117,7 +112,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">{{$users->links()}}</div>
+                <div class="box-footer">{{$permissions->links()}}</div>
             </div>
         </div>
 
@@ -167,19 +162,18 @@
 @endsection
 
 @section('script')
-    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script>
         $('#permissionTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
             "pageLength": 5,
-            paging: false
+            paging: false,
+            info: false
         });
         $('#usersTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
             "pageLength": 5,
-            paging: false
+            paging: false,
+            info: false
         });
 
 

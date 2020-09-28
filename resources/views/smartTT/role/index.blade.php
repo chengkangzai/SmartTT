@@ -1,9 +1,5 @@
 @extends('smartTT.layout.master')
 
-@section('cdn')
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-@endsection
-
 @section('content')
     <section class="content-header">
         <h1><b>User Role Management</b></h1>
@@ -54,9 +50,11 @@
 @endsection
 
 @section('script')
-    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
     <script>
-        $('#indexTable').DataTable();
+        $('#indexTable').DataTable({
+            bInfo : false,
+            paging: false,
+        });
     </script>
 @endsection

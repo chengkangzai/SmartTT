@@ -133,6 +133,7 @@
                 }
             });
         });
+
         $('#changePasswordModal').on('hidden.bs.modal', function () {
             $("#changePasswordModalAlert").addClass('alert-danger').addClass('hide').removeClass('alert-success');
             $("#changePasswordModalErrorList").html(`<ul id="changePasswordModalErrorList"></ul>`)

@@ -1,25 +1,25 @@
 @extends('smartTT.layout.master')
 @section('title')
-    Tour Management - {{config('app.name')}}
+    Trip Management - {{config('app.name')}}
 @endsection
 @section('cdn')
-{{--    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">--}}
+    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 @endsection
 
 @section('content')
     <section class="content-header">
-        <h1><b>Tour Management</b></h1>
+        <h1><b>Trip Management</b></h1>
         <ol class="breadcrumb">
-            <li class="active"><a href="{{route('tour.index')}}"><i class="fa fa-dashboard"></i> Tour </a></li>
+            <li class="active"><a href="{{route('trip.index')}}"><i class="fa fa-dashboard"></i> Trip </a></li>
         </ol>
     </section>
 
     <section class="content container-fluid">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Tour Management</h3>
+                <h3 class="box-title">Trip Management</h3>
                 <div class="m-2 btn-group-vertical pull-right">
-                    <a href="{{route('tour.create')}}" class="btn btn-success">Create</a>
+                    <a href="{{route('trip.create')}}" class="btn btn-success">Create</a>
                 </div>
             </div>
             <div class="box-body">
@@ -29,26 +29,28 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tour Name</th>
-                            <th>Tour Code</th>
-                            <th>Destination</th>
-                            <th>Category</th>
+                            <th>Trip Fee</th>
+                            <th>Trip Capacity</th>
+                            <th>Trip Departure</th>
+                            <th>Tour</th>
+                            <th>Airline</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tours as $tour)
+                        @foreach($trips as $trip)
                             <tr>
-                                <td>{{$tour->id}}</td>
-                                <td>{{$tour->name}}</td>
-                                <td>{{$tour->tour_code}}</td>
-                                <td>{{$tour->destination}}</td>
-                                <td>{{$tour->category}}</td>
+                                <td>{{$trip->id}}</td>
+                                <td>RM{{number_format($trip->fee/100,2)}}</td>
+                                <td>{{$trip->capacity}}</td>
+                                <td>{{$trip->depart_time}}</td>
+                                <td>{{$trip->tour->name}}</td>
+                                <td>{{$trip->airline}}</td>
                                 <td>
-                                    <a href="{{route('tour.show',['tour'=>$tour->id])}}" class="btn btn-info">Show</a>
-                                    <a href="{{route('tour.edit',['tour'=>$tour->id])}}"
+                                    <a href="{{route('trip.show',['trip'=>$trip->id])}}" class="btn btn-info">Show</a>
+                                    <a href="{{route('trip.edit',['trip'=>$trip->id])}}"
                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{route('tour.destroy',['tour'=>$tour->id])}}" style="display: inline"
+                                    <form action="{{route('trip.destroy',['trip'=>$trip->id])}}" style="display: inline"
                                           method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -61,7 +63,7 @@
                         </tbody>
                     </table>
                     <div class="box-footer">
-                        {{$tours->links()}}
+                        {{$trips->links()}}
                     </div>
                 </div>
             </div>
@@ -70,11 +72,11 @@
 @endsection
 
 @section('script')
-{{--    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>--}}
-{{--    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>--}}
+    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script>
         $('#indexTable').DataTable({
-            bInfo : false,
+            bInfo: false,
             paging: false,
         });
     </script>
