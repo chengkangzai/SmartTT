@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Flight;
 use Illuminate\Http\Request;
 
-class AirlineController extends Controller
+class FlightController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,10 +41,10 @@ class AirlineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Airline  $airline
+     * @param  \App\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function show(AirlineController $airline)
+    public function show(Flight $flight)
     {
         //
     }
@@ -51,10 +52,10 @@ class AirlineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Airline  $airline
+     * @param  \App\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function edit(AirlineController $airline)
+    public function edit(Flight $flight)
     {
         //
     }
@@ -63,10 +64,10 @@ class AirlineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Airline  $airline
+     * @param  \App\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AirlineController $airline)
+    public function update(Request $request, Flight $flight)
     {
         //
     }
@@ -74,10 +75,10 @@ class AirlineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Airline  $airline
+     * @param  \App\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AirlineController $airline)
+    public function destroy(Flight $flight)
     {
         //
     }

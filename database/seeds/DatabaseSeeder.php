@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(TourSeeder::class);
+        $this->call(FlightSeeder::class);
+        $this->call(AirlineSeeder::class);
+        $this->call(TripSeeder::class);
     }
 }
