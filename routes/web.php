@@ -21,7 +21,6 @@ Route::middleware('web')->domain('smartTT.' . env('APP_URL'))->group(function ()
     Route::get('/', 'DashboardController@index');
     Auth::routes(['confirm' => false]);
 
-    Auth::loginUsingId(1);
     Route::middleware('auth')->group(function () {
         Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
 
