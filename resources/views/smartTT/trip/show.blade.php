@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-{{--TODO LIST OF user who have this one--}}
+{{--TODO LIST OF user who booked this trip--}}
     </section>
 @endsection
 

@@ -71,7 +71,7 @@
                         @enderror
                     </div>
 
-                    <hr>
+
                     <div class="form-group @error('airline') has-error @enderror">
                         <label for="airline">Airline</label>
                         <select name="airline" class="form-control select2 " id="airlineSelect">
@@ -81,6 +81,25 @@
                         </select>
 
                         @error('airline')
+                        <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group @error('flight') has-error @enderror">
+                        <label for="flight">Airline</label>
+                                                <select name="flight" class="form-control select2 " id="airlineSelect">
+                        @foreach($flights as $flight)
+                            <option value="{{$flight->airline->id}}"> {{$flight->airline->name}}
+                                ({{$flight->depart_time}}) -> ({{$flight->arrive_time}})
+                            </option>
+                        @endforeach
+                                                </select>
+
+                        @error('flight')
                         <span class="help-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
