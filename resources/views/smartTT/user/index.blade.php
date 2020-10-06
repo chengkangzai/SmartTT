@@ -27,6 +27,7 @@
                         <tr>
                             <th>ID</th>
                             <th>User Name</th>
+                            <th>User Email</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -35,7 +36,7 @@
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
-
+                                <td>{{$user->email}}</td>
                                 <td>
                                     <a href="{{route('user.show',['user'=>$user->id])}}" class="btn btn-info">Show</a>
                                     @if(auth()->user()->can('Update User')||auth()->user()->id ==$user->id)
@@ -65,7 +66,7 @@
 @section('script')
     <script>
         $('#indexTable').DataTable({
-            bInfo : false,
+            bInfo: false,
             paging: false,
         });
     </script>

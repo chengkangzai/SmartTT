@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         abort_unless(auth()->user()->can('View User'), 403);
-        $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->get();
+        $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
         return view('smartTT.user.index', compact('users'));
     }
 
