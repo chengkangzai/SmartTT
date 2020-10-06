@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use function abort_unless;
@@ -18,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         abort_unless(auth()->user()->can('View User'), 403);
-        $users = User::all();
+        $users = (Auth::user()->hasRole(['Super Admin'])) ? User::all() : User::where('id', auth()->user()->id)->get();
         return view('smartTT.user.index', compact('users'));
     }
 
@@ -48,9 +49,8 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        abort_unless(auth()->user()->can('View User') || auth()->user()->id == $user->id, 403);
-        $roles = $user->roles();
-        return view('smartTT.user.show', compact('user', 'roles'));
+        abort_unless(Auth::user()->hasRole(['Super Admin']) || auth()->user()->id == $user->id, 403);
+        return view('smartTT.user.show', compact('user'));
     }
 
     public function edit(User $user)
@@ -85,7 +85,7 @@ class UserController extends Controller
     {
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
         $request->validate([
-            'old_password' => 'required|password:web',
+            'old_password' => ['required', 'password:web'],
             'new_password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
         $user->update([
