@@ -104,7 +104,6 @@
 
                 {{--TODO--}}
                 {{--1. link trips--}}
-                {{--2. link Tour description--}}
             </div>
         </div>
     </section>
