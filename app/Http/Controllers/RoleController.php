@@ -64,10 +64,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-//        TODO
         abort_unless(auth()->user()->can('View User Role'), 403);
-        $permissions = $role->permissions()->paginate(5,['*'],'permissions');
-        $users = $role->users()->paginate(5,['*'],'users');
+        $permissions = $role->permissions()->paginate(5, ['*'], 'permissions');
+        $users = $role->users()->paginate(5, ['*'], 'users');
         return view('smartTT.role.show', compact('role', 'permissions', 'users'));
     }
 
@@ -79,6 +78,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         abort_unless(auth()->user()->can('Update User Role'), 403);
+        //TODO permission
         return view('smartTT.role.edit', compact('role'));
     }
 
@@ -109,13 +109,6 @@ class RoleController extends Controller
             return Redirect::route('role.index');
         }
         return Redirect::back()->withErrors(['error' => 'There is User in this role! Therefore you cant delete it!']);
-    }
-
-    public function addUserToRole(Request $request)
-    {
-        $request->validate([
-            'id' => 'required'
-        ]);
     }
 
     public function attachUser(Role $role, Request $request)
