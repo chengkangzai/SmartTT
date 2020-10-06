@@ -2,9 +2,6 @@
 @section('title')
     Tour Management - {{config('app.name')}}
 @endsection
-@section('cdn')
-{{--    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">--}}
-@endsection
 
 @section('content')
     <section class="content-header">
@@ -70,8 +67,6 @@
 @endsection
 
 @section('script')
-{{--    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>--}}
-{{--    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>--}}
     <script>
         $('#indexTable').DataTable({
             bInfo : false,
