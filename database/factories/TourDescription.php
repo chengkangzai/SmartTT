@@ -7,7 +7,7 @@ use App\TourDescription;
 use Faker\Generator as Faker;
 
 $factory->define(TourDescription::class, function (Faker $faker) {
-    $maxNumber = Tour::all()->count();
+    $maxNumber = Tour::count();
     return [
         'place' => join(" ",$faker->words(3)),
         'description' => $faker->text,

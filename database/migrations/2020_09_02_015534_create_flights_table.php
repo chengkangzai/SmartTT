@@ -18,6 +18,7 @@ class CreateFlightsTable extends Migration
             $table->dateTime('depart_time');
             $table->dateTime('arrive_time');
             $table->integer('fee');
+            $table->foreignId('airline_id')->references('id')->on('airlines');
             $table->timestamps();
         });
     }

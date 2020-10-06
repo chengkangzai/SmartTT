@@ -12,7 +12,9 @@ $factory->define(Tour::class, function (Faker $faker) {
         'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $faker->country . " Trip",
         'destination' => $faker->city,
         'category' => $selection[rand(0, 4)],
-        'itinerary_url' => Storage::putFile('public/Tour/itinerary', $faker->image(null, 300, 200), 'public'),
-        'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $faker->image(null, 300, 200), 'public'),
+//        'itinerary_url' => Storage::putFile('public/Tour/itinerary', $faker->image(null, 300, 200), 'public'),
+//        'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $faker->image(null, 300, 200), 'public'),
+        'itinerary_url' => "",
+        'thumbnail_url' => "",
     ];
 });

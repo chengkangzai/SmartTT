@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Flight extends Model
 {
     protected $fillable = [
-        'depart_time', 'arrive_time', 'fee',
+        'depart_time', 'arrive_time', 'fee', 'airline_id'
     ];
-
 
     public function trip()
     {
-        return $this->hasMany('App\Trip');
+        return $this->belongsToMany('App\Trip');
+    }
+
+    public function airline()
+    {
+        return $this->belongsTo('App\Airline');
     }
 }

@@ -20,7 +20,6 @@ class CreateTripsTable extends Migration
             $table->string('airline');
             $table->integer('fee');
             $table->foreignId('tour_id')->references('id')->on('tours');
-            $table->foreignId('flight_id')->references('id')->on('flights');
             $table->timestamps();
         });
     }

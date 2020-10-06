@@ -12,7 +12,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $modules = ['Tour', 'Trip', 'Airline', 'User Role', 'Booking', 'User'];
+        $modules = ['Tour', 'Trip', 'Flight', 'User Role', 'Booking', 'User'];
         $cruds = ['Create', 'View', 'Update', 'Delete'];
         $temp = collect([]);
         foreach ($modules as $module) {

@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Trip extends Model
 {
     protected $fillable = [
-        'capacity', 'fee', 'tour_id', 'flight_id', 'depart_time','airline'
+        'capacity', 'fee', 'tour_id', 'flight_id', 'depart_time'
     ];
 
-    //
     public function tour()
     {
         return $this->belongsTo('App\Tour');
@@ -18,6 +17,6 @@ class Trip extends Model
 
     public function flight()
     {
-        return $this->hasOne('App\Flight');
+        return $this->belongsToMany('App\Flight');
     }
 }

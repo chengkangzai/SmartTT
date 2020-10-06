@@ -15,18 +15,15 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $role = Role::create(['name' => 'Super Admin'])->givePermissionTo(Permission::all());
-//        $permission = Permission::all();
-//        $role->givePermissionTo($permission);
 
-        $users = User::find(1);
-        $role->users()->attach($users);
+        $role->users()->attach(User::find(1));
 
-        $role = Role::create(['name' => 'Customer']);
+        Role::create(['name' => 'Customer'])
+            ->syncPermissions([
+                'View Tour', 'View Trip', 'View Flight', 'View Booking', 'View User',
+                'Create Booking', 'View Booking', 'Update Booking',
+            ])
+            ->users()->attach(User::where('id', "!=", 1)->get());
 
-        $permission = Permission::whereIn('name', [
-            'View Tour', 'View Trip', 'View Airline', 'View Booking', 'View User',
-            'Create Booking', 'View Booking', 'Update Booking',
-        ]);
-        $role->givePermissionTo($permission);
     }
 }
