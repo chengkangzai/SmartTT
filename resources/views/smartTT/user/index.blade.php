@@ -2,13 +2,10 @@
 @section('title')
     User Management - {{config('app.name')}}
 @endsection
-@section('cdn')
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-@endsection
 
 @section('content')
     <section class="content-header">
-        <h1> <b>User Management</b> </h1>
+        <h1><b>User Management</b></h1>
         <ol class="breadcrumb">
             <li class="active"><a href="{{route('user.index')}}"><i class="fa fa-dashboard"></i> User </a></li>
         </ol>
@@ -41,14 +38,18 @@
 
                                 <td>
                                     <a href="{{route('user.show',['user'=>$user->id])}}" class="btn btn-info">Show</a>
-                                    <a href="{{route('user.edit',['user'=>$user->id])}}"
-                                       class="btn btn-primary">Edit</a>
-                                    <form action="{{route('user.destroy',['user'=>$user->id])}}" style="display: inline"
-                                          method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="Delete"/>
-                                    </form>
+                                    @if(auth()->user()->can('Update User')||auth()->user()->id ==$user->id)
+                                        <a href="{{route('user.edit',['user'=>$user->id])}}" class="btn btn-primary">Edit</a>
+                                    @endif
+                                    @can('Delete User')
+                                        <form action="{{route('user.destroy',['user'=>$user->id])}}"
+                                              style="display: inline"
+                                              method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-danger" type="submit" value="Delete"/>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -61,8 +62,6 @@
 @endsection
 
 @section('script')
-    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script>
         $('#indexTable').DataTable();
     </script>

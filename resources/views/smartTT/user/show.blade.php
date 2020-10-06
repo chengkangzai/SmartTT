@@ -77,8 +77,7 @@
                                    id="new_password_confirmation" placeholder="Confirm your new password"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control btn btn-success" id="changePasswordModalButton" value="Submit"
-                                   type="submit">
+                            <input class="form-control btn btn-success" value="Submit" type="submit">
                         </div>
 
                         <div class="alert alert-danger hide" id="changePasswordModalAlert">
@@ -89,9 +88,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-default pull-left" data-dismiss="modal">
-                        Close
-                    </button>
+                    <button class="btn btn-default pull-left" data-dismiss="modal"> Close </button>
                 </div>
             </div>
         </div>
