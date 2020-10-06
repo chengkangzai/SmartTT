@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Airline;
+use App\Flight;
 use App\Tour;
 use App\Trip;
 use Carbon\Carbon;
@@ -24,9 +25,14 @@ class TripController extends Controller
     public function create()
     {
         $tours = Tour::select('id', 'name')->get();
-        $airlines = Airline::select('id', 'name')->get();
-//        $flight = Flight::all()
-        return view('smartTT.trip.create', compact('tours', 'airlines'));
+        $airlines = Airline::select('name')->get();
+        $flights = Flight::with('airline')
+            ->select('depart_time', 'arrive_time', 'airline_id', 'id')
+            ->where('depart_time', ">=", Carbon::now())
+            ->where('arrive_time', ">=", Carbon::now())
+            ->get();
+//        Depart Flight and Return Flight
+        return view('smartTT.trip.create', compact('tours', 'airlines', 'flights'));
     }
 
 
