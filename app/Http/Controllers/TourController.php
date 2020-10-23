@@ -14,14 +14,13 @@ use function view;
 
 class TourController extends Controller
 {
-//TODO
-//1. Tour Description!
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $tours = Tour::all();
+        $tours = Tour::paginate(10);
         return view('smartTT.tour.index', compact('tours'));
     }
 
@@ -67,8 +66,8 @@ class TourController extends Controller
     {
         $itineraryUrl = Storage::url($tour->itinerary_url);
         $thumbnailUrl = Storage::url($tour->thumbnail_url);
-        $tourDes = $tour->description()->get();
-        return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl','tourDes'));
+        $tourDes = $tour->description()->paginate(9);
+        return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
     }
 
     /**

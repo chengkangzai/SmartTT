@@ -5,6 +5,7 @@
 /public/adminer/
 /public/css/app.css
 /public/js/app.js
+/public/storage/
 .env
 .idea/
 .env.backup
@@ -13,3 +14,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.phpstorm.meta.php
+._ide_helper.php
+._ide_helper_models.php
+/_ide_helper_models.php
+/_ide_helper.php

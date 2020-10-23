@@ -15,11 +15,11 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('departure_datetime');
+            $table->dateTime('depart_time');
             $table->integer('capacity');
-            $table->decimal('fee',9,2);
+            $table->string('airline');
+            $table->integer('fee');
             $table->foreignId('tour_id')->references('id')->on('tours');
-            $table->foreignId('airline_id')->references('id')->on('airlines');
             $table->timestamps();
         });
     }

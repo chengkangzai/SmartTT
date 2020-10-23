@@ -15,7 +15,7 @@ class CreateTourDescriptionTable extends Migration
     {
         Schema::create('tour_description', function (Blueprint $table) {
             $table->id();
-            $table->text('place');
+            $table->string('place');
             $table->text('description');
             $table->foreignId('tour_id')->references('id')->on('tours');
             $table->timestamps();

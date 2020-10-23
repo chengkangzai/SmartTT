@@ -1,10 +1,5 @@
 @extends('smartTT.layout.master')
 
-@section('cdn')
-    <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
-@endsection
 @section('title')
     Role : {{$role->name}}
 @endsection
@@ -18,9 +13,7 @@
         </ol>
     </section>
 
-    <section class="content container-fluid w-75">
-
-
+    <section class="content container-fluid">
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">User Role Information</h3>
@@ -34,20 +27,22 @@
                 </div>
             </div>
             <div class="box-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Name</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{$role->id}}</td>
-                        <td>{{$role->name}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Name</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->name}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -59,59 +54,65 @@
                 </div>
             </div>
             <div class="box-body">
-                <table class="table" id="usersTable">
-                    <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Name</td>
-                        <td>Email</td>
-                        <td>Action</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($users as $user)
+                <div class="table-responsive">
+                    <table class="table " id="usersTable">
+                        <thead>
                         <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>
-                                <a href="{{route('user.show',['user'=>$user->id])}}" class="btn btn-info">Show</a>
-                                <form action="{{route('role.detachUserToRole',['role'=>$role->id])}}"
-                                      style="display: inline;" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="text" name="user" value="{{$user->id}}" hidden/>
-                                    <input type="submit" value="Detach" class="btn btn-danger">
-                                </form>
-                            </td>
+                            <td>ID</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Action</td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>
+                                    <a href="{{route('user.show',['user'=>$user->id])}}" class="btn btn-info">Show</a>
+                                    <form action="{{route('role.detachUserToRole',['role'=>$role->id])}}"
+                                          style="display: inline;" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="text" name="user" value="{{$user->id}}" hidden/>
+                                        <input type="submit" value="Detach" class="btn btn-danger">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">{{$users->links()}}</div>
             </div>
         </div>
 
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Permission of this role</h3>
+                <h3 class="box-title">Permission of this role </h3>
             </div>
             <div class="box-body">
-                <table class="table" id="permissionTable">
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Module</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($permissions as $permission)
+                <div class="table-responsive">
+                    <table class="table" id="permissionTable">
+                        <thead>
                         <tr>
-                            <td>{{$permission->name}}</td>
-                            <td>{{$permission->module}}</td>
+                            <td>Name</td>
+                            <td>Module</td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($permissions as $permission)
+                            <tr>
+                                <td>{{$permission->name}}</td>
+                                <td>{{$permission->module}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">{{$permissions->links()}}</div>
             </div>
         </div>
 
@@ -161,17 +162,18 @@
 @endsection
 
 @section('script')
-    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script>
         $('#permissionTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
-            "pageLength": 5
+            "pageLength": 5,
+            paging: false,
+            info: false
         });
         $('#usersTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
-            "pageLength": 5
+            "pageLength": 5,
+            paging: false,
+            info: false
         });
 
 

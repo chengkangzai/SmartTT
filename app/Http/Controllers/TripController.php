@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Airline;
+use App\Flight;
+use App\Tour;
 use App\Trip;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use function compact;
@@ -13,32 +17,42 @@ class TripController extends Controller
 
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::paginate(10);
         return view('smartTT.trip.index', compact('trips'));
     }
 
 
     public function create()
     {
-        return view('smartTT.trip.create');
+        $tours = Tour::select('id', 'name')->get();
+        $airlines = Airline::select('name')->get();
+        $flights = Flight::with('airline')
+            ->select('depart_time', 'arrive_time', 'airline_id', 'id')
+            ->where('depart_time', ">=", Carbon::now())
+            ->where('arrive_time', ">=", Carbon::now())
+            ->get();
+//        Depart Flight and Return Flight
+        return view('smartTT.trip.create', compact('tours', 'airlines', 'flights'));
     }
 
 
     public function store(Request $request)
     {
+//        dd($request->all());
         $request->validate([
-            'departure_datetime' => 'required',
-            'fee' => 'required',
-            'tour_id' => 'required',
-            'airline_id' => 'required',
-            'capacity' => 'required'
+            'fee' => 'required|integer',
+            'tour' => 'required',
+            'capacity' => 'required',
+            'depart_time' => 'required',
+            'airline' => 'required',
         ]);
+
         Trip::create([
-            'departure_datetime' => $request->get('departure_datetime') ?? "N/A",
-            'fee' => $request->get('fee') ?? "N/A",
-            'tour_id' => $request->get('tour_id') ?? "N/A",
-            'airline_id' => $request->get('airline_id') ?? "N/A",
-            'capacity' => $request->get('capacity') ?? "N/A",
+            'fee' => $request->get('fee') * 100,
+            'tour_id' => $request->get('tour'),
+            'capacity' => $request->get('capacity'),
+            'depart_time' => Carbon::parse($request->get('depart_time')),
+            'airline' => $request->get('airline'),
         ]);
         return Redirect::route('trip.index');
     }
@@ -51,7 +65,10 @@ class TripController extends Controller
 
     public function edit(Trip $trip)
     {
-        return view('smartTT.trip.edit', compact('trip'));
+        $tour = $trip->tour()->first();
+        $tours = Tour::select('id', 'name')->get();
+        $airlines = Airline::select('id', 'name')->get();
+        return view('smartTT.trip.edit', compact('trip', 'tour', 'tours', 'airlines'));
     }
 
     public function update(Request $request, Trip $trip)
@@ -63,6 +80,6 @@ class TripController extends Controller
     public function destroy(Trip $trip)
     {
         $trip->delete();
-        return Redirect::route('tour.index');
+        return Redirect::route('trip.index');
     }
 }

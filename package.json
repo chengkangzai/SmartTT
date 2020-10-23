@@ -21,5 +21,11 @@
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "datatables.net-bs4": "^1.10.22",
+        "datatables.net-dt": "^1.10.22",
+        "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+        "select2": "^4.0.13"
     }
 }

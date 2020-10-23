@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tour extends Model
 {
     protected $fillable = [
-        'tour_code','name','destination','category','itinerary_url','thumbnail_url'
+        'tour_code', 'name', 'destination', 'category', 'itinerary_url', 'thumbnail_url'
     ];
 
     //

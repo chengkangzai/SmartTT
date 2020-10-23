@@ -17,7 +17,7 @@
               method="POST" >
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tour Description</h3>
+                    <h3 class="box-title">Tour Description for {{$tourName}}</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group @error('place') has-error @enderror">

@@ -13,31 +13,7 @@ class TourSeeder extends Seeder
      */
     public function run()
     {
-        $tour =Tour::create([
-            'tour_code' => "Test",
-            'name' => "Test",
-            'destination' => "Test",
-            'category' => "Test",
-            'itinerary_url' => "Lol",
-            'thumbnail_url' => "Lol",
-        ]);
-        $temp = [
-            [
-                'place'=>'Random place la',
-                'description'=>'Where you want to go',
-                'tour_id'=>$tour->id,
-            ],
-            [
-                'place'=>'Random place la',
-                'description'=>'Where you want to go',
-                'tour_id'=>$tour->id,
-            ],
-            [
-                'place'=>'Random place la',
-                'description'=>'Where you want to go',
-                'tour_id'=>$tour->id,
-            ]
-        ];
-        TourDescription::insert($temp);
+        factory(Tour::class, 11)->create();
+        factory(TourDescription::class, 55)->create();
     }
 }

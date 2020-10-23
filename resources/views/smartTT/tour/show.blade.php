@@ -16,7 +16,7 @@
             <div class="col-lg-2">
                 <img src="{{$thumbnailUrl}}" alt="" class="img-responsive img-thumbnail image">
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 ">
                 <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Tour Information</h3>
@@ -31,30 +31,32 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tour Name</th>
-                                <th>Tour Code</th>
-                                <th>Destination</th>
-                                <th>Category</th>
-                                <th>Itinerary</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{$tour->id}}</td>
-                                <td>{{$tour->name}}</td>
-                                <td>{{$tour->tour_code}}</td>
-                                <td>{{$tour->destination}}</td>
-                                <td>{{$tour->category}}</td>
-                                <td>
-                                    <a href="{{$itineraryUrl}}" class="btn btn-info">View</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tour Name</th>
+                                    <th>Tour Code</th>
+                                    <th>Destination</th>
+                                    <th>Category</th>
+                                    <th>Itinerary</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{$tour->id}}</td>
+                                    <td>{{$tour->name}}</td>
+                                    <td>{{$tour->tour_code}}</td>
+                                    <td>{{$tour->destination}}</td>
+                                    <td>{{$tour->category}}</td>
+                                    <td>
+                                        <a href="{{$itineraryUrl}}" class="btn btn-info">View</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -71,34 +73,37 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        @forelse($tourDes as $des)
-                            <div class="card m-1 col-lg-3 pb-3 " style="width: 29% !important;">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{$des->place}}</h3>
-                                    <p class="card-text">{{$des->description}}</p>
-                                </div>
-                                <div class="mx-auto ">
-                                    <form class="form" style="display: inline;" method="POST"
-                                          action="{{route('tourDescription.destroy',['tourDescription'=>$des->id])}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                    </form>
-                                    <a href="{{route('tourDescription.edit',['tourDescription'=>$des->id])}}"
-                                       class="btn btn-info">Edit</a>
-                                </div>
+                        <div class="">
+                            @forelse($tourDes as $des)
+                                <div class="card col-lg-4 col-md-12 " style="height: 200px;padding-bottom: 10px">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{$des->place}}</h3>
+                                        <p class="card-text text-truncate">{{$des->description}}</p>
+                                    </div>
+                                    <div class="mx-auto ">
+                                        <form class="form" style="display: inline;" method="POST"
+                                              action="{{route('tourDescription.destroy',['tourDescription'=>$des->id])}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                        </form>
+                                        <a href="{{route('tourDescription.edit',['tourDescription'=>$des->id])}}"
+                                           class="btn btn-info">Edit</a>
+                                    </div>
 
-                            </div>
-                        @empty
-                            <h4 class="text-center">Nothing to show</h4>
-                        @endforelse
-
+                                </div>
+                            @empty
+                                <h4 class="text-center">Nothing to show</h4>
+                            @endforelse
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        {{$tourDes->links()}}
                     </div>
                 </div>
 
                 {{--TODO--}}
                 {{--1. link trips--}}
-                {{--2. link Tour description--}}
             </div>
         </div>
     </section>
