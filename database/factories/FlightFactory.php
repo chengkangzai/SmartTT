@@ -1,18 +1,35 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Airline;
-use App\Flight;
+use App\Models\Airline;
+use App\Models\Flight;
 use Carbon\Carbon;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use function rand;
 
-$factory->define(Flight::class, function (Faker $faker) {
-    $airlineCount = Airline::count();
-    return [
-        'depart_time' => Carbon::now()->addDay(rand(1, 30)),
-        'arrive_time' => Carbon::tomorrow()->addDay(rand(35, 50)),
-        'fee' => rand(100, 3000),
-        'airline_id' => rand(1, $airlineCount)
-    ];
-});
+class FlightFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Flight::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $airlineCount = Airline::count();
+        return [
+            'depart_time' => Carbon::now()->addDay(rand(1, 30)),
+            'arrive_time' => Carbon::tomorrow()->addDay(rand(35, 50)),
+            'fee' => rand(100, 3000),
+            'airline_id' => rand(1, $airlineCount)
+        ];
+    }
+}

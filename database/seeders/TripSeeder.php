@@ -1,12 +1,15 @@
 <?php
 
-use App\Tour;
-use App\TourDescription;
-use App\Trip;
+namespace Database\Seeders;
+
+use App\Models\Trip;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
 
 class TripSeeder extends Seeder
 {
+    use HasFactory;
+
     /**
      * Run the database seeds.
      *
@@ -14,6 +17,6 @@ class TripSeeder extends Seeder
      */
     public function run()
     {
-        factory(Trip::class, 10)->create();
+        Trip::factory()->count(10)->create();
     }
 }

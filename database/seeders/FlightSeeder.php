@@ -1,6 +1,9 @@
 <?php
 
-use App\Flight;
+namespace Database\Seeders;
+
+
+use App\Models\Flight;
 use Illuminate\Database\Seeder;
 
 class FlightSeeder extends Seeder
@@ -19,6 +22,7 @@ class FlightSeeder extends Seeder
 //            'airline_id' => Airline::where('name', 'Malaysia Airlines')->first()->id,
 //        ];
 //        DB::table('flights')->insert($flight);
-        factory(Flight::class, 100)->create();
+
+        Flight::factory()->count(100)->create();
     }
 }

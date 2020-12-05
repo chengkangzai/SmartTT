@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Flight;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller

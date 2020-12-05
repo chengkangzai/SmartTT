@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Tour;
-use App\Trip;
+use App\Models\Tour;
+use App\Models\Trip;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;

@@ -1,7 +1,10 @@
 <?php
 
-use App\Tour;
-use App\TourDescription;
+namespace Database\Seeders;
+
+
+use App\Models\Tour;
+use App\Models\TourDescription;
 use Illuminate\Database\Seeder;
 
 class TourSeeder extends Seeder
@@ -13,7 +16,7 @@ class TourSeeder extends Seeder
      */
     public function run()
     {
-        factory(Tour::class, 11)->create();
-        factory(TourDescription::class, 55)->create();
+        Tour::factory()->count(11)->create();
+        TourDescription::factory()->count(11)->create();
     }
 }
