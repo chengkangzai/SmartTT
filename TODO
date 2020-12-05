@@ -1,0 +1,18 @@
+COMPOSER install
+php artisan migrate
+
+composer require laravel/ui
+php artisan ui bootstrap
+npm install
+npm run dev
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+composer dump-autoload
+
+php artisan storage:link
+
+TODO
+https://github.com/spatie/laravel-activitylog
+config/databse->dump->change binary mysql path
+php artisan backup:run
