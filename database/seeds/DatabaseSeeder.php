@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(RoleSeeder::class);
 
-        $this->call(CountriesTableSeeder::class);
+        $this->call(CountrySeeder::class);
 
         $this->call(TourSeeder::class);
 
         $this->call(AirlineSeeder::class);
         $this->call(FlightSeeder::class);
         $this->call(TripSeeder::class);
-        
+
     }
 }

@@ -46,13 +46,7 @@
                             <td>{{$trip->depart_time}}</td>
                             <td>{{$trip->capacity}}</td>
                             <td>{{$trip->tour->name}}</td>
-                            <td>
-                                <ul>
-                                    @foreach($trip->flight as $flight)
-                                        <li>{{$flight->airline()->first()->name}}</li>
-                                    @endforeach
-                                </ul>
-                            </td>
+                            <td>{{$trip->airline}}</td>
                         </tr>
                         </tbody>
                     </table>

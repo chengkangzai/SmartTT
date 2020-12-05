@@ -1,11 +1,7 @@
 <?php
 
-use App\Airline;
 use App\Flight;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\DB;
 
 class FlightSeeder extends Seeder
 {
