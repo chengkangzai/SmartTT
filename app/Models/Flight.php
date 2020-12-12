@@ -37,11 +37,11 @@ class Flight extends Model
 
     public function trip()
     {
-        return $this->belongsToMany('App\Trip');
+        return $this->belongsToMany('App\Models\Trip');
     }
 
     public function airline()
     {
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Models\Airline');
     }
 }

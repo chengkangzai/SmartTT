@@ -39,11 +39,11 @@ class Trip extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Tour');
+        return $this->belongsTo('App\Models\Tour');
     }
 
     public function flight()
     {
-        return $this->belongsToMany('App\Flight');
+        return $this->belongsToMany('App\Models\Flight');
     }
 }

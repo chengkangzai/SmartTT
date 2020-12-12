@@ -38,10 +38,10 @@ class Booking extends Model
     //
     public function trips()
     {
-        return $this->belongsTo('App\Trip');
+        return $this->belongsTo('App\Models\Trip');
     }
     public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

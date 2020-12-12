@@ -45,12 +45,12 @@ class Tour extends Model
     //
     public function trips()
     {
-        return $this->hasMany('App\Trip');
+        return $this->hasMany('App\Models\Trip');
     }
 
     public function description()
     {
-        return $this->hasMany('App\TourDescription');
+        return $this->hasMany('App\Models\TourDescription');
     }
 
 }
