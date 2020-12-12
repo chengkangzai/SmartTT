@@ -50,6 +50,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         abort_unless(Auth::user()->hasRole(['Super Admin']) || auth()->user()->id == $user->id, 403);
+        $user->load('roles');
         return view('smartTT.user.show', compact('user'));
     }
 
