@@ -35,13 +35,15 @@ class Booking extends Model
     protected $fillable = [
         'user_id', 'trip_id', 'total_fee', 'discount', 'adult', 'child'
     ];
+
     //
     public function trips()
     {
-        return $this->belongsTo('App\Models\Trip');
+        return $this->belongsTo(Trip::class);
     }
+
     public function users()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

@@ -39,6 +39,6 @@ class TourDescription extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Models\Tour');
+        return $this->belongsTo(Tour::class);
     }
 }
