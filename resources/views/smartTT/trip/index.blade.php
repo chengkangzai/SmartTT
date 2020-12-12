@@ -45,13 +45,7 @@
                                 <td>{{$trip->capacity}}</td>
                                 <td>{{$trip->depart_time}}</td>
                                 <td>{{$trip->tour->name}}</td>
-                                <td>
-                                    <ul>
-                                        @foreach($trip->flight as $flight)
-                                            <li>{{$flight->airline()->first()->name}}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
+                                <td>{{$trip->airline}}</td>
                                 <td>
                                     <a href="{{route('trip.show',['trip'=>$trip->id])}}" class="btn btn-info">Show</a>
                                     <a href="{{route('trip.edit',['trip'=>$trip->id])}}"
