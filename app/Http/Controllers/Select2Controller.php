@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Flight;
-use App\User;
+use App\Models\Flight;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;

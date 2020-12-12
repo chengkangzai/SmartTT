@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Tour;
-use App\TourDescription;
+use App\Models\Tour;
+use App\Models\TourDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use function collect;
