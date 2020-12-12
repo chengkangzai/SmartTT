@@ -95,6 +95,7 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{asset('js/modal.js')}}"></script>
     <script>
         $("#changePasswordForm").on('submit', function (e) {
             e.preventDefault();
@@ -111,7 +112,8 @@
                     $("#changePasswordModalErrorList").html(`<ul id="changePasswordModalErrorList"></ul>`)
                         .append(`${response.message}`);
 
-                    setTimeout($("#changePasswordModal").modal('hide'), 100);
+                    $("#changePasswordModal").modal('hide');
+                    new Modal('Success !',' Password is changed').show();
                 },
 
                 error: function (error) {
