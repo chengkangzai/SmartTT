@@ -5,6 +5,8 @@
             <li><a href="{{route('tour.index')}}"><i class="fa fa-link"></i> <span>Tour Management</span></a></li>
             <li><a href="{{route('trip.index')}}"><i class="fa fa-link"></i> <span>Trip Management</span></a></li>
             <li><a href="{{route('flight.index')}}"><i class="fa fa-link"></i> <span>Flight Management</span></a></li>
+{{--            TODO--}}
+{{--            <li><a href="{{route('airline.index')}}"><i class="fa fa-link"></i> <span>Airline Management</span></a></li>--}}
 
             <li class="header">Booking</li>
             <li><a href="{{route('booking.index')}}"><i class="fa fa-link"></i> <span>Booking Management</span></a></li>

@@ -11,17 +11,26 @@ use Illuminate\Support\Facades\Redirect;
 use function compact;
 use function view;
 
+/**
+ * Class TripController
+ * @package App\Http\Controllers
+ */
 class TripController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
-        //TODO preload with airline
-        $trips = Trip::with('flight')->with('tour')->take(10)->paginate(10);
+        $trips = Trip::with('tour')->paginate(10);
         return view('smartTT.trip.index', compact('trips'));
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $tours = Tour::select('id', 'name')->get();
@@ -29,6 +38,10 @@ class TripController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
 //        dd($request->all());
@@ -56,12 +69,20 @@ class TripController extends Controller
     }
 
 
+    /**
+     * @param Trip $trip
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show(Trip $trip)
     {
         $flights = $trip->flight()->get();
         return view('smartTT.trip.show', compact('trip', 'flights'));
     }
 
+    /**
+     * @param Trip $trip
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit(Trip $trip)
     {
         $tour = $trip->tour()->first();
@@ -70,12 +91,22 @@ class TripController extends Controller
         return view('smartTT.trip.edit', compact('trip', 'tour', 'tours'));
     }
 
+    /**
+     * @param Request $request
+     * @param Trip $trip
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Trip $trip)
     {
         $trip->update($request->all());
         return Redirect::route('trip.index');
     }
 
+    /**
+     * @param Trip $trip
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Trip $trip)
     {
         $trip->delete();

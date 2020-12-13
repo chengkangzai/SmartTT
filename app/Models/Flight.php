@@ -32,7 +32,31 @@ class Flight extends Model
     use  HasFactory;
 
     protected $fillable = [
-        'depart_time', 'arrive_time', 'fee', 'airline_id'
+        'depart_time', 'arrive_time', 'fee', 'airline_id',''
+    ];
+//TODO add
+//1.depart airport
+//2.arrival airport
+//3.flight class
+//4.flight type
+
+//Class
+    protected $dates = [
+        'depart_time',
+        'arrive_time'
+    ];
+
+    protected $CLASS = [
+        'Economy' => 'Economy',
+        'Business' => 'Business',
+        'First' => 'First',
+        'Premium economy' => 'Premium Economy'
+    ];
+
+    protected $TYPE = [
+        'Round' => 'Round',
+        'One Way' => 'One Way',
+        'Multi-city' => 'Multi-city',
     ];
 
     public function trip()

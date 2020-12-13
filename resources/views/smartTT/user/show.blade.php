@@ -43,8 +43,8 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                            <a href="{{route('role.show',[$user->roles()->first()->id])}}"
-                               class="btn btn-primary">{{$user->roles()->first()->name}}</a>
+                            <a href="{{route('role.show',[$user->roles->first->id])}}"
+                               class="btn btn-primary">{{$user->roles->first->name->name}}</a>
                         </td>
                         <td>{{$user->created_at}}</td>
                     </tr>

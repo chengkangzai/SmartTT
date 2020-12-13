@@ -37,6 +37,10 @@ class Trip extends Model
         'capacity', 'fee', 'tour_id', 'flight_id', 'depart_time'
     ];
 
+    protected $dates = [
+        'depart_time'
+    ];
+
     public function tour()
     {
         return $this->belongsTo(Tour::class);
@@ -45,5 +49,10 @@ class Trip extends Model
     public function flight()
     {
         return $this->belongsToMany(Flight::class);
+    }
+
+    public function airline()
+    {
+        return $this->hasManyThrough(Airline::class, Flight::class);
     }
 }

@@ -26,9 +26,9 @@ class FlightFactory extends Factory
     {
         $airlineCount = Airline::count();
         return [
-            'depart_time' => Carbon::now()->addDay(rand(1, 30)),
-            'arrive_time' => Carbon::tomorrow()->addDay(rand(35, 50)),
-            'fee' => rand(100, 3000),
+            'depart_time' => Carbon::now()->addDay(rand(1, 30))->addSeconds(0,100000),
+            'arrive_time' => Carbon::tomorrow()->addDay(rand(35, 50))->addSeconds(0,100000),
+            'fee' => rand(10000, 200000),
             'airline_id' => rand(1, $airlineCount)
         ];
     }

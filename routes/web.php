@@ -9,12 +9,17 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
+use App\Models\Trip;
 use App\TourDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'DashboardController@index');
+Route::get('/test', function () {
 
+    $f = Trip::with('airline')->get();
+    echo $f->first()->airline->name;
+});
 Route::middleware('web')->group(function () {
     //TODO
     //Public available page ..

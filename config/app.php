@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -230,4 +230,5 @@ return [
 
     ],
 
+    'date_format' => 'd M Y H:i',
 ];
