@@ -6,8 +6,14 @@ use App\Models\Tour;
 use App\Models\Trip;
 use Carbon\Carbon;
 use DB;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Throwable;
 use function compact;
 use function view;
 
@@ -19,9 +25,9 @@ class TripController extends Controller
 {
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $trips = Trip::with('tour')->paginate(10);
         return view('smartTT.trip.index', compact('trips'));
@@ -29,22 +35,22 @@ class TripController extends Controller
 
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
-        $tours = Tour::select('id', 'name')->get();
+        $tours = Tour::select(['id', 'name'])->get();
         return view('smartTT.trip.create', compact('tours'));
     }
 
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws Throwable
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-//        dd($request->all());
         $request->validate([
             'fee' => 'required|integer',
             'tour' => 'required',
@@ -63,17 +69,15 @@ class TripController extends Controller
 
             $trip->flight()->attach($request->get('flight'));
         });
-
-
         return Redirect::route('trip.index');
     }
 
 
     /**
      * @param Trip $trip
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function show(Trip $trip)
+    public function show(Trip $trip): Factory|View|Application
     {
         $flights = $trip->flight()->get();
         return view('smartTT.trip.show', compact('trip', 'flights'));
@@ -81,12 +85,12 @@ class TripController extends Controller
 
     /**
      * @param Trip $trip
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function edit(Trip $trip)
+    public function edit(Trip $trip): Factory|View|Application
     {
         $tour = $trip->tour()->first();
-        $tours = Tour::select('id', 'name')->get();
+        $tours = Tour::select(['id', 'name'])->get();
 
         return view('smartTT.trip.edit', compact('trip', 'tour', 'tours'));
     }
@@ -94,9 +98,9 @@ class TripController extends Controller
     /**
      * @param Request $request
      * @param Trip $trip
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, Trip $trip)
+    public function update(Request $request, Trip $trip): RedirectResponse
     {
         $trip->update($request->all());
         return Redirect::route('trip.index');
@@ -104,10 +108,10 @@ class TripController extends Controller
 
     /**
      * @param Trip $trip
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy(Trip $trip)
+    public function destroy(Trip $trip): RedirectResponse
     {
         $trip->delete();
         return Redirect::route('trip.index');

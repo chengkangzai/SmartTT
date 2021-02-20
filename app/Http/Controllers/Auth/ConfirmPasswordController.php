@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 use function view;
 
@@ -27,7 +30,7 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,7 +41,11 @@ class ConfirmPasswordController extends Controller
     {
         $this->middleware('auth');
     }
-    public function showConfirmForm()
+
+    /**
+     * @return Factory|View|Application
+     */
+    public function showConfirmForm(): Factory|View|Application
     {
         return view('auth.passwords.confirm');
     }

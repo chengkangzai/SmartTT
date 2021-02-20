@@ -4,8 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use App\Models\TourDescription;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use function collect;
 use function compact;
 use function count;
@@ -16,11 +23,11 @@ class TourDescriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Tour $tour
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @param Request $request
+     * @param Tour|null $tour
+     * @return Application|ResponseFactory|Response
      */
-    public function store(Request $request, Tour $tour = null)
+    public function store(Request $request, Tour $tour = null): Response|Application|ResponseFactory
     {
 //        add validate if required
         $temp = collect([]);
@@ -44,9 +51,9 @@ class TourDescriptionController extends Controller
     /**
      * @param Request $request
      * @param TourDescription $tourDescription
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, TourDescription $tourDescription)
+    public function update(Request $request, TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->update([
             'place' => $request->get('place'),
@@ -57,9 +64,9 @@ class TourDescriptionController extends Controller
 
     /**
      * @param TourDescription $tourDescription
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function edit(TourDescription $tourDescription)
+    public function edit(TourDescription $tourDescription): Factory|View|Application
     {
         $tourName = Tour::find($tourDescription->tour_id)->first()->name;
         return view('smartTT.tourDescription.edit', compact('tourDescription', 'tourName'));
@@ -68,10 +75,10 @@ class TourDescriptionController extends Controller
 
     /**
      * @param TourDescription $tourDescription
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy(TourDescription $tourDescription)
+    public function destroy(TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->delete();
         return Redirect::back();
@@ -80,9 +87,9 @@ class TourDescriptionController extends Controller
     /**
      * @param Request $request
      * @param Tour $tour
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function attachToTour(Request $request, Tour $tour)
+    public function attachToTour(Request $request, Tour $tour): RedirectResponse
     {
         $request->validate([
             'place' => 'required',
