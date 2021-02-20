@@ -7,6 +7,7 @@ use App\Models\Airport;
 use App\Models\Flight;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 use function array_rand;
 use function rand;
 
@@ -24,6 +25,7 @@ class FlightFactory extends Factory
      *
      * @return array
      */
+    #[ArrayShape(['depart_time' => "\Carbon\Carbon", 'arrive_time' => "\Carbon\Carbon", 'fee' => "int", 'airline_id' => "int", 'depart_airport' => "int", 'arrival_airport' => "int", 'flight_class' => "array|int|string", 'flight_type' => "array|int|string"])]
     public function definition(): array
     {
         $airlineCount = Airline::count();
