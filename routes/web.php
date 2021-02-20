@@ -9,42 +9,37 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
-use App\Models\Trip;
 use App\TourDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'DashboardController@index');
-Route::get('/test', function () {
+Route::get('/', [DashboardController::class, 'index']);
 
-    $f = Trip::with('airline')->get();
-    echo $f->first()->airline->name;
-});
-Route::middleware('web')->group(function () {
+Auth::routes(['confirm' => false]);
+
+Route::middleware(['web', 'auth'])->group(function () {
     //TODO
     //Public available page ..
-    Auth::routes(['confirm' => false]);
 
-    Route::middleware('auth')->group(function () {
-        Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
-        Route::post('select2/getFlightByAirline', [Select2Controller::class, 'getFlightByAirline'])->name('select2.trip.getFlight');
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+    Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
+    Route::post('select2/getFlightByAirline', [Select2Controller::class, 'getFlightByAirline'])->name('select2.trip.getFlight');
 
-        Route::post('user/changePassword/{user}', [UserController::class, 'changePassword'])->name('user.changePassword');
-        Route::resource('user', UserController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
-        Route::resource('tour', TourController::class);
-        Route::resource('trip', TripController::class);
-        Route::resource('flight', FlightController::class);
-        Route::resource('booking', BookingController::class);
+    Route::post('user/changePassword/{user}', [UserController::class, 'changePassword'])->name('user.changePassword');
+    Route::resource('user', UserController::class);
 
-        Route::post('tourDescription/{tour}', [TourDescription::class, 'attachToTour'])->name('tourDescription.attach');
-        Route::resource('tourDescription', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
+    Route::resource('tour', TourController::class);
+    Route::resource('trip', TripController::class);
+    Route::resource('flight', FlightController::class);
+    Route::resource('booking', BookingController::class);
 
-        Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('role.attachUserToRole');
-        Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('role.detachUserToRole');
-        Route::resource('role', RoleController::class);
-    });
+    Route::post('tourDescription/{tour}', [TourDescription::class, 'attachToTour'])->name('tourDescription.attach');
+    Route::resource('tourDescription', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
+
+    Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('role.attachUserToRole');
+    Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('role.detachUserToRole');
+    Route::resource('role', RoleController::class);
 });
 
