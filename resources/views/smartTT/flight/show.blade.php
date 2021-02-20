@@ -43,7 +43,9 @@
                             <td>{{$flight->depart_time}}</td>
                             <td>{{$flight->arrive_time}}</td>
                             <td>RM {{number_format($flight->fee/100,2)}}</td>
-                            <td>{{$flight->airline->name}}</td>
+                            <td>{{$flight->airline->name}}
+                                ({{$flight->depart_airports->ICAO}}) -> ({{$flight->arrive_airport->ICAO}})
+                            </td>
                         </tr>
                         </tbody>
                     </table>

@@ -40,7 +40,9 @@
                                 <td>{{$flight->depart_time->format(config('app.date_format'))}}</td>
                                 <td>{{$flight->arrive_time->format(config('app.date_format'))}}</td>
                                 <td>RM {{number_format($flight->fee/100,2)}}</td>
-                                <td>{{$flight->airline->name}}</td>
+                                <td>{{$flight->airline->name}}
+                                    ({{$flight->depart_airports->ICAO}}) -> ({{$flight->arrive_airport->ICAO}})
+                                </td>
                                 <td>
                                     <a href="{{route('flight.show',['flight'=>$flight->id])}}"
                                        class="btn btn-info">Show</a>
