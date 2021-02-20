@@ -13,17 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(PermissionSeeder::class);
-        $this->call(RoleSeeder::class);
-
-        $this->call(CountrySeeder::class);
-
-        $this->call(TourSeeder::class);
-
-        $this->call(AirlineSeeder::class);
-        $this->call(FlightSeeder::class);
-        $this->call(TripSeeder::class);
-
+        $this->call([
+            UserSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            CountrySeeder::class,
+            TourSeeder::class,
+            AirlineSeeder::class,
+            AirportSeeder::class,
+            FlightSeeder::class,
+            TripSeeder::class,
+        ]);
     }
 }
