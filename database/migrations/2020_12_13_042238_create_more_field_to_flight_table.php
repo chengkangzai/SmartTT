@@ -14,10 +14,10 @@ class CreateMoreFieldToFlightTable extends Migration
     public function up()
     {
         Schema::table('flights', function (Blueprint $table) {
-            $table->text('depart_airport')->nullable();
-            $table->text('arrival_airport')->nullable();
-            $table->text('flight_class')->nullable();
-            $table->text('flight_type')->nullable();
+            $table->foreignId('depart_airport')->references('id')->on('airports');
+            $table->foreignId('arrival_airport')->references('id')->on('airports');
+            $table->text('flight_class');
+            $table->text('flight_type');
         });
     }
 
@@ -28,6 +28,11 @@ class CreateMoreFieldToFlightTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('more_field_to_flight');
+        Schema::table('flights', function (Blueprint $table) {
+            $table->dropColumn('depart_airport');
+            $table->dropColumn('arrival_airport');
+            $table->dropColumn('flight_class');
+            $table->dropColumn('flight_type');
+        });
     }
 }
