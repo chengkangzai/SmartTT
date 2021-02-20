@@ -31,7 +31,7 @@ class TripFactory extends Factory
             'tour_id' => rand(1, $tourCount),
             'capacity' => rand(25, 30),
             'airline' => Airline::inRandomOrder()->first()->name,
-            'depart_time' => Carbon::now()->addDay(rand(30,180))->addSeconds(rand(7000,rand(100000))),
+            'depart_time' => Carbon::now()->addDays(rand(30,180))->addSeconds(rand(7000,rand(0,100000))),
         ];
     }
 }
