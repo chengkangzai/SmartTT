@@ -28,6 +28,7 @@ class UserController extends Controller
     public function index(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View User'), 403);
+        //TODO... add Staff Role
         $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
         return view('smartTT.user.index', compact('users'));
     }

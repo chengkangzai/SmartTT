@@ -24,6 +24,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
     Route::post('select2/getFlightByAirline', [Select2Controller::class, 'getFlightByAirline'])->name('select2.trip.getFlight');
+    Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
@@ -33,6 +34,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::resource('tour', TourController::class);
     Route::resource('trip', TripController::class);
     Route::resource('flight', FlightController::class);
+    Route::post('booking/calculatePrice', [BookingController::class, 'calculatePrice'])->name('booking.calculatePrice');
     Route::resource('booking', BookingController::class);
 
     Route::post('tourDescription/{tour}', [TourDescription::class, 'attachToTour'])->name('tourDescription.attach');

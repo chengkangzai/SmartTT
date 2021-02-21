@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use function collect;
+use function dd;
 use function response;
 
 class Select2Controller extends Controller
@@ -53,6 +54,25 @@ class Select2Controller extends Controller
             $array->push([
                 'id' => $flight->id,
                 'text' => $flight->airline->name . " (" . $flight->depart_time->format('d/m/Y H:i') . ") -> (" . $flight->arrive_time->format('d/m/Y H:i') . ")",
+            ]);
+        }
+        return response()->json($array->toArray());
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|bool
+     */
+    public function getCustomer(Request $request): JsonResponse|bool
+    {
+        if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();
+        $usersNotInTheRole = Role::findById(2)->users()->get();
+        $array = collect([]);
+
+        foreach ($usersNotInTheRole as $user) {
+            $array->push([
+                'id' => $user->id,
+                'text' => $user->name . " (" . $user->email . ")",
             ]);
         }
         return response()->json($array->toArray());

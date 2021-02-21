@@ -104,11 +104,12 @@ class FlightController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Flight $flight
-     * @return Response
+     * @return RedirectResponse|Response
      * @throws Exception
      */
-    public function destroy(Flight $flight): Response
+    public function destroy(Flight $flight): Response|RedirectResponse
     {
         $flight->delete();
+        return redirect()->route('flight.index');
     }
 }

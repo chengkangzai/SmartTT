@@ -22,7 +22,7 @@ class Booking extends Model
      */
     public function trips(): BelongsTo
     {
-        return $this->belongsTo(Trip::class);
+        return $this->belongsTo(Trip::class, 'trip_id', 'id');
     }
 
     /**
@@ -30,6 +30,6 @@ class Booking extends Model
      */
     public function users(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
