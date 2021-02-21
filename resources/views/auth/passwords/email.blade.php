@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,8 @@
 
             <div class="form-group row">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Type Your Email Here">
+                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                       placeholder="Type Your Email Here">
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">

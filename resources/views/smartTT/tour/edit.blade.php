@@ -17,7 +17,8 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Edit Tour</h3>
             </div>
-            <form role="form" action="{{route('tour.update',['tour'=>$tour->id])}}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{route('tour.update',['tour'=>$tour->id])}}" method="POST"
+                  enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="box-body">

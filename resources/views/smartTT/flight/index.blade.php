@@ -1,22 +1,22 @@
 @extends('smartTT.layout.master')
 @section('title')
-    Tour Management - {{config('app.name')}}
+    Flight Management - {{config('app.name')}}
 @endsection
 
 @section('content')
     <section class="content-header">
-        <h1><b>Tour Management</b></h1>
+        <h1><b>Flight Management</b></h1>
         <ol class="breadcrumb">
-            <li class="active"><a href="{{route('tour.index')}}"><i class="fa fa-dashboard"></i> Tour </a></li>
+            <li class="active"><a href="{{route('flight.index')}}"><i class="fa fa-dashboard"></i> Flight </a></li>
         </ol>
     </section>
 
     <section class="content container-fluid">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Tour Management</h3>
+                <h3 class="box-title">Flight Management</h3>
                 <div class="m-2 btn-group-vertical pull-right">
-                    <a href="{{route('tour.create')}}" class="btn btn-success">Create</a>
+                    <a href="{{route('flight.create')}}" class="btn btn-success">Create</a>
                 </div>
             </div>
             <div class="box-body">
@@ -26,26 +26,30 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tour Name</th>
-                            <th>Tour Code</th>
-                            <th>Destination</th>
-                            <th>Category</th>
+                            <th>Depart Time</th>
+                            <th>Arrival Time</th>
+                            <th>Fee (Rm)</th>
+                            <th>Airline</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tours as $tour)
+                        @foreach($flights as $flight)
                             <tr>
-                                <td>{{$tour->id}}</td>
-                                <td>{{$tour->name}}</td>
-                                <td>{{$tour->tour_code}}</td>
-                                <td>{{$tour->destination}}</td>
-                                <td>{{$tour->category}}</td>
+                                <td>{{$flight->id}}</td>
+                                <td>{{$flight->depart_time->format(config('app.date_format'))}}</td>
+                                <td>{{$flight->arrive_time->format(config('app.date_format'))}}</td>
+                                <td>RM {{number_format($flight->fee/100,2)}}</td>
+                                <td>{{$flight->airline->name}}
+                                    ({{$flight->depart_airports->ICAO}}) -> ({{$flight->arrive_airport->ICAO}})
+                                </td>
                                 <td>
-                                    <a href="{{route('tour.show',['tour'=>$tour->id])}}" class="btn btn-info">Show</a>
-                                    <a href="{{route('tour.edit',['tour'=>$tour->id])}}"
+                                    <a href="{{route('flight.show',['flight'=>$flight->id])}}"
+                                       class="btn btn-info">Show</a>
+                                    <a href="{{route('flight.edit',['flight'=>$flight->id])}}"
                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{route('tour.destroy',['tour'=>$tour->id])}}" style="display: inline"
+                                    <form action="{{route('flight.destroy',['flight'=>$flight->id])}}"
+                                          style="display: inline"
                                           method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -53,12 +57,11 @@
                                     </form>
                                 </td>
                             </tr>
-                            {{--                        FORELSE--}}
                         @endforeach
                         </tbody>
                     </table>
                     <div class="box-footer">
-                        {{$tours->links()}}
+                        {{$flights->links()}}
                     </div>
                 </div>
             </div>

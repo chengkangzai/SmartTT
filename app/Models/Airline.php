@@ -3,25 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * App\Model\Airline
- *
- * @property int $id
- * @property string $name This table is just meant for data management
- * @method static \Illuminate\Database\Eloquent\Builder|Airline newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Airline newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Airline query()
- * @method static \Illuminate\Database\Eloquent\Builder|Airline whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Airline whereName($value)
- * @mixin \Eloquent
- */
+
 class Airline extends Model
 {
-    protected $fillable = ['name'];
+    protected array $fillable = [
+        'name'
+    ];
 
-    public function flights()
+    /**
+     * @return HasMany
+     */
+    public function flights(): HasMany
     {
-        return $this->hasMany('App\Models\Flight');
+        return $this->hasMany(Flight::class);
     }
 }

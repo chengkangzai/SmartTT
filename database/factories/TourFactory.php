@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 use function rand;
 use function strtoupper;
 
@@ -14,14 +15,15 @@ class TourFactory extends Factory
      *
      * @var string
      */
-    protected $model = Tour::class;
+    protected string $model = Tour::class;
 
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'destination' => "string", 'category' => "string", 'itinerary_url' => "string", 'thumbnail_url' => "string"])]
+    public function definition(): array
     {
         $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
         return [

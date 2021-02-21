@@ -27,12 +27,8 @@
                     </div>
                     <div class="form-group">
                         <label>Permission</label>
-                        @php $holder="";@endphp
                         @foreach($permissions as $permission)
-                            @if($permission->module !== $holder)
-                                <h4>{{$permission->module}}</h4>
-                                @php $holder=$permission->module;   @endphp
-                            @endif
+                            <h4>{{$permission->module}}</h4>
                             <label for="permissions">
                                 <input type="checkbox" name="permissions[]" class="checkmark-circled"
                                        value="{{$permission->id}}">

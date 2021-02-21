@@ -14,7 +14,7 @@
 
     <section class="content container-fluid w-75">
         <form role="form" action="{{route('tourDescription.update',['tourDescription'=>$tourDescription->id])}}"
-              method="POST" >
+              method="POST">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tour Description for {{$tourName}}</h3>

@@ -33,6 +33,7 @@
                         <th>ID</th>
                         <th>User Name</th>
                         <th>User Email</th>
+                        <th>User Role</th>
                         <th>User Joined At</th>
                     </tr>
                     </thead>
@@ -41,6 +42,10 @@
                         <td>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>
+                            <a href="{{route('role.show',[$user->roles->first->id])}}"
+                               class="btn btn-primary">{{$user->roles->first->name->name}}</a>
+                        </td>
                         <td>{{$user->created_at}}</td>
                     </tr>
                     </tbody>
@@ -88,13 +93,14 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-default pull-left" data-dismiss="modal"> Close </button>
+                    <button class="btn btn-default pull-left" data-dismiss="modal"> Close</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+    <script src="{{asset('js/modal.js')}}"></script>
     <script>
         $("#changePasswordForm").on('submit', function (e) {
             e.preventDefault();
@@ -111,7 +117,8 @@
                     $("#changePasswordModalErrorList").html(`<ul id="changePasswordModalErrorList"></ul>`)
                         .append(`${response.message}`);
 
-                    setTimeout($("#changePasswordModal").modal('hide'), 100);
+                    $("#changePasswordModal").modal('hide');
+                    new Modal('Success !', ' Password is changed').show();
                 },
 
                 error: function (error) {

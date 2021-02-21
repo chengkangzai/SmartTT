@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeTourRequest;
 use App\Models\Tour;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Throwable;
 use function compact;
 use function redirect;
 use function view;
@@ -16,9 +22,9 @@ class TourController extends Controller
 {
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
         $tours = Tour::paginate(10);
         return view('smartTT.tour.index', compact('tours'));
@@ -26,9 +32,9 @@ class TourController extends Controller
 
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
         return view('smartTT.tour.create');
     }
@@ -38,9 +44,10 @@ class TourController extends Controller
      * Store a newly created resource in storage.
      *
      * @param storeTourRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws Throwable
      */
-    public function store(storeTourRequest $request)
+    public function store(storeTourRequest $request): RedirectResponse
     {
         DB::transaction(function () use ($request) {
             $tour = Tour::create([
@@ -60,9 +67,9 @@ class TourController extends Controller
 
     /**
      * @param Tour $tour
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function show(Tour $tour)
+    public function show(Tour $tour): Factory|View|Application
     {
         $itineraryUrl = Storage::url($tour->itinerary_url);
         $thumbnailUrl = Storage::url($tour->thumbnail_url);
@@ -72,9 +79,9 @@ class TourController extends Controller
 
     /**
      * @param Tour $tour
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function edit(Tour $tour)
+    public function edit(Tour $tour): Factory|View|Application
     {
         return view('smartTT.tour.edit', compact('tour'));
     }
@@ -82,9 +89,9 @@ class TourController extends Controller
     /**
      * @param Request $request
      * @param Tour $tour
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, Tour $tour)
+    public function update(Request $request, Tour $tour): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -116,10 +123,10 @@ class TourController extends Controller
 
     /**
      * @param Tour $tour
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy(Tour $tour)
+    public function destroy(Tour $tour): RedirectResponse
     {
         $tour->description()->delete();
         Storage::delete([$tour->itinerary_url, $tour->thumbnail_url]);

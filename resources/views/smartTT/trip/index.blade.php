@@ -3,7 +3,7 @@
     Trip Management - {{config('app.name')}}
 @endsection
 @section('cdn')
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
 @endsection
 
 @section('content')
@@ -24,7 +24,6 @@
             </div>
             <div class="box-body">
                 <div class="table-responsive">
-
                     <table id="indexTable" class="table table-bordered table-hover ">
                         <thead>
                         <tr>
@@ -43,7 +42,7 @@
                                 <td>{{$trip->id}}</td>
                                 <td>RM{{number_format($trip->fee/100,2)}}</td>
                                 <td>{{$trip->capacity}}</td>
-                                <td>{{$trip->depart_time}}</td>
+                                <td>{{$trip->depart_time->format(config('app.date_format'))}}</td>
                                 <td>{{$trip->tour->name}}</td>
                                 <td>{{$trip->airline}}</td>
                                 <td>
@@ -58,14 +57,13 @@
                                     </form>
                                 </td>
                             </tr>
-                            {{--                        FORELSE--}}
                         @endforeach
                         </tbody>
                     </table>
-                    <div class="box-footer">
-                        {{$trips->links()}}
-                    </div>
                 </div>
+            </div>
+            <div class="box-footer">
+                {{$trips->links()}}
             </div>
         </div>
     </section>

@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group @error('des.0') has-error @enderror">
                         <label for="des.1">Description 1</label>
-                            <textarea type="text" name="des[]" class="form-control" id="des.1" rows="5"
+                        <textarea type="text" name="des[]" class="form-control" id="des.1" rows="5"
                                   placeholder="Enter Description 1">{{old('des.0')}}</textarea>
                         @error('des.0')
                         <span class="help-block" role="alert">

@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Airport extends Model
+{
+    use HasFactory;
+
+    protected array $fillable = [
+        'name',
+        'city',
+        'country',
+        'IATA',
+        'ICAO',
+        'latitude',
+        'longitude',
+        'altitude',
+        'offset_UTC',
+        'DST',
+        'timezoneTz',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function flight(): BelongsTo
+    {
+        return $this->belongsTo(Flight::class, 'id', 'depart_airport');
+    }
+}

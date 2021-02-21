@@ -4,46 +4,50 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-/**
- * App\Model\Trip
- *
- * @property int $id
- * @property string $depart_time
- * @property int $capacity
- * @property int $fee
- * @property int $tour_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $airline
- * @method static \Illuminate\Database\Eloquent\Builder|Trip newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Trip newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Trip query()
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereAirline($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereCapacity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereDepartTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereFee($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereTourId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Trip whereUpdatedAt($value)
- * @mixin \Eloquent
- */
+
 class Trip extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'capacity', 'fee', 'tour_id', 'flight_id', 'depart_time'
+    protected array $fillable = [
+        'capacity',
+        'fee',
+        'tour_id',
+        'flight_id',
+        'depart_time'
     ];
 
-    public function tour()
+    protected array $dates = [
+        'depart_time'
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function tour(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Tour');
+        return $this->belongsTo(Tour::class, 'tour_id', 'id');
     }
 
-    public function flight()
+    /**
+     * @return BelongsToMany
+     */
+    public function flight(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\Flight');
+        return $this->belongsToMany(Flight::class);
+    }
+
+    /**
+     * @return HasManyThrough
+     */
+    public function airline(): HasManyThrough
+    {
+        //TODO... this isn't actually working as its not connecting
+        return $this->hasManyThrough(Airline::class, Flight::class);
     }
 }

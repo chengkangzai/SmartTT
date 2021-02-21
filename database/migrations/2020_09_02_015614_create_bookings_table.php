@@ -17,8 +17,8 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('trip_id')->references('id')->on('trips');
-            $table->decimal('total_fee',9,2);
-            $table->decimal('discount',9,2);
+            $table->integer('total_fee');
+            $table->integer('discount');
             $table->integer('adult');
             $table->integer('child')->comment('Calculated column, 300 per pax');
             $table->timestamps();

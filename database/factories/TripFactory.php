@@ -7,6 +7,7 @@ use App\Models\Tour;
 use App\Models\Trip;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 use function rand;
 
 class TripFactory extends Factory
@@ -16,14 +17,15 @@ class TripFactory extends Factory
      *
      * @var string
      */
-    protected $model = Trip::class;
+    protected string $model = Trip::class;
 
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    #[ArrayShape(['fee' => "string", 'tour_id' => "int", 'capacity' => "int", 'airline' => "mixed|string", 'depart_time' => "\Carbon\Carbon"])]
+    public function definition(): array
     {
         $tourCount = Tour::count();
         return [
@@ -31,7 +33,7 @@ class TripFactory extends Factory
             'tour_id' => rand(1, $tourCount),
             'capacity' => rand(25, 30),
             'airline' => Airline::inRandomOrder()->first()->name,
-            'depart_time' => Carbon::now(),
+            'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
         ];
     }
 }

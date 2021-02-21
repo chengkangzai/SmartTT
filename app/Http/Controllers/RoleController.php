@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Gate;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Throwable;
 use function abort_unless;
 use function auth;
 use function compact;
@@ -15,9 +20,9 @@ use function view;
 class RoleController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View User Role'), 403);
         $roles = Role::paginate(10);
@@ -26,9 +31,9 @@ class RoleController extends Controller
 
 
     /**
-     * @return \Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
         abort_unless(auth()->user()->can('Create User Role'), 403);
         $permissions = Permission::all();
@@ -38,10 +43,10 @@ class RoleController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Throwable
+     * @return RedirectResponse
+     * @throws Throwable
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         abort_unless(auth()->user()->can('Create User Role'), 403);
         $request->validate([
@@ -61,9 +66,9 @@ class RoleController extends Controller
 
     /**
      * @param Role $role
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function show(Role $role)
+    public function show(Role $role): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View User Role'), 403);
         $permissions = $role->permissions()->paginate(5, ['*'], 'permissions');
@@ -74,12 +79,11 @@ class RoleController extends Controller
 
     /**
      * @param Role $role
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
-    public function edit(Role $role)
+    public function edit(Role $role): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Update User Role'), 403);
-        //TODO permission
         return view('smartTT.role.edit', compact('role'));
     }
 
@@ -87,9 +91,9 @@ class RoleController extends Controller
     /**
      * @param Request $request
      * @param Role $role
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Role $role): RedirectResponse
     {
         abort_unless(auth()->user()->can('Update User Role'), 403);
         $role->update($request->all());
@@ -99,10 +103,10 @@ class RoleController extends Controller
 
     /**
      * @param Role $role
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role): RedirectResponse
     {
         abort_unless(auth()->user()->can('Delete User Role'), 403);
         if ($role->users()->count() == 0) {
@@ -112,7 +116,12 @@ class RoleController extends Controller
         return Redirect::back()->withErrors(['error' => 'There is User in this role! Therefore you cant delete it!']);
     }
 
-    public function attachUser(Role $role, Request $request)
+    /**
+     * @param Role $role
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function attachUser(Role $role, Request $request): RedirectResponse
     {
         $request->validate([
             'users' => 'required'
@@ -121,7 +130,12 @@ class RoleController extends Controller
         return Redirect::route('role.show', ['role' => $role->id]);
     }
 
-    public function detachUser(Role $role, Request $request)
+    /**
+     * @param Role $role
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function detachUser(Role $role, Request $request): RedirectResponse
     {
         $request->validate([
             'user' => 'required'
