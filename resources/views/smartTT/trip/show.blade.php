@@ -79,10 +79,12 @@
                                 <td>{{$flight->arrive_time}}</td>
                                 <td>{{$flight->airline()->first()->name}}</td>
                                 <td>
-                                    <a href="{{route('flight.show',['flight'=>$flight->id])}}" class="btn btn-info">Show</a>
+                                    <a href="{{route('flight.show',['flight'=>$flight->id])}}"
+                                       class="btn btn-info">Show</a>
                                     <a href="{{route('flight.edit',['flight'=>$flight->id])}}"
                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{route('flight.destroy',['flight'=>$flight->id])}}" style="display: inline"
+                                    <form action="{{route('flight.destroy',['flight'=>$flight->id])}}"
+                                          style="display: inline"
                                           method="POST">
                                         @csrf
                                         @method('DELETE')

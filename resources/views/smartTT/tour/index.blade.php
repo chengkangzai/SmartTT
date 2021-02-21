@@ -69,7 +69,7 @@
 @section('script')
     <script>
         $('#indexTable').DataTable({
-            bInfo : false,
+            bInfo: false,
             paging: false,
         });
     </script>

@@ -52,7 +52,8 @@
                     </div>
                     <div class="form-group @error('password_confirmation') has-error @enderror">
                         <label for="password_confirmation">Confirm your password</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
+                        <input type="password" name="password_confirmation" class="form-control"
+                               id="password_confirmation"
                                value="{{old('password_confirmation')}}" placeholder="Enter Confirm your password">
                         @error('password_confirmation')
                         <span class="help-block" role="alert">
