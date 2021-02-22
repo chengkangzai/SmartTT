@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use Str;
 use function bcrypt;
 use function now;
 
@@ -16,7 +15,7 @@ class UserFactory extends Factory
      *
      * @var string
      */
-    protected string $model = User::class;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
@@ -31,7 +30,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('P@$$w0rd'),
-            'remember_token' => Str::random(10),
         ];
     }
 }

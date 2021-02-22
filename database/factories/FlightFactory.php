@@ -18,7 +18,7 @@ class FlightFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Flight::class;
+    protected $model = Flight::class;
 
     /**
      * Define the model's default state.

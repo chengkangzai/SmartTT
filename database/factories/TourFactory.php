@@ -15,7 +15,7 @@ class TourFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Tour::class;
+    protected $model = Tour::class;
 
     /**
      * Define the model's default state.

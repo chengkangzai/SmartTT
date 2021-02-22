@@ -17,7 +17,7 @@ class TripFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Trip::class;
+    protected $model = Trip::class;
 
     /**
      * Define the model's default state.
