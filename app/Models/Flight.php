@@ -12,7 +12,7 @@ class Flight extends Model
 {
     use  HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'depart_time',
         'arrive_time',
         'fee',
@@ -29,7 +29,7 @@ class Flight extends Model
 //4.flight type
 
 //Class
-    protected array $dates = [
+    protected $dates = [
         'depart_time',
         'arrive_time'
     ];

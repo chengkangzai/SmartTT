@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'short_code',
     ];

@@ -14,7 +14,7 @@ class Trip extends Model
 {
     use HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'capacity',
         'fee',
         'tour_id',
@@ -22,7 +22,7 @@ class Trip extends Model
         'depart_time'
     ];
 
-    protected array $dates = [
+    protected $dates = [
         'depart_time'
     ];
 

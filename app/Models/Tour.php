@@ -11,7 +11,7 @@ class Tour extends Model
 {
     use HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'tour_code',
         'name',
         'destination',

@@ -11,9 +11,9 @@ class TourDescription extends Model
 {
     use HasFactory;
 
-    protected string $table = 'tour_description';
+    protected $table = 'tour_description';
 
-    protected array $fillable = [
+    protected $fillable = [
         'place',
         'description',
         'tour_id'

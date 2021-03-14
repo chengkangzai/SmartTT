@@ -10,7 +10,7 @@ class Airport extends Model
 {
     use HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'city',
         'country',

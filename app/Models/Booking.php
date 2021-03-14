@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Booking extends Model
 {
-    protected array $fillable = [
+    protected $fillable = [
         'user_id',
         'trip_id',
         'total_fee',

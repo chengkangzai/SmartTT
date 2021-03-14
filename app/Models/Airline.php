@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Airline extends Model
 {
-    protected array $fillable = [
+    protected $fillable = [
         'name'
     ];
 
