@@ -12,10 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Throwable;
-use function compact;
-use function view;
 
 /**
  * Class TripController
@@ -69,7 +66,7 @@ class TripController extends Controller
 
             $trip->flight()->attach($request->get('flight'));
         });
-        return Redirect::route('trip.index');
+        return redirect()->route('trip.index');
     }
 
 
@@ -103,7 +100,7 @@ class TripController extends Controller
     public function update(Request $request, Trip $trip): RedirectResponse
     {
         $trip->update($request->all());
-        return Redirect::route('trip.index');
+        return redirect()->route('trip.index');
     }
 
     /**
@@ -114,6 +111,6 @@ class TripController extends Controller
     public function destroy(Trip $trip): RedirectResponse
     {
         $trip->delete();
-        return Redirect::route('trip.index');
+        return redirect()->route('trip.index');
     }
 }

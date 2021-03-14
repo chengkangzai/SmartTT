@@ -12,12 +12,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
-use function abort_unless;
-use function auth;
-use function compact;
-use function response;
-use function view;
 
 class UserController extends Controller
 {
@@ -59,7 +53,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-        return Redirect::route('user.index');
+        return redirect()->route('user.index');
     }
 
 
@@ -100,7 +94,7 @@ class UserController extends Controller
         ]);
         $user->update($request->only(['email', 'name']));
 
-        return Redirect::route('user.show');
+        return redirect()->route('user.show', $user);
     }
 
 
@@ -113,7 +107,7 @@ class UserController extends Controller
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
         $user->delete();
-        return Redirect::route('user.index');
+        return redirect()->route('user.index');
     }
 
     /**

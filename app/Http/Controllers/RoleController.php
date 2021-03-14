@@ -12,10 +12,6 @@ use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Throwable;
-use function abort_unless;
-use function auth;
-use function compact;
-use function view;
 
 class RoleController extends Controller
 {

@@ -8,9 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use function collect;
-use function dd;
-use function response;
 
 class Select2Controller extends Controller
 {

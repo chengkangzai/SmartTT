@@ -13,9 +13,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use function compact;
-use function redirect;
-use function view;
 
 class FlightController extends Controller
 {

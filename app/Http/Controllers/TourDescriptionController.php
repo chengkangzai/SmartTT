@@ -11,12 +11,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use function collect;
-use function compact;
-use function count;
-use function view;
+
 
 class TourDescriptionController extends Controller
 {
@@ -24,10 +20,10 @@ class TourDescriptionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param Tour|null $tour
+     * @param Tour $tour
      * @return Application|ResponseFactory|Response
      */
-    public function store(Request $request, Tour $tour = null): Response|Application|ResponseFactory
+    public function store(Request $request, Tour $tour): Response|Application|ResponseFactory
     {
 //        add validate if required
         $temp = collect([]);
@@ -59,7 +55,7 @@ class TourDescriptionController extends Controller
             'place' => $request->get('place'),
             'description' => $request->get('des'),
         ]);
-        return Redirect::route('tour.show', ['tour' => $tourDescription->tour()->first()->id]);
+        return redirect()->route('tour.show', ['tour' => $tourDescription->tour()->first()->id]);
     }
 
     /**
@@ -81,7 +77,7 @@ class TourDescriptionController extends Controller
     public function destroy(TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->delete();
-        return Redirect::back();
+        return redirect()->back();
     }
 
     /**
@@ -100,6 +96,6 @@ class TourDescriptionController extends Controller
             'description' => $request->get('des'),
             'tour_id' => $tour->id,
         ]);
-        return Redirect::back();
+        return redirect()->back();
     }
 }

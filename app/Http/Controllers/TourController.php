@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Throwable;
-use function compact;
-use function redirect;
-use function view;
 
 class TourController extends Controller
 {

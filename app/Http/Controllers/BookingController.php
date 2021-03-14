@@ -3,24 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\Flight;
 use App\Models\Trip;
-use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use function abort_unless;
-use function compact;
-use function dd;
-use function number_format;
-use function redirect;
-use function response;
-use function view;
 
 class BookingController extends Controller
 {
