@@ -20,8 +20,18 @@
                 </div>
             </div>
             <div class="box-body">
-                <div class="table-responsive">
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="table-responsive">
                     <table id="indexTable" class="table table-bordered table-hover ">
                         <thead>
                         <tr>

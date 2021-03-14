@@ -128,9 +128,19 @@ class TourController extends Controller
      */
     public function destroy(Tour $tour): RedirectResponse
     {
+        if ($tour->trips->isNotEmpty()) {
+            $trips = $tour->trips->all();
+            $holder = '';
+            foreach ($trips as $trip) {
+                $holder .= $trip->id . ',';
+            }
+            return redirect()->back()->withErrors('The tour cant be deleted because trip id ' . $holder . ' associate with it');
+        }
+
         $tour->description()->delete();
-        Storage::delete([$tour->itinerary_url, $tour->thumbnail_url]);
         $tour->delete();
+        Storage::delete([$tour->itinerary_url, $tour->thumbnail_url]);
+
         return Redirect::route('tour.index');
     }
 }
