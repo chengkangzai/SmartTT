@@ -23,6 +23,7 @@ class FlightController extends Controller
      */
     public function index(): Factory|View|Application
     {
+        //TODO add abort_unless !
         $flights = Flight::with(['airline', 'depart_airports', 'arrive_airport'])->paginate(10);
         return view('smartTT.flight.index', compact('flights'));
     }
