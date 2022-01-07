@@ -9,11 +9,9 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
-use App\TourDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index']);
 
 Auth::routes(['confirm' => false]);
 
@@ -21,6 +19,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     //TODO
     //Public available page ..
 
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
     Route::post('select2/getFlightByAirline', [Select2Controller::class, 'getFlightByAirline'])->name('select2.trip.getFlight');
@@ -37,7 +36,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('booking/calculatePrice', [BookingController::class, 'calculatePrice'])->name('booking.calculatePrice');
     Route::resource('booking', BookingController::class);
 
-    Route::post('tourDescription/{tour}', [TourDescription::class, 'attachToTour'])->name('tourDescription.attach');
+    Route::post('tourDescription/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescription.attach');
     Route::resource('tourDescription', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
 
     Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('role.attachUserToRole');

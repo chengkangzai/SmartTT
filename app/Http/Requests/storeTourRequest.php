@@ -23,7 +23,7 @@ class storeTourRequest extends FormRequest
      */
     public function rules()
     {
-//        dk why cant make description Required
+//todo        dk why cant make description Required
         $rules = [
             'name' => 'required',
             'tour_code' => 'required|unique:App\Tour,tour_code',

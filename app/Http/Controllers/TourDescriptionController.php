@@ -25,7 +25,7 @@ class TourDescriptionController extends Controller
      */
     public function store(Request $request, Tour $tour): Response|Application|ResponseFactory
     {
-//        add validate if required
+//todo: seems wrong 
         $temp = collect([]);
         $place = $request->get('place');
         $des = $request->get('des');
