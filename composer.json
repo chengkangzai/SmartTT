@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3.0|^8.0.0",
+        "php": "^8.0",
         "almasaeed2010/adminlte": "~2.4",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -32,7 +32,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "composer/package-versions-deprecated": true
+        }
     },
     "extra": {
         "laravel": {
