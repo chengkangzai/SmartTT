@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
@@ -26,8 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
-        if (env('APP_ENV') !== "local") {
+        if (App::isProduction()) {
             URL::forceScheme('https');
         }
         Paginator::useBootstrap();
