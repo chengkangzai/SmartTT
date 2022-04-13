@@ -13,11 +13,11 @@
     </nav>
 
     <form role="form" action="{{route('tours.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="card">
             <div class="card-header with-border">
                 <h3 class="card-title">{{__('Create Tour')}}</h3>
             </div>
-            @csrf
             <div class="card-body">
                 <div class="mb-3">
                     <label for="name" class="form-label">{{__('Name')}}</label>

@@ -12,58 +12,38 @@
         </ol>
     </nav>
 
-    <form role="form" action="{{route('users.store')}}" method="POST">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">{{__('Create User')}}</h3>
-            </div>
-            @csrf
-            <div class="card-body">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{__('Create User')}}</h3>
+        </div>
+        <div class="card-body">
+            <form role="form" action="{{route('users.store')}}" method="POST" id="createForm">
+                @include('partials.error-alert')
+                @csrf
                 <div class="mb-3">
                     <label class="form-label" for="name">{{__('Name')}}</label>
                     <input type="text" name="name" class="form-control" id="name"
-                           value="{{old('name')}}" placeholder="Enter User Name">
-                    @error('name')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                           value="{{old('name')}}" placeholder="{{__('Enter User Name')}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">{{__('Email')}}</label>
                     <input type="email" name="email" class="form-control" id="email"
                            value="{{old('email')}}" placeholder="{{__('Enter Email')}}">
-                    @error('email')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="password">{{__('Password')}}</label>
                     <input type="password" name="password" class="form-control" id="password"
                            value="{{old('password')}}" placeholder="{{__('Enter Password')}}">
-                    @error('password')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="password_confirmation">{{__('Confirm your password')}}</label>
-                    <input type="password" name="password_confirmation" class="form-control"
-                           id="password_confirmation"
+                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
                            value="{{old('password_confirmation')}}" placeholder="{{__('Enter Confirm your password')}}">
-                    @error('password_confirmation')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-            </div>
+            </form>
         </div>
-    </form>
+        <div class="card-footer">
+            <button form="createForm" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+        </div>
+    </div>
 @endsection

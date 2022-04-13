@@ -89,6 +89,7 @@
     {{--    </footer>--}}
 </div>
 @yield('modal')
+@include('partials.success-toast')
 <script src="{{asset('js/app.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>

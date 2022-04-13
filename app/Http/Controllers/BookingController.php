@@ -29,9 +29,10 @@ class BookingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'trip_id' => 'required',
-            'adult' => 'required',
-            'user_id' => 'required',
+            'trip_id' => 'required|integer|exists:trips,id',
+            'adult' => 'required|integer|min:1',
+            'user_id' => 'required|integer|exists:users,id',
+            'discount' => 'nullable|integer|min:1',
         ]);
 
         $tripPrice = Trip::whereId($request->get('trip_id'))->first()->fee / 100;
@@ -46,7 +47,7 @@ class BookingController extends Controller
             'child' => $request->get('child'),
         ]);
 
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
     public function show(Booking $booking): Factory|View|Application
@@ -73,13 +74,13 @@ class BookingController extends Controller
             'adult' => $request->get('adult'),
             'child' => $request->get('child'),
         ]);
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
     protected function calculatePrice(Request $request): JsonResponse|bool

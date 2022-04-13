@@ -12,13 +12,14 @@
         </ol>
     </nav>
 
-    <form role="form" action="{{route('bookings.store')}}" method="POST" enctype="multipart/form-data">
-        <div class="card">
-            <div class="card-header with-border">
-                <h3 class="card-title">{{__('Create Booking')}}</h3>
-            </div>
-            @csrf
-            <div class="card-body">
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Create Booking')}}</h3>
+        </div>
+        <div class="card-body">
+            <form role="form" action="{{route('bookings.store')}}" method="POST" id="createForm">
+                @include('partials.error-alert')
+                @csrf
                 <div class="mb-3">
                     <label for="trip_id" class="form-label">{{__('Trips')}}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
@@ -31,11 +32,6 @@
                         @endforeach
                     </select>
 
-                    @error('trip_id')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3 row">
@@ -43,11 +39,6 @@
                         <label for="adult" class="form-label">{{__('Adult')}}</label>
                         <input type="number" name="adult" class="form-control" id="adult" min="0"
                                value="{{old('adult',0)}}" step="1" placeholder="{{__('Enter Total adult Number')}}">
-                        @error('adult')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="child" class="form-label">{{__('Child')}}</label>
@@ -55,11 +46,6 @@
                             class="text-sm">{{__('Child is defined as children that is smaller than 12 years old')}}</small>
                         <input type="number" name="child" class="form-control" id="child" min="0"
                                value="{{old('child',0)}}" step="1" placeholder="{{__('Enter Total Child Number')}}">
-                        @error('child')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
                     </div>
                 </div>
 
@@ -68,33 +54,22 @@
                     <select name="user_id" class="form-control select2 " id="user_id" required>
                         <option value="0" disabled selected> {{__('Please Select')}}</option>
                     </select>
-                    @error('user_id')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
-
 
                 <div class="mb-3">
                     <label for="discount" class="form-label">{{__('Discount')}}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
                            value="{{old('discount',0)}}" step="1" placeholder="{{__('Please enter Discount')}}"/>
-                    @error('discount')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="form-group">
                     <label>{{__('Total Price :')}} <span id="fee">RM 0</span></label>
                 </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                </div>
+            </form>
+            <div class="card-footer">
+                <input form="createForm" type="submit" class="btn btn-primary" value="{{__('Submit')}}">
             </div>
         </div>
-    </form>
+    </div>
 @endsection
 
 @section('script')
