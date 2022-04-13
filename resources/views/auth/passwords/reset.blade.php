@@ -7,21 +7,10 @@
                 <h1>{{ __('Reset Password') }}</h1>
 
                 <form action="{{ route('password.update') }}" method="POST">
+                    @include('partials.error-alert')
                     @csrf
-
-                    <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
-                    </svg></span>
-                        <input class="form-control @error('email') is-invalid @enderror" type="text"
-                               placeholder="{{ __('Email') }}">
-                        @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
+                    <input type="email" name="email" value="{{request()->get('email')}}" hidden>
+                    <input type="text" name="token" value="{{request()->token}}" hidden>
                     <div class="input-group mb-4"><span class="input-group-text">
                       <svg class="icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>

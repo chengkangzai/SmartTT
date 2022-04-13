@@ -11,12 +11,12 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.3",
-        "spatie/laravel-permission": "^5.5"
+        "spatie/laravel-permission": "^5.5",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
         "barryvdh/laravel-ide-helper": "^2.8",
-        "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "laraveldaily/larastarters": "^1.4",
         "mockery/mockery": "^1.4.4",
