@@ -36,16 +36,16 @@
                 <div class="mb-3">
                     <label class="form-label" for="adult">{{ __('Adult') }}</label>
                     <input type="number" name="adult" class="form-control" id="adult" min="0"
-                        value="{{ old('adult', $booking->adult) }}" step="1"
-                        placeholder="{{ __('Enter Total adult Number') }}">
+                           value="{{ old('adult', $booking->adult) }}" step="1"
+                           placeholder="{{ __('Enter Total adult Number') }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="child">{{ __('Child') }}</label>
                     <small>{{ __('Child is defined as children that is smaller than 12 years old') }}</small>
                     <input type="number" name="child" class="form-control" id="child" min="0"
-                        value="{{ old('child', $booking->child) }}" step="1"
-                        placeholder="{{ __('Enter Total Child Number') }}">
+                           value="{{ old('child', $booking->child) }}" step="1"
+                           placeholder="{{ __('Enter Total Child Number') }}">
                 </div>
 
                 <div class="mb-3">
@@ -63,8 +63,8 @@
                 <div class="mb-3">
                     <label class="form-label" for="discount">{{ __('Discount') }}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
-                        value="{{ old('discount', $booking->discount) }}" step="1"
-                        placeholder="{{ __('Please enter Discount') }} " />
+                           value="{{ old('discount', $booking->discount) }}" step="1"
+                           placeholder="{{ __('Please enter Discount') }} "/>
                 </div>
 
                 <div class="form-group">
@@ -80,14 +80,13 @@
 
 @section('script')
     <script>
-        $('#user_id').select2()
-
-        let tripPrice = 0;
-
         const tripId = $('#trip_id');
         const child = $('#child');
         const adult = $('#adult');
         const discount = $('#discount');
+        const userID = $('#user_id');
+
+        userID.select2();
 
         function updatePrice() {
             const adultVal = adult.val();
@@ -99,12 +98,13 @@
                 type: "POST",
                 url: "{{ route('bookings.calculatePrice') }}",
                 data: {
-                    tripId: tripId.val(),
+                    trip_id: tripId.val(),
                     child: child.val(),
                     adult: adult.val(),
-                    discount: discount.val()
+                    discount: discount.val(),
+                    user_id: userID.val()
                 },
-                success: function(response) {
+                success: function (response) {
                     $('#fee').text('RM ' + response)
                 }
             })
