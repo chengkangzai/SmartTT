@@ -1,160 +1,156 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 
 @section('title')
-    Role : {{$role->name}}
+    Roles - {{ config('app.name') }}
 @endsection
 
 @section('content')
-    <section class="content-header">
-        <h1><b>User Role : {{$role->name}} </b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{route('role.index')}}"><i class="fa fa-dashboard"></i> User Role</a></li>
-            <li class="active">Show</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('roles.index')}}">{{__('Roles')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Show')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">User Role Information</h3>
-                <div class="pull-right ">
-                    <a href="{{route('role.edit',['role'=>$role->id])}}" class="btn btn-primary">Edit</a>
-                    <form action="{{route('role.destroy',['role'=>$role->id])}}" style="display: inline" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <input type="submit" role="button" value="Delete" class="btn btn-danger"/>
-                    </form>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{$role->id}}</td>
-                            <td>{{$role->name}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{__('User Role Information')}}</h3>
+            <div class="pull-right ">
+                <a href="{{route('roles.edit',$role)}}" class="btn btn-primary">{{__('Edit')}}</a>
+                <form action="{{route('roles.destroy',$role)}}" class="d-inline" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <input type="submit" role="button" value="{{__('Delete')}}" class="btn btn-danger"/>
+                </form>
             </div>
         </div>
-
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">User with this role</h3>
-                <div class="pull-right">
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add</a>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table class="table " id="usersTable">
-                        <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Action</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>
-                                    <a href="{{route('user.show',['user'=>$user->id])}}" class="btn btn-info">Show</a>
-                                    <form action="{{route('role.detachUserToRole',['role'=>$role->id])}}"
-                                          style="display: inline;" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="text" name="user" value="{{$user->id}}" hidden/>
-                                        <input type="submit" value="Detach" class="btn btn-danger">
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="box-footer">{{$users->links()}}</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>{{__('ID')}}</td>
+                        <td>{{__('Name')}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{$role->id}}</td>
+                        <td>{{$role->name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
 
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">Permission of this role </h3>
-            </div>
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table class="table" id="permissionTable">
-                        <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Module</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($permissions as $permission)
-                            <tr>
-                                <td>{{$permission->name}}</td>
-                                <td>{{$permission->module}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="box-footer">{{$permissions->links()}}</div>
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">{{__('User with this role')}}</h3>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success" data-coreui-toggle="modal"
+                        data-coreui-target="#addUserModal">
+                    {{__('Add')}}
+                </button>
             </div>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table " id="usersTable">
+                    <thead>
+                    <tr>
+                        <td>{{__('ID')}}</td>
+                        <td>{{__('Name')}}</td>
+                        <td>{{__('Email')}}</td>
+                        <td>{{__('Action')}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                                <a href="{{route('users.show',$user)}}"
+                                   class="btn btn-info">{{__('Show')}}</a>
+                                <form action="{{route('roles.detachUserToRole',$role)}}"
+                                      style="display: inline;" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="text" name="user" value="{{$user->id}}" hidden/>
+                                    <input type="submit" value="{{__('Detach')}}" class="btn btn-danger">
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
-                </ul>
+                    </tbody>
+                </table>
             </div>
-        @endif
-    </section>
+            <div class="card-footer">{{$users->links()}}</div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">{{__('Permission of the role')}} </h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="permissionTable">
+                    <thead>
+                    <tr>
+                        <td>{{__('Name')}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($permissions as $permission)
+                        <tr>
+                            <td>{{$permission->name}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">{{$permissions->links()}}</div>
+        </div>
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection
 @section('modal')
     <div class="modal fade" id="addUserModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add user to role:{{$role->name}}</h4>
+                    <h4 class="modal-title"> {{__('Add user to role')}}:{{$role->name}}</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('role.attachUserToRole',['role'=>$role->id])}}" method="POST"
+                    <form action="{{route('roles.attachUserToRole',$role)}}" method="POST"
                           id="addUserForm">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
-                            <label for="usersToBeAdd">User to be add</label>
+                        <div class="mb-3">
+                            <label class="form-label" for="usersToBeAdd">{{__('User to be add')}}</label>
                             <select class="form-control select2" id="usersToBeAdd" name="users[]"
-                                    multiple required data-placeholder="Select User to add"
-                                    style="width: 100%">
+                                    style="width: 100%; z-index: 100000"
+                                    multiple required data-placeholder="{{__('Select User to add')}}">
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="form-control btn btn-success" value="Submit">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{__('Close')}}</button>
+                    <input type="submit" form="addUserForm" class="btn btn-primary" value="{{__('Save changes')}}">
                 </div>
             </div>
         </div>
@@ -181,11 +177,13 @@
             type: "POST",
             url: "{{route('select2.role.getUser')}}",
             data: {
-                role_id:{{$role->id}}
+                role_id: {{$role->id}}
             },
             success: function (response) {
-                console.log(response);
-                $("#usersToBeAdd").select2({data: response});
+                $("#usersToBeAdd").select2({
+                    data: response,
+                    dropdownParent: $("#addUserModal"),
+                });
             }
         });
     </script>

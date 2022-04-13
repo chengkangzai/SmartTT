@@ -1,52 +1,51 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
+
+@section('title')
+    Roles - {{ config('app.name') }}
+@endsection
+
 
 @section('content')
-    <section class="content-header">
-        <h1><b>User Role Management</b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="active"><a href="{{route('role.index')}}"><i class="fa fa-dashboard"></i> User Role</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Roles')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">User Role </h3>
-                <div class="m-2 btn-group-vertical pull-right">
-                    <a href="{{route('role.create')}}" class="btn btn-success">Create</a>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table id="indexTable" class="table table-bordered table-hover ">
-                        <thead>
+    <div class="card">
+        <div class="card-header">
+            <a href="{{route('roles.create')}}" class="btn btn-success">{{__('Create')}}</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="indexTable" class="table table-bordered table-hover ">
+                    <thead>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Role Name')}}</th>
+                        <th>{{__('Action')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($roles as $role)
                         <tr>
-                            <th>ID</th>
-                            <th>Role Name</th>
-                            <th>Action</th>
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->name}}</td>
+                            <td>
+                                <a href="{{route('roles.show',$role)}}" class="btn btn-info">{{__('Show')}}</a>
+                                <a href="{{route('roles.edit',$role)}}" class="btn btn-primary">{{__('Edit')}}</a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($roles as $role)
-                            <tr>
-                                <td>{{$role->id}}</td>
-                                <td>{{$role->name}}</td>
-                                <td>
-                                    <a href="{{route('role.show',['role'=>$role->id])}}" class="btn btn-info">Show</a>
-                                    <a href="{{route('role.edit',['role'=>$role->id])}}"
-                                       class="btn btn-primary">Edit</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="box-footer">
-                    {{$roles->links()}}
-                </div>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                {{$roles->links()}}
             </div>
         </div>
-    </section>
+    </div>
 @endsection
 
 @section('script')

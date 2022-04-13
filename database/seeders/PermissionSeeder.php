@@ -21,7 +21,6 @@ class PermissionSeeder extends Seeder
             foreach ($cruds as $crud) {
                 $temp->push([
                     'name' => $crud . " " . $module,
-                    'module' => $module,
                     'guard_name' => 'web',
                 ]);
             }

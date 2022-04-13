@@ -3,43 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
 
-    /**
-     * @return Factory|View|Application
-     */
     public function index(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View User'), 403);
-        //TODO... add Staff Role
+        //TODO Add Staff Role
         $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
         return view('smartTT.user.index', compact('users'));
     }
 
-    /**
-     * @return Factory|View|Application
-     */
     public function create(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Create User'), 403);
         return view('smartTT.user.create');
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function store(Request $request): RedirectResponse
     {
         abort_unless(auth()->user()->can('Create User'), 403);
@@ -56,11 +45,6 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-
-    /**
-     * @param User $user
-     * @return Factory|View|Application
-     */
     public function show(User $user): Factory|View|Application
     {
         abort_unless(Auth::user()->hasRole(['Super Admin']) || auth()->user()->id == $user->id, 403);
@@ -68,22 +52,12 @@ class UserController extends Controller
         return view('smartTT.user.show', compact('user'));
     }
 
-    /**
-     * @param User $user
-     * @return Factory|View|Application
-     */
     public function edit(User $user): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
         return view('smartTT.user.edit', compact('user'));
     }
 
-
-    /**
-     * @param Request $request
-     * @param User $user
-     * @return RedirectResponse
-     */
     public function update(Request $request, User $user): RedirectResponse
     {
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
@@ -97,12 +71,6 @@ class UserController extends Controller
         return redirect()->route('user.show', $user);
     }
 
-
-    /**
-     * @param User $user
-     * @return RedirectResponse
-     * @throws Exception
-     */
     public function destroy(User $user): RedirectResponse
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
@@ -110,21 +78,10 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    /**
-     * @param User $user
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function changePassword(User $user, Request $request): JsonResponse
+    public function changePassword(User $user, Request $request): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
-        $request->validate([
-            'old_password' => ['required', 'password:web'],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed']
-        ]);
-        $user->update([
-            'password' => Hash::make($request->get('new_password'))
-        ]);
-        return response()->json(['message' => 'Password Successfully update']);
+        abort_unless(auth()->user()->roles()->first('Super Admin'), 403);
+        Password::sendResetLink(['email' => $user->email]);
+        return back()->with('success', 'Password reset link sent to ' . $user->email);
     }
 }

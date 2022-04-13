@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Trip;
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,34 +14,25 @@ use Spatie\Permission\Models\Role;
 
 class BookingController extends Controller
 {
-    /**
-     * @return Factory|View|Application
-     */
     public function index(): Factory|View|Application
     {
         $bookings = Booking::with(['users', 'trips', 'trips.tour'])->paginate(10);
         return view('smartTT.booking.index', compact('bookings'));
     }
 
-    /**
-     * @return Factory|View|Application
-     */
     public function create(): Factory|View|Application
     {
         $trips = Trip::with('tour')->get();
         return view('smartTT.booking.create', compact('trips'));
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'trip_id' => 'required',
-            'adult' => 'required',
-            'user_id' => 'required',
+            'trip_id' => 'required|integer|exists:trips,id',
+            'adult' => 'required|integer|min:1',
+            'user_id' => 'required|integer|exists:users,id',
+            'discount' => 'nullable|integer|min:1',
         ]);
 
         $tripPrice = Trip::whereId($request->get('trip_id'))->first()->fee / 100;
@@ -57,22 +47,14 @@ class BookingController extends Controller
             'child' => $request->get('child'),
         ]);
 
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
-    /**
-     * @param Booking $booking
-     * @return Factory|View|Application
-     */
     public function show(Booking $booking): Factory|View|Application
     {
         return view('smartTT.booking.show', compact('booking'));
     }
 
-    /**
-     * @param Booking $booking
-     * @return Factory|View|Application
-     */
     public function edit(Booking $booking): Factory|View|Application
     {
         $trips = Trip::with('tour')->get();
@@ -80,11 +62,6 @@ class BookingController extends Controller
         return view('smartTT.booking.edit', compact('booking', 'trips', 'users'));
     }
 
-    /**
-     * @param Request $request
-     * @param Booking $booking
-     * @return RedirectResponse
-     */
     public function update(Request $request, Booking $booking): RedirectResponse
     {
         $tripPrice = Trip::whereId($request->get('trip_id'))->first()->fee / 100;
@@ -97,24 +74,15 @@ class BookingController extends Controller
             'adult' => $request->get('adult'),
             'child' => $request->get('child'),
         ]);
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
-    /**
-     * @param Booking $booking
-     * @return RedirectResponse
-     * @throws Exception
-     */
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();
-        return redirect()->route('booking.index');
+        return redirect()->route('bookings.index');
     }
 
-    /**
-     * @param Request $request
-     * @return bool|JsonResponse
-     */
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
         if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();

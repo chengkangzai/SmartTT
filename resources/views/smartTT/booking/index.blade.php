@@ -1,77 +1,68 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Booking Management - {{config('app.name')}}
 @endsection
 
 @section('content')
-    <section class="content-header">
-        <h1><b>Booking Management</b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="active"><a href="{{route('booking.index')}}"><i class="fa fa-dashboard"></i> Booking </a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Bookings')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Booking Management</h3>
-                <div class="m-2 btn-group-vertical pull-right">
-                    <a href="{{route('booking.create')}}" class="btn btn-success">Create</a>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="table-responsive">
-
-                    <table id="indexTable" class="table table-bordered table-hover ">
-                        <thead>
+    <div class="card">
+        <div class="card-header">
+            <a href="{{route('bookings.create')}}" class="btn btn-success">{{__('Create')}}</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="indexTable" class="table table-bordered table-hover ">
+                    <thead>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Trip')}}</th>
+                        <th>{{__('Adult')}}</th>
+                        <th>{{__('Child')}}</th>
+                        <th>{{__('Customer')}}</th>
+                        <th>{{__('Discount')}}</th>
+                        <th>{{__('Total Price')}}</th>
+                        <th>{{__('Action')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($bookings as $booking)
                         <tr>
-                            <th>ID</th>
-                            <th>Trip</th>
-                            <th>Adult</th>
-                            <th>Child</th>
-                            <th>Customer</th>
-                            <th>Discount</th>
-                            <th>Total Price</th>
-                            <th>Action</th>
+                            <td>{{$booking->id}}</td>
+                            <td>
+                                <a href="{{route('trips.show',$booking->trips)}}" class="btn btn-sm btn-primary">
+                                    {{$booking->trips->tour->name}}
+                                </a>
+                            </td>
+                            <td>{{$booking->adult}}</td>
+                            <td>{{$booking->child}}</td>
+                            <td>{{$booking->users->name}}</td>
+                            <td>RM {{number_format($booking->discount)}}</td>
+                            <td>RM {{number_format($booking->total_fee)}}</td>
+                            <td>
+                                <a href="{{route('bookings.show',$booking)}}" class="btn btn-info">{{__('Show')}}</a>
+                                <a href="{{route('bookings.edit',$booking)}}" class="btn btn-primary">{{__('Edit')}}</a>
+                                <form action="{{route('bookings.destroy',$booking)}}" class="d-inline" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
+                                </form>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($bookings as $booking)
-                            <tr>
-                                <td>{{$booking->id}}</td>
-                                <td>
-                                    <a href="{{route('trip.show',['trip'=>$booking->trips->id])}}"
-                                       class="btn btn-sm btn-primary">{{$booking->trips->tour->name}}</a>
-                                </td>
-                                <td>{{$booking->adult}}</td>
-                                <td>{{$booking->child}}</td>
-                                <td>{{$booking->users->name}}</td>
-                                <td>RM {{number_format($booking->discount)}}</td>
-                                <td>RM {{number_format($booking->total_fee)}}</td>
-                                <td>
-                                    <a href="{{route('booking.show',['booking'=>$booking->id])}}"
-                                       class="btn btn-info">Show</a>
-                                    <a href="{{route('booking.edit',['booking'=>$booking->id])}}"
-                                       class="btn btn-primary">Edit</a>
-                                    <form action="{{route('booking.destroy',['booking'=>$booking->id])}}"
-                                          style="display: inline"
-                                          method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="Delete"/>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                    <div class="box-footer">
-                        {{$bookings->links()}}
-                    </div>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    {{$bookings->links()}}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
 
 @section('script')

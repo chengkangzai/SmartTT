@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeTourRequest;
+use App\Http\Requests\StoreTourRequest;
 use App\Models\Tour;
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -13,38 +12,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use Throwable;
 
 class TourController extends Controller
 {
-
-    /**
-     * @return Application|Factory|View
-     */
     public function index(): Factory|View|Application
     {
         $tours = Tour::paginate(10);
         return view('smartTT.tour.index', compact('tours'));
     }
 
-
-    /**
-     * @return Application|Factory|View
-     */
     public function create(): Factory|View|Application
     {
         return view('smartTT.tour.create');
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param storeTourRequest $request
-     * @return RedirectResponse
-     * @throws Throwable
-     */
-    public function store(storeTourRequest $request): RedirectResponse
+    public function store(StoreTourRequest $request): RedirectResponse
     {
         DB::transaction(function () use ($request) {
             $tour = Tour::create([
@@ -55,17 +37,21 @@ class TourController extends Controller
                 'itinerary_url' => Storage::putFile('public/Tour/itinerary', $request->file('itinerary'), 'public'),
                 'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $request->file('thumbnail'), 'public'),
             ]);
-            $TD = new TourDescriptionController();
-            $TD->store($request, $tour);
+
+            $place = $request->get('place');
+            $des = $request->get('des');
+
+            for ($i = 0; $i < count($place); $i++) {
+                $tour->description()->create([
+                    'place' => $place[$i],
+                    'description' => $des[$i],
+                    'tour_id' => $tour->id
+                ]);
+            }
         });
-        return Redirect::route('tour.index');
+        return Redirect::route('tours.index');
     }
 
-
-    /**
-     * @param Tour $tour
-     * @return Application|Factory|View
-     */
     public function show(Tour $tour): Factory|View|Application
     {
         $itineraryUrl = Storage::url($tour->itinerary_url);
@@ -74,25 +60,16 @@ class TourController extends Controller
         return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
     }
 
-    /**
-     * @param Tour $tour
-     * @return Application|Factory|View
-     */
     public function edit(Tour $tour): Factory|View|Application
     {
         return view('smartTT.tour.edit', compact('tour'));
     }
 
-    /**
-     * @param Request $request
-     * @param Tour $tour
-     * @return RedirectResponse
-     */
     public function update(Request $request, Tour $tour): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
-//            'tour_code' => 'required|unique:App\Tour,tour_code,except'.$tour->tour_code,
+            'tour_code' => 'required|unique:tours,tour_code,' . $tour->id,
             'destination' => 'required',
             'category' => 'required',
             'itinerary' => 'mimes:pdf',
@@ -114,15 +91,9 @@ class TourController extends Controller
             'itinerary_url' => Storage::putFile('public/Tour/itinerary', $request->file('itinerary'), 'public'),
             'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $request->file('thumbnail'), 'public'),
         ]);
-        return Redirect::route('tour.index');
+        return Redirect::route('tours.index');
     }
 
-
-    /**
-     * @param Tour $tour
-     * @return RedirectResponse
-     * @throws Exception
-     */
     public function destroy(Tour $tour): RedirectResponse
     {
         if ($tour->trips->isNotEmpty()) {
@@ -138,6 +109,6 @@ class TourController extends Controller
         $tour->delete();
         Storage::delete([$tour->itinerary_url, $tour->thumbnail_url]);
 
-        return Redirect::route('tour.index');
+        return Redirect::route('tours.index');
     }
 }
