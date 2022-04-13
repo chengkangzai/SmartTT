@@ -1,113 +1,106 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Edit Booking - {{config('app.name')}}
 @endsection
 @section('content')
-    <section class="content-header">
-        <h1><b>Edit Booking</b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{route('booking.index')}}"><i class="fa fa-dashboard"></i> Booking</a></li>
-            <li><a href="{{route('booking.show',['booking'=>$booking->id])}}">{{$booking->name}}</a></li>
-            <li class="active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('bookings.index')}}">{{__('Bookings')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid w-75">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Edit Booking</h3>
-            </div>
-            <form role="form" action="{{route('booking.update',['booking'=>$booking->id])}}" method="POST"
-                  enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="box-body">
-
-                    <div class="form-group @error('trip_id') has-error @enderror">
-                        <label for="trip_id">Trips</label>
-                        <select name="trip_id" class="form-control select2 " id="trip_id" required>
-                            <option value="0" disabled selected> Please Select</option>
-                            @foreach($trips as $key=>$trip)
-                                <option value="{{$trip->id}}" data-price="{{$trip->price}}"
-                                    {{$booking->trips->id === $key ?'selected' :''}} >
-                                    {{$trip->tour->name}} ({{$trip->depart_time}}) (${{$trip->fee/100}})
-                                </option>
-                            @endforeach
-                        </select>
-
-                        @error('trip_id')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group @error('adult') has-error @enderror">
-                        <label for="adult">Adult</label>
-                        <input type="number" name="adult" class="form-control" id="adult" min="0"
-                               value="{{old('adult',$booking->adult)}}" step="1" placeholder="Enter Total adult Number">
-                        @error('adult')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group @error('child') has-error @enderror">
-                        <label for="child">Child</label>
-                        <small>Child is defined as children that is smaller than 12 years old</small>
-                        <input type="number" name="child" class="form-control" id="child" min="0"
-                               value="{{old('child',$booking->child)}}" step="1" placeholder="Enter Total Child Number">
-                        @error('child')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group @error('user_id') has-error @enderror">
-                        <label for="user_id">Customer</label>
-                        <select name="user_id" class="form-control select2 " id="user_id" required>
-                            <option value="0" disabled selected> Please Select</option>
-                            @foreach($users as $user)
-                                <option value="{{$user->id}}"
-                                    {{$booking->users->id === $user->id ?'selected':''}}>
-                                    {{$user->name}} ({{$user->email}})
-                                </option>
-                            @endforeach
-                        </select>
-
-                        @error('user_id')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group @error('discount') has-error @enderror">
-                        <label for="discount">Discount</label>
-                        <input type="number" name="discount" class="form-control" id="discount" min="0"
-                               value="{{old('discount',$booking->discount)}}" step="1"
-                               placeholder="Please enter Discount "/>
-                        @error('discount')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label>Total Price : <span id="fee">RM {{$booking->total_fee}}</span></label>
-                    </div>
-
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </form>
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Edit Booking')}}</h3>
         </div>
-    </section>
+        <form role="form" action="{{route('bookings.update',$booking)}}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label class="form-label" for="trip_id">{{__('Trips')}}</label>
+                    <select name="trip_id" class="form-control select2 " id="trip_id" required>
+                        <option value="0" disabled selected> {{__('Please Select')}}</option>
+                        @foreach($trips as $key=>$trip)
+                            <option value="{{$trip->id}}" data-price="{{$trip->price}}"
+                                {{$booking->trips->id === $key ?'selected' :''}} >
+                                {{$trip->tour->name}} ({{$trip->depart_time}}) (${{$trip->fee/100}})
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('trip_id')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="adult">{{__('Adult')}}</label>
+                    <input type="number" name="adult" class="form-control" id="adult" min="0"
+                           value="{{old('adult',$booking->adult)}}" step="1" placeholder="{{__('Enter Total adult Number')}}">
+                    @error('adult')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="child">{{__('Child')}}</label>
+                    <small>{{__('Child is defined as children that is smaller than 12 years old')}}</small>
+                    <input type="number" name="child" class="form-control" id="child" min="0"
+                           value="{{old('child',$booking->child)}}" step="1" placeholder="{{__('Enter Total Child Number')}}">
+                    @error('child')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="user_id">{{__('Customer')}}</label>
+                    <select name="user_id" class="form-control select2 " id="user_id" required>
+                        <option value="0" disabled selected> {{__('Please Select')}}</option>
+                        @foreach($users as $user)
+                            <option value="{{$user->id}}"
+                                {{$booking->users->id === $user->id ?'selected':''}}>
+                                {{$user->name}} ({{$user->email}})
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="discount">{{__('Discount')}}</label>
+                    <input type="number" name="discount" class="form-control" id="discount" min="0"
+                           value="{{old('discount',$booking->discount)}}" step="1"
+                           placeholder="{{__('Please enter Discount')}} "/>
+                    @error('discount')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label>{{__('Total Price : ')}}<span id="fee">RM {{$booking->total_fee}}</span></label>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @section('script')
@@ -129,7 +122,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "{{route('booking.calculatePrice')}}",
+                url: "{{route('bookings.calculatePrice')}}",
                 data: {
                     tripId: tripId.val(),
                     child: child.val(),

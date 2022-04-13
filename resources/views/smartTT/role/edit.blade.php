@@ -1,34 +1,35 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
+
+@section('title')
+    Roles - {{ config('app.name') }}
+@endsection
 
 @section('content')
-    <section class="content-header">
-        <h1><b>Edit User Role : {{$role->name}} </b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{route('role.index')}}"><i class="fa fa-dashboard"></i> User Role</a></li>
-            <li><a href="{{route('role.show',['role'=>$role->id])}}">{{$role->name}}</a></li>
-            <li class="active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('roles.index')}}">{{__('Roles')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid w-75">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Edit User Role</h3>
-            </div>
-            <form role="form" action="{{route('role.update',['role'=>$role->id])}}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name"
-                               placeholder="Enter User Role Name" value="{{$role->name}}">
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Edit User Role')}}</h3>
         </div>
-    </section>
+        <form role="form" action="{{route('roles.update',$role)}}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input type="text" name="name" class="form-control" id="name"
+                           placeholder="{{__('Enter User Role Name')}}" value="{{$role->name}}">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+            </div>
+        </form>
+    </div>
 @endsection

@@ -1,72 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{config('app.name')}}</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="/bower_components/iCheck/skins/square/blue.css">
-    <link rel='icon' href='icon.gif' type='image/gif' sizes='16x16'>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="#">{{config('app.name')}}</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <h3 class="card-header">{{ __('Confirm Password') }}</h3>
+@extends('layouts.guest')
 
+@section('content')
+    <div class="col-md-6">
+        <div class="card mb-4 mx-4">
+            <div class="card-body p-4">
+                <h1>{{ __('Please confirm your password before continuing.') }}</h1>
 
-        {{ __('Please confirm your password before continuing.') }}
+                <form method="POST" action="{{ route('password.confirm') }}">
+                    @csrf
 
-        <form method="POST" action="{{ route('password.confirm') }}">
-            @csrf
+                    <div class="input-group mb-3"><span class="input-group-text">
+                    <svg class="icon">
+                      <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                    </svg></span>
+                        <input class="form-control @error('password') is-invalid @enderror" type="password"
+                               id="password" name="password" placeholder="{{ __('Password') }}">
+                        @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-primary px-4" type="submit">{{ __('Confirm Password') }}</button>
+                        </div>
+                        @if (Route::has('password.request'))
+                            <div class="col-6 text-end">
+                                <a href="{{ route('password.request') }}" class="btn btn-link px-0"
+                                   type="button">{{ __('Forgot Your Password?') }}</a>
+                            </div>
+                        @endif
+                    </div>
+                </form>
 
-            <div class="form-group row">
-                <label for="password"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                <div class="col-md-6">
-                    <input id="password" type="password"
-                           class="form-control @error('password') is-invalid @enderror" name="password"
-                           required
-                           autocomplete="current-password">
-
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
             </div>
-
-            <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Confirm Password') }}
-                    </button>
-
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
-
-
-
+@endsection

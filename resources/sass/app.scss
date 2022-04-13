@@ -1,15 +1,13 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// If you want to override variables do it here
+@import "variables";
 
-// Variables
-@import 'variables';
+$enable-ltr: true; /* stylelint-disable-line scss/dollar-variable-default */
+$enable-rtl: true; /* stylelint-disable-line scss/dollar-variable-default */
 
-// Bootstrap
-@import '~bootstrap/dist/css/bootstrap.css';
-@import "~select2/dist/css/select2.min.css";
-@import "~datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+// Import styles
+@import "@coreui/coreui/scss/coreui";
 
-@import "custom.css";
+@import "layout";
 
-@import "~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css";
-
+// If you want to add custom CSS you can put it here.
+@import "custom";

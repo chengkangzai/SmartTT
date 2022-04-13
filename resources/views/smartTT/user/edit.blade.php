@@ -1,65 +1,62 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Edit User - {{config('app.name')}}
 @endsection
 @section('content')
-    <section class="content-header">
-        <h1><b>Edit User : {{$user->name}} </b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{route('user.index')}}"><i class="fa fa-dashboard"></i> User</a></li>
-            <li><a href="{{route('user.show',['user'=>$user->id])}}">{{$user->name}}</a></li>
-            <li class="active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('users.index')}}">{{__('Users')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid w-75">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Edit User</h3>
-            </div>
-            <form role="form" action="{{route('user.update',['user'=>$user->id])}}" method="POST"
-                  enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="box-body">
-                    <div class="form-group @error('name') has-error @enderror">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control " id="name"
-                               value="{{$user->name}}" placeholder="Enter User Name">
-                        @error('name')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="form-group @error('email') has-error @enderror">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email"
-                               value="{{$user->email}}" placeholder="Enter Email">
-                        @error('email')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <hr>
-                    <div class="form-group @error('password') has-error @enderror">
-                        <label for="password">Current Password</label>
-                        <input type="password" name="password" class="form-control" id="password"
-                               value="{{old('password')}}" placeholder="Enter Current Password">
-                        @error('password')
-                        <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Edit User')}}</h3>
         </div>
-    </section>
+        <form role="form" action="{{route('users.update',['user'=>$user->id])}}" method="POST"
+              enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label" for="name">{{__('Name')}}</label>
+                    <input type="text" name="name" class="form-control " id="name"
+                           value="{{$user->name}}" placeholder="{{__('Enter User Name')}}">
+                    @error('name')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">{{__('Email')}}</label>
+                    <input type="email" name="email" class="form-control" id="email"
+                           value="{{$user->email}}" placeholder="{{__('Enter Email')}}">
+                    @error('email')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label class="form-label" for="password">{{__('Current Password')}}</label>
+                    <input type="password" name="password" class="form-control" id="password"
+                           value="{{old('password')}}" placeholder="{{__('Enter Current Password')}}">
+                    @error('password')
+                    <span class="help-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+            </div>
+        </form>
+    </div>
     {{--    TODO upload avatar--}}
     {{--    Image optimizer ?--}}
 @endsection

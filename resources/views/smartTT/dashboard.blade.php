@@ -1,23 +1,15 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Dashboard - {{config('app.name')}}
 @endsection
 
 @section('content')
-    <section class="content-header">
-        <h1>
-            Hi
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-            <li class="active">Here</li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content container-fluid">
-        <!-- Content Goes Here -->
-
-    </section>
-
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Dashboard</h3>
+        </div>
+        <div class="card-body">
+            Nothing here....
+        </div>
+    </div>
 @endsection

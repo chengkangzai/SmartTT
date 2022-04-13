@@ -1,52 +1,52 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Create Tour Description - {{config('app.name')}}
 @endsection
 
 @section('content')
-    <section class="content-header">
-        <h1><b>Tour Description</b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> Tour Description</li>
-            <li class="active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{route('tours.show',$tourDescription->tour()->first()->id)}}">{{__('Tour')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
         </ol>
-    </section>
+    </nav>
 
-    <section class="content container-fluid w-75">
-        <form role="form" action="{{route('tourDescription.update',['tourDescription'=>$tourDescription->id])}}"
-              method="POST">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Tour Description for {{$tourName}}</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group @error('place') has-error @enderror">
-                        @csrf
-                        @method('PUT')
-                        <label for="place">Place </label>
-                        <input type="text" name="place" class="form-control" id="place"
-                               value="{{$tourDescription->place}}" placeholder="Enter the main visit place 1">
-                        @error('place')
-                        <span class="help-block" role="alert">
+
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Update')}}</h3>
+        </div>
+        <div class="card-body">
+            <form role="form" action="{{route('tourDescriptions.update',['tourDescription'=>$tourDescription->id])}}"
+                  method="POST">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                    <label for="place" class="form-label">Place </label>
+                    <input type="text" name="place" class="form-control" id="place"
+                           value="{{$tourDescription->place}}" placeholder="{{__('Enter the main visit place 1')}}">
+                    @error('place')
+                    <span class="help-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
-                    </div>
-                    <div class="form-group @error('des') has-error @enderror">
-                        <label for="des.">Description </label>
-                        <textarea type="text" name="des" class="form-control" id="des" rows="5"
-                                  placeholder="Enter Description 1">{{$tourDescription->description}}</textarea>
-                        @error('des')
-                        <span class="help-block" role="alert">
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="des" class="form-label">Description </label>
+                    <textarea type="text" name="des" class="form-control" id="des" rows="5"
+                              placeholder="{{__('Enter Description 1')}}">{{$tourDescription->description}}</textarea>
+                    @error('des')
+                    <span class="help-block" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
-                    </div>
+                    @enderror
                 </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-        </form>
-    </section>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
 @endsection

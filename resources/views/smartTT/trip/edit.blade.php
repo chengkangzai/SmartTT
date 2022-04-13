@@ -1,28 +1,27 @@
-@extends('smartTT.layout.master')
+@extends('layouts.app')
 @section('title')
     Edit Trip - {{config('app.name')}}
 @endsection
 @section('content')
-    <section class="content-header">
-        <h1><b>Edit Trip : {{$trip->tour->name}} </b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{route('trip.index')}}"><i class="fa fa-dashboard"></i> Trip</a></li>
-            <li><a href="{{route('trip.show',['trip'=>$trip->id])}}">{{$trip->tour->name}}</a></li>
-            <li class="active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('trips.index')}}">{{__('Trips')}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
         </ol>
-    </section>
+    </nav>
 
     <section class="content container-fluid w-75">
-        <div class="box box-primary">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Edit Trip</h3>
+        <div class="card">
+            <div class="card">
+                <div class="card-header with-border">
+                    <h3 class="card-title">{{__('Edit Trip')}}</h3>
                 </div>
                 @csrf
-                <div class="box-body">
-                    <form role="form" action="{{route('trip.update',['trip'=>$trip->id])}}" method="POST">
-                        <div class="form-group @error('fee') has-error @enderror">
-                            <label for="fee">Fee (RM)</label>
+                <div class="card-body">
+                    <form role="form" action="{{route('trips.update',$trip)}}" method="POST">
+                        <div class="mb-3">
+                            <label for="fee" class="form-label">Fee (RM)</label>
                             <input type="number" name="fee" class="form-control" id="fee"
                                    value="{{old('fee',$trip->fee/100)}}" placeholder="Enter Trip Fee">
                             @error('fee')
@@ -31,8 +30,8 @@
                         </span>
                             @enderror
                         </div>
-                        <div class="form-group @error('capacity') has-error @enderror">
-                            <label for="capacity">Capacity</label>
+                        <div class="mb-3">
+                            <label for="capacity" class="form-label">Capacity</label>
                             <input type="number" name="capacity" class="form-control" id="capacity"
                                    value="{{old('capacity',$trip->capacity)}}"
                                    placeholder="Enter Capacity of this trip">
@@ -43,8 +42,8 @@
                             @enderror
                         </div>
 
-                        <div class="form-group @error('tour') has-error @enderror">
-                            <label for="tour">Tour</label>
+                        <div class="mb-3">
+                            <label for="tour" class="form-label">Tour</label>
                             <select name="tour" class="form-control">
                                 <option selected value="{{$tour->id}}"> {{$tour->name}} </option>
                                 @foreach($tours as $tour)
@@ -59,14 +58,11 @@
                             @enderror
                         </div>
 
-                        <div class="form-group @error('depart_time') has-error @enderror">
-                            <label for="depart_time">Depart Time</label>
+                        <div class="mb-3">
+                            <label for="depart_time" class="form-label">Depart Time</label>
                             <div class='input-group date' id='depart_time'>
-                                <input type='text' class="form-control" name="depart_time"
+                                <input type='datetime-local' class="form-control" name="depart_time"
                                        value="{{old('depart_time',$trip->depart_time)}}"/>
-                                <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
                             </div>
                             @error('depart_time')
                             <span class="help-block" role="alert">
@@ -76,19 +72,10 @@
                         </div>
                     </form>
                 </div>
-                <div class="box-footer">
+                <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-
         </div>
     </section>
-@endsection
-
-@section('script')
-    <script>
-        $('#depart_time').datetimepicker({
-            date: new Date("{{$trip->depart_time}}")
-        });
-    </script>
 @endsection

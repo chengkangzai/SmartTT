@@ -11,11 +11,6 @@ use Spatie\Permission\Models\Role;
 
 class Select2Controller extends Controller
 {
-
-    /**
-     * @param Request $request
-     * @return JsonResponse|bool
-     */
     public function getUserWithoutTheRole(Request $request): JsonResponse|bool
     {
         if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();
@@ -32,10 +27,6 @@ class Select2Controller extends Controller
         return response()->json($array->toArray());
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse|bool
-     */
     public function getFlightByAirline(Request $request): JsonResponse|bool
     {
         if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();
@@ -56,10 +47,6 @@ class Select2Controller extends Controller
         return response()->json($array->toArray());
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse|bool
-     */
     public function getCustomer(Request $request): JsonResponse|bool
     {
         if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();
