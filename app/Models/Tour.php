@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
 class Tour extends Model
 {
     use HasFactory;
@@ -17,7 +16,7 @@ class Tour extends Model
         'destination',
         'category',
         'itinerary_url',
-        'thumbnail_url'
+        'thumbnail_url',
     ];
 
     /**
@@ -35,5 +34,4 @@ class Tour extends Model
     {
         return $this->hasMany(TourDescription::class);
     }
-
 }

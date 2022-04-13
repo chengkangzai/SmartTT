@@ -17,14 +17,15 @@ class RoleController extends Controller
     {
         abort_unless(auth()->user()->can('View User Role'), 403);
         $roles = Role::paginate(10);
+
         return view('smartTT.role.index', compact('roles'));
     }
-
 
     public function create(): Application|Factory|View
     {
         abort_unless(auth()->user()->can('Create User Role'), 403);
         $permissions = Permission::all();
+
         return view('smartTT.role.create', compact('permissions'));
     }
 
@@ -32,15 +33,16 @@ class RoleController extends Controller
     {
         abort_unless(auth()->user()->can('Create User Role'), 403);
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $role = Role::create([
             'name' => $request->get('name'),
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ]);
-        if ($request->has('permissions'))
+        if ($request->has('permissions')) {
             $role->givePermissionTo($request->get('permissions'));
+        }
 
         return Redirect::route('roles.index');
     }
@@ -50,12 +52,14 @@ class RoleController extends Controller
         abort_unless(auth()->user()->can('View User Role'), 403);
         $permissions = $role->permissions()->paginate(5, ['*'], 'permissions');
         $users = $role->users()->paginate(5, ['*'], 'users');
+
         return view('smartTT.role.show', compact('role', 'permissions', 'users'));
     }
 
     public function edit(Role $role): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Update User Role'), 403);
+
         return view('smartTT.role.edit', compact('role'));
     }
 
@@ -63,6 +67,7 @@ class RoleController extends Controller
     {
         abort_unless(auth()->user()->can('Update User Role'), 403);
         $role->update($request->all());
+
         return Redirect::route('roles.show', ['role' => $role->id]);
     }
 
@@ -71,26 +76,30 @@ class RoleController extends Controller
         abort_unless(auth()->user()->can('Delete User Role'), 403);
         if ($role->users()->count() == 0) {
             $role->delete();
+
             return Redirect::route('roles.index');
         }
+
         return Redirect::back()->withErrors(['error' => 'There is User in this role! Therefore you cant delete it!']);
     }
 
     public function attachUser(Role $role, Request $request): RedirectResponse
     {
         $request->validate([
-            'users' => 'required'
+            'users' => 'required',
         ]);
         $role->users()->attach($request->get('users'));
+
         return Redirect::route('roles.show', ['role' => $role->id]);
     }
 
     public function detachUser(Role $role, Request $request): RedirectResponse
     {
         $request->validate([
-            'user' => 'required'
+            'user' => 'required',
         ]);
         $role->users()->detach($request->get('user'));
+
         return Redirect::route('roles.show', ['role' => $role->id]);
     }
 }

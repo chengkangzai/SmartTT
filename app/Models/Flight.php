@@ -22,26 +22,26 @@ class Flight extends Model
         'flight_class',
         'flight_type',
     ];
-//TODO add
-//1.depart airport
-//2.arrival airport
-//3.flight class
-//4.flight type
+    //TODO add
+    //1.depart airport
+    //2.arrival airport
+    //3.flight class
+    //4.flight type
 
-//Class
+    //Class
     protected $dates = [
         'depart_time',
-        'arrive_time'
+        'arrive_time',
     ];
 
-    const FCLASS = [
+    public const FCLASS = [
         'Economy' => 'Economy',
         'Business' => 'Business',
         'First' => 'First',
-        'Premium economy' => 'Premium Economy'
+        'Premium economy' => 'Premium Economy',
     ];
 
-    const TYPE = [
+    public const TYPE = [
         'Round' => 'Round',
         'One Way' => 'One Way',
         'Multi-city' => 'Multi-city',

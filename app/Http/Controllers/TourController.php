@@ -18,6 +18,7 @@ class TourController extends Controller
     public function index(): Factory|View|Application
     {
         $tours = Tour::paginate(10);
+
         return view('smartTT.tour.index', compact('tours'));
     }
 
@@ -45,10 +46,11 @@ class TourController extends Controller
                 $tour->description()->create([
                     'place' => $place[$i],
                     'description' => $des[$i],
-                    'tour_id' => $tour->id
+                    'tour_id' => $tour->id,
                 ]);
             }
         });
+
         return Redirect::route('tours.index');
     }
 
@@ -57,6 +59,7 @@ class TourController extends Controller
         $itineraryUrl = Storage::url($tour->itinerary_url);
         $thumbnailUrl = Storage::url($tour->thumbnail_url);
         $tourDes = $tour->description()->paginate(9);
+
         return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
     }
 
@@ -77,11 +80,17 @@ class TourController extends Controller
         ]);
         if ($request->get('tour_code') !== $tour->tour_code) {
             $count = Tour::where('tour_code', $request->get('tour_code'))->count();
-            if ($count !== 0) return redirect()->back()->withErrors(['tour_code' => 'Error Message'])->withInput();
+            if ($count !== 0) {
+                return redirect()->back()->withErrors(['tour_code' => 'Error Message'])->withInput();
+            }
         }
 
-        if ($request->hasFile('itinerary')) Storage::delete($tour->itinerary_url);
-        if ($request->hasFile('thumbnail')) Storage::delete($tour->thumbnail_url);
+        if ($request->hasFile('itinerary')) {
+            Storage::delete($tour->itinerary_url);
+        }
+        if ($request->hasFile('thumbnail')) {
+            Storage::delete($tour->thumbnail_url);
+        }
 
         $tour->update([
             'tour_code' => $request->get('tour_code'),
@@ -91,6 +100,7 @@ class TourController extends Controller
             'itinerary_url' => Storage::putFile('public/Tour/itinerary', $request->file('itinerary'), 'public'),
             'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $request->file('thumbnail'), 'public'),
         ]);
+
         return Redirect::route('tours.index');
     }
 
@@ -102,6 +112,7 @@ class TourController extends Controller
             foreach ($trips as $trip) {
                 $holder .= $trip->id . ',';
             }
+
             return redirect()->back()->withErrors('The tour cant be deleted because trip id ' . $holder . ' associate with it');
         }
 
