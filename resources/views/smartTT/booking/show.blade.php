@@ -1,26 +1,25 @@
 @extends('layouts.app')
 @section('title')
-    Booking Management - {{config('app.name')}}
+    Booking Management - {{ config('app.name') }}
 @endsection
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('bookings.index')}}">{{__('Bookings')}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{__('Show')}}</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('bookings.index') }}">{{ __('Bookings') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Show') }}</li>
         </ol>
     </nav>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">{{__('Booking Information')}}</h3>
+            <h3 class="card-title">{{ __('Booking Information') }}</h3>
             <div class="pull-right">
-                <a href="{{route('bookings.edit',$booking)}}" class="btn btn-primary">{{__('Edit')}}</a>
-                <form action="{{route('bookings.destroy',$booking)}}" method="POST"
-                      style="display: inline">
+                <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
                     @method('DELETE')
                     @csrf
-                    <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
+                    <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
             </div>
         </div>
@@ -28,26 +27,26 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>{{__('ID')}}</th>
-                        <th>{{__('Trip')}}</th>
-                        <th>{{__('Adult')}}</th>
-                        <th>{{__('Child')}}</th>
-                        <th>{{__('Customer')}}</th>
-                        <th>{{__('Discount')}}</th>
-                        <th>{{__('Total Price')}}</th>
-                    </tr>
+                        <tr>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('Trip') }}</th>
+                            <th>{{ __('Adult') }}</th>
+                            <th>{{ __('Child') }}</th>
+                            <th>{{ __('Customer') }}</th>
+                            <th>{{ __('Discount') }}</th>
+                            <th>{{ __('Total Price') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{{$booking->id}}</td>
-                        <td>{{$booking->trips->tour->name}}</td>
-                        <td>{{$booking->adult}}</td>
-                        <td>{{$booking->child}}</td>
-                        <td>{{$booking->users->name}}</td>
-                        <td>RM {{number_format($booking->discount)}}</td>
-                        <td>RM {{number_format($booking->total_fee)}}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $booking->id }}</td>
+                            <td>{{ $booking->trips->tour->name }}</td>
+                            <td>{{ $booking->adult }}</td>
+                            <td>{{ $booking->child }}</td>
+                            <td>{{ $booking->users->name }}</td>
+                            <td>RM {{ number_format($booking->discount) }}</td>
+                            <td>RM {{ number_format($booking->total_fee) }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

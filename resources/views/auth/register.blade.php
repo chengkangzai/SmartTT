@@ -10,51 +10,51 @@
                     @csrf
 
                     <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                    </svg></span>
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                            </svg></span>
                         <input class="form-control" type="text" name="name" placeholder="{{ __('Name') }}" required
-                               autocomplete="name" autofocus>
+                            autocomplete="name" autofocus>
                         @error('name')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
+                            <span class="invalid-feedback">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
 
                     <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
-                    </svg></span>
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
+                            </svg></span>
                         <input class="form-control" type="text" name="email" placeholder="{{ __('Email') }}" required
-                               autocomplete="email">
+                            autocomplete="email">
                         @error('email')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
+                            <span class="invalid-feedback">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
 
                     <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                    </svg></span>
-                        <input class="form-control @error('password') is-invalid @enderror" type="password"
-                               name="password" placeholder="{{ __('Password') }}" required autocomplete="new-password">
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                            </svg></span>
+                        <input class="form-control @error('password') is-invalid @enderror" type="password" name="password"
+                            placeholder="{{ __('Password') }}" required autocomplete="new-password">
                         @error('password')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
+                            <span class="invalid-feedback">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
 
                     <div class="input-group mb-4"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                    </svg></span>
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                            </svg></span>
                         <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password"
-                               name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required
-                               autocomplete="new-password">
+                            name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required
+                            autocomplete="new-password">
                     </div>
 
                     <button class="btn btn-block btn-success" type="submit">{{ __('Register') }}</button>
@@ -63,5 +63,4 @@
             </div>
         </div>
     </div>
-
 @endsection

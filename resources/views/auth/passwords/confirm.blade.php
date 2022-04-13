@@ -10,15 +10,15 @@
                     @csrf
 
                     <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                    </svg></span>
-                        <input class="form-control @error('password') is-invalid @enderror" type="password"
-                               id="password" name="password" placeholder="{{ __('Password') }}">
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                            </svg></span>
+                        <input class="form-control @error('password') is-invalid @enderror" type="password" id="password"
+                            name="password" placeholder="{{ __('Password') }}">
                         @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                     <div class="row">
@@ -28,7 +28,7 @@
                         @if (Route::has('password.request'))
                             <div class="col-6 text-end">
                                 <a href="{{ route('password.request') }}" class="btn btn-link px-0"
-                                   type="button">{{ __('Forgot Your Password?') }}</a>
+                                    type="button">{{ __('Forgot Your Password?') }}</a>
                             </div>
                         @endif
                     </div>

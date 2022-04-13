@@ -9,38 +9,36 @@
                 <form action="{{ route('password.update') }}" method="POST">
                     @include('partials.error-alert')
                     @csrf
-                    <input type="email" name="email" value="{{request()->get('email')}}" hidden>
-                    <input type="text" name="token" value="{{request()->token}}" hidden>
+                    <input type="email" name="email" value="{{ request()->get('email') }}" hidden>
+                    <input type="text" name="token" value="{{ request()->token }}" hidden>
                     <div class="input-group mb-4"><span class="input-group-text">
-                      <svg class="icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                      </svg></span>
-                        <input class="form-control @error('password') is-invalid @enderror" type="password"
-                               id="password" name="password"
-                               placeholder="{{ __('Password') }}">
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                            </svg></span>
+                        <input class="form-control @error('password') is-invalid @enderror" type="password" id="password"
+                            name="password" placeholder="{{ __('Password') }}">
                         @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
                     <div class="input-group mb-4"><span class="input-group-text">
-                      <svg class="icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                      </svg></span>
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
+                            </svg></span>
                         <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password"
-                               id="password_confirmation" name="password_confirmation"
-                               placeholder="{{ __('Confirm Password') }}">
+                            id="password_confirmation" name="password_confirmation"
+                            placeholder="{{ __('Confirm Password') }}">
                         @error('password_confirmation')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <button class="btn btn-block btn-success"
-                            type="submit">{{ __('Reset Password') }}</button>
+                    <button class="btn btn-block btn-success" type="submit">{{ __('Reset Password') }}</button>
                 </form>
 
             </div>

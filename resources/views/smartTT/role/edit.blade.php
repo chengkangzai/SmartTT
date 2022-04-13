@@ -7,30 +7,30 @@
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('roles.index')}}">{{__('Roles')}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{__('Edit')}}</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">{{ __('Roles') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Edit') }}</li>
         </ol>
     </nav>
 
     <div class="card">
         <div class="card-header with-border">
-            <h3 class="card-title">{{__('Edit User Role')}}</h3>
+            <h3 class="card-title">{{ __('Edit User Role') }}</h3>
         </div>
         <div class="card-body">
-            <form role="form" action="{{route('roles.update',$role)}}" method="POST" id="editForm">
+            <form role="form" action="{{ route('roles.update', $role) }}" method="POST" id="editForm">
                 @include('partials.error-alert')
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label class="form-label" for="name">Name</label>
                     <input type="text" name="name" class="form-control" id="name"
-                           placeholder="{{__('Enter User Role Name')}}" value="{{$role->name}}">
+                        placeholder="{{ __('Enter User Role Name') }}" value="{{ $role->name }}">
                 </div>
             </form>
         </div>
         <div class="card-footer">
-            <button form="editForm" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+            <button form="editForm" type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
         </div>
     </div>
 @endsection
