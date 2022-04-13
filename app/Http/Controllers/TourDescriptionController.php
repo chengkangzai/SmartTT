@@ -10,28 +10,29 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-
 class TourDescriptionController extends Controller
 {
-
     public function update(Request $request, TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->update([
             'place' => $request->get('place'),
             'description' => $request->get('des'),
         ]);
+
         return redirect()->route('tours.show', ['tour' => $tourDescription->tour()->first()->id]);
     }
 
     public function edit(TourDescription $tourDescription): Factory|View|Application
     {
         $tourName = Tour::find($tourDescription->tour_id)->first()->name;
+
         return view('smartTT.tourDescription.edit', compact('tourDescription', 'tourName'));
     }
 
     public function destroy(TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->delete();
+
         return redirect()->back();
     }
 
@@ -46,6 +47,7 @@ class TourDescriptionController extends Controller
             'description' => $request->get('des'),
             'tour_id' => $tour->id,
         ]);
+
         return redirect()->back();
     }
 }

@@ -17,12 +17,14 @@ class TripController extends Controller
     public function index(): View|Factory|Application
     {
         $trips = Trip::with('tour')->paginate(10);
+
         return view('smartTT.trip.index', compact('trips'));
     }
 
     public function create(): Factory|View|Application
     {
         $tours = Tour::select(['id', 'name'])->get();
+
         return view('smartTT.trip.create', compact('tours'));
     }
 
@@ -33,7 +35,7 @@ class TripController extends Controller
             'tour' => 'required',
             'capacity' => 'required',
             'depart_time' => 'required',
-            'flight' => 'required|array'
+            'flight' => 'required|array',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -46,12 +48,14 @@ class TripController extends Controller
 
             $trip->flight()->attach($request->get('flight'));
         });
+
         return redirect()->route('trips.index');
     }
 
     public function show(Trip $trip): Factory|View|Application
     {
         $flights = $trip->flight()->get();
+
         return view('smartTT.trip.show', compact('trip', 'flights'));
     }
 
@@ -66,12 +70,14 @@ class TripController extends Controller
     public function update(Request $request, Trip $trip): RedirectResponse
     {
         $trip->update($request->all());
+
         return redirect()->route('trips.index');
     }
 
     public function destroy(Trip $trip): RedirectResponse
     {
         $trip->delete();
+
         return redirect()->route('trips.index');
     }
 }
