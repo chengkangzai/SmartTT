@@ -14,30 +14,21 @@
 
     <div class="card">
         <div class="card-header with-border">
-            <h3 class="card-title">Create Trip</h3>
+            <h3 class="card-title">{{__('Create Trip')}}</h3>
         </div>
         <div class="card-body">
             <form role="form" action="{{route('trips.store')}}" method="POST" id="createForm">
+                @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <label for="fee" class="form-label">Fee (RM)</label>
                     <input type="number" name="fee" class="form-control" id="fee"
-                           value="{{old('fee')}}" placeholder="Enter Trip Fee">
-                    @error('fee')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                           value="{{old('fee')}}" placeholder="{{__('Enter Trip Fee')}}">
                 </div>
                 <div class="mb-3">
                     <label for="capacity" class="form-label">Capacity</label>
                     <input type="number" name="capacity" class="form-control" id="capacity"
-                           value="{{old('capacity')}}" placeholder="Enter Capacity of this trip">
-                    @error('capacity')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                           value="{{old('capacity')}}" placeholder="{{__('Enter Capacity of this trip')}}">
                 </div>
 
                 <div class="mb-3">
@@ -47,35 +38,17 @@
                             <option value="{{$tour->id}}"> {{$tour->name}} </option>
                         @endforeach
                     </select>
-
-                    @error('tour')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="depart_time">Depart Time</label>
-                    <div class="input-group" id="depart_time">
-                        <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"/>
-                    </div>
-                    @error('depart_time')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"/>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="flightSelect">Flight</label>
                     <select name="flight[]" class="form-control select2 " id="flightSelect" multiple></select>
-                    @error('flight')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
-
             </form>
         </div>
         <div class="card-footer">

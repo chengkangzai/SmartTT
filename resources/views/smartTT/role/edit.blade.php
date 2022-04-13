@@ -17,19 +17,20 @@
         <div class="card-header with-border">
             <h3 class="card-title">{{__('Edit User Role')}}</h3>
         </div>
-        <form role="form" action="{{route('roles.update',$role)}}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="card-body">
+        <div class="card-body">
+            <form role="form" action="{{route('roles.update',$role)}}" method="POST" id="editForm">
+                @include('partials.error-alert')
+                @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label class="form-label" for="name">Name</label>
                     <input type="text" name="name" class="form-control" id="name"
                            placeholder="{{__('Enter User Role Name')}}" value="{{$role->name}}">
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button form="editForm" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
+        </div>
     </div>
 @endsection

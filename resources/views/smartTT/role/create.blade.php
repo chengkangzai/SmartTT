@@ -18,9 +18,10 @@
         <div class="card-header with-border">
             <h3 class="card-title">Create User Role</h3>
         </div>
-        <form role="form" action="{{route('roles.store')}}" method="POST">
-            @csrf
-            <div class="card-body">
+        <div class="card-body">
+            <form role="form" action="{{route('roles.store')}}" method="POST" id="createForm">
+                @include('partials.error-alert')
+                @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" id="name"
@@ -36,10 +37,10 @@
                             {{$permission->name}} </label>
                     @endforeach
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button form="createForm" type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
 @endsection

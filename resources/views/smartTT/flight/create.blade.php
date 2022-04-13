@@ -12,46 +12,30 @@
         </ol>
     </nav>
 
-    <form role="form" action="{{route('flights.store')}}" method="POST" enctype="multipart/form-data">
-        <div class="card">
-            <div class="card-header with-border">
-                <h3 class="card-title">{{__('Create Flight')}}</h3>
-            </div>
-            @csrf
-            <div class="card-body">
-
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">{{__('Create Flight')}}</h3>
+        </div>
+        <div class="card-body">
+            <form role="form" action="{{route('flights.store')}}" method="POST" id="createForm">
+                @include('partials.error-alert')
+                @csrf
                 <div class="mb-3">
                     <label class="form-label" for="depart_time">{{__('Depart Time')}}</label>
                     <input type='datetime-local' class="form-control" name="depart_time" id="depart_time"
                            value="{{old('depart_time','')}}"/>
-                    @error('depart_time')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="arrive_time">{{__('Arrive Time')}}</label>
                     <input type='datetime-local' class="form-control" name="arrive_time" id="arrive_time"
                            value="{{old('arrive_time')}}"/>
-                    @error('arrive_time')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
-
 
                 <div class="mb-3">
                     <label class="form-label" for="fee">{{__('Fee')}}</label>
                     <input type="number" name="fee" class="form-control" id="fee"
                            value="{{old('fee',0)}}" step="1" placeholder="{{__('Enter Flight Fee')}}">
-                    @error('fee')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -63,11 +47,6 @@
                         @endforeach
                     </select>
 
-                    @error('airline_id')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -78,11 +57,6 @@
                             <option value="{{$airport->id}}"> {{$airport->name}}</option>
                         @endforeach
                     </select>
-                    @error('depart_airport')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -94,11 +68,6 @@
                         @endforeach
                     </select>
 
-                    @error('arrival_airport')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -110,11 +79,6 @@
                         @endforeach
                     </select>
 
-                    @error('flight_class')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -125,19 +89,14 @@
                             <option value="{{$key}}"> {{$type}} </option>
                         @endforeach
                     </select>
-                    @error('flight_type')
-                    <span class="help-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
+            </form>
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
-                </div>
+            <div class="card-footer">
+                <button form="createForm" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
             </div>
         </div>
-    </form>
+    </div>
 @endsection
 
 @section('script')
