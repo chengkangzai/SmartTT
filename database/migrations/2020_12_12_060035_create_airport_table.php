@@ -20,9 +20,9 @@ class CreateAirportTable extends Migration
             $table->string('country')->nullable();
             $table->string('IATA')->nullable();
             $table->string('ICAO')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
-            $table->string('altitude')->nullable();
+            $table->decimal('latitude', 8, 6)->nullable();
+            $table->decimal('longitude', 9, 6)->nullable();
+            $table->integer('altitude')->nullable();
             $table->string('offset_UTC')->nullable();
             $table->string('DST')->nullable();
             $table->string('timezoneTz')->nullable();
