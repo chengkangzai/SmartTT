@@ -12,7 +12,8 @@
                     </div>
                 @endif
 
-                <p class="text-medium-emphasis">{{ __('Before proceeding, please check your email for a verification link.') }}</p>
+                <p class="text-medium-emphasis">
+                    {{ __('Before proceeding, please check your email for a verification link.') }}</p>
                 <p class="text-medium-emphasis">{{ __('If you did not receive the email') }},</p>
 
                 <form method="POST" action="{{ route('verification.resend') }}">
@@ -21,7 +22,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button class="btn btn-primary px-4"
-                                    type="submit">{{ __('click here to request another') }}</button>
+                                type="submit">{{ __('click here to request another') }}</button>
                         </div>
                     </div>
                 </form>

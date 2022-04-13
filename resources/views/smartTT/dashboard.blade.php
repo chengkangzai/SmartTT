@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Dashboard - {{config('app.name')}}
+    Dashboard - {{ config('app.name') }}
 @endsection
 
 @section('content')

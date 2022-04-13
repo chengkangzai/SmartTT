@@ -31,7 +31,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['web', 'auth'])->group(function () {
-
     Route::get('/', [DashboardController::class, 'index']);
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -60,4 +59,3 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');
     Route::resource('roles', RoleController::class);
 });
-

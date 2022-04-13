@@ -14,18 +14,19 @@ use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
-
     public function index(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View User'), 403);
         //TODO Add Staff Role
         $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
+
         return view('smartTT.user.index', compact('users'));
     }
 
     public function create(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Create User'), 403);
+
         return view('smartTT.user.create');
     }
 
@@ -42,6 +43,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
+
         return redirect()->route('user.index');
     }
 
@@ -49,12 +51,14 @@ class UserController extends Controller
     {
         abort_unless(Auth::user()->hasRole(['Super Admin']) || auth()->user()->id == $user->id, 403);
         $user->load('roles');
+
         return view('smartTT.user.show', compact('user'));
     }
 
     public function edit(User $user): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
+
         return view('smartTT.user.edit', compact('user'));
     }
 
@@ -75,6 +79,7 @@ class UserController extends Controller
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
         $user->delete();
+
         return redirect()->route('user.index');
     }
 
@@ -82,6 +87,7 @@ class UserController extends Controller
     {
         abort_unless(auth()->user()->roles()->first('Super Admin'), 403);
         Password::sendResetLink(['email' => $user->email]);
+
         return back()->with('success', 'Password reset link sent to ' . $user->email);
     }
 }

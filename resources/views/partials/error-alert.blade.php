@@ -3,7 +3,7 @@
         <ul class="py-0 m-0">
             @foreach ($errors->all() as $error)
                 <li>
-                    {{$error}}
+                    {{ $error }}
                 </li>
             @endforeach
         </ul>

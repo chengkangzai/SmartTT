@@ -1,111 +1,112 @@
 @extends('layouts.app')
 @section('title')
-    Tour Management - {{config('app.name')}}
+    Tour Management - {{ config('app.name') }}
 @endsection
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('tours.index')}}">{{__('Tour')}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{__('Show')}}</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('tours.index') }}">{{ __('Tour') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Show') }}</li>
         </ol>
     </nav>
 
-        <div class="row">
-            <div class="col-lg-2">
-                <img src="{{$thumbnailUrl}}" alt="" class="img-responsive img-thumbnail image">
-            </div>
-            <div class="col-lg-10 ">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">{{__('Tour Information')}}</h3>
-                        <div class="pull-right">
-                            <a href="{{route('tours.edit',['tour'=>$tour->id])}}"
-                               class="btn btn-primary">{{__('Edit')}}</a>
-                            <form action="{{route('tours.destroy',['tour'=>$tour->id])}}" method="POST"
-                                  style="display: inline">
-                                @method('DELETE')
-                                @csrf
-                                <input class="btn btn-danger" type="submit" value="Delete"/>
-                            </form>
-                        </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <img src="{{ $thumbnailUrl }}" alt="" class="img-responsive img-thumbnail image">
+        </div>
+        <div class="col-lg-10 ">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('Tour Information') }}</h3>
+                    <div class="pull-right">
+                        <a href="{{ route('tours.edit', ['tour' => $tour->id]) }}"
+                            class="btn btn-primary">{{ __('Edit') }}</a>
+                        <form action="{{ route('tours.destroy', ['tour' => $tour->id]) }}" method="POST"
+                            style="display: inline">
+                            @method('DELETE')
+                            @csrf
+                            <input class="btn btn-danger" type="submit" value="Delete" />
+                        </form>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <th>{{__('ID')}}</th>
-                                    <th>{{__('Tour Name')}}</th>
-                                    <th>{{__('Tour Code')}}</th>
-                                    <th>{{__('Destination')}}</th>
-                                    <th>{{__('Category')}}</th>
-                                    <th>{{__('Itinerary')}}</th>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Tour Name') }}</th>
+                                    <th>{{ __('Tour Code') }}</th>
+                                    <th>{{ __('Destination') }}</th>
+                                    <th>{{ __('Category') }}</th>
+                                    <th>{{ __('Itinerary') }}</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 <tr>
-                                    <td>{{$tour->id}}</td>
-                                    <td>{{$tour->name}}</td>
-                                    <td>{{$tour->tour_code}}</td>
-                                    <td>{{$tour->destination}}</td>
-                                    <td>{{$tour->category}}</td>
+                                    <td>{{ $tour->id }}</td>
+                                    <td>{{ $tour->name }}</td>
+                                    <td>{{ $tour->tour_code }}</td>
+                                    <td>{{ $tour->destination }}</td>
+                                    <td>{{ $tour->category }}</td>
                                     <td>
-                                        <a href="{{$itineraryUrl}}" class="btn btn-info">{{__('View')}}</a>
+                                        <a href="{{ $itineraryUrl }}" class="btn btn-info">{{ __('View') }}</a>
                                     </td>
                                 </tr>
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('Tour Description') }}</h3>
+                    <div class="pull-right">
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-success" data-coreui-toggle="modal"
+                                data-coreui-target="#addTourDescriptionModal">
+                                {{ __('Add') }}
+                            </a>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="card mt-2">
-                    <div class="card-header">
-                        <h3 class="card-title">{{__('Tour Description')}}</h3>
-                        <div class="pull-right">
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addTourDescriptionModal">
-                                    {{__('Add')}}
+                <div class="card-body">
+                    @forelse($tourDes as $des)
+                        <div class="card col-lg-4 col-md-12 " style="height: 200px;padding-bottom: 10px">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ $des->place }}</h3>
+                                <p class="card-text text-truncate">{{ $des->description }}</p>
+                            </div>
+                            <div class="mx-auto ">
+                                <form class="form" style="display: inline;" method="POST"
+                                    action="{{ route('tourDescriptions.destroy', ['tourDescription' => $des->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                                <a href="{{ route('tourDescriptions.edit', ['tourDescription' => $des->id]) }}"
+                                    class="btn btn-info">
+                                    {{ __('Edit') }}
                                 </a>
                             </div>
+
                         </div>
-                    </div>
-                    <div class="card-body">
-                        @forelse($tourDes as $des)
-                            <div class="card col-lg-4 col-md-12 " style="height: 200px;padding-bottom: 10px">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{$des->place}}</h3>
-                                    <p class="card-text text-truncate">{{$des->description}}</p>
-                                </div>
-                                <div class="mx-auto ">
-                                    <form class="form" style="display: inline;" method="POST"
-                                          action="{{route('tourDescriptions.destroy',['tourDescription'=>$des->id])}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                    </form>
-                                    <a href="{{route('tourDescriptions.edit',['tourDescription'=>$des->id])}}"
-                                       class="btn btn-info">
-                                        {{__('Edit')}}
-                                    </a>
-                                </div>
-
-                            </div>
-                        @empty
-                            <p class="text-center">{{__('Nothing to show')}}</p>
-                        @endforelse
-                    </div>
-                    <div class="card-footer">
-                        {{$tourDes->links()}}
-                    </div>
+                    @empty
+                        <p class="text-center">{{ __('Nothing to show') }}</p>
+                    @endforelse
                 </div>
-
-                {{--TODO--}}
-                {{--1. link trips--}}
+                <div class="card-footer">
+                    {{ $tourDes->links() }}
+                </div>
             </div>
+
+            {{-- TODO --}}
+            {{-- 1. link trips --}}
         </div>
+    </div>
     </section>
 @endsection
 
@@ -114,33 +115,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{__("Add Tour Description to Tour :")}} {{$tour->name}}</h4>
+                    <h4 class="modal-title">{{ __('Add Tour Description to Tour :') }} {{ $tour->name }}</h4>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('tourDescriptions.attach',['tour'=>$tour->id])}}" method="POST"
-                          id="addTourDescription">
+                    <form action="{{ route('tourDescriptions.attach', ['tour' => $tour->id]) }}" method="POST"
+                        id="addTourDescription">
                         @csrf
                         @method('POST')
                         <div class="mb-3">
-                            <label for="place" class="form-label"> {{__('Description Place')}} </label>
+                            <label for="place" class="form-label"> {{ __('Description Place') }} </label>
                             <input class="form-control select2" id="place" name="place" required
-                                   placeholder="{{__('Enter the name of the Place')}}"/>
+                                placeholder="{{ __('Enter the name of the Place') }}" />
                         </div>
                         <div class="mb-3">
-                            <label for="des" class="form-label"> {{__('Place Description')}} </label>
+                            <label for="des" class="form-label"> {{ __('Place Description') }} </label>
                             <textarea name="des" id="des" class="form-control" rows="5" required
-                                      placeholder="{{__('Enter the description for the place above')}}"></textarea>
+                                placeholder="{{ __('Enter the description for the place above') }}"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{__('Close')}}</button>
-                    <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{('Submit')}}">
+                    <button type="button" class="btn btn-default pull-left"
+                        data-dismiss="modal">{{ __('Close') }}</button>
+                    <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{ 'Submit' }}">
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-

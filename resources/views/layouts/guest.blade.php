@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="./">
     <meta charset="utf-8">
@@ -9,15 +10,17 @@
     <meta name="theme-color" content="#ffffff">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            @yield('content')
+    <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                @yield('content')
+            </div>
         </div>
     </div>
-</div>
-<script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
 </body>
+
 </html>

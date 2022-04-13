@@ -9,19 +9,18 @@
                     @csrf
 
                     <div class="input-group mb-3"><span class="input-group-text">
-                    <svg class="icon">
-                      <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
-                    </svg></span>
-                        <input class="form-control @error('email') is-invalid @enderror" type="email"
-                               id="email" name="email" placeholder="{{ __('Email') }}">
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
+                            </svg></span>
+                        <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email"
+                            placeholder="{{ __('Email') }}">
                         @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
-                    <button class="btn btn-block btn-success"
-                            type="submit">{{ __('Send Password Reset Link') }}</button>
+                    <button class="btn btn-block btn-success" type="submit">{{ __('Send Password Reset Link') }}</button>
                 </form>
             </div>
         </div>

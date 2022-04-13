@@ -17,12 +17,14 @@ class BookingController extends Controller
     public function index(): Factory|View|Application
     {
         $bookings = Booking::with(['users', 'trips', 'trips.tour'])->paginate(10);
+
         return view('smartTT.booking.index', compact('bookings'));
     }
 
     public function create(): Factory|View|Application
     {
         $trips = Trip::with('tour')->get();
+
         return view('smartTT.booking.create', compact('trips'));
     }
 
@@ -59,6 +61,7 @@ class BookingController extends Controller
     {
         $trips = Trip::with('tour')->get();
         $users = Role::findById(2)->users()->get();
+
         return view('smartTT.booking.edit', compact('booking', 'trips', 'users'));
     }
 
@@ -74,18 +77,22 @@ class BookingController extends Controller
             'adult' => $request->get('adult'),
             'child' => $request->get('child'),
         ]);
+
         return redirect()->route('bookings.index');
     }
 
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();
+
         return redirect()->route('bookings.index');
     }
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) return response('You Are not allow to be here')->isForbidden();
+        if (! $request->ajax()) {
+            return response('You Are not allow to be here')->isForbidden();
+        }
         $request->validate([
             'tripId' => 'required',
             'child' => 'required',
@@ -95,6 +102,7 @@ class BookingController extends Controller
 
         $tripPrice = Trip::whereId($request->get('tripId'))->first()->fee / 100;
         $price = ($tripPrice * $request->get('adult') + (200 * $request->get('child')) - $request->get('discount'));
+
         return response()->json(number_format($price));
     }
 }
