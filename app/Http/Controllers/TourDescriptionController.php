@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Tour\TourDescription\AttachDescriptionToTourAction;
+use App\Actions\Tour\TourDescription\UpdateTourDescriptionAction;
 use App\Models\Tour;
 use App\Models\TourDescription;
 use Illuminate\Contracts\Foundation\Application;
@@ -12,12 +14,9 @@ use Illuminate\View\View;
 
 class TourDescriptionController extends Controller
 {
-    public function update(Request $request, TourDescription $tourDescription): RedirectResponse
+    public function update(Request $request, TourDescription $tourDescription, UpdateTourDescriptionAction $action): RedirectResponse
     {
-        $tourDescription->update([
-            'place' => $request->get('place'),
-            'description' => $request->get('des'),
-        ]);
+        $action->execute($request->all(), $tourDescription);
 
         return redirect()->route('tours.show', ['tour' => $tourDescription->tour()->first()->id]);
     }
@@ -36,17 +35,9 @@ class TourDescriptionController extends Controller
         return redirect()->back();
     }
 
-    public function attachToTour(Request $request, Tour $tour): RedirectResponse
+    public function attachToTour(Request $request, Tour $tour, AttachDescriptionToTourAction $action): RedirectResponse
     {
-        $request->validate([
-            'place' => 'required',
-            'des' => 'required',
-        ]);
-        TourDescription::create([
-            'place' => $request->get('place'),
-            'description' => $request->get('des'),
-            'tour_id' => $tour->id,
-        ]);
+        $action->execute($request->all(), $tour);
 
         return redirect()->back();
     }
