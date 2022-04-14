@@ -18,14 +18,15 @@ trait ValidateTour
                 'tour_code' => 'required|unique:tours,tour_code,' . $data['tour_code'],
             ];
 
-        return \Validator::make($data,
+        return \Validator::make(
+            $data,
             [
                 'name' => 'required',
                 'destination' => 'required',
                 'category' => 'required',
                 'itinerary' => 'required|mimes:pdf|max:2048',
                 'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
-                +$rules
+                +$rules,
             ],
             [
                 'des.*.required' => 'Description :index is required',
