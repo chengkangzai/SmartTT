@@ -36,6 +36,7 @@ class RoleController extends Controller
         abort_unless(auth()->user()->can('Create User Role'), 403);
 
         $action->execute($request->all());
+
         return redirect()->route('roles.index');
     }
 

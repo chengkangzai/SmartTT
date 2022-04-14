@@ -38,5 +38,4 @@ class Trip extends Model
     {
         return $this->belongsToMany(Flight::class);
     }
-
 }

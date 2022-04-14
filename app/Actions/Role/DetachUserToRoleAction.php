@@ -13,6 +13,5 @@ class DetachUserToRoleAction
         ])->validate();
 
         return $role->users()->detach($data['user_id']);
-
     }
 }

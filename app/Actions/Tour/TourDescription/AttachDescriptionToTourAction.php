@@ -13,9 +13,9 @@ class AttachDescriptionToTourAction
             'place' => 'required',
             'des' => 'required',
         ]);
+
         return $tour->description()->create([
             ...$data,
         ]);
-
     }
 }

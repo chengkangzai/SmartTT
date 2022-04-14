@@ -35,8 +35,8 @@ class StoreTourAction
                     'tour_id' => $tour->id,
                 ]);
             }
+
             return $tour;
         });
     }
-
 }

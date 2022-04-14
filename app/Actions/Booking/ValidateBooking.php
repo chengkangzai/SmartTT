@@ -2,7 +2,7 @@
 
 namespace App\Actions\Booking;
 
-trait  ValidateBooking
+trait ValidateBooking
 {
     public function validate($data): array
     {

@@ -34,6 +34,7 @@ class TripController extends Controller
             ->get()
             ->map(function ($flight) {
                 $flight->text = $flight->airline->name . " (" . $flight->depart_time->format('d/m/Y H:i') . ") -> (" . $flight->arrive_time->format('d/m/Y H:i') . ")";
+
                 return $flight;
             });
 
@@ -44,6 +45,7 @@ class TripController extends Controller
     {
         try {
             $action->execute($request->all());
+
             return redirect()->route('trips.index');
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -70,6 +72,7 @@ class TripController extends Controller
     {
         try {
             $action->execute($request->all(), $trip);
+
             return redirect()->route('trips.index');
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
