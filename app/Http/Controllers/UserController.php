@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\User\StoreUserAction;
+use App\Actions\User\UpdateUserAction;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -9,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
@@ -30,19 +31,10 @@ class UserController extends Controller
         return view('smartTT.user.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, StoreUserAction $action): RedirectResponse
     {
         abort_unless(auth()->user()->can('Create User'), 403);
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ]);
+        $action->execute($request->all());
 
         return redirect()->route('user.index');
     }
@@ -62,15 +54,10 @@ class UserController extends Controller
         return view('smartTT.user.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(Request $request, User $user, UpdateUserAction $action): RedirectResponse
     {
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
-        $request->validate([
-            'email' => 'required',
-            'name' => 'required',
-            'password' => 'required|password:web',
-        ]);
-        $user->update($request->only(['email', 'name']));
+        $action->execute($request->all(), $user);
 
         return redirect()->route('user.show', $user);
     }
@@ -78,6 +65,9 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
+        if ($user->id == auth()->user()->id) {
+            return redirect()->route('user.index')->with('error', __('You cannot delete yourself'));
+        }
         $user->delete();
 
         return redirect()->route('user.index');
@@ -88,6 +78,6 @@ class UserController extends Controller
         abort_unless(auth()->user()->roles()->first('Super Admin'), 403);
         Password::sendResetLink(['email' => $user->email]);
 
-        return back()->with('success', 'Password reset link sent to ' . $user->email);
+        return back()->with('success', __('Password reset link sent to ') . $user->email);
     }
 }

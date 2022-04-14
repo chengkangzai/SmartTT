@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Flight\StoreFlightAction;
+use App\Actions\Flight\UpdateFlightAction;
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\Flight;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -30,13 +31,9 @@ class FlightController extends Controller
         return view('smartTT.flight.create', compact('airlines', 'airports'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, StoreFlightAction $action): RedirectResponse
     {
-        $data = $request->all();
-        $data['depart_time'] = Carbon::parse($request->get('depart_time'));
-        $data['arrive_time'] = Carbon::parse($request->get('arrive_time'));
-        $data['fee'] = $request->get('fee') * 100;
-        Flight::create($data);
+        $action->execute($request->all());
 
         return redirect()->route('flights.index');
     }
@@ -55,13 +52,9 @@ class FlightController extends Controller
         return view('smartTT.flight.edit', compact('flight', 'airlines', 'airports'));
     }
 
-    public function update(Request $request, Flight $flight): RedirectResponse
+    public function update(Request $request, Flight $flight, UpdateFlightAction $action): RedirectResponse
     {
-        $data = $request->all();
-        $data['depart_time'] = Carbon::parse($request->get('depart_time'));
-        $data['arrive_time'] = Carbon::parse($request->get('arrive_time'));
-        $data['fee'] = $request->get('fee') * 100;
-        $flight->update($data);
+        $action->execute($request->all(), $flight);
 
         return redirect()->route('flights.index');
     }

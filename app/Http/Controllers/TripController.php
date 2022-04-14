@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Trip\StoreTripAction;
+use App\Actions\Trip\UpdateTripAction;
+use App\Models\Flight;
 use App\Models\Tour;
 use App\Models\Trip;
-use Carbon\Carbon;
-use DB;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,32 +25,31 @@ class TripController extends Controller
     public function create(): Factory|View|Application
     {
         $tours = Tour::select(['id', 'name'])->get();
+        $flights = Flight::with('airline:id,name')
+            ->select(['id', 'airline_id', 'depart_time', 'arrive_time'])
+            ->where('depart_time', ">=", now())
+            ->where('arrive_time', ">=", now())
+            ->orderBy('depart_time')
+            ->orderBy('arrive_time')
+            ->get()
+            ->map(function ($flight) {
+                $flight->text = $flight->airline->name . " (" . $flight->depart_time->format('d/m/Y H:i') . ") -> (" . $flight->arrive_time->format('d/m/Y H:i') . ")";
 
-        return view('smartTT.trip.create', compact('tours'));
+                return $flight;
+            });
+
+        return view('smartTT.trip.create', compact('tours', 'flights'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, StoreTripAction $action): RedirectResponse
     {
-        $request->validate([
-            'fee' => 'required|integer',
-            'tour' => 'required',
-            'capacity' => 'required',
-            'depart_time' => 'required',
-            'flight' => 'required|array',
-        ]);
+        try {
+            $action->execute($request->all());
 
-        DB::transaction(function () use ($request) {
-            $trip = Trip::create([
-                'fee' => $request->get('fee') * 100,
-                'tour_id' => $request->get('tour'),
-                'capacity' => $request->get('capacity'),
-                'depart_time' => Carbon::parse($request->get('depart_time')),
-            ]);
-
-            $trip->flight()->attach($request->get('flight'));
-        });
-
-        return redirect()->route('trips.index');
+            return redirect()->route('trips.index');
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 
     public function show(Trip $trip): Factory|View|Application
@@ -63,15 +63,20 @@ class TripController extends Controller
     {
         $tour = $trip->tour()->first();
         $tours = Tour::select(['id', 'name'])->get();
+        $flights = $trip->flight()->get();
 
-        return view('smartTT.trip.edit', compact('trip', 'tour', 'tours'));
+        return view('smartTT.trip.edit', compact('trip', 'tour', 'tours', 'flights'));
     }
 
-    public function update(Request $request, Trip $trip): RedirectResponse
+    public function update(Request $request, Trip $trip, UpdateTripAction $action): RedirectResponse
     {
-        $trip->update($request->all());
+        try {
+            $action->execute($request->all(), $trip);
 
-        return redirect()->route('trips.index');
+            return redirect()->route('trips.index');
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 
     public function destroy(Trip $trip): RedirectResponse

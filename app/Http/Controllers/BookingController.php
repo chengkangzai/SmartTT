@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Booking\CalculateTripPrice;
+use App\Actions\Booking\StoreActionValidateBookingAction;
+use App\Actions\Booking\UpdateValidateBookingAction;
 use App\Models\Booking;
 use App\Models\Trip;
 use Illuminate\Contracts\Foundation\Application;
@@ -28,26 +31,9 @@ class BookingController extends Controller
         return view('smartTT.booking.create', compact('trips'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, StoreActionValidateBookingAction $action): RedirectResponse
     {
-        $request->validate([
-            'trip_id' => 'required|integer|exists:trips,id',
-            'adult' => 'required|integer|min:1',
-            'user_id' => 'required|integer|exists:users,id',
-            'discount' => 'nullable|integer|min:1',
-        ]);
-
-        $tripPrice = Trip::whereId($request->get('trip_id'))->first()->fee / 100;
-        $price = ($tripPrice * $request->get('adult') + (200 * $request->get('child')) - $request->get('discount'));
-
-        Booking::create([
-            'user_id' => $request->get('user_id'),
-            'trip_id' => $request->get('trip_id'),
-            'total_fee' => $price,
-            'discount' => $request->get('discount'),
-            'adult' => $request->get('adult'),
-            'child' => $request->get('child'),
-        ]);
+        $action->execute($request->all());
 
         return redirect()->route('bookings.index');
     }
@@ -65,18 +51,9 @@ class BookingController extends Controller
         return view('smartTT.booking.edit', compact('booking', 'trips', 'users'));
     }
 
-    public function update(Request $request, Booking $booking): RedirectResponse
+    public function update(Request $request, Booking $booking, UpdateValidateBookingAction $action): RedirectResponse
     {
-        $tripPrice = Trip::whereId($request->get('trip_id'))->first()->fee / 100;
-        $price = ($tripPrice * $request->get('adult') + (200 * $request->get('child')) - $request->get('discount'));
-        $booking->update([
-            'user_id' => $request->get('user_id'),
-            'trip_id' => $request->get('trip_id'),
-            'total_fee' => $price,
-            'discount' => $request->get('discount'),
-            'adult' => $request->get('adult'),
-            'child' => $request->get('child'),
-        ]);
+        $action->execute($request->all(), $booking);
 
         return redirect()->route('bookings.index');
     }
@@ -88,20 +65,12 @@ class BookingController extends Controller
         return redirect()->route('bookings.index');
     }
 
-    protected function calculatePrice(Request $request): JsonResponse|bool
+    protected function calculatePrice(Request $request, CalculateTripPrice $action): JsonResponse|bool
     {
         if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
-        $request->validate([
-            'tripId' => 'required',
-            'child' => 'required',
-            'adult' => 'required',
-            'discount' => 'required',
-        ]);
-
-        $tripPrice = Trip::whereId($request->get('tripId'))->first()->fee / 100;
-        $price = ($tripPrice * $request->get('adult') + (200 * $request->get('child')) - $request->get('discount'));
+        $price = $action->calculate($request->all());
 
         return response()->json(number_format($price));
     }

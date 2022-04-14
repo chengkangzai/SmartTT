@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Flight;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -36,12 +35,21 @@ class Select2Controller extends Controller
             return response('You Are not allow to be here')->isForbidden();
         }
         $fights = Flight::with('airline')
-            ->where('depart_time', ">=", Carbon::now())
-            ->where('arrive_time', ">=", Carbon::now())
+            ->where('depart_time', ">=", now())
+            ->where('arrive_time', ">=", now())
             ->orderBy('depart_time')
             ->orderBy('arrive_time')
-//            ->whereAirlineId($request->get('airline_id'))
-            ->get();
+            ->get()
+            ->map(function ($flight) {
+                return [
+                    'id' => $flight->id,
+                    'text' => $flight->airline->name . " (" . $flight->airline->code . ") - " . $flight->depart_time->format('d/m/Y H:i') . " - " . $flight->arrive_time->format('d/m/Y H:i'),
+                ];
+            });
+
+
+
+        ;
         $array = collect([]);
         foreach ($fights as $flight) {
             $array->push([
