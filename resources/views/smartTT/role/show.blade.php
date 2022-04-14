@@ -78,7 +78,7 @@
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="text" name="user" value="{{ $user->id }}" hidden />
+                                        <input type="text" name="user_id" value="{{ $user->id }}" hidden />
                                         <input type="submit" value="{{ __('Detach') }}" class="btn btn-danger">
                                     </form>
                                 </td>

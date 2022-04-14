@@ -6,40 +6,50 @@
 
 
 @section('content')
-    <section class="content-header">
-        <h1><b>Create User Role</b></h1>
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="{{ route('roles.index') }}"><i class="fa fa-dashboard"></i> User Role</a></li>
-            <li class="active">Create</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">{{ __('Roles') }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Create') }}</li>
         </ol>
-    </section>
+    </nav>
 
     <div class="card">
         <div class="card-header with-border">
-            <h3 class="card-title">Create User Role</h3>
+            <h3 class="card-title">{{__('Create User Role')}}</h3>
         </div>
         <div class="card-body">
             <form role="form" action="{{ route('roles.store') }}" method="POST" id="createForm">
                 @include('partials.error-alert')
                 @csrf
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter User Role Name">
+                <div class=mb-3>
+                    <label class="form-label" for="name">{{__('Name')}}</label>
+                    <input type="text" name="name" class="form-control" id="name"
+                           placeholder="{{__('Enter User Role Name')}}">
                 </div>
-                <div class="form-group">
-                    <label>Permission</label>
+                <div class="mb-3">
+                    <label class="form-label" for="permissions">{{__('Permission')}}</label>
+                    <select name="permissions[]" id="permissions" multiple class="form-control">
                     @foreach ($permissions as $permission)
-                        <h4>{{ $permission->module }}</h4>
-                        <label for="permissions">
-                            <input type="checkcard" name="permissions[]" class="checkmark-circled"
-                                value="{{ $permission->id }}">
-                            {{ $permission->name }} </label>
+                        <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                     @endforeach
+                    </select>
                 </div>
             </form>
         </div>
         <div class="card-footer">
-            <button form="createForm" type="submit" class="btn btn-primary">Submit</button>
+            <button form="createForm" type="submit" class="btn btn-primary">{{__('Submit')}}</button>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('#permissions').select2({
+                placeholder: "{{__('Select Permissions')}}",
+                allowClear: true
+            });
+        });
+    </script>
 @endsection
