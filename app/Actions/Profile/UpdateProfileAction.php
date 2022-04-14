@@ -2,18 +2,17 @@
 
 namespace App\Actions\Profile;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UpdateProfileAction
 {
-    public function execute(array $data): bool
+    public function execute(array $data, User $user): bool
     {
         $data = \Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
-            'password' => ['nullable', 'string', 'confirmed', 'min:8'],
+            'name' => ['required|string|max:255'],
+            'email' => ['required|email|string|max:255|unique:users,email,' . $user->id],
+            'password' => ['nullable|string|confirmed|min:8'],
         ])->validate();
 
         if (isset($data['password'])) {
@@ -21,8 +20,7 @@ class UpdateProfileAction
         }
 
         return auth()->user()->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            ...$data
         ]);
     }
 }
