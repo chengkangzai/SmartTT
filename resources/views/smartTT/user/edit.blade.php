@@ -30,12 +30,6 @@
                     <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}"
                         placeholder="{{ __('Enter Email') }}">
                 </div>
-                <hr>
-                <div class="mb-3">
-                    <label class="form-label" for="password">{{ __('Current Password') }}</label>
-                    <input type="password" name="password" class="form-control" id="password"
-                        value="{{ old('password') }}" placeholder="{{ __('Enter Current Password') }}">
-                </div>
             </form>
         </div>
         <div class="card-footer">
