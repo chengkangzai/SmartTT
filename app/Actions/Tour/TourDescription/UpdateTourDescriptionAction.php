@@ -14,7 +14,7 @@ class UpdateTourDescriptionAction
         ])->validate();
 
         return $tourDescription->update([
-            ...$data
+            ...$data,
         ]);
     }
 }

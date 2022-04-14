@@ -20,7 +20,7 @@ class UpdateProfileAction
         }
 
         return auth()->user()->update([
-            ...$data
+            ...$data,
         ]);
     }
 }
