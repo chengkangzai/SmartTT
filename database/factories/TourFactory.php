@@ -27,15 +27,13 @@ class TourFactory extends Factory
     public function definition(): array
     {
         $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
-        $country = \DB::table('countries')->inRandomOrder()->take(1)->first();
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
-            'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Trip",
+            'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $this->faker->country . " Trip",
             'destination' => $this->faker->city,
             'category' => $selection[rand(0, 4)],
             'itinerary_url' => Storage::putFile('public/Tour/itinerary', $this->faker->image(), 'public'),
             'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $this->faker->image(), 'public'),
-            'country_id' => $country->id,
         ];
     }
 }
