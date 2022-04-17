@@ -15,7 +15,10 @@ class CreateAirlinesTable extends Migration
     {
         Schema::create('airlines', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('This table is just meant for data management');
+            $table->string('name');
+            $table->foreignId('country_id')->constrained();
+            $table->string('ICAO');
+            $table->string('IATA');
         });
     }
 
