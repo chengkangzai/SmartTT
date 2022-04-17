@@ -17,7 +17,6 @@ class CreateAirportTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('city')->nullable();
-            $table->string('country')->nullable();
             $table->string('IATA')->nullable();
             $table->string('ICAO')->nullable();
             $table->decimal('latitude', 8, 6)->nullable();
@@ -26,6 +25,7 @@ class CreateAirportTable extends Migration
             $table->string('offset_UTC')->nullable();
             $table->string('DST')->nullable();
             $table->string('timezoneTz')->nullable();
+            $table->foreignId('country_id')->nullable()->constrained();
         });
     }
 
