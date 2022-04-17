@@ -29,10 +29,9 @@ class TripFactory extends Factory
     {
         $tourCount = Tour::count();
         return [
-            'fee' => (int)rand(1000, 2000) . "00",
+            'fee' => rand(1000, 2000) . "00",
             'tour_id' => rand(1, $tourCount),
             'capacity' => rand(25, 30),
-            'airline' => Airline::inRandomOrder()->first()->name,
             'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
         ];
     }
