@@ -24,6 +24,5 @@ class TourSeeder extends Seeder
             $tour->countries()->attach(Country::inRandomOrder()->take(3)->get());
         })
             ->create();
-
     }
 }
