@@ -22,13 +22,7 @@ class Flight extends Model
         'flight_class',
         'flight_type',
     ];
-    //TODO add
-    //1.depart airport
-    //2.arrival airport
-    //3.flight class
-    //4.flight type
 
-    //Class
     protected $dates = [
         'depart_time',
         'arrive_time',

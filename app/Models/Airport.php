@@ -23,12 +23,4 @@ class Airport extends Model
         'DST',
         'timezoneTz',
     ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function flight(): BelongsTo
-    {
-        return $this->belongsTo(Flight::class, 'id', 'depart_airport');
-    }
 }

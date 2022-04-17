@@ -25,7 +25,7 @@ class Package extends Model
 
     public function tour(): BelongsTo
     {
-        return $this->belongsTo(Tour::class, 'tour_id', 'id');
+        return $this->belongsTo(Tour::class);
     }
 
     public function flight(): BelongsToMany

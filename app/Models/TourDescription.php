@@ -18,9 +18,6 @@ class TourDescription extends Model
         'tour_id',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function tour(): BelongsTo
     {
         return $this->belongsTo(Tour::class);

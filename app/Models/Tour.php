@@ -20,17 +20,11 @@ class Tour extends Model
         'thumbnail_url',
     ];
 
-    /**
-     * @return HasMany
-     */
     public function packages(): HasMany
     {
         return $this->hasMany(Package::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function description(): HasMany
     {
         return $this->hasMany(TourDescription::class);
