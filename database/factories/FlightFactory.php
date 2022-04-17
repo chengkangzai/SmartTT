@@ -25,20 +25,20 @@ class FlightFactory extends Factory
      *
      * @return array
      */
-    #[ArrayShape(['depart_time' => "\Carbon\Carbon", 'arrive_time' => "\Carbon\Carbon", 'fee' => "int", 'airline_id' => "int", 'depart_airport' => "int", 'arrival_airport' => "int", 'flight_class' => "array|int|string", 'flight_type' => "array|int|string"])]
+    #[ArrayShape(['depart_time' => "\Illuminate\Support\Carbon", 'arrive_time' => "\Illuminate\Support\Carbon", 'fee' => "int", 'airline_id' => "int", 'departure_airport' => "int", 'arrival_airport' => "int", 'class' => "array|int|string", 'type' => "array|int|string"])]
     public function definition(): array
     {
         $airlineCount = Airline::count();
         $airportCount = Airport::count();
         return [
-            'depart_time' => Carbon::now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
-            'arrive_time' => Carbon::tomorrow()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
+            'depart_time' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
+            'arrive_time' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
             'fee' => rand(10000, 200000),
             'airline_id' => rand(1, $airlineCount),
-            'depart_airport' => rand(1, $airportCount),
+            'departure_airport' => rand(1, $airportCount),
             'arrival_airport' => rand(1, $airportCount),
-            'flight_class' => array_rand(Flight::FCLASS),
-            'flight_type' => array_rand(Flight::TYPE),
+            'class' => array_rand(Flight::FCLASS),
+            'type' => array_rand(Flight::TYPE),
         ];
     }
 }
