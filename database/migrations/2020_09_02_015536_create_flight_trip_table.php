@@ -14,8 +14,8 @@ class CreateFlightTripTable extends Migration
     public function up()
     {
         Schema::create('flight_trip', function (Blueprint $table) {
-            $table->foreignId('flight_id')->references('id')->on('flights');
-            $table->foreignId('trip_id')->references('id')->on('trips');
+            $table->foreignId('flight_id')->constrained();
+            $table->foreignId('trip_id')->constrained();
         });
     }
 

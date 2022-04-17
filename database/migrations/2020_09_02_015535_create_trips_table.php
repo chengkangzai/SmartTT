@@ -18,7 +18,7 @@ class CreateTripsTable extends Migration
             $table->dateTime('depart_time');
             $table->integer('capacity');
             $table->integer('fee');
-            $table->foreignId('tour_id')->references('id')->on('tours');
+            $table->foreignId('tour_id')->constrained();
             $table->timestamps();
         });
     }
