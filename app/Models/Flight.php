@@ -47,42 +47,29 @@ class Flight extends Model
         'Multi-city' => 'Multi-city',
     ];
 
-    /**
-     * @return BelongsToMany
-     */
     public function packages(): BelongsToMany
     {
-        return $this->belongsToMany(Package::class);
+        return $this->belongsToMany(Package::class)
+            ->withTimestamps()
+            ->orderByPivot('order')
+            ->withPivot(['order']);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function airline(): BelongsTo
     {
         return $this->belongsTo(Airline::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function depart_airports(): BelongsTo
     {
         return $this->belongsTo(Airport::class, 'depart_airport', 'id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function arrive_airport(): BelongsTo
     {
         return $this->belongsTo(Airport::class, 'arrival_airport', 'id');
     }
 
-    /**
-     * @param DateTimeInterface $date
-     * @return string
-     */
     protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->format('Y-m-d H:i:s');

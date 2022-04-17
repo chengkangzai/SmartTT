@@ -23,19 +23,16 @@ class Package extends Model
         'depart_time',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function tour(): BelongsTo
     {
         return $this->belongsTo(Tour::class, 'tour_id', 'id');
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function flight(): BelongsToMany
     {
-        return $this->belongsToMany(Flight::class);
+        return $this->belongsToMany(Flight::class)
+            ->withTimestamps()
+            ->orderByPivot('order')
+            ->withPivot(['order']);
     }
 }
