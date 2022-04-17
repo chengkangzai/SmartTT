@@ -10,11 +10,6 @@ class PackageSeeder extends Seeder
 {
     use HasFactory;
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         Package::factory()->count(10)->create();

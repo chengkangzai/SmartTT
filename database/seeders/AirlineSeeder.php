@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class AirlineSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $country = DB::table('countries')->get();
