@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTourDescriptionTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('tour_description', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreateTourDescriptionTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('tour_description');

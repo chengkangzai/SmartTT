@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBookingsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
@@ -25,11 +20,6 @@ class CreateBookingsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('bookings');

@@ -7,11 +7,6 @@ use Spatie\Permission\PermissionRegistrar;
 
 class CreatePermissionTables extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         $tableNames = config('permission.table_names');
@@ -119,11 +114,6 @@ class CreatePermissionTables extends Migration
             ->forget(config('permission.cache.key'));
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         $tableNames = config('permission.table_names');

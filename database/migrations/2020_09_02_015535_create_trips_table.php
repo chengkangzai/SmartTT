@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTripsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('packages', function (Blueprint $table) {
@@ -23,11 +18,6 @@ class CreateTripsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('packages');
