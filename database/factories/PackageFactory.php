@@ -4,20 +4,20 @@ namespace Database\Factories;
 
 use App\Models\Airline;
 use App\Models\Tour;
-use App\Models\Trip;
+use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
 use function rand;
 
-class TripFactory extends Factory
+class PackageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Trip::class;
+    protected $model = Package::class;
 
     /**
      * Define the model's default state.

@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Trip') }}</th>
+                            <th>{{ __('Package') }}</th>
                             <th>{{ __('Adult') }}</th>
                             <th>{{ __('Child') }}</th>
                             <th>{{ __('Customer') }}</th>
@@ -35,7 +35,7 @@
                             <tr>
                                 <td>{{ $booking->id }}</td>
                                 <td>
-                                    <a href="{{ route('trips.show', $booking->trips) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('packages.show', $booking->trips) }}" class="btn btn-sm btn-primary">
                                         {{ $booking->trips->tour->name }}
                                     </a>
                                 </td>

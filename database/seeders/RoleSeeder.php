@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Customer'])
             ->syncPermissions([
-                'View Tour', 'View Trip', 'View Flight', 'View Booking', 'View User',
+                'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
                 'Create Booking', 'View Booking', 'Update Booking',
             ])
             ->users()->attach(User::where('id', "!=", 1)->get());

@@ -29,7 +29,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Trip') }}</th>
+                            <th>{{ __('Package') }}</th>
                             <th>{{ __('Adult') }}</th>
                             <th>{{ __('Child') }}</th>
                             <th>{{ __('Customer') }}</th>

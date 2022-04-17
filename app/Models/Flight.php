@@ -50,9 +50,9 @@ class Flight extends Model
     /**
      * @return BelongsToMany
      */
-    public function trip(): BelongsToMany
+    public function packages(): BelongsToMany
     {
-        return $this->belongsToMany(Trip::class);
+        return $this->belongsToMany(Package::class);
     }
 
     /**

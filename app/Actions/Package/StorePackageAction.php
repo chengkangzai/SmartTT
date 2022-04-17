@@ -1,31 +1,29 @@
 <?php
 
-namespace App\Actions\Trip;
+namespace App\Actions\Package;
 
-use App\Models\Trip;
+use App\Models\Package;
 use Illuminate\Support\Facades\DB;
 
-class UpdateTripAction
+class StorePackageAction
 {
-    use ValidateTrip;
+    use ValidatePackage;
 
     /**
      * @throws \Throwable
      */
-    public function execute(array $data, Trip $trip): Trip
+    public function execute(array $data)
     {
         $data = $this->validate($data);
 
-        return DB::transaction(function () use ($data, $trip) {
-            $trip->update([
+        return DB::transaction(function () use ($data) {
+            $trip = Package::create([
                 ...$data,
                 'fee' => $data['fee'] * 100,
                 'depart_time' => $data['depart_time'],
             ]);
 
             $trip->flight()->attach($data['flights']);
-
-            return $trip->refresh();
         });
     }
 }

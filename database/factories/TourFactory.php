@@ -29,7 +29,7 @@ class TourFactory extends Factory
         $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
-            'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $this->faker->country . " Trip",
+            'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $this->faker->country . " Package",
             'destination' => $this->faker->city,
             'category' => $selection[rand(0, 4)],
             'itinerary_url' => Storage::putFile('public/Tour/itinerary', $this->faker->image(), 'public'),

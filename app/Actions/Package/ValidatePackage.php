@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Trip;
+namespace App\Actions\Package;
 
-trait ValidateTrip
+trait ValidatePackage
 {
     public function validate(array $data)
     {

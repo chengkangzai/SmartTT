@@ -21,7 +21,7 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label" for="trip_id">{{ __('Trips') }}</label>
+                    <label class="form-label" for="trip_id">{{ __('Packages') }}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
                         <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach ($trips as $key => $trip)

@@ -1,22 +1,22 @@
 @extends('layouts.app')
 @section('title')
-    Trip Management - {{ config('app.name') }}
+    Package Management - {{ config('app.name') }}
 @endsection
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('trips.index') }}">{{ __('Trips') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('packages.index') }}">{{ __('Packages') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Show') }}</li>
         </ol>
     </nav>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Trip Information</h3>
+            <h3 class="card-title">Package Information</h3>
             <div class="pull-right">
-                <a href="{{ route('trips.edit', ['trip' => $trip->id]) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('trips.destroy', ['trip' => $trip->id]) }}" method="POST" style="display: inline">
+                <a href="{{ route('packages.edit', ['package' => $trip->id]) }}" class="btn btn-primary">Edit</a>
+                <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" method="POST" style="display: inline">
                     @method('DELETE')
                     @csrf
                     <input class="btn btn-danger" type="submit" value="Delete" />
@@ -29,9 +29,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Trip Fee</th>
-                            <th>Trip Departure</th>
-                            <th>Trip Capacity</th>
+                            <th>Package Fee</th>
+                            <th>Package Departure</th>
+                            <th>Package Capacity</th>
                             <th>Tour</th>
                             <th>Airline</th>
                         </tr>
@@ -53,7 +53,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Trip Flight</h3>
+            <h3 class="card-title">Package Flight</h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">

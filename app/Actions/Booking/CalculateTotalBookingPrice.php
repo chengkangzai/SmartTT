@@ -2,16 +2,16 @@
 
 namespace App\Actions\Booking;
 
-use App\Models\Trip;
+use App\Models\Package;
 
-trait CalculateTripPrice
+trait CalculateTotalBookingPrice
 {
     use ValidateBooking;
 
     public function calculate($data): float|int
     {
         $data = $this->validate($data);
-        $tripPrice = Trip::whereId($data['trip_id'])->firstOrFail()->fee / 100;
+        $tripPrice = Package::whereId($data['trip_id'])->firstOrFail()->fee / 100;
 
         return $tripPrice * $data['adult'] + (200 * $data['child']) - $data['adult'];
     }

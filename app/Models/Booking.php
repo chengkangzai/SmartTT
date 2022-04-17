@@ -19,9 +19,9 @@ class Booking extends Model
     /**
      * @return BelongsTo
      */
-    public function trips(): BelongsTo
+    public function packages(): BelongsTo
     {
-        return $this->belongsTo(Trip::class, 'trip_id', 'id');
+        return $this->belongsTo(Package::class, 'trip_id', 'id');
     }
 
     /**

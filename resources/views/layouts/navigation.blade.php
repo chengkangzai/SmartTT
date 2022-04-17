@@ -8,22 +8,21 @@
         </a>
     </li>
 
-
     <li class="nav-item">
         <a class="nav-link" href="{{ route('tours.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
             </svg>
-            Tour Management
+            {{__('Tour Management')}}
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('trips.index') }}">
+        <a class="nav-link" href="{{ route('packages.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
             </svg>
-            Trip Management
+            {{__('Package Management')}}
         </a>
     </li>
 
@@ -32,7 +31,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-airplane-mode') }}"></use>
             </svg>
-            Flight Management
+            {{__('Flight Management')}}
         </a>
     </li>
 
@@ -41,7 +40,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-dollar') }}"></use>
             </svg>
-            Booking Management
+            {{__('Booking Management')}}
         </a>
     </li>
 

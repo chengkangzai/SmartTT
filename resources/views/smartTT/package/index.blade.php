@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Trip Management - {{ config('app.name') }}
+    Package Management - {{ config('app.name') }}
 @endsection
 @section('cdn')
     <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.css') }}">
@@ -10,12 +10,12 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Trips') }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Packages') }}</li>
         </ol>
     </nav>
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('trips.create') }}" class="btn btn-success">Create</a>
+            <a href="{{ route('packages.create') }}" class="btn btn-success">Create</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -23,9 +23,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Trip Fee</th>
-                            <th>Trip Capacity</th>
-                            <th>Trip Departure</th>
+                            <th>Package Fee</th>
+                            <th>Package Capacity</th>
+                            <th>Package Departure</th>
                             <th>Tour</th>
                             <th>Airline</th>
                             <th>Action</th>
@@ -41,10 +41,10 @@
                                 <td>{{ $trip->tour->name }}</td>
                                 <td>{{ $trip->airline }}</td>
                                 <td>
-                                    <a href="{{ route('trips.show', ['trip' => $trip->id]) }}" class="btn btn-info">Show</a>
-                                    <a href="{{ route('trips.edit', ['trip' => $trip->id]) }}"
+                                    <a href="{{ route('packages.show', ['package' => $trip->id]) }}" class="btn btn-info">Show</a>
+                                    <a href="{{ route('packages.edit', ['package' => $trip->id]) }}"
                                         class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('trips.destroy', ['trip' => $trip->id]) }}" style="display: inline"
+                                    <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" style="display: inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')

@@ -21,7 +21,7 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label for="trip_id" class="form-label">{{ __('Trips') }}</label>
+                    <label for="trip_id" class="form-label">{{ __('Packages') }}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
                         <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach ($trips as $trip)

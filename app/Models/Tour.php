@@ -23,9 +23,9 @@ class Tour extends Model
     /**
      * @return HasMany
      */
-    public function trips(): HasMany
+    public function packages(): HasMany
     {
-        return $this->hasMany(Trip::class);
+        return $this->hasMany(Package::class);
     }
 
     /**

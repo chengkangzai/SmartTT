@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Trip;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
 
-class TripSeeder extends Seeder
+class PackageSeeder extends Seeder
 {
     use HasFactory;
 
@@ -17,6 +17,6 @@ class TripSeeder extends Seeder
      */
     public function run()
     {
-        Trip::factory()->count(10)->create();
+        Package::factory()->count(10)->create();
     }
 }

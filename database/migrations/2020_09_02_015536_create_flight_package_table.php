@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFlightTripTable extends Migration
+class CreateFlightPackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateFlightTripTable extends Migration
      */
     public function up()
     {
-        Schema::create('flight_trip', function (Blueprint $table) {
+        Schema::create('flight_package', function (Blueprint $table) {
             $table->foreignId('flight_id')->constrained();
-            $table->foreignId('trip_id')->constrained();
+            $table->foreignId('package_id')->constrained();
         });
     }
 
@@ -26,6 +26,6 @@ class CreateFlightTripTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flight_trip');
+        Schema::dropIfExists('flight_package');
     }
 }

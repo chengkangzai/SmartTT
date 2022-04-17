@@ -7,7 +7,7 @@ use App\Models\Booking;
 class StoreActionValidateBookingAction
 {
     use ValidateBooking;
-    use CalculateTripPrice;
+    use CalculateTotalBookingPrice;
 
     public function execute(array $data): Booking
     {

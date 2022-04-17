@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Trip\StoreTripAction;
-use App\Actions\Trip\UpdateTripAction;
+use App\Actions\Package\StorePackageAction;
+use App\Actions\Package\UpdatePackageAction;
 use App\Models\Flight;
 use App\Models\Tour;
-use App\Models\Trip;
+use App\Models\Package;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class TripController extends Controller
+class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $trips = Trip::with('tour')->paginate(10);
+        $trips = Package::with('tour')->paginate(10);
 
-        return view('smartTT.trip.index', compact('trips'));
+        return view('smartTT.package.index', compact('trips'));
     }
 
     public function create(): Factory|View|Application
@@ -38,51 +38,51 @@ class TripController extends Controller
                 return $flight;
             });
 
-        return view('smartTT.trip.create', compact('tours', 'flights'));
+        return view('smartTT.package.create', compact('tours', 'flights'));
     }
 
-    public function store(Request $request, StoreTripAction $action): RedirectResponse
+    public function store(Request $request, StorePackageAction $action): RedirectResponse
     {
         try {
             $action->execute($request->all());
 
-            return redirect()->route('trips.index');
+            return redirect()->route('packages.index');
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
 
-    public function show(Trip $trip): Factory|View|Application
+    public function show(Package $trip): Factory|View|Application
     {
         $flights = $trip->flight()->get();
 
-        return view('smartTT.trip.show', compact('trip', 'flights'));
+        return view('smartTT.package.show', compact('trip', 'flights'));
     }
 
-    public function edit(Trip $trip): Factory|View|Application
+    public function edit(Package $trip): Factory|View|Application
     {
         $tour = $trip->tour()->first();
         $tours = Tour::select(['id', 'name'])->get();
         $flights = $trip->flight()->get();
 
-        return view('smartTT.trip.edit', compact('trip', 'tour', 'tours', 'flights'));
+        return view('smartTT.package.edit', compact('trip', 'tour', 'tours', 'flights'));
     }
 
-    public function update(Request $request, Trip $trip, UpdateTripAction $action): RedirectResponse
+    public function update(Request $request, Package $trip, UpdatePackageAction $action): RedirectResponse
     {
         try {
             $action->execute($request->all(), $trip);
 
-            return redirect()->route('trips.index');
+            return redirect()->route('packages.index');
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
 
-    public function destroy(Trip $trip): RedirectResponse
+    public function destroy(Package $trip): RedirectResponse
     {
         $trip->delete();
 
-        return redirect()->route('trips.index');
+        return redirect()->route('packages.index');
     }
 }
