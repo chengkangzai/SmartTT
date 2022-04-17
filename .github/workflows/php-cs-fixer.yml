@@ -20,7 +20,9 @@ jobs:
       - name: Run blade formatter
         run: |
           npm install -g blade-formatter
+          sleep 30
           blade-formatter --write resources/**/*.blade.php
+          sleep 60
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
