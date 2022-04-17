@@ -13,18 +13,8 @@ use function rand;
 
 class FlightFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Flight::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     #[ArrayShape(['depart_time' => "\Illuminate\Support\Carbon", 'arrive_time' => "\Illuminate\Support\Carbon", 'fee' => "int", 'airline_id' => "int", 'departure_airport' => "int", 'arrival_airport' => "int", 'class' => "array|int|string", 'type' => "array|int|string"])]
     public function definition(): array
     {

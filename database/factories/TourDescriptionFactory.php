@@ -11,18 +11,8 @@ use function rand;
 
 class TourDescriptionFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = TourDescription::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     #[ArrayShape(['place' => "string", 'description' => "string", 'tour_id' => "int"])]
     public function definition(): array
     {

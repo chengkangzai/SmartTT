@@ -12,18 +12,8 @@ use function rand;
 
 class PackageFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Package::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     #[ArrayShape(['fee' => "string", 'tour_id' => "int", 'capacity' => "int", 'airline' => "mixed|string", 'depart_time' => "\Carbon\Carbon"])]
     public function definition(): array
     {

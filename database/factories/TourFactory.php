@@ -11,18 +11,8 @@ use function strtoupper;
 
 class TourFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Tour::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     #[ArrayShape(['tour_code' => "string", 'name' => "string", 'destination' => "string", 'category' => "string", 'itinerary_url' => "false|string", 'thumbnail_url' => "false|string", 'country_id' => "mixed"])]
     public function definition(): array
     {
