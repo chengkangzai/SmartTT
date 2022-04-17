@@ -19,6 +19,7 @@ class CreateFlightsTable extends Migration
             $table->text('class');
             $table->text('type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

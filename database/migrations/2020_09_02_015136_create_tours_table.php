@@ -17,6 +17,7 @@ class CreateToursTable extends Migration
             $table->text('itinerary_url');
             $table->text('thumbnail_url');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -14,6 +14,7 @@ class CreateAirlinesTable extends Migration
             $table->foreignId('country_id')->constrained();
             $table->string('ICAO');
             $table->string('IATA');
+            $table->softDeletes();
         });
     }
 

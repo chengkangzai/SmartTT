@@ -15,6 +15,7 @@ class CreateTripsTable extends Migration
             $table->integer('fee');
             $table->foreignId('tour_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

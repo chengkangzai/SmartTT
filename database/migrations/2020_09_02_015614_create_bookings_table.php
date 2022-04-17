@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
             $table->integer('adult');
             $table->integer('child');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

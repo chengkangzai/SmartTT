@@ -21,6 +21,7 @@ class CreateAirportTable extends Migration
             $table->string('DST')->nullable();
             $table->string('timezoneTz')->nullable();
             $table->foreignId('country_id')->nullable()->constrained();
+            $table->softDeletes();
         });
     }
 

@@ -14,6 +14,7 @@ class CreateTourDescriptionTable extends Migration
             $table->text('description');
             $table->foreignId('tour_id')->references('id')->on('tours');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
