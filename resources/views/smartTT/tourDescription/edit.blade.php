@@ -19,14 +19,15 @@
             <h3 class="card-title">{{ __('Update') }}</h3>
         </div>
         <div class="card-body">
-            <form role="form" action="{{ route('tourDescriptions.update', $tourDescription) }}" id="editForm" method="POST">
+            <form role="form" action="{{ route('tourDescriptions.update', $tourDescription) }}" id="editForm"
+                method="POST">
                 @include('partials.error-alert')
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label for="place" class="form-label">Place </label>
-                    <input type="text" name="place" class="form-control" id="place" value="{{ $tourDescription->place }}"
-                        placeholder="{{ __('Enter the main visit place 1') }}">
+                    <input type="text" name="place" class="form-control" id="place"
+                        value="{{ $tourDescription->place }}" placeholder="{{ __('Enter the main visit place 1') }}">
                 </div>
                 <div class="mb-3">
                     <label for="des" class="form-label">Description </label>

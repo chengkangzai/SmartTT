@@ -35,7 +35,8 @@
                             <tr>
                                 <td>{{ $booking->id }}</td>
                                 <td>
-                                    <a href="{{ route('packages.show', $booking->trips) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('packages.show', $booking->trips) }}"
+                                        class="btn btn-sm btn-primary">
                                         {{ $booking->trips->tour->name }}
                                     </a>
                                 </td>

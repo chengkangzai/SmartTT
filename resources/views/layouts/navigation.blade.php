@@ -13,7 +13,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
             </svg>
-            {{__('Tour Management')}}
+            {{ __('Tour Management') }}
         </a>
     </li>
 
@@ -22,7 +22,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
             </svg>
-            {{__('Package Management')}}
+            {{ __('Package Management') }}
         </a>
     </li>
 
@@ -31,7 +31,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-airplane-mode') }}"></use>
             </svg>
-            {{__('Flight Management')}}
+            {{ __('Flight Management') }}
         </a>
     </li>
 
@@ -40,7 +40,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-dollar') }}"></use>
             </svg>
-            {{__('Booking Management')}}
+            {{ __('Booking Management') }}
         </a>
     </li>
 

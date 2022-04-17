@@ -21,12 +21,12 @@
                     <h3 class="card-title">{{ __('Tour Information') }}</h3>
                     <div class="pull-right">
                         <a href="{{ route('tours.edit', ['tour' => $tour->id]) }}"
-                           class="btn btn-primary">{{ __('Edit') }}</a>
+                            class="btn btn-primary">{{ __('Edit') }}</a>
                         <form action="{{ route('tours.destroy', ['tour' => $tour->id]) }}" method="POST"
-                              style="display: inline">
+                            style="display: inline">
                             @method('DELETE')
                             @csrf
-                            <input class="btn btn-danger" type="submit" value="Delete"/>
+                            <input class="btn btn-danger" type="submit" value="Delete" />
                         </form>
                     </div>
                 </div>
@@ -34,26 +34,26 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>{{ __('ID') }}</th>
-                                <th>{{ __('Tour Name') }}</th>
-                                <th>{{ __('Tour Code') }}</th>
-                                <th>{{ __('Destination') }}</th>
-                                <th>{{ __('Category') }}</th>
-                                <th>{{ __('Itinerary') }}</th>
-                            </tr>
+                                <tr>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Tour Name') }}</th>
+                                    <th>{{ __('Tour Code') }}</th>
+                                    <th>{{ __('Destination') }}</th>
+                                    <th>{{ __('Category') }}</th>
+                                    <th>{{ __('Itinerary') }}</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>{{ $tour->id }}</td>
-                                <td>{{ $tour->name }}</td>
-                                <td>{{ $tour->tour_code }}</td>
-                                <td>{{ $tour->destination }}</td>
-                                <td>{{ $tour->category }}</td>
-                                <td>
-                                    <a href="{{ $itineraryUrl }}" class="btn btn-info">{{ __('View') }}</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $tour->id }}</td>
+                                    <td>{{ $tour->name }}</td>
+                                    <td>{{ $tour->tour_code }}</td>
+                                    <td>{{ $tour->destination }}</td>
+                                    <td>{{ $tour->category }}</td>
+                                    <td>
+                                        <a href="{{ $itineraryUrl }}" class="btn btn-info">{{ __('View') }}</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -67,7 +67,7 @@
                     <div class="pull-right">
                         <div class="pull-right">
                             <a href="#" class="btn btn-success" data-coreui-toggle="modal"
-                               data-coreui-target="#addTourDescriptionModal">
+                                data-coreui-target="#addTourDescriptionModal">
                                 {{ __('Add') }}
                             </a>
                         </div>
@@ -81,12 +81,11 @@
                                 <p class="card-text text-truncate">{{ $des->description }}</p>
                                 <div class="border my-2"></div>
                                 <div class="float-end">
-                                    <a href="{{ route('tourDescriptions.edit', $des) }}"
-                                       class="btn btn-primary">
+                                    <a href="{{ route('tourDescriptions.edit', $des) }}" class="btn btn-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form class="d-inline" method="POST"
-                                          action="{{ route('tourDescriptions.destroy', $des) }}">
+                                        action="{{ route('tourDescriptions.destroy', $des) }}">
                                         @csrf
                                         @method('DELETE')
                                         <input type="submit" class="btn btn-danger" value="Delete">
@@ -120,24 +119,24 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('tourDescriptions.attach', ['tour' => $tour->id]) }}" method="POST"
-                          id="addTourDescription">
+                        id="addTourDescription">
                         @csrf
                         @method('POST')
                         <div class="mb-3">
                             <label for="place" class="form-label"> {{ __('Description Place') }} </label>
                             <input class="form-control select2" id="place" name="place" required
-                                   placeholder="{{ __('Enter the name of the Place') }}"/>
+                                placeholder="{{ __('Enter the name of the Place') }}" />
                         </div>
                         <div class="mb-3">
                             <label for="des" class="form-label"> {{ __('Place Description') }} </label>
                             <textarea name="des" id="des" class="form-control" rows="5" required
-                                      placeholder="{{ __('Enter the description for the place above') }}"></textarea>
+                                placeholder="{{ __('Enter the description for the place above') }}"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left"
-                            data-dismiss="modal">{{ __('Close') }}</button>
+                        data-dismiss="modal">{{ __('Close') }}</button>
                     <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{ 'Submit' }}">
                 </div>
             </div>

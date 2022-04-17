@@ -69,7 +69,8 @@
                         <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach ($airports as $airport)
                             <option value="{{ $airport->id }}"
-                                {{ $flight->arrive_airport->id === $airport->id ? 'selected' : '' }}> {{ $airport->name }}
+                                {{ $flight->arrive_airport->id === $airport->id ? 'selected' : '' }}>
+                                {{ $airport->name }}
                             </option>
                         @endforeach
                     </select>
@@ -81,7 +82,8 @@
                     <select name="flight_class" class="form-control select2 " id="flight_class" required>
                         <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" {{ $flight->flight_class === $class ? 'selected' : '' }}>
+                            <option value="{{ $key }}"
+                                {{ $flight->flight_class === $class ? 'selected' : '' }}>
                                 {{ $class }} </option>
                         @endforeach
                     </select>

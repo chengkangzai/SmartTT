@@ -41,11 +41,12 @@
                                 <td>{{ $trip->tour->name }}</td>
                                 <td>{{ $trip->airline }}</td>
                                 <td>
-                                    <a href="{{ route('packages.show', ['package' => $trip->id]) }}" class="btn btn-info">Show</a>
+                                    <a href="{{ route('packages.show', ['package' => $trip->id]) }}"
+                                        class="btn btn-info">Show</a>
                                     <a href="{{ route('packages.edit', ['package' => $trip->id]) }}"
                                         class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" style="display: inline"
-                                        method="POST">
+                                    <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}"
+                                        style="display: inline" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input class="btn btn-danger" type="submit" value="Delete" />

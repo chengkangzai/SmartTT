@@ -28,8 +28,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">Tour Code</label>
-                    <input type="text" name="tour_code" class="form-control" id="tour_code" value="{{ $tour->tour_code }}"
-                        placeholder="Enter Tour Code">
+                    <input type="text" name="tour_code" class="form-control" id="tour_code"
+                        value="{{ $tour->tour_code }}" placeholder="Enter Tour Code">
                 </div>
                 <div class="mb-3">
                     <label for="destination" class="form-label">Destination</label>

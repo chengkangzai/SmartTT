@@ -16,7 +16,8 @@
             <h3 class="card-title">Package Information</h3>
             <div class="pull-right">
                 <a href="{{ route('packages.edit', ['package' => $trip->id]) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" method="POST" style="display: inline">
+                <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" method="POST"
+                    style="display: inline">
                     @method('DELETE')
                     @csrf
                     <input class="btn btn-danger" type="submit" value="Delete" />

@@ -36,16 +36,16 @@
                 <div class="mb-3">
                     <label class="form-label" for="adult">{{ __('Adult') }}</label>
                     <input type="number" name="adult" class="form-control" id="adult" min="0"
-                           value="{{ old('adult', $booking->adult) }}" step="1"
-                           placeholder="{{ __('Enter Total adult Number') }}">
+                        value="{{ old('adult', $booking->adult) }}" step="1"
+                        placeholder="{{ __('Enter Total adult Number') }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="child">{{ __('Child') }}</label>
                     <small>{{ __('Child is defined as children that is smaller than 12 years old') }}</small>
                     <input type="number" name="child" class="form-control" id="child" min="0"
-                           value="{{ old('child', $booking->child) }}" step="1"
-                           placeholder="{{ __('Enter Total Child Number') }}">
+                        value="{{ old('child', $booking->child) }}" step="1"
+                        placeholder="{{ __('Enter Total Child Number') }}">
                 </div>
 
                 <div class="mb-3">
@@ -53,7 +53,8 @@
                     <select name="user_id" class="form-control select2 " id="user_id" required>
                         <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach ($users as $user)
-                            <option value="{{ $user->id }}" {{ $booking->users->id === $user->id ? 'selected' : '' }}>
+                            <option value="{{ $user->id }}"
+                                {{ $booking->users->id === $user->id ? 'selected' : '' }}>
                                 {{ $user->name }} ({{ $user->email }})
                             </option>
                         @endforeach
@@ -63,8 +64,8 @@
                 <div class="mb-3">
                     <label class="form-label" for="discount">{{ __('Discount') }}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
-                           value="{{ old('discount', $booking->discount) }}" step="1"
-                           placeholder="{{ __('Please enter Discount') }} "/>
+                        value="{{ old('discount', $booking->discount) }}" step="1"
+                        placeholder="{{ __('Please enter Discount') }} " />
                 </div>
 
                 <div class="form-group">
@@ -104,7 +105,7 @@
                     discount: discount.val(),
                     user_id: userID.val()
                 },
-                success: function (response) {
+                success: function(response) {
                     $('#fee').text('RM ' + response)
                 }
             })

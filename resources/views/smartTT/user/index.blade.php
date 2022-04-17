@@ -40,7 +40,8 @@
                                             class="btn btn-primary">{{ __('Edit') }}</a>
                                     @endif
                                     @can('Delete User')
-                                        <form action="{{ route('users.destroy', $user) }}" class="d-inline" method="POST">
+                                        <form action="{{ route('users.destroy', $user) }}" class="d-inline"
+                                            method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
