@@ -11,14 +11,14 @@ class GetTourAndFlightForCreateAndUpdateTour
     {
         $tours = Tour::select(['id', 'name'])->get();
         $flights = Flight::with('airline:id,name')
-            ->select(['id', 'airline_id', 'depart_time', 'arrive_time'])
-            ->where('depart_time', ">=", now())
-            ->where('arrive_time', ">=", now())
-            ->orderBy('depart_time')
-            ->orderBy('arrive_time')
+            ->select(['id', 'airline_id', 'departure_date', 'arrival_date'])
+            ->where('departure_date', ">=", now())
+            ->where('arrival_date', ">=", now())
+            ->orderBy('departure_date')
+            ->orderBy('arrival_date')
             ->get()
-            ->map(function ($flight) {
-                $flight->text = $flight->airline->name . " (" . $flight->depart_time->format('d/m/Y H:i') . ") -> (" . $flight->arrive_time->format('d/m/Y H:i') . ")";
+            ->map(function (Flight $flight) {
+                $flight->text = $flight->airline->name . " (" . $flight->departure_date->format('d/m/Y H:i') . ") -> (" . $flight->arrival_date->format('d/m/Y H:i') . ")";
 
                 return $flight;
             });

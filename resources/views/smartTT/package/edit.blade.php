@@ -23,10 +23,10 @@
                     @csrf
                     <div class="mb-3 row">
                         <div class="col col-md-6">
-                            <label for="fee" class="form-label">{{ __('Fee (RM)') }}</label>
-                            <input type="number" name="fee" class="form-control" id="fee" min="1"
-                                   value="{{ old('fee', $package->fee / 100) }}"
-                                   placeholder="{{ __('Enter Package Fee') }}">
+                            <label for="price" class="form-label">{{ __('Price (RM)') }}</label>
+                            <input type="number" name="price" class="form-control" id="price" min="1"
+                                   value="{{ old('price', $package->price) }}"
+                                   placeholder="{{ __('Enter Package Price') }}">
                         </div>
                         <div class="col col-md-6">
                             <label for="capacity" class="form-label">{{ __('Capacity') }}</label>

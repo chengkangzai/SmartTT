@@ -26,7 +26,7 @@
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 {{ $booking->packages->id === $key ? 'selected' : '' }}>
-                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee / 100 }})
+                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
                             </option>
                         @endforeach
                     </select>

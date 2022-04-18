@@ -39,7 +39,7 @@
                     <tbody>
                     <tr>
                         <td>{{ $package->id }}</td>
-                        <td>RM {{ number_format($package->fee / 100, 2) }}</td>
+                        <td>RM {{ number_format($package->fee, 2) }}</td>
                         <td>{{ $package->depart_time }}</td>
                         <td>{{ $package->capacity }}</td>
                         <td>{{ $package->tour->name }}</td>

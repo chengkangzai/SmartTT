@@ -43,7 +43,7 @@
                         <td>{{ $flight->id }}</td>
                         <td>{{ $flight->departure_date }}</td>
                         <td>{{ $flight->arrival_date }}</td>
-                        <td>RM {{ number_format($flight->price / 100, 2) }}</td>
+                        <td>RM {{ number_format($flight->price, 2) }}</td>
                         <td>{{ $flight->airline->name }}
                             ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})
                         </td>

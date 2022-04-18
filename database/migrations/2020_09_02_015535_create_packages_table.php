@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTripsTable extends Migration
+class CreatePackagesTable extends Migration
 {
     public function up()
     {
@@ -12,7 +12,7 @@ class CreateTripsTable extends Migration
             $table->id();
             $table->dateTime('depart_time');
             $table->integer('capacity');
-            $table->integer('fee');
+            $table->integer('price');
             $table->foreignId('tour_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

@@ -22,9 +22,9 @@
                 @csrf
                 <div class="mb-3 row">
                     <div class="col col-md-6">
-                        <label for="fee" class="form-label">{{ __('Fee (RM)') }}</label>
-                        <input type="number" name="fee" class="form-control" id="fee" value="{{ old('fee') }}"
-                               placeholder="{{ __('Enter Package Fee') }}">
+                        <label for="price" class="form-label">{{ __('Price (RM)') }}</label>
+                        <input type="number" name="price" class="form-control" id="price" value="{{ old('price') }}"
+                               placeholder="{{ __('Enter Package Price') }}">
                     </div>
                     <div class="col col-md-6">
                         <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
@@ -48,7 +48,7 @@
                         <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
                         <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
                                min="{{ date('Y-m-d\TH:i') }}"
-                               value="{{ old('depart_time') }}"/>
+                               value="{{ old('depart_time',now()->format('Y-m-d\TH:i')) }}"/>
                     </div>
                 </div>
 

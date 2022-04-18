@@ -19,8 +19,6 @@ class UpdatePackageAction
         return DB::transaction(function () use ($data, $package) {
             $package->update([
                 ...$data,
-                'fee' => $data['fee'] * 100,
-                'depart_time' => $data['depart_time'],
             ]);
 
             $package->flight()->sync($data['flights']);

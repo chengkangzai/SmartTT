@@ -19,8 +19,6 @@ class StorePackageAction
         return DB::transaction(function () use ($data) {
             $package = Package::create([
                 ...$data,
-                'fee' => $data['fee'] * 100,
-                'depart_time' => $data['depart_time'],
             ]);
 
             $package->flight()->attach($data['flights']);

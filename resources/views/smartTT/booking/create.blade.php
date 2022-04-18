@@ -26,7 +26,7 @@
                         @foreach ($packages as $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 {{ old('trip_id') == $package->id ? 'checked' : '' }}>
-                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee / 100 }})
+                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
                             </option>
                         @endforeach
                     </select>
