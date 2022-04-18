@@ -20,32 +20,36 @@
             <form role="form" action="{{ route('packages.store') }}" method="POST" id="createForm">
                 @include('partials.error-alert')
                 @csrf
-                <div class="mb-3">
-                    <label for="fee" class="form-label">{{ __('Fee (RM)') }}</label>
-                    <input type="number" name="fee" class="form-control" id="fee" value="{{ old('fee') }}"
-                        placeholder="{{ __('Enter Package Fee') }}">
-                </div>
-                <div class="mb-3">
-                    <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
-                    <input type="number" name="capacity" class="form-control" id="capacity"
-                        value="{{ old('capacity') }}" placeholder="{{ __('Enter Capacity of this package') }}">
-                </div>
-
-                <div class="mb-3">
-                    <label for="tour_id" class="form-label">{{ __('Tour') }}</label>
-                    <select id="tour_id" name="tour_id" class="form-control">
-                        @foreach ($tours as $tour)
-                            <option value="{{ $tour->id }}" @selected(old('tour_id') == $tour->id)>
-                                {{ $tour->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label for="fee" class="form-label">{{ __('Fee (RM)') }}</label>
+                        <input type="number" name="fee" class="form-control" id="fee" value="{{ old('fee') }}"
+                               placeholder="{{ __('Enter Package Fee') }}">
+                    </div>
+                    <div class="col col-md-6">
+                        <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
+                        <input type="number" name="capacity" class="form-control" id="capacity"
+                               value="{{ old('capacity') }}" placeholder="{{ __('Enter Capacity of this package') }}">
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
-                    <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
-                        value="{{ old('depart_time') }}" />
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label for="tour_id" class="form-label">{{ __('Tour') }}</label>
+                        <select id="tour_id" name="tour_id" class="form-control">
+                            @foreach ($tours as $tour)
+                                <option value="{{ $tour->id }}" @selected(old('tour_id') == $tour->id)>
+                                    {{ $tour->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col col-md-6">
+                        <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
+                        <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
+                               min="{{ date('Y-m-d\TH:i') }}"
+                               value="{{ old('depart_time') }}"/>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -68,8 +72,6 @@
 
 @section('script')
     <script>
-        $("#flights").select2({
-            placeholder: "{{ __('Select Flight') }}",
-        });
+        $("#flights").select2();
     </script>
 @endsection

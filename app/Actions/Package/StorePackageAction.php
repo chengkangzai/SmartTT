@@ -17,13 +17,13 @@ class StorePackageAction
         $data = $this->validate($data);
 
         return DB::transaction(function () use ($data) {
-            $trip = Package::create([
+            $package = Package::create([
                 ...$data,
                 'fee' => $data['fee'] * 100,
                 'depart_time' => $data['depart_time'],
             ]);
 
-            $trip->flight()->attach($data['flights']);
+            $package->flight()->attach($data['flights']);
         });
     }
 }

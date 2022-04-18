@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Package\GetTourAndFlightForCreateAndUpdateTour;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
-use App\Models\Flight;
 use App\Models\Package;
-use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,26 +16,14 @@ class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $trips = Package::with('tour')->paginate(10);
+        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate();
 
-        return view('smartTT.package.index', compact('trips'));
+        return view('smartTT.package.index', compact('packages'));
     }
 
-    public function create(): Factory|View|Application
+    public function create(GetTourAndFlightForCreateAndUpdateTour $get): Factory|View|Application
     {
-        $tours = Tour::select(['id', 'name'])->get();
-        $flights = Flight::with('airline:id,name')
-            ->select(['id', 'airline_id', 'depart_time', 'arrive_time'])
-            ->where('depart_time', ">=", now())
-            ->where('arrive_time', ">=", now())
-            ->orderBy('depart_time')
-            ->orderBy('arrive_time')
-            ->get()
-            ->map(function ($flight) {
-                $flight->text = $flight->airline->name . " (" . $flight->depart_time->format('d/m/Y H:i') . ") -> (" . $flight->arrive_time->format('d/m/Y H:i') . ")";
-
-                return $flight;
-            });
+        [$tours, $flights] = $get->execute();
 
         return view('smartTT.package.create', compact('tours', 'flights'));
     }
@@ -52,26 +39,25 @@ class PackageController extends Controller
         }
     }
 
-    public function show(Package $trip): Factory|View|Application
+    public function show(Package $package): Factory|View|Application
     {
-        $flights = $trip->flight()->get();
+        $package->load('flight', 'flight.airline');
 
-        return view('smartTT.package.show', compact('trip', 'flights'));
+        return view('smartTT.package.show', compact('package'));
     }
 
-    public function edit(Package $trip): Factory|View|Application
+    public function edit(Package $package, GetTourAndFlightForCreateAndUpdateTour $get): Factory|View|Application
     {
-        $tour = $trip->tour()->first();
-        $tours = Tour::select(['id', 'name'])->get();
-        $flights = $trip->flight()->get();
+        $package->load('flight', 'tour');
+        [$tours, $flights] = $get->execute();
 
-        return view('smartTT.package.edit', compact('trip', 'tour', 'tours', 'flights'));
+        return view('smartTT.package.edit', compact('package', 'tours', 'flights'));
     }
 
-    public function update(Request $request, Package $trip, UpdatePackageAction $action): RedirectResponse
+    public function update(Request $request, Package $package, UpdatePackageAction $action): RedirectResponse
     {
         try {
-            $action->execute($request->all(), $trip);
+            $action->execute($request->all(), $package);
 
             return redirect()->route('packages.index');
         } catch (\Throwable $e) {
@@ -79,9 +65,9 @@ class PackageController extends Controller
         }
     }
 
-    public function destroy(Package $trip): RedirectResponse
+    public function destroy(Package $package): RedirectResponse
     {
-        $trip->delete();
+        $package->delete();
 
         return redirect()->route('packages.index');
     }

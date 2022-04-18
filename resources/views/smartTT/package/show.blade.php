@@ -15,12 +15,11 @@
         <div class="card-header">
             <h3 class="card-title">Package Information</h3>
             <div class="pull-right">
-                <a href="{{ route('packages.edit', ['package' => $trip->id]) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('packages.destroy', ['package' => $trip->id]) }}" method="POST"
-                    style="display: inline">
+                <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">{{__('Edit')}}</a>
+                <form action="{{ route('packages.destroy', $package) }}" method="POST" class="d-inline">
                     @method('DELETE')
                     @csrf
-                    <input class="btn btn-danger" type="submit" value="Delete" />
+                    <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
                 </form>
             </div>
         </div>
@@ -28,24 +27,30 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Package Fee</th>
-                            <th>Package Departure</th>
-                            <th>Package Capacity</th>
-                            <th>Tour</th>
-                            <th>Airline</th>
-                        </tr>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Fee')}}</th>
+                        <th>{{__('Departure')}}</th>
+                        <th>{{__('Capacity')}}</th>
+                        <th>{{__('Tour')}}</th>
+                        <th>{{__('Airline')}}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{ $trip->id }}</td>
-                            <td>RM {{ number_format($trip->fee / 100, 2) }}</td>
-                            <td>{{ $trip->depart_time }}</td>
-                            <td>{{ $trip->capacity }}</td>
-                            <td>{{ $trip->tour->name }}</td>
-                            <td>{{ $trip->airline }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $package->id }}</td>
+                        <td>RM {{ number_format($package->fee / 100, 2) }}</td>
+                        <td>{{ $package->depart_time }}</td>
+                        <td>{{ $package->capacity }}</td>
+                        <td>{{ $package->tour->name }}</td>
+                        <td>
+                            <ul>
+                                @foreach ($package->flight as $flight)
+                                    <li>{{ $flight->airline->name }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -54,41 +59,42 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Package Flight</h3>
+            <h3 class="card-title">{{__('Flight')}}</h3>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Flight Departure</th>
-                            <th>Flight Arrival</th>
-                            <th>Airline</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>{{__('ID')}}</th>
+                        <th>{{__('Departure')}}</th>
+                        <th>{{__('Arrival')}}</th>
+                        <th>{{__('Airline')}}</th>
+                        <th>{{__('Action')}}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach ($flights as $flight)
-                            <tr>
-                                <td>{{ $flight->id }}</td>
-                                <td>{{ $flight->depart_time }}</td>
-                                <td>{{ $flight->arrive_time }}</td>
-                                <td>{{ $flight->airline()->first()->name }}</td>
-                                <td>
-                                    <a href="{{ route('flights.show', ['flight' => $flight->id]) }}"
-                                        class="btn btn-info">Show</a>
-                                    <a href="{{ route('flights.edit', ['flight' => $flight->id]) }}"
-                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('flights.destroy', ['flight' => $flight->id]) }}"
-                                        style="display: inline" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="Delete" />
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach ($package->flight as $flight)
+                        <tr>
+                            <td>{{ $flight->id }}</td>
+                            <td>{{ $flight->depart_time }}</td>
+                            <td>{{ $flight->arrive_time }}</td>
+                            <td>{{ $flight->airline->name }}</td>
+                            <td>
+                                <a href="{{ route('flights.show', $flight) }}" class="btn btn-info">
+                                    {{__('Show')}}
+                                </a>
+                                <a href="{{ route('flights.edit', $flight) }}" class="btn btn-primary">
+                                    {{__('Edit')}}
+                                </a>
+                                <form action="{{ route('flights.destroy', $flight) }}" class="d-inline" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
