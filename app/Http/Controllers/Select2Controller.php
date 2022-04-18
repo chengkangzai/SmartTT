@@ -35,20 +35,20 @@ class Select2Controller extends Controller
         if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
-        $usersNotInTheRole = Role::findById(2)->users()->get();
-        $array = collect([]);
-
-        foreach ($usersNotInTheRole as $user) {
-            $array->push([
-                'id' => $user->id,
-                'text' => $user->name . " (" . $user->email . ")",
-            ]);
-        }
+        $array = Role::findById(2)
+            ->users()
+            ->get(['id', 'name', 'email'])
+            ->map(function ($user) {
+                return [
+                    'id' => $user->id,
+                    'text' => $user->name . " (" . $user->email . ")",
+                ];
+            });
 
         return response()->json($array->toArray());
     }
 
-    public function getAirports(Request $request, Flight $flight)
+    public function getAirports(Request $request)
     {
         if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
