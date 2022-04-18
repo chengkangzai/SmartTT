@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Package\GetTourAndFlightForCreateAndUpdateTour;
+use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
 use App\Models\Package;
@@ -21,7 +21,7 @@ class PackageController extends Controller
         return view('smartTT.package.index', compact('packages'));
     }
 
-    public function create(GetTourAndFlightForCreateAndUpdateTour $get): Factory|View|Application
+    public function create(GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
         [$tours, $flights] = $get->execute();
 
@@ -46,7 +46,7 @@ class PackageController extends Controller
         return view('smartTT.package.show', compact('package'));
     }
 
-    public function edit(Package $package, GetTourAndFlightForCreateAndUpdateTour $get): Factory|View|Application
+    public function edit(Package $package, GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
         $package->load('flight', 'tour');
         [$tours, $flights] = $get->execute();

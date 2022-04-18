@@ -5,9 +5,9 @@ namespace App\Actions\Package;
 use App\Models\Flight;
 use App\Models\Tour;
 
-class GetTourAndFlightForCreateAndUpdateTour
+class GetTourAndFlightForCreateAndUpdatePackage
 {
-    public function execute()
+    public function execute(): array
     {
         $tours = Tour::select(['id', 'name'])->get();
         $flights = Flight::with('airline:id,name')
