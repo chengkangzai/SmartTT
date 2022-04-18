@@ -3,7 +3,6 @@
 namespace App\Actions\Flight;
 
 use App\Models\Flight;
-use Carbon\Carbon;
 
 class UpdateFlightAction
 {

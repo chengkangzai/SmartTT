@@ -53,6 +53,7 @@ class TourController extends Controller
     public function edit(Tour $tour): Factory|View|Application
     {
         $countries = Country::pluck('name', 'id');
+
         return view('smartTT.tour.edit', compact('tour', 'countries'));
     }
 

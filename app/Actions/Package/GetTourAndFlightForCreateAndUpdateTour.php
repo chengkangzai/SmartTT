@@ -22,6 +22,7 @@ class GetTourAndFlightForCreateAndUpdateTour
 
                 return $flight;
             });
+
         return [$tours, $flights];
     }
 }

@@ -8,7 +8,8 @@ trait ValidateFlight
 {
     public function validate(array $data): array
     {
-        return Validator::make($data,
+        return Validator::make(
+            $data,
             [
                 'price' => 'required|numeric|min:0',
                 'departure_date' => 'required|date|after:today',

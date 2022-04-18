@@ -10,7 +10,7 @@ class DestroyTourAction
     /**
      * @throws \Exception
      */
-    public function execute( Tour $tour): void
+    public function execute(Tour $tour): void
     {
         //make sure the tour do not have package
         if ($tour->packages->count() > 0) {

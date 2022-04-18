@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\Flight\StoreFlightAction;
 use App\Actions\Flight\UpdateFlightAction;
 use App\Models\Airline;
-use App\Models\Airport;
 use App\Models\Flight;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

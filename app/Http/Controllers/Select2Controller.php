@@ -7,14 +7,13 @@ use App\Models\Flight;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Spatie\Permission\Models\Role;
 
 class Select2Controller extends Controller
 {
     public function getUserWithoutTheRole(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
         $userInRole = Role::findById($request->get('role_id'))->users()->get()->pluck('id');
@@ -33,7 +32,7 @@ class Select2Controller extends Controller
 
     public function getCustomer(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
         $usersNotInTheRole = Role::findById(2)->users()->get();
@@ -51,7 +50,7 @@ class Select2Controller extends Controller
 
     public function getAirports(Request $request, Flight $flight)
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
         $array = Airport::select(['id', 'name', 'IATA'])
