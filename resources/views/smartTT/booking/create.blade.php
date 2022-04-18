@@ -21,16 +21,15 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label for="trip_id" class="form-label">{{ __('Packages') }}</label>
-                    <select name="trip_id" class="form-control select2 " id="trip_id" required>
+                    <label for="package_id" class="form-label">{{ __('Packages') }}</label>
+                    <select name="package_id" class="form-control select2 " id="package_id" required>
                         @foreach ($packages as $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
-                                {{ old('trip_id') == $package->id ? 'checked' : '' }}>
+                                @checked(old('package_id') == $package->id)>
                                 {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
                             </option>
                         @endforeach
                     </select>
-
                 </div>
 
                 <div class="mb-3 row">
@@ -41,8 +40,9 @@
                     </div>
                     <div class="col-md-6">
                         <label for="child" class="form-label">{{ __('Child') }}</label>
-                        <small
-                            class="text-sm">{{ __('Child is defined as children that is smaller than 12 years old') }}</small>
+                        <small class="text-sm">
+                            {{ __('Child is defined as children that is smaller than 12 years old') }}
+                        </small>
                         <input type="number" name="child" class="form-control" id="child" min="0"
                             value="{{ old('child', 0) }}" step="1" placeholder="{{ __('Enter Total Child Number') }}">
                     </div>
@@ -72,8 +72,6 @@
 
 @section('script')
     <script>
-        let tripPrice = 0;
-
         $.ajax({
             type: "POST",
             url: "{{ route('select2.user.getCustomer') }}",
@@ -83,22 +81,22 @@
                 });
             }
         });
-        const tripId = $('#trip_id');
+        const packageId = $('#package_id');
         const child = $('#child');
         const adult = $('#adult');
         const discount = $('#discount');
 
         function updatePrice() {
             const adultVal = adult.val();
-            const tripIdVal = tripId.val();
-            if (adultVal === 0 || tripIdVal === null) {
+            const package = packageId.val();
+            if (adultVal === 0 || package === null) {
                 return;
             }
             $.ajax({
                 type: "POST",
                 url: "{{ route('bookings.calculatePrice') }}",
                 data: {
-                    tripId: tripId.val(),
+                    package_id: packageId.val(),
                     child: child.val(),
                     adult: adult.val(),
                     discount: discount.val()
@@ -112,6 +110,6 @@
         discount.on('change', updatePrice);
         child.on('change', updatePrice);
         adult.on('change', updatePrice);
-        tripId.on('change', updatePrice)
+        packageId.on('change', updatePrice)
     </script>
 @endsection

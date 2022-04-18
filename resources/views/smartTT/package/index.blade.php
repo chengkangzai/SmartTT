@@ -52,12 +52,12 @@
                                 </ol>
                             </td>
                             <td>
-                                <a href="{{ route('packages.show', $package) }}" class="btn btn-info">Show</a>
-                                <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('packages.show', $package) }}" class="btn btn-info">{{__('Show')}}</a>
+                                <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">{{__('Edit')}}</a>
                                 <form action="{{ route('packages.destroy', $package) }}" class="d-inline" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                    <input class="btn btn-danger" type="submit" value="{{__('Delete')}}"/>
                                 </form>
                             </td>
                         </tr>

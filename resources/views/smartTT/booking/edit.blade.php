@@ -19,13 +19,12 @@
             <form role="form" action="{{ route('bookings.update', $booking) }}" method="POST" id="editForm">
                 @csrf
                 @method('PUT')
-
                 <div class="mb-3">
-                    <label class="form-label" for="trip_id">{{ __('Packages') }}</label>
-                    <select name="trip_id" class="form-control select2 " id="trip_id" required>
+                    <label class="form-label" for="package_id">{{ __('Packages') }}</label>
+                    <select name="package_id" class="form-control select2 " id="package_id" required>
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
-                                {{ $booking->packages->id === $key ? 'selected' : '' }}>
+                                @checked($booking->packages->id === $key )>
                                 {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
                             </option>
                         @endforeach
@@ -51,8 +50,7 @@
                     <label class="form-label" for="user_id">{{ __('Customer') }}</label>
                     <select name="user_id" class="form-control select2 " id="user_id" required>
                         @foreach ($users as $user)
-                            <option value="{{ $user->id }}"
-                                {{ $booking->users->id === $user->id ? 'selected' : '' }}>
+                            <option value="{{ $user->id }}"@checked($booking->users->id === $user->id)>
                                 {{ $user->name }} ({{ $user->email }})
                             </option>
                         @endforeach
@@ -79,7 +77,7 @@
 
 @section('script')
     <script>
-        const tripId = $('#trip_id');
+        const packageId = $('#package_id');
         const child = $('#child');
         const adult = $('#adult');
         const discount = $('#discount');
@@ -89,15 +87,15 @@
 
         function updatePrice() {
             const adultVal = adult.val();
-            const tripIdVal = tripId.val();
-            if (adultVal === 0 || tripIdVal === null) {
+            const package = packageId.val();
+            if (adultVal === 0 || package === null) {
                 return;
             }
             $.ajax({
                 type: "POST",
                 url: "{{ route('bookings.calculatePrice') }}",
                 data: {
-                    trip_id: tripId.val(),
+                    package_id: packageId.val(),
                     child: child.val(),
                     adult: adult.val(),
                     discount: discount.val(),
@@ -112,6 +110,6 @@
         discount.on('change', updatePrice);
         child.on('change', updatePrice);
         adult.on('change', updatePrice);
-        tripId.on('change', updatePrice)
+        packageId.on('change', updatePrice)
     </script>
 @endsection
