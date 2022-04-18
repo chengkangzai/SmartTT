@@ -11,8 +11,8 @@ trait CalculateTotalBookingPrice
     public function calculate($data): float|int
     {
         $data = $this->validate($data);
-        $tripPrice = Package::whereId($data['trip_id'])->firstOrFail()->fee / 100;
+        $packagePrice = Package::whereId($data['trip_id'])->firstOrFail()->fee / 100;
 
-        return $tripPrice * $data['adult'] + (200 * $data['child']) - $data['adult'];
+        return $packagePrice * $data['adult'] + (200 * $data['child']) - $data['adult'];
     }
 }

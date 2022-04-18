@@ -23,10 +23,10 @@
                 <div class="mb-3">
                     <label for="trip_id" class="form-label">{{ __('Packages') }}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
-                        @foreach ($trips as $trip)
-                            <option value="{{ $trip->id }}" data-price="{{ $trip->price }}"
-                                {{ old('trip_id') == $trip->id ? 'checked' : '' }}>
-                                {{ $trip->tour->name }} ({{ $trip->depart_time }}) (${{ $trip->fee / 100 }})
+                        @foreach ($packages as $package)
+                            <option value="{{ $package->id }}" data-price="{{ $package->price }}"
+                                {{ old('trip_id') == $package->id ? 'checked' : '' }}>
+                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee / 100 }})
                             </option>
                         @endforeach
                     </select>

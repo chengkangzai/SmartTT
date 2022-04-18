@@ -23,10 +23,10 @@
                 <div class="mb-3">
                     <label class="form-label" for="trip_id">{{ __('Packages') }}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
-                        @foreach ($trips as $key => $trip)
-                            <option value="{{ $trip->id }}" data-price="{{ $trip->price }}"
-                                {{ $booking->trips->id === $key ? 'selected' : '' }}>
-                                {{ $trip->tour->name }} ({{ $trip->depart_time }}) (${{ $trip->fee / 100 }})
+                        @foreach ($packages as $key => $package)
+                            <option value="{{ $package->id }}" data-price="{{ $package->price }}"
+                                {{ $booking->packages->id === $key ? 'selected' : '' }}>
+                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee / 100 }})
                             </option>
                         @endforeach
                     </select>

@@ -40,7 +40,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->trips->tour->name }}</td>
+                            <td>{{ $booking->packages->tour->name }}</td>
                             <td>{{ $booking->adult }}</td>
                             <td>{{ $booking->child }}</td>
                             <td>{{ $booking->users->name }}</td>

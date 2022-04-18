@@ -26,9 +26,9 @@ class BookingController extends Controller
 
     public function create(): Factory|View|Application
     {
-        $trips = Package::with('tour')->get();
+        $packages = Package::with('tour')->get();
 
-        return view('smartTT.booking.create', compact('trips'));
+        return view('smartTT.booking.create', compact('packages'));
     }
 
     public function store(Request $request, StoreActionValidateBookingAction $action): RedirectResponse
@@ -45,10 +45,10 @@ class BookingController extends Controller
 
     public function edit(Booking $booking): Factory|View|Application
     {
-        $trips = Package::with('tour')->get();
+        $packages = Package::with('tour')->get();
         $users = Role::findById(2)->users()->get();
 
-        return view('smartTT.booking.edit', compact('booking', 'trips', 'users'));
+        return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
     }
 
     public function update(Request $request, Booking $booking, UpdateValidateBookingAction $action): RedirectResponse
