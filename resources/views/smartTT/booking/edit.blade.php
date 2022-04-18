@@ -87,8 +87,8 @@
 
         function updatePrice() {
             const adultVal = adult.val();
-            const package = packageId.val();
-            if (adultVal === 0 || package === null) {
+            const packageVal = packageId.val();
+            if (adultVal === 0 || packageVal === null) {
                 return;
             }
             $.ajax({
