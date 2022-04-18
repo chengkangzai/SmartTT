@@ -10,12 +10,12 @@ class CreateFlightsTable extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('depart_time');
-            $table->dateTime('arrive_time');
-            $table->integer('fee');
+            $table->dateTime('departure_date');
+            $table->dateTime('arrival_date');
+            $table->integer('price');
             $table->foreignId('airline_id')->constrained();
-            $table->foreignId('departure_airport')->references('id')->on('airports');
-            $table->foreignId('arrival_airport')->references('id')->on('airports');
+            $table->foreignId('departure_airport_id')->references('id')->on('airports');
+            $table->foreignId('arrival_airport_id')->references('id')->on('airports');
             $table->text('class');
             $table->text('type');
             $table->timestamps();

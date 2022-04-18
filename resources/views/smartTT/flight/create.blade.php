@@ -21,85 +21,124 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
-                    <input type='datetime-local' class="form-control" name="depart_time" id="depart_time"
-                        value="{{ old('depart_time', '') }}" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="arrive_time">{{ __('Arrive Time') }}</label>
-                    <input type='datetime-local' class="form-control" name="arrive_time" id="arrive_time"
-                        value="{{ old('arrive_time') }}" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="fee">{{ __('Fee') }}</label>
-                    <input type="number" name="fee" class="form-control" id="fee" value="{{ old('fee', 0) }}" step="1"
-                        placeholder="{{ __('Enter Flight Fee') }}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="airline_id">{{ __('Flight') }}</label>
-                    <select name="airline_id" class="form-control select2 " id="airline_id" required>
-                        @foreach ($airlines as $airline)
-                            <option value="{{ $airline->id }}"> {{ $airline->name }}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="depart_airport">{{ __('Depart Airport') }}</label>
-                    <select name="depart_airport" class="form-control select2 " id="depart_airport" required>
-                        @foreach ($airports as $airport)
-                            <option value="{{ $airport->id }}"> {{ $airport->name }}</option>
+                    <label for="airline_id" class="form-label">{{ __('Airline') }}</label>
+                    <select class="form-control" id="airline_id" name="airline_id">
+                        <option value="">{{ __('Please Select') }}</option>
+                        @foreach($airlines as $airline)
+                            <option value="{{ $airline->id }}" @selected($airline->id== old('airline_id'))>
+                                {{ $airline->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="arrival_airport">{{ __('Arrival Airport') }}</label>
-                    <select name="arrival_airport" class="form-control select2 " id="arrival_airport" required>
-                        @foreach ($airports as $airport)
-                            <option value="{{ $airport->id }}"> {{ $airport->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label class="form-label" for="departure_airport_id">{{ __('Departure Airport') }}</label>
+                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id"
+                                multiple>
+                            @if(old('departure_airport_id'))
+                                <option value="{{old('departure_airport_id')}}" selected>
+                                    @php
+                                        $a =\App\Models\Airport::find(old('departure_airport_id'));
+                                        echo $a->name . " (" . $a->IATA . ")";
+                                    @endphp
+                                </option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="col col-md-6">
+                        <label class="form-label" for="arrival_airport_id">{{ __('Arrival Airport') }}</label>
+                        <select name="arrival_airport_id" class="form-control select2" id="arrival_airport_id"
+                                multiple>
+                            @if(old('arrival_airport_id'))
+                                <option value="{{old('arrival_airport_id')}}" selected>
+                                    @php
+                                        $a =\App\Models\Airport::find(old('arrival_airport_id'));
+                                        echo $a->name . " (" . $a->IATA . ")";
+                                    @endphp
+                                </option>
+                            @endif
+                        </select>
+                    </div>
+                </div>
 
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label class="form-label" for="departure_date"> {{ __('Departure Time') }}
+                            <small>({{__('based on departure timezone')}})</small>
+                        </label>
+                        <input type='datetime-local' class="form-control" name="departure_date" id="departure_date"
+                               min="{{date('Y-m-d\TH:i')}}"
+                               value="{{ old('departure_date',now()->addMinutes(5)->format('Y-m-d\TH:i')) }}"/>
+                    </div>
+                    <div class="col col-md-6">
+                        <label class="form-label" for="arrival_date"> {{ __('Arrival Time') }}
+                            <small>({{__('based on arrival timezone')}})</small>
+                        </label>
+                        <input type='datetime-local' class="form-control" name="arrival_date" id="arrival_date"
+                               min="{{date('Y-m-d\TH:i')}}"
+                               value="{{ old('arrival_date',now()->addMinutes(10)->format('Y-m-d\TH:i')) }}"/>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="flight_class">{{ __('Flight Class') }}</label>
-                    <select name="flight_class" class="form-control select2" id="flight_class" required>
+                    <label class="form-label" for="price">{{ __('Price') }}</label>
+                    <input type="number" name="price" class="form-control" id="price" value="{{ old('price', 0) }}"
+                           step=".01" placeholder="{{ __('Enter Flight Price') }}">
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label" for="class">{{ __('Flight Class') }}</label>
+                    <select name="class" class="form-control" id="class">
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}"> {{ $class }} </option>
+                            <option value="{{ $key }}" @selected(old('class')==$key)> {{ $class }} </option>
                         @endforeach
                     </select>
-
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="flight_type">{{ __('Flight Class') }}</label>
-                    <select name="flight_type" class="form-control select2" id="flight_type" required>
-                        @foreach (\App\Models\Flight::TYPE as $key => $type)
-                            <option value="{{ $key }}"> {{ $type }} </option>
+                    <label class="form-label" for="type">{{ __('Flight Class') }}</label>
+                    <select name="type" class="form-control" id="type">
+                        @foreach (\App\Models\Flight::TYPE as $key => $class)
+                            <option value="{{ $key }}" @selected(old('type')==$key)> {{ $class }} </option>
                         @endforeach
                     </select>
                 </div>
-            </form>
 
-            <div class="card-footer">
-                <button form="createForm" type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-            </div>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <button form="createForm" type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
         </div>
     </div>
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
-        $('#airline_id').select2();
-        $('#depart_airport').select2();
-        $('#arrival_airport').select2();
-        $('#flight_class').select2();
-        $('#flight_type').select2();
+        const config = {
+            maximumSelectionLength: 1,
+            ajax: {
+                url: '{{ route('select2.flights.getAirports') }}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.text,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            },
+        }
+        $('#departure_airport_id').select2(config);
+        $('#arrival_airport_id').select2(config);
     </script>
 @endsection

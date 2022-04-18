@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,19 +16,19 @@ class Flight extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'depart_time',
-        'arrive_time',
-        'fee',
+        'departure_date',
+        'arrival_date',
+        'price',
         'airline_id',
-        'depart_airport',
-        'arrival_airport',
-        'flight_class',
-        'flight_type',
+        'departure_airport_id',
+        'arrival_airport_id',
+        'class',
+        'type',
     ];
 
     protected $dates = [
-        'depart_time',
-        'arrive_time',
+        'departure_date',
+        'arrival_date',
     ];
 
     public const FCLASS = [
@@ -43,6 +44,14 @@ class Flight extends Model
         'Multi-city' => 'Multi-city',
     ];
 
+    public function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
+    }
+
     public function packages(): BelongsToMany
     {
         return $this->belongsToMany(Package::class)
@@ -56,14 +65,14 @@ class Flight extends Model
         return $this->belongsTo(Airline::class);
     }
 
-    public function depart_airports(): BelongsTo
+    public function depart_airport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'depart_airport', 'id');
+        return $this->belongsTo(Airport::class, 'departure_airport_id', 'id');
     }
 
     public function arrive_airport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'arrival_airport', 'id');
+        return $this->belongsTo(Airport::class, 'arrival_airport_id', 'id');
     }
 
     protected function serializeDate(DateTimeInterface $date): string

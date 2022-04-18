@@ -40,6 +40,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
     Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
+    Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
     Route::post('user/sendResetPassword/{user}', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);

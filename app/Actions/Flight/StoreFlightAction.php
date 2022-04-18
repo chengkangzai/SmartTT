@@ -15,9 +15,6 @@ class StoreFlightAction
 
         return Flight::create([
             ...$data,
-            'depart_time' => Carbon::parse($data['depart_time']),
-            'arrive_time' => Carbon::parse($data['arrive_time']),
-            'fee' => $data['fee'] * 100,
         ]);
     }
 }
