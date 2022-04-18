@@ -20,6 +20,8 @@ class Tour extends Model
         'category',
         'itinerary_url',
         'thumbnail_url',
+        'days',
+        'nights',
     ];
 
     public function packages(): HasMany
@@ -34,6 +36,8 @@ class Tour extends Model
 
     public function countries(): BelongsToMany
     {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsToMany(Country::class)
+            ->withPivot(['order'])
+            ->orderByPivot('order');
     }
 }

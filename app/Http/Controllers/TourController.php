@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Tour\DestroyTourAction;
 use App\Actions\Tour\StoreTourAction;
 use App\Actions\Tour\UpdateStoreAction;
+use App\Models\Country;
 use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,14 +18,16 @@ class TourController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $tours = Tour::paginate(10);
+        $tours = Tour::with('countries')->orderByDesc('id')->paginate(10);
 
         return view('smartTT.tour.index', compact('tours'));
     }
 
     public function create(): Factory|View|Application
     {
-        return view('smartTT.tour.create');
+        $countries = Country::pluck('name', 'id');
+
+        return view('smartTT.tour.create', compact('countries'));
     }
 
     public function store(Request $request, StoreTourAction $action): RedirectResponse
@@ -49,7 +52,8 @@ class TourController extends Controller
 
     public function edit(Tour $tour): Factory|View|Application
     {
-        return view('smartTT.tour.edit', compact('tour'));
+        $countries = Country::pluck('name', 'id');
+        return view('smartTT.tour.edit', compact('tour', 'countries'));
     }
 
     public function update(Request $request, Tour $tour, UpdateStoreAction $action): RedirectResponse
@@ -62,7 +66,7 @@ class TourController extends Controller
     public function destroy(Tour $tour, DestroyTourAction $action): RedirectResponse
     {
         try {
-            $action->execute([], $tour);
+            $action->execute($tour);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

@@ -16,7 +16,14 @@ class TourSeeder extends Seeder
             TourDescription::factory()->count(3)->create([
                 'tour_id' => $tour->id,
             ]);
-            $tour->countries()->attach(Country::inRandomOrder()->take(3)->get());
+            Country::inRandomOrder()
+                ->take(rand(1, 4))
+                ->get()
+                ->each(function (Country $country, $index) use ($tour) {
+                    $tour->countries()->attach($country->id, [
+                        'order' => $index,
+                    ]);
+                });
         })
             ->create();
     }

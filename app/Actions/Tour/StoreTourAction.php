@@ -36,6 +36,11 @@ class StoreTourAction
                 ]);
             }
 
+            collect($data['countries'])
+                ->each(function ($country, $index) use ($tour) {
+                    $tour->countries()->attach($country, ['order' => $index]);
+                });
+
             return $tour;
         });
     }

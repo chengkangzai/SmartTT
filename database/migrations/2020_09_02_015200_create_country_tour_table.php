@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('tour_id')->constrained();
+            $table->integer('order');
         });
     }
 

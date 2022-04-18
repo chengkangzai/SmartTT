@@ -48,7 +48,13 @@
                                     <td>{{ $tour->id }}</td>
                                     <td>{{ $tour->name }}</td>
                                     <td>{{ $tour->tour_code }}</td>
-                                    <td>{{ $tour->destination }}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach($tour->countries as $country)
+                                                <li>{{ $country->name }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td>{{ $tour->category }}</td>
                                     <td>
                                         <a href="{{ $itineraryUrl }}" class="btn btn-info">{{ __('View') }}</a>
@@ -101,12 +107,8 @@
                     {{ $tourDes->links() }}
                 </div>
             </div>
-
-            {{-- TODO --}}
-            {{-- 1. link trips --}}
         </div>
     </div>
-    </section>
 @endsection
 
 @section('modal')

@@ -10,10 +10,10 @@ class DestroyTourAction
     /**
      * @throws \Exception
      */
-    public function execute(array $data, Tour $tour)
+    public function execute( Tour $tour): void
     {
         //make sure the tour do not have package
-        if ($tour->trips->count() > 0) {
+        if ($tour->packages->count() > 0) {
             throw  new \Exception('This tour has package, you can not delete it, please delete the package first');
         }
 

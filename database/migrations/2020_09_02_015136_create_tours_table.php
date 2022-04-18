@@ -12,10 +12,11 @@ class CreateToursTable extends Migration
             $table->id();
             $table->string('tour_code');
             $table->string('name');
-            $table->string('destination');
             $table->string('category');
             $table->text('itinerary_url');
             $table->text('thumbnail_url');
+            $table->integer('days');
+            $table->integer('nights');
             $table->timestamps();
             $table->softDeletes();
         });

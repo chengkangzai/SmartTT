@@ -2,31 +2,35 @@
 
 namespace App\Actions\Tour;
 
+use App\Models\Tour;
+
 trait ValidateTour
 {
-    public function validate(array $data, bool $isStore = false): array
+    public function validate(array $data, bool $isStore = false, Tour $tour = null): array
     {
         $rules = ($isStore) ?
             [
-                'des' => 'required|array|min:1|max:5',
+                'des' => 'required|array',
                 'des.*' => 'required|string',
-                'place' => 'required|array|min:1|max:5',
+                'place' => 'required|array',
                 'place.*' => 'required|string',
                 'tour_code' => 'required|unique:tours,tour_code',
+                'itinerary' => 'required|mimes:pdf|max:2048',
+                'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
             ] :
             [
-                'tour_code' => 'required|unique:tours,tour_code,' . $data['tour_code'],
+                'tour_code' => 'required|unique:tours,tour_code,' . $tour->id,
             ];
 
         return \Validator::make(
             $data,
             [
                 'name' => 'required',
-                'destination' => 'required',
                 'category' => 'required',
-                'itinerary' => 'required|mimes:pdf|max:2048',
-                'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
-                +$rules,
+                'countries' => 'required|array|exists:countries,id',
+                'nights' => 'required|integer|min:1',
+                'days' => 'required|integer|min:1',
+                ...$rules,
             ],
             [
                 'des.*.required' => 'Description :index is required',
