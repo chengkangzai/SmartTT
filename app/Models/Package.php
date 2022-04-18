@@ -18,7 +18,6 @@ class Package extends Model
         'capacity',
         'price',
         'tour_id',
-        'flight_id',
         'depart_time',
     ];
 
