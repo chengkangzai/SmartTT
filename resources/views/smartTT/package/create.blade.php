@@ -51,7 +51,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="flights">{{ __('Flight') }}</label>
                     <select name="flights[]" class="form-control select2" id="flights" multiple>
-                        <option value="">{{ __('Select Flight') }}</option>
                         @foreach ($flights as $flight)
                             <option value="{{ $flight->id }}" @selected(old('flights') == $flight->id)>
                                 {{ $flight->text }}

@@ -60,9 +60,6 @@
 
 @section('script')
     <script>
-        $('#indexTable').DataTable({
-            bInfo: false,
-            paging: false,
-        });
+        $('#indexTable').DataTable();
     </script>
 @endsection

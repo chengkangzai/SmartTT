@@ -23,7 +23,6 @@
                 <div class="mb-3">
                     <label for="trip_id" class="form-label">{{ __('Packages') }}</label>
                     <select name="trip_id" class="form-control select2 " id="trip_id" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
                         @foreach ($trips as $trip)
                             <option value="{{ $trip->id }}" data-price="{{ $trip->price }}"
                                 {{ old('trip_id') == $trip->id ? 'checked' : '' }}>
@@ -52,7 +51,6 @@
                 <div class="mb-3">
                     <label for="user_id" class="form-label">{{ __('Customer') }}</label>
                     <select name="user_id" class="form-control select2 " id="user_id" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
                     </select>
                 </div>
 

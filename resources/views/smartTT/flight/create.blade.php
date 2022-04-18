@@ -41,7 +41,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="airline_id">{{ __('Flight') }}</label>
                     <select name="airline_id" class="form-control select2 " id="airline_id" required>
-                        <option value="0" disabled selected>{{ __('Please Select') }}</option>
                         @foreach ($airlines as $airline)
                             <option value="{{ $airline->id }}"> {{ $airline->name }}</option>
                         @endforeach
@@ -52,7 +51,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="depart_airport">{{ __('Depart Airport') }}</label>
                     <select name="depart_airport" class="form-control select2 " id="depart_airport" required>
-                        <option value="0" disabled selected>{{ __('Please Select') }}</option>
                         @foreach ($airports as $airport)
                             <option value="{{ $airport->id }}"> {{ $airport->name }}</option>
                         @endforeach
@@ -62,7 +60,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="arrival_airport">{{ __('Arrival Airport') }}</label>
                     <select name="arrival_airport" class="form-control select2 " id="arrival_airport" required>
-                        <option value="0" disabled selected>{{ __('Please Select') }}</option>
                         @foreach ($airports as $airport)
                             <option value="{{ $airport->id }}"> {{ $airport->name }}</option>
                         @endforeach
@@ -73,7 +70,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="flight_class">{{ __('Flight Class') }}</label>
                     <select name="flight_class" class="form-control select2" id="flight_class" required>
-                        <option value="0" disabled selected>{{ __('Please Select') }}</option>
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
                             <option value="{{ $key }}"> {{ $class }} </option>
                         @endforeach
@@ -84,7 +80,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="flight_type">{{ __('Flight Class') }}</label>
                     <select name="flight_type" class="form-control select2" id="flight_type" required>
-                        <option value="0" disabled selected>{{ __('Please Select') }}</option>
                         @foreach (\App\Models\Flight::TYPE as $key => $type)
                             <option value="{{ $key }}"> {{ $type }} </option>
                         @endforeach

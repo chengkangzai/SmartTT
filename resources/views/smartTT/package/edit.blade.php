@@ -36,7 +36,6 @@
                     <div class="mb-3">
                         <label for="tour" class="form-label">{{ __('Tour') }}</label>
                         <select name="tour" class="form-control" id="tour">
-                            <option selected value="{{ $tour->id }}"> {{ $tour->name }} </option>
                             @foreach ($tours as $tour)
                                 <option value="{{ $tour->id }}"> {{ $tour->name }} </option>
                             @endforeach
