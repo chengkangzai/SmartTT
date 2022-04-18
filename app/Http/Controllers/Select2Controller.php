@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airport;
-use App\Models\Flight;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
