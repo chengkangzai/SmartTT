@@ -17,18 +17,6 @@ jobs:
         with:
           args: --config=.php_cs.dist.php --allow-risky=yes
 
-      - name: Install node dependencies
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
-      - name: Run Blade formatter
-        run: |
-          npm install -g blade-formatter
-          sleep 10
-          blade-formatter --write resources/**/*.blade.php
-          sleep 30
-
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
