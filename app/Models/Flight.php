@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Flight extends Model
 {
-    use  HasFactory;
+    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
