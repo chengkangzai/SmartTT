@@ -50,7 +50,7 @@
                                     <td>{{ $tour->tour_code }}</td>
                                     <td>
                                         <ul>
-                                            @foreach($tour->countries as $country)
+                                            @foreach ($tour->countries as $country)
                                                 <li>{{ $country->name }}</li>
                                             @endforeach
                                         </ul>

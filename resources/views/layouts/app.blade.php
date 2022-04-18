@@ -101,26 +101,28 @@
     <script>
         []
         .slice
-        .call(document.querySelectorAll('.toast'))
-        .map((toastEl) => new coreui.Toast(toastEl))
-        .map((toast) => toast.show());
-</script>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.fn.select2.defaults.set("selectionCssClass", "py-2");
-    $.fn.select2.defaults.set("placeholder", "{{ __('Please Select') }}");
+            .call(document.querySelectorAll('.toast'))
+            .map((toastEl) => new coreui.Toast(toastEl))
+            .map((toast) => toast.show());
+    </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.fn.select2.defaults.set("selectionCssClass", "py-2");
+        $.fn.select2.defaults.set("placeholder", "{{ __('Please Select') }}");
 
-    $.extend(true, $.fn.dataTable.defaults, {
-        bInfo: false,
-        paging: false,
-        order: [[ 0, "desc" ]],
-    });
-</script>
-@yield('script')
+        $.extend(true, $.fn.dataTable.defaults, {
+            bInfo: false,
+            paging: false,
+            order: [
+                [0, "desc"]
+            ],
+        });
+    </script>
+    @yield('script')
 </body>
 
 </html>

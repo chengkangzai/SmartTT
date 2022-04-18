@@ -24,8 +24,8 @@
                     <label for="airline_id" class="form-label">{{ __('Airline') }}</label>
                     <select class="form-control" id="airline_id" name="airline_id">
                         <option value="">{{ __('Please Select') }}</option>
-                        @foreach($airlines as $airline)
-                            <option value="{{ $airline->id }}" @selected($airline->id== old('airline_id'))>
+                        @foreach ($airlines as $airline)
+                            <option value="{{ $airline->id }}" @selected($airline->id == old('airline_id'))>
                                 {{ $airline->name }}
                             </option>
                         @endforeach
@@ -35,13 +35,12 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label class="form-label" for="departure_airport_id">{{ __('Departure Airport') }}</label>
-                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id"
-                                multiple>
-                            @if(old('departure_airport_id'))
-                                <option value="{{old('departure_airport_id')}}" selected>
+                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id" multiple>
+                            @if (old('departure_airport_id'))
+                                <option value="{{ old('departure_airport_id') }}" selected>
                                     @php
-                                        $a =\App\Models\Airport::find(old('departure_airport_id'));
-                                        echo $a->name . " (" . $a->IATA . ")";
+                                        $a = \App\Models\Airport::find(old('departure_airport_id'));
+                                        echo $a->name . ' (' . $a->IATA . ')';
                                     @endphp
                                 </option>
                             @endif
@@ -49,13 +48,12 @@
                     </div>
                     <div class="col col-md-6">
                         <label class="form-label" for="arrival_airport_id">{{ __('Arrival Airport') }}</label>
-                        <select name="arrival_airport_id" class="form-control select2" id="arrival_airport_id"
-                                multiple>
-                            @if(old('arrival_airport_id'))
-                                <option value="{{old('arrival_airport_id')}}" selected>
+                        <select name="arrival_airport_id" class="form-control select2" id="arrival_airport_id" multiple>
+                            @if (old('arrival_airport_id'))
+                                <option value="{{ old('arrival_airport_id') }}" selected>
                                     @php
-                                        $a =\App\Models\Airport::find(old('arrival_airport_id'));
-                                        echo $a->name . " (" . $a->IATA . ")";
+                                        $a = \App\Models\Airport::find(old('arrival_airport_id'));
+                                        echo $a->name . ' (' . $a->IATA . ')';
                                     @endphp
                                 </option>
                             @endif
@@ -66,26 +64,26 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label class="form-label" for="departure_date"> {{ __('Departure Time') }}
-                            <small>({{__('based on departure timezone')}})</small>
+                            <small>({{ __('based on departure timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="departure_date" id="departure_date"
-                               min="{{date('Y-m-d\TH:i')}}"
-                               value="{{ old('departure_date',now()->addMinutes(5)->format('Y-m-d\TH:i')) }}"/>
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('departure_date',now()->addMinutes(5)->format('Y-m-d\TH:i')) }}" />
                     </div>
                     <div class="col col-md-6">
                         <label class="form-label" for="arrival_date"> {{ __('Arrival Time') }}
-                            <small>({{__('based on arrival timezone')}})</small>
+                            <small>({{ __('based on arrival timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="arrival_date" id="arrival_date"
-                               min="{{date('Y-m-d\TH:i')}}"
-                               value="{{ old('arrival_date',now()->addMinutes(10)->format('Y-m-d\TH:i')) }}"/>
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('arrival_date',now()->addMinutes(10)->format('Y-m-d\TH:i')) }}" />
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="price">{{ __('Price') }}</label>
                     <input type="number" name="price" class="form-control" id="price" value="{{ old('price', 0) }}"
-                           step=".01" placeholder="{{ __('Enter Flight Price') }}">
+                        step=".01" placeholder="{{ __('Enter Flight Price') }}">
                 </div>
 
 
@@ -93,7 +91,8 @@
                     <label class="form-label" for="class">{{ __('Flight Class') }}</label>
                     <select name="class" class="form-control" id="class">
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" @selected(old('class')==$key)> {{ $class }} </option>
+                            <option value="{{ $key }}" @selected(old('class') == $key)> {{ $class }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -102,7 +101,8 @@
                     <label class="form-label" for="type">{{ __('Flight Class') }}</label>
                     <select name="type" class="form-control" id="type">
                         @foreach (\App\Models\Flight::TYPE as $key => $class)
-                            <option value="{{ $key }}" @selected(old('type')==$key)> {{ $class }} </option>
+                            <option value="{{ $key }}" @selected(old('type') == $key)> {{ $class }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -125,9 +125,9 @@
                 url: '{{ route('select2.flights.getAirports') }}',
                 dataType: 'json',
                 delay: 250,
-                processResults: function (data) {
+                processResults: function(data) {
                     return {
-                        results: $.map(data, function (item) {
+                        results: $.map(data, function(item) {
                             return {
                                 text: item.text,
                                 id: item.id

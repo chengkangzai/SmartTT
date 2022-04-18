@@ -24,7 +24,7 @@
                     <select name="package_id" class="form-control select2 " id="package_id" required>
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
-                                @checked($booking->packages->id === $key )>
+                                @checked($booking->packages->id === $key)>
                                 {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
                             </option>
                         @endforeach
@@ -50,7 +50,7 @@
                     <label class="form-label" for="user_id">{{ __('Customer') }}</label>
                     <select name="user_id" class="form-control select2 " id="user_id" required>
                         @foreach ($users as $user)
-                            <option value="{{ $user->id }}"@checked($booking->users->id === $user->id)>
+                            <option value="{{ $user->id }}" @checked($booking->users->id === $user->id)>
                                 {{ $user->name }} ({{ $user->email }})
                             </option>
                         @endforeach

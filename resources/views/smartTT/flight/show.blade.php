@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Flight $flight */
+/** @var \App\Models\Flight $flight */
 @endphp
 @extends('layouts.app')
 @section('title')
@@ -22,7 +22,7 @@
                 <form action="{{ route('flights.destroy', $flight) }}" method="POST" class="d-inline">
                     @method('DELETE')
                     @csrf
-                    <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}"/>
+                    <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
             </div>
         </div>
@@ -30,24 +30,24 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('Depart Time') }}</th>
-                        <th>{{ __('Arrival Time') }}</th>
-                        <th>{{ __('Fee (Rm)') }}</th>
-                        <th>{{ __('Airline') }}</th>
-                    </tr>
+                        <tr>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('Depart Time') }}</th>
+                            <th>{{ __('Arrival Time') }}</th>
+                            <th>{{ __('Fee (Rm)') }}</th>
+                            <th>{{ __('Airline') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{{ $flight->id }}</td>
-                        <td>{{ $flight->departure_date }}</td>
-                        <td>{{ $flight->arrival_date }}</td>
-                        <td>RM {{ number_format($flight->price, 2) }}</td>
-                        <td>{{ $flight->airline->name }}
-                            ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $flight->id }}</td>
+                            <td>{{ $flight->departure_date }}</td>
+                            <td>{{ $flight->arrival_date }}</td>
+                            <td>RM {{ number_format($flight->price, 2) }}</td>
+                            <td>{{ $flight->airline->name }}
+                                ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

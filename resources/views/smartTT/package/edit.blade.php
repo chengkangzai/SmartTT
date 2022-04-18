@@ -25,14 +25,14 @@
                         <div class="col col-md-6">
                             <label for="price" class="form-label">{{ __('Price (RM)') }}</label>
                             <input type="number" name="price" class="form-control" id="price" min="1"
-                                   value="{{ old('price', $package->price) }}"
-                                   placeholder="{{ __('Enter Package Price') }}">
+                                value="{{ old('price', $package->price) }}"
+                                placeholder="{{ __('Enter Package Price') }}">
                         </div>
                         <div class="col col-md-6">
                             <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
                             <input type="number" name="capacity" class="form-control" id="capacity" max="100" min="0"
-                                   value="{{ old('capacity', $package->capacity) }}"
-                                   placeholder="{{ __('Enter Capacity of this package') }}">
+                                value="{{ old('capacity', $package->capacity) }}"
+                                placeholder="{{ __('Enter Capacity of this package') }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -40,8 +40,7 @@
                             <label for="tour" class="form-label">{{ __('Tour') }}</label>
                             <select name="tour_id" class="form-control" id="tour">
                                 @foreach ($tours as $tour)
-                                    <option value="{{ $tour->id }}"
-                                        @selected(old('tour_id', $package->tour_id)== $tour->id)>
+                                    <option value="{{ $tour->id }}" @selected(old('tour_id', $package->tour_id) == $tour->id)>
                                         {{ $tour->name }}
                                     </option>
                                 @endforeach
@@ -50,8 +49,8 @@
                         <div class="col col-md-6">
                             <label for="depart_time" class="form-label">{{ __('Depart Time') }}</label>
                             <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
-                                   min="{{ date('Y-m-d\TH:i') }}"
-                                   value="{{ old('depart_time', $package->depart_time->format('Y-m-d\TH:i')) }}"/>
+                                min="{{ date('Y-m-d\TH:i') }}"
+                                value="{{ old('depart_time', $package->depart_time->format('Y-m-d\TH:i')) }}" />
                         </div>
                     </div>
 
