@@ -45,11 +45,6 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
-            $('#permissions').select2({
-                placeholder: "{{ __('Select Permissions') }}",
-                allowClear: true
-            });
-        });
+        $('#permissions').select2();
     </script>
 @endsection
