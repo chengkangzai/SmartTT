@@ -21,13 +21,13 @@ class Booking extends Model
         'child',
     ];
 
-    public function packages(): BelongsTo
+    public function package(): BelongsTo
     {
-        return $this->belongsTo(Package::class, 'package_id', 'id');
+        return $this->belongsTo(Package::class);
     }
 
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 }

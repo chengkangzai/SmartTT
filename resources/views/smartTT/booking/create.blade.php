@@ -26,7 +26,7 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    //TODO add package pricing
+{{--                    //TODO add package pricing--}}
                     <label for="package_id" class="form-label">{{ __('Packages') }}</label>
                     <select name="package_id" class="form-control" id="package_id" required multiple>
                         @foreach ($packages as $package)

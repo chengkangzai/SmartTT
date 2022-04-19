@@ -26,7 +26,7 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label class="form-label" for="package_id">{{ __('Packages') }}</label>
-                    //TODO add package pricing
+{{--                    //TODO add package pricing--}}
                     <select name="package_id" class="form-control select2 " id="package_id" required multiple>
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"

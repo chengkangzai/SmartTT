@@ -35,14 +35,14 @@
                             <tr>
                                 <td>{{ $booking->id }}</td>
                                 <td>
-                                    <a href="{{ route('packages.show', $booking->packages) }}"
+                                    <a href="{{ route('packages.show', $booking->package) }}"
                                         class="btn btn-sm btn-primary">
-                                        {{ $booking->packages->tour->name }}
+                                        {{ $booking->package->tour->name }}
                                     </a>
                                 </td>
                                 <td>{{ $booking->adult }}</td>
                                 <td>{{ $booking->child }}</td>
-                                <td>{{ $booking->users->name }}</td>
+                                <td>{{ $booking->user->name }}</td>
                                 <td>RM {{ number_format($booking->discount, 2) }}</td>
                                 <td>RM {{ number_format($booking->total_price, 2) }}</td>
                                 <td>

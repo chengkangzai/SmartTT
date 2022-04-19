@@ -21,7 +21,7 @@ class BookingController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $bookings = Booking::with(['users', 'packages', 'packages.tour'])->orderByDesc('id')->paginate(10);
+        $bookings = Booking::with(['user', 'package', 'package.tour'])->orderByDesc('id')->paginate(10);
 
         return view('smartTT.booking.index', compact('bookings'));
     }
