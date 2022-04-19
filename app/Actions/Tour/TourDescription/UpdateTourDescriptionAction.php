@@ -13,10 +13,10 @@ class UpdateTourDescriptionAction
             'description' => 'required|string|',
         ])->validate();
 
-         $tourDescription->update([
+        $tourDescription->update([
             ...$data,
         ]);
 
-         return $tourDescription->refresh();
+        return $tourDescription->refresh();
     }
 }

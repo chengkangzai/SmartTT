@@ -12,7 +12,7 @@ class StorePackageAction
     /**
      * @throws \Throwable
      */
-    public function execute(array $data) : Package
+    public function execute(array $data): Package
     {
         $data = $this->validate($data, isStore: true);
 

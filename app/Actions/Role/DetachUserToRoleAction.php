@@ -12,8 +12,8 @@ class DetachUserToRoleAction
             'user_id' => 'required|exists:users,id',
         ])->validate();
 
-         $role->users()->detach($data['user_id']);
+        $role->users()->detach($data['user_id']);
 
-         return $role->refresh();
+        return $role->refresh();
     }
 }

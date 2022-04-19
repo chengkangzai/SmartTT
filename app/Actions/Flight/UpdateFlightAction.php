@@ -12,10 +12,10 @@ class UpdateFlightAction
     {
         $data = $this->validate($data);
 
-         $flight->update([
+        $flight->update([
             ...$data,
         ]);
 
-         return $flight->refresh();
+        return $flight->refresh();
     }
 }
