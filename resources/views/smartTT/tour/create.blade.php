@@ -63,8 +63,7 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label for="itinerary" class="form-label">{{ __('Itinerary') }}</label>
-                        <input type="file" id="itinerary" name="itinerary" accept='application/pdf'
-                               class="form-control">
+                        <input type="file" id="itinerary" name="itinerary" accept='application/pdf' class="form-control">
                     </div>
                     <div class="col col-md-6">
                         <label for="thumbnail" class="form-label">{{ __('Thumbnail') }}</label>
@@ -73,9 +72,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="is_active" class="form-check-label">{{__('Active this Tour')}}</label>
-                    <input type="checkbox" name="is_active" class="form-check-primary" id="is_active"
-                           value="1" @checked(old('is_active',1))>
+                    <label for="is_active" class="form-check-label">{{ __('Active this Tour') }}</label>
+                    <input type="checkbox" name="is_active" class="form-check-primary" id="is_active" value="1"
+                        @checked(old('is_active', 1))>
                 </div>
             </div>
         </div>
@@ -89,12 +88,12 @@
                     <div class="col col-md-3">
                         <label for="place.1" class="form-label">{{ __('Place 1') }}</label>
                         <input type="text" name="place[1]" class="form-control" id="place.1"
-                               value="{{ old('place.1') }}" placeholder="{{ __('Enter the main visit place 1') }}">
+                            value="{{ old('place.1') }}" placeholder="{{ __('Enter the main visit place 1') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.1" class="form-label">{{ __('Description 1') }}</label>
                         <textarea type="text" name="des[1]" class="form-control" id="des.1" rows="3"
-                                  placeholder="{{ __('Enter Description 1') }}">{{ old('des.1') }}</textarea>
+                            placeholder="{{ __('Enter Description 1') }}">{{ old('des.1') }}</textarea>
                     </div>
                 </div>
 
@@ -102,12 +101,12 @@
                     <div class="col col-md-3">
                         <label for="place.2" class="form-label">{{ __('Place 2') }}</label>
                         <input type="text" name="place[2]" class="form-control" id="place.2"
-                               value="{{ old('place.2') }}" placeholder="{{ __('Enter the main visit place 2') }}">
+                            value="{{ old('place.2') }}" placeholder="{{ __('Enter the main visit place 2') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.2" class="form-label">{{ __('Description 2') }}</label>
                         <textarea type="text" name="des[2]" class="form-control" id="des.2" rows="3"
-                                  placeholder="{{ __('Enter Description 2') }}">{{ old('des.2') }}</textarea>
+                            placeholder="{{ __('Enter Description 2') }}">{{ old('des.2') }}</textarea>
                     </div>
                 </div>
 
@@ -115,12 +114,12 @@
                     <div class="col col-md-3">
                         <label for="place.3" class="form-label">{{ __('Place 3') }}</label>
                         <input type="text" name="place[3]" class="form-control" id="place.3"
-                               value="{{ old('place.3') }}" placeholder="{{ __('Enter the main visit place 3') }}">
+                            value="{{ old('place.3') }}" placeholder="{{ __('Enter the main visit place 3') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.3" class="form-label">{{ __('Description 3') }}</label>
                         <textarea type="text" name="des[3]" class="form-control" id="des.3" rows="3"
-                                  placeholder="{{ __('Enter Description 3') }}">{{ old('des.3') }}</textarea>
+                            placeholder="{{ __('Enter Description 3') }}">{{ old('des.3') }}</textarea>
                     </div>
                 </div>
 
