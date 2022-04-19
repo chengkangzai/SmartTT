@@ -9,7 +9,7 @@ trait ValidateTour
 {
     public function validate(array $data, bool $isStore = false, Tour $tour = null): array
     {
-        if (!isset($data['is_active'])) {
+        if (! isset($data['is_active'])) {
             $data['is_active'] = false;
         }
 

@@ -33,12 +33,12 @@ class PackageController extends Controller
     {
         try {
             $action->execute($request->all());
-
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+
         return redirect()->route('packages.index');
     }
 
@@ -61,7 +61,6 @@ class PackageController extends Controller
     {
         try {
             $action->execute($request->all(), $package);
-
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
         } catch (\Throwable $e) {

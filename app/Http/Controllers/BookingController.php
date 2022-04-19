@@ -69,7 +69,7 @@ class BookingController extends Controller
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
         $price = $this->calculate($request->all());
