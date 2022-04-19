@@ -11,7 +11,7 @@ class PackagePricingFactory extends Factory
 {
     protected $model = PackagePricing::class;
 
-    #[ArrayShape(['package_id' => "int|mixed", 'price' => "int", 'name' => "array|string", 'total_capacity' => "int", 'available_capacity' => "int"])]
+    #[ArrayShape(['package_id' => "int|mixed", 'price' => "int", 'name' => "array|string", 'total_capacity' => "int", 'available_capacity' => "int", 'is_active' => "int"])]
     public function definition(): array
     {
         return [
@@ -19,7 +19,8 @@ class PackagePricingFactory extends Factory
             'price' => rand(100, 1000),
             'name' => $this->faker->words(rand(1, 3), true),
             'total_capacity' => 10,
-            'available_capacity' => 10
+            'available_capacity' => 10,
+            'is_active' => rand(0, 1)
         ];
     }
 }
