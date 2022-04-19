@@ -1,6 +1,6 @@
 @php
-    /** @var \App\Models\Booking $booking */
-    /** @var \App\Models\Package $package */
+/** @var \App\Models\Booking $booking */
+/** @var \App\Models\Package $package */
 @endphp
 
 @extends('layouts.app')
@@ -42,16 +42,14 @@
                     <div class="col-md-6">
                         <label for="adult" class="form-label">{{ __('Adult') }}</label>
                         <input type="number" name="adult" class="form-control" id="adult" min="0"
-                               value="{{ old('adult', 0) }}" step="1"
-                               placeholder="{{ __('Enter Total Adult Number') }}">
+                            value="{{ old('adult', 0) }}" step="1" placeholder="{{ __('Enter Total Adult Number') }}">
                     </div>
                     <div class="col-md-6">
                         <label for="child" class="form-label">{{ __('Child') }}
                             <small class="text-sm">{{ __('children that is smaller than 12 years old') }}</small>
                         </label>
                         <input type="number" name="child" class="form-control" id="child" min="0"
-                               value="{{ old('child', 0) }}" step="1"
-                               placeholder="{{ __('Enter Total Child Number') }}">
+                            value="{{ old('child', 0) }}" step="1" placeholder="{{ __('Enter Total Child Number') }}">
                     </div>
                 </div>
 
@@ -63,7 +61,7 @@
                 <div class="mb-3">
                     <label for="discount" class="form-label">{{ __('Discount') }}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
-                           value="{{ old('discount', 0) }}" step="1" placeholder="{{ __('Please enter Discount') }}"/>
+                        value="{{ old('discount', 0) }}" step="1" placeholder="{{ __('Please enter Discount') }}" />
                 </div>
                 <div class="mb-3">
                     <label>{{ __('Total Price :') }} <span id="fee">RM 0</span></label>
@@ -81,7 +79,7 @@
         $.ajax({
             type: "POST",
             url: "{{ route('select2.user.getCustomer') }}",
-            success: function (response) {
+            success: function(response) {
                 $("#user_id").select2({
                     data: response,
                     maximumSelectionLength: 1
@@ -114,7 +112,7 @@
                     adult: adult.val(),
                     discount: discount.val()
                 },
-                success: function (response) {
+                success: function(response) {
                     $('#fee').text('RM ' + response)
                 }
             })

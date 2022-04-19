@@ -1,6 +1,6 @@
 @php
-    /** @var \App\Models\Booking $booking */
-    /** @var \App\Models\Package $package */
+/** @var \App\Models\Booking $booking */
+/** @var \App\Models\Package $package */
 @endphp
 
 @extends('layouts.app')
@@ -39,8 +39,8 @@
                 <div class="mb-3">
                     <label class="form-label" for="adult">{{ __('Adult') }}</label>
                     <input type="number" name="adult" class="form-control" id="adult" min="0"
-                           value="{{ old('adult', $booking->adult) }}" step="1"
-                           placeholder="{{ __('Enter Total adult Number') }}">
+                        value="{{ old('adult', $booking->adult) }}" step="1"
+                        placeholder="{{ __('Enter Total adult Number') }}">
                 </div>
 
                 <div class="mb-3">
@@ -48,8 +48,8 @@
                         <small>{{ __('children that is smaller than 12 years old') }}</small>
                     </label>
                     <input type="number" name="child" class="form-control" id="child" min="0"
-                           value="{{ old('child', $booking->child) }}" step="1"
-                           placeholder="{{ __('Enter Total Child Number') }}">
+                        value="{{ old('child', $booking->child) }}" step="1"
+                        placeholder="{{ __('Enter Total Child Number') }}">
                 </div>
 
                 <div class="mb-3">
@@ -66,12 +66,13 @@
                 <div class="mb-3">
                     <label class="form-label" for="discount">{{ __('Discount') }}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
-                           value="{{ old('discount', $booking->discount) }}" step="1"
-                           placeholder="{{ __('Please enter Discount') }} "/>
+                        value="{{ old('discount', $booking->discount) }}" step="1"
+                        placeholder="{{ __('Please enter Discount') }} " />
                 </div>
 
                 <div class="form-group">
-                    <label>{{ __('Total Price : ') }}<span id="fee">RM {{ number_format($booking->total_price) }}</span></label>
+                    <label>{{ __('Total Price : ') }}<span id="fee">RM
+                            {{ number_format($booking->total_price) }}</span></label>
                 </div>
             </form>
         </div>
@@ -112,7 +113,7 @@
                     discount: discount.val(),
                     user_id: userID.val()
                 },
-                success: function (response) {
+                success: function(response) {
                     $('#fee').text('RM ' + response)
                 }
             })
