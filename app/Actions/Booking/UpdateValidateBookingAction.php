@@ -17,7 +17,7 @@ class UpdateValidateBookingAction
 
         return $booking->update([
             ...$data,
-            'total_fee' => $price,
+            'total_price' => $price,
         ]);
     }
 }

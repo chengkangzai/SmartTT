@@ -6,13 +6,10 @@ use App\Models\Package;
 
 trait CalculateTotalBookingPrice
 {
-    use ValidateBooking;
-
     public function calculate($data): float|int
     {
-        $data = $this->validate($data);
         $packagePrice = Package::whereId($data['package_id'])->firstOrFail()->price;
 
-        return $packagePrice * $data['adult'] + (200 * $data['child']) - $data['adult'];
+        return $packagePrice * $data['adult'] + (200 * $data['child']) - $data['discount'];
     }
 }

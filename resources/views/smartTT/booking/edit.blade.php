@@ -1,3 +1,8 @@
+@php
+    /** @var \App\Models\Booking $booking */
+    /** @var \App\Models\Package $package */
+@endphp
+
 @extends('layouts.app')
 @section('title')
     Edit Booking - {{ config('app.name') }}
@@ -21,7 +26,7 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label class="form-label" for="package_id">{{ __('Packages') }}</label>
-                    <select name="package_id" class="form-control select2 " id="package_id" required>
+                    <select name="package_id" class="form-control select2 " id="package_id" required multiple>
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 @checked($booking->packages->id === $key)>
@@ -34,21 +39,22 @@
                 <div class="mb-3">
                     <label class="form-label" for="adult">{{ __('Adult') }}</label>
                     <input type="number" name="adult" class="form-control" id="adult" min="0"
-                        value="{{ old('adult', $booking->adult) }}" step="1"
-                        placeholder="{{ __('Enter Total adult Number') }}">
+                           value="{{ old('adult', $booking->adult) }}" step="1"
+                           placeholder="{{ __('Enter Total adult Number') }}">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="child">{{ __('Child') }}</label>
-                    <small>{{ __('Child is defined as children that is smaller than 12 years old') }}</small>
+                    <label class="form-label" for="child">{{ __('Child') }}
+                        <small>{{ __('children that is smaller than 12 years old') }}</small>
+                    </label>
                     <input type="number" name="child" class="form-control" id="child" min="0"
-                        value="{{ old('child', $booking->child) }}" step="1"
-                        placeholder="{{ __('Enter Total Child Number') }}">
+                           value="{{ old('child', $booking->child) }}" step="1"
+                           placeholder="{{ __('Enter Total Child Number') }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="user_id">{{ __('Customer') }}</label>
-                    <select name="user_id" class="form-control select2 " id="user_id" required>
+                    <select name="user_id" class="form-control select2 " id="user_id" required multiple>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" @checked($booking->users->id === $user->id)>
                                 {{ $user->name }} ({{ $user->email }})
@@ -60,12 +66,12 @@
                 <div class="mb-3">
                     <label class="form-label" for="discount">{{ __('Discount') }}</label>
                     <input type="number" name="discount" class="form-control" id="discount" min="0"
-                        value="{{ old('discount', $booking->discount) }}" step="1"
-                        placeholder="{{ __('Please enter Discount') }} " />
+                           value="{{ old('discount', $booking->discount) }}" step="1"
+                           placeholder="{{ __('Please enter Discount') }} "/>
                 </div>
 
                 <div class="form-group">
-                    <label>{{ __('Total Price : ') }}<span id="fee">RM {{ $booking->total_fee }}</span></label>
+                    <label>{{ __('Total Price : ') }}<span id="fee">RM {{ number_format($booking->total_price) }}</span></label>
                 </div>
             </form>
         </div>
@@ -83,7 +89,12 @@
         const discount = $('#discount');
         const userID = $('#user_id');
 
-        userID.select2();
+        userID.select2({
+            maximumSelectionLength: 1,
+        });
+        packageId.selec2({
+            maximumSelectionLength: 1,
+        });
 
         function updatePrice() {
             const adultVal = adult.val();
@@ -101,7 +112,7 @@
                     discount: discount.val(),
                     user_id: userID.val()
                 },
-                success: function(response) {
+                success: function (response) {
                     $('#fee').text('RM ' + response)
                 }
             })

@@ -21,7 +21,7 @@ class BookingController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $bookings = Booking::with(['users', 'packages', 'packages.tour'])->paginate(10);
+        $bookings = Booking::with(['users', 'packages', 'packages.tour'])->orderByDesc('id')->paginate(10);
 
         return view('smartTT.booking.index', compact('bookings'));
     }
@@ -69,7 +69,7 @@ class BookingController extends Controller
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
-        if (! $request->ajax()) {
+        if (!$request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
         $price = $this->calculate($request->all());

@@ -45,7 +45,7 @@
                             <td>{{ $booking->child }}</td>
                             <td>{{ $booking->users->name }}</td>
                             <td>RM {{ number_format($booking->discount) }}</td>
-                            <td>RM {{ number_format($booking->total_fee) }}</td>
+                            <td>RM {{ number_format($booking->total_price) }}</td>
                         </tr>
                     </tbody>
                 </table>

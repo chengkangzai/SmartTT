@@ -12,7 +12,7 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('package_id')->constrained();
-            $table->integer('total_fee');
+            $table->integer('total_price');
             $table->integer('discount');
             $table->integer('adult');
             $table->integer('child');

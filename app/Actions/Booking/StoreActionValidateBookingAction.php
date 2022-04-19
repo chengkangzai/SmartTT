@@ -17,7 +17,7 @@ class StoreActionValidateBookingAction
 
         return Booking::create([
             ...$data,
-            'total_fee' => $price,
+            'total_price' => $price,
         ]);
     }
 }
