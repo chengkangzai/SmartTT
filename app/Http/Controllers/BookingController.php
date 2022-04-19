@@ -17,6 +17,8 @@ use Spatie\Permission\Models\Role;
 
 class BookingController extends Controller
 {
+    use CalculateTotalBookingPrice;
+
     public function index(): Factory|View|Application
     {
         $bookings = Booking::with(['users', 'packages', 'packages.tour'])->paginate(10);
@@ -65,12 +67,12 @@ class BookingController extends Controller
         return redirect()->route('bookings.index');
     }
 
-    protected function calculatePrice(Request $request, CalculateTotalBookingPrice $action): JsonResponse|bool
+    protected function calculatePrice(Request $request): JsonResponse|bool
     {
         if (! $request->ajax()) {
             return response('You Are not allow to be here')->isForbidden();
         }
-        $price = $action->calculate($request->all());
+        $price = $this->calculate($request->all());
 
         return response()->json(number_format($price));
     }
