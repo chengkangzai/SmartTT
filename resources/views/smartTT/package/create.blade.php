@@ -67,16 +67,21 @@
                         <input type="text" class="form-control" name="name[1]" id="name[1]"
                             placeholder="{{ __('Enter Pricing Name 1') }}" value="{{ old('name.1') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="price[1]" class="form-label">{{ __('Price') }} 1 </label>
                         <input type="number" class="form-control" name="price[1]" id="price[1]" step="0.01"
                             placeholder="{{ 'Enter Price for Pricing  1' }}" value="{{ old('price.1') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="total_capacity[1]" class="form-label">{{ __('Total Capacity') }} 1 </label>
                         <input type="number" class="form-control" name="total_capacity[1]" id="total_capacity[1]"
                             placeholder="{{ __('Enter Total Capacity of 1') }}" value="{{ old('total_capacity.1') }}"
                             step="1">
+                    </div>
+                    <div class="col col-md-2">
+                        <label for="pricing_is_active-1" class="form-label">{{ __('Active this Pricing') }}</label>
+                        <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_1"
+                            id="pricing_is_active-1" value="1">
                     </div>
                 </div>
 
@@ -86,16 +91,21 @@
                         <input type="text" class="form-control" name="name[2]" id="name[2]"
                             placeholder="{{ __('Enter Pricing Name 2') }}" value="{{ old('name.2') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="price[2]" class="form-label">{{ __('Price') }} 2 </label>
                         <input type="number" class="form-control" name="price[2]" id="price[2]" step="0.01"
                             placeholder="{{ 'Enter Price for Pricing  2' }}" value="{{ old('price.2') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="total_capacity[2]" class="form-label">{{ __('Total Capacity') }} 2 </label>
                         <input type="number" class="form-control" name="total_capacity[2]" id="total_capacity[2]"
                             placeholder="{{ __('Enter Total Capacity of 2') }}" value="{{ old('total_capacity.2') }}"
                             step="1">
+                    </div>
+                    <div class="col col-md-2">
+                        <label for="pricing_is_active-2" class="form-label">{{ __('Active this Pricing') }}</label>
+                        <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_2"
+                            id="pricing_is_active-2" value="1">
                     </div>
                 </div>
 
@@ -105,16 +115,21 @@
                         <input type="text" class="form-control" name="name[3]" id="name[3]"
                             placeholder="{{ __('Enter Pricing Name 3') }}" value="{{ old('name.3') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="price[3]" class="form-label">{{ __('Price') }} 3 </label>
                         <input type="number" class="form-control" name="price[3]" id="price[3]" step="0.01"
                             placeholder="{{ 'Enter Price for Pricing  3' }}" value="{{ old('price.3') }}">
                     </div>
-                    <div class="col col-md-4">
+                    <div class="col col-md-3">
                         <label for="total_capacity[3]" class="form-label">{{ __('Total Capacity') }} 3 </label>
                         <input type="number" class="form-control" name="total_capacity[3]" id="total_capacity[3]"
                             placeholder="{{ __('Enter Total Capacity of 3') }}" value="{{ old('total_capacity.3') }}"
                             step="1">
+                    </div>
+                    <div class="col col-md-2">
+                        <label for="pricing_is_active-3" class="form-label">{{ __('Active this Pricing') }}</label>
+                        <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_3"
+                            id="pricing_is_active-3" value="1">
                     </div>
                 </div>
             </form>

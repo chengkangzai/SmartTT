@@ -78,6 +78,7 @@
                             <th>{{ __('Price') }}</th>
                             <th>{{ __('Total Capacity') }}</th>
                             <th>{{ __('Available Capacity') }}</th>
+                            <th>{{ __('Active') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -89,6 +90,7 @@
                                 <td>RM {{ number_format($pricing->price, 2) }}</td>
                                 <td>{{ $pricing->total_capacity }}</td>
                                 <td>{{ $pricing->available_capacity }}</td>
+                                <td>{{ $pricing->is_active ? 'Active' : 'Inactive' }}</td>
                                 <td>
                                     <a href="{{ route('packagePricings.edit', $pricing) }}" class="btn btn-primary">
                                         {{ __('Edit') }}

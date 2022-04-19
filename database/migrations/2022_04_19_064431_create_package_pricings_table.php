@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('price');
             $table->integer('total_capacity');
             $table->integer('available_capacity');
+            $table->boolean('is_active');
             $table->timestamps();
             $table->softDeletes();
         });

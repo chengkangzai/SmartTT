@@ -18,6 +18,7 @@ class PackagePricing extends Model
         'price',
         'total_capacity',
         'available_capacity',
+        'is_active',
     ];
 
     public function package(): BelongsTo

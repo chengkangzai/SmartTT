@@ -31,8 +31,8 @@
                 <div class="mb-3">
                     <label for="price" class="form-label">{{ __('Price') }}</label>
                     <input type="number" class="form-control" name="price" id="price"
-                        placeholder="{{ 'Enter Price for Pricing ' }}" value="{{ old('price', $packagePricing->price) }}"
-                        step="0.01">
+                        placeholder="{{ 'Enter Price for Pricing ' }}"
+                        value="{{ old('price', $packagePricing->price) }}" step="0.01">
                 </div>
                 <div class="mb-3">
                     <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>

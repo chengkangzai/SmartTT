@@ -10,14 +10,30 @@ trait ValidatePackage
             $data['is_active'] = false;
         }
 
-        $rules = ($isStore) ? [
-            'name' => 'required|array',
-            'name.*' => 'required|string|max:255',
-            'price' => 'required|array',
-            'price.*' => 'required|string|max:255',
-            'total_capacity' => 'required|array',
-            'total_capacity.*' => 'required|string|max:255',
-        ] : [];
+        $rules = [];
+        if ($isStore) {
+            $rules = [
+                ...$rules,
+                'name' => 'required|array',
+                'name.*' => 'required|string|max:255',
+                'price' => 'required|array',
+                'price.*' => 'required|string|max:255',
+                'total_capacity' => 'required|array',
+                'total_capacity.*' => 'required|string|max:255',
+            ];
+
+            for ($i = 1; $i < count($data['name']) + 1; $i++) {
+                if (isset($data['pricing_is_active_' . $i])) {
+                    $data['pricing_is_active_' . $i] = true;
+                } else {
+                    $data['pricing_is_active_' . $i] = false;
+                }
+                $rules = [
+                    ...$rules,
+                    'pricing_is_active_' . $i => 'required|boolean'
+                ];
+            }
+        }
 
         return \Validator::make(
             $data,

@@ -31,6 +31,7 @@ class StorePackageAction
                     'price' => $price[$i],
                     'total_capacity' => $totalCapacity[$i],
                     'available_capacity' => $totalCapacity[$i],
+                    'is_active' => $data['pricing_is_active_' . $i],
                 ]);
             }
 
