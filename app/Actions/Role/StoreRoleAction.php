@@ -20,6 +20,6 @@ class StoreRoleAction
 
         $role->givePermissionTo($data['permissions']);
 
-        return $role;
+        return $role->refresh();
     }
 }

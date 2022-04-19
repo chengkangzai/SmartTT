@@ -13,5 +13,7 @@ class AttachUserToRoleAction
         ])->validate();
 
         $role->users()->attach($data['users']);
+
+        return $role->refresh();
     }
 }

@@ -12,7 +12,7 @@ class StorePackageAction
     /**
      * @throws \Throwable
      */
-    public function execute(array $data)
+    public function execute(array $data) : Package
     {
         $data = $this->validate($data, isStore: true);
 
@@ -36,6 +36,8 @@ class StorePackageAction
             }
 
             $package->flight()->attach($data['flights']);
+
+            return $package->refresh();
         });
     }
 }

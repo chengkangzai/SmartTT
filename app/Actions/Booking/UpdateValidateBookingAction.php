@@ -9,15 +9,17 @@ class UpdateValidateBookingAction
     use CalculateTotalBookingPrice;
     use ValidateBooking;
 
-    public function execute(array $data, Booking $booking): bool
+    public function execute(array $data, Booking $booking): Booking
     {
         $data = $this->validate($data);
 
         $price = $this->calculate($data);
 
-        return $booking->update([
+        $booking->update([
             ...$data,
             'total_price' => $price,
         ]);
+
+        return $booking->refresh();
     }
 }

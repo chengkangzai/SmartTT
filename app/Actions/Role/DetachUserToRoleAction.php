@@ -6,12 +6,14 @@ use Spatie\Permission\Models\Role;
 
 class DetachUserToRoleAction
 {
-    public function execute(array $data, Role $role): int
+    public function execute(array $data, Role $role): Role
     {
         $data = \Validator::make($data, [
             'user_id' => 'required|exists:users,id',
         ])->validate();
 
-        return $role->users()->detach($data['user_id']);
+         $role->users()->detach($data['user_id']);
+
+         return $role->refresh();
     }
 }

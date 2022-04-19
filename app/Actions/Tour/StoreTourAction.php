@@ -43,7 +43,7 @@ class StoreTourAction
                     $tour->countries()->attach($country, ['order' => $index]);
                 });
 
-            return $tour;
+            return $tour->refresh();
         });
     }
 }

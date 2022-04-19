@@ -8,7 +8,7 @@ trait CalculateTotalBookingPrice
 {
     public function calculate($data): float|int
     {
-        $packagePrice = Package::whereId($data['package_id'])->firstOrFail()->price;
+        $packagePrice = Package::findOrFail($data['package_id'])->price;
 
         return $packagePrice * $data['adult'] + (200 * $data['child']) - $data['discount'];
     }

@@ -8,12 +8,14 @@ class UpdateFlightAction
 {
     use ValidateFlight;
 
-    public function execute(array $data, Flight $flight): bool
+    public function execute(array $data, Flight $flight): Flight
     {
         $data = $this->validate($data);
 
-        return $flight->update([
+         $flight->update([
             ...$data,
         ]);
+
+         return $flight->refresh();
     }
 }
