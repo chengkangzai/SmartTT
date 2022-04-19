@@ -6,7 +6,7 @@ trait ValidatePackage
 {
     public function validate(array $data, bool $isStore = false): array
     {
-        if (!isset($data['is_active'])) {
+        if (! isset($data['is_active'])) {
             $data['is_active'] = false;
         }
 
@@ -30,7 +30,7 @@ trait ValidatePackage
                 }
                 $rules = [
                     ...$rules,
-                    'pricing_is_active_' . $i => 'required|boolean'
+                    'pricing_is_active_' . $i => 'required|boolean',
                 ];
             }
         }
@@ -41,7 +41,7 @@ trait ValidatePackage
                 'tour_id' => 'required|integer|exists:tours,id',
                 'depart_time' => 'required|date|after:now',
                 'flights' => 'required|array|exists:flights,id',
-                ...$rules
+                ...$rules,
             ],
             [
                 'name.*.required' => 'Name of the Pricing :index is required',
