@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Tour\DestroyTourAction;
 use App\Actions\Tour\StoreTourAction;
-use App\Actions\Tour\UpdateStoreAction;
+use App\Actions\Tour\UpdateTourAction;
 use App\Models\Country;
 use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class TourController extends Controller
@@ -34,6 +35,8 @@ class TourController extends Controller
     {
         try {
             $action->execute($request->all());
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
@@ -57,7 +60,7 @@ class TourController extends Controller
         return view('smartTT.tour.edit', compact('tour', 'countries'));
     }
 
-    public function update(Request $request, Tour $tour, UpdateStoreAction $action): RedirectResponse
+    public function update(Request $request, Tour $tour, UpdateTourAction $action): RedirectResponse
     {
         $action->execute($request->all(), $tour);
 
@@ -68,6 +71,8 @@ class TourController extends Controller
     {
         try {
             $action->execute($tour);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

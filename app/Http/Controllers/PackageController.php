@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PackageController extends Controller
 {
@@ -33,10 +34,12 @@ class PackageController extends Controller
         try {
             $action->execute($request->all());
 
-            return redirect()->route('packages.index');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+        return redirect()->route('packages.index');
     }
 
     public function show(Package $package): Factory|View|Application
@@ -59,10 +62,13 @@ class PackageController extends Controller
         try {
             $action->execute($request->all(), $package);
 
-            return redirect()->route('packages.index');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+
+        return redirect()->route('packages.index');
     }
 
     public function destroy(Package $package): RedirectResponse
