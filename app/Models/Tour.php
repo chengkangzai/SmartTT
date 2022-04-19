@@ -22,6 +22,7 @@ class Tour extends Model
         'thumbnail_url',
         'days',
         'nights',
+        'is_active',
     ];
 
     public function packages(): HasMany
@@ -31,7 +32,7 @@ class Tour extends Model
 
     public function description(): HasMany
     {
-        return $this->hasMany(TourDescription::class);
+        return $this->hasMany(TourDescription::class)->orderBy('order');
     }
 
     public function countries(): BelongsToMany

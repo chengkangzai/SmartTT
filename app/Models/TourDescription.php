@@ -17,6 +17,7 @@ class TourDescription extends Model
     protected $fillable = [
         'place',
         'description',
+        'order',
         'tour_id',
     ];
 

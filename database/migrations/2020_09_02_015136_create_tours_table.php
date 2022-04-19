@@ -17,6 +17,7 @@ class CreateToursTable extends Migration
             $table->text('thumbnail_url');
             $table->integer('days');
             $table->integer('nights');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
