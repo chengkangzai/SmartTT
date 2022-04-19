@@ -13,9 +13,12 @@ class TourSeeder extends Seeder
     public function run()
     {
         Tour::factory()->count(11)->afterCreating(function (Tour $tour) {
-            TourDescription::factory()->count(3)->create([
+            TourDescription::factory()->count(3)->make([
                 'tour_id' => $tour->id,
-            ]);
+            ])->map(function ($description,$index) {
+                $description->order = $index ;
+                return $description;
+            })->each->save();
             Country::inRandomOrder()
                 ->take(rand(1, 4))
                 ->get()
