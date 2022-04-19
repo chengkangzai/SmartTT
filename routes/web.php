@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
@@ -54,6 +55,9 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::post('tourDescription/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');
     Route::resource('tourDescriptions', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
+
+    Route::post('packagePricing/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
+    Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
 
     Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
     Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');

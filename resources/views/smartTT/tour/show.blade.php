@@ -20,10 +20,8 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Information') }}</h3>
                     <div class="pull-right">
-                        <a href="{{ route('tours.edit', ['tour' => $tour->id]) }}"
-                            class="btn btn-primary">{{ __('Edit') }}</a>
-                        <form action="{{ route('tours.destroy', ['tour' => $tour->id]) }}" method="POST"
-                            style="display: inline">
+                        <a href="{{ route('tours.edit', $tour) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                        <form action="{{ route('tours.destroy', $tour) }}" method="POST" class="d-inline">
                             @method('DELETE')
                             @csrf
                             <input class="btn btn-danger" type="submit" value="Delete" />
@@ -66,17 +64,14 @@
                 </div>
             </div>
 
-
             <div class="card mt-2">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Description') }}</h3>
                     <div class="pull-right">
-                        <div class="pull-right">
-                            <a href="#" class="btn btn-success" data-coreui-toggle="modal"
-                                data-coreui-target="#addTourDescriptionModal">
-                                {{ __('Add') }}
-                            </a>
-                        </div>
+                        <a href="#" class="btn btn-success" data-coreui-toggle="modal"
+                            data-coreui-target="#addTourDescriptionModal">
+                            {{ __('Add') }}
+                        </a>
                     </div>
                 </div>
                 <div class="card-body row gap-1">
@@ -120,7 +115,7 @@
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('tourDescriptions.attach', ['tour' => $tour->id]) }}" method="POST"
+                    <form action="{{ route('tourDescriptions.attach', $tour->id) }}" method="POST"
                         id="addTourDescription">
                         @csrf
                         @method('POST')

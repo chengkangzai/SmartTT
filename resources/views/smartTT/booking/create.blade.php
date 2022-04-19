@@ -26,13 +26,13 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
+                    //TODO add package pricing
                     <label for="package_id" class="form-label">{{ __('Packages') }}</label>
                     <select name="package_id" class="form-control" id="package_id" required multiple>
                         @foreach ($packages as $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 @checked(old('package_id') == $package->id)>
                                 {{ $package->tour->name }} ({{ $package->depart_time }})
-                                (RM{{ number_format($package->price, 2) }})
                             </option>
                         @endforeach
                     </select>

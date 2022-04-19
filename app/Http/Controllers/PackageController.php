@@ -44,7 +44,7 @@ class PackageController extends Controller
 
     public function show(Package $package): Factory|View|Application
     {
-        $package->load('flight', 'flight.airline');
+        $package->load('flight', 'flight.airline', 'pricings');
 
         return view('smartTT.package.show', compact('package'));
     }
