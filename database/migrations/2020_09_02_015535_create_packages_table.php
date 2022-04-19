@@ -11,8 +11,7 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->dateTime('depart_time');
-            $table->integer('capacity');
-            $table->integer('price');
+            $table->boolean('is_active')->default(true);
             $table->foreignId('tour_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

@@ -28,8 +28,6 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Fee') }}</th>
-                            <th>{{ __('Capacity') }}</th>
                             <th>{{ __('Departure') }}</th>
                             <th>{{ __('Tour') }}</th>
                             <th>{{ __('Airline') }}</th>
@@ -40,8 +38,6 @@
                         @foreach ($packages as $package)
                             <tr>
                                 <td>{{ $package->id }}</td>
-                                <td>RM{{ number_format($package->price, 2) }}</td>
-                                <td>{{ $package->capacity }}</td>
                                 <td>{{ $package->depart_time->format(config('app.date_format')) }}</td>
                                 <td>{{ $package->tour->name }}</td>
                                 <td>

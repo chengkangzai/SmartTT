@@ -34,9 +34,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Fee') }}</th>
                             <th>{{ __('Departure') }}</th>
-                            <th>{{ __('Capacity') }}</th>
                             <th>{{ __('Tour') }}</th>
                             <th>{{ __('Airline') }}</th>
                         </tr>
@@ -44,9 +42,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $package->id }}</td>
-                            <td>RM {{ number_format($package->fee, 2) }}</td>
                             <td>{{ $package->depart_time }}</td>
-                            <td>{{ $package->capacity }}</td>
                             <td>{{ $package->tour->name }}</td>
                             <td>
                                 <ul>

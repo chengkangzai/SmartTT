@@ -23,20 +23,6 @@
                     @csrf
                     <div class="mb-3 row">
                         <div class="col col-md-6">
-                            <label for="price" class="form-label">{{ __('Price (RM)') }}</label>
-                            <input type="number" name="price" class="form-control" id="price" min="1"
-                                value="{{ old('price', $package->price) }}"
-                                placeholder="{{ __('Enter Package Price') }}">
-                        </div>
-                        <div class="col col-md-6">
-                            <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
-                            <input type="number" name="capacity" class="form-control" id="capacity" max="100" min="0"
-                                value="{{ old('capacity', $package->capacity) }}"
-                                placeholder="{{ __('Enter Capacity of this package') }}">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="col col-md-6">
                             <label for="tour" class="form-label">{{ __('Tour') }}</label>
                             <select name="tour_id" class="form-control" id="tour">
                                 @foreach ($tours as $tour)

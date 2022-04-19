@@ -22,19 +22,6 @@
                 @csrf
                 <div class="mb-3 row">
                     <div class="col col-md-6">
-                        <label for="price" class="form-label">{{ __('Price (RM)') }}</label>
-                        <input type="number" name="price" class="form-control" id="price" value="{{ old('price') }}"
-                            placeholder="{{ __('Enter Package Price') }}">
-                    </div>
-                    <div class="col col-md-6">
-                        <label for="capacity" class="form-label">{{ __('Capacity') }}</label>
-                        <input type="number" name="capacity" class="form-control" id="capacity"
-                            value="{{ old('capacity') }}" placeholder="{{ __('Enter Capacity of this package') }}">
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <div class="col col-md-6">
                         <label for="tour_id" class="form-label">{{ __('Tour') }}</label>
                         <select id="tour_id" name="tour_id" class="form-control">
                             @foreach ($tours as $tour)
@@ -47,8 +34,8 @@
                     <div class="col col-md-6">
                         <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
                         <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
-                            min="{{ date('Y-m-d\TH:i') }}"
-                            value="{{ old('depart_time', now()->format('Y-m-d\TH:i')) }}" />
+                               min="{{ date('Y-m-d\TH:i') }}"
+                               value="{{ old('depart_time', now()->format('Y-m-d\TH:i')) }}"/>
                     </div>
                 </div>
 

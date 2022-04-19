@@ -19,9 +19,7 @@ class PackageFactory extends Factory
     {
         $tourCount = Tour::count();
         return [
-            'price' => rand(1000, 2000),
             'tour_id' => rand(1, $tourCount),
-            'capacity' => rand(25, 30),
             'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
         ];
     }

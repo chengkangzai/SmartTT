@@ -15,9 +15,8 @@ class Package extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'capacity',
-        'price',
         'tour_id',
+        'is_active',
         'depart_time',
     ];
 
@@ -25,11 +24,12 @@ class Package extends Model
         'depart_time',
     ];
 
+    //TODO Change to price Range
     public function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
