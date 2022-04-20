@@ -1,6 +1,10 @@
+@php
+/** @var \App\Models\User $user */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    User Management - {{ config('app.name') }}
+    {{ __('User Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -35,10 +39,8 @@
                                 <td>
                                     <a href="{{ route('users.show', $user) }}"
                                         class="btn btn-info">{{ __('Show') }}</a>
-                                    @if (auth()->user()->can('Update User') || auth()->user()->id == $user->id)
-                                        <a href="{{ route('users.edit', $user) }}"
-                                            class="btn btn-primary">{{ __('Edit') }}</a>
-                                    @endif
+                                    <a href="{{ route('users.edit', $user) }}"
+                                        class="btn btn-primary">{{ __('Edit') }}</a>
                                     @can('Delete User')
                                         <form action="{{ route('users.destroy', $user) }}" class="d-inline"
                                             method="POST">

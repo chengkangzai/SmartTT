@@ -1,6 +1,12 @@
+@php
+/** @var \App\Models\Package $package */
+/** @var \App\Models\Tour $tour */
+/** @var \App\Models\Flight $flight */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Create Package - {{ config('app.name') }}
+    {{ __('Create Package') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

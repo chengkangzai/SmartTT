@@ -4,8 +4,9 @@
 
 @extends('layouts.app')
 @section('title')
-    Edit Flight - {{ config('app.name') }}
+    {{ __('Edit Flight') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

@@ -1,6 +1,10 @@
+@php
+/** @var \App\Models\PackagePricing $packagePricing */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Create Package Pricing - {{ config('app.name') }}
+    {{ __('Create Package Pricing') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

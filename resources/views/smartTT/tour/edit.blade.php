@@ -4,8 +4,9 @@
 
 @extends('layouts.app')
 @section('title')
-    Edit Tour - {{ config('app.name') }}
+    {{ __('Edit Tour') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -27,8 +28,8 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $tour->name) }}"
-                        placeholder="{{ __('Enter Tour Name') }}">
+                    <input type="text" name="name" class="form-control" id="name"
+                        value="{{ old('name', $tour->name) }}" placeholder="{{ __('Enter Tour Name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">{{ __('Tour Code') }}</label>
@@ -45,7 +46,8 @@
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
                         <select name="countries[]" id="country_id" class="form-control py-3" multiple>
                             @foreach ($countries as $key => $country)
-                                <option value="{{ $key }}" @checked(in_array($key, old('countries', $tour->countries->pluck('id')->toArray())))>{{ $country }}
+                                <option value="{{ $key }}" @checked(in_array($key, old('countries', $tour->countries->pluck('id')->toArray())))>
+                                    {{ $country }}
                                 </option>
                             @endforeach
                         </select>

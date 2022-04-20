@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title')
+    {{ __('About') }} - {{ config('app.name') }}
+@endsection
+@extends('layouts.app')
 
 @section('content')
     <div class="card mb-4">

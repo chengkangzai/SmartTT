@@ -1,7 +1,12 @@
+@php
+/** @var \App\Models\Tour $tour */
+/** @var \App\Models\Package $package */
+@endphp
 @extends('layouts.app')
 @section('title')
-    Edit Package - {{ config('app.name') }}
+    {{ __('Edit Package') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    Tour Management - {{ config('app.name') }}
+    {{ __('Tour Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -17,20 +17,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('tours.create') }}" class="btn btn-success">Create</a>
+            <a href="{{ route('tours.create') }}" class="btn btn-success">{{ __('Create') }}</a>
         </div>
         <div class="card-body">
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="table-responsive">
                 <table id="indexTable" class="table table-bordered table-hover ">
                     <thead>
@@ -58,10 +47,12 @@
                                 </td>
                                 <td>{{ $tour->category }}</td>
                                 <td>
-                                    <a href="{{ route('tours.show', $tour) }}"
-                                        class="btn btn-info">{{ __('Show') }}</a>
-                                    <a href="{{ route('tours.edit', $tour) }}"
-                                        class="btn btn-primary">{{ __('Edit') }}</a>
+                                    <a href="{{ route('tours.show', $tour) }}" class="btn btn-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('tours.edit', $tour) }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
                                     <form action="{{ route('tours.destroy', $tour) }}" class="d-inline"
                                         method="POST">
                                         @csrf

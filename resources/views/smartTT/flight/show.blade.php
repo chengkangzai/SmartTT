@@ -1,10 +1,12 @@
 @php
 /** @var \App\Models\Flight $flight */
 @endphp
+
 @extends('layouts.app')
 @section('title')
-    Flight Management - {{ config('app.name') }}
+    {{ __('Flight Management') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

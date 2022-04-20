@@ -1,7 +1,12 @@
+@php
+/** @var \App\Models\User $user */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Edit User - {{ config('app.name') }}
+    {{ __('Edit User') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

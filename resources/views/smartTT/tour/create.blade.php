@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Create Tour - {{ config('app.name') }}
+    {{ __('Create Tour') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

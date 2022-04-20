@@ -1,6 +1,10 @@
+@php
+/** @var \App\Models\Booking $booking */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Booking Management - {{ config('app.name') }}
+    {{ __('Booking Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

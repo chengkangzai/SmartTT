@@ -5,10 +5,7 @@
 
 @extends('layouts.app')
 @section('title')
-    Package Management - {{ config('app.name') }}
-@endsection
-@section('cdn')
-    <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.css') }}">
+    {{ __('Package Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

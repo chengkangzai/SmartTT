@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    Flight Management - {{ config('app.name') }}
+    {{ __('Flight Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')

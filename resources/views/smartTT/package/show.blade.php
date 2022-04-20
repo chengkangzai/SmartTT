@@ -6,7 +6,7 @@
 
 @extends('layouts.app')
 @section('title')
-    Package Management - {{ config('app.name') }}
+    {{ __('Package Management') }} - {{ config('app.name') }}
 @endsection
 @section('content')
     <nav aria-label="breadcrumb">

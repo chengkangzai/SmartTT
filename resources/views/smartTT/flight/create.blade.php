@@ -1,6 +1,9 @@
+@php
+/** @var \App\Models\Flight $flight */
+@endphp
 @extends('layouts.app')
 @section('title')
-    Create Flight - {{ config('app.name') }}
+    {{ __('Create Flight') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
