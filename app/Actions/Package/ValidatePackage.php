@@ -44,12 +44,15 @@ trait ValidatePackage
                 ...$rules,
             ],
             [
-                'name.*.required' => 'Name of the Pricing :index is required',
-                'name.*.max' => 'Name of the Pricing :index must be less than 255 characters',
-                'price.*.required' => 'Price of the Pricing :index is required',
-                'price.*.max' => 'Price of the Pricing :index must be less than 255 characters',
-                'total_capacity.*.required' => 'Total Capacity of the Pricing :index is required',
-                'total_capacity.*.max' => 'Total Capacity of the Pricing :index must be less than 255 characters',
+                'name.*.required' => __('Name of the Pricing :index is required'),
+                'name.*.max' => __('Name of the Pricing :index must be less than 255 characters'),
+                'price.*.required' => __('Price of the Pricing :index is required'),
+                'price.*.max' => __('Price of the Pricing :index must be less than 255 characters'),
+                'total_capacity.*.required' => __('Total Capacity of the Pricing :index is required'),
+                'total_capacity.*.max' => __('Total Capacity of the Pricing :index must be less than 255 characters'),
+            ],
+            [
+                'tour_id' => __('Tour'),
             ]
         )->validate();
     }

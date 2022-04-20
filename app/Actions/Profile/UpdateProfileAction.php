@@ -10,9 +10,9 @@ class UpdateProfileAction
     public function execute(array $data, User $user): User
     {
         $data = \Validator::make($data, [
-            'name' => ['required|string|max:255'],
-            'email' => ['required|email|string|max:255|unique:users,email,' . $user->id],
-            'password' => ['nullable|string|confirmed|min:8'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|string|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|confirmed|min:8',
         ])->validate();
 
         if (isset($data['password'])) {
