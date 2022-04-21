@@ -16,6 +16,6 @@ class ProfileController extends Controller
     {
         $action->execute($request->all(), auth()->user());
 
-        return redirect()->back()->with('success', 'Profile updated.');
+        return redirect()->back()->with('success', __('Profile updated successfully'));
     }
 }

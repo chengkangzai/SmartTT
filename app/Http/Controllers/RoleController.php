@@ -37,7 +37,7 @@ class RoleController extends Controller
 
         $action->execute($request->all());
 
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with('success', __('Role created successfully'));
     }
 
     public function show(Role $role): Factory|View|Application
@@ -61,7 +61,7 @@ class RoleController extends Controller
         abort_unless(auth()->user()->can('Update User Role'), 403);
         $role->update($request->all());
 
-        return redirect()->route('roles.show', ['role' => $role->id]);
+        return redirect()->route('roles.show', $role)->with('success', __('Role updated successfully'));
     }
 
     public function destroy(Role $role): RedirectResponse
@@ -70,23 +70,23 @@ class RoleController extends Controller
         if ($role->users()->count() == 0) {
             $role->delete();
 
-            return redirect()->route('roles.index');
+            return redirect()->route('roles.index')->with('success', __('Role deleted successfully'));
         }
 
-        return redirect()->back()->withErrors(['error' => 'There is User in this role! Therefore you cant delete it!']);
+        return redirect()->back()->withErrors(['error' => __('There is User in this role! Therefore you cant delete it!')]);
     }
 
     public function attachUser(Role $role, Request $request, AttachUserToRoleAction $action): RedirectResponse
     {
         $action->execute($request->all(), $role);
 
-        return redirect()->route('roles.show', $role);
+        return redirect()->route('roles.show', $role)->with('success', __('User attached successfully'));
     }
 
     public function detachUser(Role $role, Request $request, DetachUserToRoleAction $action): RedirectResponse
     {
         $action->execute($request->all(), $role);
 
-        return redirect()->route('roles.show', $role);
+        return redirect()->route('roles.show', $role)->with('success', __('User detached successfully'));
     }
 }

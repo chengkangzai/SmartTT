@@ -37,7 +37,7 @@ class BookingController extends Controller
     {
         $action->execute($request->all());
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking created successfully'));
     }
 
     public function show(Booking $booking): Factory|View|Application
@@ -57,20 +57,20 @@ class BookingController extends Controller
     {
         $action->execute($request->all(), $booking);
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking updated successfully'));
     }
 
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking deleted successfully'));
     }
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
-        if (! $request->ajax()) {
-            return response('You Are not allow to be here')->isForbidden();
+        if (!$request->ajax()) {
+            return response(__('You Are not allow to be here'))->isForbidden();
         }
         $price = $this->calculate($request->all());
 
