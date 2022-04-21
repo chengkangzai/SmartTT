@@ -48,7 +48,7 @@ class BookingController extends Controller
     public function edit(Booking $booking): Factory|View|Application
     {
         $packages = Package::with('tour')->get();
-        $users = Role::findById(2)->users()->get();
+        $users = Role::findByName('Customer')->users()->get();
 
         return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
     }

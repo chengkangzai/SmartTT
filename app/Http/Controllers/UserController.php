@@ -10,14 +10,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
+        $users = User::orderByDesc('id')->paginate(10);
 
         return view('smartTT.user.index', compact('users'));
     }
@@ -61,12 +59,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success', __('User Deleted Successfully'));
-    }
-
-    public function changePassword(User $user, Request $request): RedirectResponse
-    {
-        Password::sendResetLink(['email' => $user->email]);
-
-        return back()->with('success', __('Password reset link sent to :') . $user->email);
     }
 }
