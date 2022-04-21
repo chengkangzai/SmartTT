@@ -47,12 +47,16 @@ class RoleController extends Controller
 
     public function edit(Role $role): Factory|View|Application
     {
-        return view('smartTT.role.edit', compact('role'));
+        $role->load('permissions');
+        $permissions = Permission::all();
+
+        return view('smartTT.role.edit', compact('role', 'permissions'));
     }
 
     public function update(Request $request, Role $role): RedirectResponse
     {
         $role->update($request->all());
+        $role->syncPermissions($request->get('permissions'));
 
         return redirect()->route('roles.show', $role)->with('success', __('Role updated successfully'));
     }

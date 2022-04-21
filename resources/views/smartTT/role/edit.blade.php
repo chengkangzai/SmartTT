@@ -23,9 +23,20 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label class="form-label" for="name">Name</label>
+                    <label class="form-label" for="name">{{__('Name')}}</label>
                     <input type="text" name="name" class="form-control" id="name"
-                        placeholder="{{ __('Enter User Role Name') }}" value="{{ $role->name }}">
+                           placeholder="{{ __('Enter User Role Name') }}" value="{{ old('name', $role->name) }}">
+                </div>
+                <div class="mb-3">
+                    <label for="permissions" class="form-label">{{__('Permissions')}}</label>
+                    <select name="permissions[]" id="permissions" class="form-control" multiple>
+                        @foreach ($permissions as $permission)
+                            <option value="{{ $permission->id }}"
+                                {{ in_array($permission->id, $role->permissions->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                {{ $permission->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </form>
         </div>
@@ -33,4 +44,10 @@
             <button form="editForm" type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#permissions').select2();
+    </script>
 @endsection
