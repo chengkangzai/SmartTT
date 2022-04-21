@@ -1,7 +1,12 @@
+@php
+/** @var \App\Models\Flight $flight */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Flight Management - {{ config('app.name') }}
+    {{ __('Flight Management') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -38,11 +43,11 @@
                     <tbody>
                         <tr>
                             <td>{{ $flight->id }}</td>
-                            <td>{{ $flight->depart_time }}</td>
-                            <td>{{ $flight->arrive_time }}</td>
-                            <td>RM {{ number_format($flight->fee / 100, 2) }}</td>
+                            <td>{{ $flight->departure_date }}</td>
+                            <td>{{ $flight->arrival_date }}</td>
+                            <td>RM {{ number_format($flight->price, 2) }}</td>
                             <td>{{ $flight->airline->name }}
-                                ({{ $flight->depart_airports->ICAO }}) -> ({{ $flight->arrive_airport->ICAO }})
+                                ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})
                             </td>
                         </tr>
                     </tbody>

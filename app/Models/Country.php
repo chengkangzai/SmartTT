@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
@@ -10,4 +12,16 @@ class Country extends Model
         'name',
         'short_code',
     ];
+
+    public function tours(): BelongsToMany
+    {
+        return $this->belongsToMany(Tour::class)
+            ->withPivot(['order'])
+            ->orderByPivot('order');
+    }
+
+    public function airline(): HasMany
+    {
+        return $this->hasMany(Airline::class);
+    }
 }

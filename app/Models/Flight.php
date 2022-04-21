@@ -3,35 +3,32 @@
 namespace App\Models;
 
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Flight extends Model
 {
-    use  HasFactory;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'depart_time',
-        'arrive_time',
-        'fee',
+        'departure_date',
+        'arrival_date',
+        'price',
         'airline_id',
-        'depart_airport',
-        'arrival_airport',
-        'flight_class',
-        'flight_type',
+        'departure_airport_id',
+        'arrival_airport_id',
+        'class',
+        'type',
     ];
-    //TODO add
-    //1.depart airport
-    //2.arrival airport
-    //3.flight class
-    //4.flight type
 
-    //Class
     protected $dates = [
-        'depart_time',
-        'arrive_time',
+        'departure_date',
+        'arrival_date',
     ];
 
     public const FCLASS = [
@@ -47,42 +44,37 @@ class Flight extends Model
         'Multi-city' => 'Multi-city',
     ];
 
-    /**
-     * @return BelongsToMany
-     */
-    public function trip(): BelongsToMany
+    public function price(): Attribute
     {
-        return $this->belongsToMany(Trip::class);
+        return Attribute::make(
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
+        );
     }
 
-    /**
-     * @return BelongsTo
-     */
+    public function packages(): BelongsToMany
+    {
+        return $this->belongsToMany(Package::class)
+            ->withTimestamps()
+            ->orderByPivot('order')
+            ->withPivot(['order']);
+    }
+
     public function airline(): BelongsTo
     {
         return $this->belongsTo(Airline::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function depart_airports(): BelongsTo
+    public function depart_airport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'depart_airport', 'id');
+        return $this->belongsTo(Airport::class, 'departure_airport_id', 'id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function arrive_airport(): BelongsTo
     {
-        return $this->belongsTo(Airport::class, 'arrival_airport', 'id');
+        return $this->belongsTo(Airport::class, 'arrival_airport_id', 'id');
     }
 
-    /**
-     * @param DateTimeInterface $date
-     * @return string
-     */
     protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->format('Y-m-d H:i:s');

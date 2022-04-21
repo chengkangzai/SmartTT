@@ -2,37 +2,42 @@
 
 namespace App\Actions\Tour;
 
+use App\Models\Tour;
+use Validator;
+
 trait ValidateTour
 {
-    public function validate(array $data, bool $isStore = false): array
+    public function validate(array $data, bool $isStore = false, Tour $tour = null): array
     {
-        $rules = ($isStore) ?
-            [
-                'des' => 'required|array|min:1|max:5',
-                'des.*' => 'required|string',
-                'place' => 'required|array|min:1|max:5',
-                'place.*' => 'required|string',
-                'tour_code' => 'required|unique:tours,tour_code',
-            ] :
-            [
-                'tour_code' => 'required|unique:tours,tour_code,' . $data['tour_code'],
-            ];
+        if (! isset($data['is_active'])) {
+            $data['is_active'] = false;
+        }
 
-        return \Validator::make(
-            $data,
-            [
-                'name' => 'required',
-                'destination' => 'required',
-                'category' => 'required',
-                'itinerary' => 'required|mimes:pdf|max:2048',
-                'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
-                +$rules,
-            ],
-            [
-                'des.*.required' => 'Description :index is required',
-                'place.*.required' => 'Place :index is required',
-            ]
-        )
-            ->validate();
+        $rules = ($isStore) ? [
+            'des' => 'required|array',
+            'des.*' => 'required|string',
+            'place' => 'required|array',
+            'place.*' => 'required|string',
+            'tour_code' => 'required|unique:tours,tour_code',
+            'itinerary' => 'required|mimes:pdf|max:2048',
+            'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
+        ] : [
+            'tour_code' => 'required|unique:tours,tour_code,' . $tour->id,
+        ];
+
+        return Validator::make($data, [
+            'name' => 'required',
+            'category' => 'required',
+            'countries' => 'required|array|exists:countries,id',
+            'nights' => 'required|integer|min:1',
+            'days' => 'required|integer|min:1',
+            'is_active' => 'required|boolean',
+            ...$rules,
+        ], [
+            'des.*.required' => __('Description :index is required'),
+            'place.*.required' => __('Place :index is required'),
+        ], [
+            'des.*' => 'description',
+        ])->validate();
     }
 }

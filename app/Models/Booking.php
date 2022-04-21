@@ -2,33 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
 {
+    use SoftDeletes;
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
-        'trip_id',
-        'total_fee',
+        'package_id',
+        'total_price',
         'discount',
         'adult',
         'child',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function trips(): BelongsTo
+    public function package(): BelongsTo
     {
-        return $this->belongsTo(Trip::class, 'trip_id', 'id');
+        return $this->belongsTo(Package::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 }

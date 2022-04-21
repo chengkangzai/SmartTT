@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Roles - {{ config('app.name') }}
+    {{ __('Roles Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -32,8 +32,12 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>
-                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-info">{{ __('Show') }}</a>
-                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -49,9 +53,6 @@
 
 @section('script')
     <script>
-        $('#indexTable').DataTable({
-            bInfo: false,
-            paging: false,
-        });
+        $('#indexTable').DataTable();
     </script>
 @endsection

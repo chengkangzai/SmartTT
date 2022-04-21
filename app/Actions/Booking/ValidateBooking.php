@@ -6,14 +6,17 @@ trait ValidateBooking
 {
     public function validate($data): array
     {
-        $validator = \Validator::make($data, [
-            'trip_id' => 'required|integer|exists:trips,id',
+        return \Validator::make($data, [
+            'package_id' => 'required|integer|exists:packages,id',
             'adult' => 'required|integer|min:1',
             'child' => 'nullable|integer|min:0',
             'user_id' => 'required|integer|exists:users,id',
             'discount' => 'nullable|integer|min:1',
-        ]);
-
-        return $validator->validate();
+        ], customAttributes: [
+            'package_id' => __('Package'),
+            'adult' => __('Total of Adult'),
+            'child' => __('Total of Child'),
+            'user_id' => __('User'),
+        ])->validate();
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "918dc46d3df876c70c05f99eff250446",
+    "content-hash": "ece0f9ef638469a5d1c91a71476f8051",
     "packages": [
         {
             "name": "brick/math",
@@ -5524,6 +5524,77 @@
             "time": "2018-12-13T10:34:14+00:00"
         },
         {
+            "name": "chengkangzai/laravel-stubs",
+            "version": "2.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chengkangzai/laravel-stubs.git",
+                "reference": "56c30588fe9d72975bbb6cfa31c1cbeba45fc8cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chengkangzai/laravel-stubs/zipball/56c30588fe9d72975bbb6cfa31c1cbeba45fc8cc",
+                "reference": "56c30588fe9d72975bbb6cfa31c1cbeba45fc8cc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.71|^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.24|^7.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChengKangZai\\Stubs\\StubsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChengKangZai\\Stubs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ching Cheng Kang",
+                    "email": "hi@chengkangzai.com",
+                    "homepage": "https://chengkangzai.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Opinionated Laravel stubs",
+            "homepage": "https://github.com/chengkangzai/laravel-stubs",
+            "keywords": [
+                "chengkangzai",
+                "laravel-stubs"
+            ],
+            "support": {
+                "source": "https://github.com/chengkangzai/laravel-stubs/tree/2.4.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/chengkangzai",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-10T04:16:35+00:00"
+        },
+        {
             "name": "composer/pcre",
             "version": "3.0.0",
             "source": {
@@ -8757,7 +8828,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

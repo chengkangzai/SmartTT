@@ -1,7 +1,11 @@
+@php
+/** @var \App\Models\Booking $booking */
+@endphp
 @extends('layouts.app')
 @section('title')
-    Booking Management - {{ config('app.name') }}
+    {{ __('Booking Management') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -29,7 +33,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Trip') }}</th>
+                            <th>{{ __('Package') }}</th>
                             <th>{{ __('Adult') }}</th>
                             <th>{{ __('Child') }}</th>
                             <th>{{ __('Customer') }}</th>
@@ -40,12 +44,12 @@
                     <tbody>
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->trips->tour->name }}</td>
+                            <td>{{ $booking->packages->tour->name }}</td>
                             <td>{{ $booking->adult }}</td>
                             <td>{{ $booking->child }}</td>
                             <td>{{ $booking->users->name }}</td>
                             <td>RM {{ number_format($booking->discount) }}</td>
-                            <td>RM {{ number_format($booking->total_fee) }}</td>
+                            <td>RM {{ number_format($booking->total_price) }}</td>
                         </tr>
                     </tbody>
                 </table>

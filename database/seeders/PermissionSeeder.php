@@ -7,14 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class PermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $modules = ['Tour', 'Trip', 'Flight', 'User Role', 'Booking', 'User'];
+        $modules = ['Tour', 'Package', 'Flight', 'User Role', 'Booking', 'User'];
         $cruds = ['Create', 'View', 'Update', 'Delete'];
         $temp = collect([]);
         foreach ($modules as $module) {

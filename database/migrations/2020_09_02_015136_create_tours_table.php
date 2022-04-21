@@ -6,30 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateToursTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
             $table->string('tour_code');
             $table->string('name');
-            $table->string('destination');
             $table->string('category');
             $table->text('itinerary_url');
             $table->text('thumbnail_url');
+            $table->integer('days');
+            $table->integer('nights');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('tours');

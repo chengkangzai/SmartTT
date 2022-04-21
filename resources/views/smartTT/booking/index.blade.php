@@ -1,6 +1,10 @@
+@php
+/** @var \App\Models\Booking $booking */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Booking Management - {{ config('app.name') }}
+    {{ __('Booking Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -21,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Trip') }}</th>
+                            <th>{{ __('Package') }}</th>
                             <th>{{ __('Adult') }}</th>
                             <th>{{ __('Child') }}</th>
                             <th>{{ __('Customer') }}</th>
@@ -35,20 +39,23 @@
                             <tr>
                                 <td>{{ $booking->id }}</td>
                                 <td>
-                                    <a href="{{ route('trips.show', $booking->trips) }}" class="btn btn-sm btn-primary">
-                                        {{ $booking->trips->tour->name }}
+                                    <a href="{{ route('packages.show', $booking->package) }}"
+                                        class="btn btn-sm btn-primary">
+                                        {{ $booking->package->tour->name }}
                                     </a>
                                 </td>
                                 <td>{{ $booking->adult }}</td>
                                 <td>{{ $booking->child }}</td>
-                                <td>{{ $booking->users->name }}</td>
-                                <td>RM {{ number_format($booking->discount) }}</td>
-                                <td>RM {{ number_format($booking->total_fee) }}</td>
+                                <td>{{ $booking->user->name }}</td>
+                                <td>RM {{ number_format($booking->discount, 2) }}</td>
+                                <td>RM {{ number_format($booking->total_price, 2) }}</td>
                                 <td>
-                                    <a href="{{ route('bookings.show', $booking) }}"
-                                        class="btn btn-info">{{ __('Show') }}</a>
-                                    <a href="{{ route('bookings.edit', $booking) }}"
-                                        class="btn btn-primary">{{ __('Edit') }}</a>
+                                    <a href="{{ route('bookings.show', $booking) }}" class="btn btn-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
                                     <form action="{{ route('bookings.destroy', $booking) }}" class="d-inline"
                                         method="POST">
                                         @csrf
@@ -70,9 +77,6 @@
 
 @section('script')
     <script>
-        $('#indexTable').DataTable({
-            bInfo: false,
-            paging: false,
-        });
+        $('#indexTable').DataTable();
     </script>
 @endsection

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Airport extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -23,12 +24,4 @@ class Airport extends Model
         'DST',
         'timezoneTz',
     ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function flight(): BelongsTo
-    {
-        return $this->belongsTo(Flight::class, 'id', 'depart_airport');
-    }
 }

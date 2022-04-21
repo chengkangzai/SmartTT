@@ -5,6 +5,7 @@ namespace App\Actions\Tour;
 use App\Models\Tour;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class StoreTourAction
@@ -13,6 +14,7 @@ class StoreTourAction
 
     /**
      * @throws Throwable
+     * @throws ValidationException
      */
     public function execute(array $data): Tour
     {
@@ -32,11 +34,16 @@ class StoreTourAction
                 $tour->description()->create([
                     'place' => $place[$i],
                     'description' => $des[$i],
-                    'tour_id' => $tour->id,
+                    'order' => $i,
                 ]);
             }
 
-            return $tour;
+            collect($data['countries'])
+                ->each(function ($country, $index) use ($tour) {
+                    $tour->countries()->attach($country, ['order' => $index]);
+                });
+
+            return $tour->refresh();
         });
     }
 }

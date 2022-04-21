@@ -1,6 +1,10 @@
+@php
+/** @var \App\Models\Flight $flight */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Flight Management - {{ config('app.name') }}
+    {{ __('Flight Management') }} - {{ config('app.name') }}
 @endsection
 
 @section('content')
@@ -23,7 +27,7 @@
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Depart Time') }}</th>
                             <th>{{ __('Arrival Time') }}</th>
-                            <th>{{ __('Fee (Rm)') }}</th>
+                            <th>{{ __('Price (RM)') }}</th>
                             <th>{{ __('Airline') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
@@ -32,23 +36,25 @@
                         @foreach ($flights as $flight)
                             <tr>
                                 <td>{{ $flight->id }}</td>
-                                <td>{{ $flight->depart_time->format(config('app.date_format')) }}</td>
-                                <td>{{ $flight->arrive_time->format(config('app.date_format')) }}</td>
-                                <td>RM {{ number_format($flight->fee / 100, 2) }}</td>
+                                <td>{{ $flight->departure_date->format(config('app.date_format')) }}</td>
+                                <td>{{ $flight->arrival_date->format(config('app.date_format')) }}</td>
+                                <td>{{ number_format($flight->price, 2) }}</td>
                                 <td>{{ $flight->airline->name }}
-                                    ({{ $flight->depart_airports->ICAO }})
-                                    -> ({{ $flight->arrive_airport->ICAO }})
+                                    ({{ $flight->depart_airport->IATA }})
+                                    -> ({{ $flight->arrive_airport->IATA }})
                                 </td>
                                 <td>
-                                    <a href="{{ route('flights.show', ['flight' => $flight->id]) }}"
-                                        class="btn btn-info">Show</a>
-                                    <a href="{{ route('flights.edit', ['flight' => $flight->id]) }}"
-                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('flights.destroy', ['flight' => $flight->id]) }}"
-                                        style="display: inline" method="POST">
+                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
+                                    <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="Delete" />
+                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>
@@ -65,9 +71,6 @@
 
 @section('script')
     <script>
-        $('#indexTable').DataTable({
-            bInfo: false,
-            paging: false,
-        });
+        $('#indexTable').DataTable();
     </script>
 @endsection

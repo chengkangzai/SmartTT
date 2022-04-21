@@ -7,7 +7,7 @@ use App\Models\Booking;
 class StoreActionValidateBookingAction
 {
     use ValidateBooking;
-    use CalculateTripPrice;
+    use CalculateTotalBookingPrice;
 
     public function execute(array $data): Booking
     {
@@ -17,7 +17,7 @@ class StoreActionValidateBookingAction
 
         return Booking::create([
             ...$data,
-            'total_fee' => $price,
+            'total_price' => $price,
         ]);
     }
 }

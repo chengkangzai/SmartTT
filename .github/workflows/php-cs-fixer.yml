@@ -1,6 +1,6 @@
 name: Check & fix styling
 
-on: [push]
+on: [ push ]
 
 jobs:
   php-cs-fixer:
@@ -16,11 +16,6 @@ jobs:
         uses: docker://oskarstark/php-cs-fixer-ga
         with:
           args: --config=.php_cs.dist.php --allow-risky=yes
-
-      - name: Run blade formatter
-        run: |
-          npm install -g blade-formatter
-          blade-formatter --write resources/**/*.blade.php
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4

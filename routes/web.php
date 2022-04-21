@@ -4,12 +4,13 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
-use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,12 +41,13 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
     Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
+    Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
     Route::post('user/sendResetPassword/{user}', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);
 
     Route::resource('tours', TourController::class);
-    Route::resource('trips', TripController::class);
+    Route::resource('packages', PackageController::class);
     Route::resource('flights', FlightController::class);
 
     Route::post('booking/calculatePrice', [BookingController::class, 'calculatePrice'])->name('bookings.calculatePrice');
@@ -53,6 +55,9 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::post('tourDescription/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');
     Route::resource('tourDescriptions', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
+
+    Route::post('packagePricing/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
+    Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
 
     Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
     Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');

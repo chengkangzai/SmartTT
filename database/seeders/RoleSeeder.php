@@ -9,11 +9,6 @@ use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $role = Role::create(['name' => 'Super Admin'])->givePermissionTo(Permission::all());
@@ -22,7 +17,7 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Customer'])
             ->syncPermissions([
-                'View Tour', 'View Trip', 'View Flight', 'View Booking', 'View User',
+                'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
                 'Create Booking', 'View Booking', 'Update Booking',
             ])
             ->users()->attach(User::where('id', "!=", 1)->get());

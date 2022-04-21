@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\DB;
 
 class AirlineSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        $country = DB::table('countries')->get();
+        $my = $country->where('name', 'Malaysia')->first()->id;
+        $qatar = $country->where('name', 'Qatar')->first()->id;
         $airlines = [
-            ['name' => 'Air Asia'],
-            ['name' => 'Malaysia Airline'],
-            ['name' => 'Malindo'],
-            ['name' => 'Qatar Airline'],
+            ['name' => 'Air Asia', 'country_id' => $my, 'ICAO' => 'AK', 'IATA' => 'AXM'],
+            ['name' => 'Malaysia Airline', 'country_id' => $my, 'ICAO' => 'MH', 'IATA' => 'MAS'],
+            ['name' => 'Malindo', 'country_id' => $my, 'ICAO' => 'OD', 'IATA' => 'MXD'],
+            ['name' => 'Qatar Airline', 'country_id' => $qatar, 'ICAO' => 'QR', 'IATA' => 'QTR'],
         ];
         DB::table('airlines')->insert($airlines);
     }

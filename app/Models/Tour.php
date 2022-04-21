@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tour extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'tour_code',
@@ -17,21 +20,25 @@ class Tour extends Model
         'category',
         'itinerary_url',
         'thumbnail_url',
+        'days',
+        'nights',
+        'is_active',
     ];
 
-    /**
-     * @return HasMany
-     */
-    public function trips(): HasMany
+    public function packages(): HasMany
     {
-        return $this->hasMany(Trip::class);
+        return $this->hasMany(Package::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function description(): HasMany
     {
-        return $this->hasMany(TourDescription::class);
+        return $this->hasMany(TourDescription::class)->orderBy('order');
+    }
+
+    public function countries(): BelongsToMany
+    {
+        return $this->belongsToMany(Country::class)
+            ->withPivot(['order'])
+            ->orderByPivot('order');
     }
 }

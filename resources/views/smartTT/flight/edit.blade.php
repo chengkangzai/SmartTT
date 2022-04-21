@@ -1,7 +1,12 @@
+@php
+/** @var \App\Models\Flight $flight */
+@endphp
+
 @extends('layouts.app')
 @section('title')
-    Edit Flight - {{ config('app.name') }}
+    {{ __('Edit Flight') }} - {{ config('app.name') }}
 @endsection
+
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -21,80 +26,78 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label class="form-label" for="depart_time">{{ __('Depart Time') }}</label>
-                    <input type='datetime-local' class="form-control" name="depart_time" id="depart_time"
-                        value="{{ old('depart_time', $flight->depart_time) }}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="arrive_time">{{ __('Arrive Time') }}</label>
-                    <input type='datetime-local' class="form-control" name="arrive_time" id="arrive_time"
-                        value="{{ old('arrive_time', $flight->arrive_time) }}" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="fee">{{ __('Fee') }}</label>
-                    <input type="number" name="fee" class="form-control" id="fee"
-                        value="{{ old('fee', $flight->fee / 100) }}" step="1" placeholder="Enter Flight Fee">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="airline_id">{{ __('Flight') }}</label>
-                    <select name="airline_id" class="form-control select2 " id="airline_id" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
+                    <label for="airline_id" class="form-label">{{ __('Airline') }}</label>
+                    <select class="form-control" id="airline_id" name="airline_id">
+                        <option value="">{{ __('Please Select') }}</option>
                         @foreach ($airlines as $airline)
-                            <option value="{{ $airline->id }}"
-                                {{ $flight->airline->id === $airline->id ? 'selected' : '' }}> {{ $airline->name }}
+                            <option value="{{ $airline->id }}" @selected(old('airline_id', $airline->id) == $flight->airline_id)>
+                                {{ $airline->name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="depart_airport">{{ __('Depart Airport') }}</label>
-                    <select name="depart_airport" class="form-control select2 " id="depart_airport" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
-                        @foreach ($airports as $airport)
-                            <option value="{{ $airport->id }}"
-                                {{ $flight->depart_airports->id === $airport->id ? 'selected' : '' }}>
-                                {{ $airport->name }}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="arrival_airport">{{ __('Arrival Airport') }}</label>
-                    <select name="arrival_airport" class="form-control select2 " id="arrival_airport" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
-                        @foreach ($airports as $airport)
-                            <option value="{{ $airport->id }}"
-                                {{ $flight->arrive_airport->id === $airport->id ? 'selected' : '' }}> {{ $airport->name }}
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label class="form-label" for="departure_airport_id">{{ __('Departure Airport') }}</label>
+                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id" multiple>
+                            <option selected value="{{ $flight->departure_airport_id }}">
+                                {{ $flight->depart_airport->name }}
                             </option>
-                        @endforeach
-                    </select>
+                        </select>
+                    </div>
+                    <div class="col col-md-6">
+                        <label class="form-label" for="arrival_airport_id">{{ __('Arrival Airport') }}</label>
+                        <select name="arrival_airport_id" class="form-control select2" id="arrival_airport_id" multiple>
+                            <option selected value="{{ $flight->arrival_airport_id }}">
+                                {{ $flight->arrive_airport->name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
+                <div class="mb-3 row">
+                    <div class="col col-md-6">
+                        <label class="form-label" for="departure_date"> {{ __('Departure Time') }}
+                            <small>({{ __('based on departure timezone') }})</small>
+                        </label>
+                        <input type='datetime-local' class="form-control" name="departure_date" id="departure_date"
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('departure_date', $flight->departure_date->format('Y-m-d\TH:i')) }}" />
+                    </div>
+                    <div class="col col-md-6">
+                        <label class="form-label" for="arrival_date"> {{ __('Arrival Time') }}
+                            <small>({{ __('based on arrival timezone') }})</small>
+                        </label>
+                        <input type='datetime-local' class="form-control" name="arrival_date" id="arrival_date"
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('arrival_date', $flight->arrival_date->format('Y-m-d\TH:i')) }}" />
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="flight_class">{{ __('Flight Class') }}</label>
-                    <select name="flight_class" class="form-control select2 " id="flight_class" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
+                    <label class="form-label" for="price">{{ __('Price') }}</label>
+                    <input type="number" name="price" class="form-control" id="price"
+                        value="{{ old('price', $flight->price) }}" step="1"
+                        placeholder="{{ __('Enter Flight Price') }}">
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label" for="class">{{ __('Flight Class') }}</label>
+                    <select name="class" class="form-control" id="class">
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" {{ $flight->flight_class === $class ? 'selected' : '' }}>
-                                {{ $class }} </option>
+                            <option value="{{ $key }}" @selected(old('class', $flight->class) == $key)>
+                                {{ $class }}
+                            </option>
                         @endforeach
                     </select>
-
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="flight_type">{{ __('Flight Class') }}</label>
-                    <select name="flight_type" class="form-control select2 " id="flight_type" required>
-                        <option value="0" disabled selected> {{ __('Please Select') }}</option>
-                        @foreach (\App\Models\Flight::TYPE as $key => $type)
-                            <option value="{{ $key }}" {{ $flight->flight_type === $type ? 'selected' : '' }}>
-                                {{ $type }} </option>
+                    <label class="form-label" for="type">{{ __('Flight Class') }}</label>
+                    <select name="type" class="form-control" id="type">
+                        @foreach (\App\Models\Flight::TYPE as $key => $class)
+                            <option value="{{ $key }}" @selected(old('type', $flight->type) == $key)>{{ $class }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -107,11 +110,33 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
-        $('#airline_id').select2();
-        $('#depart_airport').select2();
-        $('#arrival_airport').select2();
-        $('#flight_class').select2();
-        $('#flight_type').select2();
+        const config = {
+            maximumSelectionLength: 1,
+            ajax: {
+                url: '{{ route('select2.flights.getAirports') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.text,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            },
+        }
+        $('#departure_airport_id').select2(config);
+        $('#arrival_airport_id').select2(config);
     </script>
 @endsection
