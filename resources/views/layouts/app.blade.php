@@ -18,12 +18,9 @@
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
-            <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
-            </svg>
-            <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#signet') }}"></use>
-            </svg>
+            <a href="{{ route('home') }}" class="d-flex align-items-center text-white">
+                <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
+            </a>
         </div>
         @include('layouts.navigation')
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
@@ -37,10 +34,8 @@
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                     </svg>
                 </button>
-                <a class="header-brand d-md-none" href="#">
-                    <svg width="118" height="46">
-                        <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
-                    </svg>
+                <a href="{{ route('home') }}" class="header-brand">
+                    <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
                 </a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item"><a class="nav-link"
