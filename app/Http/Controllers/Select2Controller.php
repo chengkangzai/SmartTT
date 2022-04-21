@@ -12,7 +12,7 @@ class Select2Controller extends Controller
 {
     public function getUserWithoutTheRole(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response(__('You Are not allow to be here'))->isForbidden();
         }
         $userInRole = Role::findById($request->get('role_id'))->users()->get()->pluck('id');
@@ -31,7 +31,7 @@ class Select2Controller extends Controller
 
     public function getCustomer(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response(__('You Are not allow to be here'))->isForbidden();
         }
         $array = Role::findById(2)
@@ -49,7 +49,7 @@ class Select2Controller extends Controller
 
     public function getAirports(Request $request)
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response(__('You Are not allow to be here'))->isForbidden();
         }
         $array = Airport::select(['id', 'name', 'IATA'])
