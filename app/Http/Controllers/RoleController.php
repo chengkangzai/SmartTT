@@ -31,7 +31,6 @@ class RoleController extends Controller
 
     public function store(Request $request, StoreRoleAction $action): RedirectResponse
     {
-
         $action->execute($request->all());
 
         return redirect()->route('roles.index')->with('success', __('Role created successfully'));
@@ -69,7 +68,7 @@ class RoleController extends Controller
             return redirect()->route('roles.index')->with('success', __('Role deleted successfully'));
         }
 
-        return redirect()->back()->withErrors(['error' => __('There is User in this role! Therefore you cant delete it!')]);
+        return redirect()->back()->withErrors(__('Role has users attached to it, cannot delete'));
     }
 
     public function attachUser(Role $role, Request $request, AttachUserToRoleAction $action): RedirectResponse

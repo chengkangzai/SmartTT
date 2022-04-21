@@ -16,6 +16,7 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('User Role Information') }}</h3>
             <div class="pull-right ">
+                @include('partials.error-alert')
                 <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('roles.destroy', $role) }}" class="d-inline" method="POST">
                     @method('DELETE')
@@ -115,15 +116,6 @@
         </div>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 @endsection
 @section('modal')
     <div class="modal fade" id="addUserModal">

@@ -43,7 +43,6 @@ class UserController extends Controller
 
     public function edit(User $user): Factory|View|Application
     {
-
         return view('smartTT.user.edit', compact('user'));
     }
 
@@ -57,7 +56,7 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         if ($user->id == auth()->user()->id) {
-            return redirect()->route('users.index')->with('error', __('You cannot delete yourself'));
+            return redirect()->route('users.index')->withErrors(__('You cannot delete yourself'));
         }
         $user->delete();
 
