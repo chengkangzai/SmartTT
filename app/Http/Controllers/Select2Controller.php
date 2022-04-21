@@ -34,7 +34,7 @@ class Select2Controller extends Controller
         if (! $request->ajax()) {
             return response(__('You Are not allow to be here'))->isForbidden();
         }
-        $array = Role::findById(2)
+        $array = Role::findByName('Customer')
             ->users()
             ->get(['id', 'name', 'email'])
             ->map(function ($user) {
