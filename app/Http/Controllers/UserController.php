@@ -17,8 +17,6 @@ class UserController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('View User'), 403);
-        //TODO Add Staff Role
         $users = (Auth::user()->hasRole(['Super Admin'])) ? User::paginate(10) : User::where('id', auth()->user()->id)->paginate(1);
 
         return view('smartTT.user.index', compact('users'));
@@ -26,14 +24,11 @@ class UserController extends Controller
 
     public function create(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('Create User'), 403);
-
         return view('smartTT.user.create');
     }
 
     public function store(Request $request, StoreUserAction $action): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Create User'), 403);
         $action->execute($request->all());
 
         return redirect()->route('users.index')->with('success', __('User Created Successfully'));
@@ -41,7 +36,6 @@ class UserController extends Controller
 
     public function show(User $user): Factory|View|Application
     {
-        abort_unless(Auth::user()->hasRole(['Super Admin']) || auth()->user()->id == $user->id, 403);
         $user->load('roles');
 
         return view('smartTT.user.show', compact('user'));
@@ -49,14 +43,12 @@ class UserController extends Controller
 
     public function edit(User $user): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
 
         return view('smartTT.user.edit', compact('user'));
     }
 
     public function update(Request $request, User $user, UpdateUserAction $action): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
         $action->execute($request->all(), $user);
 
         return redirect()->route('users.show', $user)->with('success', __('User Updated Successfully'));
@@ -64,7 +56,6 @@ class UserController extends Controller
 
     public function destroy(User $user): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Delete User'), 403);
         if ($user->id == auth()->user()->id) {
             return redirect()->route('users.index')->with('error', __('You cannot delete yourself'));
         }
@@ -75,7 +66,6 @@ class UserController extends Controller
 
     public function changePassword(User $user, Request $request): RedirectResponse
     {
-        abort_unless(auth()->user()->roles()->first('Super Admin'), 403);
         Password::sendResetLink(['email' => $user->email]);
 
         return back()->with('success', __('Password reset link sent to :') . $user->email);
