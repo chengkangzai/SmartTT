@@ -20,20 +20,20 @@ class PackagePricingController extends Controller
     {
         $action->execute($request->all(), $packagePricing);
 
-        return redirect()->route('packages.show', $packagePricing->package);
+        return redirect()->route('packages.show', $packagePricing->package)->with('success', __('Package pricing updated successfully.'));
     }
 
     public function destroy(PackagePricing $packagePricing, DestroyPackagePricingAction $action)
     {
         $action->execute($packagePricing);
 
-        return redirect()->route('packages.show', $packagePricing->package);
+        return redirect()->route('packages.show', $packagePricing->package)->with('success', __('Package pricing deleted successfully.'));
     }
 
     public function attachToPackage(Request $request, Package $package, AttachPricingToPackageAction $action)
     {
         $action->execute($request->all(), $package);
 
-        return back();
+        return back()->with('success', __('Package pricing attached successfully.'));
     }
 }

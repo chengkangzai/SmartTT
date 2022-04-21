@@ -18,27 +18,26 @@ class TourDescriptionController extends Controller
     {
         $action->execute($request->all(), $tourDescription);
 
-        return redirect()->route('tours.show', ['tour' => $tourDescription->tour()->first()->id]);
+        return redirect()->route('tours.show', $tourDescription->tour)
+            ->with('success', __('Tour description updated successfully'));
     }
 
     public function edit(TourDescription $tourDescription): Factory|View|Application
     {
-        $tourName = Tour::find($tourDescription->tour_id)->first()->name;
-
-        return view('smartTT.tourDescription.edit', compact('tourDescription', 'tourName'));
+        return view('smartTT.tourDescription.edit', compact('tourDescription'));
     }
 
     public function destroy(TourDescription $tourDescription): RedirectResponse
     {
         $tourDescription->delete();
 
-        return redirect()->back();
+        return back()->with('success', __('Tour description deleted successfully'));
     }
 
     public function attachToTour(Request $request, Tour $tour, AttachDescriptionToTourAction $action): RedirectResponse
     {
         $action->execute($request->all(), $tour);
 
-        return redirect()->back();
+        return back()->with('success', __('Tour description attached successfully'));
     }
 }

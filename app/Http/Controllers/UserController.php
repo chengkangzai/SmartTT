@@ -36,7 +36,7 @@ class UserController extends Controller
         abort_unless(auth()->user()->can('Create User'), 403);
         $action->execute($request->all());
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index')->with('success', __('User Created Successfully'));
     }
 
     public function show(User $user): Factory|View|Application
@@ -59,18 +59,18 @@ class UserController extends Controller
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
         $action->execute($request->all(), $user);
 
-        return redirect()->route('user.show', $user);
+        return redirect()->route('users.show', $user)->with('success', __('User Updated Successfully'));
     }
 
     public function destroy(User $user): RedirectResponse
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
         if ($user->id == auth()->user()->id) {
-            return redirect()->route('user.index')->with('error', __('You cannot delete yourself'));
+            return redirect()->route('users.index')->with('error', __('You cannot delete yourself'));
         }
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index')->with('success', __('User Deleted Successfully'));
     }
 
     public function changePassword(User $user, Request $request): RedirectResponse
@@ -78,6 +78,6 @@ class UserController extends Controller
         abort_unless(auth()->user()->roles()->first('Super Admin'), 403);
         Password::sendResetLink(['email' => $user->email]);
 
-        return back()->with('success', __('Password reset link sent to ') . $user->email);
+        return back()->with('success', __('Password reset link sent to :') . $user->email);
     }
 }

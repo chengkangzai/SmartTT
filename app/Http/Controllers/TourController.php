@@ -41,7 +41,7 @@ class TourController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour created successfully'));
     }
 
     public function show(Tour $tour): Factory|View|Application
@@ -64,7 +64,7 @@ class TourController extends Controller
     {
         $action->execute($request->all(), $tour);
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour updated successfully'));
     }
 
     public function destroy(Tour $tour, DestroyTourAction $action): RedirectResponse
@@ -77,6 +77,6 @@ class TourController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour deleted successfully'));
     }
 }

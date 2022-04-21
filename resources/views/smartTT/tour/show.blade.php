@@ -131,8 +131,8 @@
                                 placeholder="{{ __('Enter the name of the Place') }}" />
                         </div>
                         <div class="mb-3">
-                            <label for="des" class="form-label"> {{ __('Place Description') }} </label>
-                            <textarea name="des" id="des" class="form-control" rows="5" required
+                            <label for="description" class="form-label"> {{ __('Place Description') }} </label>
+                            <textarea name="description" id="description" class="form-control" rows="5" required
                                 placeholder="{{ __('Enter the description for the place above') }}"></textarea>
                         </div>
                     </form>
@@ -140,7 +140,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left"
                         data-dismiss="modal">{{ __('Close') }}</button>
-                    <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{ 'Submit' }}">
+                    <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{ __('Submit') }}">
                 </div>
             </div>
         </div>

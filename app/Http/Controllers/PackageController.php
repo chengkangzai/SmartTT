@@ -39,7 +39,7 @@ class PackageController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('packages.index');
+        return redirect()->route('packages.index')->with('success', __('Package created successfully'));
     }
 
     public function show(Package $package): Factory|View|Application
@@ -67,13 +67,13 @@ class PackageController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('packages.index');
+        return redirect()->route('packages.index')->with('success', __('Package updated successfully'));
     }
 
     public function destroy(Package $package): RedirectResponse
     {
         $package->delete();
 
-        return redirect()->route('packages.index');
+        return redirect()->route('packages.index')->with('success', __('Package deleted successfully'));
     }
 }
