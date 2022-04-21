@@ -18,7 +18,7 @@ class UserRoleSeeder extends Seeder
             'password' => Hash::make('P@$$w0rd'),
         ]);
 
-        User::factory()->count(10)->create();
+        User::factory()->count(9)->create();
 
         $role = Role::create(['name' => 'Super Admin'])->givePermissionTo(Permission::all());
 
