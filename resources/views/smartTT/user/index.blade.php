@@ -20,6 +20,7 @@
             <a href="{{ route('users.create') }}" class="btn btn-success">{{ __('Create') }}</a>
         </div>
         <div class="card-body">
+            @include('partials.error-alert')
             <div class="table-responsive">
                 <table id="indexTable" class="table table-bordered table-hover ">
                     <thead>

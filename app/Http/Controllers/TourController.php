@@ -62,7 +62,13 @@ class TourController extends Controller
 
     public function update(Request $request, Tour $tour, UpdateTourAction $action): RedirectResponse
     {
-        $action->execute($request->all(), $tour);
+        try {
+            $action->execute($request->all(), $tour);
+        } catch (ValidationException $exception) {
+            return redirect()->back()->withErrors($exception->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
 
         return redirect()->route('tours.index')->with('success', __('Tour updated successfully'));
     }
