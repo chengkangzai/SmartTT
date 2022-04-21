@@ -27,6 +27,8 @@ class UpdateTourAction
             ...$data,
         ]);
 
+        $tour->countries()->sync($data['countries']);
+
         return $tour->refresh();
     }
 }
