@@ -36,7 +36,7 @@ class UserController extends Controller
         abort_unless(auth()->user()->can('Create User'), 403);
         $action->execute($request->all());
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     public function show(User $user): Factory|View|Application
@@ -59,18 +59,18 @@ class UserController extends Controller
         abort_unless(auth()->user()->can('Edit User') || auth()->user()->id == $user->id, 403);
         $action->execute($request->all(), $user);
 
-        return redirect()->route('user.show', $user);
+        return redirect()->route('users.show', $user);
     }
 
     public function destroy(User $user): RedirectResponse
     {
         abort_unless(auth()->user()->can('Delete User'), 403);
         if ($user->id == auth()->user()->id) {
-            return redirect()->route('user.index')->with('error', __('You cannot delete yourself'));
+            return redirect()->route('users.index')->with('error', __('You cannot delete yourself'));
         }
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     public function changePassword(User $user, Request $request): RedirectResponse
