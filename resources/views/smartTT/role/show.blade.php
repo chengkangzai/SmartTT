@@ -115,7 +115,6 @@
             <div class="card-footer">{{ $permissions->links() }}</div>
         </div>
     </div>
-
 @endsection
 @section('modal')
     <div class="modal fade" id="addUserModal">
