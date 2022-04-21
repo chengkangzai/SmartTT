@@ -11,13 +11,14 @@ class AttachDescriptionToTourAction
     {
         $data = \Validator::make($data, [
             'place' => 'required',
-            'des' => 'required',
+            'description' => 'required',
         ], customAttributes: [
-            'des' => 'Description',
+            'description' => 'Description',
         ])->validate();
 
         return $tour->description()->create([
             ...$data,
+            'order' => $tour->description()->count() + 1,
         ]);
     }
 }
