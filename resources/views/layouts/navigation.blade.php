@@ -45,7 +45,7 @@
     </li>
 
 
-    @canany(['View User', 'Create User', 'Delete User', 'View User Role'])
+    @role('Super Admin')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                 <svg class="nav-icon">
@@ -54,9 +54,7 @@
                 {{ __('Users') }}
             </a>
         </li>
-    @endcanany
 
-    @can('View User Role')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
                 <svg class="nav-icon">
@@ -65,7 +63,7 @@
                 {{ __('Role Management') }}
             </a>
         </li>
-    @endcan
+    @endrole
 
 
     <li class="nav-item">
