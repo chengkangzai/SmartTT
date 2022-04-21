@@ -18,8 +18,12 @@
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
-            <a href="{{ route('home') }}" class="d-flex align-items-center text-white">
+            <a href="{{ route('home') }}" class="sidebar-brand-full">
                 <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
+            </a>
+
+            <a href="{{ route('home') }}" class="sidebar-brand-narrow">
+                <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="46">
             </a>
         </div>
         @include('layouts.navigation')
@@ -34,7 +38,7 @@
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                     </svg>
                 </button>
-                <a href="{{ route('home') }}" class="header-brand">
+                <a class="header-brand d-md-none" href="#">
                     <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
                 </a>
                 <ul class="header-nav d-none d-md-flex">
