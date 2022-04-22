@@ -2,12 +2,19 @@
 
 namespace App\Actions\Flight;
 
+use Illuminate\Validation\ValidationException;
 use Validator;
 
 trait ValidateFlight
 {
     public function validate(array $data): array
     {
+        if (!isset($data['departure_airport_id'])){
+            return throw ValidationException::withMessages([
+                'departure_airport_id' => [__('The departure airport field is required.')],
+            ]);
+        }
+
         return Validator::make($data, [
             'price' => 'required|numeric|min:0',
             'departure_date' => 'required|date|after:today',
@@ -23,7 +30,6 @@ trait ValidateFlight
             'departure_airport_id' => __('Departure airport'),
             'arrival_airport_id' => __('Arrival airport'),
             'airline_id' => __('Airline'),
-        ])->stopOnFirstFailure()
-            ->validate();
+        ])->validate();
     }
 }
