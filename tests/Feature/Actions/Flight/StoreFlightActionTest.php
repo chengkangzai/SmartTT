@@ -6,6 +6,7 @@ use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -22,17 +23,7 @@ it('should create flight ', function () {
 
     expect($action)->toBeInstanceOf(Flight::class);
 
-    assertDatabaseHas('flights', [
-        'id' => $action->id,
-        'price' => $data->price * 100,
-        'departure_date' => $data->departure_date->toDateTimeString(),
-        'arrival_date' => $data->arrival_date->toDateTimeString(),
-        'departure_airport_id' => $data->departure_airport_id,
-        'arrival_airport_id' => $data->arrival_airport_id,
-        'airline_id' => $data->airline_id,
-        'created_at' => $action->created_at->toDateTimeString(),
-        'updated_at' => $action->updated_at->toDateTimeString(),
-    ]);
+    assertModelExists($action);
 });
 
 

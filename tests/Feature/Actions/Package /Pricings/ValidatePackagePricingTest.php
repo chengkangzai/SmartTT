@@ -16,7 +16,6 @@ it('should invalidate invalid data', function ($name, $data) {
         try {
             $mock->validate($testArray);
         } catch (ValidationException $e) {
-            Log::info($e->validator->errors()->get($name), $testArray);
             assertNotEmpty($e->validator->errors()->get($name));
         }
     }

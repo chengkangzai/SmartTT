@@ -27,6 +27,6 @@ it('should update package pricing', function () {
 
     $newPP = $action->execute($fakePP->toArray(), $pp);
 
-    assertInstanceOf(PackagePricing::class, $newPP);
+    expect($newPP)->toBeInstanceOf(PackagePricing::class);
     assertModelExists($newPP);
 });
