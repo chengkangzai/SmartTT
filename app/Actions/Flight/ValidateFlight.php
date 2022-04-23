@@ -9,7 +9,7 @@ trait ValidateFlight
 {
     public function validate(array $data): array
     {
-        if (!isset($data['departure_airport_id'])){
+        if (! isset($data['departure_airport_id'])) {
             return throw ValidationException::withMessages([
                 'departure_airport_id' => [__('The departure airport field is required.')],
             ]);

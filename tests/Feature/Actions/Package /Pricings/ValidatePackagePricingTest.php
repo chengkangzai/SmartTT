@@ -13,6 +13,7 @@ it('should invalidate invalid data', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             $mock->validate($testArray);
         } catch (ValidationException $e) {
@@ -23,5 +24,5 @@ it('should invalidate invalid data', function ($name, $data) {
     ['name', ['', -1, null, $faker->sentence(256)]],
     ['price', ['', -1, null, 0]],
     ['price', ['', -1, null, 0]],
-    ['is_active', ['', -1]]
+    ['is_active', ['', -1]],
 ]);

@@ -11,6 +11,7 @@ it('should invalidate invalid data with Update', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             $mock->validate($testArray);
         } catch (ValidationException $e) {
