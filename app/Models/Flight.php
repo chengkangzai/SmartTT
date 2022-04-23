@@ -52,6 +52,13 @@ class Flight extends Model
         );
     }
 
+    public function asSelection(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->airline->name . " (" . $this->departure_date->format('d/m/Y H:i') . ") -> (" . $this->arrival_date->format('d/m/Y H:i') . ")",
+        );
+    }
+
     public function packages(): BelongsToMany
     {
         return $this->belongsToMany(Package::class)
