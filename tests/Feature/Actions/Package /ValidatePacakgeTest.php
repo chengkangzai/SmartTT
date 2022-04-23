@@ -14,6 +14,7 @@ it('should invalidate invalid data with Update', function ($name, $data) {
 
         try {
             $mock->validate($testArray);
+            $this->fail('ValidationException was not thrown');
         } catch (ValidationException $e) {
             assertNotEmpty($e->validator->errors()->get($name));
         }
