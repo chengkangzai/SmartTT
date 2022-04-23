@@ -1,17 +1,20 @@
 <?php
 
 use App\Actions\Flight\StoreFlightAction;
-use App\Actions\Flight\ValidateFlight;
 use App\Models\Flight;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\seed;
+
+beforeEach(function () {
+    seed(CountrySeeder::class);
+    seed(AirlineSeeder::class);
+    seed(AirportSeeder::class);
+});
 
 it('should create flight ', function () {
-    $this->seed(CountrySeeder::class);
-    $this->seed(AirlineSeeder::class);
-    $this->seed(AirportSeeder::class);
 
     $data = Flight::factory()->make();
 

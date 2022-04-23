@@ -6,15 +6,18 @@ use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\seed;
+
+beforeEach(function () {
+    seed(CountrySeeder::class);
+    seed(AirlineSeeder::class);
+    seed(AirportSeeder::class);
+});
 
 it('should update flight', function () {
-    $this->seed(CountrySeeder::class);
-    $this->seed(AirlineSeeder::class);
-    $this->seed(AirportSeeder::class);
-
     $data = Flight::factory()->create();
-    $action = app(UpdateFlightAction::class);
 
+    $action = app(UpdateFlightAction::class);
     $mockFlight = Flight::factory()->make()->toArray();
     $newFlight = $action->execute($mockFlight, $data);
 
