@@ -41,6 +41,7 @@ trait ValidatePackage
                 'tour_id' => 'required|integer|exists:tours,id',
                 'depart_time' => 'required|date|after:now',
                 'flights' => 'required|array|exists:flights,id',
+                'is_active' => 'required|boolean',
                 ...$rules,
             ],
             [
