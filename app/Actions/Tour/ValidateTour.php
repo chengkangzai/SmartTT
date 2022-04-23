@@ -15,7 +15,7 @@ trait ValidateTour
 
         $rules = ($isStore) ? [
             'des' => 'required|array',
-            'des.*' => 'required|string',
+            'des.*' => 'required|string|max:255',
             'place' => 'required|array',
             'place.*' => 'required|string',
             'tour_code' => 'required|unique:tours,tour_code',
