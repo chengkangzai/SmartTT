@@ -5,7 +5,6 @@ use App\Models\Flight;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
-use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 
@@ -16,7 +15,6 @@ beforeEach(function () {
 });
 
 it('should create flight ', function () {
-
     $data = Flight::factory()->make();
 
     $action = app(StoreFlightAction::class)->execute($data->toArray());
@@ -25,5 +23,3 @@ it('should create flight ', function () {
 
     assertModelExists($action);
 });
-
-

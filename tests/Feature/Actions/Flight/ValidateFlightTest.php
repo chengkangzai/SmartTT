@@ -10,9 +10,10 @@ it('should invalidate invalid data', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
-        if (!isset($data['departure_airport_id'])){
+        if (! isset($data['departure_airport_id'])) {
             $testArray['departure_airport_id'] = 1;
         }
+
         try {
             $mock->validate($testArray);
         } catch (ValidationException $e) {
@@ -27,5 +28,5 @@ it('should invalidate invalid data', function ($name, $data) {
     ['arrival_airport_id', ['asda', -1, 100, null, 1]],
     ['airline_id', ['asda', -1, 100, null, 1]],
     ['class', [-1, null]],
-    ['type', [-1, null]]
+    ['type', [-1, null]],
 ]);

@@ -57,5 +57,4 @@ it('should return tour and flight for create and update package', function () {
         assertNull($flight->arrival_airport_id);
         assertEmpty($flight->price);
     });
-
 });

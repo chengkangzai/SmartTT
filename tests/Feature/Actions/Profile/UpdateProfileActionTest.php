@@ -25,13 +25,14 @@ it('should fail to update user profile due to invalid data', function ($name, $d
     $user = User::factory()->create();
     foreach ($data as $item) {
         $testArray[$name] = $item;
-        if (!isset($data['password_confirmation'])) {
+        if (! isset($data['password_confirmation'])) {
             if (isset($data['password'])) {
                 $testArray['password_confirmation'] = $data['password'];
             } else {
                 $testArray['password_confirmation'] = '';
             }
         }
+
         try {
             app(UpdateProfileAction::class)->execute($testArray, $user);
         } catch (ValidationException $e) {

@@ -6,9 +6,7 @@ use Database\Seeders\CountrySeeder;
 use Database\Seeders\PackageSeeder;
 use Database\Seeders\TourSeeder;
 use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\seed;
-use function PHPUnit\Framework\assertInstanceOf;
 
 beforeEach(function () {
     seed(CountrySeeder::class);
