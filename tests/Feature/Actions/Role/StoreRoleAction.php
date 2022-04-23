@@ -2,9 +2,9 @@
 
 use App\Actions\Role\StoreRoleAction;
 use Database\Seeders\PermissionSeeder;
-use Spatie\Permission\Models\Permission;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
+use Spatie\Permission\Models\Permission;
 
 beforeEach(function () {
     seed(PermissionSeeder::class);
@@ -24,5 +24,4 @@ it('should create a role', function () {
     $permissions->each(function ($permission) use ($role) {
         assert($role->hasPermissionTo($permission));
     });
-
 });

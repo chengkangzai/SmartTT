@@ -4,9 +4,9 @@ use App\Actions\Role\AttachUserToRoleAction;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
-use Spatie\Permission\Models\Role;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     seed(PermissionSeeder::class);
