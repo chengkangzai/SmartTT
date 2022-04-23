@@ -17,9 +17,9 @@ trait ValidatePackage
                 'name' => 'required|array',
                 'name.*' => 'required|string|max:255',
                 'price' => 'required|array',
-                'price.*' => 'required|string|max:255',
+                'price.*' => 'required|numeric|max:255',
                 'total_capacity' => 'required|array',
-                'total_capacity.*' => 'required|string|max:255',
+                'total_capacity.*' => 'required|numeric|max:255',
             ];
 
             for ($i = 1; $i < count($data['name']) + 1; $i++) {
