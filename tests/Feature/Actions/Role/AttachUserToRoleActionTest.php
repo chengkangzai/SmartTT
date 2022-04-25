@@ -34,7 +34,7 @@ it('should attach multiple user to one role', function () {
         assert($user->roles()->count() === 0);
     });
 
-    $role = Role::find(5);
+    $role = Role::inRandomOrder()->first();
     assertModelExists($role);
 
     $action = app(AttachUserToRoleAction::class)
