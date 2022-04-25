@@ -4,6 +4,7 @@ namespace App\Actions\Tour;
 
 use App\Models\Tour;
 use Illuminate\Support\Facades\Storage;
+use function collect;
 
 class UpdateTourAction
 {
@@ -17,7 +18,10 @@ class UpdateTourAction
         $data = $this->validate($data, tour: $tour);
 
         return \DB::transaction(function () use ($data, $tour) {
-            $tour->countries()->sync($data['countries']);
+            collect($data['countries'])->each(function ($country, $index) use ($tour) {
+                $tour->countries()->attach($country, ['order' => $index]);
+            });
+
 
             if (isset($data['itinerary'])) {
                 Storage::delete($tour->itinerary_url);
