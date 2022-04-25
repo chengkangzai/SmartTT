@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Profile\UpdateProfileAction;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
