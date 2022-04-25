@@ -17,7 +17,7 @@ beforeEach(function () {
         CountrySeeder::class,
         PermissionSeeder::class,
         UserRoleSeeder::class,
-        TourSeeder::class
+        TourSeeder::class,
     ]);
     $this->actingAs(User::first());
 });

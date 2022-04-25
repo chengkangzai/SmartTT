@@ -51,7 +51,7 @@ it('should return show view', function () {
         ->assertViewHas([
             'itineraryUrl' => Storage::url(Tour::first()->itinerary_url),
             'thumbnailUrl' => Storage::url(Tour::first()->thumbnail_url),
-            'tourDes' => Tour::first()->description()->paginate(9)
+            'tourDes' => Tour::first()->description()->paginate(9),
         ]);
 });
 $faker = Faker\Factory::create();

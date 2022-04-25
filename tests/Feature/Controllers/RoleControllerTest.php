@@ -1,18 +1,12 @@
 <?php
 
-use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
-use App\Models\Flight;
-use App\Models\Package;
-use App\Models\PackagePricing;
 use App\Models\User;
-use Carbon\Carbon;
 use Database\Seeders\DatabaseSeeder;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
-use function PHPUnit\Framework\assertInstanceOf;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     seed(DatabaseSeeder::class);
