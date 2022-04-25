@@ -36,7 +36,6 @@ it('should fail to update user profile due to invalid data', function ($name, $d
         try {
             app(UpdateProfileAction::class)->execute($testArray, $user);
         } catch (ValidationException $e) {
-            Log::info($e->validator->errors()->get($name), $testArray);
             assertNotEmpty($e->validator->errors()->get($name));
         }
     }
