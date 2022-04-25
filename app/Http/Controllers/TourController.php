@@ -77,8 +77,6 @@ class TourController extends Controller
     {
         try {
             $action->execute($tour);
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
