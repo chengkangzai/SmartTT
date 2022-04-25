@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Booking\CalculateTotalBookingPrice;
-use App\Actions\Booking\StoreActionValidateBookingAction;
-use App\Actions\Booking\UpdateValidateBookingAction;
+use App\Actions\Booking\StoreBookingAction;
+use App\Actions\Booking\UpdateBookingAction;
 use App\Models\Booking;
 use App\Models\Package;
 use Illuminate\Contracts\Foundation\Application;
@@ -33,7 +33,7 @@ class BookingController extends Controller
         return view('smartTT.booking.create', compact('packages'));
     }
 
-    public function store(Request $request, StoreActionValidateBookingAction $action): RedirectResponse
+    public function store(Request $request, StoreBookingAction $action): RedirectResponse
     {
         $action->execute($request->all());
 
@@ -53,7 +53,7 @@ class BookingController extends Controller
         return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
     }
 
-    public function update(Request $request, Booking $booking, UpdateValidateBookingAction $action): RedirectResponse
+    public function update(Request $request, Booking $booking, UpdateBookingAction $action): RedirectResponse
     {
         $action->execute($request->all(), $booking);
 

@@ -17,9 +17,8 @@ class PackageFactory extends Factory
     #[ArrayShape(['price' => "int", 'tour_id' => "int", 'capacity' => "int", 'airline' => "mixed|string", 'depart_time' => "\Carbon\Carbon"])]
     public function definition(): array
     {
-        $tourCount = Tour::count();
         return [
-            'tour_id' => rand(1, $tourCount),
+            'tour_id' => Tour::inRandomOrder()->first()->id,
             'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
         ];
     }

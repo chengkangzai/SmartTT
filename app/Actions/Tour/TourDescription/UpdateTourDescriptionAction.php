@@ -10,7 +10,8 @@ class UpdateTourDescriptionAction
     {
         $data = \Validator::make($data, [
             'place' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|max:255',
+            'order' => 'nullable|integer|min:0',
         ])->validate();
 
         $tourDescription->update([

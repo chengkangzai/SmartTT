@@ -4,7 +4,7 @@ namespace App\Actions\Package\Pricings;
 
 trait ValidatePackagePricing
 {
-    private function validate(array $data): array
+    public function validate(array $data): array
     {
         if (! isset($data['is_active'])) {
             $data['is_active'] = false;

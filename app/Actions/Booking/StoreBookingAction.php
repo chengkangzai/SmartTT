@@ -4,22 +4,20 @@ namespace App\Actions\Booking;
 
 use App\Models\Booking;
 
-class UpdateValidateBookingAction
+class StoreBookingAction
 {
-    use CalculateTotalBookingPrice;
     use ValidateBooking;
+    use CalculateTotalBookingPrice;
 
-    public function execute(array $data, Booking $booking): Booking
+    public function execute(array $data): Booking
     {
         $data = $this->validate($data);
 
         $price = $this->calculate($data);
 
-        $booking->update([
+        return Booking::create([
             ...$data,
             'total_price' => $price,
         ]);
-
-        return $booking->refresh();
     }
 }
