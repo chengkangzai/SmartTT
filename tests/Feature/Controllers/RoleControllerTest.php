@@ -3,6 +3,7 @@
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use function Pest\Laravel\assertModelExists;
+use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
 use Spatie\Permission\Models\Permission;
@@ -45,7 +46,7 @@ it('should return show view', function () {
         ->get(route('roles.show', $role))
         ->assertViewIs('smartTT.role.show');
 });
-//
+
 $faker = Faker\Factory::create();
 it('should store a role', function () use ($faker) {
     $role = [
@@ -75,7 +76,7 @@ it('should not store a role bc w/o other param', function () use ($faker) {
             'permissions',
         ]);
 });
-//
+
 it('should update a role', function () use ($faker) {
     $role = Role::create([
         'name' => $faker->name,
@@ -119,5 +120,5 @@ it('should destroy a role', function () use ($faker) {
         ->assertRedirect(route('roles.index'))
         ->assertSessionHas('success');
 
-    assertSoftDeleted($role);
+    assertModelMissing($role);
 });
