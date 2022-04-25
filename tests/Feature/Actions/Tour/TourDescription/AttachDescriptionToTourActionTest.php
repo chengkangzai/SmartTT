@@ -37,6 +37,7 @@ it('should not attach tour description as invalid data', function ($name, $data)
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             app(AttachDescriptionToTourAction::class)->execute($testArray, $tour);
             $this->fail('ValidationException was not thrown');

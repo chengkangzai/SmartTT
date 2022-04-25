@@ -1,6 +1,5 @@
 <?php
 
-use App\Actions\Tour\TourDescription\AttachDescriptionToTourAction;
 use App\Actions\Tour\TourDescription\UpdateTourDescriptionAction;
 use App\Models\Tour;
 use App\Models\TourDescription;
@@ -30,7 +29,6 @@ it('should update tour description to tour', function () {
 
     expect($dec)->toBeInstanceOf(TourDescription::class);
     assertModelExists($dec);
-
 });
 
 it('should not attach tour description as invalid data', function ($name, $data) {
@@ -41,6 +39,7 @@ it('should not attach tour description as invalid data', function ($name, $data)
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             app(UpdateTourDescriptionAction::class)->execute($testArray, $td);
             $this->fail('ValidationException was not thrown');

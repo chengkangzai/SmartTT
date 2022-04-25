@@ -3,8 +3,8 @@
 namespace App\Actions\Tour;
 
 use App\Models\Tour;
-use Illuminate\Support\Facades\Storage;
 use function collect;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateTourAction
 {

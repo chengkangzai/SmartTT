@@ -47,6 +47,6 @@ it('cannot destroy tour that have package', function () {
         assertModelExists($package);
     });
 
-    expect(fn() => app(DestroyTourAction::class)->execute($tour))
+    expect(fn () => app(DestroyTourAction::class)->execute($tour))
         ->toThrow('This tour has package, you can not delete it, please delete the package first');
 });
