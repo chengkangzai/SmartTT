@@ -18,6 +18,7 @@ it('should invalidate invalid data', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             $mock->validate($testArray);
             $this->fail('ValidationException was not thrown');
@@ -42,6 +43,7 @@ it('should invalidate invalid data w/ update ', function ($name, $data) {
     foreach ($data as $item) {
         $testArray[$name] = $item;
         $tour = Tour::factory()->create();
+
         try {
             $mock->validate($testArray, tour: $tour);
             $this->fail('ValidationException was not thrown');
@@ -64,6 +66,7 @@ it('should invalidate invalid data w/ store ', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             $mock->validate($testArray, isStore: true);
             $this->fail('ValidationException was not thrown');

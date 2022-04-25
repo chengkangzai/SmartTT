@@ -6,7 +6,6 @@ use App\Models\Tour;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
 use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -43,6 +42,6 @@ it('should not update tour bc w/o country', function () {
     assertModelExists($oriTour);
 
     $mockTour = Tour::factory()->make();
-    expect(fn() => app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour))
+    expect(fn () => app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour))
         ->toThrow('The countries field is required.');
 });
