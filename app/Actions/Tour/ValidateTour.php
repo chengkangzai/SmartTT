@@ -37,6 +37,7 @@ trait ValidateTour
             'des.*.required' => __('Description :index is required'),
             'place.*.required' => __('Place :index is required'),
         ], [
+            'des' => 'description',
             'des.*' => 'description',
         ])->validate();
     }

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Country;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use function rand;
@@ -36,6 +37,16 @@ class TourFactory extends Factory
             return [
                 'itinerary_url' => Storage::putFile('public/Tour/itinerary', $this->faker->image(), 'public'),
                 'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $this->faker->image(), 'public'),
+            ];
+        });
+    }
+
+    public function withItineraryAndThumbnailBinary(): TourFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'itinerary' => UploadedFile::fake()->create('document.pdf', 100),
+                'thumbnail' => UploadedFile::fake()->create('thumbnail.jpg', 100),
             ];
         });
     }
