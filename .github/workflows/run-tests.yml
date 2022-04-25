@@ -40,4 +40,4 @@ jobs:
           php artisan migrate:fresh --seed
 
       - name: Execute tests
-        run: ./vendor/bin/pest
+        run: composer test
