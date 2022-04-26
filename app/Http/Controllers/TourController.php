@@ -41,7 +41,7 @@ class TourController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour created successfully'));
     }
 
     public function show(Tour $tour): Factory|View|Application
@@ -62,21 +62,25 @@ class TourController extends Controller
 
     public function update(Request $request, Tour $tour, UpdateTourAction $action): RedirectResponse
     {
-        $action->execute($request->all(), $tour);
+        try {
+            $action->execute($request->all(), $tour);
+        } catch (ValidationException $exception) {
+            return redirect()->back()->withErrors($exception->validator->errors())->withInput();
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour updated successfully'));
     }
 
     public function destroy(Tour $tour, DestroyTourAction $action): RedirectResponse
     {
         try {
             $action->execute($tour);
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('tours.index');
+        return redirect()->route('tours.index')->with('success', __('Tour deleted successfully'));
     }
 }

@@ -11,7 +11,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: test
+          MYSQL_DATABASE: test_db
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -40,4 +40,4 @@ jobs:
           php artisan migrate:fresh --seed
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: composer test

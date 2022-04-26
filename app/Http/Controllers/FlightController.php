@@ -33,7 +33,7 @@ class FlightController extends Controller
     {
         $action->execute($request->all());
 
-        return redirect()->route('flights.index');
+        return redirect()->route('flights.index')->with('success', __('Flight created successfully.'));
     }
 
     public function show(Flight $flight): Factory|View|Application
@@ -53,13 +53,13 @@ class FlightController extends Controller
     {
         $action->execute($request->all(), $flight);
 
-        return redirect()->route('flights.index');
+        return redirect()->route('flights.index')->with('success', __('Flight updated successfully.'));
     }
 
     public function destroy(Flight $flight): Response|RedirectResponse
     {
         $flight->delete();
 
-        return redirect()->route('flights.index');
+        return redirect()->route('flights.index')->with('success', __('Flight deleted successfully.'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Actions\User;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class StoreUserAction
 {
@@ -15,9 +16,13 @@ class StoreUserAction
             'password' => 'required|string|min:8|confirmed',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             ...$data,
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->roles()->sync(Role::findByName('Customer'));
+
+        return $user->refresh();
     }
 }

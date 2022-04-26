@@ -22,7 +22,6 @@ class Tour extends Model implements HasMedia
     protected $fillable = [
         'tour_code',
         'name',
-        'destination',
         'category',
         'itinerary_url',
         'thumbnail_url',

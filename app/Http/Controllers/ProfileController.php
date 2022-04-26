@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Profile\UpdateProfileAction;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -16,6 +16,6 @@ class ProfileController extends Controller
     {
         $action->execute($request->all(), auth()->user());
 
-        return redirect()->back()->with('success', 'Profile updated.');
+        return redirect()->back()->with('success', __('Profile updated successfully'));
     }
 }

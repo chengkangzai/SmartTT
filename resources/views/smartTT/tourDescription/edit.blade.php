@@ -36,8 +36,8 @@
                         value="{{ $tourDescription->place }}" placeholder="{{ __('Enter the main visit place') }}">
                 </div>
                 <div class="mb-3">
-                    <label for="des" class="form-label">Description </label>
-                    <textarea type="text" name="des" class="form-control" id="des" rows="5"
+                    <label for="description" class="form-label">Description </label>
+                    <textarea type="text" name="description" class="form-control" id="description" rows="5"
                         placeholder="{{ __('Enter Description') }}">{{ $tourDescription->description }}</textarea>
                 </div>
             </form>

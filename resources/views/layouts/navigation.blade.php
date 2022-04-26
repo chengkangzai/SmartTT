@@ -1,6 +1,6 @@
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('home') }}">
+        <a class="nav-link {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
             </svg>
@@ -9,7 +9,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('tours.index') }}">
+        <a class="nav-link {{ request()->is('tours*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
             </svg>
@@ -18,7 +18,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('packages.index') }}">
+        <a class="nav-link {{ request()->is('packages*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
             </svg>
@@ -27,7 +27,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('flights.index') }}">
+        <a class="nav-link {{ request()->is('flights*') ? 'active' : '' }}" href="{{ route('flights.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-airplane-mode') }}"></use>
             </svg>
@@ -36,7 +36,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('bookings.index') }}">
+        <a class="nav-link {{ request()->is('bookings*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-dollar') }}"></use>
             </svg>
@@ -45,31 +45,29 @@
     </li>
 
 
-    @canany(['View User', 'Create User', 'Delete User', 'View User Role'])
+    @role('Super Admin')
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('users.index') }}">
+            <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                 </svg>
                 {{ __('Users') }}
             </a>
         </li>
-    @endcanany
 
-    @can('View User Role')
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('roles.index') }}">
+            <a class="nav-link {{ request()->is('roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
                 </svg>
                 {{ __('Role Management') }}
             </a>
         </li>
-    @endcan
+    @endrole
 
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('about') }}">
+        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-fire') }}"></use>
             </svg>

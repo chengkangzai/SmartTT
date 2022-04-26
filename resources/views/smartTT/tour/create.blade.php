@@ -40,7 +40,8 @@
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
                         <select name="countries[]" id="country_id" class="form-control py-3" multiple>
                             @foreach ($countries as $key => $country)
-                                <option value="{{ $key }}" {{ old('country_id') == $key ? 'selected' : '' }}>
+                                <option value="{{ $key }}"
+                                    {{ in_array($key, old('countries', [])) ? 'selected' : '' }}>
                                     {{ $country }}
                                 </option>
                             @endforeach

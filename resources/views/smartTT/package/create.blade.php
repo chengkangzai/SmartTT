@@ -32,7 +32,7 @@
                         <select id="tour_id" name="tour_id" class="form-control">
                             @foreach ($tours as $tour)
                                 <option value="{{ $tour->id }}" @selected(old('tour_id') == $tour->id)>
-                                    {{ $tour->name }}
+                                    {{ $tour->name }} ({{ $tour->tour_code }})
                                 </option>
                             @endforeach
                         </select>
@@ -50,7 +50,7 @@
                     <select name="flights[]" class="form-control select2" id="flights" multiple>
                         @foreach ($flights as $flight)
                             <option value="{{ $flight->id }}" @selected(old('flights') == $flight->id)>
-                                {{ $flight->text }}
+                                {{ $flight->asSelection }}
                             </option>
                         @endforeach
                     </select>

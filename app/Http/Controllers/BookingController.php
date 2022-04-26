@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Booking\CalculateTotalBookingPrice;
-use App\Actions\Booking\StoreActionValidateBookingAction;
-use App\Actions\Booking\UpdateValidateBookingAction;
+use App\Actions\Booking\StoreBookingAction;
+use App\Actions\Booking\UpdateBookingAction;
 use App\Models\Booking;
 use App\Models\Package;
 use Illuminate\Contracts\Foundation\Application;
@@ -33,11 +33,11 @@ class BookingController extends Controller
         return view('smartTT.booking.create', compact('packages'));
     }
 
-    public function store(Request $request, StoreActionValidateBookingAction $action): RedirectResponse
+    public function store(Request $request, StoreBookingAction $action): RedirectResponse
     {
         $action->execute($request->all());
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking created successfully'));
     }
 
     public function show(Booking $booking): Factory|View|Application
@@ -48,29 +48,29 @@ class BookingController extends Controller
     public function edit(Booking $booking): Factory|View|Application
     {
         $packages = Package::with('tour')->get();
-        $users = Role::findById(2)->users()->get();
+        $users = Role::findByName('Customer')->users()->get();
 
         return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
     }
 
-    public function update(Request $request, Booking $booking, UpdateValidateBookingAction $action): RedirectResponse
+    public function update(Request $request, Booking $booking, UpdateBookingAction $action): RedirectResponse
     {
         $action->execute($request->all(), $booking);
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking updated successfully'));
     }
 
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();
 
-        return redirect()->route('bookings.index');
+        return redirect()->route('bookings.index')->with('success', __('Booking deleted successfully'));
     }
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
         if (! $request->ajax()) {
-            return response('You Are not allow to be here')->isForbidden();
+            return response(__('You Are not allow to be here'))->isForbidden();
         }
         $price = $this->calculate($request->all());
 

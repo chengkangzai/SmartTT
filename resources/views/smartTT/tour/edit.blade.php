@@ -46,7 +46,8 @@
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
                         <select name="countries[]" id="country_id" class="form-control py-3" multiple>
                             @foreach ($countries as $key => $country)
-                                <option value="{{ $key }}" @checked(in_array($key, old('countries', $tour->countries->pluck('id')->toArray())))>
+                                <option value="{{ $key }}"
+                                    {{ in_array($key, old('countries', $tour->countries->pluck('id')->toArray())) ? 'selected' : '' }}>
                                     {{ $country }}
                                 </option>
                             @endforeach

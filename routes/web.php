@@ -24,11 +24,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::middleware(['web', 'auth'])->group(function () {
@@ -43,8 +38,6 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
     Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
-    Route::post('user/sendResetPassword/{user}', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
-    Route::resource('users', UserController::class);
 
     Route::resource('tours', TourController::class);
     Route::resource('packages', PackageController::class);
@@ -58,6 +51,11 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::post('packagePricing/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
     Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
+});
+
+Route::group(['middleware' => ['role:Super Admin']], function () {
+    Route::post('users/sendResetPassword/{user}', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
+    Route::resource('users', UserController::class);
 
     Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
     Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');

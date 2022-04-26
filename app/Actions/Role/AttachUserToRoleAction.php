@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Role;
 
 class AttachUserToRoleAction
 {
-    public function execute(array $data, Role $role)
+    public function execute(array $data, Role $role): Role
     {
         $data = \Validator::make($data, [
             'users' => 'required|array|exists:users,id',
