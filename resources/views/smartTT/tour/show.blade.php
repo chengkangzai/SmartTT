@@ -44,6 +44,7 @@
                                     <th>{{ __('Tour Code') }}</th>
                                     <th>{{ __('Destination') }}</th>
                                     <th>{{ __('Category') }}</th>
+                                    <th>{{ __('Active') }}</th>
                                     <th>{{ __('Itinerary') }}</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,7 @@
                                         </ul>
                                     </td>
                                     <td>{{ $tour->category }}</td>
+                                    <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                     <td>
                                         <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}" class="btn btn-info">{{ __('View') }}</a>
                                     </td>
