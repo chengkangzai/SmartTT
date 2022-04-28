@@ -14,12 +14,13 @@ class PackageFactory extends Factory
 {
     protected $model = Package::class;
 
-    #[ArrayShape(['price' => "int", 'tour_id' => "int", 'capacity' => "int", 'airline' => "mixed|string", 'depart_time' => "\Carbon\Carbon"])]
+    #[ArrayShape(['tour_id' => "int|mixed", 'depart_time' => "\Carbon\Carbon", 'is_active' => "int"])]
     public function definition(): array
     {
         return [
             'tour_id' => Tour::inRandomOrder()->first()->id,
             'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
+            'is_active' => rand(0, 1),
         ];
     }
 }
