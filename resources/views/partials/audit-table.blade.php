@@ -13,7 +13,9 @@
         @forelse($logs as $log)
             <tr>
                 <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
-                <td> {{ $log->causer->name ?? 'System' }} </td>
+                <td> {{ $log->causer->name ?? 'System' }} <br>
+                    {{ $log->causer?->email ? "<".$log->causer->email.">" : '' }}
+                </td>
                 <td> {{ $log->description }} </td>
                 <td>
                     @forelse((collect($log->changes)->get('old') ?? []) as $key => $value)
