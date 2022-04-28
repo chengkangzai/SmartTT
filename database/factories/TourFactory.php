@@ -15,7 +15,7 @@ class TourFactory extends Factory
 {
     protected $model = Tour::class;
 
-    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'itinerary_url' => "false|string", 'thumbnail_url' => "false|string", 'nights' => "int", 'days' => "int"])]
+    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'nights' => "int", 'days' => "int"])]
     public function definition(): array
     {
         $country = Country::inRandomOrder()->first();
@@ -32,8 +32,8 @@ class TourFactory extends Factory
     public function withFakerItineraryAndThumbnail(): TourFactory
     {
         return $this->afterCreating(function (Tour $tour) {
-            $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail', 's3');
-            $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary', 's3');
+            $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail');
+            $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
         });
     }
 
