@@ -54,7 +54,7 @@ class Tour extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->toMediaCollection('thumbnail');
+            ->width(500)
+            ->height(500);
     }
 }

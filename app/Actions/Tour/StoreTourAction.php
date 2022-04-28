@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Throwable;
+use function dd;
 
 class StoreTourAction
 {
@@ -23,9 +24,13 @@ class StoreTourAction
         return DB::transaction(function () use ($data) {
             $tour = Tour::create([
                 ...$data,
-                'itinerary_url' => Storage::putFile('public/Tour/itinerary', $data['itinerary'], 'public'),
-                'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $data['thumbnail'], 'public'),
+                'itinerary_url' => '',
+                'thumbnail_url' => '',
             ]);
+
+            $tour->addMedia($data['itinerary'])->toMediaCollection('itinerary');
+
+            $tour->addMedia($data['thumbnail'])->toMediaCollection('thumbnail');
 
             $place = $data['place'];
             $des = $data['des'];
