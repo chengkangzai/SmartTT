@@ -33,6 +33,8 @@
                             @csrf
                             <input class="btn btn-danger" type="submit" value="Delete" />
                         </form>
+                        <a href="{{ route('tours.audit', $tour) }}"
+                            class="btn btn-primary">{{ __('Audit Trail') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -108,10 +110,12 @@
                                             </ol>
                                         </td>
                                         <td>
-                                            <a href="{{ route('packages.show', $package) }}"
-                                                class="btn btn-info">{{ __('Show') }}</a>
-                                            <a href="{{ route('packages.edit', $package) }}"
-                                                class="btn btn-primary">{{ __('Edit') }}</a>
+                                            <a href="{{ route('packages.show', $package) }}" class="btn btn-info">
+                                                {{ __('Show') }}
+                                            </a>
+                                            <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">
+                                                {{ __('Edit') }}
+                                            </a>
                                             <form action="{{ route('packages.destroy', $package) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
@@ -154,6 +158,9 @@
                                 <div class="float-end">
                                     <a href="{{ route('tourDescriptions.edit', $des) }}" class="btn btn-primary">
                                         {{ __('Edit') }}
+                                    </a>
+                                    <a href="{{ route('tourDescriptions.audit', $des) }}" class="btn btn-info">
+                                        {{ __('Audit Trail') }}
                                     </a>
                                     <form class="d-inline" method="POST"
                                         action="{{ route('tourDescriptions.destroy', $des) }}">

@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Actions\Role\AttachUserToRoleAction;
 use App\Actions\Role\DetachUserToRoleAction;
 use App\Actions\Role\StoreRoleAction;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use function compact;
+use function view;
 
 class RoleController extends Controller
 {
@@ -83,5 +87,12 @@ class RoleController extends Controller
         $action->execute($request->all(), $role);
 
         return redirect()->route('roles.show', $role)->with('success', __('User detached successfully'));
+    }
+
+    public function audit(Role $role)
+    {
+        $logs = Activity::forSubject($role)->get();
+
+        return view('smartTT.role.audit', compact('logs', 'role'));
     }
 }

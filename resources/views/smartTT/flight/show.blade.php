@@ -26,6 +26,7 @@
                     @csrf
                     <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
+                <a href="{{ route('flights.audit', $flight) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">

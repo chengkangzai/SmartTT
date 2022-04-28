@@ -38,26 +38,35 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
     Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
-
+    Route::get('tours/{tour}/audit', [TourController::class, 'audit'])->name('tours.audit');
     Route::resource('tours', TourController::class);
+
+    Route::get('packages/{package}/audit', [PackageController::class, 'audit'])->name('packages.audit');
     Route::resource('packages', PackageController::class);
+
+    Route::get('flights/{flight}/audit', [FlightController::class, 'audit'])->name('flights.audit');
     Route::resource('flights', FlightController::class);
 
-    Route::post('booking/calculatePrice', [BookingController::class, 'calculatePrice'])->name('bookings.calculatePrice');
+    Route::get('bookings/{booking}/audit', [BookingController::class, 'audit'])->name('bookings.audit');
+    Route::post('bookings/calculatePrice', [BookingController::class, 'calculatePrice'])->name('bookings.calculatePrice');
     Route::resource('bookings', BookingController::class);
 
-    Route::post('tourDescription/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');
+    Route::get('tourDescriptions/{tourDescription}/audit', [TourDescriptionController::class, 'audit'])->name('tourDescriptions.audit');
+    Route::post('tourDescriptions/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');
     Route::resource('tourDescriptions', TourDescriptionController::class)->only(['edit', 'update', 'destroy']);
 
-    Route::post('packagePricing/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
+    Route::get('packagePricings/{packagePricing}/audit', [PackagePricingController::class, 'audit'])->name('packagePricings.audit');
+    Route::post('packagePricings/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
     Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
 });
 
-Route::group(['middleware' => ['role:Super Admin']], function () {
-    Route::post('users/sendResetPassword/{user}', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
+Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
+    Route::get('users/{user}/audit', [UserController::class, 'audit'])->name('users.audit');
+    Route::post('users/{user}/sendResetPassword', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);
 
-    Route::put('role/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
-    Route::delete('role/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');
+    Route::get('roles/{role}/audit', [RoleController::class, 'audit'])->name('roles.audit');
+    Route::put('roles/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
+    Route::delete('roles/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');
     Route::resource('roles', RoleController::class);
 });

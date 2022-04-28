@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Actions\User\StoreUserAction;
 use App\Actions\User\UpdateUserAction;
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Password;
+use Spatie\Activitylog\Models\Activity;
+use function compact;
+use function view;
 
 class UserController extends Controller
 {
@@ -59,5 +64,20 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success', __('User Deleted Successfully'));
+    }
+
+    public function sendResetPassword(User $user)
+    {
+        Password::sendResetLink(['email' => $user->email]);
+        activity()->causedBy($user)->performedOn($user)->log(__('Send Reset Password Link'));
+
+        return redirect()->route('users.show', $user)->with('success', __('Password Reset Link Sent Successfully'));
+    }
+
+    public function audit(User $user)
+    {
+        $logs = Activity::forSubject($user)->get();
+
+        return view('smartTT.user.audit', compact('logs', 'user'));
     }
 }

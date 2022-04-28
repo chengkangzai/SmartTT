@@ -27,6 +27,7 @@
                     @csrf
                     <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
+                <a href="{{ route('packages.audit', $package) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -101,6 +102,9 @@
                                         @csrf
                                         <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
+                                    <a href="{{ route('packagePricings.audit', $pricing) }}" class="btn btn-info">
+                                        {{ __('Audit Trail') }}
+                                    </a>
                             </tr>
                         @endforeach
                     </tbody>

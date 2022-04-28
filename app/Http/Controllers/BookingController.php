@@ -6,6 +6,7 @@ use App\Actions\Booking\CalculateTotalBookingPrice;
 use App\Actions\Booking\StoreBookingAction;
 use App\Actions\Booking\UpdateBookingAction;
 use App\Models\Booking;
+use App\Models\Flight;
 use App\Models\Package;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -13,7 +14,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
+use function compact;
+use function view;
 
 class BookingController extends Controller
 {
@@ -78,5 +82,12 @@ class BookingController extends Controller
         $price = $this->calculate($request->all());
 
         return response()->json(number_format($price));
+    }
+
+    public function audit(Booking $booking)
+    {
+        $logs = Activity::forSubject($booking)->get();
+
+        return view('smartTT.booking.audit', compact('logs', 'booking'));
     }
 }

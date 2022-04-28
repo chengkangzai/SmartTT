@@ -8,6 +8,7 @@ use App\Actions\Package\Pricings\UpdatePackagePricingAction;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class PackagePricingController extends Controller
 {
@@ -35,5 +36,12 @@ class PackagePricingController extends Controller
         $action->execute($request->all(), $package);
 
         return back()->with('success', __('Package pricing attached successfully.'));
+    }
+
+    public function audit(PackagePricing $packagePricing)
+    {
+        $logs = Activity::forSubject($packagePricing)->get();
+
+        return view('smartTT.packagePricing.audit', compact('logs', 'packagePricing'));
     }
 }

@@ -6,12 +6,16 @@ use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
 use App\Models\Package;
+use App\Models\PackagePricing;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Spatie\Activitylog\Models\Activity;
+use function compact;
+use function view;
 
 class PackageController extends Controller
 {
@@ -75,5 +79,12 @@ class PackageController extends Controller
         $package->delete();
 
         return redirect()->route('packages.index')->with('success', __('Package deleted successfully'));
+    }
+
+    public function audit(Package $package)
+    {
+        $logs = Activity::forSubject($package)->get();
+
+        return view('smartTT.package.audit', compact('logs', 'package'));
     }
 }
