@@ -28,6 +28,7 @@
                             <th>{{ __('Departure') }}</th>
                             <th>{{ __('Tour') }}</th>
                             <th>{{ __('Airline') }}</th>
+                            <th>{{ __('Active') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                                         @endforeach
                                     </ol>
                                 </td>
+                                <td>{{ $package->active ? __('Yes') : __('No') }}</td>
                                 <td>
                                     <a href="{{ route('packages.show', $package) }}"
                                         class="btn btn-info">{{ __('Show') }}</a>

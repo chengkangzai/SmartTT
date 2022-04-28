@@ -19,7 +19,8 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <img src="{{ $tour->getFirstMedia('thumbnail')?->getUrl() ?? '#' }}" alt="" class="img-responsive img-thumbnail image">
+            <img src="{{ $tour->getFirstMedia('thumbnail')?->getUrl() ?? '#' }}" alt=""
+                class="img-responsive img-thumbnail image">
         </div>
         <div class="col-lg-10 ">
             <div class="card">
@@ -63,11 +64,72 @@
                                     <td>{{ $tour->category }}</td>
                                     <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                     <td>
-                                        <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}" class="btn btn-info">{{ __('View') }}</a>
+                                        <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}"
+                                            class="btn btn-info">{{ __('View') }}</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('Packages') }}</h3>
+                    <div class="pull-right">
+                        <a href="{{ route('packages.create') }}" class="btn btn-primary">{{ __('Add') }}</a>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Departure') }}</th>
+                                    <th>{{ __('Tour') }}</th>
+                                    <th>{{ __('Airline') }}</th>
+                                    <th>{{ __('Action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($packages as $package)
+                                    <tr>
+                                        <td>{{ $package->id }}</td>
+                                        <td>{{ $package->depart_time->format(config('app.date_format')) }}</td>
+                                        <td>{{ $package->tour->name }}</td>
+                                        <td>
+                                            <ol>
+                                                @foreach ($package->flight as $flight)
+                                                    <li>{{ $flight->airline->name }}</li>
+                                                @endforeach
+                                            </ol>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('packages.show', $package) }}"
+                                                class="btn btn-info">{{ __('Show') }}</a>
+                                            <a href="{{ route('packages.edit', $package) }}"
+                                                class="btn btn-primary">{{ __('Edit') }}</a>
+                                            <form action="{{ route('packages.destroy', $package) }}"
+                                                class="d-inline" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            {{ __('No data') }}
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        {{ $packages->links() }}
                     </div>
                 </div>
             </div>

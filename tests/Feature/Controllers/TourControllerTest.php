@@ -49,9 +49,8 @@ it('should return show view', function () {
         ->get(route('tours.show', Tour::first()))
         ->assertViewIs('smartTT.tour.show')
         ->assertViewHas([
-            'itineraryUrl' => Storage::url(Tour::first()->itinerary_url),
-            'thumbnailUrl' => Storage::url(Tour::first()->thumbnail_url),
-            'tourDes' => Tour::first()->description()->paginate(9),
+            'tourDes' => Tour::first()->description()->paginate(9, ['*'], 'tourDes'),
+            'packages' => Tour::first()->packages()->paginate(9, ['*'], 'packages'),
         ]);
 });
 $faker = Faker\Factory::create();
