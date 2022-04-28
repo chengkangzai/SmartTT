@@ -46,11 +46,10 @@ class TourController extends Controller
 
     public function show(Tour $tour): Factory|View|Application
     {
-        $itineraryUrl = Storage::url($tour->itinerary_url);
-        $thumbnailUrl = Storage::url($tour->thumbnail_url);
-        $tourDes = $tour->description()->paginate(9);
+        $tourDes = $tour->description()->paginate(9, ['*'], 'tourDes');
+        $packages = $tour->packages()->paginate(9, ['*'], 'packages');
 
-        return view('smartTT.tour.show', compact('tour', 'itineraryUrl', 'thumbnailUrl', 'tourDes'));
+        return view('smartTT.tour.show', compact('tour', 'tourDes', 'packages'));
     }
 
     public function edit(Tour $tour): Factory|View|Application
