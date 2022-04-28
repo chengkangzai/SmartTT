@@ -20,7 +20,7 @@
     <div class="card mb-1">
         <div class="card-header">
             <h3 class="card-title">{{ __('Package Information') }}</h3>
-            <div class="pull-right">
+            <div class="float-end">
                 <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('packages.destroy', $package) }}" method="POST" class="d-inline">
                     @method('DELETE')
@@ -63,7 +63,7 @@
     <div class="card mb-1">
         <div class="card-header">
             <h3 class="card-title">{{ __('Pricing Plan') }}</h3>
-            <div class="pull-right">
+            <div class="float-end">
                 <a href="#" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addPackagePricingModal">
                     {{ __('Add') }}
                 </a>

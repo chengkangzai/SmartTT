@@ -17,7 +17,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('bookings.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            <div class="float-end">
+                <a href="{{ route('bookings.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">

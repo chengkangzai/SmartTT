@@ -19,14 +19,14 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <img src="{{ $tour->getFirstMedia('thumbnail')?->getUrl() ?? '#' }}" alt=""
-                class="img-responsive img-thumbnail image">
+            <img src="{{ $tour->getFirstMedia('thumbnail')?->getUrl() ?? '#' }}" alt="{{ $tour->name }}"
+                class="img-fluid">
         </div>
         <div class="col-lg-10 ">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Information') }}</h3>
-                    <div class="pull-right">
+                    <div class="float-end">
                         <a href="{{ route('tours.edit', $tour) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                         <form action="{{ route('tours.destroy', $tour) }}" method="POST" class="d-inline">
                             @method('DELETE')
@@ -79,7 +79,7 @@
             <div class="card mt-2">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Packages') }}</h3>
-                    <div class="pull-right">
+                    <div class="float-end">
                         <a href="{{ route('packages.create') }}" class="btn btn-primary">{{ __('Add') }}</a>
 
                     </div>
@@ -141,7 +141,7 @@
             <div class="card mt-2">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Description') }}</h3>
-                    <div class="pull-right">
+                    <div class="float-end">
                         <a href="#" class="btn btn-success" data-coreui-toggle="modal"
                             data-coreui-target="#addTourDescriptionModal">
                             {{ __('Add') }}

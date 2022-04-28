@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('Flight Information') }}</h3>
-            <div class="pull-right">
+            <div class="float-end">
                 <a href="{{ route('flights.edit', $flight) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('flights.destroy', $flight) }}" method="POST" class="d-inline">
                     @method('DELETE')

@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('User Information') }}</h3>
-            <div class="pull-right">
+            <div class="float-end">
                 <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 @can('Delete User')
                     <form action="{{ route('users.destroy', $user) }}" method="POST" style="display: inline">
@@ -30,9 +30,9 @@
                 @endcan
                 <form action="{{ route('users.sendResetPassword', $user) }}" method="POST" style="display: inline">
                     @csrf
-                    <input class="btn btn-info text-white" type="submit" value="{{ __('Send Password Reset Email') }}" />
+                    <input class="btn btn-info" type="submit" value="{{ __('Send Password Reset Email') }}" />
                 </form>
-                <a href="{{ route('users.audit', $user) }}" class="btn btn-info text-white">{{ __('Audit Trail') }}</a>
+                <a href="{{ route('users.audit', $user) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">

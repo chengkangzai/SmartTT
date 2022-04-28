@@ -17,7 +17,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('users.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            <div class="float-end">
+                <a href="{{ route('users.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            </div>
         </div>
         <div class="card-body">
             @include('partials.error-alert')
@@ -38,10 +40,12 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('users.show', $user) }}"
-                                        class="btn btn-info">{{ __('Show') }}</a>
-                                    <a href="{{ route('users.edit', $user) }}"
-                                        class="btn btn-primary">{{ __('Edit') }}</a>
+                                    <a href="{{ route('users.show', $user) }}" class="btn btn-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
                                     @can('Delete User')
                                         <form action="{{ route('users.destroy', $user) }}" class="d-inline"
                                             method="POST">

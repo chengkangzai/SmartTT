@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('User Role Information') }}</h3>
-            <div class="pull-right ">
+            <div class="float-end ">
                 @include('partials.error-alert')
                 <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('roles.destroy', $role) }}" class="d-inline" method="POST">
@@ -49,7 +49,7 @@
     <div class="card mt-3">
         <div class="card-header">
             <h3 class="card-title">{{ __('User with this role') }}</h3>
-            <div class="pull-right">
+            <div class="float-end">
                 <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addUserModal">
                     {{ __('Add') }}
                 </button>
