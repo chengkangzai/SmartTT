@@ -43,6 +43,7 @@ class BookingController extends Controller
     public function show(Booking $booking): Factory|View|Application
     {
         $booking->load(['user', 'package', 'package.tour']);
+
         return view('smartTT.booking.show', compact('booking'));
     }
 
@@ -71,7 +72,7 @@ class BookingController extends Controller
 
     protected function calculatePrice(Request $request): JsonResponse|bool
     {
-        if (!$request->ajax()) {
+        if (! $request->ajax()) {
             return response(__('You Are not allow to be here'))->isForbidden();
         }
         $price = $this->calculate($request->all());
