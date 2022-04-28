@@ -15,7 +15,7 @@ class TourFactory extends Factory
 {
     protected $model = Tour::class;
 
-    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'nights' => "int", 'days' => "int"])]
+    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'nights' => "int", 'days' => "int", 'is_active' => "int"])]
     public function definition(): array
     {
         $country = Country::inRandomOrder()->first();
@@ -26,6 +26,7 @@ class TourFactory extends Factory
             'category' => $selection[rand(0, 4)],
             'nights' => rand(1, 5),
             'days' => rand(1, 5),
+            'is_active' => rand(0, 1),
         ];
     }
 
