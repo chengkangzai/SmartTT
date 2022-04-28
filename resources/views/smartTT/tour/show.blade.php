@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <img src="{{ $tour->getFirstMedia('thumbnail')->getUrl() }}" alt="" class="img-responsive img-thumbnail image">
+            <img src="{{ $tour->getFirstMedia('thumbnail')?->getUrl() ?? '#' }}" alt="" class="img-responsive img-thumbnail image">
         </div>
         <div class="col-lg-10 ">
             <div class="card">
@@ -61,7 +61,7 @@
                                     </td>
                                     <td>{{ $tour->category }}</td>
                                     <td>
-                                        <a href="{{ $tour->getFirstMedia('itinerary')->getUrl() }}" class="btn btn-info">{{ __('View') }}</a>
+                                        <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}" class="btn btn-info">{{ __('View') }}</a>
                                     </td>
                                 </tr>
                             </tbody>
