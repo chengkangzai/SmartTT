@@ -16,3 +16,7 @@ $enable-rtl: true; /* stylelint-disable-line scss/dollar-variable-default */
 body {
     overscroll-behavior-y: none !important;
 }
+
+.btn-info, .btn-success, .btn-danger {
+    color: white;
+}
