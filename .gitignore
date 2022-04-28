@@ -1,6 +1,7 @@
 /node_modules
 /storage/*.key
 /storage/app/
+/storage/media-library/
 /vendor
 /public/adminer/
 /public/storage/
