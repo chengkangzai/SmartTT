@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\PackagePricing $packagePricing */
+/** @var \App\Models\PackagePricing $packagePricing */
 @endphp
 
 @extends('layouts.app')
@@ -12,7 +12,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
             <li class="breadcrumb-item">
-                <a href="{{ route('packages.show',$packagePricing->package) }}">
+                <a href="{{ route('packages.show', $packagePricing->package) }}">
                     {{ __('Packages') }}
                 </a>
             </li>
@@ -28,5 +28,4 @@
             @include('partials.audit-table')
         </div>
     </div>
-
 @endsection

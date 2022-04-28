@@ -1,5 +1,5 @@
 @php
-    /** @var \Spatie\Permission\Models\Role $role */
+/** @var \Spatie\Permission\Models\Role $role */
 @endphp
 
 @extends('layouts.app')
@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('roles.show',$role) }}">{{ __('Role') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('roles.show', $role) }}">{{ __('Role') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Audit Trail') }}</li>
         </ol>
     </nav>
@@ -24,5 +24,4 @@
             @include('partials.audit-table')
         </div>
     </div>
-
 @endsection
