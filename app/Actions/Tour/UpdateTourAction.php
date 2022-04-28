@@ -4,7 +4,10 @@ namespace App\Actions\Tour;
 
 use App\Models\Tour;
 use Log;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Throwable;
 use function collect;
 use Illuminate\Support\Facades\Storage;
 use function dd;
@@ -15,7 +18,9 @@ class UpdateTourAction
     use ValidateTour;
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function execute(array $data, Tour $tour): Tour
     {
@@ -28,21 +33,11 @@ class UpdateTourAction
             });
 
             if (isset($data['itinerary'])) {
-                $media = $tour->getMedia('itinerary')->first();
-                $model_type = $media->model_type;
-                $model = $model_type::find($media->model_id);
-                $model->deleteMedia($media->id);
-
-                $tour->addMedia($data['itinerary'])->toMediaCollection('itinerary');
+                $this->updateFile($tour, 'itinerary', $data);
             }
 
             if (isset($data['thumbnail'])) {
-                $media = $tour->getMedia('thumbnail')->first();
-                $model_type = $media->model_type;
-                $model = $model_type::find($media->model_id);
-                $model->deleteMedia($media->id);
-
-                $tour->addMedia($data['thumbnail'])->toMediaCollection('thumbnail');
+                $this->updateFile($tour, 'thumbnail', $data);
             }
 
             $tour->update([
@@ -51,5 +46,18 @@ class UpdateTourAction
 
             return $tour->refresh();
         });
+    }
+
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    private function updateFile(Tour $tour, string $mode, $data): void
+    {
+        $media = $tour->getMedia($mode)->first();
+        $model_type = $media->model_type;
+        $model = $model_type::find($media->model_id);
+        $model->deleteMedia($media->id);
+        $tour->addMedia($data[$mode])->toMediaCollection($mode);
     }
 }

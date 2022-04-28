@@ -16,8 +16,21 @@ class DestroyTourAction
             throw  new \Exception('This tour has package, you can not delete it, please delete the package first');
         }
 
-        Storage::delete([$tour->itinerary_url, $tour->thumbnail_url]);
+        $this->deleteFile($tour, 'itinerary');
+        $this->deleteFile($tour, 'thumbnail');
+
         $tour->description()->delete();
         $tour->delete();
+    }
+
+    private function deleteFile(Tour $tour, string $mode): void
+    {
+        $medias = $tour->getMedia($mode)->all();
+
+        foreach ($medias as $media) {
+            $model_type = $media->model_type;
+            $model = $model_type::find($media->model_id);
+            $model->deleteMedia($media->id);
+        }
     }
 }

@@ -24,8 +24,6 @@ class StoreTourAction
         return DB::transaction(function () use ($data) {
             $tour = Tour::create([
                 ...$data,
-                'itinerary_url' => '',
-                'thumbnail_url' => '',
             ]);
 
             $tour->addMedia($data['itinerary'])->toMediaCollection('itinerary');
