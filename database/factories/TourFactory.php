@@ -6,10 +6,10 @@ use App\Models\Country;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use function rand;
 use function strtoupper;
+use function time;
 
 class TourFactory extends Factory
 {
@@ -32,8 +32,8 @@ class TourFactory extends Factory
     public function withFakerItineraryAndThumbnail(): TourFactory
     {
         return $this->afterCreating(function (Tour $tour) {
-            $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail');
-            $tour->addMedia(UploadedFile::fake()->create('document.pdf', 100))->toMediaCollection('itinerary');
+            $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail', 's3');
+            $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary', 's3');
         });
     }
 
@@ -41,8 +41,8 @@ class TourFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'itinerary' => UploadedFile::fake()->create('document.pdf', 100),
-                'thumbnail' => UploadedFile::fake()->image('avatar.jpg', 200, 200),
+                'itinerary' => UploadedFile::fake()->create(time() . 'document.pdf', 100),
+                'thumbnail' => UploadedFile::fake()->image(time() . 'avatar.jpg', 200, 200),
             ];
         });
     }
