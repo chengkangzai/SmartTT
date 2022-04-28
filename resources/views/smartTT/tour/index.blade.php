@@ -29,6 +29,7 @@
                             <th>{{ __('Tour Code') }}</th>
                             <th>{{ __('Destination') }}</th>
                             <th>{{ __('Category') }}</th>
+                            <th>{{ __('Active') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@
                                     </ul>
                                 </td>
                                 <td>{{ $tour->category }}</td>
+                                <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                 <td>
                                     <a href="{{ route('tours.show', $tour) }}" class="btn btn-info">
                                         {{ __('Show') }}

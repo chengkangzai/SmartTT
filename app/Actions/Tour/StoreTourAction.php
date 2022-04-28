@@ -4,7 +4,6 @@ namespace App\Actions\Tour;
 
 use App\Models\Tour;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
@@ -23,9 +22,11 @@ class StoreTourAction
         return DB::transaction(function () use ($data) {
             $tour = Tour::create([
                 ...$data,
-                'itinerary_url' => Storage::putFile('public/Tour/itinerary', $data['itinerary'], 'public'),
-                'thumbnail_url' => Storage::putFile('public/Tour/thumbnail', $data['thumbnail'], 'public'),
             ]);
+
+            $tour->addMedia($data['itinerary'])->toMediaCollection('itinerary');
+
+            $tour->addMedia($data['thumbnail'])->toMediaCollection('thumbnail');
 
             $place = $data['place'];
             $des = $data['des'];

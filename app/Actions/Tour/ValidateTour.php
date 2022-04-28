@@ -23,6 +23,8 @@ trait ValidateTour
             'thumbnail' => 'required|mimes:jpeg,bmp,png|max:2048',
         ] : [
             'tour_code' => 'required|unique:tours,tour_code,' . $tour?->id,
+            'itinerary' => 'nullable|mimes:pdf|max:2048',
+            'thumbnail' => 'nullable|mimes:jpeg,bmp,png|max:2048',
         ];
 
         return Validator::make($data, [
