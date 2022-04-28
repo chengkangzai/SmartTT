@@ -30,6 +30,14 @@ it('should return edit view', function () {
         ->assertViewHas('tourDescription', $des);
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('tourDescriptions.audit', TourDescription::first()))
+        ->assertViewIs('smartTT.tourDescription.audit')
+        ->assertViewHas('tourDescription', TourDescription::first())
+        ->assertViewHas('logs');
+});
+
 it('should update tour description', function () {
     $ori = TourDescription::factory()->create();
     $mock = TourDescription::factory()->make();

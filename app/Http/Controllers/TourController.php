@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Spatie\Activitylog\Models\Activity;
 
 class TourController extends Controller
 {
@@ -80,5 +81,12 @@ class TourController extends Controller
         }
 
         return redirect()->route('tours.index')->with('success', __('Tour deleted successfully'));
+    }
+
+    public function audit(Tour $tour)
+    {
+        $logs = Activity::forSubject($tour)->get();
+
+        return view('smartTT.tour.audit', compact('logs', 'tour'));
     }
 }

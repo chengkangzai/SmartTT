@@ -54,6 +54,14 @@ it('should return show view', function () {
         ->assertViewHas('package', Package::first());
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('packages.audit', Package::first()))
+        ->assertViewIs('smartTT.package.audit')
+        ->assertViewHas('package', Package::first())
+        ->assertViewHas('logs');
+});
+
 $faker = Faker\Factory::create();
 it('should store a package', function () use ($faker) {
     $package = Package::factory()->make()->toArray();

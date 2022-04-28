@@ -46,6 +46,14 @@ it('should return show view', function () {
         ->assertViewIs('smartTT.role.show');
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('roles.audit', Role::first()))
+        ->assertViewIs('smartTT.role.audit')
+        ->assertViewHas('role', Role::first())
+        ->assertViewHas('logs');
+});
+
 $faker = Faker\Factory::create();
 it('should store a role', function () use ($faker) {
     $role = [

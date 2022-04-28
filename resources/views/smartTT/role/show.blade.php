@@ -23,6 +23,7 @@
                     @csrf
                     <input type="submit" role="button" value="{{ __('Delete') }}" class="btn btn-danger" />
                 </form>
+                <a href="{{ route('roles.audit', $role) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">

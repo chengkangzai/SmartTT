@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\Activitylog\Models\Activity;
 
 class FlightController extends Controller
 {
@@ -61,5 +62,12 @@ class FlightController extends Controller
         $flight->delete();
 
         return redirect()->route('flights.index')->with('success', __('Flight deleted successfully.'));
+    }
+
+    public function audit(Flight $flight)
+    {
+        $logs = Activity::forSubject($flight)->get();
+
+        return view('smartTT.flight.audit', compact('logs', 'flight'));
     }
 }

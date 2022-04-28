@@ -42,6 +42,14 @@ it('should return show view', function () {
         ->assertViewHas('flight', Flight::first());
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('flights.audit', Flight::first()))
+        ->assertViewIs('smartTT.flight.audit')
+        ->assertViewHas('flight', Flight::first())
+        ->assertViewHas('logs');
+});
+
 it('should store a flight', function () {
     $flight = Flight::factory()->make();
     $this

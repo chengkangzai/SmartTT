@@ -44,6 +44,14 @@ it('should return edit view', function () {
         ->assertViewHas('tour', Tour::first());
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('tours.audit', Tour::first()))
+        ->assertViewIs('smartTT.tour.audit')
+        ->assertViewHas('tour', Tour::first())
+        ->assertViewHas('logs');
+});
+
 it('should return show view', function () {
     $this
         ->get(route('tours.show', Tour::first()))

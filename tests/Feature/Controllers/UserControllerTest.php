@@ -37,7 +37,15 @@ it('should return show view', function () {
         ->assertViewIs('smartTT.user.show')
         ->assertViewHas('user', User::first());
 });
-//
+
+it('should return audit view', function () {
+    $this
+        ->get(route('users.audit', User::first()))
+        ->assertViewIs('smartTT.user.audit')
+        ->assertViewHas('user', User::first())
+        ->assertViewHas('logs');
+});
+
 it('should store a user', function () {
     $user = User::factory()->make();
     $user = $user->toArray();

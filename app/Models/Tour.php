@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -15,13 +17,12 @@ class Tour extends Model implements HasMedia
     use HasFactory;
     use SoftDeletes;
     use InteractsWithMedia;
+    use LogsActivity;
 
     protected $fillable = [
         'tour_code',
         'name',
         'category',
-        'itinerary_url',
-        'thumbnail_url',
         'days',
         'nights',
         'is_active',
@@ -42,5 +43,10 @@ class Tour extends Model implements HasMedia
         return $this->belongsToMany(Country::class)
             ->withPivot(['order'])
             ->orderByPivot('order');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logFillable()->logOnlyDirty();
     }
 }
