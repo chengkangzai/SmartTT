@@ -9,6 +9,8 @@ return new class extends Migration {
     {
         Schema::table('tours', function (Blueprint $table) {
             $table->dropColumn('itinerary_url');
+        }); // for the sake of SQLite
+        Schema::table('tours', function (Blueprint $table) {
             $table->dropColumn('thumbnail_url');
         });
     }
