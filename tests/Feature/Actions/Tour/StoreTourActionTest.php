@@ -3,6 +3,7 @@
 use App\Actions\Tour\StoreTourAction;
 use App\Models\Country;
 use App\Models\Tour;
+use App\Models\TourDescription;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
 use Illuminate\Validation\ValidationException;
@@ -27,6 +28,25 @@ it('should store a tour', function () use ($faker) {
 
     expect($tour)->toBeInstanceOf(Tour::class);
     assertModelExists($tour);
+    expect($tour->name)->toBe($mockTour->name);
+    expect($tour->tour_code)->toBe($mockTour->tour_code);
+    expect($tour->days)->toBe($mockTour->days);
+    expect($tour->nights)->toBe($mockTour->nights);
+
+    expect($tour->getFirstMedia('thumbnail')->exists())->toBe(true);
+    expect($tour->getFirstMedia('itinerary')->exists())->toBe(true);
+
+    $tour->description()->each(function (TourDescription $description, $index) use ($mockTour) {
+        expect($description)->toBeInstanceOf(TourDescription::class);
+        expect($description->description)->toBe($mockTour['des'][$index + 1]);
+        expect($description->place)->toBe($mockTour['place'][$index + 1]);
+    });
+
+    expect($tour->countries()->count())->toBe(3);
+    $tour->countries()->each(function (Country $country) use ($mockTour) {
+        expect($country)->toBeInstanceOf(Country::class);
+        expect($country->id)->toBeIn($mockTour['countries']);
+    });
 });
 
 it('should not store a tour bc w/o des', function () use ($faker) {

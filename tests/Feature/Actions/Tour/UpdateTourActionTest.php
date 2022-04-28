@@ -22,17 +22,19 @@ it('should update tour', function () use ($faker) {
     $mockTour = Tour::factory()->make();
     $mockTour['countries'] = Country::inRandomOrder()->take(3)->pluck('id')->toArray();
 
-    $ex = app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour);
+    $updatedTour = app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour);
 
-    expect($ex)->toBeInstanceOf(Tour::class);
-    assertModelExists($ex);
-    expect($ex->name)->toBe($mockTour->name);
-    expect($ex->tour_code)->toBe($mockTour->tour_code);
-    expect($ex->days)->toBe($mockTour->days);
-    expect($ex->nights)->toBe($mockTour->nights);
+    expect($updatedTour)->toBeInstanceOf(Tour::class);
+    assertModelExists($updatedTour);
+    expect($updatedTour->name)->toBe($mockTour->name);
+    expect($updatedTour->tour_code)->toBe($mockTour->tour_code);
+    expect($updatedTour->days)->toBe($mockTour->days);
+    expect($updatedTour->nights)->toBe($mockTour->nights);
 
-    collect($mockTour['countries'])->each(function ($countryId) use ($ex) {
-        expect($ex->countries->contains($countryId))->toBe(true);
+    expect($updatedTour->countries()->count())->toBe(3);
+    $updatedTour->countries()->each(function (Country $country) use ($mockTour) {
+        expect($country)->toBeInstanceOf(Country::class);
+        expect($country->id)->toBeIn($mockTour['countries']);
     });
 });
 
