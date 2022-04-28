@@ -33,7 +33,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Package') }}</th>
+                            <th>{{ __('Tour') }}</th>
                             <th>{{ __('Adult') }}</th>
                             <th>{{ __('Child') }}</th>
                             <th>{{ __('Customer') }}</th>
@@ -44,10 +44,10 @@
                     <tbody>
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->packages->tour->name }}</td>
+                            <td>{{ $booking->package->tour->name }}</td>
                             <td>{{ $booking->adult }}</td>
                             <td>{{ $booking->child }}</td>
-                            <td>{{ $booking->users->name }}</td>
+                            <td>{{ $booking->user->name }}</td>
                             <td>RM {{ number_format($booking->discount) }}</td>
                             <td>RM {{ number_format($booking->total_price) }}</td>
                         </tr>
