@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('roles.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+                <a href="{{ route('roles.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -34,10 +34,10 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>
-                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-info">
+                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">
+                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                 </td>

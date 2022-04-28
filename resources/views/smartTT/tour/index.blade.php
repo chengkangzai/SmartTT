@@ -18,7 +18,7 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('tours.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+                <a href="{{ route('tours.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -51,17 +51,17 @@
                                 <td>{{ $tour->category }}</td>
                                 <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                 <td>
-                                    <a href="{{ route('tours.show', $tour) }}" class="btn btn-info">
+                                    <a href="{{ route('tours.show', $tour) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('tours.edit', $tour) }}" class="btn btn-primary">
+                                    <a href="{{ route('tours.edit', $tour) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form action="{{ route('tours.destroy', $tour) }}" class="d-inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>

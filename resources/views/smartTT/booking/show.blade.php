@@ -19,13 +19,15 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Information') }}</h3>
             <div class="float-end">
-                <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
                     @method('DELETE')
                     @csrf
-                    <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
-                <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
+                <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-outline-info">
+                    {{ __('Audit Trail') }}
+                </a>
             </div>
         </div>
         <div class="card-body">

@@ -27,14 +27,15 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Information') }}</h3>
                     <div class="float-end">
-                        <a href="{{ route('tours.edit', $tour) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                        <a href="{{ route('tours.edit', $tour) }}"
+                            class="btn btn-outline-primary">{{ __('Edit') }}</a>
                         <form action="{{ route('tours.destroy', $tour) }}" method="POST" class="d-inline">
                             @method('DELETE')
                             @csrf
-                            <input class="btn btn-danger" type="submit" value="Delete" />
+                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                         </form>
                         <a href="{{ route('tours.audit', $tour) }}"
-                            class="btn btn-primary">{{ __('Audit Trail') }}</a>
+                            class="btn btn-outline-primary">{{ __('Audit Trail') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -67,7 +68,7 @@
                                     <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                     <td>
                                         <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}"
-                                            class="btn btn-info">{{ __('View') }}</a>
+                                            class="btn btn-outline-info">{{ __('View') }}</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -80,7 +81,7 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Packages') }}</h3>
                     <div class="float-end">
-                        <a href="{{ route('packages.create') }}" class="btn btn-primary">{{ __('Add') }}</a>
+                        <a href="{{ route('packages.create') }}" class="btn btn-outline-primary">{{ __('Add') }}</a>
 
                     </div>
                 </div>
@@ -110,17 +111,20 @@
                                             </ol>
                                         </td>
                                         <td>
-                                            <a href="{{ route('packages.show', $package) }}" class="btn btn-info">
+                                            <a href="{{ route('packages.show', $package) }}"
+                                                class="btn btn-outline-info">
                                                 {{ __('Show') }}
                                             </a>
-                                            <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">
+                                            <a href="{{ route('packages.edit', $package) }}"
+                                                class="btn btn-outline-primary">
                                                 {{ __('Edit') }}
                                             </a>
                                             <form action="{{ route('packages.destroy', $package) }}"
                                                 class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                                <input class="btn btn-outline-danger" type="submit"
+                                                    value="{{ __('Delete') }}" />
                                             </form>
                                         </td>
                                     </tr>
@@ -142,7 +146,7 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Tour Description') }}</h3>
                     <div class="float-end">
-                        <a href="#" class="btn btn-success" data-coreui-toggle="modal"
+                        <a href="#" class="btn btn-outline-success" data-coreui-toggle="modal"
                             data-coreui-target="#addTourDescriptionModal">
                             {{ __('Add') }}
                         </a>
@@ -156,17 +160,17 @@
                                 <p class="card-text text-truncate">{{ $des->description }}</p>
                                 <div class="border my-2"></div>
                                 <div class="float-end">
-                                    <a href="{{ route('tourDescriptions.edit', $des) }}" class="btn btn-primary">
+                                    <a href="{{ route('tourDescriptions.edit', $des) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
-                                    <a href="{{ route('tourDescriptions.audit', $des) }}" class="btn btn-info">
+                                    <a href="{{ route('tourDescriptions.audit', $des) }}" class="btn btn-outline-info">
                                         {{ __('Audit Trail') }}
                                     </a>
                                     <form class="d-inline" method="POST"
                                         action="{{ route('tourDescriptions.destroy', $des) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                        <input type="submit" class="btn btn-outline-danger" value="{{ __('Delete') }}">
                                     </form>
                                 </div>
                             </div>
@@ -209,9 +213,11 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left"
-                        data-dismiss="modal">{{ __('Close') }}</button>
-                    <input form="addTourDescription" type="submit" class="btn btn-primary" value="{{ __('Submit') }}">
+                    <button type="button" class="btn btn-default pull-left" data-coreui-dismiss="modal">
+                        {{ __('Close') }}
+                    </button>
+                    <input form="addTourDescription" type="submit" class="btn btn-outline-primary"
+                        value="{{ __('Submit') }}" />
                 </div>
             </div>
         </div>

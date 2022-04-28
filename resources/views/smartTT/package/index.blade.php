@@ -18,7 +18,7 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('packages.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+                <a href="{{ route('packages.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -50,14 +50,14 @@
                                 <td>{{ $package->active ? __('Yes') : __('No') }}</td>
                                 <td>
                                     <a href="{{ route('packages.show', $package) }}"
-                                        class="btn btn-info">{{ __('Show') }}</a>
+                                        class="btn btn-outline-info">{{ __('Show') }}</a>
                                     <a href="{{ route('packages.edit', $package) }}"
-                                        class="btn btn-primary">{{ __('Edit') }}</a>
+                                        class="btn btn-outline-primary">{{ __('Edit') }}</a>
                                     <form action="{{ route('packages.destroy', $package) }}" class="d-inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>

@@ -141,7 +141,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <input type="submit" class="btn btn-primary" value="{{ __('Submit') }}" form="createForm">
+            <input type="submit" class="btn btn-outline-primary" value="{{ __('Submit') }}" form="createForm">
         </div>
     </div>
 @endsection

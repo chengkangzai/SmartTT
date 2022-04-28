@@ -20,19 +20,19 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('User Information') }}</h3>
             <div class="float-end">
-                <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
                 @can('Delete User')
                     <form action="{{ route('users.destroy', $user) }}" method="POST" style="display: inline">
                         @method('DELETE')
                         @csrf
-                        <input class="btn btn-danger text-white" type="submit" value="{{ __('Delete') }}" />
+                        <input class="btn btn-outline-danger text-white" type="submit" value="{{ __('Delete') }}" />
                     </form>
                 @endcan
                 <form action="{{ route('users.sendResetPassword', $user) }}" method="POST" style="display: inline">
                     @csrf
-                    <input class="btn btn-info" type="submit" value="{{ __('Send Password Reset Email') }}" />
+                    <input class="btn btn-outline-info" type="submit" value="{{ __('Send Password Reset Email') }}" />
                 </form>
-                <a href="{{ route('users.audit', $user) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
+                <a href="{{ route('users.audit', $user) }}" class="btn btn-outline-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -52,8 +52,9 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('roles.show', $user->roles->first()) }}"
-                                class="btn btn-outline-primary">{{ $user->roles->first()->name }}</a>
+                            <a href="{{ route('roles.show', $user->roles->first()) }}" class="btn btn-outline-primary">
+                                {{ $user->roles->first()->name }}
+                            </a>
                         </td>
                         <td>{{ $user->created_at }}</td>
                     </tr>
