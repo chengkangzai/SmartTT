@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\TourDescription $tourDescription */
+/** @var \App\Models\TourDescription $tourDescription */
 @endphp
 
 @extends('layouts.app')
@@ -28,5 +28,4 @@
             @include('partials.audit-table')
         </div>
     </div>
-
 @endsection

@@ -79,7 +79,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <button form="editForm" type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+            <button form="editForm" type="submit" class="btn btn-outline-primary">{{ __('Update') }}</button>
         </div>
     </div>
 @endsection

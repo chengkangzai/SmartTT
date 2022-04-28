@@ -15,15 +15,15 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">{{ __('User Role Information') }}</h3>
-            <div class="pull-right ">
+            <div class="float-end ">
                 @include('partials.error-alert')
-                <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+                <a href="{{ route('roles.edit', $role) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('roles.destroy', $role) }}" class="d-inline" method="POST">
                     @method('DELETE')
                     @csrf
-                    <input type="submit" role="button" value="{{ __('Delete') }}" class="btn btn-danger" />
+                    <input type="submit" role="button" value="{{ __('Delete') }}" class="btn btn-outline-danger" />
                 </form>
-                <a href="{{ route('roles.audit', $role) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
+                <a href="{{ route('roles.audit', $role) }}" class="btn btn-outline-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -49,8 +49,9 @@
     <div class="card mt-3">
         <div class="card-header">
             <h3 class="card-title">{{ __('User with this role') }}</h3>
-            <div class="pull-right">
-                <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addUserModal">
+            <div class="float-end">
+                <button type="button" class="btn btn-outline-success" data-coreui-toggle="modal"
+                    data-coreui-target="#addUserModal">
                     {{ __('Add') }}
                 </button>
             </div>
@@ -74,13 +75,13 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <a href="{{ route('users.show', $user) }}"
-                                        class="btn btn-info">{{ __('Show') }}</a>
+                                        class="btn btn-outline-info">{{ __('Show') }}</a>
                                     <form action="{{ route('roles.detachUserToRole', $role) }}" style="display: inline;"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input type="text" name="user_id" value="{{ $user->id }}" hidden />
-                                        <input type="submit" value="{{ __('Detach') }}" class="btn btn-danger">
+                                        <input type="submit" value="{{ __('Detach') }}" class="btn btn-outline-danger">
                                     </form>
                                 </td>
                             </tr>
@@ -138,9 +139,11 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left"
-                        data-dismiss="modal">{{ __('Close') }}</button>
-                    <input type="submit" form="addUserForm" class="btn btn-primary" value="{{ __('Save changes') }}">
+                    <button type="button" class="btn btn-default pull-left" data-coreui-dismiss="modal">
+                        {{ __('Close') }}
+                    </button>
+                    <input type="submit" form="addUserForm" class="btn btn-outline-primary"
+                        value="{{ __('Save changes') }}">
                 </div>
             </div>
         </div>
@@ -161,7 +164,6 @@
             paging: false,
             info: false
         });
-
 
         $.ajax({
             type: "POST",

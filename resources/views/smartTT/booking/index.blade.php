@@ -17,7 +17,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('bookings.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            <div class="float-end">
+                <a href="{{ route('bookings.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -50,17 +52,17 @@
                                 <td>RM {{ number_format($booking->discount, 2) }}</td>
                                 <td>RM {{ number_format($booking->total_price, 2) }}</td>
                                 <td>
-                                    <a href="{{ route('bookings.show', $booking) }}" class="btn btn-info">
+                                    <a href="{{ route('bookings.show', $booking) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-primary">
+                                    <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form action="{{ route('bookings.destroy', $booking) }}" class="d-inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>

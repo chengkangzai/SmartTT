@@ -43,7 +43,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <button form="editForm" type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+            <button form="editForm" type="submit" class="btn btn-outline-primary">{{ __('Submit') }}</button>
         </div>
     </div>
 @endsection

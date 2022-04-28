@@ -17,7 +17,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('flights.create') }}" class="btn btn-success">{{ __('Create') }}</a>
+            <div class="float-end">
+                <a href="{{ route('flights.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -44,17 +46,17 @@
                                     -> ({{ $flight->arrive_airport->IATA }})
                                 </td>
                                 <td>
-                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-info">
+                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-primary">
+                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>

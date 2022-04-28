@@ -20,14 +20,15 @@
     <div class="card mb-1">
         <div class="card-header">
             <h3 class="card-title">{{ __('Package Information') }}</h3>
-            <div class="pull-right">
-                <a href="{{ route('packages.edit', $package) }}" class="btn btn-primary">{{ __('Edit') }}</a>
+            <div class="float-end">
+                <a href="{{ route('packages.edit', $package) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('packages.destroy', $package) }}" method="POST" class="d-inline">
                     @method('DELETE')
                     @csrf
-                    <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                 </form>
-                <a href="{{ route('packages.audit', $package) }}" class="btn btn-info">{{ __('Audit Trail') }}</a>
+                <a href="{{ route('packages.audit', $package) }}"
+                    class="btn btn-outline-info">{{ __('Audit Trail') }}</a>
             </div>
         </div>
         <div class="card-body">
@@ -63,8 +64,9 @@
     <div class="card mb-1">
         <div class="card-header">
             <h3 class="card-title">{{ __('Pricing Plan') }}</h3>
-            <div class="pull-right">
-                <a href="#" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addPackagePricingModal">
+            <div class="float-end">
+                <a href="#" class="btn btn-outline-success" data-coreui-toggle="modal"
+                    data-coreui-target="#addPackagePricingModal">
                     {{ __('Add') }}
                 </a>
             </div>
@@ -93,16 +95,18 @@
                                 <td>{{ $pricing->available_capacity }}</td>
                                 <td>{{ $pricing->is_active ? 'Active' : 'Inactive' }}</td>
                                 <td>
-                                    <a href="{{ route('packagePricings.edit', $pricing) }}" class="btn btn-primary">
+                                    <a href="{{ route('packagePricings.edit', $pricing) }}"
+                                        class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
                                         class="d-inline">
                                         @method('DELETE')
                                         @csrf
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
-                                    <a href="{{ route('packagePricings.audit', $pricing) }}" class="btn btn-info">
+                                    <a href="{{ route('packagePricings.audit', $pricing) }}"
+                                        class="btn btn-outline-info">
                                         {{ __('Audit Trail') }}
                                     </a>
                             </tr>
@@ -139,17 +143,17 @@
                                     {{ $flight->arrive_airport->name }} </td>
                                 <td>{{ $flight->airline->name }}</td>
                                 <td>
-                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-info">
+                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-primary">
+                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
                                         {{ __('Edit') }}
                                     </a>
                                     <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input class="btn btn-danger" type="submit" value="{{ __('Delete') }}" />
+                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                                     </form>
                                 </td>
                             </tr>
@@ -196,8 +200,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left"
-                        data-dismiss="modal">{{ __('Close') }}</button>
-                    <input form="addPackagePricingForm" type="submit" class="btn btn-primary"
+                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <input form="addPackagePricingForm" type="submit" class="btn btn-outline-primary"
                         value="{{ 'Submit' }}" />
                 </div>
             </div>
