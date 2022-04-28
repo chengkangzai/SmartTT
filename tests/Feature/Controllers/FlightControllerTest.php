@@ -4,6 +4,7 @@ use App\Models\Airline;
 use App\Models\Flight;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Spatie\Activitylog\Models\Activity;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
@@ -40,6 +41,14 @@ it('should return show view', function () {
         ->get(route('flights.show', Flight::first()))
         ->assertViewIs('smartTT.flight.show')
         ->assertViewHas('flight', Flight::first());
+});
+
+it('should return audit view', function () {
+    $this
+        ->get(route('flights.audit', Flight::first()))
+        ->assertViewIs('smartTT.flight.audit')
+        ->assertViewHas('flight', Flight::first())
+        ->assertViewHas('logs');
 });
 
 it('should store a flight', function () {

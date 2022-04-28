@@ -21,6 +21,14 @@ it('should return edit view', function () {
         ->assertViewHas('packagePricing', $pp);
 });
 
+it('should return audit view', function () {
+    $this
+        ->get(route('packagePricings.audit', PackagePricing::first()))
+        ->assertViewIs('smartTT.packagePricing.audit')
+        ->assertViewHas('packagePricing', PackagePricing::first())
+        ->assertViewHas('logs');
+});
+
 it('should update Package Pricing', function () {
     $ori = PackagePricing::factory()->create();
     $mock = PackagePricing::factory()->make();
