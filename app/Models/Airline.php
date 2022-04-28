@@ -22,7 +22,6 @@ class Airline extends Model
         return $this->hasMany(Flight::class);
     }
 
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable();

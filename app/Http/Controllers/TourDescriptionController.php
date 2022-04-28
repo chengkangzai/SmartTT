@@ -6,13 +6,13 @@ use App\Actions\Tour\TourDescription\AttachDescriptionToTourAction;
 use App\Actions\Tour\TourDescription\UpdateTourDescriptionAction;
 use App\Models\Tour;
 use App\Models\TourDescription;
+use function compact;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Activitylog\Models\Activity;
-use function compact;
 use function view;
 
 class TourDescriptionController extends Controller

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Role\AttachUserToRoleAction;
 use App\Actions\Role\DetachUserToRoleAction;
 use App\Actions\Role\StoreRoleAction;
-use App\Models\User;
+use function compact;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +14,6 @@ use Illuminate\View\View;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use function compact;
 use function view;
 
 class RoleController extends Controller
