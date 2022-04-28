@@ -3,7 +3,6 @@
 namespace App\Actions\Tour;
 
 use App\Models\Tour;
-use Illuminate\Support\Facades\Storage;
 
 class DestroyTourAction
 {

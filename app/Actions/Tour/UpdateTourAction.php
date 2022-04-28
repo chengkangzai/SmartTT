@@ -3,15 +3,10 @@
 namespace App\Actions\Tour;
 
 use App\Models\Tour;
-use Log;
+use function collect;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Throwable;
-use function collect;
-use Illuminate\Support\Facades\Storage;
-use function dd;
-use function dump;
 
 class UpdateTourAction
 {

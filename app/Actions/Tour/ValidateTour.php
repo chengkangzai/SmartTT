@@ -4,7 +4,6 @@ namespace App\Actions\Tour;
 
 use App\Models\Tour;
 use Validator;
-use function dd;
 
 trait ValidateTour
 {

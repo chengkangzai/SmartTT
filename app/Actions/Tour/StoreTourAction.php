@@ -4,10 +4,8 @@ namespace App\Actions\Tour;
 
 use App\Models\Tour;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Throwable;
-use function dd;
 
 class StoreTourAction
 {
