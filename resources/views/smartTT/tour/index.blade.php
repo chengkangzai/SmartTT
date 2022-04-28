@@ -49,7 +49,9 @@
                                     </ul>
                                 </td>
                                 <td>{{ $tour->category }}</td>
-                                <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
+                                <td>
+                                    <x-active-inactive-badge :active="$tour->is_active" />
+                                </td>
                                 <td>
                                     <a href="{{ route('tours.show', $tour) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}

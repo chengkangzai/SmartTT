@@ -47,12 +47,16 @@
                                         @endforeach
                                     </ol>
                                 </td>
-                                <td>{{ $package->active ? __('Yes') : __('No') }}</td>
                                 <td>
-                                    <a href="{{ route('packages.show', $package) }}"
-                                        class="btn btn-outline-info">{{ __('Show') }}</a>
-                                    <a href="{{ route('packages.edit', $package) }}"
-                                        class="btn btn-outline-primary">{{ __('Edit') }}</a>
+                                    <x-active-inactive-badge :active="$package->is_active" />
+                                </td>
+                                <td>
+                                    <a href="{{ route('packages.show', $package) }}" class="btn btn-outline-info">
+                                        {{ __('Show') }}
+                                    </a>
+                                    <a href="{{ route('packages.edit', $package) }}" class="btn btn-outline-primary">
+                                        {{ __('Edit') }}
+                                    </a>
                                     <form action="{{ route('packages.destroy', $package) }}" class="d-inline"
                                         method="POST">
                                         @csrf
