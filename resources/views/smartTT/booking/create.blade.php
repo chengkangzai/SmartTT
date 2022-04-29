@@ -28,7 +28,7 @@
                 <div class="mb-3">
                     {{-- //TODO add package pricing --}}
                     <label for="package_id" class="form-label">{{ __('Packages') }}</label>
-                    <select name="package_id" class="form-control" id="package_id" required multiple>
+                    <select name="package_id" class="form-control" id="package_id" required>
                         @foreach ($packages as $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 @checked(old('package_id') == $package->id)>
@@ -91,11 +91,6 @@
         const child = $('#child');
         const adult = $('#adult');
         const discount = $('#discount');
-
-        packageId.select2({
-            maximumSelectionLength: 1
-        });
-
 
         function updatePrice() {
             const adultVal = adult.val();
