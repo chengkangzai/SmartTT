@@ -15,7 +15,7 @@ class Airline extends Model
 
     protected $fillable = [
         'name',
-        'country_id'
+        'country_id',
     ];
 
     public function flights(): HasMany
