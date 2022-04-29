@@ -1,5 +1,12 @@
 <?php
 
+use App\Models\Settings\GeneralSetting;
+use App\Models\Settings\BookingSetting;
+use App\Models\Settings\FlightSetting;
+use App\Models\Settings\PackagePricingsSetting;
+use App\Models\Settings\PackageSetting;
+use App\Models\Settings\TourSetting;
+
 return [
 
     /*
@@ -7,7 +14,12 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-
+        GeneralSetting::class,
+        BookingSetting::class,
+        FlightSetting::class,
+        PackagePricingsSetting::class,
+        PackageSetting::class,
+        TourSetting::class
     ],
 
     /*
@@ -16,7 +28,7 @@ return [
      * a custom defined path when running the command.
      */
     'migrations_paths' => [
-        database_path('settings'),
+        database_path('migrations/settings'),
     ],
 
     /*

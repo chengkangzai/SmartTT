@@ -19,11 +19,11 @@ class TourFactory extends Factory
     public function definition(): array
     {
         $country = Country::inRandomOrder()->first();
-        $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
+        $selection = ['Asia', 'Exotic', 'Europe', 'Southeast Asia'];
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
             'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package",
-            'category' => $selection[rand(0, 4)],
+            'category' => $selection[rand(0, 3)],
             'nights' => rand(1, 5),
             'days' => rand(1, 5),
             'is_active' => rand(0, 1),

@@ -25,18 +25,20 @@ it('should return index view', function () {
 });
 
 it('should return create view', function () {
-    [$tours, $flight] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute();
+    [$tours, $flight, $setting, $pricingSetting] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute();
     $this
         ->get(route('packages.create'))
         ->assertViewIs('smartTT.package.create')
         ->assertViewHas([
             'tours' => $tours,
             'flights' => $flight,
+            'setting' => $setting,
+            'pricingSetting' => $pricingSetting
         ]);
 });
 
 it('should return edit view', function () {
-    [$tours, $flight] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute();
+    [$tours, $flight] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute(false, false);
     $this
         ->get(route('packages.edit', Package::first()))
         ->assertViewIs('smartTT.package.edit')
