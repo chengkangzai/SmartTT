@@ -5,7 +5,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Package Management') }} - {{ config('app.name') }}
+    {{ __('Package Management') }}
 @endsection
 
 @section('content')

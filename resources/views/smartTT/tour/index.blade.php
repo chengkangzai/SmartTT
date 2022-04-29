@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Tour Management') }} - {{ config('app.name') }}
+    {{ __('Tour Management') }}
 @endsection
 
 @section('content')

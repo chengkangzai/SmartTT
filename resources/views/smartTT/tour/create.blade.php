@@ -1,6 +1,9 @@
+@php
+/** @var \App\Models\Settings\TourSetting $setting */
+@endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Create Tour') }} - {{ config('app.name') }}
+    {{ __('Create Tour') }}
 @endsection
 
 @section('content')
@@ -33,8 +36,13 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label for="category" class="form-label">{{ __('Category') }}</label>
-                        <input type="text" name="category" class="form-control" id="category"
-                            value="{{ old('category') }}" placeholder="{{ __('Enter Category') }}">
+                        <select name="category" class="form-control" id="category">
+                            @foreach ($setting->category as $category)
+                                <option value="{{ $category }}" @selected(old('category', $category))>
+                                    {{ $category }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col col-md-6">
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
@@ -75,7 +83,7 @@
                 <div class="mb-3">
                     <label for="is_active" class="form-check-label">{{ __('Active this Tour') }}</label>
                     <input type="checkbox" name="is_active" class="form-check-primary" id="is_active" value="1"
-                        @checked(old('is_active', 1))>
+                        @checked(old('is_active', $setting->default_status))>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit Booking') }} - {{ config('app.name') }}
+    {{ __('Edit Booking') }}
 @endsection
 
 @section('content')

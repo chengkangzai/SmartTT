@@ -4,7 +4,7 @@
 @endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit Package') }} - {{ config('app.name') }}
+    {{ __('Edit Package') }}
 @endsection
 
 @section('content')

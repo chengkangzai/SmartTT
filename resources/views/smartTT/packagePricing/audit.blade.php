@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Package Pricing Management') }} - {{ config('app.name') }}
+    {{ __('Package Pricing Management') }}
 @endsection
 
 @section('content')

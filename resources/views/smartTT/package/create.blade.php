@@ -2,11 +2,13 @@
 /** @var \App\Models\Package $package */
 /** @var \App\Models\Tour $tour */
 /** @var \App\Models\Flight $flight */
+/** @var \App\Models\Settings\PackageSetting $setting */
+/** @var \App\Models\Settings\PackagePricingsSetting $pricingSetting */
 @endphp
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Create Package') }} - {{ config('app.name') }}
+    {{ __('Create Package') }}
 @endsection
 
 @section('content')
@@ -58,7 +60,7 @@
 
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="is_active" name="is_active"
-                        @checked(old('is_active', 1))>
+                        @checked(old('is_active', $setting->default_status))>
                     <label class="form-check-label" for="is_active">
                         {{ __('Active this Package ') }}
                     </label>
@@ -71,7 +73,8 @@
                     <div class="col col-md-4">
                         <label for="name[1]" class="form-label">{{ __('Name') }} 1 </label>
                         <input type="text" class="form-control" name="name[1]" id="name[1]"
-                            placeholder="{{ __('Enter Pricing Name 1') }}" value="{{ old('name.1') }}">
+                            placeholder="{{ __('Enter Pricing Name 1') }}"
+                            value="{{ old('name.1', $pricingSetting->default_namings[0]) }}">
                     </div>
                     <div class="col col-md-3">
                         <label for="price[1]" class="form-label">{{ __('Price') }} 1 </label>
@@ -81,13 +84,13 @@
                     <div class="col col-md-3">
                         <label for="total_capacity[1]" class="form-label">{{ __('Total Capacity') }} 1 </label>
                         <input type="number" class="form-control" name="total_capacity[1]" id="total_capacity[1]"
-                            placeholder="{{ __('Enter Total Capacity of 1') }}" value="{{ old('total_capacity.1') }}"
-                            step="1">
+                            placeholder="{{ __('Enter Total Capacity of 1') }}"
+                            value="{{ old('total_capacity.1', $pricingSetting->default_capacity[0]) }}" step="1">
                     </div>
                     <div class="col col-md-2">
                         <label for="pricing_is_active-1" class="form-label">{{ __('Active this Pricing') }}</label>
                         <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_1"
-                            id="pricing_is_active-1" value="1">
+                            id="pricing_is_active-1" value="1" @checked($pricingSetting->default_status[0])>
                     </div>
                 </div>
 
@@ -95,7 +98,8 @@
                     <div class="col col-md-4">
                         <label for="name[2]" class="form-label">{{ __('Name') }} 2 </label>
                         <input type="text" class="form-control" name="name[2]" id="name[2]"
-                            placeholder="{{ __('Enter Pricing Name 2') }}" value="{{ old('name.2') }}">
+                            placeholder="{{ __('Enter Pricing Name 2') }}"
+                            value="{{ old('name.2', $pricingSetting->default_namings[1]) }}">
                     </div>
                     <div class="col col-md-3">
                         <label for="price[2]" class="form-label">{{ __('Price') }} 2 </label>
@@ -105,13 +109,13 @@
                     <div class="col col-md-3">
                         <label for="total_capacity[2]" class="form-label">{{ __('Total Capacity') }} 2 </label>
                         <input type="number" class="form-control" name="total_capacity[2]" id="total_capacity[2]"
-                            placeholder="{{ __('Enter Total Capacity of 2') }}" value="{{ old('total_capacity.2') }}"
-                            step="1">
+                            placeholder="{{ __('Enter Total Capacity of 2') }}"
+                            value="{{ old('total_capacity.2', $pricingSetting->default_capacity[1]) }}" step="1">
                     </div>
                     <div class="col col-md-2">
                         <label for="pricing_is_active-2" class="form-label">{{ __('Active this Pricing') }}</label>
                         <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_2"
-                            id="pricing_is_active-2" value="1">
+                            id="pricing_is_active-2" value="1" @checked($pricingSetting->default_status[1])>
                     </div>
                 </div>
 
@@ -119,7 +123,8 @@
                     <div class="col col-md-4">
                         <label for="name[3]" class="form-label">{{ __('Name') }} 3 </label>
                         <input type="text" class="form-control" name="name[3]" id="name[3]"
-                            placeholder="{{ __('Enter Pricing Name 3') }}" value="{{ old('name.3') }}">
+                            placeholder="{{ __('Enter Pricing Name 3') }}"
+                            value="{{ old('name.3', $pricingSetting->default_namings[2]) }}">
                     </div>
                     <div class="col col-md-3">
                         <label for="price[3]" class="form-label">{{ __('Price') }} 3 </label>
@@ -129,13 +134,13 @@
                     <div class="col col-md-3">
                         <label for="total_capacity[3]" class="form-label">{{ __('Total Capacity') }} 3 </label>
                         <input type="number" class="form-control" name="total_capacity[3]" id="total_capacity[3]"
-                            placeholder="{{ __('Enter Total Capacity of 3') }}" value="{{ old('total_capacity.3') }}"
-                            step="1">
+                            placeholder="{{ __('Enter Total Capacity of 3') }}"
+                            value="{{ old('total_capacity.3', $pricingSetting->default_capacity[2]) }}" step="1">
                     </div>
                     <div class="col col-md-2">
                         <label for="pricing_is_active-3" class="form-label">{{ __('Active this Pricing') }}</label>
                         <input type="checkbox" class="form-check-input d-block" name="pricing_is_active_3"
-                            id="pricing_is_active-3" value="1">
+                            id="pricing_is_active-3" value="1" @checked($pricingSetting->default_status[2])>
                     </div>
                 </div>
             </form>

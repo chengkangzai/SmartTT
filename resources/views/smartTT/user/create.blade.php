@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ __('Create User') }} - {{ config('app.name') }}
+    {{ __('Create User') }}
 @endsection
 
 @section('content')

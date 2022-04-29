@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Create Flight') }} - {{ config('app.name') }}
+    {{ __('Create Flight') }}
 @endsection
 
 @section('content')
@@ -94,18 +94,16 @@
                     <label class="form-label" for="class">{{ __('Flight Class') }}</label>
                     <select name="class" class="form-control" id="class">
                         @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" @selected(old('class') == $key)> {{ $class }}
-                            </option>
+                            <option value="{{ $key }}" @selected(old('class') == $key)> {{ $class }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="type">{{ __('Flight Class') }}</label>
+                    <label class="form-label" for="type">{{ __('Flight Type') }}</label>
                     <select name="type" class="form-control" id="type">
                         @foreach (\App\Models\Flight::TYPE as $key => $class)
-                            <option value="{{ $key }}" @selected(old('type') == $key)> {{ $class }}
-                            </option>
+                            <option value="{{ $key }}" @selected(old('type') == $key)> {{ $class }} </option>
                         @endforeach
                     </select>
                 </div>

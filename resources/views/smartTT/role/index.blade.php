@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Roles Management') }} - {{ config('app.name') }}
+    {{ __('Roles Management') }}
 @endsection
 
 @section('content')

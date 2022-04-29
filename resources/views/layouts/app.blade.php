@@ -1,12 +1,17 @@
+@php
+    $setting = app(App\Models\Settings\GeneralSetting::class);
+    $site_name = $setting->site_name;
+    $language = $setting->default_language;
+@endphp
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{$language}}">
 
 <head>
     <base href="./">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>@yield('title')</title>
+    <title>@yield('title') - {{ $site_name }}</title>
     <meta name="theme-color" content="#ffffff">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css" />
@@ -42,8 +47,9 @@
                     <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
                 </a>
                 <ul class="header-nav d-none d-md-flex">
-                    <li class="nav-item"><a class="nav-link"
-                            href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+                    </li>
                 </ul>
                 <ul class="header-nav ms-auto">
 

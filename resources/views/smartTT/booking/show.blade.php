@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Booking Management') }} - {{ config('app.name') }}
+    {{ __('Booking Management') }}
 @endsection
 
 @section('content')
