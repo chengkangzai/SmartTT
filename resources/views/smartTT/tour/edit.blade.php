@@ -28,8 +28,8 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
-                    <input type="text" name="name" class="form-control" id="name"
-                        value="{{ old('name', $tour->name) }}" placeholder="{{ __('Enter Tour Name') }}">
+                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $tour->name) }}"
+                        placeholder="{{ __('Enter Tour Name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">{{ __('Tour Code') }}</label>
