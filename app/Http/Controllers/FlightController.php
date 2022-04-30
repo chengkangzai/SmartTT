@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use App\Actions\Flight\GetDataForCreateAndEditAction;
 use App\Actions\Flight\StoreFlightAction;
 use App\Actions\Flight\UpdateFlightAction;
-use App\Models\Airline;
-use App\Models\Country;
 use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
-use DB;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,7 +14,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Spatie\Activitylog\Models\Activity;
-use function dd;
 
 class FlightController extends Controller
 {
