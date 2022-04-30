@@ -65,16 +65,17 @@
         </li>
     @endrole
 
-    {{-- @role('Super Admin|Manager') --}}
-    {{-- <li class="nav-item"> --}}
-    {{-- <a class="nav-link {{ request()->is('roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}"> --}}
-    {{-- <svg class="nav-icon"> --}}
-    {{-- <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use> --}}
-    {{-- </svg> --}}
-    {{-- {{ __('Role Management') }} --}}
-    {{-- </a> --}}
-    {{-- </li> --}}
-    {{-- @endrole --}}
+    @role('Super Admin|Manager')
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('settings/*') ? 'active' : '' }}"
+                href="{{ route('settings.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                </svg>
+                {{ __('Settings') }}
+            </a>
+        </li>
+    @endrole
 
 
     <li class="nav-item">
