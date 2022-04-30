@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use function abort;
+use function app;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\FlightSetting;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\PackagePricingsSetting;
 use App\Models\Settings\PackageSetting;
 use App\Models\Settings\TourSetting;
-use function abort;
-use function app;
-use function dd;
 
 class SettingController extends Controller
 {
@@ -54,7 +53,5 @@ class SettingController extends Controller
 
     public function update()
     {
-
     }
-
 }
