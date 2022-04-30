@@ -34,7 +34,7 @@ it('should return tour and flight for create and update package', function () {
     assertInstanceOf(Collection::class, $flight);
     assertCount(Tour::count(), $tour);
 
-    $tour->each(function ($tour) {
+    $tour->each(function (Tour $tour) {
         assertNotEmpty($tour->id);
         assertNotEmpty($tour->name);
         assertNotEmpty($tour->tour_code);

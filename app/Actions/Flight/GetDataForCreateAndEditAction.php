@@ -5,10 +5,14 @@ namespace App\Actions\Flight;
 use App\Models\Airline;
 use App\Models\Country;
 use App\Models\Settings\FlightSetting;
+use Illuminate\Support\Collection;
 use function app;
 
 class GetDataForCreateAndEditAction
 {
+    /**
+     * @return array<Collection>
+     */
     public function execute(): array
     {
         $setting = app(FlightSetting::class);
