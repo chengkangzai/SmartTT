@@ -34,19 +34,6 @@ class Flight extends Model
         'arrival_date',
     ];
 
-    public const FCLASS = [
-        'Economy' => 'Economy',
-        'Business' => 'Business',
-        'First' => 'First',
-        'Premium economy' => 'Premium Economy',
-    ];
-
-    public const TYPE = [
-        'Round' => 'Round',
-        'One Way' => 'One Way',
-        'Multi-city' => 'Multi-city',
-    ];
-
     public function price(): Attribute
     {
         return Attribute::make(
