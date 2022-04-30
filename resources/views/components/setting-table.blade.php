@@ -8,6 +8,7 @@
     <tr>
         <th>{{ __('Name') }}</th>
         <th>{{ __('Value') }}</th>
+        <th>{{ __('Action') }}</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,12 @@
                 @else
                     {{ $settings[$mode]->$key }}
                 @endif
+            </td>
+            <td>
+                <a href="{{ route('settings.edit', [$mode, $key]) }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-edit"></i>
+                    {{__('Edit')}}
+                </a>
             </td>
         </tr>
     @endforeach

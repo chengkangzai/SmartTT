@@ -70,7 +70,7 @@
             <a class="nav-link {{ request()->is('settings/*') ? 'active' : '' }}"
                 href="{{ route('settings.index') }}">
                 <svg class="nav-icon">
-                    <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-settings') }}"></use>
                 </svg>
                 {{ __('Settings') }}
             </a>
