@@ -40,6 +40,8 @@
                             <th>{{ __('Arrival Time') }}</th>
                             <th>{{ __('Fee (Rm)') }}</th>
                             <th>{{ __('Airline') }}</th>
+                            <th>{{ __('Type') }}</th>
+                            <th>{{ __('Class') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,8 @@
                             <td>{{ $flight->airline->name }}
                                 ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})
                             </td>
+                            <td>{{ $flight->type }}</td>
+                            <td>{{ $flight->class }}</td>
                         </tr>
                     </tbody>
                 </table>

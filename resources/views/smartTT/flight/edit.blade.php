@@ -1,5 +1,6 @@
 @php
 /** @var \App\Models\Flight $flight */
+/** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 
 @extends('layouts.app')
@@ -85,8 +86,8 @@
                 <div class="mb-3">
                     <label class="form-label" for="class">{{ __('Flight Class') }}</label>
                     <select name="class" class="form-control" id="class">
-                        @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" @selected(old('class', $flight->class) == $key)>
+                        @foreach ($setting->supported_class as $class)
+                            <option value="{{ $class }}" @selected(old('class', $flight->class) == $class)>
                                 {{ $class }}
                             </option>
                         @endforeach
@@ -94,10 +95,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="type">{{ __('Flight Class') }}</label>
+                    <label class="form-label" for="type">{{ __('Flight Type') }}</label>
                     <select name="type" class="form-control" id="type">
-                        @foreach (\App\Models\Flight::TYPE as $key => $class)
-                            <option value="{{ $key }}" @selected(old('type', $flight->type) == $key)>{{ $class }}</option>
+                        @foreach ($setting->supported_type as $type)
+                            <option value="{{ $type }}" @selected(old('type', $flight->type) == $type)>{{ $type }}</option>
                         @endforeach
                     </select>
                 </div>
