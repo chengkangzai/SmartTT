@@ -66,6 +66,9 @@
         ],
         "test": [
             "./vendor/bin/pest --parallel"
+        ],
+        "test-coverage": [
+            "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage"
         ]
     },
     "extra": {
