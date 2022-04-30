@@ -2,11 +2,11 @@
 
 namespace App\Actions\Flight;
 
+use function app;
 use App\Models\Airline;
 use App\Models\Country;
 use App\Models\Settings\FlightSetting;
 use Illuminate\Support\Collection;
-use function app;
 
 class GetDataForCreateAndEditAction
 {
