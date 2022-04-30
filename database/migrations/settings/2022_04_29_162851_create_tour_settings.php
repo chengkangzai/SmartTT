@@ -8,5 +8,7 @@ class CreateTourSettings extends SettingsMigration
     {
         $this->migrator->add('tour.default_status', true);
         $this->migrator->add('tour.category', ['Asia', 'Exotic', 'Europe', 'Southeast Asia']);
+        $this->migrator->add('tour.default_night', 4);
+        $this->migrator->add('tour.default_day', 3);
     }
 }
