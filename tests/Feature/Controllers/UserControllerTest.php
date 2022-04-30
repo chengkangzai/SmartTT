@@ -57,8 +57,7 @@ it('should store a user', function () {
         ->assertRedirect(route('users.index'))
         ->assertSessionHas('success');
 
-    /** @var User $latestUser */
-    $latestUser = User::orderByDesc('id')->get()->first();
+    $latestUser = User::query()->orderByDesc('id')->get()->first();
     expect($latestUser->name)->toBe($user['name']);
     expect($latestUser->email)->toBe($user['email']);
     expect($latestUser->roles()->count())->toBe(1);

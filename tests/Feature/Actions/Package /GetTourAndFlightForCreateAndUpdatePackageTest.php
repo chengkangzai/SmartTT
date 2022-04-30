@@ -26,11 +26,6 @@ beforeEach(function () {
 
 
 it('should return tour and flight for create and update package', function () {
-
-    /**
-     * @var Collection $tour
-     * @var Collection $flight
-     */
     [$tour, $flight] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute();
 
     assertNotEmpty($tour);
@@ -39,7 +34,7 @@ it('should return tour and flight for create and update package', function () {
     assertInstanceOf(Collection::class, $flight);
     assertCount(Tour::count(), $tour);
 
-    $tour->each(function (Tour $tour) {
+    $tour->each(function ($tour) {
         assertNotEmpty($tour->id);
         assertNotEmpty($tour->name);
         assertNotEmpty($tour->tour_code);

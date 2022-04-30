@@ -6,10 +6,14 @@ use App\Models\Flight;
 use App\Models\Settings\PackagePricingsSetting;
 use App\Models\Settings\PackageSetting;
 use App\Models\Tour;
+use Illuminate\Support\Collection;
 use function app;
 
 class GetTourAndFlightForCreateAndUpdatePackage
 {
+    /**
+     * @return array<Collection,Collection,?Collection,?Collection>
+     */
     public function execute($loadPackageSetting = true, $loadPricingSetting = true): array
     {
         $tours = Tour::select(['id', 'name', 'tour_code'])->get();

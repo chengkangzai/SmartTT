@@ -37,8 +37,7 @@ it('should update Package Pricing', function () {
         ->assertRedirect(route('packages.show', $ori->package))
         ->assertSessionHas('success');
 
-    /** @var PackagePricing $updated */
-    $updated = PackagePricing::orderByDesc('id')->first();
+    $updated = PackagePricing::query()->orderByDesc('id')->first();
     expect($updated->name)->toBe($mock->name);
     expect($updated->price)->toBe($mock->price);
     expect($updated->total_capacity)->toBe($mock->total_capacity);

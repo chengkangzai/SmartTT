@@ -76,8 +76,7 @@ it('should store a tour', function () use ($faker) {
         ->assertRedirect(route('tours.index'))
         ->assertSessionHas('success');
 
-    /** @var Tour $newTour */
-    $newTour = Tour::orderByDesc('id')->first();
+    $newTour = Tour::query()->orderByDesc('id')->first();
     expect($newTour->tour_code)->toBe($tour['tour_code']);
     expect($newTour->name)->toBe($tour['name']);
     expect($newTour->nights)->toBe($tour['nights']);

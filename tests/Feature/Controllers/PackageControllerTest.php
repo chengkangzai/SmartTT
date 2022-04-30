@@ -77,8 +77,7 @@ it('should store a package', function () use ($faker) {
         ->assertSessionHasNoErrors()
         ->assertSessionHas('success');
 
-    /** @var Package $latestPackage */
-    $latestPackage = Package::with('pricings')->orderByDesc('id')->get()->first();
+    $latestPackage = Package::query()->with('pricings')->orderByDesc('id')->get()->first();
 
     expect($latestPackage->tour_id)->toBe($package['tour_id']);
     assert(Carbon::make($latestPackage->depart_time)->eq(Carbon::make($package['depart_time'])));
@@ -119,9 +118,7 @@ it('should update a package', function () use ($faker) {
         ->assertSessionHasNoErrors()
         ->assertSessionHas('success');
 
-    /** @var Package $updatedPackage */
-    $updatedPackage = Package::with('pricings')->find($package->id);
-    Log::info($updatedPackage);
+    $updatedPackage = Package::query()->with('pricings')->find($package->id);
 
     expect($updatedPackage->tour_id)->toBe($newPackage['tour_id']);
     assert(Carbon::make($updatedPackage->depart_time)->eq(Carbon::make($newPackage['depart_time'])));
