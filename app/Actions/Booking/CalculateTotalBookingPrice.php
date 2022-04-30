@@ -9,7 +9,8 @@ trait CalculateTotalBookingPrice
 {
     public function __construct(
         private readonly BookingSetting $bookingSetting,
-    ){}
+    ) {
+    }
 
     public function calculate($data): float|int
     {

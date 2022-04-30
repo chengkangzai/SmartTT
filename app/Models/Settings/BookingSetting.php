@@ -2,7 +2,6 @@
 
 namespace App\Models\Settings;
 
-use DateTimeZone;
 use Spatie\LaravelSettings\Settings;
 
 class BookingSetting extends Settings

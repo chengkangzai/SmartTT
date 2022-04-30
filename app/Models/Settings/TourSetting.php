@@ -2,7 +2,6 @@
 
 namespace App\Models\Settings;
 
-use DateTimeZone;
 use Spatie\LaravelSettings\Settings;
 
 class TourSetting extends Settings

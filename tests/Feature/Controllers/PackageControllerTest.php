@@ -33,7 +33,7 @@ it('should return create view', function () {
             'tours' => $tours,
             'flights' => $flight,
             'setting' => $setting,
-            'pricingSetting' => $pricingSetting
+            'pricingSetting' => $pricingSetting,
         ]);
 });
 
