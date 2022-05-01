@@ -11,7 +11,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->is('tours*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
             </svg>
             {{ __('Tour Management') }}
         </a>
