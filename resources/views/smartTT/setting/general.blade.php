@@ -39,7 +39,6 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- @dd($setting->default_timezone) --}}
                 <div class="mb-3">
                     <label for="default_timezone">{{ __('Default Timezone') }}</label>
                     <select name="default_timezone" id="default_timezone" class="form-select">
