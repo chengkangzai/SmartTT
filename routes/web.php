@@ -72,5 +72,6 @@ Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
     Route::resource('roles', RoleController::class);
 
     Route::get('settings/index', [SettingController::class, 'index'])->name('settings.index');
-    Route::get('settings/{mode}/{value}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::get('settings/{mode}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::post('settings/{mode}/update', [SettingController::class, 'update'])->name('settings.update');
 });
