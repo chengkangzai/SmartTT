@@ -4,7 +4,7 @@
 @endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit Package') }} - {{ config('app.name') }}
+    {{ __('Edit Package') }}
 @endsection
 
 @section('content')
@@ -64,8 +64,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $("#flights").select2();
     </script>
-@endsection
+@endpush

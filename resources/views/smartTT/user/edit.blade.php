@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit User') }} - {{ config('app.name') }}
+    {{ __('Edit User') }}
 @endsection
 
 @section('content')

@@ -26,11 +26,6 @@ beforeEach(function () {
 
 
 it('should return tour and flight for create and update package', function () {
-
-    /**
-     * @var Collection $tour
-     * @var Collection $flight
-     */
     [$tour, $flight] = app(GetTourAndFlightForCreateAndUpdatePackage::class)->execute();
 
     assertNotEmpty($tour);

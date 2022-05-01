@@ -2,12 +2,19 @@
 
 namespace App\Actions\Package;
 
+use function app;
 use App\Models\Flight;
+use App\Models\Settings\PackagePricingsSetting;
+use App\Models\Settings\PackageSetting;
 use App\Models\Tour;
+use Illuminate\Support\Collection;
 
 class GetTourAndFlightForCreateAndUpdatePackage
 {
-    public function execute(): array
+    /**
+     * @return array<Collection,Collection,?Collection,?Collection>
+     */
+    public function execute($loadPackageSetting = true, $loadPricingSetting = true): array
     {
         $tours = Tour::select(['id', 'name', 'tour_code'])->get();
         $flights = Flight::with('airline:id,name')
@@ -18,6 +25,10 @@ class GetTourAndFlightForCreateAndUpdatePackage
             ->orderBy('arrival_date')
             ->get();
 
-        return [$tours, $flights];
+        $packageSetting = $loadPackageSetting ? app(PackageSetting::class) : null;
+
+        $packagePricingSetting = $loadPricingSetting ? app(PackagePricingsSetting::class) : null;
+
+        return [$tours, $flights, $packageSetting, $packagePricingSetting];
     }
 }

@@ -27,9 +27,9 @@ class PackageController extends Controller
 
     public function create(GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
-        [$tours, $flights] = $get->execute();
+        [$tours, $flights, $setting, $pricingSetting] = $get->execute();
 
-        return view('smartTT.package.create', compact('tours', 'flights'));
+        return view('smartTT.package.create', compact('tours', 'flights', 'setting', 'pricingSetting'));
     }
 
     public function store(Request $request, StorePackageAction $action): RedirectResponse
@@ -55,7 +55,7 @@ class PackageController extends Controller
     public function edit(Package $package, GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
         $package->load('flight', 'tour');
-        [$tours, $flights] = $get->execute();
+        [$tours, $flights] = $get->execute(loadPackageSetting: false, loadPricingSetting: false);
 
         return view('smartTT.package.edit', compact('package', 'tours', 'flights'));
     }

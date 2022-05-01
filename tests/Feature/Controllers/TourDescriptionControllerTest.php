@@ -46,8 +46,7 @@ it('should update tour description', function () {
         ->assertRedirect(route('tours.show', $ori->tour))
         ->assertSessionHas('success');
 
-    /** @var TourDescription $updated */
-    $updated = TourDescription::orderByDesc('id')->first();
+    $updated = TourDescription::query()->orderByDesc('id')->first();
     expect($updated->place)->toBe($mock->place);
     expect($updated->description)->toBe($mock->description);
 });

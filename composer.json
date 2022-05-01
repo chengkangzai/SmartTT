@@ -15,7 +15,8 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-activitylog": "^4.5",
         "spatie/laravel-medialibrary": "^10.0.0",
-        "spatie/laravel-permission": "^5.5"
+        "spatie/laravel-permission": "^5.5",
+        "spatie/laravel-settings": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -65,6 +66,9 @@
         ],
         "test": [
             "./vendor/bin/pest --parallel"
+        ],
+        "test-coverage": [
+            "XDEBUG_MODE=coverage ./vendor/bin/pest --coverage"
         ]
     },
     "extra": {

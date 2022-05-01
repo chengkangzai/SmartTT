@@ -5,7 +5,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit Booking') }} - {{ config('app.name') }}
+    {{ __('Edit Booking') }}
 @endsection
 
 @section('content')
@@ -28,11 +28,11 @@
                 <div class="mb-3">
                     <label class="form-label" for="package_id">{{ __('Packages') }}</label>
                     {{-- //TODO add package pricing --}}
-                    <select name="package_id" class="form-control select2 " id="package_id" required multiple>
+                    <select name="package_id" class="form-control select2 " id="package_id" required>
                         @foreach ($packages as $key => $package)
                             <option value="{{ $package->id }}" data-price="{{ $package->price }}"
                                 @checked($booking->package->id === $key)>
-                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->fee }})
+                                {{ $package->tour->name }} ({{ $package->depart_time }}) (${{ $package->price }})
                             </option>
                         @endforeach
                     </select>
@@ -84,7 +84,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         const packageId = $('#package_id');
         const child = $('#child');
@@ -93,9 +93,6 @@
         const userID = $('#user_id');
 
         userID.select2({
-            maximumSelectionLength: 1,
-        });
-        packageId.select2({
             maximumSelectionLength: 1,
         });
 
@@ -126,4 +123,4 @@
         adult.on('change', updatePrice);
         packageId.on('change', updatePrice)
     </script>
-@endsection
+@endpush

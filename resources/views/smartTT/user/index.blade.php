@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('User Management') }} - {{ config('app.name') }}
+    {{ __('User Management') }}
 @endsection
 
 @section('content')
@@ -65,8 +65,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#indexTable').DataTable();
     </script>
-@endsection
+@endpush

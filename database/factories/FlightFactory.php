@@ -5,9 +5,10 @@ namespace Database\Factories;
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\Flight;
-use Carbon\Carbon;
+use App\Models\Settings\FlightSetting;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
+use function app;
 use function array_rand;
 use function rand;
 
@@ -18,7 +19,8 @@ class FlightFactory extends Factory
     #[ArrayShape(['departure_date' => "\Illuminate\Support\Carbon", 'arrival_date' => "\Illuminate\Support\Carbon", 'price' => "int", 'airline_id' => "int", 'departure_airport_id' => "int", 'arrival_airport_id' => "int", 'class' => "array|int|string", 'type' => "array|int|string"])]
     public function definition(): array
     {
-        $airport= Airport::inRandomOrder()->take(2)->get();
+        $flightSetting = app(FlightSetting::class);
+        $airport = Airport::inRandomOrder()->take(2)->get();
         return [
             'departure_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
             'arrival_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
@@ -26,8 +28,8 @@ class FlightFactory extends Factory
             'airline_id' => Airline::inRandomOrder()->first()->id,
             'departure_airport_id' => $airport[0]->id,
             'arrival_airport_id' => $airport[1]->id,
-            'class' => array_rand(Flight::FCLASS),
-            'type' => array_rand(Flight::TYPE),
+            'class' => $flightSetting->supported_class[array_rand($flightSetting->supported_class)],
+            'type' => $flightSetting->supported_type[array_rand($flightSetting->supported_type)],
         ];
     }
 }

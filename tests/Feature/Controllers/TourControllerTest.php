@@ -2,6 +2,7 @@
 
 use App\Models\Country;
 use App\Models\Package;
+use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use App\Models\User;
 use Database\Seeders\CountrySeeder;
@@ -33,7 +34,8 @@ it('should return create view', function () {
     $this
         ->get(route('tours.create'))
         ->assertViewIs('smartTT.tour.create')
-        ->assertViewHas('countries', Country::pluck('name', 'id'));
+        ->assertViewHas('countries', Country::pluck('name', 'id'))
+        ->assertViewHas('setting', app(TourSetting::class));
 });
 
 it('should return edit view', function () {
@@ -74,8 +76,7 @@ it('should store a tour', function () use ($faker) {
         ->assertRedirect(route('tours.index'))
         ->assertSessionHas('success');
 
-    /** @var Tour $newTour */
-    $newTour = Tour::orderByDesc('id')->first();
+    $newTour = Tour::query()->orderByDesc('id')->first();
     expect($newTour->tour_code)->toBe($tour['tour_code']);
     expect($newTour->name)->toBe($tour['name']);
     expect($newTour->nights)->toBe($tour['nights']);

@@ -9,6 +9,7 @@ use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\UserController;
@@ -69,4 +70,8 @@ Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
     Route::put('roles/addUserToRole/{role}}', [RoleController::class, 'attachUser'])->name('roles.attachUserToRole');
     Route::delete('roles/removeUserToRole/{role}}', [RoleController::class, 'detachUser'])->name('roles.detachUserToRole');
     Route::resource('roles', RoleController::class);
+
+    Route::get('settings/index', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('settings/{mode}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::post('settings/{mode}/update', [SettingController::class, 'update'])->name('settings.update');
 });

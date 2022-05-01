@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 @section('title')
-    {{ __('Edit Tour') }} - {{ config('app.name') }}
+    {{ __('Edit Tour') }}
 @endsection
 
 @section('content')
@@ -28,8 +28,8 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
-                    <input type="text" name="name" class="form-control" id="name"
-                        value="{{ old('name', $tour->name) }}" placeholder="{{ __('Enter Tour Name') }}">
+                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $tour->name) }}"
+                        placeholder="{{ __('Enter Tour Name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">{{ __('Tour Code') }}</label>
@@ -90,8 +90,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#country_id').select2();
     </script>
-@endsection
+@endpush

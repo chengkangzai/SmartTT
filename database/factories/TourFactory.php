@@ -3,10 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Country;
+use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
+use function app;
+use function array_rand;
 use function rand;
 use function strtoupper;
 use function time;
@@ -19,11 +22,11 @@ class TourFactory extends Factory
     public function definition(): array
     {
         $country = Country::inRandomOrder()->first();
-        $selection = ['Asia', 'Arabic', 'Europe', 'Southeast Asia', 'United State'];
+        $setting = app(TourSetting::class);
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
             'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package",
-            'category' => $selection[rand(0, 4)],
+            'category' => $setting->category[array_rand($setting->category)],
             'nights' => rand(1, 5),
             'days' => rand(1, 5),
             'is_active' => rand(0, 1),

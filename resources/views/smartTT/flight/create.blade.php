@@ -1,9 +1,10 @@
 @php
 /** @var \App\Models\Flight $flight */
+/** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 @extends('layouts.app')
 @section('title')
-    {{ __('Create Flight') }} - {{ config('app.name') }}
+    {{ __('Create Flight') }}
 @endsection
 
 @section('content')
@@ -93,18 +94,20 @@
                 <div class="mb-3">
                     <label class="form-label" for="class">{{ __('Flight Class') }}</label>
                     <select name="class" class="form-control" id="class">
-                        @foreach (\App\Models\Flight::FCLASS as $key => $class)
-                            <option value="{{ $key }}" @selected(old('class') == $key)> {{ $class }}
+                        @foreach ($setting->supported_class as $class)
+                            <option value="{{ $class }}" @selected(old('class', $setting->default_class) == $class)>
+                                {{ $class }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="type">{{ __('Flight Class') }}</label>
+                    <label class="form-label" for="type">{{ __('Flight Type') }}</label>
                     <select name="type" class="form-control" id="type">
-                        @foreach (\App\Models\Flight::TYPE as $key => $class)
-                            <option value="{{ $key }}" @selected(old('type') == $key)> {{ $class }}
+                        @foreach ($setting->supported_type as $type)
+                            <option value="{{ $type }}" @selected(old('type', $setting->default_type) == $type)>
+                                {{ $type }}
                             </option>
                         @endforeach
                     </select>
@@ -119,7 +122,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
         const config = {
@@ -144,4 +147,4 @@
         $('#departure_airport_id').select2(config);
         $('#arrival_airport_id').select2(config);
     </script>
-@endsection
+@endpush

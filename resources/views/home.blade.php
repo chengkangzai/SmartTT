@@ -1,5 +1,5 @@
 @section('title')
-    {{ __('Home') }} - {{ config('app.name') }}
+    {{ __('Home') }}
 @endsection
 @extends('layouts.app')
 

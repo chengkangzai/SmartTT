@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Airline;
+use App\Actions\Flight\GetDataForCreateAndEditAction;
 use App\Models\Flight;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
@@ -21,18 +21,20 @@ it('should return index view', function () {
 });
 
 it('should return create view', function () {
+    [$airlines] = app(GetDataForCreateAndEditAction::class)->execute();
     $this
         ->get(route('flights.create'))
         ->assertViewIs('smartTT.flight.create')
-        ->assertViewHas('airlines', Airline::select(['id', 'name'])->get());
+        ->assertViewHas('airlines', $airlines);
 });
 
 it('should return edit view', function () {
+    [$airlines] = app(GetDataForCreateAndEditAction::class)->execute();
     $this
         ->get(route('flights.edit', Flight::first()))
         ->assertViewIs('smartTT.flight.edit')
         ->assertViewHas('flight', Flight::first())
-        ->assertViewHas('airlines', Airline::select(['id', 'name'])->get());
+        ->assertViewHas('airlines', $airlines);
 });
 
 it('should return show view', function () {
@@ -57,8 +59,7 @@ it('should store a flight', function () {
         ->assertRedirect(route('flights.index'))
         ->assertSessionHas('success');
 
-    /** @var Flight $latestFlight */
-    $latestFlight = Flight::orderByDesc('id')->get()->first();
+    $latestFlight = Flight::query()->orderByDesc('id')->get()->first();
     expect($flight->price)->toEqual($latestFlight->price);
     expect($flight->airline_id)->toEqual($latestFlight->airline_id);
     expect($flight->departure_airport_id)->toEqual($latestFlight->departure_airport_id);

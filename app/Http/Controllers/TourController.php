@@ -6,6 +6,7 @@ use App\Actions\Tour\DestroyTourAction;
 use App\Actions\Tour\StoreTourAction;
 use App\Actions\Tour\UpdateTourAction;
 use App\Models\Country;
+use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -24,11 +25,11 @@ class TourController extends Controller
         return view('smartTT.tour.index', compact('tours'));
     }
 
-    public function create(): Factory|View|Application
+    public function create(TourSetting $setting): Factory|View|Application
     {
         $countries = Country::pluck('name', 'id');
 
-        return view('smartTT.tour.create', compact('countries'));
+        return view('smartTT.tour.create', compact('countries', 'setting'));
     }
 
     public function store(Request $request, StoreTourAction $action): RedirectResponse

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ __('Roles') }} - {{ config('app.name') }}
+    {{ __('Roles') }}
 @endsection
 
 @section('content')
@@ -150,7 +150,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#permissionTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
@@ -179,4 +179,4 @@
             }
         });
     </script>
-@endsection
+@endpush

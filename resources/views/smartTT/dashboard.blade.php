@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ __('Dashboard') }} - {{ config('app.name') }}
+    {{ __('Dashboard') }}
 @endsection
 
 @section('content')
