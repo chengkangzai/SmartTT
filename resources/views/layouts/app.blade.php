@@ -104,11 +104,14 @@ $language = $setting->default_language;
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        []
-        .slice
+        [].slice
             .call(document.querySelectorAll('.toast'))
             .map((toastEl) => new coreui.Toast(toastEl))
             .map((toast) => toast.show());
+
+        [].slice
+            .call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'))
+            .map((tooltipTriggerEl) => new coreui.Tooltip(tooltipTriggerEl))
     </script>
     <script>
         $.ajaxSetup({
