@@ -31,7 +31,7 @@ class UpdateFlightSettingAction implements UpdateSettingInterface
             'default_class' => 'required|string|max:255',
             'default_type' => 'required|string|max:255',
             'supported_countries' => 'required|array|max:255|exists:countries,name',
-        ],customAttributes: [
+        ], customAttributes: [
             'supported_class' => __('Supported Class'),
             'supported_type' => __('Supported Type'),
             'default_class' => __('Default Class'),
