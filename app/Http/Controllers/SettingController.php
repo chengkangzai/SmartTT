@@ -67,7 +67,6 @@ class SettingController extends Controller
             'general' => app(GetViewBagForGeneralSettingAction::class),
             'tour' => app(GetViewBagForTourSettingAction::class),
             'flight' => app(GetViewBagForFlightSettingAction::class),
-            'booking' => app(GetViewBagForBookingSettingAction::class),
             default => null,
         };
 
