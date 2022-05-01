@@ -27,8 +27,8 @@ class UpdateTourSettingAction implements UpdateSettingInterface
     {
         return Validator::make($data, [
             'default_status' => 'required|boolean',
-            'default_night' => 'required|integer',
-            'default_day' => 'required|integer',
+            'default_night' => 'required|integer|min:1',
+            'default_day' => 'required|integer|min:1',
             'category' => 'required|array',
         ], customAttributes: [
             'default_status' => __('Default Status'),

@@ -32,7 +32,7 @@ class UpdateBookingSettingAction implements UpdateSettingInterface
 
         return Validator::make($data, [
             'default_payment_method' => 'required|string|in:' . $validPaymentMethods,
-            'charge_per_child' => 'required',
+            'charge_per_child' => 'required|numeric|min:0',
         ])->validate();
     }
 }
