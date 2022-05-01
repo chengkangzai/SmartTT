@@ -127,7 +127,7 @@ $language = $setting->default_language;
             ],
         });
     </script>
-    @yield('script')
+    @stack('script')
 </body>
 
 </html>

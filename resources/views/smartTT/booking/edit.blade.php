@@ -84,7 +84,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         const packageId = $('#package_id');
         const child = $('#child');
@@ -123,4 +123,4 @@
         adult.on('change', updatePrice);
         packageId.on('change', updatePrice)
     </script>
-@endsection
+@endpush

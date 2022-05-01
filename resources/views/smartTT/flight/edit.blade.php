@@ -110,7 +110,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
         const config = {
@@ -140,4 +140,4 @@
         $('#departure_airport_id').select2(config);
         $('#arrival_airport_id').select2(config);
     </script>
-@endsection
+@endpush

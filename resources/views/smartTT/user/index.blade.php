@@ -65,8 +65,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#indexTable').DataTable();
     </script>
-@endsection
+@endpush

@@ -151,8 +151,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $("#flights").select2();
     </script>
-@endsection
+@endpush

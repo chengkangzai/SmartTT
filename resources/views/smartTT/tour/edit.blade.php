@@ -90,8 +90,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#country_id').select2();
     </script>
-@endsection
+@endpush

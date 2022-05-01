@@ -46,8 +46,8 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#permissions').select2();
     </script>
-@endsection
+@endpush

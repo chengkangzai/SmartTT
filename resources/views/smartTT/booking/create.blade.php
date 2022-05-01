@@ -74,7 +74,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $.ajax({
             type: "POST",
@@ -118,4 +118,4 @@
         adult.on('change', updatePrice);
         packageId.on('change', updatePrice)
     </script>
-@endsection
+@endpush

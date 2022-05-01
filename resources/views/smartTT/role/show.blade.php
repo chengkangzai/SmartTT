@@ -150,7 +150,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         $('#permissionTable').DataTable({
             "lengthMenu": [5, 10, 25, 50],
@@ -179,4 +179,4 @@
             }
         });
     </script>
-@endsection
+@endpush
