@@ -3,7 +3,6 @@
 use App\Actions\Setting\Edit\GetViewBagForTourSettingAction;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
-use Illuminate\Support\Collection;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {

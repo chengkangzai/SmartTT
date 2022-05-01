@@ -1,9 +1,7 @@
 <?php
 
 
-use App\Actions\Setting\Update\UpdateFlightSettingAction;
 use App\Actions\Setting\Update\UpdateTourSettingAction;
-use App\Models\Settings\FlightSetting;
 use App\Models\Settings\TourSetting;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Validation\ValidationException;
@@ -56,6 +54,7 @@ it('should not update setting', function ($name, $data) {
     foreach ($data as $item) {
         $testArray[$name] = $item;
         $testArray['category'] = ['Amateur', 'Professional'];
+
         try {
             $action->execute($testArray, $bookingSetting);
             $this->fail('ValidationException was not thrown');

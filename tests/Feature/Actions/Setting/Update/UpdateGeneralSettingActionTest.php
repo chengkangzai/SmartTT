@@ -21,7 +21,7 @@ it('should update general setting', function () {
     foreach ($items as $key => $item) {
         assertDatabaseHas('settings', [
             'name' => $key,
-            'payload' => ($item instanceof \DateTimeZone) ?  json_encode($item->getName()) : json_encode($item),
+            'payload' => ($item instanceof \DateTimeZone) ? json_encode($item->getName()) : json_encode($item),
             'group' => 'general',
         ]);
     }
@@ -41,7 +41,7 @@ it('should update general setting', function () {
     foreach ($items as $key => $item) {
         assertDatabaseHas('settings', [
             'name' => $key,
-            'payload' => ($item instanceof \DateTimeZone) ?  json_encode($item->getName()) : json_encode($item),
+            'payload' => ($item instanceof \DateTimeZone) ? json_encode($item->getName()) : json_encode($item),
             'group' => 'general',
         ]);
     }
@@ -55,6 +55,7 @@ it('should not update setting', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
+
         try {
             $action->execute($testArray, $bookingSetting);
             $this->fail('ValidationException was not thrown');

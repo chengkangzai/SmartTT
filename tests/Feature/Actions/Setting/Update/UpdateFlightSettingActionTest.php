@@ -55,6 +55,7 @@ it('should not update setting', function ($name, $data) {
         $testArray[$name] = $item;
         $testArray['supported_type'] = ['roundtrip', 'oneway', 'multicity',];
         $testArray['supported_class'] = ['business', 'economy', 'first',];
+
         try {
             $action->execute($testArray, $bookingSetting);
             $this->fail('ValidationException was not thrown');

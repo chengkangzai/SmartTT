@@ -2,9 +2,7 @@
 
 use App\Actions\Setting\Update\UpdatePackagePricingSettingAction;
 use App\Models\Settings\PackagePricingsSetting;
-use Illuminate\Validation\ValidationException;
 use function Pest\Laravel\assertDatabaseHas;
-use function PHPUnit\Framework\assertNotEmpty;
 
 it('should update package pricing setting', function () {
     /** @var PackagePricingsSetting $setting */

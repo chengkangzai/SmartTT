@@ -14,7 +14,7 @@ use function Pest\Laravel\seed;
 beforeEach(function () {
     seed([
         PermissionSeeder::class,
-        UserRoleSeeder::class
+        UserRoleSeeder::class,
     ]);
     $this->actingAs(User::first());
 });
@@ -52,4 +52,3 @@ it('should return respective view for each setting', function ($mode, $view) {
     ['flight', 'smartTT.setting.flight'],
     ['booking', 'smartTT.setting.booking'],
 ]);
-
