@@ -2,7 +2,6 @@
 
 use App\Actions\Setting\Update\UpdatePackagePricingSettingAction;
 use App\Models\Settings\PackagePricingsSetting;
-use function Pest\Laravel\assertDatabaseHas;
 
 it('should update package pricing setting', function () {
     /** @var PackagePricingsSetting $setting */

@@ -5,7 +5,6 @@ use App\Actions\Setting\Update\UpdateTourSettingAction;
 use App\Models\Settings\TourSetting;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Validation\ValidationException;
-use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertNotEmpty;
 
@@ -20,7 +19,7 @@ it('should update Tour setting', function () {
     $items = $tourSetting->toArray();
     foreach ($items as $key => $item) {
         $s = DB::table('settings')->where('name', $key)->first();
-            expect(json_decode($s->payload))->toBe($item);
+        expect(json_decode($s->payload))->toBe($item);
     }
 
     $data = [

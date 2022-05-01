@@ -2,7 +2,6 @@
 
 use App\Actions\Setting\Update\UpdatePackageSettingAction;
 use App\Models\Settings\PackageSetting;
-use function Pest\Laravel\assertDatabaseHas;
 
 it('should update package setting', function () {
     /** @var PackageSetting $setting */
