@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Settings\FlightSetting $setting */
+/** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 
 @extends('layouts.app')
@@ -26,26 +26,25 @@
                 @include('partials.error-alert')
                 @csrf
                 <div id="supported_class">
-                    @foreach($setting->supported_class as $class)
-                        <input type="text" hidden name="supported_class[]" value="{{$class}}">
+                    @foreach ($setting->supported_class as $class)
+                        <input type="text" hidden name="supported_class[]" value="{{ $class }}">
                     @endforeach
                 </div>
                 <div id="supported_type">
-                    @foreach($setting->supported_type as $type)
-                        <input type="text" hidden name="supported_type[]" value="{{$type}}">
+                    @foreach ($setting->supported_type as $type)
+                        <input type="text" hidden name="supported_type[]" value="{{ $type }}">
                     @endforeach
                 </div>
                 <div class="mb-3">
                     <label for="default_class"> {{ __('Default Class') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
-                                data-coreui-target="#defaultClassModal" href="#">
-                            {{__('Create New Class')}}
+                            data-coreui-target="#defaultClassModal" href="#">
+                            {{ __('Create New Class') }}
                         </a>
                     </label>
                     <select name="default_class" id="default_class" class="form-select">
                         @foreach ($setting->supported_class as $class)
-                            <option value="{{ $class }}"
-                                @selected(old('default_class', $setting->default_class) == $class)>
+                            <option value="{{ $class }}" @selected(old('default_class', $setting->default_class) == $class)>
                                 {{ $class }}
                             </option>
                         @endforeach
@@ -54,14 +53,13 @@
                 <div class="mb-3">
                     <label for="default_type">{{ __('Default Type') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
-                                data-coreui-target="#defaultTypeModal" href="#">
-                            {{__('Create New Type')}}
+                            data-coreui-target="#defaultTypeModal" href="#">
+                            {{ __('Create New Type') }}
                         </a>
                     </label>
                     <select name="default_type" id="default_type" class="form-select">
                         @foreach ($setting->supported_type as $type)
-                            <option value="{{ $type }}"
-                                @selected(old('default_type', $setting->default_type) == $type)>
+                            <option value="{{ $type }}" @selected(old('default_type', $setting->default_type) == $type)>
                                 {{ $type }}
                             </option>
                         @endforeach
@@ -71,8 +69,7 @@
                     <label for="supported_countries">{{ __('Default Country') }}</label>
                     <select name="supported_countries[]" id="supported_countries" class="form-select" multiple>
                         @foreach ($viewBag['countries'] as $country)
-                            <option value="{{ $country->name }}"
-                                @selected(in_array($country->name, old('supported_countries', $setting->supported_countries)))>
+                            <option value="{{ $country->name }}" @selected(in_array($country->name, old('supported_countries', $setting->supported_countries)))>
                                 {{ $country->name }}
                             </option>
                         @endforeach
@@ -99,15 +96,14 @@
                         <div class="form-group">
                             <label for="new_class">{{ __('Class') }}</label>
                             <input type="text" name="new_class" id="new_class" class="form-control"
-                                   placeholder="{{ __('Class') }}">
+                                placeholder="{{ __('Class') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
-                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
-                           form="addClassForm">
+                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addClassForm">
                 </div>
             </div>
         </div>
@@ -125,15 +121,14 @@
                         <div class="form-group">
                             <label for="new_type">{{ __('Type') }}</label>
                             <input type="text" name="new_type" id="new_type" class="form-control"
-                                   placeholder="{{ __('Type') }}">
+                                placeholder="{{ __('Type') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
-                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
-                           form="addTypeForm">
+                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addTypeForm">
                 </div>
             </div>
         </div>

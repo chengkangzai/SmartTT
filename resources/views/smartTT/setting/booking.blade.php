@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Settings\BookingSetting $setting */
+/** @var \App\Models\Settings\BookingSetting $setting */
 @endphp
 
 @extends('layouts.app')
@@ -29,8 +29,7 @@
                     <label for="default_payment_method"> {{ __('Default Payment method') }}</label>
                     <select name="default_payment_method" id="default_payment_method" class="form-select">
                         @foreach ($setting->supported_payment_method as $method)
-                            <option value="{{ $method }}"
-                                @selected(old('default_payment_method', $setting->default_payment_method) == $method)>
+                            <option value="{{ $method }}" @selected(old('default_payment_method', $setting->default_payment_method) == $method)>
                                 {{ $method }}
                             </option>
                         @endforeach
@@ -39,7 +38,7 @@
                 <div class="mb-3">
                     <label for="charge_per_child">{{ __('Charges for Children') }}</label>
                     <input name="charge_per_child" id="charge_per_child" class="form-select"
-                           value="{{old('charge_per_child',$setting->charge_per_child)}}">
+                        value="{{ old('charge_per_child', $setting->charge_per_child) }}">
                 </div>
             </form>
         </div>
@@ -48,4 +47,3 @@
         </div>
     </div>
 @endsection
-

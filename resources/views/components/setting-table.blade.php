@@ -24,7 +24,7 @@ $settings = $attributes->get('settings');
                         <td>{{ trans('setting.' . $mode . '.' . $key) }}</td>
                         <td>
                             @if (is_array($settings[$mode]->$key))
-                                {{ collect($settings[$mode]->$key)->map(fn($v) => is_bool($v) ? ($v ? __('Active') : __('Inactive')) : $v)->implode(', ') }}
+                                {{ collect($settings[$mode]->$key)->map(fn($v) => is_bool($v) ? ($v ? __('Active') : __('Inactive')) : $v)->join(', ', __(' and ')) }}
                             @elseif($settings[$mode]->$key instanceof DateTimeZone)
                                 {{ $settings[$mode]->$key->getName() }}
                             @elseif(is_bool($settings[$mode]->$key))
