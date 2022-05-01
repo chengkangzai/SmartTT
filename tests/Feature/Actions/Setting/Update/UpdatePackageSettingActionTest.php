@@ -10,11 +10,11 @@ it('should update package setting', function () {
 
     $items = $packageSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'package',
-        ]);
+        $s = DB::table('settings')
+            ->where('name', $key)
+            ->where('group', 'package')
+            ->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 
     $data = [
@@ -25,10 +25,10 @@ it('should update package setting', function () {
 
     $items = $packageSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'package',
-        ]);
+        $s = DB::table('settings')
+            ->where('name', $key)
+            ->where('group', 'package')
+            ->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 });

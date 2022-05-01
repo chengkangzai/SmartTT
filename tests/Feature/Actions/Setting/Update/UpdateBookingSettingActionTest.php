@@ -11,11 +11,8 @@ it('should update booking setting', function () {
     $bookingSetting = app(BookingSetting::class);
     $items = $bookingSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'booking',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 
     $data = [
@@ -27,11 +24,8 @@ it('should update booking setting', function () {
 
     $items = $bookingSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'booking',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 });
 
@@ -52,6 +46,6 @@ it('should not update setting', function ($name, $data) {
         }
     }
 })->with([
-    ['default_payment_method', ['', 'asda', -1, null, 1,'a'.str_repeat('a', 256)]],
+    ['default_payment_method', ['', 'asda', -1, null, 1, 'a' . str_repeat('a', 256)]],
     ['charge_per_child', ['asda', -1, null]],
 ]);

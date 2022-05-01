@@ -19,11 +19,12 @@ it('should update general setting', function () {
 
     $items = $generalSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => ($item instanceof \DateTimeZone) ? json_encode($item->getName()) : json_encode($item),
-            'group' => 'general',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        if ($item instanceof DateTimeZone) {
+            expect(json_decode($s->payload))->toBe($item->getName());
+        } else {
+            expect(json_decode($s->payload))->toBe($item);
+        }
     }
 
     $data = [
@@ -39,11 +40,12 @@ it('should update general setting', function () {
 
     $items = $generalSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => ($item instanceof \DateTimeZone) ? json_encode($item->getName()) : json_encode($item),
-            'group' => 'general',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        if ($item instanceof DateTimeZone) {
+            expect(json_decode($s->payload))->toBe($item->getName());
+        } else {
+            expect(json_decode($s->payload))->toBe($item);
+        }
     }
 });
 

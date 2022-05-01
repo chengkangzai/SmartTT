@@ -18,11 +18,8 @@ it('should update Flight setting', function () {
 
     $items = $flightSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'flight',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 
     $data = [
@@ -37,11 +34,8 @@ it('should update Flight setting', function () {
 
     $items = $flightSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'flight',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 });
 

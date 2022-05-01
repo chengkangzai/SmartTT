@@ -19,11 +19,8 @@ it('should update Tour setting', function () {
 
     $items = $tourSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'tour',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+            expect(json_decode($s->payload))->toBe($item);
     }
 
     $data = [
@@ -37,11 +34,8 @@ it('should update Tour setting', function () {
 
     $items = $tourSetting->toArray();
     foreach ($items as $key => $item) {
-        assertDatabaseHas('settings', [
-            'name' => $key,
-            'payload' => json_encode($item),
-            'group' => 'tour',
-        ]);
+        $s = DB::table('settings')->where('name', $key)->first();
+        expect(json_decode($s->payload))->toBe($item);
     }
 });
 
@@ -59,9 +53,6 @@ it('should not update setting', function ($name, $data) {
             $action->execute($testArray, $bookingSetting);
             $this->fail('ValidationException was not thrown');
         } catch (ValidationException $e) {
-            Log::info($name);
-            Log::info($testArray);
-            Log::info($e->validator->errors()->get($name));
             assertNotEmpty($e->validator->errors()->get($name));
         }
     }
