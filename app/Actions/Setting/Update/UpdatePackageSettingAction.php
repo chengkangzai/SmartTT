@@ -7,7 +7,6 @@ use Validator;
 
 class UpdatePackageSettingAction implements UpdateSettingInterface
 {
-
     /**
      * @param array $data
      * @param PackageSetting $setting

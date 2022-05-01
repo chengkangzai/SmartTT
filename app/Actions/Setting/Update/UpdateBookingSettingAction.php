@@ -3,8 +3,8 @@
 namespace App\Actions\Setting\Update;
 
 use App\Models\Settings\BookingSetting;
-use Validator;
 use function implode;
+use Validator;
 
 class UpdateBookingSettingAction implements UpdateSettingInterface
 {
@@ -29,6 +29,7 @@ class UpdateBookingSettingAction implements UpdateSettingInterface
     public function validate(array $data): ?array
     {
         $validPaymentMethods = implode(',', $this->bookingSetting->supported_payment_method);
+
         return Validator::make($data, [
             'default_payment_method' => 'required|string|in:' . $validPaymentMethods,
             'charge_per_child' => 'required',

@@ -13,7 +13,7 @@ class GetViewBagForGeneralSettingAction implements GetViewBagSettingInterface
     {
         return [
             'timezones' => DateTimeZone::listIdentifiers(),
-            'countries' => Country::get(['id', 'name'])
+            'countries' => Country::get(['id', 'name']),
         ];
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Setting\Edit\GetViewBagForBookingSettingAction;
+use function abort_if;
+use function app;
 use App\Actions\Setting\Edit\GetViewBagForFlightSettingAction;
 use App\Actions\Setting\Edit\GetViewBagForGeneralSettingAction;
-use App\Actions\Setting\Edit\GetViewBagForPackagePricingSettingAction;
 use App\Actions\Setting\Edit\GetViewBagForTourSettingAction;
-use App\Actions\Setting\GetViewBagForPackageSettingAction;
 use App\Actions\Setting\Update\UpdateBookingSettingAction;
 use App\Actions\Setting\Update\UpdateFlightSettingAction;
 use App\Actions\Setting\Update\UpdateGeneralSettingAction;
@@ -23,8 +22,6 @@ use App\Models\Settings\PackageSetting;
 use App\Models\Settings\TourSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use function abort_if;
-use function app;
 
 class SettingController extends Controller
 {
@@ -45,14 +42,14 @@ class SettingController extends Controller
     public function index()
     {
         return view('smartTT.setting.index', [
-            'settings' => $this->settings
+            'settings' => $this->settings,
         ]);
     }
 
     public function edit(string $mode)
     {
         $setting = $this->settings[$mode];
-        abort_if(!$setting, 404);
+        abort_if(! $setting, 404);
 
         $view = match ($mode) {
             'general' => 'smartTT.setting.general',
@@ -78,7 +75,7 @@ class SettingController extends Controller
     public function update(Request $request, string $mode)
     {
         $setting = $this->settings[$mode];
-        abort_if(!$setting, 404);
+        abort_if(! $setting, 404);
 
         /** @var UpdateSettingInterface $action */
         $action = match ($mode) {

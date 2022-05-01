@@ -2,11 +2,9 @@
 
 namespace App\Actions\Setting\Update;
 
-
 use App\Models\Settings\PackagePricingsSetting;
-use Validator;
 use function count;
-use function dd;
+use Validator;
 
 class UpdatePackagePricingSettingAction implements UpdateSettingInterface
 {
@@ -37,7 +35,7 @@ class UpdatePackagePricingSettingAction implements UpdateSettingInterface
             'default_capacity.*' => 'required|integer|max:255',
             'default_status' => 'required|array',
             'default_status.*' => 'required|boolean|max:255',
-        ],customAttributes: [
+        ], customAttributes: [
             'default_namings' => __('Default Naming'),
             'default_capacity' => __('Default Capacity'),
             'default_status' => __('Default Status'),

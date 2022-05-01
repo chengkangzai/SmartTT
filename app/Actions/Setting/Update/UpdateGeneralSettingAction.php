@@ -24,7 +24,7 @@ class UpdateGeneralSettingAction implements UpdateSettingInterface
 
         $this->setting->fill([
             ...$data,
-            'default_timezone' => CarbonTimeZone::create($data['default_timezone'])
+            'default_timezone' => CarbonTimeZone::create($data['default_timezone']),
         ]);
 
         return $this->setting->save();
