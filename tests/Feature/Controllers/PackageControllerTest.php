@@ -139,7 +139,7 @@ it('should not update a package bc w/o required param', function () use ($faker)
         ->put(route('packages.update', $package), $newPackage)
         ->assertRedirect(route('packages.edit', $package))
         ->assertSessionHasErrors([
-            'flights'
+            'flights',
         ]);
 });
 

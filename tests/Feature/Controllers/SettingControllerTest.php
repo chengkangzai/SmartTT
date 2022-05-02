@@ -1,12 +1,5 @@
 <?php
 
-use App\Actions\Setting\Update\UpdateBookingSettingAction;
-use App\Actions\Setting\Update\UpdateFlightSettingAction;
-use App\Actions\Setting\Update\UpdateGeneralSettingAction;
-use App\Actions\Setting\Update\UpdatePackagePricingSettingAction;
-use App\Actions\Setting\Update\UpdatePackageSettingAction;
-use App\Actions\Setting\Update\UpdateSettingInterface;
-use App\Actions\Setting\Update\UpdateTourSettingAction;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\FlightSetting;
 use App\Models\Settings\GeneralSetting;
@@ -23,7 +16,7 @@ beforeEach(function () {
     seed([
         PermissionSeeder::class,
         UserRoleSeeder::class,
-        CountrySeeder::class
+        CountrySeeder::class,
     ]);
     $this->actingAs(User::first());
 });
@@ -101,7 +94,6 @@ it('should update setting', function ($mode, $data) {
             expect(json_decode($s->payload))->toBe($item);
         }
     }
-
 })->with([
     ['general', [
         'site_name' => 'Another Name',
@@ -166,7 +158,6 @@ it('should not update setting bc w/o required param', function ($mode, $data) {
         ->post(route('settings.update', $mode), $data)
         ->assertRedirect(route('settings.index'))
         ->assertSessionHasErrors();
-
 })->with([
     ['general',[null]],
     ['tour', [null]],

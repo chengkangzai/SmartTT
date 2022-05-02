@@ -4,7 +4,6 @@ namespace App\Actions\Flight;
 
 use Illuminate\Validation\ValidationException;
 use Validator;
-use function it;
 
 trait ValidateFlight
 {

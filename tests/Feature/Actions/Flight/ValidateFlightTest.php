@@ -10,7 +10,7 @@ it('should invalidate invalid data', function ($name, $data) {
 
     foreach ($data as $item) {
         $testArray[$name] = $item;
-        if (!isset($data['departure_airport_id'])) {
+        if (! isset($data['departure_airport_id'])) {
             $testArray['departure_airport_id'] = 1;
         }
 
@@ -36,5 +36,5 @@ it('should invalidate invalid data without departure airport id ', function () {
     $mock = Mockery::mock(ValidateFlight::class);
     $mock->shouldReceive('validate');
 
-    expect(fn() => $mock->validate([]))->toThrow(ValidationException::class);
+    expect(fn () => $mock->validate([]))->toThrow(ValidationException::class);
 });
