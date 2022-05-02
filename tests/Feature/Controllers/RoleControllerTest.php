@@ -129,3 +129,59 @@ it('should destroy a role', function () use ($faker) {
 
     assertModelMissing($role);
 });
+
+it('should destroy role with user', function () use ($faker) {
+    $role = Role::create([
+        'name' => $faker->name,
+    ]);
+    User::factory()->count(10)->create()->each(function ($user) use ($role) {
+        $user->assignRole($role);
+    });
+    assertModelExists($role);
+
+    $this
+        ->from(route('roles.index'))
+        ->delete(route('roles.destroy', $role))
+        ->assertRedirect(route('roles.index'))
+        ->assertSessionHasErrors();
+
+    assertModelExists($role);
+});
+
+it('should attach user to role', function () use ($faker) {
+    $users = User::factory()->count(5)->create();
+    $role = Role::create([
+        'name' => $faker->name,
+    ]);
+
+    $this
+        ->from(route('roles.show', $role))
+        ->put(route('roles.attachUserToRole', $role), [
+            'users' => $users->pluck('id')->toArray(),
+        ])
+        ->assertRedirect(route('roles.show', $role))
+        ->assertSessionHasNoErrors()
+        ->assertSessionHas('success');
+
+    $role->users()->each(function ($user) use ($users) {
+        expect($users->pluck('id'))->toContain($user->id);
+    });
+});
+
+it('should detach a user from a role', function () use ($faker) {
+    $user = User::factory()->create();
+    $role = Role::create([
+        'name' => $faker->name,
+    ]);
+    $user->assignRole($role);
+
+    $this
+        ->delete(route('roles.detachUserToRole', $role), [
+            'user_id' => $user->id,
+        ])
+        ->assertRedirect(route('roles.show', $role))
+        ->assertSessionHasNoErrors()
+        ->assertSessionHas('success');
+
+    expect($role->users->count())->toBe(0);
+});

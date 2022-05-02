@@ -84,6 +84,17 @@ it('should store a tour', function () use ($faker) {
 });
 
 
+it('should not store a tour bc w/o other param', function () use ($faker) {
+    $tour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
+
+    $this
+        ->from(route('tours.create'))
+        ->post(route('tours.store'), $tour->toArray())
+        ->assertRedirect(route('tours.create'))
+        ->assertSessionHasErrors();
+});
+
+
 it('should update a tour', function () {
     $oriTour = Tour::factory()->create();
     assertModelExists($oriTour);
@@ -102,6 +113,20 @@ it('should update a tour', function () {
     expect($newTour->name)->toBe($oriTour['name']);
     expect($newTour->nights)->toBe($oriTour['nights']);
     expect($newTour->days)->toBe($oriTour['days']);
+});
+
+
+it('should not update a tour bc w/o other param', function () {
+    $oriTour = Tour::factory()->create();
+    assertModelExists($oriTour);
+
+    $mockTour = Tour::factory()->make();
+
+    $this
+        ->from(route('tours.edit', $oriTour))
+        ->put(route('tours.update', $oriTour), $mockTour->toArray())
+        ->assertRedirect(route('tours.edit', $oriTour))
+        ->assertSessionHasErrors();
 });
 
 it('should destroy a tour', function () {

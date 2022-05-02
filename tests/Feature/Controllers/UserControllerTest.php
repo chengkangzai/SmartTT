@@ -3,6 +3,7 @@
 
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Auth\Notifications\ResetPassword;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
@@ -89,4 +90,29 @@ it('should destroy a user', function () {
         ->assertSessionHas('success');
 
     assertSoftDeleted($user);
+});
+
+it('should not delete a user itself', function () {
+    $user = User::first();
+    $this->actingAs($user);
+    $this
+        ->delete(route('users.destroy', $user))
+        ->assertRedirect(route('users.index'))
+        ->assertSessionHas('errors');
+
+    assertModelExists($user);
+});
+
+it('should send reset password email', function () {
+    Notification::fake();
+
+    $user = User::factory()->create();
+    assertModelExists($user);
+
+    $this
+        ->post(route('users.sendResetPassword', $user))
+        ->assertRedirect(route('users.show', $user))
+        ->assertSessionHas('success');
+
+    Notification::assertSentTo($user, ResetPassword::class);
 });

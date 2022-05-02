@@ -11,7 +11,7 @@ use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed(CountrySeeder::class);
-    seed(TourSeeder::class);
+    Tour::factory()->count(11)->withFakerItineraryAndThumbnail()->create();
 });
 
 it('can destroy a tour', function () {
