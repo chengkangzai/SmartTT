@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function number_format;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use function number_format;
 
 class Package extends Model
 {
@@ -36,7 +36,7 @@ class Package extends Model
         $max = $this->pricings()->max('price');
 
         return Attribute::make(
-            get: fn($value) => number_format($min, 2) . ' - ' . number_format($max, 2),
+            get: fn ($value) => number_format($min, 2) . ' - ' . number_format($max, 2),
         );
     }
 

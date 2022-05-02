@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use function app;
 use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
 use App\Models\Package;
 use App\Models\Settings\GeneralSetting;
-use function app;
 use function compact;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

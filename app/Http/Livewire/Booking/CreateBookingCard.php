@@ -2,17 +2,17 @@
 
 namespace App\Http\Livewire\Booking;
 
+use function app;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
+use function collect;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use function app;
-use function collect;
 
 class CreateBookingCard extends Component
 {
@@ -50,6 +50,7 @@ class CreateBookingCard extends Component
     {
         if ($this->tour == 0) {
             $this->addError('tour', __('Please select a tour'));
+
             return;
         }
         if ($this->getErrorBag()->has('tour')) {
@@ -63,6 +64,7 @@ class CreateBookingCard extends Component
     {
         if ($this->package == 0) {
             $this->addError('package', __('Please select a package'));
+
             return;
         }
         if ($this->getErrorBag()->has('package')) {
@@ -115,6 +117,4 @@ class CreateBookingCard extends Component
 
 //        $this->currentStep++;
     }
-
-
 }
