@@ -24,11 +24,7 @@ trait ValidatePackage
 
             if (isset($data['name'])) {
                 for ($i = 1; $i < count($data['name']) + 1; $i++) {
-                    if (isset($data['pricing_is_active_' . $i])) {
-                        $data['pricing_is_active_' . $i] = true;
-                    } else {
-                        $data['pricing_is_active_' . $i] = false;
-                    }
+                    $data['pricing_is_active_' . $i] = isset($data['pricing_is_active_' . $i]);
                     $rules = [
                         ...$rules,
                         'pricing_is_active_' . $i => 'required|boolean',

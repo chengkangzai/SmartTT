@@ -16,10 +16,10 @@ beforeEach(function () {
 $faker = Faker\Factory::create();
 
 it('should update tour', function () use ($faker) {
-    $oriTour = Tour::factory()->create();
+    $oriTour = Tour::factory()->withFakerItineraryAndThumbnail()->create();
     assertModelExists($oriTour);
 
-    $mockTour = Tour::factory()->make();
+    $mockTour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
     $mockTour['countries'] = Country::inRandomOrder()->take(3)->pluck('id')->toArray();
 
     $updatedTour = app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour);

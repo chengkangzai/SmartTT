@@ -31,3 +31,10 @@ it('should invalidate invalid data', function ($name, $data) {
     ['class', [-1, null]],
     ['type', [-1, null]],
 ]);
+
+it('should invalidate invalid data without departure airport id ', function () {
+    $mock = Mockery::mock(ValidateFlight::class);
+    $mock->shouldReceive('validate');
+
+    expect(fn () => $mock->validate([]))->toThrow(ValidationException::class);
+});

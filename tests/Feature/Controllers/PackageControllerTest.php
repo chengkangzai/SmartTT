@@ -129,6 +129,20 @@ it('should update a package', function () use ($faker) {
     });
 });
 
+it('should not update a package bc w/o required param', function () use ($faker) {
+    $package = Package::factory()->create();
+    assertModelExists($package);
+
+    $newPackage = Package::factory()->make()->toArray();
+    $this
+        ->from(route('packages.edit', $package))
+        ->put(route('packages.update', $package), $newPackage)
+        ->assertRedirect(route('packages.edit', $package))
+        ->assertSessionHasErrors([
+            'flights',
+        ]);
+});
+
 
 it('should destroy a package', function () {
     $package = Package::factory()->create();

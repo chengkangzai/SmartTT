@@ -4,14 +4,13 @@ use App\Actions\Tour\DestroyTourAction;
 use App\Models\Package;
 use App\Models\Tour;
 use Database\Seeders\CountrySeeder;
-use Database\Seeders\TourSeeder;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed(CountrySeeder::class);
-    seed(TourSeeder::class);
+    Tour::factory()->count(11)->withFakerItineraryAndThumbnail()->create();
 });
 
 it('can destroy a tour', function () {
