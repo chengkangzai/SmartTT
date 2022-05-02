@@ -31,9 +31,7 @@ class BookingController extends Controller
 
     public function create(): Factory|View|Application
     {
-        $packages = Package::with('tour')->get();
-
-        return view('smartTT.booking.create', compact('packages'));
+        return view('smartTT.booking.create');
     }
 
     public function store(Request $request, StoreBookingAction $action): RedirectResponse
