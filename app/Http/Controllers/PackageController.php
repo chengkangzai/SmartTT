@@ -6,6 +6,8 @@ use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
 use App\Models\Package;
+use App\Models\Settings\GeneralSetting;
+use function app;
 use function compact;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -21,8 +23,9 @@ class PackageController extends Controller
     public function index(): View|Factory|Application
     {
         $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate();
+        $setting = app(GeneralSetting::class);
 
-        return view('smartTT.package.index', compact('packages'));
+        return view('smartTT.package.index', compact('packages', 'setting'));
     }
 
     public function create(GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
