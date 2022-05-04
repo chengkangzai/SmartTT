@@ -135,7 +135,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (! $this->guests[$index]['is_child']) {
+        if (!$this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -161,7 +161,7 @@ class CreateBookingCard extends Component
         ]);
 
         collect($data['guests'])
-            ->filter(fn ($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -239,17 +239,13 @@ class CreateBookingCard extends Component
 
     public function nextStep()
     {
-        if ($this->currentStep == 1) {
-            $this->updatedTour();
-        } elseif ($this->currentStep == 2) {
-            $this->updatedPackage();
-        } elseif ($this->currentStep == 3) {
-            $this->validateGuest();
-        } elseif ($this->currentStep == 4) {
-            $this->saveBooking();
-        }
-
-//        $this->currentStep++;
+        match ($this->currentStep) {
+            1 => $this->updatedTour(),
+            2 => $this->updatedPackage(),
+            3 => $this->validateGuest(),
+            4 => $this->saveBooking(),
+            default => $this->currentStep++,
+        };
     }
     #endregion
 }
