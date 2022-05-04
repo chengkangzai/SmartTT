@@ -31,5 +31,4 @@ class BookingGuest extends Model
     {
         return $this->belongsTo(PackagePricing::class);
     }
-
 }
