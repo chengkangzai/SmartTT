@@ -1,6 +1,7 @@
 @php
 /** @var \App\Models\Tour $tour */
 /** @var \App\Models\Package $package */
+/** @var \App\Models\Settings\PackageSetting $setting */
 @endphp
 @extends('layouts.app')
 @section('title')
@@ -54,6 +55,14 @@
                                 </option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
+                            @checked(old('is_active', $package->is_active)) value="1">
+                        <label class="form-check-label" for="is_active">
+                            {{ __('Active this Package ') }}
+                        </label>
                     </div>
                 </form>
             </div>
