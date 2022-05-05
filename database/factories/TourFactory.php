@@ -35,6 +35,9 @@ class TourFactory extends Factory
 
     public function withFakerItineraryAndThumbnail(): TourFactory
     {
+        if (app()->environment('testing')) {
+            return $this;
+        }
         return $this->afterCreating(function (Tour $tour) {
             $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail');
             $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
