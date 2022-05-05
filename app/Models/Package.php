@@ -32,11 +32,11 @@ class Package extends Model
 
     public function price(): Attribute
     {
-        $min = $this->pricings()->min('price');
-        $max = $this->pricings()->max('price');
+        $min = $this->pricings->min('price');
+        $max = $this->pricings->max('price');
 
         return Attribute::make(
-            get: fn ($value) => number_format($min / 100, 2) . ' - ' . number_format($max / 100, 2),
+            get: fn ($value) => number_format($min, 2) . ' - ' . number_format($max, 2),
         );
     }
 
