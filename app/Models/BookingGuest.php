@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class BookingGuest extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use LogsActivity;
 
     public $fillable = [
         'name',
@@ -30,5 +33,10 @@ class BookingGuest extends Model
     public function packagePricing(): BelongsTo
     {
         return $this->belongsTo(PackagePricing::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logFillable()->logOnlyDirty();
     }
 }
