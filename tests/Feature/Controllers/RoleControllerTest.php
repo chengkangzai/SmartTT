@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\UserRoleSeeder;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\seed;
@@ -9,7 +11,10 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
-    seed(DatabaseSeeder::class);
+    seed([
+        PermissionSeeder::class,
+        UserRoleSeeder::class,
+    ]);
     $this->actingAs(User::first());
 });
 

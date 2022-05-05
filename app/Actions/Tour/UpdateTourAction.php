@@ -50,9 +50,11 @@ class UpdateTourAction
     private function updateFile(Tour $tour, string $mode, $data): void
     {
         $media = $tour->getMedia($mode)->first();
-        $model_type = $media->model_type;
-        $model = $model_type::find($media->model_id);
-        $model->deleteMedia($media->id);
-        $tour->addMedia($data[$mode])->toMediaCollection($mode);
+        if ($media) {
+            $model_type = $media->model_type;
+            $model = $model_type::find($media->model_id);
+            $model->deleteMedia($media->id);
+            $tour->addMedia($data[$mode])->toMediaCollection($mode);
+        }
     }
 }
