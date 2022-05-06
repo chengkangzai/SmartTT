@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Booking;
 
+ use App\Models\Payment;
+use Stripe\SetupIntent;
 use function app;
 use App\Models\Booking;
 use App\Models\Package;
@@ -11,44 +13,55 @@ use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use function array_filter;
 use function array_keys;
+use function auth;
 use function collect;
 use function count;
-use DB;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use function dd;
 
 class CreateBookingCard extends Component
 {
-    #region properties
+    #region Step 1
     public Collection $tours;
     public int $tour = 0;
-    public Tour $tourModel;
-
+    #endregion
+    #region Step 2
     public Collection $packages;
     public int $package = 0;
-    public Package $packageModel;
-
+    #endregion
+    #region Step 3
     public Collection $pricings;
     public int $pricing = 0;
     public array $pricingsHolder;
-
     public int $totalPrice = 0;
-
+    #endregion
+    #region Step 4
     public array $guests = [];
-
     private Booking $booking;
+    public int $bookingId;
+    #endregion
+    #region Step 5
+    public string $paymentType = 'full';
+    public string $paymentMethod = 'stripe';
+
+    public string $stripePaymentMethod = '';
+    public int $paymentAmount = 0;
+    private SetupIntent $paymentIntent;
     #endregion
 
     public int $currentStep = 1;
     public string $defaultCurrency;
     public int $charge_per_child;
 
+    protected $listeners = ['cardSetupConfirmed'];
+
     public function mount()
     {
-        $this->tours = Tour::active()->get();
+        $this->tours = Tour::active()->get(['id', 'name']);
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
     }
@@ -73,8 +86,6 @@ class CreateBookingCard extends Component
         }
         $this->currentStep++;
         $this->packages = Package::where('tour_id', $this->tour)->active()->get();
-
-        $this->tourModel = Tour::find($this->tour);
     }
     #endregion
 
@@ -96,8 +107,6 @@ class CreateBookingCard extends Component
         } else {
             $this->updatePrice(0);
         }
-
-        $this->packageModel = Package::find($this->package);
     }
 
     private function updatePricings(): void
@@ -194,7 +203,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        $this->booking = DB::transaction(function () {
+        if (!isset($this->booking)) {
             $booking = Booking::create([
                 'user_id' => auth()->id(),
                 'package_id' => $this->package,
@@ -213,18 +222,68 @@ class CreateBookingCard extends Component
                         'package_pricing_id' => $guest['pricing'],
                     ]);
 
-                    $pricing = PackagePricing::find($guest['pricing']);
-                    $pricing->decrement('available_capacity');
+//                    $this->pricings->find($guest['pricing'])->decrement('available_capacity');
                 });
 
-            return $booking;
-        });
-
+            $this->booking = $booking;
+            $this->bookingId = $this->booking->id;
+        }
+        $this->getReadyForPayment();
         $this->currentStep++;
     }
     #endregion
 
     #region Step 5 - Payment
+    public function getReadyForPayment()
+    {
+        $payment = Payment::updateOrCreate([
+            'user_id' => auth()->id(),
+            'booking_id' => $this->bookingId,
+        ], [
+            'status' => Payment::STATUS_PENDING,
+            'amount' => $this->paymentType == 'full' ? $this->totalPrice : count($this->guests) * 200,
+            'payment_method' => $this->paymentMethod,
+            'payment_type' => $this->paymentType,
+        ]);
+
+        $this->paymentAmount = $payment->amount;
+
+        if ($this->paymentMethod == 'stripe') {
+            if (!isset($this->paymentIntent)) {
+                $this->paymentIntent = auth()->user()->createSetupIntent();
+            }
+
+            $this->dispatchBrowserEvent('getReadyForPayment', [
+                'clientSecret' => $this->paymentIntent->client_secret,
+            ]);
+        }
+    }
+
+    public function updatedPaymentMethod()
+    {
+        $this->getReadyForPayment();
+    }
+
+    public function updatedPaymentType()
+    {
+        $this->getReadyForPayment();
+    }
+
+    public function cardSetupConfirmed(string $paymentMethod)
+    {
+        $user = auth()->user();
+        $user->createOrGetStripeCustomer();
+        $user->updateDefaultPaymentMethod($paymentMethod);
+        $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->package . ' Of Tour '
+            . $this->tours->find($this->tour)->first()->name, $this->paymentAmount * 100);
+
+        collect($this->guests)
+            ->each(function ($guest) {
+                $this->pricings->find($guest['pricing'])->decrement('available_capacity');
+            });
+
+        $this->currentStep++;
+    }
 
     #endregion
 
