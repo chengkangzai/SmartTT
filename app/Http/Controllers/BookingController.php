@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Booking\CalculateTotalBookingPrice;
-use App\Actions\Booking\StoreBookingAction;
 use App\Actions\Booking\UpdateBookingAction;
 use App\Models\Booking;
 use App\Models\Package;

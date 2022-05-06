@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire\Booking;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Carbon;
 use function activity;
 use function app;
 use App\Models\Booking;
@@ -22,9 +20,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Stripe\SetupIntent;
-use function redirect;
 
 class CreateBookingCard extends Component
 {
@@ -162,7 +160,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (!$this->guests[$index]['is_child']) {
+        if (! $this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -188,7 +186,7 @@ class CreateBookingCard extends Component
         ]);
 
         collect($data['guests'])
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -221,7 +219,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (!isset($this->booking)) {
+        if (! isset($this->booking)) {
             $booking = Booking::create([
                 'user_id' => auth()->id(),
                 'package_id' => $this->package,
@@ -265,7 +263,7 @@ class CreateBookingCard extends Component
         $this->paymentAmount = $payment->amount;
 
         if ($this->paymentMethod == 'stripe') {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -320,8 +318,9 @@ class CreateBookingCard extends Component
                 ->performedOn($payment)
                 ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
         } else {
-            if (!$this->paymentCashReceived) {
+            if (! $this->paymentCashReceived) {
                 $this->getErrorBag()->add('paymentCashReceived', __('Please confirm that you have received the cash.'));
+
                 return;
             }
             $payment->update([
@@ -390,5 +389,4 @@ class CreateBookingCard extends Component
         session()->flash('success', __('Booking saved successfully'));
         $this->redirectRoute('bookings.index');
     }
-
 }
