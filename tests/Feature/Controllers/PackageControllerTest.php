@@ -37,7 +37,7 @@ it('should return index view', function () {
     $this
         ->get(route('packages.index'))
         ->assertViewIs('smartTT.package.index')
-        ->assertViewHas('packages', Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate());
+        ->assertViewHas('packages', Package::with('tour', 'flight.airline:id,name', 'pricings')->orderByDesc('id')->paginate());
 });
 
 it('should return create view', function () {
