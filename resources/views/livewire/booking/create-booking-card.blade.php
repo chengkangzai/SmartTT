@@ -162,6 +162,14 @@
                                         <td>{{ number_format($guest['price'], 2) }}</td>
                                     </tr>
                                 @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <span class="float-end fw-bold ">{{ __('Total Price') }}</span>
+                                    </td>
+                                    <td>{{ number_format($totalPrice, 2) }}</td>
+                            </tfoot>
                         </table>
                     </td>
                 </tr>
