@@ -92,13 +92,11 @@ class CreateBookingCard extends Component
     #region Step 1 - Select Tour
     public function updatedTour()
     {
+        $this->resetErrorBag();
         if ($this->tour == 0) {
             $this->addError('tour', __('Please select a tour'));
 
             return;
-        }
-        if ($this->getErrorBag()->has('tour')) {
-            $this->resetErrorBag();
         }
         $this->currentStep++;
         $this->packages = Package::where('tour_id', $this->tour)->active()->get();
@@ -108,13 +106,11 @@ class CreateBookingCard extends Component
     #region Step 2 - Select Package
     public function updatedPackage()
     {
+        $this->resetErrorBag();
         if ($this->package == 0) {
             $this->addError('package', __('Please select a package'));
 
             return;
-        }
-        if ($this->getErrorBag()->has('package')) {
-            $this->resetErrorBag();
         }
         $this->currentStep++;
         $this->updatePricings();
@@ -160,7 +156,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (! $this->guests[$index]['is_child']) {
+        if (!$this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -186,7 +182,7 @@ class CreateBookingCard extends Component
         ]);
 
         collect($data['guests'])
-            ->filter(fn ($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -219,7 +215,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (! isset($this->booking)) {
+        if (!isset($this->booking)) {
             $booking = Booking::create([
                 'user_id' => auth()->id(),
                 'package_id' => $this->package,
@@ -263,7 +259,7 @@ class CreateBookingCard extends Component
         $this->paymentAmount = $payment->amount;
 
         if ($this->paymentMethod == 'stripe') {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -318,7 +314,7 @@ class CreateBookingCard extends Component
                 ->performedOn($payment)
                 ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
         } else {
-            if (! $this->paymentCashReceived) {
+            if (!$this->paymentCashReceived) {
                 $this->getErrorBag()->add('paymentCashReceived', __('Please confirm that you have received the cash.'));
 
                 return;
