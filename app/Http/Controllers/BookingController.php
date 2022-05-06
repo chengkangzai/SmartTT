@@ -34,13 +34,6 @@ class BookingController extends Controller
         return view('smartTT.booking.create');
     }
 
-    public function store(Request $request, StoreBookingAction $action): RedirectResponse
-    {
-        $action->execute($request->all());
-
-        return redirect()->route('bookings.index')->with('success', __('Booking created successfully'));
-    }
-
     public function show(Booking $booking): Factory|View|Application
     {
         $booking->load(['user', 'package', 'package.tour']);
