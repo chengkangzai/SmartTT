@@ -49,6 +49,11 @@ class Booking extends Model
         return $this->hasMany(BookingGuest::class);
     }
 
+    public function payment(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable()->logOnlyDirty();
