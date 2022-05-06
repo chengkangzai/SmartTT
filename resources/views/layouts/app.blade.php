@@ -131,8 +131,8 @@ $language = $setting->default_language;
             ],
         });
     </script>
-    @stack('script')
     @livewireScripts
+    @stack('script')
 </body>
 
 </html>
