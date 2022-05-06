@@ -24,7 +24,6 @@
         "barryvdh/laravel-debugbar": "^3.5",
         "barryvdh/laravel-ide-helper": "^2.8",
         "chengkangzai/laravel-stubs": "^2.4",
-        "laravel/sail": "^1.0.1",
         "laraveldaily/larastarters": "^1.4",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
