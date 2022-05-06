@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Booking;
 
-use function activity;
-use function app;
+ use App\Actions\Booking\StoreBookingAction;
+use App\Actions\Booking\UpdateManualPaymentAction;
+use App\Actions\Booking\ValidateBookingGuestAction;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PackagePricing;
@@ -11,16 +12,12 @@ use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
-use function array_filter;
-use function array_keys;
-use function auth;
-use function collect;
-use function count;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
 
@@ -165,46 +162,16 @@ class CreateBookingCard extends Component
     public function validateGuest()
     {
         $this->resetErrorBag();
-        $data = $this->validate([
-            'guests.*.name' => 'required|string|max:255',
-            'guests.*.pricing' => 'required|integer',
-            'guests.*.price' => 'required|numeric|min:1',
-            'guests.*.is_child' => 'required|boolean',
-            'tour' => 'required|exists:tours,id',
-            'package' => 'required|exists:packages,id',
-        ], attributes: [
-            'guests.*.name' => __('Guest Name'),
-            'guests.*.pricing' => __('Pricing'),
-            'guests.*.price' => __('Price'),
-            'guests.*.is_child' => __('Is Child'),
-            'tour' => __('Tour'),
-            'package' => __('Package'),
-        ]);
+        try {
+            app(ValidateBookingGuestAction::class)->execute($this->pricingsHolder, [
+                'guests' => $this->guests,
+                'tour' => $this->tour,
+                'package' => $this->package,
+            ]);
+        } catch (ValidationException $e) {
+            $this->setErrorBag($e->validator->errors());
+            $this->updatePricings();
 
-        collect($data['guests'])
-            ->filter(fn($guest) => !$guest['is_child'])
-            ->each(function ($guest) {
-                $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
-                    return $p['id'] == $guest['pricing'];
-                });
-
-                $index = array_keys($arr)[0];
-                $pricing = $arr[$index];
-
-                if ($pricing['available_capacity'] < 1) {
-                    $this->addError(
-                        'guests',
-                        __('There is not enough capacity for the selected pricing of :packageName', [
-                            'packageName' => $pricing['name'],
-                        ])
-                    );
-                    $this->updatePricings();
-                } else {
-                    $this->pricingsHolder[$index]['available_capacity'] -= 1;
-                }
-            });
-
-        if ($this->getErrorBag()->count() > 0) {
             return;
         }
 
@@ -216,28 +183,18 @@ class CreateBookingCard extends Component
     public function saveBooking()
     {
         if (!isset($this->booking)) {
-            $booking = Booking::create([
-                'user_id' => auth()->id(),
+            $booking = app(StoreBookingAction::class)->execute(auth()->user(), [
                 'package_id' => $this->package,
                 'adult' => collect($this->guests)->where('is_child', false)->count(),
                 'child' => collect($this->guests)->where('is_child', true)->count(),
                 'total_price' => $this->totalPrice,
-                'discount' => 0, // TODO Coupon
+                'guests' => $this->guests,
             ]);
 
-            collect($this->guests)
-                ->each(function ($guest) use ($booking) {
-                    $booking->guests()->create([
-                        'name' => $guest['name'],
-                        'price' => $guest['price'],
-                        'is_child' => $guest['is_child'],
-                        'package_pricing_id' => $guest['pricing'],
-                    ]);
-                });
-
             $this->booking = $booking;
-            $this->bookingId = $this->booking->id;
+            $this->bookingId = $booking->id;
         }
+
         $this->getReadyForPayment();
         $this->currentStep++;
     }
@@ -296,43 +253,24 @@ class CreateBookingCard extends Component
         $payment = Payment::whereBookingId($this->bookingId)->latest()->first();
         $this->resetErrorBag();
 
-        if ($this->manualType == 'card') {
-            $this->validate($this->validateCardRule);
-            $payment->update([
-                'status' => Payment::STATUS_PAID,
-                'amount' => $this->paymentAmount,
-                'payment_method' => $this->paymentMethod,
-                'payment_type' => $this->paymentType,
-                'booking_id' => $this->bookingId,
-                'card_holder_name' => $this->cardHolderName,
-                'card_number' => $this->cardNumber,
-                'card_expiry_date' => $this->cardExpiry,
-                'card_cvc' => $this->cardCvc,
-                'user_id' => auth()->id(),
-            ]);
-            activity()
-                ->performedOn($payment)
-                ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
-        } else {
-            if (!$this->paymentCashReceived) {
-                $this->getErrorBag()->add('paymentCashReceived', __('Please confirm that you have received the cash.'));
-
-                return;
-            }
-            $payment->update([
-                'status' => Payment::STATUS_PAID,
-                'amount' => $this->paymentAmount,
-                'payment_method' => $this->paymentMethod,
-                'payment_type' => $this->paymentType,
-                'user_id' => auth()->id(),
-            ]);
-            activity()
-                ->performedOn($payment)
-                ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
+        try {
+            app(UpdateManualPaymentAction::class)
+                ->execute($payment, $this->manualType, $this->bookingId, auth()->user(), [
+                    'amount' => $this->paymentAmount,
+                    'payment_type' => $this->paymentType,
+                    'payment_method' => $this->paymentMethod,
+                    'booking_id' => $this->bookingId,
+                    'card_holder_name' => $this->cardHolderName,
+                    'card_number' => $this->cardNumber,
+                    'card_expiry_date' => $this->cardExpiry,
+                    'card_cvc' => $this->cardCvc,
+                    'paymentCashReceived' => $this->paymentCashReceived,
+                ]);
+            $this->reduceAvailability();
+            $this->currentStep++;
+        } catch (ValidationException $e) {
+            $this->setErrorBag($e->validator->errors());
         }
-
-        $this->reduceAvailability();
-        $this->currentStep++;
     }
 
     public function validateCard(string $field)
@@ -358,6 +296,14 @@ class CreateBookingCard extends Component
     }
     #endregion
 
+    #region Step 6 - Finish
+    private function finish()
+    {
+        session()->flash('success', __('Booking saved successfully'));
+        $this->redirectRoute('bookings.index');
+    }
+    #endregion
+
     #region Flow Control
     public function previousStep()
     {
@@ -378,11 +324,5 @@ class CreateBookingCard extends Component
             default => $this->currentStep++,
         };
     }
-
     #endregion
-    private function finish()
-    {
-        session()->flash('success', __('Booking saved successfully'));
-        $this->redirectRoute('bookings.index');
-    }
 }
