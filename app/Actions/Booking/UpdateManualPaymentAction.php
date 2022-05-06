@@ -100,7 +100,7 @@ class UpdateManualPaymentAction
         if ($isBeforeNextMonth) {
             throw ValidationException::withMessages([
                 'card_expiry_date' => [
-                    __('Card expiry date must be after next month')
+                    __('Card expiry date must be after next month'),
                 ],
             ]);
         }
@@ -110,7 +110,7 @@ class UpdateManualPaymentAction
 
     private function validateCash(): void
     {
-        if (!$this->data['paymentCashReceived']) {
+        if (! $this->data['paymentCashReceived']) {
             throw ValidationException::withMessages([
                 'paymentCashReceived' => [
                     __('Please confirm that you have received the cash.'),

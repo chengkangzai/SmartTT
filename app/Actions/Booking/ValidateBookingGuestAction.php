@@ -26,7 +26,7 @@ class ValidateBookingGuestAction
         ])->validate();
 
         $isValid = collect($data['guests'])
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->map(function ($guest) use (&$pricingHolder) {
                 $arr = array_filter($pricingHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -48,11 +48,11 @@ class ValidateBookingGuestAction
                 ];
             });
 
-        if ($isValid->pluck('valid')->filter(fn($v) => $v == false)->isNotEmpty()) {
+        if ($isValid->pluck('valid')->filter(fn ($v) => $v == false)->isNotEmpty()) {
             throw ValidationException::withMessages(['guests' =>
                 __('There is not enough capacity for the selected pricing of :packageName', [
                     'packageName' => $isValid->pluck('pricing')->filter()->first(),
-                ])
+                ]),
             ]);
         }
     }

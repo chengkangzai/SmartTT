@@ -153,7 +153,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (!$this->guests[$index]['is_child']) {
+        if (! $this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -162,6 +162,7 @@ class CreateBookingCard extends Component
     public function validateGuest()
     {
         $this->resetErrorBag();
+
         try {
             app(ValidateBookingGuestAction::class)->execute($this->pricingsHolder, [
                 'guests' => $this->guests,
@@ -182,7 +183,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (!isset($this->booking)) {
+        if (! isset($this->booking)) {
             $booking = app(StoreBookingAction::class)->execute(auth()->user(), [
                 'package_id' => $this->package,
                 'adult' => collect($this->guests)->where('is_child', false)->count(),
@@ -216,7 +217,7 @@ class CreateBookingCard extends Component
         $this->paymentAmount = $payment->amount;
 
         if ($this->paymentMethod == 'stripe') {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
