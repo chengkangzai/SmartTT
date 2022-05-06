@@ -19,7 +19,7 @@ class Payment extends Model
     public const STATUS_PENDING = 'pending';
     public const STATUS_SUCCESS = 'success';
     public const STATUS_FAILED = 'failed';
-
+    public const STATUS_PAID = 'paid';
 
     public $fillable = [
         'booking_id',
@@ -29,6 +29,10 @@ class Payment extends Model
         'payment_method',
         'payment_type',
         'user_id',
+        'card_number',
+        'card_expiry_date',
+        'card_cvc',
+        'card_holder_name',
     ];
 
     protected $dates = [
@@ -39,8 +43,8 @@ class Payment extends Model
     public function amount(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 

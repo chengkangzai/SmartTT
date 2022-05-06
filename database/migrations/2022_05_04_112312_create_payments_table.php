@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('status');
             $table->integer('amount');
             $table->string('payment_type');
+
+            $table->string('card_number')->nullable();
+            $table->string('card_expiry_date')->nullable();
+            $table->string('card_cvc')->nullable();
+            $table->string('card_holder_name')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

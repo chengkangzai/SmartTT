@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Booking;
 
- use function app;
+use Illuminate\Support\Carbon;
+use function activity;
+use function app;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PackagePricing;
@@ -45,7 +47,21 @@ class CreateBookingCard extends Component
     #endregion
     #region Step 5
     public string $paymentType = 'full';
-    public string $paymentMethod = 'stripe';
+    public string $paymentMethod;
+    public string $manualType = 'card';
+    public bool $paymentCashReceived = false;
+
+    public string $cardHolderName = '';
+    public string $cardNumber = '';
+    public string $cardExpiry = '';
+    public string $cardCvc = '';
+
+    private array $validateCardRule = [
+        'cardHolderName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
+        'cardNumber' => ['required', 'string', 'max:255', 'regex:/^[0-9]{16}$/'],
+        'cardExpiry' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
+        'cardCvc' => ['required', 'string', 'max:255', 'regex:/^[0-9]{3,4}$/'],
+    ];
 
     public string $stripePaymentMethod = '';
     public int $paymentAmount = 0;
@@ -63,6 +79,7 @@ class CreateBookingCard extends Component
         $this->tours = Tour::active()->get(['id', 'name']);
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
+        $this->paymentMethod = auth()->user()->hasRole('Customer') ? 'stripe' : 'manual';
     }
 
     public function render(): Factory|View|Application
@@ -143,7 +160,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (! $this->guests[$index]['is_child']) {
+        if (!$this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -169,7 +186,7 @@ class CreateBookingCard extends Component
         ]);
 
         collect($data['guests'])
-            ->filter(fn ($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -202,7 +219,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (! isset($this->booking)) {
+        if (!isset($this->booking)) {
             $booking = Booking::create([
                 'user_id' => auth()->id(),
                 'package_id' => $this->package,
@@ -220,8 +237,6 @@ class CreateBookingCard extends Component
                         'is_child' => $guest['is_child'],
                         'package_pricing_id' => $guest['pricing'],
                     ]);
-
-//                    $this->pricings->find($guest['pricing'])->decrement('available_capacity');
                 });
 
             $this->booking = $booking;
@@ -248,7 +263,7 @@ class CreateBookingCard extends Component
         $this->paymentAmount = $payment->amount;
 
         if ($this->paymentMethod == 'stripe') {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -276,14 +291,74 @@ class CreateBookingCard extends Component
         $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->package . ' Of Tour '
             . $this->tours->find($this->tour)->first()->name, $this->paymentAmount * 100);
 
+        $this->reduceAvailability();
+        $this->currentStep++;
+    }
+
+    public function recordManualPayment()
+    {
+        $payment = Payment::whereBookingId($this->bookingId)->latest()->first();
+        $this->resetErrorBag();
+
+        if ($this->manualType == 'card') {
+            $this->validate($this->validateCardRule);
+            $payment->update([
+                'status' => Payment::STATUS_PAID,
+                'amount' => $this->paymentAmount,
+                'payment_method' => $this->paymentMethod,
+                'payment_type' => $this->paymentType,
+                'booking_id' => $this->bookingId,
+                'card_holder_name' => $this->cardHolderName,
+                'card_number' => $this->cardNumber,
+                'card_expiry_date' => $this->cardExpiry,
+                'card_cvc' => $this->cardCvc,
+                'user_id' => auth()->id(),
+            ]);
+            activity()
+                ->performedOn($payment)
+                ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
+        } else {
+            if (!$this->paymentCashReceived) {
+                $this->getErrorBag()->add('paymentCashReceived', __('Please confirm that you have received the cash.'));
+                return;
+            }
+            $payment->update([
+                'status' => Payment::STATUS_PAID,
+                'amount' => $this->paymentAmount,
+                'payment_method' => $this->paymentMethod,
+                'payment_type' => $this->paymentType,
+                'user_id' => auth()->id(),
+            ]);
+            activity()
+                ->performedOn($payment)
+                ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $this->bookingId . ' by ' . auth()->user()->name);
+        }
+
+        $this->reduceAvailability();
+        $this->currentStep++;
+    }
+
+    public function validateCard(string $field)
+    {
+        $this->validate([
+            $field => $this->validateCardRule[$field],
+        ]);
+
+        if ($this->getErrorBag()->isEmpty() && $field == 'cardExpiry') {
+            $isBeforeNextMonth = Carbon::createFromFormat('m/y', $this->cardExpiry)->isBefore(Carbon::now());
+            if ($isBeforeNextMonth) {
+                $this->getErrorBag()->add('cardExpiry', __('The card is expired'));
+            }
+        }
+    }
+
+    private function reduceAvailability(): void
+    {
         collect($this->guests)
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
-
-        $this->currentStep++;
     }
-
     #endregion
 
     #region Flow Control
@@ -306,4 +381,5 @@ class CreateBookingCard extends Component
         };
     }
     #endregion
+
 }
