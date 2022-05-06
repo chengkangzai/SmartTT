@@ -16,9 +16,9 @@ class Payment extends Model
     use SoftDeletes;
     use LogsActivity;
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_SUCCESS = 'success';
-    const STATUS_FAILED = 'failed';
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_SUCCESS = 'success';
+    public const STATUS_FAILED = 'failed';
 
 
     public $fillable = [
@@ -39,8 +39,8 @@ class Payment extends Model
     public function amount(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 

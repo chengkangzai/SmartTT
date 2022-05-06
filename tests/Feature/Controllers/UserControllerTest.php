@@ -2,7 +2,6 @@
 
 
 use App\Models\User;
-use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -13,7 +12,7 @@ use function Pest\Laravel\seed;
 beforeEach(function () {
     seed([
         PermissionSeeder::class,
-        UserRoleSeeder::class
+        UserRoleSeeder::class,
     ]);
     $this->actingAs(User::first());
 });

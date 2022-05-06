@@ -2,12 +2,11 @@
 
 namespace App\Http\Livewire\Booking;
 
- use App\Models\Payment;
-use Stripe\SetupIntent;
-use function app;
+ use function app;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PackagePricing;
+use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
@@ -21,7 +20,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use function dd;
+use Stripe\SetupIntent;
 
 class CreateBookingCard extends Component
 {
@@ -144,7 +143,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (!$this->guests[$index]['is_child']) {
+        if (! $this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -170,7 +169,7 @@ class CreateBookingCard extends Component
         ]);
 
         collect($data['guests'])
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $arr = array_filter($this->pricingsHolder, function ($p) use ($guest) {
                     return $p['id'] == $guest['pricing'];
@@ -203,7 +202,7 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (!isset($this->booking)) {
+        if (! isset($this->booking)) {
             $booking = Booking::create([
                 'user_id' => auth()->id(),
                 'package_id' => $this->package,
@@ -249,7 +248,7 @@ class CreateBookingCard extends Component
         $this->paymentAmount = $payment->amount;
 
         if ($this->paymentMethod == 'stripe') {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
