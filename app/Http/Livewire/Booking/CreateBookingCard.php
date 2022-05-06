@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Booking;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
 use function activity;
 use function app;
@@ -23,6 +24,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Stripe\SetupIntent;
+use function redirect;
 
 class CreateBookingCard extends Component
 {
@@ -377,9 +379,16 @@ class CreateBookingCard extends Component
             2 => $this->updatedPackage(),
             3 => $this->validateGuest(),
             4 => $this->saveBooking(),
+            6 => $this->finish(),
             default => $this->currentStep++,
         };
     }
+
     #endregion
+    private function finish()
+    {
+        session()->flash('success', __('Booking saved successfully'));
+        $this->redirectRoute('bookings.index');
+    }
 
 }

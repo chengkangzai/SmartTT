@@ -221,8 +221,9 @@
                                 <div class="col-md-5">
                                     <label for="card-holder-name">{{ __('Card Holder Name') }}</label>
                                     <input type="text" class="form-control" id="card-holder-name"
-                                           wire:model="cardHolderName"  wire:change.debounce="validateCard('cardHolderName')"
-                                           placeholder="John Wick" />
+                                           wire:model="cardHolderName"
+                                           wire:change.debounce="validateCard('cardHolderName')"
+                                           placeholder="John Wick"/>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="card-element">{{ __('Credit/Debit Card Number') }}</label>
@@ -234,13 +235,13 @@
                                     <label for="card-expiry-month">{{ __('Expiration Date') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
                                            wire:model="cardExpiry" wire:change.debounce="validateCard('cardExpiry')"
-                                           placeholder="{{ __('MM/YY') }}" />
+                                           placeholder="{{ __('MM/YY') }}"/>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="card-expiry-month">{{ __('Security Code') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
                                            wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
-                                           placeholder="{{ __('123') }}" />
+                                           placeholder="{{ __('123') }}"/>
                                 </div>
                             </div>
                         </div>
@@ -249,13 +250,31 @@
                 @endif
             </div>
         @endif
+        @if ($currentStep == 6)
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <svg class="icon icon-6xl text-success">
+                            <use xlink:href="{{ asset('icons/coreui.svg#cil-check') }}"></use>
+                        </svg>
+                    </div>
+                    <div class="col-md-12">
+                        <h3>{{ __('Invoice Paid') }}</h3>
+                        <span class="d-block">{{ __('You have successfully made a payment') }}</span>
+                        <h3> {{ $defaultCurrency }} {{ $paymentAmount }}</h3>
+                        <p>{{ __('The payment has been successfully processed') }}</p>
+                        <p>{{ __('You will receive an email confirmation shortly') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="card-footer">
         <div class="float-end">
             @if ($currentStep > 1 && $currentStep < 5)
                 <button wire:click="previousStep" class="btn btn-primary mx-1"> &larr; {{ __('Previous') }}</button>
             @endif
-            @if ($currentStep < 4 )
+            @if ($currentStep < 4)
                 <button wire:click="nextStep" class="btn btn-primary mx-1">{{ __('Next') }} &rarr;</button>
             @endif
             @if ($currentStep == 4)
@@ -264,20 +283,21 @@
                 </button>
             @endif
             @if($currentStep == 5 && $paymentMethod == 'stripe')
-                <button type="button" class="mt-4 btn btn-primary" id="payment-button"
+                <button type="button" class="btn btn-primary" id="payment-button"
                         onclick="pay('{{json_encode($guests)}}')">
                     {{__('Pay')}} {{$defaultCurrency}} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
-
             @if($currentStep == 5 && $paymentMethod == 'manual')
-                <button type="button" class="mt-4 btn btn-primary" wire:click="recordManualPayment">
+                <button type="button" class="btn btn-primary" wire:click="recordManualPayment">
                     {{__('Pay')}} {{$defaultCurrency}} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
-
             @if($currentStep == 5 && $paymentMethod == 'cash')
                 <button wire:click="nextStep" class="btn btn-primary mx-1">{{ __('Next') }} &rarr;</button>
+            @endif
+            @if($currentStep == 6)
+                <button wire:click="nextStep" class="btn btn-success mx-1">{{ __('Finish') }} &rarr;</button>
             @endif
         </div>
     </div>
