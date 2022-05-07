@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('card_cvc')->nullable();
             $table->string('card_holder_name')->nullable();
 
+            $table->timestamp('paid_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
