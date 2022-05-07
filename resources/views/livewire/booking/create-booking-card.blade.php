@@ -269,20 +269,22 @@
                         </svg>
                     </div>
                     <div class="col-md-12">
-                        <h3>{{ __('Invoice Paid') }}</h3>
-                        <span class="d-block">{{ __('You have successfully made a payment') }}</span>
-                        <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
-                        <p>{{ __('The payment has been successfully processed') }}</p>
-                        <p>{{ __('You will receive an email confirmation shortly') }}</p>
                         @if ($paymentMethod == 'stripe')
+                            <h3>{{ __('Payment Processing') }}</h3>
+                            <span class="d-block">{{ __('You have successfully made a payment') }}</span>
+                            <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
+                            <p>{{ __('The payment has been successfully processed') }}</p>
+                            <p>{{ __('You will receive an email confirmation shortly') }}</p>
                             <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
-                                class="btn btn-outline-primary" target="_blank">
+                               class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Invoice') }}
                             </a>
                         @endif
                         @if ($paymentMethod == 'manual')
+                            <h3>{{ __('Booking Paid') }}</h3>
+                            <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
                             <a href="{{ $payment->getFirstMedia('receipts')->getUrl() }}"
-                                class="btn btn-outline-primary" target="_blank">
+                               class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Receipt') }}
                             </a>
                         @endif
