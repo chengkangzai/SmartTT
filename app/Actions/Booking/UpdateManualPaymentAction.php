@@ -6,8 +6,8 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
-use Validator;
 use function now;
+use Validator;
 
 class UpdateManualPaymentAction
 {
@@ -37,7 +37,7 @@ class UpdateManualPaymentAction
 
         $payment->update([
             'paid_at' => now(),
-            'status' => Payment::STATUS_PAID
+            'status' => Payment::STATUS_PAID,
         ]);
 
         return $payment->refresh();
@@ -116,7 +116,7 @@ class UpdateManualPaymentAction
 
     private function validateCash(): void
     {
-        if (!$this->data['paymentCashReceived']) {
+        if (! $this->data['paymentCashReceived']) {
             throw ValidationException::withMessages([
                 'paymentCashReceived' => [
                     __('Please confirm that you have received the cash.'),

@@ -2,20 +2,20 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use function app;
 use App\Actions\Booking\Invoice\GenerateReceiptFromLivewireAction;
 use App\Models\BookingGuest;
 use App\Models\Payment;
 use App\Models\User;
 use App\Notifications\PaymentSuccessNotification;
+use function collect;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Spatie\WebhookClient\Models\WebhookCall;
-use function app;
-use function collect;
 use function now;
+use Spatie\WebhookClient\Models\WebhookCall;
 
 class ChargeSucceededJob implements ShouldQueue
 {
@@ -50,7 +50,7 @@ class ChargeSucceededJob implements ShouldQueue
 
                 $payment->update([
                     'paid_at' => now(),
-                    'status' => Payment::STATUS_PAID
+                    'status' => Payment::STATUS_PAID,
                 ]);
                 $payment = app(GenerateReceiptFromLivewireAction::class)->execute($payment->refresh(), [
                     'guests' => $guests,

@@ -2,7 +2,6 @@
 
 namespace App\Actions\Booking\Invoice;
 
-use App\Models\Booking;
 use App\Models\Payment;
 use Illuminate\Support\Carbon;
 use LaravelDaily\Invoices\Classes\Party;
