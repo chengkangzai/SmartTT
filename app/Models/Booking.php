@@ -26,7 +26,7 @@ class Booking extends Model
         'child',
     ];
 
-    public function total_price(): Attribute
+    public function totalPrice(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value / 100,

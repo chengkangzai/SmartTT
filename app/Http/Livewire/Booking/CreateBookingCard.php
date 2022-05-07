@@ -41,8 +41,7 @@ class CreateBookingCard extends Component
     #endregion
     #region Step 4
     public array $guests = [];
-    private Booking $booking;
-    public int $bookingId;
+    public int $bookingId = 0;
     #endregion
     #region Step 5
     public string $paymentType = 'full';
@@ -187,8 +186,8 @@ class CreateBookingCard extends Component
     #region Step 4 - Confirm Booking
     public function saveBooking()
     {
-        if (! isset($this->booking)) {
-            $this->booking = app(StoreBookingAction::class)->execute(auth()->user(), [
+        if ($this->bookingId == 0) {
+            $booking = app(StoreBookingAction::class)->execute(auth()->user(), [
                 'package_id' => $this->package,
                 'adult' => collect($this->guests)->where('is_child', false)->count(),
                 'child' => collect($this->guests)->where('is_child', true)->count(),
@@ -196,7 +195,8 @@ class CreateBookingCard extends Component
                 'guests' => $this->guests,
             ]);
 
-            $this->bookingId = $this->booking->id;
+            $this->bookingId = $booking->id;
+            $this->totalPrice = $booking->total_price;
         }
 
         $this->getReadyForPayment();
