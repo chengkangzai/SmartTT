@@ -4,10 +4,10 @@ namespace App\Actions\Booking\Invoice;
 
 use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
+use function collect;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
-use function collect;
 use function public_path;
 
 class InvoiceAction
@@ -34,7 +34,7 @@ class InvoiceAction
     protected static function getItems($guests): array
     {
         return collect($guests)
-            ->map(fn($g) => (new InvoiceItem())->title($g['name'])->description(PackagePricing::find($g['pricing'])->name)->pricePerUnit($g['price']))
+            ->map(fn ($g) => (new InvoiceItem())->title($g['name'])->description(PackagePricing::find($g['pricing'])->name)->pricePerUnit($g['price']))
             ->toArray();
     }
 }
