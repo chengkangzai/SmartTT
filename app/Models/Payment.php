@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Payment extends Model
+class Payment extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
     use LogsActivity;
+    use InteractsWithMedia;
 
     public const STATUS_PENDING = 'pending';
     public const STATUS_SUCCESS = 'success';
