@@ -28,7 +28,7 @@ return [
     'total_taxes'            => 'Total taxes',
     'tax_rate'               => 'Tax rate',
     'total_amount'           => 'Total amount',
-    'pay_until'              => 'Please pay until',
+    'pay_until'              => 'Please pay before',
     'amount_in_words'        => 'Amount in words',
     'amount_in_words_format' => '%s %s and %s %s',
     'notes'                  => 'Notes',
