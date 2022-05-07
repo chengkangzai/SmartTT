@@ -24,7 +24,7 @@ return [
          * Supported tags {SERIES}, {DELIMITER}, {SEQUENCE}
          * Example: AA.00001
          */
-        'format' => '{SYMBOL}{VALUE}',
+        'format' => '{SERIES}{DELIMITER}{SEQUENCE}',
     ],
 
     'currency' => [
