@@ -68,12 +68,12 @@
                                 {{ $i + 1 }}
                             </td>
                             <td>
-                                <input type="text" wire:model="guests.{{ $i }}.name"
+                                <input type="text" wire:model.debounce="guests.{{ $i }}.name"
                                     id="guest-{{ $i }}-name" class="form-control" aria-label="Name">
                             </td>
                             <td>
                                 @if (!$guest['is_child'])
-                                    <select wire:model="guests.{{ $i }}.pricing"
+                                    <select wire:model.debounce="guests.{{ $i }}.pricing"
                                         id="guest-{{ $i }}-pricings" class="form-control"
                                         aria-label="Pricing" required wire:change="updatePrice({{ $i }})">
                                         @foreach ($pricingsHolder as $pricing)
