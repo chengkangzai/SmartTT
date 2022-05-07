@@ -218,7 +218,7 @@
                         <div class="container my-2">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="false" id="receivedCheckBox"
-                                    required wire:model="paymentCashReceived" />
+                                       required wire:model="paymentCashReceived"/>
                                 <label class="form-check-label" for="receivedCheckBox">
                                     {{ __('The Cash money is received') }}
                                 </label>
@@ -231,33 +231,34 @@
                                 <div class="col-md-5">
                                     <label for="card-holder-name">{{ __('Card Holder Name') }}</label>
                                     <input type="text" class="form-control" id="card-holder-name"
-                                        wire:model="cardHolderName"
-                                        wire:change.debounce="validateCard('cardHolderName')" placeholder="John Wick" />
+                                           wire:model="cardHolderName"
+                                           wire:change.debounce="validateCard('cardHolderName')"
+                                           placeholder="John Wick"/>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="card-element">{{ __('Credit/Debit Card Number') }}</label>
                                     <input type="text" class="form-control" id="card-element" wire:model="cardNumber"
-                                        wire:change.debounce="validateCard('cardNumber')"
-                                        placeholder="1234 5678 1234 5678" />
+                                           wire:change.debounce="validateCard('cardNumber')"
+                                           placeholder="1234 5678 1234 5678"/>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="card-expiry-month">{{ __('Expiration Date') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
-                                        wire:model="cardExpiry" wire:change.debounce="validateCard('cardExpiry')"
-                                        placeholder="{{ __('MM/YY') }}" />
+                                           wire:model="cardExpiry" wire:change.debounce="validateCard('cardExpiry')"
+                                           placeholder="{{ __('MM/YY') }}"/>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="card-expiry-month">{{ __('Security Code') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
-                                        wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
-                                        placeholder="{{ __('123') }}" />
+                                           wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
+                                           placeholder="{{ __('123') }}"/>
                                 </div>
                             </div>
                         </div>
                     @endif
-                    <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
-                        {{ number_format($paymentAmount, 2) }}</p>
                 @endif
+                <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
+                    {{ number_format($paymentAmount, 2) }}</p>
             </div>
         @endif
         @if ($currentStep == 6)
@@ -282,32 +283,47 @@
     <div class="card-footer">
         <div class="float-end">
             @if ($currentStep > 1 && $currentStep < 5)
-                <button wire:click="previousStep" class="btn btn-primary mx-1"> &larr; {{ __('Previous') }}</button>
+                <button wire:click="previousStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                    &larr; {{ __('Previous') }}
+                </button>
             @endif
             @if ($currentStep < 4)
-                <button wire:click="nextStep" class="btn btn-primary mx-1">{{ __('Next') }} &rarr;</button>
+                <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    {{ __('Next') }} &rarr;
+                </button>
             @endif
             @if ($currentStep == 4)
-                <button wire:click="nextStep" class="btn btn-success mx-1">
+                <button wire:click="nextStep" class="btn btn-success mx-1" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Confirm & Proceed to Payment') }} &rarr;
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'stripe')
                 <button type="button" class="btn btn-primary" id="payment-button"
-                    onclick="pay('{{ json_encode($guests) }}')">
+                    onclick="pay('{{ json_encode($guests) }}')" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'manual')
-                <button type="button" class="btn btn-primary" wire:click="recordManualPayment">
+                <button type="button" class="btn btn-primary" wire:click="recordManualPayment" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'cash')
-                <button wire:click="nextStep" class="btn btn-primary mx-1">{{ __('Next') }} &rarr;</button>
+                <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    {{ __('Next') }} &rarr;
+                </button>
             @endif
             @if ($currentStep == 6)
-                <button wire:click="nextStep" class="btn btn-success mx-1">{{ __('Finish') }} &rarr;</button>
+                <button wire:click="nextStep" class="btn btn-success mx-1" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    {{ __('Finish') }} &rarr;
+                </button>
             @endif
         </div>
     </div>
@@ -332,6 +348,8 @@
         });
 
         function pay(guest) {
+            $('#payment-button').attr('disabled', true);
+            $('#payment-button-spinner').removeClass('d-none');
             stripe.confirmCardSetup(clientSecret, {
                     payment_method: {
                         card: cardElement,
@@ -343,9 +361,11 @@
                 .then(function(result) {
                     if (result.error) {
                         $('#card-error').text(result.error.message).removeClass('d-none');
+                        $('#payment-button-spinner').addClass('d-none');
                         $('#payment-button').attr('disabled', false);
                     } else {
                         $('#card-error').text('').addClass('d-none');
+                        $('#payment-button-spinner').addClass('d-none');
                         Livewire.emit('cardSetupConfirmed', result.setupIntent.payment_method);
                     }
                 });
