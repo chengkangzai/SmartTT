@@ -20,8 +20,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
+ use function sleep;
 
-class CreateBookingCard extends Component
+ class CreateBookingCard extends Component
 {
     #region Step 1
     public Collection $tours;
@@ -312,6 +313,7 @@ class CreateBookingCard extends Component
             $this->updatePricings();
         }
         $this->currentStep--;
+        $this->resetErrorBag();
     }
 
     public function nextStep()
