@@ -21,7 +21,7 @@ class StoreBookingAction
                     'name' => $guest['name'],
                     'price' => $guest['price'],
                     'is_child' => $guest['is_child'],
-                    'package_pricing_id' => $guest['pricing'],
+                    'package_pricing_id' => $guest['pricing'] ?: null,
                 ]);
             });
 

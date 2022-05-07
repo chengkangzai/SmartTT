@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('notes')->nullable();
             $table->boolean('is_child')->nullable();
             $table->foreignId('booking_id')->constrained();
-            $table->foreignId('package_pricing_id')->constrained();
+            $table->foreignId('package_pricing_id')->nullable()->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
