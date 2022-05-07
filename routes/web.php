@@ -13,6 +13,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\UserController;
+use App\Models\BookingGuest;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
