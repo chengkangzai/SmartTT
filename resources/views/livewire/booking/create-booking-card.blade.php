@@ -218,7 +218,7 @@
                         <div class="container my-2">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="false" id="receivedCheckBox"
-                                       required wire:model="paymentCashReceived"/>
+                                    required wire:model="paymentCashReceived" />
                                 <label class="form-check-label" for="receivedCheckBox">
                                     {{ __('The Cash money is received') }}
                                 </label>
@@ -231,27 +231,26 @@
                                 <div class="col-md-5">
                                     <label for="card-holder-name">{{ __('Card Holder Name') }}</label>
                                     <input type="text" class="form-control" id="card-holder-name"
-                                           wire:model="cardHolderName"
-                                           wire:change.debounce="validateCard('cardHolderName')"
-                                           placeholder="John Wick"/>
+                                        wire:model="cardHolderName"
+                                        wire:change.debounce="validateCard('cardHolderName')" placeholder="John Wick" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="card-element">{{ __('Credit/Debit Card Number') }}</label>
                                     <input type="text" class="form-control" id="card-element" wire:model="cardNumber"
-                                           wire:change.debounce="validateCard('cardNumber')"
-                                           placeholder="1234 5678 1234 5678"/>
+                                        wire:change.debounce="validateCard('cardNumber')"
+                                        placeholder="1234 5678 1234 5678" />
                                 </div>
                                 <div class="col-md-2">
                                     <label for="card-expiry-month">{{ __('Expiration Date') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
-                                           wire:model="cardExpiry" wire:change.debounce="validateCard('cardExpiry')"
-                                           placeholder="{{ __('MM/YY') }}"/>
+                                        wire:model="cardExpiry" wire:change.debounce="validateCard('cardExpiry')"
+                                        placeholder="{{ __('MM/YY') }}" />
                                 </div>
                                 <div class="col-md-2">
                                     <label for="card-expiry-month">{{ __('Security Code') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
-                                           wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
-                                           placeholder="{{ __('123') }}"/>
+                                        wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
+                                        placeholder="{{ __('123') }}" />
                                 </div>
                             </div>
                         </div>
@@ -272,9 +271,21 @@
                     <div class="col-md-12">
                         <h3>{{ __('Invoice Paid') }}</h3>
                         <span class="d-block">{{ __('You have successfully made a payment') }}</span>
-                        <h3> {{ $defaultCurrency }} {{ $paymentAmount }}</h3>
+                        <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
                         <p>{{ __('The payment has been successfully processed') }}</p>
                         <p>{{ __('You will receive an email confirmation shortly') }}</p>
+                        @if ($paymentMethod == 'stripe')
+                            <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
+                                class="btn btn-outline-primary" target="_blank">
+                                {{ __('Download Invoice') }}
+                            </a>
+                        @endif
+                        @if ($paymentMethod == 'manual')
+                            <a href="{{ $payment->getFirstMedia('receipts')->getUrl() }}"
+                                class="btn btn-outline-primary" target="_blank">
+                                {{ __('Download Receipt') }}
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -303,12 +314,14 @@
                 <button type="button" class="btn btn-primary" id="payment-button"
                     onclick="pay('{{ json_encode($guests) }}')" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status"
+                        aria-hidden="true"></span>
                     {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'manual')
-                <button type="button" class="btn btn-primary" wire:click="recordManualPayment" wire:loading.attr="disabled">
+                <button type="button" class="btn btn-primary" wire:click="recordManualPayment"
+                    wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
