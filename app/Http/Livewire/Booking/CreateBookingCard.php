@@ -304,7 +304,7 @@ class CreateBookingCard extends Component
     private function generateReceipt()
     {
         $this->payment = app(GenerateReceiptFromLivewireAction::class)
-            ->execute($this->payment, $this->bookingId, [
+            ->execute($this->payment, [
                 'guests' => $this->guests,
             ]);
     }
@@ -312,7 +312,7 @@ class CreateBookingCard extends Component
     private function generateInvoice()
     {
         $this->payment = app(GenerateInvoiceFromLivewireAction::class)
-            ->execute($this->payment, $this->bookingId, [
+            ->execute($this->payment, [
                 'guests' => $this->guests,
             ]);
     }

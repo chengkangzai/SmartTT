@@ -7,13 +7,13 @@ use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateReceiptFromLivewireAction extends InvoiceAction
 {
-    public function execute(Payment $payment, int $bookingId, array $data): Payment
+    public function execute(Payment $payment, array $data): Payment
     {
         $customer = new Party([
             'name' => $data['guests'][0]['name'],
         ]);
 
-        $fileName = time() . '_receipt_' . $bookingId;
+        $fileName = time() . '_receipt_' . $payment->booking_id;
         $this->invoice
             ->name('Receipt')
             ->series('RE')

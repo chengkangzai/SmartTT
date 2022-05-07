@@ -9,9 +9,9 @@ use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateInvoiceFromLivewireAction extends InvoiceAction
 {
-    public function execute(Payment $payment, int $booking, array $data): Payment
+    public function execute(Payment $payment, array $data): Payment
     {
-        $booking = Booking::findOrFail($booking);
+        $booking = $payment->booking;
         $customer = new Party([
             'name' => auth()->user()->name,
         ]);
