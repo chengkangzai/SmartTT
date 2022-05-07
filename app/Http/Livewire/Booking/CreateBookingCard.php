@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
+use function dd;
 
 class CreateBookingCard extends Component
 {
@@ -188,7 +189,7 @@ class CreateBookingCard extends Component
     public function saveBooking()
     {
         if (!isset($this->booking)) {
-            $booking = app(StoreBookingAction::class)->execute(auth()->user(), [
+            $this->booking = app(StoreBookingAction::class)->execute(auth()->user(), [
                 'package_id' => $this->package,
                 'adult' => collect($this->guests)->where('is_child', false)->count(),
                 'child' => collect($this->guests)->where('is_child', true)->count(),
@@ -196,8 +197,7 @@ class CreateBookingCard extends Component
                 'guests' => $this->guests,
             ]);
 
-            $this->booking = $booking;
-            $this->bookingId = $booking->id;
+            $this->bookingId = $this->booking->id;
         }
 
         $this->getReadyForPayment();
@@ -305,7 +305,7 @@ class CreateBookingCard extends Component
     private function generateReceipt()
     {
         $this->payment = app(GenerateReceiptFromLivewireAction::class)
-            ->execute($this->payment, $this->booking, [
+            ->execute($this->payment, $this->bookingId, [
                 'guests' => $this->guests,
             ]);
     }
@@ -313,7 +313,7 @@ class CreateBookingCard extends Component
     private function generateInvoice()
     {
         $this->payment = app(GenerateInvoiceFromLivewireAction::class)
-            ->execute($this->payment, $this->booking, [
+            ->execute($this->payment, $this->bookingId, [
                 'guests' => $this->guests,
             ]);
     }
