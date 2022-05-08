@@ -4,7 +4,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->in([
         __DIR__ . '/app',
         __DIR__ . '/lang',
-        __DIR__ . '/database/seeders',
+        __DIR__ . '/database/factories',
         __DIR__ . '/resources/views',
         __DIR__ . '/routes',
         __DIR__ . '/tests',
