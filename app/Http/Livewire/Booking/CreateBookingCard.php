@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
+use function app;
 
 class CreateBookingCard extends Component
 {
@@ -71,6 +72,7 @@ class CreateBookingCard extends Component
     public int $currentStep = 1;
     public string $defaultCurrency;
     public int $charge_per_child;
+    public int $reservation_charge_per_pax;
 
     protected $listeners = ['cardSetupConfirmed'];
 
@@ -78,7 +80,9 @@ class CreateBookingCard extends Component
     {
         $this->tours = Tour::active()->get(['id', 'name']);
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
-        $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
+        $bookingSetting = app(BookingSetting::class);
+        $this->charge_per_child = $bookingSetting->charge_per_child;
+        $this->reservation_charge_per_pax= $bookingSetting->reservation_charge_per_pax;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? 'stripe' : 'manual';
     }
 
@@ -212,7 +216,9 @@ class CreateBookingCard extends Component
             'booking_id' => $this->bookingId,
         ], [
             'status' => Payment::STATUS_PENDING,
-            'amount' => $this->paymentType == Payment::TYPE_FULL ? $this->totalPrice : count($this->guests) * 200,
+            'amount' => $this->paymentType == Payment::TYPE_FULL
+                ? $this->totalPrice
+                : count($this->guests) * $this->reservation_charge_per_pax,
             'payment_method' => $this->paymentMethod,
             'payment_type' => $this->paymentType,
         ]);
