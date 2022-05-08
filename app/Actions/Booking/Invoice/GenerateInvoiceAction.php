@@ -3,7 +3,6 @@
 namespace App\Actions\Booking\Invoice;
 
 use App\Models\Payment;
-use Illuminate\Support\Carbon;
 use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateInvoiceAction extends InvoiceAction
@@ -12,12 +11,14 @@ class GenerateInvoiceAction extends InvoiceAction
     {
         $booking = $payment->booking;
         $customer = new Party([
-            'name' => auth()->user()->name,
+            'name' => $data['guests'][0]['name'],
         ]);
 
         $fileName = time() . '_invoice_' . $booking->id;
+        if ($payment->status == Payment::STATUS_PAID) {
+            $this->invoice->payUntilDays(-1);
+        }
         $this->invoice->name('Invoice')
-            ->payUntilDays(Carbon::parse($booking->package->depart_time)->diffInDays(Carbon::now()))
             ->sequence($payment->id)
             ->status(__($payment->status))
             ->seller($this->client)
