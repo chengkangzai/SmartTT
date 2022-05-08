@@ -20,7 +20,6 @@ class Payment extends Model implements HasMedia
     use InteractsWithMedia;
 
     public const STATUS_PENDING = 'pending';
-    public const STATUS_SUCCESS = 'success';
     public const STATUS_FAILED = 'failed';
     public const STATUS_PAID = 'paid';
 
