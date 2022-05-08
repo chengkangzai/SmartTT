@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
+use function app;
 
 class BookingController extends Controller
 {
@@ -27,9 +29,10 @@ class BookingController extends Controller
 
     public function show(Booking $booking): Factory|View|Application
     {
-        $booking->load(['user', 'package', 'package.tour']);
+        $booking->load(['user', 'package', 'package.tour', 'payment']);
+        $setting = app(GeneralSetting::class);
 
-        return view('smartTT.booking.show', compact('booking'));
+        return view('smartTT.booking.show', compact('booking', 'setting'));
     }
 
     public function edit(Booking $booking): Factory|View|Application
