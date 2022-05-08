@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use function app;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\Settings\GeneralSetting;
@@ -11,7 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Role;
-use function app;
 
 class BookingController extends Controller
 {
