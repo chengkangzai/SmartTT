@@ -26,8 +26,12 @@ class InvoiceAction
             ->logo(public_path('button_smart-tt.png'));
 
         $this->client = new Party([
-            'name' => $this->generalSetting->site_name,
-            'phone' => '(60) 755-12345',
+            'name' => $this->generalSetting->company_name,
+            'phone' => $this->generalSetting->company_phone,
+            'address' => $this->generalSetting->company_address,
+            'custom_fields' => [
+                'business id' => $this->generalSetting->business_registration_no,
+            ],
         ]);
     }
 
