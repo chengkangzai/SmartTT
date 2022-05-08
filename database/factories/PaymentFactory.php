@@ -17,7 +17,7 @@ class PaymentFactory extends Factory
     {
         return [
             'paid_at' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
-            'status' => $this->faker->randomElement([Payment::STATUS_PENDING, Payment::STATUS_FAILED, Payment::STATUS_SUCCESS]),
+            'status' => $this->faker->randomElement([Payment::STATUS_PENDING, Payment::STATUS_FAILED, Payment::STATUS_PAID]),
             'amount' => $this->faker->randomFloat(2, 0, 100),
             'payment_method' => $this->faker->randomElement(['cash', 'stripe', 'card']),
             'payment_type' => $this->faker->randomElement(['full', 'reservation']),
