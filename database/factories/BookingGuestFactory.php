@@ -20,7 +20,14 @@ class BookingGuestFactory extends Factory
         $booking = Booking::inRandomOrder()->first();
         return [
             'name' => $this->faker->name,
-            'package_pricing_id' => $isChild ? null : PackagePricing::wherePackageId($booking->package_id)->inRandomOrder()->first()->id,
+            'package_pricing_id' => $isChild
+                ? null
+                : PackagePricing::wherePackageId($booking->package_id)
+                    ->active()
+                    ->available()
+                    ->inRandomOrder()
+                    ->first()
+                    ->id,
             'booking_id' => $booking->id,
             'is_child' => $isChild
         ];

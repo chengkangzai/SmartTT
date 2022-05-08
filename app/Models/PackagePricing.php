@@ -48,4 +48,9 @@ class PackagePricing extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public function scopeAvailable(Builder $query): Builder
+    {
+        return $query->where('available_capacity', '>', 0);
+    }
 }

@@ -125,7 +125,7 @@ class CreateBookingCard extends Component
     {
         $this->pricings = PackagePricing::query()
             ->where('package_id', $this->package)
-            ->where('available_capacity', '>', 1)
+            ->available()
             ->active()
             ->orderBy('price')
             ->get();
