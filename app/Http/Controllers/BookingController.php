@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Settings\BookingSetting;
 use function app;
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
