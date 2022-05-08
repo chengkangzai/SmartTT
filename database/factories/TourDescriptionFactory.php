@@ -16,6 +16,7 @@ class TourDescriptionFactory extends Factory
     public function definition(): array
     {
         $tour = Tour::inRandomOrder()->first();
+
         return [
             'place' => join(" ", $this->faker->words(3)),
             'description' => $this->faker->text,

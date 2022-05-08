@@ -18,6 +18,7 @@ class BookingGuestFactory extends Factory
     {
         $isChild = rand(0, 100) > 90;
         $booking = Booking::inRandomOrder()->first();
+
         return [
             'name' => $this->faker->name,
             'package_pricing_id' => $isChild
@@ -29,7 +30,7 @@ class BookingGuestFactory extends Factory
                     ->first()
                     ->id,
             'booking_id' => $booking->id,
-            'is_child' => $isChild
+            'is_child' => $isChild,
         ];
     }
 }

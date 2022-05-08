@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Booking;
 
+use function app;
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\StoreBookingAction;
@@ -22,7 +23,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
-use function app;
 
 class CreateBookingCard extends Component
 {
