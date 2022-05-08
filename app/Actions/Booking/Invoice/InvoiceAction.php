@@ -34,7 +34,12 @@ class InvoiceAction
     protected static function getItems($guests): array
     {
         return collect($guests)
-            ->map(fn ($g) => (new InvoiceItem())->title($g['name'])->description(PackagePricing::find($g['pricing'])->name)->pricePerUnit($g['price']))
+            ->map(function ($g) {
+                return (new InvoiceItem())
+                    ->title($g['name'])
+                    ->description(PackagePricing::find($g['pricing'])?->name ?? __('Child'))
+                    ->pricePerUnit($g['price']);
+            })
             ->toArray();
     }
 }
