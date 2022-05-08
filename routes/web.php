@@ -49,7 +49,6 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::resource('flights', FlightController::class);
 
     Route::get('bookings/{booking}/audit', [BookingController::class, 'audit'])->name('bookings.audit');
-    Route::post('bookings/calculatePrice', [BookingController::class, 'calculatePrice'])->name('bookings.calculatePrice');
     Route::resource('bookings', BookingController::class)->except(['store']);
 
     Route::get('tourDescriptions/{tourDescription}/audit', [TourDescriptionController::class, 'audit'])->name('tourDescriptions.audit');
