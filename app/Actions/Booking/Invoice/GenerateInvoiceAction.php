@@ -6,7 +6,7 @@ use App\Models\Payment;
 use Illuminate\Support\Carbon;
 use LaravelDaily\Invoices\Classes\Party;
 
-class GenerateInvoiceFromLivewireAction extends InvoiceAction
+class GenerateInvoiceAction extends InvoiceAction
 {
     public function execute(Payment $payment, array $data): Payment
     {

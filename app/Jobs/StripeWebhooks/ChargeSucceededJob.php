@@ -3,7 +3,7 @@
 namespace App\Jobs\StripeWebhooks;
 
 use function app;
-use App\Actions\Booking\Invoice\GenerateReceiptFromLivewireAction;
+use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Models\BookingGuest;
 use App\Models\Payment;
 use App\Models\User;
@@ -52,7 +52,7 @@ class ChargeSucceededJob implements ShouldQueue
                     'paid_at' => now(),
                     'status' => Payment::STATUS_PAID,
                 ]);
-                $payment = app(GenerateReceiptFromLivewireAction::class)->execute($payment->refresh(), [
+                $payment = app(GenerateReceiptAction::class)->execute($payment->refresh(), [
                     'guests' => $guests,
                 ]);
 

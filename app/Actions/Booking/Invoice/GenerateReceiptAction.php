@@ -5,7 +5,7 @@ namespace App\Actions\Booking\Invoice;
 use App\Models\Payment;
 use LaravelDaily\Invoices\Classes\Party;
 
-class GenerateReceiptFromLivewireAction extends InvoiceAction
+class GenerateReceiptAction extends InvoiceAction
 {
     public function execute(Payment $payment, array $data): Payment
     {
