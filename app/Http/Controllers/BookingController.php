@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Settings\BookingSetting;
 use function app;
 use App\Models\Booking;
 use App\Models\Package;
@@ -18,8 +19,9 @@ class BookingController extends Controller
     public function index(): Factory|View|Application
     {
         $bookings = Booking::with(['user', 'package', 'package.tour'])->orderByDesc('id')->paginate(10);
+        $setting = app(GeneralSetting::class);
 
-        return view('smartTT.booking.index', compact('bookings'));
+        return view('smartTT.booking.index', compact('bookings', 'setting'));
     }
 
     public function create(): Factory|View|Application
@@ -29,10 +31,11 @@ class BookingController extends Controller
 
     public function show(Booking $booking): Factory|View|Application
     {
-        $booking->load(['user', 'package', 'package.tour', 'payment']);
+        $booking->load(['user', 'package', 'package.tour', 'payment', 'guests']);
         $setting = app(GeneralSetting::class);
+        $bookingSetting = app(BookingSetting::class);
 
-        return view('smartTT.booking.show', compact('booking', 'setting'));
+        return view('smartTT.booking.show', compact('booking', 'setting', 'bookingSetting'));
     }
 
     public function edit(Booking $booking): Factory|View|Application
