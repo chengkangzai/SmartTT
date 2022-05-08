@@ -66,9 +66,6 @@
     <div class="card mb-2">
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Payment') }}</h3>
-            <div class="float-end">
-                <a href="#" class="btn btn-outline-primary">{{ __('Create') }}</a>
-            </div>
         </div>
         <div class="card-body">
             <table class="table table-responsive">
