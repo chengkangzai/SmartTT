@@ -22,6 +22,9 @@ class BookingSeeder extends Seeder
             ->afterCreating(function (Booking $booking) {
                 $setting = app(BookingSetting::class);
                 $guests = collect($booking->guests)
+                    ->each(function (BookingGuest $guest) {
+                        $guest->packagePricing()->decrement('available_capacity');
+                    })
                     ->map(function (BookingGuest $guest) use ($setting) {
                         return [
                             'name' => $guest->name,
