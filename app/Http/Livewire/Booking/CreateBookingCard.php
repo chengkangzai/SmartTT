@@ -44,9 +44,9 @@ class CreateBookingCard extends Component
     public int $bookingId = 0;
     #endregion
     #region Step 5
-    public string $paymentType = 'full';
+    public string $paymentType = Payment::TYPE_FULL;
     public string $paymentMethod;
-    public string $manualType = 'card';
+    public string $manualType = Payment::METHOD_CARD;
     public bool $paymentCashReceived = false;
 
     public string $cardHolderName = '';
@@ -212,7 +212,7 @@ class CreateBookingCard extends Component
             'booking_id' => $this->bookingId,
         ], [
             'status' => Payment::STATUS_PENDING,
-            'amount' => $this->paymentType == 'full' ? $this->totalPrice : count($this->guests) * 200,
+            'amount' => $this->paymentType == Payment::TYPE_FULL ? $this->totalPrice : count($this->guests) * 200,
             'payment_method' => $this->paymentMethod,
             'payment_type' => $this->paymentType,
         ]);
