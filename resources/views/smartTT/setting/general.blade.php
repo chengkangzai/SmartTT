@@ -72,6 +72,31 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="border my-2"></div>
+                <div class="row mb-md-2">
+                    <div class="col-12 mb-2 mb-md-0 col-md-4">
+                        <label for="company_name">{{ __('Company Name') }}</label>
+                        <input type="text" class="form-control" name="company_name" id="company_name"
+                               value="{{ old('company_name', $setting->company_name) }}">
+                    </div>
+                    <div class="col-12 mb-2 mb-md-0 col-md-4">
+                        <label for="company_phone">{{ __('Default Currency Symbol') }}</label>
+                        <input type="text" class="form-control" name="company_phone"
+                               id="company_phone"
+                               value="{{ old('company_phone', $setting->company_phone) }}">
+                    </div>
+                    <div class="col-12 mb-2 mb-md-0 col-md-4">
+                        <label for="business_registration_no">{{ __('Business Registration Number') }}</label>
+                        <input type="text" class="form-control" name="business_registration_no"
+                               id="business_registration_no"
+                               value="{{ old('business_registration_no', $setting->business_registration_no) }}">
+                    </div>
+                </div>
+                <div>
+                    <label for="company_address">{{ __('Company Address') }}</label>
+                    <textarea name="company_address" id="company_address" class="form-control"
+                                rows="3">{{ old('company_address', $setting->company_address) }}</textarea>
+                </div>
             </form>
         </div>
         <div class="card-footer">
