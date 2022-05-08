@@ -39,5 +39,6 @@ return [
         'charge_per_child' => 'Charge Per Child',
         'default_payment_method' => 'Default Payment Method',
         'supported_payment_method' => 'Supported Payment Method',
+        'reservation_charge_per_pax' => 'Reservation Charge Per Pax',
     ],
 ];
