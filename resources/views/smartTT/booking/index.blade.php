@@ -28,11 +28,9 @@
                         <tr>
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Package') }}</th>
-                            <th>{{ __('Adult') }}</th>
-                            <th>{{ __('Child') }}</th>
-                            <th>{{ __('Customer') }}</th>
-                            <th>{{ __('Discount') }}</th>
-                            <th>{{ __('Total Price') }}</th>
+                            <th>{{ __('Payment Status') }}</th>
+                            <th>{{ __('Made By') }} </th>
+                            <th>{{ __('Total Price') }} ({{$setting->default_currency}}) </th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -46,11 +44,9 @@
                                         {{ $booking->package->tour->name }}
                                     </a>
                                 </td>
-                                <td>{{ $booking->adult }}</td>
-                                <td>{{ $booking->child }}</td>
+                                <td>{{$booking->paymentStatus() ? __('Paid') : __('Pending')}}</td>
                                 <td>{{ $booking->user->name }}</td>
-                                <td>RM {{ number_format($booking->discount, 2) }}</td>
-                                <td>RM {{ number_format($booking->total_price, 2) }}</td>
+                                <td>{{ number_format($booking->total_price, 2) }}</td>
                                 <td>
                                     <a href="{{ route('bookings.show', $booking) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
