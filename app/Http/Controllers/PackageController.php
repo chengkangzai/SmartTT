@@ -22,7 +22,7 @@ class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate();
+        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate(10);
         $setting = app(GeneralSetting::class);
 
         return view('smartTT.package.index', compact('packages', 'setting'));
