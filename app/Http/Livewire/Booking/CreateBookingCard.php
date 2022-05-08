@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Booking;
 
-use App\Actions\Booking\Invoice\GenerateInvoiceFromLivewireAction;
-use App\Actions\Booking\Invoice\GenerateReceiptFromLivewireAction;
+use App\Actions\Booking\Invoice\GenerateInvoiceAction;
+use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\StoreBookingAction;
 use App\Actions\Booking\UpdateManualPaymentAction;
 use App\Actions\Booking\ValidateBookingGuestAction;
@@ -272,6 +272,7 @@ class CreateBookingCard extends Component
                     'paymentCashReceived' => $this->paymentCashReceived,
                 ]);
             $this->reduceAvailability();
+            $this->generateInvoice();
             $this->generateReceipt();
             $this->currentStep++;
         } catch (ValidationException $e) {
@@ -303,7 +304,7 @@ class CreateBookingCard extends Component
 
     private function generateReceipt()
     {
-        $this->payment = app(GenerateReceiptFromLivewireAction::class)
+        $this->payment = app(GenerateReceiptAction::class)
             ->execute($this->payment, [
                 'guests' => $this->guests,
             ]);
@@ -311,7 +312,7 @@ class CreateBookingCard extends Component
 
     private function generateInvoice()
     {
-        $this->payment = app(GenerateInvoiceFromLivewireAction::class)
+        $this->payment = app(GenerateInvoiceAction::class)
             ->execute($this->payment, [
                 'guests' => $this->guests,
             ]);
