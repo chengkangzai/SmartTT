@@ -276,7 +276,7 @@
                             <p>{{ __('The payment has been successfully processed') }}</p>
                             <p>{{ __('You will receive an email confirmation shortly') }}</p>
                             <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
-                               class="btn btn-outline-primary" target="_blank">
+                                class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Invoice') }}
                             </a>
                         @endif
@@ -284,11 +284,11 @@
                             <h3>{{ __('Booking Paid') }}</h3>
                             <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
                             <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
-                               class="btn btn-outline-primary" target="_blank">
+                                class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Invoice') }}
                             </a>
                             <a href="{{ $payment->getFirstMedia('receipts')->getUrl() }}"
-                               class="btn btn-outline-primary" target="_blank">
+                                class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Receipt') }}
                             </a>
                         @endif

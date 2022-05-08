@@ -69,7 +69,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            {{ $bookings->links() }}
+                {{ $bookings->links() }}
             </div>
         </div>
     </div>

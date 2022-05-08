@@ -63,7 +63,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                    {{ $flights->links() }}
+                {{ $flights->links() }}
             </div>
         </div>
     </div>
