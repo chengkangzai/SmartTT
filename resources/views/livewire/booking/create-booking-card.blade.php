@@ -283,6 +283,10 @@
                         @if ($paymentMethod == 'manual')
                             <h3>{{ __('Booking Paid') }}</h3>
                             <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
+                            <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
+                               class="btn btn-outline-primary" target="_blank">
+                                {{ __('Download Invoice') }}
+                            </a>
                             <a href="{{ $payment->getFirstMedia('receipts')->getUrl() }}"
                                class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Receipt') }}
@@ -325,7 +329,7 @@
                 <button type="button" class="btn btn-primary" wire:click="recordManualPayment"
                     wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                    {{ __('Receive') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'cash')
