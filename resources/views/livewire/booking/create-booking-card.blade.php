@@ -184,8 +184,8 @@
                         {{ __('Full Payment') }}
                     </button>
                     <button
-                        class="col-md-6 btn {{ $paymentType == 'deposit' ? 'btn-primary' : 'btn-outline-primary' }}"
-                        wire:click="$set('paymentType','deposit')">
+                        class="col-md-6 btn {{ $paymentType == 'reservation' ? 'btn-primary' : 'btn-outline-primary' }}"
+                        wire:click="$set('paymentType','reservation')">
                         {{ __('Reservation Deposit') }}
                     </button>
                 </div>
