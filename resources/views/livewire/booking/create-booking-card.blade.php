@@ -260,7 +260,7 @@
                 <div class="m-2 border"></div>
 
                 <div class="container row">
-                    <h3>{{__('Billing Information')}}</h3>
+                    <h3>{{ __('Billing Information') }}</h3>
                     <div class="mb-3 col-12 col-md-6">
                         <label for="billing-name">{{ __('Full Name') }}</label>
                         <input type="text" class="form-control" id="billing-name" wire:model="billingName"
@@ -333,8 +333,8 @@
                 </button>
             @endif
             @if ($currentStep == 5 && $paymentMethod == 'stripe')
-                <button type="button" class="btn btn-primary" id="payment-button"
-                    onclick="pay('{{ json_encode($guests) }}')" wire:loading.attr="disabled">
+                <button type="button" class="btn btn-primary" id="payment-button" onclick="pay()"
+                    wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status"
                         aria-hidden="true"></span>
@@ -382,14 +382,14 @@
             cardElement.mount('#card-element');
         });
 
-        function pay(guest) {
+        function pay() {
             $('#payment-button').attr('disabled', true);
             $('#payment-button-spinner').removeClass('d-none');
             stripe.confirmCardSetup(clientSecret, {
                     payment_method: {
                         card: cardElement,
                         billing_details: {
-                            name: guest[0].name,
+                            name: $('billing-name').val(),
                         },
                     }
                 })
