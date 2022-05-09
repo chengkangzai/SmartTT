@@ -102,6 +102,10 @@ it('should update setting', function ($mode, $data) {
         'default_currency' => 'British Pound',
         'default_currency_symbol' => '£',
         'default_country' => 'United Kingdom',
+        'company_name' => 'Some Company',
+        'company_address' => 'Some Address',
+        'company_phone' => 'Some Phone',
+        'business_registration_no' => 'Some Registration No',
     ]],
     ['tour', [
         'default_status' => false,
@@ -127,6 +131,7 @@ it('should update setting', function ($mode, $data) {
     ['booking', [
         'default_payment_method' => 'Stripe',
         'charge_per_child' => 400,
+        'reservation_charge_per_pax' => 400,
     ]],
 ]);
 

@@ -17,6 +17,7 @@ it('should update booking setting', function () {
     $data = [
         'default_payment_method' => 'Stripe',
         'charge_per_child' => 400,
+        'reservation_charge_per_pax' => 400,
     ];
     $action = app(UpdateBookingSettingAction::class);
     $action->execute($data, $bookingSetting);

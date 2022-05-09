@@ -33,6 +33,10 @@ it('should update general setting', function () {
         'default_currency' => 'British Pound',
         'default_currency_symbol' => '£',
         'default_country' => 'United Kingdom',
+        'company_name' => 'Some Company',
+        'company_address' => 'Some Address',
+        'company_phone' => 'Some Phone',
+        'business_registration_no' => 'Some Registration No',
     ];
     $action = app(UpdateGeneralSettingAction::class);
     $action->execute($data, $generalSetting);
