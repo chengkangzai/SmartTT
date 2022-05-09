@@ -6,13 +6,11 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
-use function now;
 use Validator;
 
 class UpdateManualPaymentAction
 {
     private int $bookingId;
-    private array $data;
     private User $user;
     private string $mode;
 
@@ -28,13 +26,14 @@ class UpdateManualPaymentAction
     public function execute(Payment $payment, string $mode, int $bookingId, User $user, array $data): Payment
     {
         $this->bookingId = $bookingId;
-        $this->data = $data;
         $this->user = $user;
         $this->mode = $mode;
         if ($mode === 'card') {
-            $this->storeCard($payment);
+            $data = $this->validateCard($data);
+            $this->storeCard($payment, $data);
         } else {
-            $this->storeCash($payment);
+            $data = $this->validateCash($data);
+            $this->storeCash($payment, $data);
         }
 
         $payment->update([
@@ -45,22 +44,13 @@ class UpdateManualPaymentAction
         return $payment->refresh();
     }
 
-    private function storeCard(Payment $payment): void
+    private function storeCard(Payment $payment, array $data): void
     {
-        $data = $this->validateCard();
-
         $payment->update([
+            ...$data,
             'status' => Payment::STATUS_PAID,
-            'amount' => $data['amount'],
             'payment_method' => $this->mode,
-            'payment_type' => $data['payment_type'],
             'booking_id' => $this->bookingId,
-            'card_holder_name' => $data['card_holder_name'],
-            'card_number' => $data['card_number'],
-            'card_expiry_date' => $data['card_expiry_date'],
-            'card_cvc' => $data['card_cvc'],
-            'billing_name' => $data['billing_name'],
-            'billing_phone' => $data['billing_phone'],
             'user_id' => auth()->id(),
         ]);
 
@@ -70,16 +60,12 @@ class UpdateManualPaymentAction
             ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId);
     }
 
-    private function storeCash(Payment $payment): void
+    private function storeCash(Payment $payment, array $data): void
     {
-        $this->validateCash();
         $payment->update([
+            ...$data,
             'status' => Payment::STATUS_PAID,
-            'amount' => $this->data['amount'],
             'payment_method' => $this->mode,
-            'payment_type' => $this->data['payment_type'],
-            'billing_name' => $this->data['billing_name'],
-            'billing_phone' => $this->data['billing_phone'],
             'user_id' => auth()->id(),
         ]);
 
@@ -89,9 +75,9 @@ class UpdateManualPaymentAction
             ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $this->bookingId);
     }
 
-    private function validateCard(): array
+    private function validateCard(array $data): array
     {
-        $data = Validator::make($this->data, [
+        $data = Validator::make($data, [
             'card_holder_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
             'card_number' => ['required', 'string', 'max:255', 'regex:/^[0-9]{16}$/'],
             'card_expiry_date' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
@@ -121,22 +107,22 @@ class UpdateManualPaymentAction
         return $data;
     }
 
-    private function validateCash(): void
+    private function validateCash(array $data): array
     {
-        Validator::make($this->data, [
-            'amount' => 'required',
-            'payment_type' => 'required',
-            'booking_id' => 'required',
-            'billing_name' => 'required',
-            'billing_phone' => 'required',
-        ])->validate();
-
-        if (!$this->data['paymentCashReceived']) {
+        if (!$data['paymentCashReceived']) {
             throw ValidationException::withMessages([
                 'paymentCashReceived' => [
                     __('Please confirm that you have received the cash.'),
                 ],
             ]);
         }
+
+        return Validator::make($data, [
+            'amount' => 'required',
+            'payment_type' => 'required',
+            'booking_id' => 'required',
+            'billing_name' => 'required',
+            'billing_phone' => 'required',
+        ])->validate();
     }
 }
