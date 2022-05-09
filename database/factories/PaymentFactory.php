@@ -14,7 +14,7 @@ class PaymentFactory extends Factory
 {
     protected $model = Payment::class;
 
-    #[ArrayShape(['paid_at' => "\DateTime", 'status' => "mixed", 'amount' => "float", 'payment_method' => "mixed", 'payment_type' => "mixed", 'user_id' => "int|mixed", 'booking_id' => "int|mixed"])]
+    #[ArrayShape(['paid_at' => "\DateTime", 'status' => "mixed|string", 'amount' => "float|int|mixed", 'payment_method' => "mixed", 'payment_type' => "mixed", 'user_id' => "int|mixed", 'booking_id' => "int|mixed", 'billing_name' => "string", 'billing_phone' => "string"])]
     public function definition(): array
     {
         $paymentMethod = $this->faker->randomElement(Payment::METHODS);
@@ -34,6 +34,8 @@ class PaymentFactory extends Factory
             'payment_type' => $paymentType,
             'user_id' => User::inRandomOrder()->first()->id,
             'booking_id' => $booking->id,
+            'billing_name' => $this->faker->name,
+            'billing_phone' =>$this->faker->phoneNumber,
         ];
     }
 }
