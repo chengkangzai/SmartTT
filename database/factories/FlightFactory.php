@@ -2,15 +2,12 @@
 
 namespace Database\Factories;
 
-use function app;
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
-use function array_rand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function rand;
 
 class FlightFactory extends Factory
 {

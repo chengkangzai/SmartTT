@@ -8,7 +8,6 @@ use App\Models\PackagePricing;
 use App\Models\Settings\PackagePricingsSetting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
-use function app;
 
 class PackageSeeder extends Seeder
 {

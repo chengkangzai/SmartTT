@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use function app;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\Settings\BookingSetting;

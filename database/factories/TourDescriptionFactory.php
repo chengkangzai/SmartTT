@@ -6,7 +6,6 @@ use App\Models\Tour;
 use App\Models\TourDescription;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function join;
 
 class TourDescriptionFactory extends Factory
 {

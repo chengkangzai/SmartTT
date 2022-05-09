@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\User\StoreUserAction;
 use App\Actions\User\UpdateUserAction;
 use App\Models\User;
-use function compact;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,7 +12,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Password;
 use Spatie\Activitylog\Models\Activity;
-use function view;
 
 class UserController extends Controller
 {

@@ -7,7 +7,6 @@ use App\Models\Tour;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function rand;
 
 class PackageFactory extends Factory
 {

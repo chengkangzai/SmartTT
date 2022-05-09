@@ -2,17 +2,12 @@
 
 namespace Database\Factories;
 
-use function app;
 use App\Models\Country;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
-use function array_rand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
-use function rand;
-use function strtoupper;
-use function time;
 
 class TourFactory extends Factory
 {
