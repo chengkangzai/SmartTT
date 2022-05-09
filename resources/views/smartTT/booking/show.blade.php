@@ -22,7 +22,6 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Information') }}</h3>
             <div class="float-end">
-                <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
                 <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
                     @method('DELETE')
                     @csrf

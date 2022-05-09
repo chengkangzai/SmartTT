@@ -38,15 +38,6 @@ class BookingController extends Controller
         return view('smartTT.booking.show', compact('booking', 'setting', 'bookingSetting'));
     }
 
-    public function edit(Booking $booking): Factory|View|Application
-    {
-        $booking->load(['package', 'user']);
-        $packages = Package::with('tour')->get();
-        $users = Role::findByName('Customer')->users()->get();
-        //TODO : use livewire to edit booking
-        return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
-    }
-
     public function destroy(Booking $booking): RedirectResponse
     {
         $booking->delete();

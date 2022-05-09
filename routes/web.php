@@ -50,7 +50,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('bookings/{booking}/audit', [BookingController::class, 'audit'])->name('bookings.audit');
     Route::get('bookings/{booking}/addPayment', [BookingController::class, 'addPayment'])->name('bookings.addPayment');
-    Route::resource('bookings', BookingController::class)->except(['store']);
+    Route::resource('bookings', BookingController::class)->except(['store', 'edit', 'update']);
 
     Route::get('tourDescriptions/{tourDescription}/audit', [TourDescriptionController::class, 'audit'])->name('tourDescriptions.audit');
     Route::post('tourDescriptions/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');

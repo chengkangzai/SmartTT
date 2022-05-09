@@ -51,9 +51,6 @@
                                     <a href="{{ route('bookings.show', $booking) }}" class="btn btn-outline-info">
                                         {{ __('Show') }}
                                     </a>
-                                    <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
                                     <form action="{{ route('bookings.destroy', $booking) }}" class="d-inline"
                                         method="POST">
                                         @csrf
