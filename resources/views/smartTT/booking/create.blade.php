@@ -1,8 +1,3 @@
-@php
-/** @var \App\Models\Booking $booking */
-/** @var \App\Models\Package $package */
-@endphp
-
 @extends('layouts.app')
 @section('title')
     {{ __('Create Booking') }}
