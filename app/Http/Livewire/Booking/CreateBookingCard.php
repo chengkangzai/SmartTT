@@ -220,7 +220,7 @@ class CreateBookingCard extends Component
             'amount' => $this->paymentType == Payment::TYPE_FULL
                 ? $this->totalPrice
                 : count($this->guests) * $this->reservation_charge_per_pax,
-            'payment_method' => $this->paymentMethod,
+            'payment_method' => $this->paymentMethod == Payment::METHOD_STRIPE ?: $this->manualType,
             'payment_type' => $this->paymentType,
         ]);
 
@@ -271,7 +271,6 @@ class CreateBookingCard extends Component
                 ->execute($payment, $this->manualType, $this->bookingId, auth()->user(), [
                     'amount' => $this->paymentAmount,
                     'payment_type' => $this->paymentType,
-                    'booking_id' => $this->bookingId,
                     'card_holder_name' => $this->cardHolderName,
                     'card_number' => $this->cardNumber,
                     'card_expiry_date' => $this->cardExpiry,
