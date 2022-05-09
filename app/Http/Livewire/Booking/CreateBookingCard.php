@@ -225,7 +225,7 @@ class CreateBookingCard extends Component
 
         $this->paymentAmount = $this->payment->amount;
 
-        if ($this->paymentMethod == 'stripe') {
+        if ($this->paymentMethod == Payment::METHOD_STRIPE) {
             if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
@@ -269,7 +269,6 @@ class CreateBookingCard extends Component
                 ->execute($payment, $this->manualType, $this->bookingId, auth()->user(), [
                     'amount' => $this->paymentAmount,
                     'payment_type' => $this->paymentType,
-                    'payment_method' => $this->paymentMethod,
                     'booking_id' => $this->bookingId,
                     'card_holder_name' => $this->cardHolderName,
                     'card_number' => $this->cardNumber,
