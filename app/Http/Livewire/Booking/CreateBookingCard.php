@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Booking;
 
-use App\Actions\Booking\ValidateManualCardAction;
 use function app;
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\StoreBookingAction;
 use App\Actions\Booking\UpdateManualPaymentAction;
 use App\Actions\Booking\ValidateBookingGuestAction;
+use App\Actions\Booking\ValidateManualCardAction;
 use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PackagePricing;
@@ -20,7 +20,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Stripe\SetupIntent;
@@ -161,7 +160,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (!$this->guests[$index]['is_child']) {
+        if (! $this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -228,7 +227,7 @@ class CreateBookingCard extends Component
         $this->billingName = $this->guests[0]['name'];
 
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -304,7 +303,7 @@ class CreateBookingCard extends Component
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });

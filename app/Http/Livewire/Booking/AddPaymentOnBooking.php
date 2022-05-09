@@ -13,10 +13,8 @@ use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
-use Log;
 use Stripe\SetupIntent;
 
 class AddPaymentOnBooking extends Component
@@ -56,7 +54,7 @@ class AddPaymentOnBooking extends Component
     public function mount(Booking $booking)
     {
         $this->booking = $booking;
-        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
         $bookingSetting = app(BookingSetting::class);
@@ -77,7 +75,7 @@ class AddPaymentOnBooking extends Component
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 

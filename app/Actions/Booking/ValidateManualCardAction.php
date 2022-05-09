@@ -2,10 +2,8 @@
 
 namespace App\Actions\Booking;
 
-use App\Http\Livewire\Booking\CreateBookingCard;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
-use Log;
 use Validator;
 
 class ValidateManualCardAction
