@@ -2,11 +2,11 @@
 
 namespace App\Jobs\StripeWebhooks;
 
-use App\Models\Settings\BookingSetting;
 use function app;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Models\BookingGuest;
 use App\Models\Payment;
+use App\Models\Settings\BookingSetting;
 use App\Models\User;
 use App\Notifications\PaymentSuccessNotification;
 use function collect;
