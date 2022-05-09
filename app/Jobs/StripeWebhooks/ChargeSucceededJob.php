@@ -2,6 +2,7 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Models\Settings\BookingSetting;
 use function app;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Models\BookingGuest;
@@ -38,12 +39,13 @@ class ChargeSucceededJob implements ShouldQueue
         if ($user) {
             $payment = Payment::where('user_id', $user->id)->whereNull('paid_at')->latest()->first();
             if ($payment) {
+                $charge = app(BookingSetting::class)->charge_per_child;
                 $guests = collect($payment->booking->guests)
-                    ->map(function (BookingGuest $guest) {
+                    ->map(function (BookingGuest $guest) use ($charge) {
                         return [
                             'name' => $guest->name,
                             'pricing' => $guest->package_pricing_id,
-                            'price' => $guest->packagePricing->price,
+                            'price' => $guest->packagePricing->price ?? $charge,
                         ];
                     })
                     ->toArray();
