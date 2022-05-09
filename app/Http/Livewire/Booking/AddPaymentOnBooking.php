@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Booking;
 
+use App\Actions\Booking\CreatePaymentAction;
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\ValidateManualCardAction;
@@ -16,6 +17,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Log;
+use Stripe\SetupIntent;
 
 class AddPaymentOnBooking extends Component
 {
@@ -38,8 +40,9 @@ class AddPaymentOnBooking extends Component
     ];
 
     public int $paymentAmount = 0;
-    public string $client_secret = '';
+    public string $clientSecret = '';
     public Payment $payment;
+    private SetupIntent $paymentIntent;
     #endregion
 
     public Booking $booking;
@@ -53,7 +56,7 @@ class AddPaymentOnBooking extends Component
     public function mount(Booking $booking)
     {
         $this->booking = $booking;
-        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
         $bookingSetting = app(BookingSetting::class);
@@ -61,7 +64,7 @@ class AddPaymentOnBooking extends Component
         $this->guests = $this->getGuests($bookingSetting);
 
         if ($this->paymentMethod === Payment::METHOD_STRIPE) {
-            $this->client_secret = auth()->user()->createSetupIntent()->client_secret;
+            $this->clientSecret = auth()->user()->createSetupIntent()->client_secret;
         }
     }
 
@@ -71,6 +74,19 @@ class AddPaymentOnBooking extends Component
     }
 
     #region Step 1 Payment
+    public function getReadyForPayment()
+    {
+        if ($this->paymentMethod == Payment::METHOD_STRIPE) {
+            if (!isset($this->paymentIntent)) {
+                $this->paymentIntent = auth()->user()->createSetupIntent();
+            }
+
+            $this->dispatchBrowserEvent('getReadyForPayment', [
+                'clientSecret' => $this->paymentIntent->client_secret,
+            ]);
+        }
+    }
+
     public function cardSetupConfirmed(string $paymentMethod)
     {
         $user = auth()->user();
@@ -94,47 +110,18 @@ class AddPaymentOnBooking extends Component
 
     public function recordManualPayment()
     {
-        $this->resetErrorBag();
-
         try {
-            if ($this->manualType == Payment::METHOD_CARD) {
-                $this->payment = Payment::create([
-                    'booking_id' => $this->booking->id,
-                    'status' => Payment::STATUS_PAID,
-                    'payment_method' => $this->manualType,
-                    'payment_type' => $this->paymentType,
-                    'amount' => $this->paymentAmount,
-                    'card_holder_name' => $this->cardHolderName,
-                    'card_number' => $this->cardNumber,
-                    'card_expiry_date' => $this->cardExpiry,
-                    'card_cvc' => $this->cardCvc,
-                    'billing_name' => $this->billingName,
-                    'billing_phone' => $this->billingPhone,
-                    'user_id' => auth()->id(),
-                ]);
-
-                activity()
-                    ->performedOn($this->booking)
-                    ->causedBy(auth()->user())
-                    ->log('Payment#' . $this->payment->id . '(Card) recorded for booking #' . $this->booking->id);
-            }
-            if ($this->manualType == Payment::METHOD_CASH) {
-                $this->payment = Payment::create([
-                    'booking_id' => $this->booking->id,
-                    'status' => Payment::STATUS_PAID,
-                    'payment_method' => $this->manualType,
-                    'payment_type' => $this->paymentType,
-                    'amount' => $this->paymentAmount,
-                    'billing_name' => $this->billingName,
-                    'billing_phone' => $this->billingPhone,
-                    'user_id' => auth()->id(),
-                ]);
-
-                activity()
-                    ->performedOn($this->booking)
-                    ->causedBy(auth()->user())
-                    ->log('Payment#' . $this->payment->id . '(Card) recorded for booking #' . $this->booking->id);
-            }
+            $this->payment = app(CreatePaymentAction::class)->execute($this->manualType, $this->booking, auth()->user(), [
+                'payment_type' => $this->paymentType,
+                'amount' => $this->paymentAmount,
+                'card_holder_name' => $this->cardHolderName,
+                'card_number' => $this->cardNumber,
+                'card_expiry_date' => $this->cardExpiry,
+                'card_cvc' => $this->cardCvc,
+                'billing_name' => $this->billingName,
+                'billing_phone' => $this->billingPhone,
+                'paymentCashReceived' => $this->paymentCashReceived,
+            ]);
             $this->generateInvoice();
             $this->generateReceipt();
             $this->currentStep++;
