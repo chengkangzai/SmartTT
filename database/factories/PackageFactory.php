@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Airline;
-use App\Models\Tour;
 use App\Models\Package;
+use App\Models\Tour;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;

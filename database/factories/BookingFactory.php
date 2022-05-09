@@ -24,7 +24,7 @@ class BookingFactory extends Factory
             'total_price' => rand(100, 1000),
             'discount' => 0,
             'adult' => rand(1, 10),
-            'child' => rand(0, 3)
+            'child' => rand(0, 3),
         ];
     }
 

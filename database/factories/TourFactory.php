@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
+use function app;
 use App\Models\Country;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
+use function array_rand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
-use function app;
-use function array_rand;
 use function rand;
 use function strtoupper;
 use function time;
@@ -23,6 +23,7 @@ class TourFactory extends Factory
     {
         $country = Country::inRandomOrder()->first();
         $setting = app(TourSetting::class);
+
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
             'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package",
@@ -38,6 +39,7 @@ class TourFactory extends Factory
         if (app()->environment('testing')) {
             return $this;
         }
+
         return $this->afterCreating(function (Tour $tour) {
             $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail');
             $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
@@ -53,5 +55,4 @@ class TourFactory extends Factory
             ];
         });
     }
-
 }

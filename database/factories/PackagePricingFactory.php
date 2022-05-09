@@ -20,7 +20,7 @@ class PackagePricingFactory extends Factory
             'name' => $this->faker->words(rand(1, 3), true),
             'total_capacity' => 10,
             'available_capacity' => 10,
-            'is_active' => rand(0, 1)
+            'is_active' => rand(0, 1),
         ];
     }
 }

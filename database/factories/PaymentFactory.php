@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
+use function app;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function app;
-use function rand;
 
 class PaymentFactory extends Factory
 {
@@ -22,6 +21,7 @@ class PaymentFactory extends Factory
         $paymentType = $this->faker->randomElement(Payment::TYPES);
         $booking = Booking::inRandomOrder()->first();
         $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax;
+
         return [
             'paid_at' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'status' => $paymentMethod == Payment::METHOD_STRIPE
