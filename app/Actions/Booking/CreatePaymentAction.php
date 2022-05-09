@@ -18,12 +18,15 @@ class CreatePaymentAction
     {
         if ($mode == Payment::METHOD_CARD) {
             $data = $this->validateCard($data);
+
             return $this->storeCard($booking, $data, $user);
         }
         if ($mode == Payment::METHOD_CASH) {
             $data = $this->validateCash($data);
+
             return $this->storeCash($booking, $data, $user);
         }
+
         throw new \Exception('Invalid payment method');
     }
 
@@ -41,6 +44,7 @@ class CreatePaymentAction
             ->performedOn($booking)
             ->causedBy($user)
             ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $booking->id);
+
         return $payment;
     }
 
@@ -58,6 +62,7 @@ class CreatePaymentAction
             ->performedOn($booking)
             ->causedBy($user)
             ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $booking->id);
+
         return $payment;
     }
 }
