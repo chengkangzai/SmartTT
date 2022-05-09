@@ -14,6 +14,7 @@ class UpdateManualPaymentAction
     private int $bookingId;
     private array $data;
     private User $user;
+    private string $mode;
 
     /**
      * @param Payment $payment
@@ -29,6 +30,7 @@ class UpdateManualPaymentAction
         $this->bookingId = $bookingId;
         $this->data = $data;
         $this->user = $user;
+        $this->mode = $mode;
         if ($mode === 'card') {
             $this->storeCard($payment);
         } else {
@@ -50,7 +52,7 @@ class UpdateManualPaymentAction
         $payment->update([
             'status' => Payment::STATUS_PAID,
             'amount' => $data['amount'],
-            'payment_method' => $data['payment_method'],
+            'payment_method' => $this->mode,
             'payment_type' => $data['payment_type'],
             'booking_id' => $this->bookingId,
             'card_holder_name' => $data['card_holder_name'],
@@ -72,7 +74,7 @@ class UpdateManualPaymentAction
         $payment->update([
             'status' => Payment::STATUS_PAID,
             'amount' => $this->data['amount'],
-            'payment_method' => $this->data['payment_method'],
+            'payment_method' => $this->mode,
             'payment_type' => $this->data['payment_type'],
             'user_id' => auth()->id(),
         ]);
@@ -91,7 +93,6 @@ class UpdateManualPaymentAction
             'card_expiry_date' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
             'card_cvc' => ['required', 'string', 'max:255', 'regex:/^[0-9]{3,4}$/'],
             'amount' => 'required',
-            'payment_method' => 'required',
             'payment_type' => 'required',
             'booking_id' => 'required',
         ], customAttributes: [
