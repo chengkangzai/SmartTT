@@ -7,10 +7,10 @@ use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateReceiptAction extends InvoiceAction
 {
-    public function execute(Payment $payment, array $data): Payment
+    public function execute(Payment $payment): Payment
     {
         $customer = new Party([
-            'name' => $data['guests'][0]['name'],
+            'name' => $payment->booking->guests->first()->name,
         ]);
 
         $fileName = time() . '_receipt_' . $payment->booking_id;
@@ -23,7 +23,7 @@ class GenerateReceiptAction extends InvoiceAction
             ->seller($this->client)
             ->buyer($customer)
             ->filename($fileName)
-            ->addItems($this->getItems($data['guests']))
+            ->addItems(parent::getItems($payment->booking->guests))
             ->save('public');
 
         $payment->addMediaFromDisk($fileName . '.pdf', 'public')->toMediaCollection('receipts');

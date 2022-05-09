@@ -9,10 +9,8 @@ use App\Models\BookingGuest;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use Illuminate\Database\Seeder;
-use Log;
 use function app;
 use function collect;
-use function dd;
 
 class BookingSeeder extends Seeder
 {
@@ -49,18 +47,14 @@ class BookingSeeder extends Seeder
                     ]);
 
                 foreach ($payments as $payment) {
-                    app(GenerateInvoiceAction::class)->execute($payment, [
-                        'guests' => $guests->toArray(),
-                    ]);
+                    app(GenerateInvoiceAction::class)->execute($payment);
                     if ($payment->payment_type == 'full'
                         && ($payment->payment_method == 'cash'
                             || $payment->payment_method == 'card'
                             || ($payment->payment_method == 'stripe' && $payment->status == 'paid')
                         )
                     ) {
-                        app(GenerateReceiptAction::class)->execute($payment, [
-                            'guests' => $guests->toArray(),
-                        ]);
+                        app(GenerateReceiptAction::class)->execute($payment);
                     }
                 }
             })

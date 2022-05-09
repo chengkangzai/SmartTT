@@ -7,11 +7,11 @@ use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateInvoiceAction extends InvoiceAction
 {
-    public function execute(Payment $payment, array $data): Payment
+    public function execute(Payment $payment): Payment
     {
         $booking = $payment->booking;
         $customer = new Party([
-            'name' => $data['guests'][0]['name'],
+            'name' => $payment->booking->guests->first()->name,
         ]);
 
         $fileName = time() . '_invoice_' . $booking->id;
@@ -24,7 +24,7 @@ class GenerateInvoiceAction extends InvoiceAction
             ->seller($this->client)
             ->buyer($customer)
             ->filename($fileName)
-            ->addItems(parent::getItems($data['guests']))
+            ->addItems(parent::getItems($booking->guests))
             ->save('public');
 
         $payment->addMediaFromDisk($fileName . '.pdf', 'public')->toMediaCollection('invoices');

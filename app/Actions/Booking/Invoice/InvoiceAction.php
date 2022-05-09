@@ -2,8 +2,12 @@
 
 namespace App\Actions\Booking\Invoice;
 
+use App\Models\BookingGuest;
 use App\Models\PackagePricing;
+use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
+use Illuminate\Support\Collection;
+use function Aws\map;
 use function collect;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
@@ -35,14 +39,15 @@ class InvoiceAction
         ]);
     }
 
-    protected static function getItems($guests): array
+    protected static function getItems(Collection $guests): array
     {
-        return collect($guests)
-            ->map(function ($g) {
+        $charge = app(BookingSetting::class)->charge_per_child;
+        return $guests
+            ->map(function (BookingGuest $g) use ($charge) {
                 return (new InvoiceItem())
-                    ->title($g['name'])
-                    ->description(PackagePricing::find($g['pricing'])?->name ?? __('Child'))
-                    ->pricePerUnit($g['price']);
+                    ->title($g->name)
+                    ->description($g->packagePricing?->name ?? __('Child'))
+                    ->pricePerUnit($g->packagePricing->price ?? $charge);
             })
             ->toArray();
     }

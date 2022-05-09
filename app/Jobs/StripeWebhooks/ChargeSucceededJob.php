@@ -54,9 +54,7 @@ class ChargeSucceededJob implements ShouldQueue
                     'paid_at' => now(),
                     'status' => Payment::STATUS_PAID,
                 ]);
-                $payment = app(GenerateReceiptAction::class)->execute($payment->refresh(), [
-                    'guests' => $guests,
-                ]);
+                $payment = app(GenerateReceiptAction::class)->execute($payment->refresh());
 
                 $user->notify(new PaymentSuccessNotification($payment));
             }

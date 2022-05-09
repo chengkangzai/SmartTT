@@ -302,6 +302,7 @@ class CreateBookingCard extends Component
     private function reduceAvailability(): void
     {
         collect($this->guests)
+            ->filter(fn($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
@@ -309,18 +310,12 @@ class CreateBookingCard extends Component
 
     private function generateReceipt()
     {
-        $this->payment = app(GenerateReceiptAction::class)
-            ->execute($this->payment, [
-                'guests' => $this->guests,
-            ]);
+        $this->payment = app(GenerateReceiptAction::class)->execute($this->payment);
     }
 
     private function generateInvoice()
     {
-        $this->payment = app(GenerateInvoiceAction::class)
-            ->execute($this->payment, [
-                'guests' => $this->guests,
-            ]);
+        $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
     #endregion
 

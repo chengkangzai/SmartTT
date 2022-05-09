@@ -153,18 +153,12 @@ class AddPaymentOnBooking extends Component
 
     private function generateReceipt()
     {
-        $this->payment = app(GenerateReceiptAction::class)
-            ->execute($this->payment, [
-                'guests' => $this->guests,
-            ]);
+        $this->payment = app(GenerateReceiptAction::class)->execute($this->payment);
     }
 
     private function generateInvoice()
     {
-        $this->payment = app(GenerateInvoiceAction::class)
-            ->execute($this->payment, [
-                'guests' => $this->guests,
-            ]);
+        $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
 
     private function getGuests(BookingSetting $bookingSetting): array
