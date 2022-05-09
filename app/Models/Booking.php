@@ -34,13 +34,13 @@ class Booking extends Model
         );
     }
 
-    public function paymentStatus(): bool
+    public function isFullPaid(): bool
     {
         $amounts = $this->payment
             ->filter(fn (Payment $payment) => $payment->status = Payment::STATUS_PAID)
             ->sum('amount');
 
-        return $amounts > $this->total_price;
+        return $amounts >= $this->total_price;
     }
 
     public function package(): BelongsTo
