@@ -66,6 +66,13 @@
     <div class="card mb-2">
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Payment') }}</h3>
+            @if(!$booking->isFullPaid())
+                <div class="float-end">
+                    <a href="{{route('bookings.addPayment',$booking)}}" class="btn btn-outline-primary">
+                        {{__('Pay Remaining')}}
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-responsive">

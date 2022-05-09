@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
@@ -51,6 +52,15 @@ class BookingController extends Controller
         $booking->delete();
 
         return redirect()->route('bookings.index')->with('success', __('Booking deleted successfully'));
+    }
+
+    public function addPayment(Booking $booking)
+    {
+        $paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        if ($paymentAmount <= 0) {
+            return redirect()->route('bookings.show', $booking);
+        }
+        return view('smartTT.booking.add-payment', compact('booking'));
     }
 
     public function audit(Booking $booking)

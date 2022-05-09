@@ -39,9 +39,11 @@ class Payment extends Model implements HasMedia
 
     public const TYPE_FULL = 'full';
     public const TYPE_RESERVATION = 'reservation';
+    public const TYPE_REMAINING = 'remaining';
     public const TYPES = [
         self::TYPE_FULL,
         self::TYPE_RESERVATION,
+        self::TYPE_REMAINING,
     ];
 
     public $fillable = [
