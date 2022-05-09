@@ -59,6 +59,8 @@ class UpdateManualPaymentAction
             'card_number' => $data['card_number'],
             'card_expiry_date' => $data['card_expiry_date'],
             'card_cvc' => $data['card_cvc'],
+            'billing_name' => $data['billing_name'],
+            'billing_phone' => $data['billing_phone'],
             'user_id' => auth()->id(),
         ]);
 
@@ -76,6 +78,8 @@ class UpdateManualPaymentAction
             'amount' => $this->data['amount'],
             'payment_method' => $this->mode,
             'payment_type' => $this->data['payment_type'],
+            'billing_name' => $this->data['billing_name'],
+            'billing_phone' => $this->data['billing_phone'],
             'user_id' => auth()->id(),
         ]);
 
@@ -95,6 +99,8 @@ class UpdateManualPaymentAction
             'amount' => 'required',
             'payment_type' => 'required',
             'booking_id' => 'required',
+            'billing_name' => 'required',
+            'billing_phone' => 'required',
         ], customAttributes: [
             'card_holder_name' => 'Card Holder Name',
             'card_number' => 'Card Number',
@@ -117,7 +123,15 @@ class UpdateManualPaymentAction
 
     private function validateCash(): void
     {
-        if (! $this->data['paymentCashReceived']) {
+        Validator::make($this->data, [
+            'amount' => 'required',
+            'payment_type' => 'required',
+            'booking_id' => 'required',
+            'billing_name' => 'required',
+            'billing_phone' => 'required',
+        ])->validate();
+
+        if (!$this->data['paymentCashReceived']) {
             throw ValidationException::withMessages([
                 'paymentCashReceived' => [
                     __('Please confirm that you have received the cash.'),

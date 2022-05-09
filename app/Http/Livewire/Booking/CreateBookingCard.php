@@ -54,12 +54,18 @@ class CreateBookingCard extends Component
     public string $cardNumber = '';
     public string $cardExpiry = '';
     public string $cardCvc = '';
-
     private array $validateCardRule = [
         'cardHolderName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'cardNumber' => ['required', 'string', 'max:255', 'regex:/^[0-9]{16}$/'],
         'cardExpiry' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
         'cardCvc' => ['required', 'string', 'max:255', 'regex:/^[0-9]{3,4}$/'],
+    ];
+
+    public string $billingName = '';
+    public string $billingPhone = '';
+    public array $validateBillingRule = [
+        'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
+        'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
     ];
 
     public string $stripePaymentMethod = '';
@@ -82,7 +88,7 @@ class CreateBookingCard extends Component
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $bookingSetting = app(BookingSetting::class);
         $this->charge_per_child = $bookingSetting->charge_per_child;
-        $this->reservation_charge_per_pax= $bookingSetting->reservation_charge_per_pax;
+        $this->reservation_charge_per_pax = $bookingSetting->reservation_charge_per_pax;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? 'stripe' : 'manual';
     }
 
@@ -160,7 +166,7 @@ class CreateBookingCard extends Component
 
     public function updatePrice($index)
     {
-        if (! $this->guests[$index]['is_child']) {
+        if (!$this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');
@@ -224,9 +230,10 @@ class CreateBookingCard extends Component
         ]);
 
         $this->paymentAmount = $this->payment->amount;
+        $this->billingName = $this->guests[0]['name'];
 
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -275,6 +282,8 @@ class CreateBookingCard extends Component
                     'card_expiry_date' => $this->cardExpiry,
                     'card_cvc' => $this->cardCvc,
                     'paymentCashReceived' => $this->paymentCashReceived,
+                    'billing_name' => $this->billingName,
+                    'billing_phone' => $this->billingPhone,
                 ]);
             $this->reduceAvailability();
             $this->generateInvoice();
@@ -291,6 +300,10 @@ class CreateBookingCard extends Component
             $field => $this->validateCardRule[$field],
         ]);
 
+        if ($field == 'cardHolderName') {
+            $this->billingName = $this->cardHolderName;
+        }
+
         if ($this->getErrorBag()->isEmpty() && $field == 'cardExpiry') {
             $isBeforeNextMonth = Carbon::createFromFormat('m/y', $this->cardExpiry)->isBefore(Carbon::now());
             if ($isBeforeNextMonth) {
@@ -302,7 +315,7 @@ class CreateBookingCard extends Component
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
@@ -316,6 +329,13 @@ class CreateBookingCard extends Component
     private function generateInvoice()
     {
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
+    }
+
+    public function validateBilling(string $field)
+    {
+        $this->validate([
+            $field => $this->validateBillingRule[$field],
+        ]);
     }
     #endregion
 

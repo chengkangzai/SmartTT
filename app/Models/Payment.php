@@ -58,6 +58,8 @@ class Payment extends Model implements HasMedia
         'card_expiry_date',
         'card_cvc',
         'card_holder_name',
+        'billing_name',
+        'billing_phone',
     ];
 
     protected $dates = [

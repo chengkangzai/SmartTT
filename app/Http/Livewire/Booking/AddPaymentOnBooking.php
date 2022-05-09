@@ -27,12 +27,18 @@ class AddPaymentOnBooking extends Component
     public string $cardNumber = '';
     public string $cardExpiry = '';
     public string $cardCvc = '';
-
     private array $validateCardRule = [
         'cardHolderName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'cardNumber' => ['required', 'string', 'max:255', 'regex:/^[0-9]{16}$/'],
         'cardExpiry' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
         'cardCvc' => ['required', 'string', 'max:255', 'regex:/^[0-9]{3,4}$/'],
+    ];
+
+    public string $billingName = '';
+    public string $billingPhone = '';
+    public array $validateBillingRule = [
+        'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
+        'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
     ];
 
     public int $paymentAmount = 0;
@@ -106,6 +112,8 @@ class AddPaymentOnBooking extends Component
                     'card_number' => $this->cardNumber,
                     'card_expiry_date' => $this->cardExpiry,
                     'card_cvc' => $this->cardCvc,
+                    'billing_name' => $this->billingName,
+                    'billing_phone' => $this->billingPhone,
                     'user_id' => auth()->id(),
                 ]);
 
@@ -121,6 +129,8 @@ class AddPaymentOnBooking extends Component
                     'payment_method' => $this->manualType,
                     'payment_type' => $this->paymentType,
                     'amount' => $this->paymentAmount,
+                    'billing_name' => $this->billingName,
+                    'billing_phone' => $this->billingPhone,
                     'user_id' => auth()->id(),
                 ]);
 
@@ -143,6 +153,10 @@ class AddPaymentOnBooking extends Component
             $field => $this->validateCardRule[$field],
         ]);
 
+        if  ($field == 'cardHolderName') {
+            $this->billingName = $this->cardHolderName;
+        }
+
         if ($this->getErrorBag()->isEmpty() && $field == 'cardExpiry') {
             $isBeforeNextMonth = Carbon::createFromFormat('m/y', $this->cardExpiry)->isBefore(Carbon::now());
             if ($isBeforeNextMonth) {
@@ -161,6 +175,13 @@ class AddPaymentOnBooking extends Component
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
 
+    public function validateBilling(string $field)
+    {
+        $this->validate([
+            $field => $this->validateBillingRule[$field],
+        ]);
+    }
+
     private function getGuests(BookingSetting $bookingSetting): array
     {
         return $this->booking->guests->map(function ($guest) use ($bookingSetting) {
@@ -175,7 +196,7 @@ class AddPaymentOnBooking extends Component
 
     public function finish()
     {
-        session()->flash('success', __('Booking saved successfully'));
-        $this->redirectRoute('bookings.index');
+        session()->flash('success', __('Payment recorded successfully'));
+        $this->redirectRoute('bookings.show', $this->booking);
     }
 }

@@ -11,7 +11,8 @@ class GenerateInvoiceAction extends InvoiceAction
     {
         $booking = $payment->booking;
         $customer = new Party([
-            'name' => $payment->booking->guests->first()->name,
+            'name' => $payment->billing_name,
+            'phone' => $payment->billing_phone,
         ]);
 
         $fileName = time() . '_invoice_' . $booking->id;

@@ -10,7 +10,8 @@ class GenerateReceiptAction extends InvoiceAction
     public function execute(Payment $payment): Payment
     {
         $customer = new Party([
-            'name' => $payment->booking->guests->first()->name,
+            'name' => $payment->billing_name,
+            'phone' => $payment->billing_phone,
         ]);
 
         $fileName = time() . '_receipt_' . $payment->booking_id;
