@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Booking;
 
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
+use App\Actions\Booking\ValidateManualCardAction;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
@@ -14,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Log;
 
 class AddPaymentOnBooking extends Component
 {
@@ -27,12 +29,6 @@ class AddPaymentOnBooking extends Component
     public string $cardNumber = '';
     public string $cardExpiry = '';
     public string $cardCvc = '';
-    private array $validateCardRule = [
-        'cardHolderName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
-        'cardNumber' => ['required', 'string', 'max:255', 'regex:/^[0-9]{16}$/'],
-        'cardExpiry' => ['required', 'string', 'max:255', 'regex:/^[0-9]{2}\/[0-9]{2}$/'], // MM/YY
-        'cardCvc' => ['required', 'string', 'max:255', 'regex:/^[0-9]{3,4}$/'],
-    ];
 
     public string $billingName = '';
     public string $billingPhone = '';
@@ -149,19 +145,14 @@ class AddPaymentOnBooking extends Component
 
     public function validateCard(string $field)
     {
-        $this->validate([
-            $field => $this->validateCardRule[$field],
-        ]);
-
-        if  ($field == 'cardHolderName') {
-            $this->billingName = $this->cardHolderName;
-        }
-
-        if ($this->getErrorBag()->isEmpty() && $field == 'cardExpiry') {
-            $isBeforeNextMonth = Carbon::createFromFormat('m/y', $this->cardExpiry)->isBefore(Carbon::now());
-            if ($isBeforeNextMonth) {
-                $this->getErrorBag()->add('cardExpiry', __('The card is expired'));
+        try {
+            $this->resetErrorBag();
+            app(ValidateManualCardAction::class)->execute($field, $this->{$field});
+            if ($field == 'cardHolderName') {
+                $this->billingName = $this->cardHolderName;
             }
+        } catch (ValidationException $e) {
+            $this->setErrorBag($e->validator->errors());
         }
     }
 
