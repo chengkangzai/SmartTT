@@ -267,7 +267,7 @@ class CreateBookingCard extends Component
 
         try {
             $this->payment = app(UpdateManualPaymentAction::class)
-                ->execute($payment, $this->manualType, $this->bookingId, auth()->user(), [
+                ->execute($payment, $this->manualType, auth()->user(), [
                     'amount' => $this->paymentAmount,
                     'payment_type' => $this->paymentType,
                     'card_holder_name' => $this->cardHolderName,

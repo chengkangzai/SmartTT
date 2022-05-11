@@ -12,32 +12,18 @@ class UpdateManualPaymentAction
     use ValidateCard;
     use ValidateCash;
 
-    private int $bookingId;
-    private User $user;
-    private string $mode;
-
     /**
-     * @param Payment $payment
-     * @param string $mode
-     * @param int $bookingId
-     * @param User $user
-     * @param array{} $data
-     * @return Payment
-     * @throws ValidationException
      * @throws Exception
      */
-    public function execute(Payment $payment, string $mode, int $bookingId, User $user, array $data): Payment
+    public function execute(Payment $payment, string $mode, User $user, array $data): Payment
     {
-        $this->bookingId = $bookingId;
-        $this->user = $user;
-        $this->mode = $mode;
         if ($mode === Payment::METHOD_CARD) {
             $data = $this->validateCard($data);
-            return $this->storeCard($payment, $user,$data);
+            return $this->storeCard($payment, $user, $data);
         }
         if ($mode === Payment::METHOD_CASH) {
             $data = $this->validateCash($data);
-            return $this->storeCash($payment, $user,$data);
+            return $this->storeCash($payment, $user, $data);
         }
 
         throw new Exception('Payment method not supported');
@@ -54,10 +40,10 @@ class UpdateManualPaymentAction
 
         activity()
             ->performedOn($payment->booking)
-            ->causedBy($this->user)
-            ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $this->bookingId);
+            ->causedBy($user)
+            ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $payment->booking_id);
 
-        return $payment->refresh();
+        return $payment;
     }
 
     private function storeCash(Payment $payment, User $user, array $data): Payment
@@ -71,9 +57,9 @@ class UpdateManualPaymentAction
 
         activity()
             ->performedOn($payment->booking)
-            ->causedBy($this->user)
-            ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $this->bookingId);
+            ->causedBy($user)
+            ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $payment->booking_id);
 
-        return $payment->refresh();
+        return $payment;
     }
 }
