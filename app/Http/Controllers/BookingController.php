@@ -49,7 +49,7 @@ class BookingController extends Controller
     {
         $paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         if ($paymentAmount <= 0) {
-            return redirect()->route('bookings.show', $booking);
+            return redirect()->route('bookings.show', $booking)->withErrors(__('Payment already completed'));
         }
 
         return view('smartTT.booking.add-payment', compact('booking'));
