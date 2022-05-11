@@ -3,12 +3,19 @@
 namespace App\Actions\Booking\Invoice;
 
 use App\Models\Payment;
+use Exception;
 use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateReceiptAction extends InvoiceAction
 {
+    /**
+     * @throws Exception
+     */
     public function execute(Payment $payment): Payment
     {
+        if ($payment->status != Payment::STATUS_PAID){
+            throw new Exception('Payment is not paid');
+        }
         $customer = new Party([
             'name' => $payment->billing_name,
             'phone' => $payment->billing_phone,
@@ -20,7 +27,7 @@ class GenerateReceiptAction extends InvoiceAction
             ->series('RE')
             ->payUntilDays(-1)
             ->sequence($payment->id)
-            ->status(__($payment->status))
+            ->status(Payment::STATUS_PAID)
             ->seller($this->client)
             ->buyer($customer)
             ->filename($fileName)
