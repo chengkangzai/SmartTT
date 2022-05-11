@@ -93,14 +93,14 @@
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         <td>
                             <a target="_blank" class="btn btn-outline-primary"
-                                href="{{ $payment->getFirstMedia('invoices')->getUrl() }}">
+                                href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}">
                                 {{ __('View') }}
                             </a>
                         </td>
                         <td>
                             @if ($payment->getFirstMediaUrl('receipts'))
                                 <a target="_blank" class="btn btn-outline-primary"
-                                    href="{{ $payment->getFirstMediaUrl('receipts') }}">
+                                    href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}">
                                     {{ __('View') }}
                                 </a>
                             @endif
@@ -164,7 +164,7 @@
                     <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
                     <td>
                         <a class="btn btn-outline-primary"
-                            href="{{ $booking->package->tour->getFirstMedia('itinerary')->getUrl() }}">
+                            href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
                             {{ __('Itinerary') }}
                         </a>
                     </td>
