@@ -23,13 +23,13 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 
 it('should generate receipt', function () {
     $payment = Payment::factory()->create([
-        'status' => Payment::STATUS_PAID
+        'status' => Payment::STATUS_PAID,
     ]);
 
     $newPayment = app(GenerateReceiptAction::class)->execute($payment);
@@ -43,12 +43,12 @@ it('should generate receipt', function () {
 it('should not generate receipt because its not paid', function ($statuses) {
     foreach ($statuses as $status) {
         $payment = Payment::factory()->create([
-            'status' => $status
+            'status' => $status,
         ]);
 
-        expect(fn() => app(GenerateReceiptAction::class)->execute($payment))
+        expect(fn () => app(GenerateReceiptAction::class)->execute($payment))
             ->toThrow('Payment is not paid');
     }
 })->with([
-    [[Payment::STATUS_FAILED, Payment::STATUS_PENDING]]
+    [[Payment::STATUS_FAILED, Payment::STATUS_PENDING]],
 ]);

@@ -26,12 +26,12 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 
 it('should create payment w/ card', function () {
-    $booking = Booking::all()->filter(fn($b) => !$b->isFullPaid())->first();
+    $booking = Booking::all()->filter(fn ($b) => ! $b->isFullPaid())->first();
     $user = User::first();
     $payment = app(CreatePaymentAction::class)
         ->execute(Payment::METHOD_CARD, $booking, $user, [
@@ -62,7 +62,7 @@ it('should create payment w/ card', function () {
 });
 
 it('should create payment w/ cash', function () {
-    $booking = Booking::all()->filter(fn($b) => !$b->isFullPaid())->first();
+    $booking = Booking::all()->filter(fn ($b) => ! $b->isFullPaid())->first();
     $user = User::first();
     $payment = app(CreatePaymentAction::class)
         ->execute(Payment::METHOD_CASH, $booking, $user, [
@@ -86,10 +86,11 @@ it('should create payment w/ cash', function () {
 });
 
 it('should throw exception when method is not support ', function () {
-    $booking = Booking::all()->filter(fn($b) => !$b->isFullPaid())->first();
+    $booking = Booking::all()->filter(fn ($b) => ! $b->isFullPaid())->first();
     $user = User::first();
 
     expect(function () use ($booking, $user) {
-        app(CreatePaymentAction::class)->execute('asdasd', $booking, $user, []);})
+        app(CreatePaymentAction::class)->execute('asdasd', $booking, $user, []);
+    })
         ->toThrow('Invalid payment method');
 });

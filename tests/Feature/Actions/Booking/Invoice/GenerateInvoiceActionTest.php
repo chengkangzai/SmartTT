@@ -23,7 +23,7 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 

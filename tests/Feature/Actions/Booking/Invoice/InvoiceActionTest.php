@@ -11,7 +11,6 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-use LaravelDaily\Invoices\Invoice;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -24,7 +23,7 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 
@@ -33,6 +32,6 @@ it('should be able to generate invoice item for each guest', function () {
         ->shouldAllowMockingProtectedMethods()
         ->shouldReceive('getItems')
         ->andReturn([
-            (new InvoiceItem())
+            (new InvoiceItem()),
         ]);
 });

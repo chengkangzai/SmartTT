@@ -11,7 +11,7 @@ use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed([
-        DatabaseSeeder::class
+        DatabaseSeeder::class,
     ]);
     $this->actingAs(User::first());
 });
@@ -54,7 +54,7 @@ it('should return audit view', function () {
 });
 
 it('should return add payment view', function () {
-    $booking = Booking::get()->filter(fn($b) => !$b->isFullPaid())->first();
+    $booking = Booking::get()->filter(fn ($b) => ! $b->isFullPaid())->first();
     $this
         ->get(route('bookings.addPayment', $booking))
         ->assertViewIs('smartTT.booking.add-payment')
@@ -62,7 +62,7 @@ it('should return add payment view', function () {
 });
 
 it('should not return payment view bc its fully paid', function () {
-    $booking = Booking::get()->filter(fn($b) => $b->isFullPaid())->first();
+    $booking = Booking::get()->filter(fn ($b) => $b->isFullPaid())->first();
     $this
         ->get(route('bookings.addPayment', $booking))
         ->assertRedirect(route('bookings.show', $booking))
@@ -81,4 +81,3 @@ it('should destroy a booking', function () {
 
     assertSoftDeleted($booking);
 });
-

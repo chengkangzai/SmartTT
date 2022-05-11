@@ -13,7 +13,7 @@ class GenerateReceiptAction extends InvoiceAction
      */
     public function execute(Payment $payment): Payment
     {
-        if ($payment->status != Payment::STATUS_PAID){
+        if ($payment->status != Payment::STATUS_PAID) {
             throw new Exception('Payment is not paid');
         }
         $customer = new Party([

@@ -5,7 +5,6 @@ namespace App\Actions\Booking;
 use App\Models\Payment;
 use App\Models\User;
 use Exception;
-use Illuminate\Validation\ValidationException;
 
 class UpdateManualPaymentAction
 {
@@ -19,10 +18,12 @@ class UpdateManualPaymentAction
     {
         if ($mode === Payment::METHOD_CARD) {
             $data = $this->validateCard($data);
+
             return $this->storeCard($payment, $user, $data);
         }
         if ($mode === Payment::METHOD_CASH) {
             $data = $this->validateCash($data);
+
             return $this->storeCash($payment, $user, $data);
         }
 
