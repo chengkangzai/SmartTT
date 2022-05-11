@@ -9,7 +9,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        Artisan::call('down');
+        if (app()->environment('local')) {
+            Artisan::call('down');
+        }
         $this->call([
             PermissionSeeder::class,
             UserRoleSeeder::class,
@@ -21,6 +23,8 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             BookingSeeder::class
         ]);
-        Artisan::call('up');
+        if (app()->environment('local')) {
+            Artisan::call('up');
+        }
     }
 }
