@@ -17,6 +17,9 @@
         <testsuite name="Controllers">
             <directory suffix="Test.php">./tests/Feature/Controllers</directory>
         </testsuite>
+        <testsuite name="Livewires">
+            <directory suffix="Test.php">./tests/Feature/Livewires</directory>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
