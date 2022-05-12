@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Country;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
-use GuzzleHttp\Psr7\Stream;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
