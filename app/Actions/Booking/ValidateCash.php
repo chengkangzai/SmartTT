@@ -2,6 +2,7 @@
 
 namespace App\Actions\Booking;
 
+use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
 use Validator;
 
@@ -18,10 +19,10 @@ trait ValidateCash
         }
 
         return Validator::make($data, [
-            'amount' => 'required',
-            'payment_type' => 'required',
-            'billing_name' => 'required',
-            'billing_phone' => 'required',
+            'amount' => 'required|numeric|min:1',
+            'payment_type' => 'required|in:'.implode(',', Payment::TYPES),
+            'billing_name' => 'required|string|max:255',
+            'billing_phone' => 'required|string|max:255',
         ])->validate();
     }
 }
