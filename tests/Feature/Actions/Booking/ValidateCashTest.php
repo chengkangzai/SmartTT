@@ -2,33 +2,8 @@
 
 use App\Actions\Booking\ValidateCash;
 use App\Models\Payment;
-use Database\Seeders\AirlineSeeder;
-use Database\Seeders\AirportSeeder;
-use Database\Seeders\BookingSeeder;
-use Database\Seeders\CountrySeeder;
-use Database\Seeders\FlightSeeder;
-use Database\Seeders\PackageSeeder;
-use Database\Seeders\PermissionSeeder;
-use Database\Seeders\TourSeeder;
-use Database\Seeders\UserRoleSeeder;
 use Illuminate\Validation\ValidationException;
-use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertNotEmpty;
-
-beforeEach(function () {
-    seed([
-        PermissionSeeder::class,
-        UserRoleSeeder::class,
-        CountrySeeder::class,
-        TourSeeder::class,
-        AirlineSeeder::class,
-        AirportSeeder::class,
-        FlightSeeder::class,
-        PackageSeeder::class,
-        BookingSeeder::class,
-    ]);
-});
-
 
 it('should validate valid data', function () {
     $action = Mockery::mock(ValidateCash::class);
