@@ -14,7 +14,7 @@ beforeEach(function () {
     seed(AirportSeeder::class);
 });
 
-it('should create flight ', function () {
+it('should create flight', function () {
     $data = Flight::factory()->make();
 
     $action = app(StoreFlightAction::class)->execute($data->toArray());

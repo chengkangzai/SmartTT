@@ -79,7 +79,7 @@ it('should update payment w/ cash', function () {
     expect($payment->billing_phone)->toBe('123456789');
 });
 
-it('should throw exception when method is not support ', function () {
+it('should throw exception when method is not support', function () {
     $payment = Payment::factory()->create();
     $user = User::factory()->create();
 

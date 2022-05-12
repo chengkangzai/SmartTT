@@ -85,7 +85,7 @@ it('should create payment w/ cash', function () {
     expect($payment->billing_phone)->toBe('123456789');
 });
 
-it('should throw exception when method is not support ', function () {
+it('should throw exception when method is not support', function () {
     $booking = Booking::all()->filter(fn ($b) => ! $b->isFullPaid())->first();
     $user = User::first();
 

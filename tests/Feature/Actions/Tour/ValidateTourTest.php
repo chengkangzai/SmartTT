@@ -36,7 +36,7 @@ it('should invalidate invalid data', function ($name, $data) {
 ]);
 
 
-it('should invalidate invalid data w/ update ', function ($name, $data) {
+it('should invalidate invalid data w/ update', function ($name, $data) {
     $mock = Mockery::mock(ValidateTour::class);
     $mock->shouldReceive('validate');
 
@@ -60,7 +60,7 @@ it('should invalidate invalid data w/ update ', function ($name, $data) {
     ['is_active', ['asda', -1, 100]],
 ]);
 
-it('should invalidate invalid data w/ store ', function ($name, $data) {
+it('should invalidate invalid data w/ store', function ($name, $data) {
     $mock = Mockery::mock(ValidateTour::class);
     $mock->shouldReceive('validate');
 
