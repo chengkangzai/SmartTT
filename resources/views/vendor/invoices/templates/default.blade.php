@@ -389,9 +389,9 @@
         </p>
     @endif
 
-    <p>
-        {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
-    </p>
+{{--    <p>--}}
+{{--        {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}--}}
+{{--    </p>--}}
     @if ($invoice->pay_until_days >= 1)
         <p>
             {{ trans('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}

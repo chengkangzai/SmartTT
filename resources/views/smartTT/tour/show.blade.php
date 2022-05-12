@@ -68,7 +68,9 @@
                                     <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                     <td>
                                         <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}"
-                                            class="btn btn-outline-info">{{ __('View') }}</a>
+                                            target="_blank" class="btn btn-outline-info">
+                                            {{ __('View') }}
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
