@@ -2,7 +2,7 @@
 
 use App\Models\User;
 
-it('should return a view when its logged in ', function () {
+it('should return a view when its logged in', function () {
     $this->actingAs(User::factory()->create())
         ->get('/')
         ->assertStatus(200)

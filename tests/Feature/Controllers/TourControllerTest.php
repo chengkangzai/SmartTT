@@ -15,10 +15,12 @@ use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    seed(CountrySeeder::class);
-    seed(TourSeeder::class);
-    seed(PermissionSeeder::class);
-    seed(UserRoleSeeder::class);
+    seed([
+        PermissionSeeder::class,
+        UserRoleSeeder::class,
+        CountrySeeder::class,
+        TourSeeder::class,
+    ]);
     $this->actingAs(User::first());
 });
 

@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
+use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
 {
@@ -26,6 +28,34 @@ class UserFactory extends Factory
             return [
                 'email_verified_at' => null,
             ];
+        });
+    }
+
+    public function superAdmin(): UserFactory
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::find('Super Admin'));
+        });
+    }
+
+    public function manager(): UserFactory
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::find('Manager'));
+        });
+    }
+
+    public function customer(): UserFactory
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::find('Customer'));
+        });
+    }
+
+    public function staff(): UserFactory
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::find('Staff'));
         });
     }
 }

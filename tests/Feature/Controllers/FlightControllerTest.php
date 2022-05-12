@@ -3,13 +3,25 @@
 use App\Actions\Flight\GetDataForCreateAndEditAction;
 use App\Models\Flight;
 use App\Models\User;
-use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\AirlineSeeder;
+use Database\Seeders\AirportSeeder;
+use Database\Seeders\CountrySeeder;
+use Database\Seeders\FlightSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\UserRoleSeeder;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    seed(DatabaseSeeder::class);
+    seed([
+        PermissionSeeder::class,
+        UserRoleSeeder::class,
+        CountrySeeder::class,
+        AirlineSeeder::class,
+        AirportSeeder::class,
+        FlightSeeder::class,
+    ]);
     $this->actingAs(User::first());
 });
 

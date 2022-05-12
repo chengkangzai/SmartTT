@@ -6,7 +6,7 @@ use App\Actions\Package\GetTourAndFlightForCreateAndUpdatePackage;
 use App\Actions\Package\StorePackageAction;
 use App\Actions\Package\UpdatePackageAction;
 use App\Models\Package;
-use function compact;
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -14,15 +14,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Spatie\Activitylog\Models\Activity;
-use function view;
 
 class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate();
+        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate(10);
+        $setting = app(GeneralSetting::class);
 
-        return view('smartTT.package.index', compact('packages'));
+        return view('smartTT.package.index', compact('packages', 'setting'));
     }
 
     public function create(GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application

@@ -1,6 +1,7 @@
 @php
 /** @var \App\Models\Package $package */
 /** @var \App\Models\Airline $airline */
+/** @var \App\Models\Settings\GeneralSetting $setting */
 @endphp
 
 @extends('layouts.app')
@@ -30,6 +31,7 @@
                             <th>{{ __('Departure') }}</th>
                             <th>{{ __('Tour') }}</th>
                             <th>{{ __('Airline') }}</th>
+                            <th>{{ __('Price') }} ({{ $setting->default_currency }}) </th>
                             <th>{{ __('Active') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
@@ -47,6 +49,7 @@
                                         @endforeach
                                     </ol>
                                 </td>
+                                <td>{{ __($package->price) }}</td>
                                 <td>
                                     <x-active-inactive-badge :active="$package->is_active" />
                                 </td>

@@ -2,68 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Booking\CalculateTotalBookingPrice;
-use App\Actions\Booking\StoreBookingAction;
-use App\Actions\Booking\UpdateBookingAction;
 use App\Models\Booking;
-use App\Models\Package;
-use function compact;
+use App\Models\Payment;
+use App\Models\Settings\BookingSetting;
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
-use Spatie\Permission\Models\Role;
-use function view;
 
 class BookingController extends Controller
 {
-    use CalculateTotalBookingPrice;
-
     public function index(): Factory|View|Application
     {
         $bookings = Booking::with(['user', 'package', 'package.tour'])->orderByDesc('id')->paginate(10);
+        $setting = app(GeneralSetting::class);
 
-        return view('smartTT.booking.index', compact('bookings'));
+        return view('smartTT.booking.index', compact('bookings', 'setting'));
     }
 
     public function create(): Factory|View|Application
     {
-        $packages = Package::with('tour')->get();
-
-        return view('smartTT.booking.create', compact('packages'));
-    }
-
-    public function store(Request $request, StoreBookingAction $action): RedirectResponse
-    {
-        $action->execute($request->all());
-
-        return redirect()->route('bookings.index')->with('success', __('Booking created successfully'));
+        return view('smartTT.booking.create');
     }
 
     public function show(Booking $booking): Factory|View|Application
     {
-        $booking->load(['user', 'package', 'package.tour']);
+        $booking->load(['user', 'package', 'package.tour', 'payment', 'guests']);
+        $setting = app(GeneralSetting::class);
+        $bookingSetting = app(BookingSetting::class);
 
-        return view('smartTT.booking.show', compact('booking'));
-    }
-
-    public function edit(Booking $booking): Factory|View|Application
-    {
-        $booking->load(['package', 'user']);
-        $packages = Package::with('tour')->get();
-        $users = Role::findByName('Customer')->users()->get();
-
-        return view('smartTT.booking.edit', compact('booking', 'packages', 'users'));
-    }
-
-    public function update(Request $request, Booking $booking, UpdateBookingAction $action): RedirectResponse
-    {
-        $action->execute($request->all(), $booking);
-
-        return redirect()->route('bookings.index')->with('success', __('Booking updated successfully'));
+        return view('smartTT.booking.show', compact('booking', 'setting', 'bookingSetting'));
     }
 
     public function destroy(Booking $booking): RedirectResponse
@@ -73,14 +43,14 @@ class BookingController extends Controller
         return redirect()->route('bookings.index')->with('success', __('Booking deleted successfully'));
     }
 
-    protected function calculatePrice(Request $request): JsonResponse|bool
+    public function addPayment(Booking $booking)
     {
-        if (! $request->ajax()) {
-            return response(__('You Are not allow to be here'))->isForbidden();
+        $paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        if ($paymentAmount <= 0) {
+            return redirect()->route('bookings.show', $booking)->withErrors(__('Payment already completed'));
         }
-        $price = $this->calculate($request->all());
 
-        return response()->json(number_format($price));
+        return view('smartTT.booking.add-payment', compact('booking'));
     }
 
     public function audit(Booking $booking)

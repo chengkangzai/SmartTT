@@ -32,7 +32,7 @@ it('should invalidate invalid data', function ($name, $data) {
     ['type', [-1, null]],
 ]);
 
-it('should invalidate invalid data without departure airport id ', function () {
+it('should invalidate invalid data without departure airport id', function () {
     $mock = Mockery::mock(ValidateFlight::class);
     $mock->shouldReceive('validate');
 

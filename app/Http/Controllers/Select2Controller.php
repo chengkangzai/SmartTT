@@ -29,24 +29,6 @@ class Select2Controller extends Controller
         return response()->json($array->toArray());
     }
 
-    public function getCustomer(Request $request): JsonResponse|bool
-    {
-        if (! $request->ajax()) {
-            return response(__('You Are not allow to be here'))->isForbidden();
-        }
-        $array = Role::findByName('Customer')
-            ->users()
-            ->get(['id', 'name', 'email'])
-            ->map(function ($user) {
-                return [
-                    'id' => $user->id,
-                    'text' => $user->name . " (" . $user->email . ")",
-                ];
-            });
-
-        return response()->json($array->toArray());
-    }
-
     public function getAirports(Request $request)
     {
         if (! $request->ajax()) {

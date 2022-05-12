@@ -63,9 +63,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="card-footer">
-                    {{ $flights->links() }}
-                </div>
+                {{ $flights->links() }}
             </div>
         </div>
     </div>

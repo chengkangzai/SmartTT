@@ -42,6 +42,10 @@ class UpdateGeneralSettingAction implements UpdateSettingInterface
             'default_currency' => 'required|string|max:255',
             'default_currency_symbol' => 'required|string|max:10',
             'default_country' => 'required|string|exists:countries,name',
+            'company_name' => 'required|string|max:255',
+            'company_address' => 'required|string|max:255',
+            'company_phone' => 'required|string|max:255',
+            'business_registration_no' => 'required|string|max:255',
         ], customAttributes: [
             'site_name' => __('Site Name'),
             'default_language' => __('Default Language'),
@@ -49,6 +53,10 @@ class UpdateGeneralSettingAction implements UpdateSettingInterface
             'default_currency' => __('Default Currency'),
             'default_currency_symbol' => __('Default Currency Symbol'),
             'default_country' => __('Default Country'),
+            'company_name' => __('Company Name'),
+            'company_address' => __('Company Address'),
+            'company_phone' => __('Company Phone'),
+            'business_registration_no' => __('Business Registration No'),
         ])->validate();
     }
 }

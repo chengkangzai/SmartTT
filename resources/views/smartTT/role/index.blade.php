@@ -45,8 +45,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer">
                 {{ $roles->links() }}
             </div>
         </div>

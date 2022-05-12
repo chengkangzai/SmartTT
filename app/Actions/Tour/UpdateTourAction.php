@@ -3,7 +3,6 @@
 namespace App\Actions\Tour;
 
 use App\Models\Tour;
-use function collect;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Throwable;
@@ -50,9 +49,11 @@ class UpdateTourAction
     private function updateFile(Tour $tour, string $mode, $data): void
     {
         $media = $tour->getMedia($mode)->first();
-        $model_type = $media->model_type;
-        $model = $model_type::find($media->model_id);
-        $model->deleteMedia($media->id);
-        $tour->addMedia($data[$mode])->toMediaCollection($mode);
+        if ($media) {
+            $model_type = $media->model_type;
+            $model = $model_type::find($media->model_id);
+            $model->deleteMedia($media->id);
+            $tour->addMedia($data[$mode])->toMediaCollection($mode);
+        }
     }
 }

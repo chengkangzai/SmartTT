@@ -8,9 +8,6 @@ use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function app;
-use function array_rand;
-use function rand;
 
 class FlightFactory extends Factory
 {
@@ -21,6 +18,7 @@ class FlightFactory extends Factory
     {
         $flightSetting = app(FlightSetting::class);
         $airport = Airport::inRandomOrder()->take(2)->get();
+
         return [
             'departure_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
             'arrival_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),

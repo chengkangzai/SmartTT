@@ -3,21 +3,29 @@
 namespace App\Actions\Booking;
 
 use App\Models\Booking;
+use App\Models\User;
+use function collect;
 
 class StoreBookingAction
 {
-    use ValidateBooking;
-    use CalculateTotalBookingPrice;
-
-    public function execute(array $data): Booking
+    public function execute(User $user, array $data): Booking
     {
-        $data = $this->validate($data);
-
-        $price = $this->calculate($data);
-
-        return Booking::create([
+        $booking = Booking::create([
             ...$data,
-            'total_price' => $price,
+            'user_id' => $user->id,
+            'discount' => 0, // TODO Coupon
         ]);
+
+        collect($data['guests'])
+            ->each(function ($guest) use ($booking) {
+                $booking->guests()->create([
+                    'name' => $guest['name'],
+                    'price' => $guest['price'],
+                    'is_child' => $guest['is_child'],
+                    'package_pricing_id' => $guest['pricing'] ?: null,
+                ]);
+            });
+
+        return $booking->refresh();
     }
 }

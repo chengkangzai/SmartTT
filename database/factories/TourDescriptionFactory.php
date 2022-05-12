@@ -6,7 +6,6 @@ use App\Models\Tour;
 use App\Models\TourDescription;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use function join;
 
 class TourDescriptionFactory extends Factory
 {
@@ -16,6 +15,7 @@ class TourDescriptionFactory extends Factory
     public function definition(): array
     {
         $tour = Tour::inRandomOrder()->first();
+
         return [
             'place' => join(" ", $this->faker->words(3)),
             'description' => $this->faker->text,

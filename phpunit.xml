@@ -17,11 +17,19 @@
         <testsuite name="Controllers">
             <directory suffix="Test.php">./tests/Feature/Controllers</directory>
         </testsuite>
+        <testsuite name="Livewires">
+            <directory suffix="Test.php">./tests/Feature/Livewires</directory>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">./app/Providers</directory>
+            <directory suffix=".php">./app/Http/Middleware</directory>
+            <directory suffix=".php">./app/Http/Controllers/Auth/</directory>
+        </exclude>
     </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>

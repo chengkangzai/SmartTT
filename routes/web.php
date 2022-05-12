@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
@@ -36,7 +37,6 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
-    Route::post('select2/getCustomer', [Select2Controller::class, 'getCustomer'])->name('select2.user.getCustomer');
     Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
     Route::get('tours/{tour}/audit', [TourController::class, 'audit'])->name('tours.audit');
@@ -49,8 +49,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::resource('flights', FlightController::class);
 
     Route::get('bookings/{booking}/audit', [BookingController::class, 'audit'])->name('bookings.audit');
-    Route::post('bookings/calculatePrice', [BookingController::class, 'calculatePrice'])->name('bookings.calculatePrice');
-    Route::resource('bookings', BookingController::class);
+    Route::get('bookings/{booking}/addPayment', [BookingController::class, 'addPayment'])->name('bookings.addPayment');
+    Route::resource('bookings', BookingController::class)->except(['store', 'edit', 'update']);
 
     Route::get('tourDescriptions/{tourDescription}/audit', [TourDescriptionController::class, 'audit'])->name('tourDescriptions.audit');
     Route::post('tourDescriptions/{tour}', [TourDescriptionController::class, 'attachToTour'])->name('tourDescriptions.attach');

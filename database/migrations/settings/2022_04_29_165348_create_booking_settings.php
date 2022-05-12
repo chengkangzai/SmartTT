@@ -9,5 +9,7 @@ class CreateBookingSettings extends SettingsMigration
         $this->migrator->add('booking.charge_per_child', 200);
         $this->migrator->add('booking.default_payment_method', 'Cash');
         $this->migrator->add('booking.supported_payment_method', ['Cash', 'Stripe']);
+
+        $this->migrator->add('booking.reservation_charge_per_pax', 200);
     }
 }

@@ -9,6 +9,10 @@ return [
         'default_currency' => 'Default Currency',
         'default_currency_symbol' => 'Default Currency Symbol',
         'default_country' => 'Default Country',
+        'company_name' => 'Company Name',
+        'company_address' => 'Company Address',
+        'company_phone' => 'Company Phone',
+        'business_registration_no' => 'Business Registration No',
     ],
     'tour' => [
         'default_status' => 'Default Status',
@@ -35,5 +39,6 @@ return [
         'charge_per_child' => 'Charge Per Child',
         'default_payment_method' => 'Default Payment Method',
         'supported_payment_method' => 'Supported Payment Method',
+        'reservation_charge_per_pax' => 'Reservation Charge Per Pax',
     ],
 ];

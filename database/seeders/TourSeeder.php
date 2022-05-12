@@ -12,7 +12,7 @@ class TourSeeder extends Seeder
 {
     public function run()
     {
-        Tour::factory()->count(11)->afterCreating(function (Tour $tour) {
+        Tour::factory()->count(11)->withFakerItineraryAndThumbnail()->afterCreating(function (Tour $tour) {
             TourDescription::factory()->count(3)->make([
                 'tour_id' => $tour->id,
             ])->map(function ($description,$index) {

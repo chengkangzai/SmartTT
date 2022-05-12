@@ -15,6 +15,11 @@ class GeneralSetting extends Settings
     public string $default_currency_symbol;
     public string $default_country;
 
+    public string $company_name;
+    public string $company_address;
+    public string $company_phone;
+    public string $business_registration_no;
+
     public static function group(): string
     {
         return 'general';

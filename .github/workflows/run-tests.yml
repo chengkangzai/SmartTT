@@ -8,7 +8,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: test_db
@@ -28,6 +28,9 @@ jobs:
       - name: Setup .env file
         run: |
           cp .env.ci .env
+          echo STRIPE_KEY=${{secrets.STRIPE_KEY}} >> .env
+          echo STRIPE_SECRET=${{secrets.STRIPE_SECRET}} >> .env
+          echo STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}} >> .env
 
       - name: Prepare Laravel Application
         run: |
@@ -37,7 +40,6 @@ jobs:
       - name: Migrate database
         run: |
           mysql --version
-          php artisan migrate:fresh --seed
 
       - name: Execute tests
         run: composer test

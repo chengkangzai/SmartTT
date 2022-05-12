@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use function abort_if;
-use function app;
 use App\Actions\Setting\Edit\GetViewBagForFlightSettingAction;
 use App\Actions\Setting\Edit\GetViewBagForGeneralSettingAction;
 use App\Actions\Setting\Edit\GetViewBagForTourSettingAction;
