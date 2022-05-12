@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Booking;
 
-use function app;
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\StoreBookingAction;
 use App\Actions\Booking\UpdateManualPaymentAction;
 use App\Actions\Booking\ValidateBookingGuestAction;
 use App\Actions\Booking\ValidateManualCardAction;
-use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\Payment;
