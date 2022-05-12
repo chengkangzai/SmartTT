@@ -28,6 +28,7 @@ jobs:
       - name: Setup .env file
         run: |
           cp .env.ci .env
+          echo STRIPE_KEY=${{secrets.STRIPE_KEY}} >> .env
 
       - name: Prepare Laravel Application
         run: |
