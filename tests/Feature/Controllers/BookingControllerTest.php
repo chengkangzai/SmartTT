@@ -56,11 +56,10 @@ it('should return audit view', function () {
 
 it('should return add payment view', function () {
     $booking = Booking::factory()->afterCreating(function (Booking $b) {
-        Payment::factory()->create([
-            'booking_id' => $b->id,
+        $b->payment()->save(Payment::factory()->make([
             'status' => Payment::STATUS_FAILED,
-            'amount' => $b->total_price / 2,
-        ]);
+            'amount' => 10,
+        ]));
     })
         ->create();
     $this
