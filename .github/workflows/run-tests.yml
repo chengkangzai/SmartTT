@@ -29,6 +29,8 @@ jobs:
         run: |
           cp .env.ci .env
           echo STRIPE_KEY=${{secrets.STRIPE_KEY}} >> .env
+          echo STRIPE_SECRET=${{secrets.STRIPE_SECRET}} >> .env
+          echo STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}} >> .env
 
       - name: Prepare Laravel Application
         run: |
@@ -38,7 +40,6 @@ jobs:
       - name: Migrate database
         run: |
           mysql --version
-          php artisan migrate:fresh --seed
 
       - name: Execute tests
         run: composer test
