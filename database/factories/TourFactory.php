@@ -36,7 +36,7 @@ class TourFactory extends Factory
         }
 
         return $this->afterCreating(function (Tour $tour) {
-            $tour->addMedia($this->faker->image())->toMediaCollection('thumbnail');
+            $tour->addMediaFromStream($this->faker->image())->toMediaCollection('thumbnail');
             $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
         });
     }
