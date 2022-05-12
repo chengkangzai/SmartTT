@@ -64,7 +64,6 @@ it('should return add payment view', function () {
         ->create();
     $this
         ->get(route('bookings.addPayment', $booking))
-        ->dd()
         ->assertViewIs('smartTT.booking.add-payment')
         ->assertSeeLivewire('booking.add-payment-on-booking');
 });
