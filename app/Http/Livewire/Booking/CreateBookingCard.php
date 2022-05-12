@@ -173,8 +173,6 @@ class CreateBookingCard extends Component
         try {
             app(ValidateBookingGuestAction::class)->execute($this->pricingsHolder, [
                 'guests' => $this->guests,
-                'tour' => $this->tour,
-                'package' => $this->package,
             ]);
         } catch (ValidationException $e) {
             $this->setErrorBag($e->validator->errors());

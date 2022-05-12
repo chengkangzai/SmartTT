@@ -7,6 +7,9 @@ use Validator;
 
 class ValidateBookingGuestAction
 {
+    /**
+     * @throws ValidationException
+     */
     public function execute(array $pricingHolder, array $data): void
     {
         $data = Validator::make($data, [
@@ -14,15 +17,11 @@ class ValidateBookingGuestAction
             'guests.*.pricing' => 'required|integer',
             'guests.*.price' => 'required|numeric|min:1',
             'guests.*.is_child' => 'required|boolean',
-            'tour' => 'required|exists:tours,id',
-            'package' => 'required|exists:packages,id',
         ], customAttributes: [
             'guests.*.name' => __('Guest Name'),
             'guests.*.pricing' => __('Pricing'),
             'guests.*.price' => __('Price'),
             'guests.*.is_child' => __('Is Child'),
-            'tour' => __('Tour'),
-            'package' => __('Package'),
         ])->validate();
 
         $isValid = collect($data['guests'])
