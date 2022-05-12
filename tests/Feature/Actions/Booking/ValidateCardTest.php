@@ -70,4 +70,3 @@ it('should invalidate invalid data', function ($name, $data) {
     ['billing_name', [null]],
     ['billing_phone', [null]],
 ]);
-

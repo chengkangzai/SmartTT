@@ -43,8 +43,9 @@ it('should validate valid data', function () {
     $charge_per_child = app(BookingSetting::class)->charge_per_child;
     $guests = [
         ['name' => 'John Doe', 'pricing' => 0, 'price' => $charge_per_child, 'is_child' => true],
-        ['name' => 'John Wick', 'pricing' => $pricing->first()->id, 'price' => $pricing->first()->price, 'is_child' => false]
+        ['name' => 'John Wick', 'pricing' => $pricing->first()->id, 'price' => $pricing->first()->price, 'is_child' => false],
     ];
+
     try {
         app(ValidateBookingGuestAction::class)->execute($pricing->toArray(), [
             'guests' => $guests,
@@ -72,10 +73,9 @@ it('should invalidate invalid data', function ($name, $guests) {
     } catch (ValidationException $e) {
         assertNotEmpty($e->validator->errors());
     }
-
 })->with([
     ['guests', [
-        ['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true]],
+        ['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true], ],
         [['name' => 'John', 'pricing' => null, 'price' => 200, 'is_child' => true]],
         [['name' => 'John', 'pricing' => 0, 'price' => -1, 'is_child' => true]],
         [['name' => 'Johm', 'pricing' => 0, 'price' => 200, 'is_child' => false]],
@@ -83,7 +83,7 @@ it('should invalidate invalid data', function ($name, $guests) {
         [['name' => 'Johm', 'pricing' => 0, 'is_child' => false]],
         [['name' => 'Johm', 'price' => 200, 'is_child' => false]],
         [['pricing' => 0, 'price' => 200, 'is_child' => false],
-        ]
+        ],
     ],
 ]);
 
