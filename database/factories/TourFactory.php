@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Country;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
+use GuzzleHttp\Psr7\Stream;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
@@ -36,7 +37,7 @@ class TourFactory extends Factory
         }
 
         return $this->afterCreating(function (Tour $tour) {
-            $tour->addMediaFromStream($this->faker->image())->toMediaCollection('thumbnail');
+            $tour->addMedia(UploadedFile::fake()->image('s.png', 640, 480))->toMediaCollection('thumbnail');
             $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
         });
     }
