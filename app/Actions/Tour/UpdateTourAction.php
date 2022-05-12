@@ -3,7 +3,6 @@
 namespace App\Actions\Tour;
 
 use App\Models\Tour;
-use function collect;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Throwable;

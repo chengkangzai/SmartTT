@@ -3,7 +3,6 @@
 namespace App\Actions\Setting\Update;
 
 use App\Models\Settings\PackagePricingsSetting;
-use function count;
 use Validator;
 
 class UpdatePackagePricingSettingAction implements UpdateSettingInterface

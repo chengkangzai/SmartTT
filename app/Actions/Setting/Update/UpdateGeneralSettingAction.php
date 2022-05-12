@@ -2,7 +2,6 @@
 
 namespace App\Actions\Setting\Update;
 
-use function __;
 use App\Models\Settings\GeneralSetting;
 use Carbon\CarbonTimeZone;
 use DateTimeZone;

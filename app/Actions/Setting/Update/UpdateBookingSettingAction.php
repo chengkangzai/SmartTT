@@ -3,7 +3,6 @@
 namespace App\Actions\Setting\Update;
 
 use App\Models\Settings\BookingSetting;
-use function implode;
 use Validator;
 
 class UpdateBookingSettingAction implements UpdateSettingInterface

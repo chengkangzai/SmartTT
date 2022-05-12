@@ -2,7 +2,6 @@
 
 namespace App\Actions\Package;
 
-use function app;
 use App\Models\Flight;
 use App\Models\Settings\PackagePricingsSetting;
 use App\Models\Settings\PackageSetting;

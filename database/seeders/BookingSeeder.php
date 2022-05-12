@@ -9,8 +9,6 @@ use App\Models\BookingGuest;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use Illuminate\Database\Seeder;
-use function app;
-use function collect;
 
 class BookingSeeder extends Seeder
 {
