@@ -55,7 +55,14 @@ it('should return audit view', function () {
 });
 
 it('should return add payment view', function () {
-    $booking = Booking::factory()->create();
+    $booking = Booking::factory()->afterCreating(function (Booking $b) {
+        Payment::factory()->create([
+            'booking_id' => $b->id,
+            'status' => Payment::STATUS_FAILED,
+            'amount' => $b->total_price / 2,
+        ]);
+    })
+        ->create();
     $this
         ->get(route('bookings.addPayment', $booking))
         ->assertViewIs('smartTT.booking.add-payment')
