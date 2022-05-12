@@ -29,7 +29,7 @@ trait ValidateCard
         $isBeforeNextMonth = Carbon::createFromFormat('m/y', $data['card_expiry_date'])->isBefore(Carbon::now());
 
         if ($isBeforeNextMonth) {
-            throw ValidationException::withMessages([
+            return throw ValidationException::withMessages([
                 'card_expiry_date' => [
                     __('Card expiry date must be after next month'),
                 ],
