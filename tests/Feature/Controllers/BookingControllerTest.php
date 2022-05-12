@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use App\Models\User;
@@ -54,7 +55,7 @@ it('should return audit view', function () {
 });
 
 it('should return add payment view', function () {
-    $booking = Booking::get()->filter(fn ($b) => ! $b->isFullPaid())->first();
+    $booking = Booking::factory()->create();
     $this
         ->get(route('bookings.addPayment', $booking))
         ->assertViewIs('smartTT.booking.add-payment')
@@ -62,7 +63,14 @@ it('should return add payment view', function () {
 });
 
 it('should not return payment view bc its fully paid', function () {
-    $booking = Booking::get()->filter(fn ($b) => $b->isFullPaid())->first();
+    $booking = Booking::factory()->afterCreating(function ($b) {
+        Payment::factory()->create([
+            'booking_id' => $b->id,
+            'status' => Payment::STATUS_PAID,
+            'amount' => $b->total_amount,
+        ]);
+    })
+        ->create();
     $this
         ->get(route('bookings.addPayment', $booking))
         ->assertRedirect(route('bookings.show', $booking))
