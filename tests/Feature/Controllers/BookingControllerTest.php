@@ -63,11 +63,11 @@ it('should return add payment view', function () {
 });
 
 it('should not return payment view bc its fully paid', function () {
-    $booking = Booking::factory()->afterCreating(function ($b) {
+    $booking = Booking::factory()->afterCreating(function (Booking $b) {
         Payment::factory()->create([
             'booking_id' => $b->id,
             'status' => Payment::STATUS_PAID,
-            'amount' => $b->total_amount,
+            'amount' => $b->total_price,
         ]);
     })
         ->create();
