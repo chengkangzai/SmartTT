@@ -7,6 +7,7 @@ use App\Models\Package;
 use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Spatie\Activitylog\Models\Activity;
@@ -64,7 +65,7 @@ class GetHomeDataForStaff
 
     private function getDataByModelField(string $model, string $field): array
     {
-        /** @var Booking $model */
+        /** @var Booking|User $model */
         return [
             $model::whereDate($field, '=', now()->subDays(6))->count(),
             $model::whereDate($field, '=', now()->subDays(5))->count(),
