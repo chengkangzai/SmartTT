@@ -6,7 +6,7 @@ use App\Models\User;
 
 class GetHomeDataForCustomer
 {
-    public function execute(User $user)
+    public function execute(User $user): array
     {
         return [
             $user->bookings()->paginate(10, ['*'], 'bookings'),

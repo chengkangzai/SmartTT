@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Package;
 use App\Models\Tour;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use JetBrains\PhpStorm\ArrayShape;
 use Spatie\Activitylog\Models\Activity;
@@ -29,16 +30,8 @@ class GetHomeDataForStaff
     private function getBookingData(): array
     {
         return [
-            'label' => [__('Saturday'), __('Sunday'), __('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday')],
-            'data' => [
-                Booking::whereDay('created_at', '=', now()->subDays(6))->count(),
-                Booking::whereDay('created_at', '=', now()->subDays(5))->count(),
-                Booking::whereDay('created_at', '=', now()->subDays(4))->count(),
-                Booking::whereDay('created_at', '=', now()->subDays(3))->count(),
-                Booking::whereDay('created_at', '=', now()->subDays(2))->count(),
-                Booking::whereDay('created_at', '=', now()->subDays(1))->count(),
-                Booking::whereDay('created_at', '=', now())->count(),
-            ],
+            'label' => $this->getLastSevenDayInName(),
+            'data' => $this->getDataByModelField(Booking::class, 'created_at'),
         ];
     }
 
@@ -46,21 +39,35 @@ class GetHomeDataForStaff
     private function getUserData(): array
     {
         return [
-            'label' => [__('Saturday'), __('Sunday'), __('Monday'), __('Tuesday'), __('Wednesday'), __('Thursday'), __('Friday')],
-            'data' => [
-                User::whereDay('created_at', '=', now()->subDays(6))->count(),
-                User::whereDay('created_at', '=', now()->subDays(5))->count(),
-                User::whereDay('created_at', '=', now()->subDays(4))->count(),
-                User::whereDay('created_at', '=', now()->subDays(3))->count(),
-                User::whereDay('created_at', '=', now()->subDays(2))->count(),
-                User::whereDay('created_at', '=', now()->subDays(1))->count(),
-                User::whereDay('created_at', '=', now())->count(),
-            ],
+            'label' => $this->getLastSevenDayInName(),
+            'data' => $this->getDataByModelField(User::class, 'created_at'),
         ];
     }
 
-    private function getActivityForBooking(): array|LengthAwarePaginator
+    private function getActivityForBooking(): LengthAwarePaginator
     {
         return Activity::where('subject_type', Booking::class)->latest()->paginate(10, ['*'], 'logs');
+    }
+
+    private function getLastSevenDayInName(): array
+    {
+        return collect()
+            ->times(7)
+            ->map(fn ($i) => now()->subDays($i)->getTranslatedDayName())
+            ->toArray();
+    }
+
+    private function getDataByModelField(string $model, string $field): array
+    {
+        /** @var Model $model */
+        return [
+            $model::whereDay($field, '=', now()->subDays(6))->count(),
+            $model::whereDay($field, '=', now()->subDays(5))->count(),
+            $model::whereDay($field, '=', now()->subDays(4))->count(),
+            $model::whereDay($field, '=', now()->subDays(3))->count(),
+            $model::whereDay($field, '=', now()->subDays(2))->count(),
+            $model::whereDay($field, '=', now()->subDays(1))->count(),
+            $model::whereDay($field, '=', now())->count(),
+        ];
     }
 }
