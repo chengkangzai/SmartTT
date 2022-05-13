@@ -20,7 +20,11 @@ class PackageController extends Controller
     public function index(): View|Factory|Application
     {
         abort_unless(auth()->user()->can('View Package'), 403);
-        $packages = Package::with('tour', 'flight.airline:id,name', 'pricings')->orderByDesc('id')->paginate(10);
+        $role = auth()->user()->roles()->first()->name;
+        $packages = Package::with('tour', 'flight.airline:id,name', 'pricings')
+            ->when($role === 'Customer', fn($q) => $q->active())
+            ->orderByDesc('id')
+            ->paginate(10);
         $setting = app(GeneralSetting::class);
 
         return view('smartTT.package.index', compact('packages', 'setting'));

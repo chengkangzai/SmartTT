@@ -16,8 +16,14 @@ class BookingController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('View Booking'), 403);
-        $bookings = Booking::with(['user', 'package', 'package.tour'])->orderByDesc('id')->paginate(10);
+        $user = auth()->user();
+        abort_unless($user->can('View Booking'), 403);
+
+        $role = $user->roles()->first()->name;
+        $bookings = Booking::when($role === 'Customer', fn($q) => $q->active()->where('user_id', $user->id))
+            ->with(['user', 'package', 'package.tour'])
+            ->orderByDesc('bookings.id')
+            ->paginate(10);
         $setting = app(GeneralSetting::class);
 
         return view('smartTT.booking.index', compact('bookings', 'setting'));
