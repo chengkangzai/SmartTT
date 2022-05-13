@@ -5,7 +5,6 @@ $finder = Symfony\Component\Finder\Finder::create()
         __DIR__ . '/app',
         __DIR__ . '/lang',
         __DIR__ . '/database/factories',
-        __DIR__ . '/resources/views',
         __DIR__ . '/routes',
         __DIR__ . '/tests',
     ])
