@@ -26,21 +26,26 @@ class UserRoleSeeder extends Seeder
 
         Role::create(['name' => 'Manager'])
             ->syncPermissions([
-                'View Tour', 'Create Tour', 'Update Tour', 'Delete Tour',
-                'View Package', 'Create Package', 'Update Package', 'Delete Package',
-                'View Flight', 'Create Flight', 'Update Flight', 'Delete Flight',
-                'View Booking', 'Create Booking', 'Update Booking', 'Delete Booking',
-                'View User', 'Create User', 'Update User', 'Delete User',
+                'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour', 'Audit Tour',
+                'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description', 'Audit Tour Description',
+                'View Package', 'Create Package', 'Edit Package', 'Delete Package', 'Audit Package',
+                'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing',
+                'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight', 'Audit Flight',
+                'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
+                'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
+                'Update Setting', 'View Setting'
             ])
             ->users()
             ->attach(User::where('id', ">", 1)->take(3)->get());
 
         Role::create(['name' => 'Staff'])
             ->syncPermissions([
-                'View Tour', 'Create Tour', 'Update Tour', 'Delete Tour',
-                'View Package', 'Create Package', 'Update Package', 'Delete Package',
-                'View Flight', 'Create Flight', 'Update Flight', 'Delete Flight',
-                'View Booking', 'Create Booking', 'Update Booking', 'Delete Booking',
+                'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour',
+                'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description',
+                'View Package', 'Create Package', 'Edit Package', 'Delete Package',
+                'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing',
+                'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight',
+                'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
                 'View User',
             ])
             ->users()
@@ -49,7 +54,7 @@ class UserRoleSeeder extends Seeder
         Role::create(['name' => 'Customer'])
             ->syncPermissions([
                 'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
-                'Create Booking', 'View Booking', 'Update Booking',
+                'Create Booking', 'View Booking', 'Edit Booking',
             ])
             ->users()
             ->attach(User::where('id', ">", 7)->take(3)->get());
