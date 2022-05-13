@@ -38,7 +38,7 @@ class GetHomeDataForStaff
                 Booking::whereDay('created_at', '=', now()->subDays(2))->count(),
                 Booking::whereDay('created_at', '=', now()->subDays(1))->count(),
                 Booking::whereDay('created_at', '=', now())->count(),
-            ]
+            ],
         ];
     }
 
@@ -55,7 +55,7 @@ class GetHomeDataForStaff
                 User::whereDay('created_at', '=', now()->subDays(2))->count(),
                 User::whereDay('created_at', '=', now()->subDays(1))->count(),
                 User::whereDay('created_at', '=', now())->count(),
-            ]
+            ],
         ];
     }
 
