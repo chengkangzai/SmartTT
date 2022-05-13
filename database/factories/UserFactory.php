@@ -35,28 +35,28 @@ class UserFactory extends Factory
     public function superAdmin(): UserFactory
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::find('Super Admin'));
+            $user->assignRole(Role::findByName('Super Admin'));
         });
     }
 
     public function manager(): UserFactory
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::find('Manager'));
+            $user->assignRole(Role::findByName('Manager'));
         });
     }
 
     public function customer(): UserFactory
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::find('Customer'));
+            $user->assignRole(Role::findByName('Customer'));
         });
     }
 
     public function staff(): UserFactory
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::find('Staff'));
+            $user->assignRole(Role::findByName('Staff'));
         });
     }
 }
