@@ -17,8 +17,11 @@
 
     <div class="card">
         <div class="card-header">
+            <h3>{{ __('Flights') }}</h3>
             <div class="float-end">
-                <a href="{{ route('flights.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @can('Create Flight')
+                    <a href="{{ route('flights.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -46,18 +49,24 @@
                                     -> ({{ $flight->arrive_airport->IATA }})
                                 </td>
                                 <td>
-                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                    </form>
+                                    @can('View Flight')
+                                        <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Edit Flight')
+                                        <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
+                                    @can('Delete Flight')
+                                        <form action="{{ route('flights.destroy', $flight) }}" method="POST"
+                                            style="display: inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

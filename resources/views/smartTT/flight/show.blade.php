@@ -20,14 +20,21 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Flight Information') }}</h3>
             <div class="float-end">
-                <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
-                <form action="{{ route('flights.destroy', $flight) }}" method="POST" class="d-inline">
-                    @method('DELETE')
-                    @csrf
-                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                </form>
-                <a href="{{ route('flights.audit', $flight) }}"
-                    class="btn btn-outline-info">{{ __('Audit Trail') }}</a>
+                @can('Edit Flight')
+                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
+                @endcan
+                @can('Delete Flight')
+                    <form action="{{ route('flights.destroy', $flight) }}" method="POST" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                    </form>
+                @endcan
+                @can('Audit Flight')
+                    <a href="{{ route('flights.audit', $flight) }}" class="btn btn-outline-info">
+                        {{ __('Audit Trail') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="card-body">

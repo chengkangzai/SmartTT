@@ -16,7 +16,14 @@ class BookingController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $bookings = Booking::with(['user', 'package', 'package.tour'])->orderByDesc('id')->paginate(10);
+        $user = auth()->user();
+        abort_unless($user->can('View Booking'), 403);
+
+        $role = $user->roles()->first()->name;
+        $bookings = Booking::when($role === 'Customer', fn ($q) => $q->active()->where('user_id', $user->id))
+            ->with(['user', 'package', 'package.tour'])
+            ->orderByDesc('bookings.id')
+            ->paginate(10);
         $setting = app(GeneralSetting::class);
 
         return view('smartTT.booking.index', compact('bookings', 'setting'));
@@ -24,11 +31,14 @@ class BookingController extends Controller
 
     public function create(): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Create Booking'), 403);
+
         return view('smartTT.booking.create');
     }
 
     public function show(Booking $booking): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('View Booking'), 403);
         $booking->load(['user', 'package', 'package.tour', 'payment', 'guests']);
         $setting = app(GeneralSetting::class);
         $bookingSetting = app(BookingSetting::class);
@@ -38,6 +48,7 @@ class BookingController extends Controller
 
     public function destroy(Booking $booking): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Delete Booking'), 403);
         $booking->delete();
 
         return redirect()->route('bookings.index')->with('success', __('Booking deleted successfully'));
@@ -45,6 +56,7 @@ class BookingController extends Controller
 
     public function addPayment(Booking $booking)
     {
+        abort_unless(auth()->user()->can('Create Payment'), 403);
         $paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         if ($paymentAmount <= 0) {
             return redirect()->route('bookings.show', $booking)->withErrors(__('Payment already completed'));
@@ -55,6 +67,7 @@ class BookingController extends Controller
 
     public function audit(Booking $booking)
     {
+        abort_unless(auth()->user()->can('Audit Booking'), 403);
         $logs = Activity::forSubject($booking)->get();
 
         return view('smartTT.booking.audit', compact('logs', 'booking'));

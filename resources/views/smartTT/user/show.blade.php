@@ -26,31 +26,37 @@
                         {{ __('Action') }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
-                        <li>
-                            <a href="{{ route('users.edit', $user) }}" class="dropdown-item">{{ __('Edit') }}</a>
-                        </li>
-                        <li>
-                            @can('Delete User')
+                        @can('Edit User')
+                            <li>
+                                <a href="{{ route('users.edit', $user) }}" class="dropdown-item">{{ __('Edit') }}</a>
+                            </li>
+                        @endcan
+                        @can('Delete User')
+                            <li>
                                 <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
                                     @method('DELETE')
                                     @csrf
                                     <input class="dropdown-item" type="submit" value="{{ __('Delete') }}" />
                                 </form>
-                            @endcan
-                        </li>
-                        <li>
-                            <form action="{{ route('users.sendResetPassword', $user) }}" method="POST"
-                                style="display: inline">
-                                @csrf
-                                <input class="dropdown-item" type="submit"
-                                    value="{{ __('Send Password Reset Email') }}" />
-                            </form>
-                        </li>
-                        <li>
-                            <a href="{{ route('users.audit', $user) }}"
-                                class="dropdown-item">{{ __('Audit Trail') }}</a>
-                        </li>
-
+                            </li>
+                        @endcan
+                        @can('Edit User')
+                            <li>
+                                <form action="{{ route('users.sendResetPassword', $user) }}" method="POST"
+                                    style="display: inline">
+                                    @csrf
+                                    <input class="dropdown-item" type="submit"
+                                        value="{{ __('Send Password Reset Email') }}" />
+                                </form>
+                            </li>
+                        @endcan
+                        @can('Audit User')
+                            <li>
+                                <a href="{{ route('users.audit', $user) }}" class="dropdown-item">
+                                    {{ __('Audit Trail') }}
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

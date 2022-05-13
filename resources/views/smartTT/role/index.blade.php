@@ -15,7 +15,9 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('roles.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @can('Create Role')
+                    <a href="{{ route('roles.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -34,12 +36,16 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>
-                                    <a href="{{ route('roles.show', $role) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
+                                    @can('View Role')
+                                        <a href="{{ route('roles.show', $role) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Edit Role')
+                                        <a href="{{ route('roles.edit', $role) }}" class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

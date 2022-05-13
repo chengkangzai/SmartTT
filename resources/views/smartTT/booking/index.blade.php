@@ -18,7 +18,9 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('bookings.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @can('Create Booking')
+                    <a href="{{ route('bookings.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -50,15 +52,19 @@
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ number_format($booking->total_price, 2) }}</td>
                                 <td>
-                                    <a href="{{ route('bookings.show', $booking) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <form action="{{ route('bookings.destroy', $booking) }}" class="d-inline"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                    </form>
+                                    @can('View Booking')
+                                        <a href="{{ route('bookings.show', $booking) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Delete Booking')
+                                        <form action="{{ route('bookings.destroy', $booking) }}" class="d-inline"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

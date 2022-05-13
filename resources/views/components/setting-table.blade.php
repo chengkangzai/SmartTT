@@ -6,9 +6,11 @@ $settings = $attributes->get('settings');
 
 <div class="row">
     <div class="col-12 my-2">
-        <a href="{{ route('settings.edit', $mode) }}" class="btn btn-outline-primary float-end">
-            {{ __('Edit') }}
-        </a>
+        @can('Update Setting')
+            <a href="{{ route('settings.edit', $mode) }}" class="btn btn-outline-primary float-end">
+                {{ __('Edit') }}
+            </a>
+        @endcan
     </div>
     <div class="col-12">
         <table id="{{ $mode }}Table" class="table table-bordered">

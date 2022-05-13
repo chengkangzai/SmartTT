@@ -22,14 +22,18 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Information') }}</h3>
             <div class="float-end">
-                <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
-                    @method('DELETE')
-                    @csrf
-                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                </form>
-                <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-outline-info">
-                    {{ __('Audit Trail') }}
-                </a>
+                @can('Delete Booking')
+                    <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
+                        @method('DELETE')
+                        @csrf
+                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                    </form>
+                @endcan
+                @can('Audit Booking')
+                    <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-outline-info">
+                        {{ __('Audit Trail') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -65,13 +69,15 @@
     <div class="card mb-2">
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Payment') }}</h3>
-            @if (!$booking->isFullPaid())
-                <div class="float-end">
-                    <a href="{{ route('bookings.addPayment', $booking) }}" class="btn btn-outline-primary">
-                        {{ __('Pay Remaining') }}
-                    </a>
-                </div>
-            @endif
+            @can('Edit Booking')
+                @if (!$booking->isFullPaid())
+                    <div class="float-end">
+                        <a href="{{ route('bookings.addPayment', $booking) }}" class="btn btn-outline-primary">
+                            {{ __('Pay Remaining') }}
+                        </a>
+                    </div>
+                @endif
+            @endcan
         </div>
         <div class="card-body">
             <table class="table table-responsive">
@@ -136,40 +142,44 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">{{ __('Tour and Packages') }}</h3>
+    @can('View Tour')
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ __('Tour and Packages') }}</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <tr>
+                        <th>{{ __('Tour Code') }}</th>
+                        <th>{{ __('Destination') }}</th>
+                        <th>{{ __('Departure Date') }}</th>
+                        <th>{{ __('Itinerary') }}</th>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <a class="btn btn-outline-primary" href="{{ route('tours.show', $booking->package->tour) }}">
+                                {{ $booking->package->tour->tour_code }}
+                            </a>
+
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach ($booking->package->tour->countries as $destination)
+                                    <li>{{ $destination->name }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
+                        <td>
+                            <a class="btn btn-outline-primary"
+                                href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
+                                {{ __('Itinerary') }}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="card-body">
-            <table class="table table-responsive">
-                <tr>
-                    <th>{{ __('Tour Code') }}</th>
-                    <th>{{ __('Destination') }}</th>
-                    <th>{{ __('Departure Date') }}</th>
-                    <th>{{ __('Itinerary') }}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <a class="btn btn-outline-primary" href="{{ route('tours.show', $booking->package->tour) }}">
-                            {{ $booking->package->tour->tour_code }}
-                        </a>
-                    </td>
-                    <td>
-                        <ul>
-                            @foreach ($booking->package->tour->countries as $destination)
-                                <li>{{ $destination->name }}</li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
-                    <td>
-                        <a class="btn btn-outline-primary"
-                            href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
-                            {{ __('Itinerary') }}
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    @endcan
 @endsection

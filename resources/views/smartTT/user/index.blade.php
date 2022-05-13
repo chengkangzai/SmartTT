@@ -18,7 +18,9 @@
     <div class="card">
         <div class="card-header">
             <div class="float-end">
-                <a href="{{ route('users.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @can('Create User')
+                    <a href="{{ route('users.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -40,12 +42,16 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('users.show', $user) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
+                                    @can('View User')
+                                        <a href="{{ route('users.show', $user) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Edit User')
+                                        <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
                                     @can('Delete User')
                                         <form action="{{ route('users.destroy', $user) }}" class="d-inline"
                                             method="POST">

@@ -44,7 +44,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">
+                                <td colspan="5" class="text-center">
                                     {{ __('What are you waiting?') }}
                                     {!! __('<a href=":link" class="btn btn-sm btn-outline-primary">Make a Booking Here!</a>', ['link' => route('bookings.create')]) !!}
                                 </td>
@@ -80,7 +80,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">
+                                <td colspan="5" class="text-center">
                                     {{ __('No payment yet') }}
                                 </td>
                             </tr>

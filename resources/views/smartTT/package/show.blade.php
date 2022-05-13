@@ -21,14 +21,21 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Package Information') }}</h3>
             <div class="float-end">
-                <a href="{{ route('packages.edit', $package) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
-                <form action="{{ route('packages.destroy', $package) }}" method="POST" class="d-inline">
-                    @method('DELETE')
-                    @csrf
-                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                </form>
-                <a href="{{ route('packages.audit', $package) }}"
-                    class="btn btn-outline-info">{{ __('Audit Trail') }}</a>
+                @can('Edit Package')
+                    <a href="{{ route('packages.edit', $package) }}" class="btn btn-outline-primary">{{ __('Edit') }}</a>
+                @endcan
+                @can('Delete Package')
+                    <form action="{{ route('packages.destroy', $package) }}" method="POST" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                    </form>
+                @endcan
+                @can('Audit Package')
+                    <a href="{{ route('packages.audit', $package) }}" class="btn btn-outline-info">
+                        {{ __('Audit Trail') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -65,10 +72,12 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Pricing Plan') }}</h3>
             <div class="float-end">
-                <a href="#" class="btn btn-outline-success" data-coreui-toggle="modal"
-                    data-coreui-target="#addPackagePricingModal">
-                    {{ __('Add') }}
-                </a>
+                @can('Edit Package')
+                    <a href="#" class="btn btn-outline-success" data-coreui-toggle="modal"
+                        data-coreui-target="#addPackagePricingModal">
+                        {{ __('Add') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -95,20 +104,27 @@
                                 <td>{{ $pricing->available_capacity }}</td>
                                 <td>{{ $pricing->is_active ? 'Active' : 'Inactive' }}</td>
                                 <td>
-                                    <a href="{{ route('packagePricings.edit', $pricing) }}"
-                                        class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
-                                        class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                    </form>
-                                    <a href="{{ route('packagePricings.audit', $pricing) }}"
-                                        class="btn btn-outline-info">
-                                        {{ __('Audit Trail') }}
-                                    </a>
+                                    @can('Edit Package Pricing')
+                                        <a href="{{ route('packagePricings.edit', $pricing) }}"
+                                            class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
+                                    @can('Delete Package Pricing')
+                                        <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
+                                            class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                        </form>
+                                    @endcan
+                                    @can('Audit Package Pricing')
+                                        <a href="{{ route('packagePricings.audit', $pricing) }}"
+                                            class="btn btn-outline-info">
+                                            {{ __('Audit Trail') }}
+                                        </a>
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -143,18 +159,24 @@
                                     {{ $flight->arrive_airport->name }} </td>
                                 <td>{{ $flight->airline->name }}</td>
                                 <td>
-                                    <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                    </form>
+                                    @can('Edit Flight')
+                                        <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Edit Flight')
+                                        <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
+                                    @can('Delete Flight')
+                                        <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -167,44 +189,46 @@
 
 
 @section('modal')
-    <div class="modal fade" tabindex="-1" id="addPackagePricingModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">{{ __('Add New Package Pricing') }}</h4>
-                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('packagePricings.attach', $package) }}" method="POST"
-                        id="addPackagePricingForm">
-                        @csrf
-                        @method('POST')
-                        @include('partials.error-toast')
-                        <div class="mb-3">
-                            <label for="name" class="form-label">{{ __('Name') }}</label>
-                            <input type="text" class="form-control" name="name" id="name"
-                                placeholder="{{ __('Enter Pricing Name') }}" value="{{ old('name') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">{{ __('Price') }}</label>
-                            <input type="number" class="form-control" name="price" id="price"
-                                placeholder="{{ 'Enter Price for Pricing ' }}" value="{{ old('price') }}" step="0.01">
-                        </div>
-                        <div class="mb-3">
-                            <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>
-                            <input type="number" class="form-control" name="total_capacity" id="total_capacity"
-                                placeholder="{{ __('Enter Total Capacity of') }}" value="{{ old('total_capacity') }}"
-                                step="1">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left"
-                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
-                    <input form="addPackagePricingForm" type="submit" class="btn btn-outline-primary"
-                        value="{{ 'Submit' }}" />
+    @can('Edit Package')
+        <div class="modal fade" tabindex="-1" id="addPackagePricingModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ __('Add New Package Pricing') }}</h4>
+                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('packagePricings.attach', $package) }}" method="POST"
+                            id="addPackagePricingForm">
+                            @csrf
+                            @method('POST')
+                            @include('partials.error-toast')
+                            <div class="mb-3">
+                                <label for="name" class="form-label">{{ __('Name') }}</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="{{ __('Enter Pricing Name') }}" value="{{ old('name') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">{{ __('Price') }}</label>
+                                <input type="number" class="form-control" name="price" id="price"
+                                    placeholder="{{ 'Enter Price for Pricing ' }}" value="{{ old('price') }}" step="0.01">
+                            </div>
+                            <div class="mb-3">
+                                <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>
+                                <input type="number" class="form-control" name="total_capacity" id="total_capacity"
+                                    placeholder="{{ __('Enter Total Capacity of') }}" value="{{ old('total_capacity') }}"
+                                    step="1">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left"
+                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                        <input form="addPackagePricingForm" type="submit" class="btn btn-outline-primary"
+                            value="{{ 'Submit' }}" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endcan
 @endsection

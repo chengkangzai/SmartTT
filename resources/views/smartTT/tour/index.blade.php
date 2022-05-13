@@ -17,8 +17,11 @@
 
     <div class="card">
         <div class="card-header">
+            <h2>{{ __('Tours') }}</h2>
             <div class="float-end">
-                <a href="{{ route('tours.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @can('Create Tour')
+                    <a href="{{ route('tours.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -53,18 +56,24 @@
                                     <x-active-inactive-badge :active="$tour->is_active" />
                                 </td>
                                 <td>
-                                    <a href="{{ route('tours.show', $tour) }}" class="btn btn-outline-info">
-                                        {{ __('Show') }}
-                                    </a>
-                                    <a href="{{ route('tours.edit', $tour) }}" class="btn btn-outline-primary">
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <form action="{{ route('tours.destroy', $tour) }}" class="d-inline"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                    </form>
+                                    @can('View Tour')
+                                        <a href="{{ route('tours.show', $tour) }}" class="btn btn-outline-info">
+                                            {{ __('Show') }}
+                                        </a>
+                                    @endcan
+                                    @can('Edit Tour')
+                                        <a href="{{ route('tours.edit', $tour) }}" class="btn btn-outline-primary">
+                                            {{ __('Edit') }}
+                                        </a>
+                                    @endcan
+                                    @can('Delete Tour')
+                                        <form action="{{ route('tours.destroy', $tour) }}" class="d-inline"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
