@@ -215,7 +215,9 @@ class CreateBookingCard extends Component
             'amount' => $this->paymentType == Payment::TYPE_FULL
                 ? $this->totalPrice
                 : count($this->guests) * $this->reservation_charge_per_pax,
-            'payment_method' => $this->paymentMethod == Payment::METHOD_STRIPE ?: $this->manualType,
+            'payment_method' => $this->paymentMethod == Payment::METHOD_STRIPE
+                ? Payment::METHOD_STRIPE
+                : $this->manualType,
             'payment_type' => $this->paymentType,
         ]);
 

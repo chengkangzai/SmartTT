@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackageController;
@@ -29,7 +28,7 @@ Auth::routes();
 Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::redirect('/', '/home');
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');

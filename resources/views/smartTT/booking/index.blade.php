@@ -28,6 +28,7 @@
                         <tr>
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Package') }}</th>
+                            <th>{{ __('Depart Time') }}</th>
                             <th>{{ __('Payment Status') }}</th>
                             <th>{{ __('Made By') }} </th>
                             <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
@@ -44,6 +45,7 @@
                                         {{ $booking->package->tour->name }}
                                     </a>
                                 </td>
+                                <td>{{ $booking->package->depart_time }}</td>
                                 <td>{{ $booking->isFullPaid() ? __('Paid') : __('Pending') }}</td>
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ number_format($booking->total_price, 2) }}</td>
