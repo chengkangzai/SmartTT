@@ -13,12 +13,12 @@ use Spatie\Activitylog\Models\Activity;
 
 class GetHomeDataForStaff
 {
-
     private Builder $logs;
 
     public function execute(): array
     {
         $this->logs = $this->getActivityForBooking();
+
         return [
             User::count(),
             $this->getUserData(),
@@ -27,7 +27,7 @@ class GetHomeDataForStaff
             Tour::active()->count(),
             Package::active()->count(),
             $this->logs->paginate(10, ['*'], 'logs'),
-            $this->getBooking()
+            $this->getBooking(),
         ];
     }
 
@@ -58,7 +58,7 @@ class GetHomeDataForStaff
     {
         return collect()
             ->times(7)
-            ->map(fn($i) => now()->subDays($i)->getTranslatedDayName())
+            ->map(fn ($i) => now()->subDays($i)->getTranslatedDayName())
             ->toArray();
     }
 

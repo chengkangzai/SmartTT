@@ -40,6 +40,7 @@ class SettingController extends Controller
     public function index()
     {
         abort_unless(auth()->user()->can('View Setting'), 403);
+
         return view('smartTT.setting.index', [
             'settings' => $this->settings,
         ]);

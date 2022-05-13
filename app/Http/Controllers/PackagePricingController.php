@@ -15,6 +15,7 @@ class PackagePricingController extends Controller
     public function edit(PackagePricing $packagePricing)
     {
         abort_unless(auth()->user()->can('Edit Package Pricing'), 403);
+
         return view('smartTT.packagePricing.edit', compact('packagePricing'));
     }
 
