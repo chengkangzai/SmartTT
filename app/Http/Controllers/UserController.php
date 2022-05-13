@@ -26,6 +26,7 @@ class UserController extends Controller
     public function create(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Create User'), 403);
+
         return view('smartTT.user.create');
     }
 
@@ -48,6 +49,7 @@ class UserController extends Controller
     public function edit(User $user): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Edit User'), 403);
+
         return view('smartTT.user.edit', compact('user'));
     }
 

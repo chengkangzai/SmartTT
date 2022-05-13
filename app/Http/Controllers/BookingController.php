@@ -20,7 +20,7 @@ class BookingController extends Controller
         abort_unless($user->can('View Booking'), 403);
 
         $role = $user->roles()->first()->name;
-        $bookings = Booking::when($role === 'Customer', fn($q) => $q->active()->where('user_id', $user->id))
+        $bookings = Booking::when($role === 'Customer', fn ($q) => $q->active()->where('user_id', $user->id))
             ->with(['user', 'package', 'package.tour'])
             ->orderByDesc('bookings.id')
             ->paginate(10);
@@ -32,6 +32,7 @@ class BookingController extends Controller
     public function create(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Create Booking'), 403);
+
         return view('smartTT.booking.create');
     }
 
@@ -56,7 +57,7 @@ class BookingController extends Controller
     public function addPayment(Booking $booking)
     {
         abort_unless(auth()->user()->can('Create Payment'), 403);
-        $paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         if ($paymentAmount <= 0) {
             return redirect()->route('bookings.show', $booking)->withErrors(__('Payment already completed'));
         }

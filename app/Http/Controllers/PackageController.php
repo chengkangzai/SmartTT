@@ -22,7 +22,7 @@ class PackageController extends Controller
         abort_unless(auth()->user()->can('View Package'), 403);
         $role = auth()->user()->roles()->first()->name;
         $packages = Package::with('tour', 'flight.airline:id,name', 'pricings')
-            ->when($role === 'Customer', fn($q) => $q->active())
+            ->when($role === 'Customer', fn ($q) => $q->active())
             ->orderByDesc('id')
             ->paginate(10);
         $setting = app(GeneralSetting::class);

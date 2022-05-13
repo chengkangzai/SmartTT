@@ -44,6 +44,7 @@ class FlightController extends Controller
     public function show(Flight $flight): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View Flight'), 403);
+
         return view('smartTT.flight.show', compact('flight'));
     }
 

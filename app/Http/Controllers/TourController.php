@@ -22,7 +22,7 @@ class TourController extends Controller
     {
         $role = auth()->user()->roles()->first()->name;
         $tours = Tour::with('countries')
-            ->when($role === 'Customer', fn($q) => $q->active())
+            ->when($role === 'Customer', fn ($q) => $q->active())
             ->orderByDesc('id')
             ->paginate(10);
 
