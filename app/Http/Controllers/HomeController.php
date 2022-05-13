@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        if (! auth()->user()->roles->contains('name', 'Customer')) {
-            [$userCount, $userData, $bookingCount, $bookingData, $tourCount, $packageCount, $logs]
+        if (!auth()->user()->roles->contains('name', 'Customer')) {
+            [$userCount, $userData, $bookingCount, $bookingData, $tourCount, $packageCount, $logs, $logData]
                 = app(GetHomeDataForStaff::class)->execute();
 
             return view('home', [
@@ -21,6 +21,7 @@ class HomeController extends Controller
                 'tourCount' => $tourCount,
                 'packageCount' => $packageCount,
                 'logs' => $logs,
+                'logData' => $logData
             ]);
         }
 

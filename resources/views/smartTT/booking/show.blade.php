@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Booking $booking */
-/** @var \App\Models\Payment $payment */
-/** @var \App\Models\Settings\GeneralSetting $setting */
-/** @var \App\Models\Settings\BookingSetting $bookingSetting */
+    /** @var \App\Models\Booking $booking */
+    /** @var \App\Models\Payment $payment */
+    /** @var \App\Models\Settings\GeneralSetting $setting */
+    /** @var \App\Models\Settings\BookingSetting $bookingSetting */
 @endphp
 @extends('layouts.app')
 @section('title')
@@ -22,40 +22,44 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Information') }}</h3>
             <div class="float-end">
-                <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
-                    @method('DELETE')
-                    @csrf
-                    <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                </form>
-                <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-outline-info">
-                    {{ __('Audit Trail') }}
-                </a>
+                @can('Delete Booking')
+                    <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
+                        @method('DELETE')
+                        @csrf
+                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}"/>
+                    </form>
+                @endcan
+                @can('Audit Booking')
+                    <a href="{{ route('bookings.audit', $booking) }}" class="btn btn-outline-info">
+                        {{ __('Audit Trail') }}
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>{{ __('ID') }}</th>
-                            <th>{{ __('Tour') }}</th>
-                            <th>{{ __('Adult') }}</th>
-                            <th>{{ __('Child') }}</th>
-                            <th>{{ __('Customer') }}</th>
-                            <th>{{ __('Discount') }} ({{ $setting->default_currency }})</th>
-                            <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
-                        </tr>
+                    <tr>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Tour') }}</th>
+                        <th>{{ __('Adult') }}</th>
+                        <th>{{ __('Child') }}</th>
+                        <th>{{ __('Customer') }}</th>
+                        <th>{{ __('Discount') }} ({{ $setting->default_currency }})</th>
+                        <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->package->tour->name }}</td>
-                            <td>{{ $booking->adult }}</td>
-                            <td>{{ $booking->child }}</td>
-                            <td>{{ $booking->user->name }}</td>
-                            <td>{{ number_format($booking->discount, 2) }}</td>
-                            <td>{{ number_format($booking->total_price, 2) }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $booking->id }}</td>
+                        <td>{{ $booking->package->tour->name }}</td>
+                        <td>{{ $booking->adult }}</td>
+                        <td>{{ $booking->child }}</td>
+                        <td>{{ $booking->user->name }}</td>
+                        <td>{{ number_format($booking->discount, 2) }}</td>
+                        <td>{{ number_format($booking->total_price, 2) }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -65,13 +69,15 @@
     <div class="card mb-2">
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Payment') }}</h3>
-            @if (!$booking->isFullPaid())
-                <div class="float-end">
-                    <a href="{{ route('bookings.addPayment', $booking) }}" class="btn btn-outline-primary">
-                        {{ __('Pay Remaining') }}
-                    </a>
-                </div>
-            @endif
+            @can('Edit Booking')
+                @if (!$booking->isFullPaid())
+                    <div class="float-end">
+                        <a href="{{ route('bookings.addPayment', $booking) }}" class="btn btn-outline-primary">
+                            {{ __('Pay Remaining') }}
+                        </a>
+                    </div>
+                @endif
+            @endcan
         </div>
         <div class="card-body">
             <table class="table table-responsive">
@@ -93,14 +99,14 @@
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         <td>
                             <a target="_blank" class="btn btn-outline-primary"
-                                href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}">
+                               href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}">
                                 {{ __('View') }}
                             </a>
                         </td>
                         <td>
                             @if ($payment->getFirstMediaUrl('receipts'))
                                 <a target="_blank" class="btn btn-outline-primary"
-                                    href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}">
+                                   href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}">
                                     {{ __('View') }}
                                 </a>
                             @endif
@@ -136,40 +142,45 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">{{ __('Tour and Packages') }}</h3>
+    @can('View Tour')
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ __('Tour and Packages') }}</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <tr>
+                        <th>{{ __('Tour Code') }}</th>
+                        <th>{{ __('Destination') }}</th>
+                        <th>{{ __('Departure Date') }}</th>
+                        <th>{{ __('Itinerary') }}</th>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <a class="btn btn-outline-primary"
+                               href="{{ route('tours.show', $booking->package->tour) }}">
+                                {{ $booking->package->tour->tour_code }}
+                            </a>
+
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach ($booking->package->tour->countries as $destination)
+                                    <li>{{ $destination->name }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
+                        <td>
+                            <a class="btn btn-outline-primary"
+                               href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
+                                {{ __('Itinerary') }}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="card-body">
-            <table class="table table-responsive">
-                <tr>
-                    <th>{{ __('Tour Code') }}</th>
-                    <th>{{ __('Destination') }}</th>
-                    <th>{{ __('Departure Date') }}</th>
-                    <th>{{ __('Itinerary') }}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <a class="btn btn-outline-primary" href="{{ route('tours.show', $booking->package->tour) }}">
-                            {{ $booking->package->tour->tour_code }}
-                        </a>
-                    </td>
-                    <td>
-                        <ul>
-                            @foreach ($booking->package->tour->countries as $destination)
-                                <li>{{ $destination->name }}</li>
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
-                    <td>
-                        <a class="btn btn-outline-primary"
-                            href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
-                            {{ __('Itinerary') }}
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    @endcan
 @endsection

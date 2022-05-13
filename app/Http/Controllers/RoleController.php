@@ -18,6 +18,7 @@ class RoleController extends Controller
 {
     public function index(): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('View Role'), 403);
         $roles = Role::paginate(10);
 
         return view('smartTT.role.index', compact('roles'));
@@ -25,6 +26,7 @@ class RoleController extends Controller
 
     public function create(): Application|Factory|View
     {
+        abort_unless(auth()->user()->can('Create Role'), 403);
         $permissions = Permission::all();
 
         return view('smartTT.role.create', compact('permissions'));
@@ -32,6 +34,7 @@ class RoleController extends Controller
 
     public function store(Request $request, StoreRoleAction $action): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Create Role'), 403);
         $action->execute($request->all());
 
         return redirect()->route('roles.index')->with('success', __('Role created successfully'));
@@ -39,6 +42,7 @@ class RoleController extends Controller
 
     public function show(Role $role): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('View Role'), 403);
         $permissions = $role->permissions()->paginate(5, ['*'], 'permissions');
         $users = $role->users()->paginate(5, ['*'], 'users');
 
@@ -47,6 +51,7 @@ class RoleController extends Controller
 
     public function edit(Role $role): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Edit Role'), 403);
         $role->load('permissions');
         $permissions = Permission::all();
 
@@ -55,6 +60,7 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Edit Role'), 403);
         $role->update($request->all());
         $role->syncPermissions($request->get('permissions'));
 
@@ -63,6 +69,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Delete Role'), 403);
         if ($role->users()->count() == 0) {
             $role->delete();
 
@@ -74,6 +81,7 @@ class RoleController extends Controller
 
     public function attachUser(Role $role, Request $request, AttachUserToRoleAction $action): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Edit User'), 403);
         $action->execute($request->all(), $role);
 
         return redirect()->route('roles.show', $role)->with('success', __('User attached successfully'));
@@ -81,6 +89,7 @@ class RoleController extends Controller
 
     public function detachUser(Role $role, Request $request, DetachUserToRoleAction $action): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Edit User'), 403);
         $action->execute($request->all(), $role);
 
         return redirect()->route('roles.show', $role)->with('success', __('User detached successfully'));
@@ -88,6 +97,7 @@ class RoleController extends Controller
 
     public function audit(Role $role)
     {
+        abort_unless(auth()->user()->can('Audit Role'), 403);
         $logs = Activity::forSubject($role)->get();
 
         return view('smartTT.role.audit', compact('logs', 'role'));

@@ -20,13 +20,18 @@ class TourController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $tours = Tour::with('countries')->orderByDesc('id')->paginate(10);
+        $role = auth()->user()->roles()->first()->name;
+        $tours = Tour::with('countries')
+            ->when($role === 'Customer', fn($q) => $q->active())
+            ->orderByDesc('id')
+            ->paginate(10);
 
         return view('smartTT.tour.index', compact('tours'));
     }
 
     public function create(TourSetting $setting): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Create Tour'), 403);
         $countries = Country::pluck('name', 'id');
 
         return view('smartTT.tour.create', compact('countries', 'setting'));
@@ -35,6 +40,7 @@ class TourController extends Controller
     public function store(Request $request, StoreTourAction $action): RedirectResponse
     {
         try {
+            abort_unless(auth()->user()->can('Create Tour'), 403);
             $action->execute($request->all());
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -47,14 +53,16 @@ class TourController extends Controller
 
     public function show(Tour $tour): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('View Tour'), 403);
         $tourDes = $tour->description()->paginate(9, ['*'], 'tourDes');
-        $packages = $tour->packages()->paginate(9, ['*'], 'packages');
+        $packages = $tour->packages()->with('flight.airline:id,name')->paginate(9, ['*'], 'packages');
 
         return view('smartTT.tour.show', compact('tour', 'tourDes', 'packages'));
     }
 
     public function edit(Tour $tour): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Edit Tour'), 403);
         $countries = Country::pluck('name', 'id');
 
         return view('smartTT.tour.edit', compact('tour', 'countries'));
@@ -63,6 +71,7 @@ class TourController extends Controller
     public function update(Request $request, Tour $tour, UpdateTourAction $action): RedirectResponse
     {
         try {
+            abort_unless(auth()->user()->can('Edit Tour'), 403);
             $action->execute($request->all(), $tour);
         } catch (ValidationException $exception) {
             return redirect()->back()->withErrors($exception->validator->errors())->withInput();
@@ -76,6 +85,7 @@ class TourController extends Controller
     public function destroy(Tour $tour, DestroyTourAction $action): RedirectResponse
     {
         try {
+            abort_unless(auth()->user()->can('Delete Tour'), 403);
             $action->execute($tour);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -86,6 +96,7 @@ class TourController extends Controller
 
     public function audit(Tour $tour)
     {
+        abort_unless(auth()->user()->can('Audit Tour'), 403);
         $logs = Activity::forSubject($tour)->get();
 
         return view('smartTT.tour.audit', compact('logs', 'tour'));

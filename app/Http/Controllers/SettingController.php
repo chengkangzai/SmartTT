@@ -39,6 +39,7 @@ class SettingController extends Controller
 
     public function index()
     {
+        abort_unless(auth()->user()->can('View Setting'), 403);
         return view('smartTT.setting.index', [
             'settings' => $this->settings,
         ]);
@@ -46,8 +47,9 @@ class SettingController extends Controller
 
     public function edit(string $mode)
     {
+        abort_unless(auth()->user()->can('Update Setting'), 403);
         $setting = $this->settings[$mode];
-        abort_if(! $setting, 404);
+        abort_unless($setting, 404);
 
         $view = match ($mode) {
             'general' => 'smartTT.setting.general',
@@ -72,8 +74,9 @@ class SettingController extends Controller
 
     public function update(Request $request, string $mode)
     {
+        abort_unless(auth()->user()->can('Update Setting'), 403);
         $setting = $this->settings[$mode];
-        abort_if(! $setting, 404);
+        abort_unless($setting, 404);
 
         /** @var UpdateSettingInterface $action */
         $action = match ($mode) {

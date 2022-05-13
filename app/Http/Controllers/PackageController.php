@@ -19,7 +19,8 @@ class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $packages = Package::with('tour', 'flight.airline:id,name')->orderByDesc('id')->paginate(10);
+        abort_unless(auth()->user()->can('View Package'), 403);
+        $packages = Package::with('tour', 'flight.airline:id,name', 'pricings')->orderByDesc('id')->paginate(10);
         $setting = app(GeneralSetting::class);
 
         return view('smartTT.package.index', compact('packages', 'setting'));
@@ -27,6 +28,7 @@ class PackageController extends Controller
 
     public function create(GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Create Package'), 403);
         [$tours, $flights, $setting, $pricingSetting] = $get->execute();
 
         return view('smartTT.package.create', compact('tours', 'flights', 'setting', 'pricingSetting'));
@@ -35,6 +37,7 @@ class PackageController extends Controller
     public function store(Request $request, StorePackageAction $action): RedirectResponse
     {
         try {
+            abort_unless(auth()->user()->can('Create Package'), 403);
             $action->execute($request->all());
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
@@ -47,6 +50,7 @@ class PackageController extends Controller
 
     public function show(Package $package): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('View Package'), 403);
         $package->load('flight', 'flight.airline', 'pricings');
 
         return view('smartTT.package.show', compact('package'));
@@ -54,6 +58,7 @@ class PackageController extends Controller
 
     public function edit(Package $package, GetTourAndFlightForCreateAndUpdatePackage $get): Factory|View|Application
     {
+        abort_unless(auth()->user()->can('Edit Package'), 403);
         $package->load('flight', 'tour');
         [$tours, $flights] = $get->execute(loadPackageSetting: false, loadPricingSetting: false);
 
@@ -63,6 +68,7 @@ class PackageController extends Controller
     public function update(Request $request, Package $package, UpdatePackageAction $action): RedirectResponse
     {
         try {
+            abort_unless(auth()->user()->can('Edit Package'), 403);
             $action->execute($request->all(), $package);
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
@@ -75,6 +81,7 @@ class PackageController extends Controller
 
     public function destroy(Package $package): RedirectResponse
     {
+        abort_unless(auth()->user()->can('Delete Package'), 403);
         $package->delete();
 
         return redirect()->route('packages.index')->with('success', __('Package deleted successfully'));
@@ -82,6 +89,7 @@ class PackageController extends Controller
 
     public function audit(Package $package)
     {
+        abort_unless(auth()->user()->can('View Package'), 403);
         $logs = Activity::forSubject($package)->get();
 
         return view('smartTT.package.audit', compact('logs', 'package'));
