@@ -1,6 +1,5 @@
 <?php
 
-use App\Actions\Home\GetHomeDataForCustomer;
 use App\Actions\Home\GetHomeDataForStaff;
 use App\Models\Booking;
 use App\Models\Package;
@@ -15,8 +14,8 @@ use Database\Seeders\PackageSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
-use Spatie\Activitylog\Models\Activity;
 use function Pest\Laravel\seed;
+use Spatie\Activitylog\Models\Activity;
 
 beforeEach(function () {
     seed([
@@ -28,7 +27,7 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 
@@ -36,7 +35,7 @@ function getLastSevenDayInName(): array
 {
     return collect()
         ->times(7)
-        ->map(fn($i) => now()->subDays($i)->getTranslatedDayName())
+        ->map(fn ($i) => now()->subDays($i)->getTranslatedDayName())
         ->toArray();
 }
 
@@ -68,10 +67,10 @@ it('should get home data for customer', function () {
     expect($logs)->toEqual(Activity::where('subject_type', Booking::class)->latest()->paginate(10, ['*'], 'logs'));
     expect($userData)->toEqual([
         'label' => getLastSevenDayInName(),
-        'data' => getDataByModelField(User::class, 'created_at')
+        'data' => getDataByModelField(User::class, 'created_at'),
     ]);
     expect($bookingData)->toEqual([
         'label' => getLastSevenDayInName(),
-        'data' => getDataByModelField(Booking::class, 'created_at')
+        'data' => getDataByModelField(Booking::class, 'created_at'),
     ]);
 });
