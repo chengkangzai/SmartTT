@@ -7,7 +7,6 @@ use App\Models\Package;
 use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Spatie\Activitylog\Models\Activity;
