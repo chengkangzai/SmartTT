@@ -7,13 +7,12 @@ use App\Models\Package;
 use App\Models\Tour;
 use App\Models\User;
 use Spatie\Activitylog\Models\Activity;
-use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->isNot(Role::findByName('Customer'))) {
+        if (!auth()->user()->roles->contains('name', 'Customer')) {
             return view('home', [
                 'userCount' => User::count(),
                 'userData' => [
@@ -48,7 +47,10 @@ class HomeController extends Controller
             ]);
         }
 
-        return view('home');
+        return view('home_customer', [
+            'bookings' => auth()->user()->bookings()->paginate(10, ['*'], 'bookings'),
+            'payments' => auth()->user()->payments()->paginate(10, ['*'], 'payments'),
+        ]);
 
     }
 }
