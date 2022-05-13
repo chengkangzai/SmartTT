@@ -84,7 +84,7 @@
                             <tr>
                                 <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
                                 <td> {{ (new ReflectionClass($log->subject_type))->getShortName() }} </td>
-                                <td> {{ $log->causer->name ?? 'System' }}
+                                <td> {{ $log->causer->name ?? __('System') }}
                                     {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                                 </td>
                                 <td> {{ $log->description }} </td>
@@ -158,8 +158,8 @@
                     label: 'Users',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
-                    pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue(
-                        '--cui-primary'),
+                    pointBackgroundColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue('--cui-primary'),
                     data: @json($userData['data']),
                 }]
             },
@@ -173,8 +173,8 @@
                 datasets: [{
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
-                    pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue(
-                        '--cui-info'),
+                    pointBackgroundColor: getComputedStyle(document.documentElement)
+                        .getPropertyValue('--cui-info'),
                     data: @json($bookingData['data']),
                 }]
             },

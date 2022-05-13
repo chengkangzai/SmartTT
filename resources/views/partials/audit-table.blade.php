@@ -18,7 +18,7 @@
                 <tr>
                     <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
                     <td> {{ (new ReflectionClass($log->subject_type))->getShortName() }} </td>
-                    <td> {{ $log->causer->name ?? 'System' }} <br>
+                    <td> {{ $log->causer->name ?? __('System') }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                     </td>
                     <td> {{ $log->description }} </td>
