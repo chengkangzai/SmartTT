@@ -1,8 +1,12 @@
-<div class="table-responsive">
-    <table class="table">
+@php
+/** @var \Spatie\Activitylog\Models\Activity $log */
+@endphp
+<div>
+    <table class="table table-responsive table-striped">
         <thead>
             <tr>
                 <th> {{ __('Date Time') }} </th>
+                <th> {{ __('Subject') }} </th>
                 <th> {{ __('Performed By') }} </th>
                 <th> {{ __('Action') }} </th>
                 <th> {{ __('Previous Value') }} </th>
@@ -13,6 +17,7 @@
             @forelse($logs as $log)
                 <tr>
                     <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
+                    <td> {{ (new ReflectionClass($log->subject_type))->getShortName() }} </td>
                     <td> {{ $log->causer->name ?? 'System' }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                     </td>
