@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use \Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -66,5 +68,12 @@ class Booking extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable()->logOnlyDirty();
+    }
+
+    public function scopeActive(): Booking|Builder|QueryBuilder
+    {
+        return $this->join('packages', 'packages.id', '=', 'bookings.package_id')
+            ->where('packages.depart_time', '>', now())
+            ->where('packages.is_active', '=', true);
     }
 }
