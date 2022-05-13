@@ -15,7 +15,7 @@ it('should return a view when its logged in', function () {
 it('should return a view when its logged in as customer', function () {
     seed([
        PermissionSeeder::class,
-        UserRoleSeeder::class
+        UserRoleSeeder::class,
     ]);
     $this->actingAs(User::factory()->customer()->create())
         ->get(route('home'))
