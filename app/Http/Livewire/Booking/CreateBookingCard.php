@@ -320,6 +320,7 @@ class CreateBookingCard extends Component
         $this->validate([
             $field => $this->validateBillingRule[$field],
         ]);
+        $this->getReadyForPayment();
     }
     #endregion
 

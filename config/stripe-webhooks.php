@@ -16,7 +16,6 @@ return [
      */
     'jobs' => [
          'charge_succeeded' => \App\Jobs\StripeWebhooks\ChargeSucceededJob::class,
-        // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],
 
     /*
