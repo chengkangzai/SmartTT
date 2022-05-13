@@ -99,7 +99,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{$logs->links()}}
+                {{ $logs->links() }}
             </div>
         </div>
     </div>
