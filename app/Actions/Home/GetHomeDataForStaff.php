@@ -6,15 +6,19 @@ use App\Models\Booking;
 use App\Models\Package;
 use App\Models\Tour;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Spatie\Activitylog\Models\Activity;
 
 class GetHomeDataForStaff
 {
+
+    private Builder $logs;
+
     public function execute(): array
     {
+        $this->logs = $this->getActivityForBooking();
         return [
             User::count(),
             $this->getUserData(),
@@ -22,7 +26,8 @@ class GetHomeDataForStaff
             $this->getBookingData(),
             Tour::active()->count(),
             Package::active()->count(),
-            $this->getActivityForBooking(),
+            $this->logs->paginate(10, ['*'], 'logs'),
+            $this->getBooking()
         ];
     }
 
@@ -44,30 +49,35 @@ class GetHomeDataForStaff
         ];
     }
 
-    private function getActivityForBooking(): LengthAwarePaginator
+    private function getActivityForBooking(): Builder|Activity
     {
-        return Activity::where('subject_type', Booking::class)->latest()->paginate(10, ['*'], 'logs');
+        return Activity::where('subject_type', Booking::class)->latest();
     }
 
     private function getLastSevenDayInName(): array
     {
         return collect()
             ->times(7)
-            ->map(fn ($i) => now()->subDays($i)->getTranslatedDayName())
+            ->map(fn($i) => now()->subDays($i)->getTranslatedDayName())
             ->toArray();
     }
 
     private function getDataByModelField(string $model, string $field): array
     {
-        /** @var Model $model */
+        /** @var Booking $model */
         return [
-            $model::whereDay($field, '=', now()->subDays(6))->count(),
-            $model::whereDay($field, '=', now()->subDays(5))->count(),
-            $model::whereDay($field, '=', now()->subDays(4))->count(),
-            $model::whereDay($field, '=', now()->subDays(3))->count(),
-            $model::whereDay($field, '=', now()->subDays(2))->count(),
-            $model::whereDay($field, '=', now()->subDays(1))->count(),
-            $model::whereDay($field, '=', now())->count(),
+            $model::whereDate($field, '=', now()->subDays(6))->count(),
+            $model::whereDate($field, '=', now()->subDays(5))->count(),
+            $model::whereDate($field, '=', now()->subDays(4))->count(),
+            $model::whereDate($field, '=', now()->subDays(3))->count(),
+            $model::whereDate($field, '=', now()->subDays(2))->count(),
+            $model::whereDate($field, '=', now()->subDays(1))->count(),
+            $model::whereDate($field, '=', now())->count(),
         ];
+    }
+
+    private function getBooking(): Collection
+    {
+        return Booking::with('package.tour:id,name')->find($this->logs->pluck('subject_id'));
     }
 }

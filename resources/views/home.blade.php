@@ -88,9 +88,9 @@
                                     {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                                 </td>
                                 <td> {{ $log->description }} </td>
-                                <td> {{ number_format($log->subject_type::find($log->subject_id)->total_price, 2) }}
+                                <td> {{ number_format($logData->find($log->subject_id)->total_price, 2) }}
                                 </td>
-                                <td> {{ $log->subject_type::find($log->subject_id)->package->tour->name }} </td>
+                                <td> {{ $logData->find($log->subject_id)->package->tour->name }} </td>
                             </tr>
                         @empty
                             <tr>
