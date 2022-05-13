@@ -31,7 +31,7 @@ class GetHomeDataForStaff
     {
         return [
             'label' => $this->getLastSevenDayInName(),
-            'data' => $this->getDataByModelField(Booking::class, 'created_at')
+            'data' => $this->getDataByModelField(Booking::class, 'created_at'),
         ];
     }
 
@@ -40,7 +40,7 @@ class GetHomeDataForStaff
     {
         return [
             'label' => $this->getLastSevenDayInName(),
-            'data' => $this->getDataByModelField(User::class, 'created_at')
+            'data' => $this->getDataByModelField(User::class, 'created_at'),
         ];
     }
 
@@ -53,7 +53,7 @@ class GetHomeDataForStaff
     {
         return collect()
             ->times(7)
-            ->map(fn($i) => now()->subDays($i)->getTranslatedDayName())
+            ->map(fn ($i) => now()->subDays($i)->getTranslatedDayName())
             ->toArray();
     }
 
