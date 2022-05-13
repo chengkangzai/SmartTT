@@ -1,8 +1,8 @@
 @php
-    /** @var \App\Models\Booking $booking */
-    /** @var \App\Models\Payment $payment */
-    /** @var \App\Models\Settings\GeneralSetting $setting */
-    /** @var \App\Models\Settings\BookingSetting $bookingSetting */
+/** @var \App\Models\Booking $booking */
+/** @var \App\Models\Payment $payment */
+/** @var \App\Models\Settings\GeneralSetting $setting */
+/** @var \App\Models\Settings\BookingSetting $bookingSetting */
 @endphp
 @extends('layouts.app')
 @section('title')
@@ -26,7 +26,7 @@
                     <form action="{{ route('bookings.destroy', $booking) }}" method="POST" style="display: inline">
                         @method('DELETE')
                         @csrf
-                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}"/>
+                        <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
                     </form>
                 @endcan
                 @can('Audit Booking')
@@ -40,26 +40,26 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('Tour') }}</th>
-                        <th>{{ __('Adult') }}</th>
-                        <th>{{ __('Child') }}</th>
-                        <th>{{ __('Customer') }}</th>
-                        <th>{{ __('Discount') }} ({{ $setting->default_currency }})</th>
-                        <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
-                    </tr>
+                        <tr>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('Tour') }}</th>
+                            <th>{{ __('Adult') }}</th>
+                            <th>{{ __('Child') }}</th>
+                            <th>{{ __('Customer') }}</th>
+                            <th>{{ __('Discount') }} ({{ $setting->default_currency }})</th>
+                            <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{{ $booking->id }}</td>
-                        <td>{{ $booking->package->tour->name }}</td>
-                        <td>{{ $booking->adult }}</td>
-                        <td>{{ $booking->child }}</td>
-                        <td>{{ $booking->user->name }}</td>
-                        <td>{{ number_format($booking->discount, 2) }}</td>
-                        <td>{{ number_format($booking->total_price, 2) }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $booking->id }}</td>
+                            <td>{{ $booking->package->tour->name }}</td>
+                            <td>{{ $booking->adult }}</td>
+                            <td>{{ $booking->child }}</td>
+                            <td>{{ $booking->user->name }}</td>
+                            <td>{{ number_format($booking->discount, 2) }}</td>
+                            <td>{{ number_format($booking->total_price, 2) }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -99,14 +99,14 @@
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         <td>
                             <a target="_blank" class="btn btn-outline-primary"
-                               href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}">
+                                href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}">
                                 {{ __('View') }}
                             </a>
                         </td>
                         <td>
                             @if ($payment->getFirstMediaUrl('receipts'))
                                 <a target="_blank" class="btn btn-outline-primary"
-                                   href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}">
+                                    href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}">
                                     {{ __('View') }}
                                 </a>
                             @endif
@@ -158,8 +158,7 @@
                     <tr>
                         <td>
 
-                            <a class="btn btn-outline-primary"
-                               href="{{ route('tours.show', $booking->package->tour) }}">
+                            <a class="btn btn-outline-primary" href="{{ route('tours.show', $booking->package->tour) }}">
                                 {{ $booking->package->tour->tour_code }}
                             </a>
 
@@ -174,7 +173,7 @@
                         <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
                         <td>
                             <a class="btn btn-outline-primary"
-                               href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
+                                href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">
                                 {{ __('Itinerary') }}
                             </a>
                         </td>
