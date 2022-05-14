@@ -13,3 +13,10 @@ it('should redirect when user is not logged in', function () {
         ->assertRedirect('/login')
         ->assertStatus(302);
 });
+
+it('should return dashboard view', function () {
+    $this->actingAs(User::factory()->create())
+        ->get('/home')
+        ->assertViewIs('home')
+        ->assertStatus(200);
+});
