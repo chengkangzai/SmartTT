@@ -45,8 +45,6 @@ class AddPaymentOnBooking extends Component
 
     public Booking $booking;
     public string $defaultCurrency;
-    public int $reservation_charge_per_pax;
-    public array $guests;
     public int $currentStep = 1;
 
     protected $listeners = ['cardSetupConfirmed'];
@@ -54,12 +52,9 @@ class AddPaymentOnBooking extends Component
     public function mount(Booking $booking)
     {
         $this->booking = $booking;
-        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
-        $bookingSetting = app(BookingSetting::class);
-        $this->reservation_charge_per_pax = $bookingSetting->reservation_charge_per_pax;
-        $this->guests = $this->getGuests($bookingSetting);
 
         if ($this->paymentMethod === Payment::METHOD_STRIPE) {
             $this->clientSecret = auth()->user()->createSetupIntent()->client_secret;
@@ -75,7 +70,7 @@ class AddPaymentOnBooking extends Component
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -158,16 +153,6 @@ class AddPaymentOnBooking extends Component
         ]);
     }
 
-    private function getGuests(BookingSetting $bookingSetting): array
-    {
-        return $this->booking->guests->map(function ($guest) use ($bookingSetting) {
-            return [
-                'name' => $guest->name,
-                'pricing' => $guest->package_pricing_id,
-                'price' => $guest->packagePricing->price ?? $bookingSetting->charge_per_child,
-            ];
-        })->toArray();
-    }
     #endregion
 
     public function finish()
