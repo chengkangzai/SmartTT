@@ -35,3 +35,14 @@ it('should invalidate invalid data', function ($name, $data) {
     ['cardExpiry', ['', 'asdas', 1, -1, 'a' . str_repeat('a', 255)]],
     ['cardCvc', ['', 'asdas', 1, -1, 'a' . str_repeat('a', 255)]],
 ]);
+
+it('should invalidate card that are almost expired', function () {
+    $action = app(ValidateManualCardAction::class);
+
+    try {
+        $action->execute('cardExpiry', now()->subDays()->format('m/y'));
+        $this->fail('ValidationException was not thrown');
+    } catch (ValidationException $e) {
+        assertNotEmpty($e->validator->errors()->get('cardExpiry'));
+    }
+});

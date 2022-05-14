@@ -32,6 +32,7 @@ class UserRoleSeeder extends Seeder
                 'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing',
                 'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight', 'Audit Flight',
                 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
+                'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
                 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
                 'Update Setting', 'View Setting'
             ])
@@ -46,6 +47,7 @@ class UserRoleSeeder extends Seeder
                 'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing',
                 'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight',
                 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
+                'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
                 'View User',
             ])
             ->users()
@@ -55,6 +57,7 @@ class UserRoleSeeder extends Seeder
             ->syncPermissions([
                 'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
                 'Create Booking', 'View Booking', 'Edit Booking',
+                'View Payment', 'Create Payment',
             ])
             ->users()
             ->attach(User::where('id', ">", 7)->take(3)->get());

@@ -69,7 +69,7 @@
     <div class="card mb-2">
         <div class="card-header">
             <h3 class="card-title">{{ __('Booking Payment') }}</h3>
-            @can('Edit Booking')
+            @can('Create Payment')
                 @if (!$booking->isFullPaid())
                     <div class="float-end">
                         <a href="{{ route('bookings.addPayment', $booking) }}" class="btn btn-outline-primary">
