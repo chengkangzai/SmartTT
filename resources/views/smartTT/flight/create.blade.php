@@ -87,7 +87,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="price">{{ __('Price') }}</label>
                     <input type="number" name="price" class="form-control" id="price" value="{{ old('price', 0) }}"
-                        step=".01" placeholder="{{ __('Enter Flight Price') }}">
+                        step=".01" placeholder="{{ __('Flight Price') }}">
                 </div>
 
 

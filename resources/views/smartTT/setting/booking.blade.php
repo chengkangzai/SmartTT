@@ -26,7 +26,7 @@
                 @include('partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label for="default_payment_method"> {{ __('Default Payment method') }}</label>
+                    <label for="default_payment_method"> {{ __('Default Payment Method') }}</label>
                     <select name="default_payment_method" id="default_payment_method" class="form-select">
                         @foreach ($setting->supported_payment_method as $method)
                             <option value="{{ $method }}" @selected(old('default_payment_method', $setting->default_payment_method) == $method)>

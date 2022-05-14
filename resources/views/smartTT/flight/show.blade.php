@@ -45,7 +45,7 @@
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Depart Time') }}</th>
                             <th>{{ __('Arrival Time') }}</th>
-                            <th>{{ __('Fee (Rm)') }}</th>
+                            <th>{{ __('Fee') }}</th> // TODO SHOW Currency
                             <th>{{ __('Airline') }}</th>
                             <th>{{ __('Type') }}</th>
                             <th>{{ __('Class') }}</th>

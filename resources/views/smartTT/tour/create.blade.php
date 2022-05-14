@@ -26,12 +26,12 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}"
-                        placeholder="{{ __('Enter Tour Name') }}">
+                        placeholder="{{ __('Tour Name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">{{ __('Tour Code') }}</label>
                     <input type="text" name="tour_code" class="form-control" id="tour_code"
-                        value="{{ old('tour_code') }}" placeholder="{{ __('Enter Tour Code') }}">
+                        value="{{ old('tour_code') }}" placeholder="{{ __('Tour Code') }}">
                 </div>
                 <div class="mb-3 row">
                     <div class="col col-md-6">
@@ -60,13 +60,13 @@
                     <div class="col col-md-6">
                         <label for="days" class="form-label">{{ __('Days') }}</label>
                         <input type="number" name="days" class="form-control" id="days"
-                            value="{{ old('days', $setting->default_day) }}" placeholder="{{ __('Enter Days') }}">
+                            value="{{ old('days', $setting->default_day) }}" placeholder="{{ __('Days') }}">
                     </div>
                     <div class="col col-md-6">
                         <label for="nights" class="form-label">{{ __('Nights') }}</label>
                         <input type="number" name="nights" class="form-control" id="nights"
                             value="{{ old('nights', $setting->default_night) }}"
-                            placeholder="{{ __('Enter Nights') }}">
+                            placeholder="{{ __('Nights') }}">
                     </div>
                 </div>
 
@@ -98,12 +98,12 @@
                     <div class="col col-md-3">
                         <label for="place.1" class="form-label">{{ __('Place 1') }}</label>
                         <input type="text" name="place[1]" class="form-control" id="place.1"
-                            value="{{ old('place.1') }}" placeholder="{{ __('Enter the main visit place 1') }}">
+                            value="{{ old('place.1') }}" placeholder="{{ __('Place 1') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.1" class="form-label">{{ __('Description 1') }}</label>
                         <textarea type="text" name="des[1]" class="form-control" id="des.1" rows="3"
-                            placeholder="{{ __('Enter Description 1') }}">{{ old('des.1') }}</textarea>
+                            placeholder="{{ __('Description 1') }}">{{ old('des.1') }}</textarea>
                     </div>
                 </div>
 
@@ -111,12 +111,12 @@
                     <div class="col col-md-3">
                         <label for="place.2" class="form-label">{{ __('Place 2') }}</label>
                         <input type="text" name="place[2]" class="form-control" id="place.2"
-                            value="{{ old('place.2') }}" placeholder="{{ __('Enter the main visit place 2') }}">
+                            value="{{ old('place.2') }}" placeholder="{{ __('Place 2') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.2" class="form-label">{{ __('Description 2') }}</label>
                         <textarea type="text" name="des[2]" class="form-control" id="des.2" rows="3"
-                            placeholder="{{ __('Enter Description 2') }}">{{ old('des.2') }}</textarea>
+                            placeholder="{{ __('Description 2') }}">{{ old('des.2') }}</textarea>
                     </div>
                 </div>
 
@@ -124,12 +124,12 @@
                     <div class="col col-md-3">
                         <label for="place.3" class="form-label">{{ __('Place 3') }}</label>
                         <input type="text" name="place[3]" class="form-control" id="place.3"
-                            value="{{ old('place.3') }}" placeholder="{{ __('Enter the main visit place 3') }}">
+                            value="{{ old('place.3') }}" placeholder="{{ __('Place 3') }}">
                     </div>
                     <div class="col col-md-9">
                         <label for="des.3" class="form-label">{{ __('Description 3') }}</label>
                         <textarea type="text" name="des[3]" class="form-control" id="des.3" rows="3"
-                            placeholder="{{ __('Enter Description 3') }}">{{ old('des.3') }}</textarea>
+                            placeholder="{{ __('Description 3') }}">{{ old('des.3') }}</textarea>
                     </div>
                 </div>
 
