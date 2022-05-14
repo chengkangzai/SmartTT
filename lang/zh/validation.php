@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
   'accepted' => ' :attribute 必须被接受。',
   'accepted_if' => '当 :other 为 :value 时，必须接受 :attribute。',
   'active_url' => ' :attribute 不是有效的 URL。',
@@ -12,13 +12,13 @@ return array (
   'array' => ' :attribute 必须是一个数组。',
   'before' => ' :attribute 必须是 :date 之前的日期。',
   'before_or_equal' => ' :attribute 必须是早于或等于 :date 的日期。',
-  'between' => 
-  array (
+  'between' =>
+  [
     'array' => ' :attribute 必须有 :min 和 :max 之间的项目。',
     'file' => ' :attribute 必须介于 :min 和 :max 千字节之间。',
     'numeric' => ' :attribute 必须在 :min 和 :max 之间。',
     'string' => ' :attribute 必须介于 :min 和 :max 字符之间。',
-  ),
+  ],
   'boolean' => ' :attribute 字段必须为真或假。',
   'confirmed' => ' :attribute 确认不匹配。',
   'current_password' => '密码不正确。',
@@ -38,20 +38,20 @@ return array (
   'exists' => '选择的 :attribute 无效。',
   'file' => ' :attribute 必须是一个文件。',
   'filled' => ' :attribute 字段必须有一个值。',
-  'gt' => 
-  array (
+  'gt' =>
+  [
     'array' => ' :attribute 必须有超过 :value 项。',
     'file' => ' :attribute 必须大于 :value 千字节。',
     'numeric' => ' :attribute 必须大于 :value。',
     'string' => ' :attribute 必须大于 :value 个字符。',
-  ),
-  'gte' => 
-  array (
+  ],
+  'gte' =>
+  [
     'array' => ' :attribute 必须有 :value 项或更多项。',
     'file' => ' :attribute 必须大于或等于 :value 千字节。',
     'numeric' => ' :attribute 必须大于或等于 :value。',
     'string' => ' :attribute 必须大于或等于 :value 个字符。',
-  ),
+  ],
   'image' => ' :attribute 必须是图像。',
   'in' => '选择的 :attribute 无效。',
   'in_array' => ' :other 中不存在 :attribute 字段。',
@@ -60,37 +60,37 @@ return array (
   'ipv4' => ' :attribute 必须是有效的 IPv4 地址。',
   'ipv6' => ' :attribute 必须是有效的 IPv6 地址。',
   'json' => ' :attribute 必须是有效的 JSON 字符串。',
-  'lt' => 
-  array (
+  'lt' =>
+  [
     'array' => ' :attribute 必须少于 :value 项。',
     'file' => ' :attribute 必须小于 :value 千字节。',
     'numeric' => ' :attribute 必须小于 :value。',
     'string' => ' :attribute 必须小于 :value 个字符。',
-  ),
-  'lte' => 
-  array (
+  ],
+  'lte' =>
+  [
     'array' => ' :attribute 不得超过 :value 项。',
     'file' => ' :attribute 必须小于或等于 :value 千字节。',
     'numeric' => ' :attribute 必须小于或等于 :value。',
     'string' => ' :attribute 必须小于或等于 :value 个字符。',
-  ),
+  ],
   'mac_address' => ' :attribute 必须是有效的 MAC 地址。',
-  'max' => 
-  array (
+  'max' =>
+  [
     'array' => ' :attribute 不得超过 :max 项。',
     'file' => ' :attribute 不得大于 :max 千字节。',
     'numeric' => ' :attribute 不得大于 :max。',
     'string' => ' :attribute 不得大于 :max 个字符。',
-  ),
+  ],
   'mimes' => ' :attribute 必须是以下类型的文件： :values。',
   'mimetypes' => ' :attribute 必须是以下类型的文件： :values。',
-  'min' => 
-  array (
+  'min' =>
+  [
     'array' => ' :attribute 必须至少有 :min 项。',
     'file' => ' :attribute 必须至少为 :min 千字节。',
     'numeric' => ' :attribute 必须至少为 :min。',
     'string' => ' :attribute 必须至少有 :min 个字符。',
-  ),
+  ],
   'multiple_of' => ' :attribute 必须是 :value 的倍数。',
   'not_in' => '选择的 :attribute 无效。',
   'not_regex' => ' :attribute 格式无效。',
@@ -110,13 +110,13 @@ return array (
   'required_without' => '当 :values 不存在时， :attribute 字段是必需的。',
   'required_without_all' => '当 :values 都不存在时， :attribute 字段是必需的。',
   'same' => ' :attribute 和 :other 必须匹配。',
-  'size' => 
-  array (
+  'size' =>
+  [
     'array' => ' :attribute 必须包含 :size 项。',
     'file' => ' :attribute 必须是 :size 千字节。',
     'numeric' => ' :attribute 必须是 :size。',
     'string' => ' :attribute 必须是 :size 个字符。',
-  ),
+  ],
   'starts_with' => ' :attribute 必须以下列之一开头： :values。',
   'string' => ' :attribute 必须是字符串。',
   'timezone' => ' :attribute 必须是有效的时区。',
@@ -124,11 +124,11 @@ return array (
   'uploaded' => ' :attribute 上传失败。',
   'url' => ' :attribute 必须是有效的 URL。',
   'uuid' => ' :attribute 必须是有效的 UUID。',
-  'custom' => 
-  array (
-    'attribute-name' => 
-    array (
+  'custom' =>
+  [
+    'attribute-name' =>
+    [
       'rule-name' => '自定义消息',
-    ),
-  ),
-);
+    ],
+  ],
+];

@@ -1,23 +1,23 @@
 <?php
 
-return array (
-  'booking' => 
-  array (
+return [
+  'booking' =>
+  [
     'charge_per_child' => 'Charge Per Child',
     'default_payment_method' => 'Default Payment Method',
     'reservation_charge_per_pax' => 'Reservation Charge Per Pax',
     'supported_payment_method' => 'Supported Payment Method',
-  ),
-  'flight' => 
-  array (
+  ],
+  'flight' =>
+  [
     'default_class' => 'Default Class',
     'default_type' => 'Default Type',
     'supported_class' => 'Supported Class',
     'supported_countries' => 'Supported Countries',
     'supported_type' => 'Supported Type',
-  ),
-  'general' => 
-  array (
+  ],
+  'general' =>
+  [
     'business_registration_no' => 'Business Registration No',
     'company_address' => 'Company Address',
     'company_name' => 'Company Name',
@@ -29,22 +29,22 @@ return array (
     'default_timezone' => 'Default Timezone',
     'site_name' => 'Site Name',
     'supported_language' => 'Supported Languages',
-  ),
-  'package' => 
-  array (
+  ],
+  'package' =>
+  [
     'default_status' => 'Default Status',
-  ),
-  'package_pricing' => 
-  array (
+  ],
+  'package_pricing' =>
+  [
     'default_capacity' => 'Default Capacity',
     'default_namings' => 'Default Namings',
     'default_status' => 'Default Status',
-  ),
-  'tour' => 
-  array (
+  ],
+  'tour' =>
+  [
     'category' => 'Category',
     'default_day' => 'Default Day',
     'default_night' => 'Default Night',
     'default_status' => 'Default Status',
-  ),
-);
+  ],
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
   'accepted' => ' :attribute mesti diterima.',
   'accepted_if' => ' :attribute mesti diterima apabila :other ialah :value.',
   'active_url' => ' :attribute bukan URL yang sah.',
@@ -12,23 +12,23 @@ return array (
   'array' => ' :attribute mestilah array.',
   'before' => ' :attribute mestilah tarikh sebelum :date.',
   'before_or_equal' => ' :attribute mestilah tarikh sebelum atau sama dengan :date.',
-  'between' => 
-  array (
+  'between' =>
+  [
     'array' => ' :attribute mesti mempunyai antara :min dan :max item.',
     'file' => ' :attribute mestilah antara :min dan :max kilobait.',
     'numeric' => ' :attribute mestilah antara :min dan :max.',
     'string' => ' :attribute mestilah antara aksara :min dan :max.',
-  ),
+  ],
   'boolean' => 'Medan :attribute mestilah benar atau salah.',
   'confirmed' => 'Pengesahan :attribute tidak sepadan.',
   'current_password' => 'Kata laluan tidak betul.',
-  'custom' => 
-  array (
-    'attribute-name' => 
-    array (
+  'custom' =>
+  [
+    'attribute-name' =>
+    [
       'rule-name' => 'pesanan tersuai',
-    ),
-  ),
+    ],
+  ],
   'date' => ' :attribute bukan tarikh yang sah.',
   'date_equals' => ' :attribute mestilah tarikh bersamaan dengan :date.',
   'date_format' => ' :attribute tidak sepadan dengan format :format.',
@@ -45,20 +45,20 @@ return array (
   'exists' => ' :attribute yang dipilih adalah tidak sah.',
   'file' => ' :attribute mestilah fail.',
   'filled' => 'Medan :attribute mesti mempunyai nilai.',
-  'gt' => 
-  array (
+  'gt' =>
+  [
     'array' => ' :attribute mesti mempunyai lebih daripada :value item.',
     'file' => ' :attribute mestilah lebih besar daripada :value kilobait.',
     'numeric' => ' :attribute mestilah lebih besar daripada :value.',
     'string' => ' :attribute mestilah lebih besar daripada aksara :value.',
-  ),
-  'gte' => 
-  array (
+  ],
+  'gte' =>
+  [
     'array' => ' :attribute mesti mempunyai :value item atau lebih.',
     'file' => ' :attribute mestilah lebih besar daripada atau sama dengan :value kilobait.',
     'numeric' => ' :attribute mestilah lebih besar daripada atau sama dengan :value.',
     'string' => ' :attribute mestilah lebih besar daripada atau sama dengan aksara :value.',
-  ),
+  ],
   'image' => ' :attribute mestilah imej.',
   'in' => ' :attribute yang dipilih adalah tidak sah.',
   'in_array' => 'Medan :attribute tidak wujud dalam :other.',
@@ -67,37 +67,37 @@ return array (
   'ipv4' => ' :attribute mestilah alamat IPv4 yang sah.',
   'ipv6' => ' :attribute mestilah alamat IPv6 yang sah.',
   'json' => ' :attribute mestilah rentetan JSON yang sah.',
-  'lt' => 
-  array (
+  'lt' =>
+  [
     'array' => ' :attribute mesti mempunyai kurang daripada :value item.',
     'file' => ' :attribute mestilah kurang daripada :value kilobait.',
     'numeric' => ' :attribute mestilah kurang daripada :value.',
     'string' => ' :attribute mestilah kurang daripada :value aksara.',
-  ),
-  'lte' => 
-  array (
+  ],
+  'lte' =>
+  [
     'array' => ' :attribute mestilah tidak mempunyai lebih daripada :value item.',
     'file' => ' :attribute mestilah kurang daripada atau sama dengan :value kilobait.',
     'numeric' => ' :attribute mestilah kurang daripada atau sama dengan :value.',
     'string' => ' :attribute mestilah kurang daripada atau sama dengan aksara :value.',
-  ),
+  ],
   'mac_address' => ' :attribute mestilah alamat MAC yang sah.',
-  'max' => 
-  array (
+  'max' =>
+  [
     'array' => ' :attribute mestilah tidak mempunyai lebih daripada :max item.',
     'file' => ' :attribute mestilah tidak lebih daripada :max kilobait.',
     'numeric' => ' :attribute tidak boleh lebih besar daripada :max.',
     'string' => ' :attribute mestilah tidak lebih daripada :max aksara.',
-  ),
+  ],
   'mimes' => ' :attribute mestilah jenis fail: :values.',
   'mimetypes' => ' :attribute mestilah jenis fail: :values.',
-  'min' => 
-  array (
+  'min' =>
+  [
     'array' => ' :attribute mesti mempunyai sekurang-kurangnya :min item.',
     'file' => ' :attribute mestilah sekurang-kurangnya :min kilobait.',
     'numeric' => ' :attribute mestilah sekurang-kurangnya :min.',
     'string' => ' :attribute mestilah sekurang-kurangnya :min aksara.',
-  ),
+  ],
   'multiple_of' => ' :attribute mestilah gandaan bagi :value.',
   'not_in' => ' :attribute yang dipilih adalah tidak sah.',
   'not_regex' => 'Format :attribute tidak sah.',
@@ -117,13 +117,13 @@ return array (
   'required_without' => 'Medan :attribute diperlukan apabila :values tiada.',
   'required_without_all' => 'Medan :attribute diperlukan apabila tiada daripada :values hadir.',
   'same' => ' :attribute dan :other mesti sepadan.',
-  'size' => 
-  array (
+  'size' =>
+  [
     'array' => ' :attribute mesti mengandungi :size item.',
     'file' => ' :attribute mestilah :size kilobait.',
     'numeric' => ' :attribute mestilah :size.',
     'string' => ' :attribute mestilah :size aksara.',
-  ),
+  ],
   'starts_with' => ' :attribute mesti bermula dengan salah satu daripada yang berikut: :values.',
   'string' => ' :attribute mestilah rentetan.',
   'timezone' => ' :attribute mestilah zon waktu yang sah.',
@@ -131,4 +131,4 @@ return array (
   'uploaded' => ' :attribute gagal dimuat naik.',
   'url' => ' :attribute mestilah URL yang sah.',
   'uuid' => ' :attribute mestilah UUID yang sah.',
-);
+];
