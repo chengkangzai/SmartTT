@@ -86,8 +86,7 @@
                             <label for="total_capacity[{{ $key + 1 }}]"
                                 class="form-label">{{ __('Total Capacity') }}</label>
                             <input type="number" class="form-control" name="total_capacity[{{ $key + 1 }}]"
-                                id="total_capacity[{{ $key + 1 }}]"
-                                placeholder="{{ __('Total Capacity of') }}"
+                                id="total_capacity[{{ $key + 1 }}]" placeholder="{{ __('Total Capacity of') }}"
                                 value="{{ old('total_capacity.' . $key + 1, $pricingSetting->default_capacity[$key]) }}"
                                 step="1">
                         </div>

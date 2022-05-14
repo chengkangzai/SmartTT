@@ -65,8 +65,7 @@
                     <div class="col col-md-6">
                         <label for="nights" class="form-label">{{ __('Nights') }}</label>
                         <input type="number" name="nights" class="form-control" id="nights"
-                            value="{{ old('nights', $setting->default_night) }}"
-                            placeholder="{{ __('Nights') }}">
+                            value="{{ old('nights', $setting->default_night) }}" placeholder="{{ __('Nights') }}">
                     </div>
                 </div>
 

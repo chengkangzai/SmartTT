@@ -38,8 +38,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="password_confirmation">{{ __('Confirm your password') }}</label>
                     <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
-                        value="{{ old('password_confirmation') }}"
-                        placeholder="{{ __('Confirm your password') }}">
+                        value="{{ old('password_confirmation') }}" placeholder="{{ __('Confirm your password') }}">
                 </div>
             </form>
         </div>
