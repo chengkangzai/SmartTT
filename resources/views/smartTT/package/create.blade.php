@@ -73,21 +73,20 @@
                         <div class="col col-md-4">
                             <label for="name[{{ $key + 1 }}]" class="form-label">{{ __('Name') }}</label>
                             <input type="text" class="form-control" name="name[{{ $key + 1 }}]"
-                                id="name[{{ $key + 1 }}]" placeholder="{{ __('Enter Pricing Name') }}"
+                                id="name[{{ $key + 1 }}]" placeholder="{{ __('Pricing Name') }}"
                                 value="{{ old('name.' . $key + 1, $name) }}">
                         </div>
                         <div class="col col-md-3">
                             <label for="price[{{ $key + 1 }}]" class="form-label">{{ __('Price') }}</label>
                             <input type="number" class="form-control" name="price[{{ $key + 1 }}]"
-                                id="price[{{ $key + 1 }}]" step="0.01" placeholder="{{ __('Enter Price') }} "
+                                id="price[{{ $key + 1 }}]" step="0.01" placeholder="{{ __('Price') }} "
                                 value="{{ old('price.' . $key + 1) }}">
                         </div>
                         <div class="col col-md-3">
                             <label for="total_capacity[{{ $key + 1 }}]"
                                 class="form-label">{{ __('Total Capacity') }}</label>
                             <input type="number" class="form-control" name="total_capacity[{{ $key + 1 }}]"
-                                id="total_capacity[{{ $key + 1 }}]"
-                                placeholder="{{ __('Enter Total Capacity of') }}"
+                                id="total_capacity[{{ $key + 1 }}]" placeholder="{{ __('Total Capacity of') }}"
                                 value="{{ old('total_capacity.' . $key + 1, $pricingSetting->default_capacity[$key]) }}"
                                 step="1">
                         </div>

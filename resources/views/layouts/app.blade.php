@@ -49,13 +49,31 @@ $language = $setting->default_language;
                 </a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+                        <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                     </li>
                 </ul>
                 <ul class="header-nav ms-auto">
 
                 </ul>
                 <ul class="header-nav ms-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            {{ __('Language') }}
+                            <svg class="icon">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-globe-alt') }}"></use>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end pt-0">
+                            @foreach ($setting->supported_language as $lang)
+                                <a class="dropdown-item {{ App::currentLocale() == $lang ? 'active' : '' }} "
+                                    href="{{ route('setLocale', $lang) }}">
+                                    {{ $lang }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    |
                     <li class="nav-item dropdown">
                         <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">

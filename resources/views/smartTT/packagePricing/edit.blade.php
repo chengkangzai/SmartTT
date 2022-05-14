@@ -29,19 +29,19 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
-                    <input type="text" class="form-control" name="name" id="name"
-                        placeholder="{{ __('Enter Pricing Name') }}" value="{{ old('name', $packagePricing->name) }}">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="{{ __('Pricing Name') }}"
+                        value="{{ old('name', $packagePricing->name) }}">
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">{{ __('Price') }}</label>
                     <input type="number" class="form-control" name="price" id="price"
-                        placeholder="{{ 'Enter Price for Pricing ' }}"
-                        value="{{ old('price', $packagePricing->price) }}" step="0.01">
+                        placeholder="{{ 'Price for Pricing ' }}" value="{{ old('price', $packagePricing->price) }}"
+                        step="0.01">
                 </div>
                 <div class="mb-3">
                     <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>
                     <input type="number" class="form-control" name="total_capacity" id="total_capacity"
-                        placeholder="{{ __('Enter Total Capacity of') }}"
+                        placeholder="{{ __('Total Capacity of') }}"
                         value="{{ old('total_capacity', $packagePricing->total_capacity) }}" step="1">
                 </div>
             </form>

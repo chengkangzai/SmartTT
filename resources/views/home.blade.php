@@ -39,7 +39,7 @@
                     <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                         <div>
                             <div class="fs-4 fw-semibold">{{ $tourCount }}</div>
-                            <div>{{ 'Active Tour' }}</div>
+                            <div>{{ __('Active Tour') }}</div>
                         </div>
                     </div>
                     <div class="c-chart-wrapper mt-3" style="height:70px;">
@@ -88,9 +88,9 @@
                                     {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                                 </td>
                                 <td> {{ $log->description }} </td>
-                                <td> {{ number_format($logData->find($log->subject_id)->total_price, 2) }}
+                                <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
                                 </td>
-                                <td> {{ $logData->find($log->subject_id)->package->tour->name }} </td>
+                                <td> {{ $logData->find($log->subject_id)?->package?->tour?->name ?? '' }} </td>
                             </tr>
                         @empty
                             <tr>

@@ -54,7 +54,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>{{ __('No') }}</th>
+                        <th></th>
                         <th>{{ __('Guest Name') }}</th>
                         <th>{{ __('Package') }} ({{ $defaultCurrency }})</th>
                         <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
@@ -206,7 +206,7 @@
                 @endif
 
                 @if ($paymentMethod == 'stripe')
-                    <span class="my-2">{{ __('Enter Credit/Debit Card Information') }}</span>
+                    <span class="my-2">{{ __('Credit/Debit Card Information') }}</span>
                     <div class="container">
                         <div id="card-element" class="form-control py-2"></div>
                         <div class="alert alert-danger mt-4 d-none" id="card-error"></div>
@@ -250,7 +250,7 @@
                                     <label for="card-expiry-month">{{ __('Security Code') }}</label>
                                     <input type="text" class="form-control" id="card-expiry-month"
                                         wire:model="cardCvc" wire:change.debounce="validateCard('cardCvc')"
-                                        placeholder="{{ __('123') }}" />
+                                        placeholder="123" />
                                 </div>
                             </div>
                         </div>
@@ -317,13 +317,13 @@
         <div class="float-end">
             @if ($currentStep > 1 && $currentStep < 5)
                 <button wire:click="previousStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
-                    &larr; {{ __('Previous') }}
+                    &larr; {{ __('Previous Step') }}
                 </button>
             @endif
             @if ($currentStep < 4)
                 <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Next') }} &rarr;
+                    {{ __('Next Step') }} &rarr;
                 </button>
             @endif
             @if ($currentStep == 4)
@@ -351,7 +351,7 @@
             @if ($currentStep == 5 && $paymentMethod == 'cash')
                 <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Next') }} &rarr;
+                    {{ __('Next Step') }} &rarr;
                 </button>
             @endif
             @if ($currentStep == 6)

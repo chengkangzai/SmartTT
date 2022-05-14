@@ -29,18 +29,18 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $tour->name) }}"
-                        placeholder="{{ __('Enter Tour Name') }}">
+                        placeholder="{{ __('Tour Name') }}">
                 </div>
                 <div class="mb-3">
                     <label for="tour_code" class="form-label">{{ __('Tour Code') }}</label>
                     <input type="text" name="tour_code" class="form-control" id="tour_code"
-                        value="{{ old('tour_code', $tour->tour_code) }}" placeholder="{{ __('Enter Tour Code') }}">
+                        value="{{ old('tour_code', $tour->tour_code) }}" placeholder="{{ __('Tour Code') }}">
                 </div>
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label for="category" class="form-label">{{ __('Category') }}</label>
                         <input type="text" name="category" class="form-control" id="category"
-                            value="{{ old('category', $tour->category) }}" placeholder="{{ __('Enter Category') }}">
+                            value="{{ old('category', $tour->category) }}" placeholder="{{ __('Category') }}">
                     </div>
                     <div class="col col-md-6">
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
@@ -58,12 +58,12 @@
                     <div class="col col-md-6">
                         <label for="days" class="form-label">{{ __('Days') }}</label>
                         <input type="number" name="days" class="form-control" id="days" min="1"
-                            value="{{ old('days', $tour->days) }}" placeholder="{{ __('Enter Days') }}">
+                            value="{{ old('days', $tour->days) }}" placeholder="{{ __('Days') }}">
                     </div>
                     <div class="col col-md-6">
                         <label for="nights" class="form-label">{{ __('Nights') }}</label>
                         <input type="number" name="nights" class="form-control" id="nights" min="1"
-                            value="{{ old('nights', $tour->nights) }}" placeholder="{{ __('Enter Nights') }}">
+                            value="{{ old('nights', $tour->nights) }}" placeholder="{{ __('Nights') }}">
                     </div>
                 </div>
 

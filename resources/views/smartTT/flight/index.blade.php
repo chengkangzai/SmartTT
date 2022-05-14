@@ -32,7 +32,7 @@
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Depart Time') }}</th>
                             <th>{{ __('Arrival Time') }}</th>
-                            <th>{{ __('Price (RM)') }}</th>
+                            <th>{{ __('Price') }}</th>
                             <th>{{ __('Airline') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>

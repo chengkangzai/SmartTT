@@ -28,12 +28,12 @@
                 <div class="mb-3">
                     <label class="form-label" for="name">{{ __('Name') }}</label>
                     <input type="text" name="name" class="form-control " id="name" value="{{ $user->name }}"
-                        placeholder="{{ __('Enter User Name') }}">
+                        placeholder="{{ __('User Name') }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">{{ __('Email') }}</label>
                     <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}"
-                        placeholder="{{ __('Enter Email') }}">
+                        placeholder="{{ __('Email') }}">
                 </div>
             </form>
         </div>

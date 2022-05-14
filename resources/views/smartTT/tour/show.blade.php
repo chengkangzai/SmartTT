@@ -233,12 +233,12 @@
                             <div class="mb-3">
                                 <label for="place" class="form-label"> {{ __('Description Place') }} </label>
                                 <input class="form-control select2" id="place" name="place" required
-                                    placeholder="{{ __('Enter the name of the Place') }}" />
+                                    placeholder="{{ __('the name of the Place') }}" />
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label"> {{ __('Place Description') }} </label>
                                 <textarea name="description" id="description" class="form-control" rows="5" required
-                                    placeholder="{{ __('Enter the description for the place above') }}"></textarea>
+                                    placeholder="{{ __('the description for the place above') }}"></textarea>
                             </div>
                         </form>
                     </div>

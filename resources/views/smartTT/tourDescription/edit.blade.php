@@ -33,12 +33,12 @@
                 <div class="mb-3">
                     <label for="place" class="form-label">Place </label>
                     <input type="text" name="place" class="form-control" id="place"
-                        value="{{ $tourDescription->place }}" placeholder="{{ __('Enter the main visit place') }}">
+                        value="{{ $tourDescription->place }}" placeholder="{{ __('the main visit place') }}">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description </label>
                     <textarea type="text" name="description" class="form-control" id="description" rows="5"
-                        placeholder="{{ __('Enter Description') }}">{{ $tourDescription->description }}</textarea>
+                        placeholder="{{ __('Description') }}">{{ $tourDescription->description }}</textarea>
                 </div>
             </form>
         </div>
