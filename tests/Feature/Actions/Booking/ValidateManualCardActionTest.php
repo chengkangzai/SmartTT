@@ -38,6 +38,7 @@ it('should invalidate invalid data', function ($name, $data) {
 
 it('should invalidate card that are almost expired', function () {
     $action = app(ValidateManualCardAction::class);
+
     try {
         $action->execute('cardExpiry', now()->subDays()->format('m/y'));
         $this->fail('ValidationException was not thrown');

@@ -15,5 +15,5 @@ it('should change the locale', function ($name, $locales) {
             ->assertSee(__('Home'));
     }
 })->with([
-    ['locale', ['ms', 'zh'],]
+    ['locale', ['ms', 'zh'],],
 ]);

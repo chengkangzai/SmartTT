@@ -8,7 +8,6 @@ use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\ValidateManualCardAction;
 use App\Models\Booking;
 use App\Models\Payment;
-use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -52,7 +51,7 @@ class AddPaymentOnBooking extends Component
     public function mount(Booking $booking)
     {
         $this->booking = $booking;
-        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn(Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
 
@@ -70,7 +69,7 @@ class AddPaymentOnBooking extends Component
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
