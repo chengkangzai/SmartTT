@@ -1,23 +1,23 @@
 <?php
 
-return [
-  'booking' =>
-  [
+return array (
+  'booking' => 
+  array (
     'charge_per_child' => 'Caj Setiap Kanak-kanak',
     'default_payment_method' => 'Kaedah Pembayaran Lalai',
     'reservation_charge_per_pax' => 'Caj Tempahan Setiap Orang',
     'supported_payment_method' => 'Kaedah Pembayaran yang Disokong',
-  ],
-  'flight' =>
-  [
+  ),
+  'flight' => 
+  array (
     'default_class' => 'Kelas Lalai',
     'default_type' => 'Jenis Lalai',
     'supported_class' => 'Kelas yang Disokong',
     'supported_countries' => 'Negara yang Disokong',
     'supported_type' => 'Jenis yang Disokong',
-  ],
-  'general' =>
-  [
+  ),
+  'general' => 
+  array (
     'business_registration_no' => 'No Pendaftaran Perniagaan',
     'company_address' => 'Alamat syarikat',
     'company_name' => 'Nama syarikat',
@@ -29,22 +29,22 @@ return [
     'default_timezone' => 'Zon Waktu Lalai',
     'site_name' => 'Nama Tapak',
     'supported_language' => 'Bahasa yang Disokong',
-  ],
-  'package' =>
-  [
+  ),
+  'package' => 
+  array (
     'default_status' => 'Status Lalai',
-  ],
-  'package_pricing' =>
-  [
+  ),
+  'package_pricing' => 
+  array (
     'default_capacity' => 'Kapasiti Lalai',
     'default_namings' => 'Penamaan Lalai',
     'default_status' => 'Status Lalai',
-  ],
-  'tour' =>
-  [
+  ),
+  'tour' => 
+  array (
     'category' => 'Kategori',
     'default_day' => 'Hari Lalai',
     'default_night' => 'Malam Lalai',
     'default_status' => 'Status Lalai',
-  ],
-];
+  ),
+);

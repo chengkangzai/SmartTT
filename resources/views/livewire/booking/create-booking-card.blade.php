@@ -54,7 +54,7 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>{{ __('No') }}</th>
+                        <th></th>
                         <th>{{ __('Guest Name') }}</th>
                         <th>{{ __('Package') }} ({{ $defaultCurrency }})</th>
                         <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
@@ -317,13 +317,13 @@
         <div class="float-end">
             @if ($currentStep > 1 && $currentStep < 5)
                 <button wire:click="previousStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
-                    &larr; {{ __('Previous') }}
+                    &larr; {{ __('Previous Step') }}
                 </button>
             @endif
             @if ($currentStep < 4)
                 <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Next') }} &rarr;
+                    {{ __('Next Step') }} &rarr;
                 </button>
             @endif
             @if ($currentStep == 4)
@@ -351,7 +351,7 @@
             @if ($currentStep == 5 && $paymentMethod == 'cash')
                 <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Next') }} &rarr;
+                    {{ __('Next Step') }} &rarr;
                 </button>
             @endif
             @if ($currentStep == 6)

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
+Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web', 'auth'])->group(function () {
