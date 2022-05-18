@@ -272,8 +272,9 @@
                             wire:change.debounce="validateBilling('billingPhone')" placeholder="60123456789" />
                     </div>
                 </div>
-                <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
-                    {{ number_format($paymentAmount, 2) }}</p>
+                <p class="my-3">
+                    {{ __('Payable : ') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                </p>
             </div>
         @endif
         @if ($currentStep == 6)
