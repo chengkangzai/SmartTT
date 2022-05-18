@@ -40,7 +40,11 @@ it('should be mountable', function () {
 });
 
 it('should be create booking as customer', function () {
-    $selectedTour = Tour::with(['packages', 'packages.pricings'])->withCount('packages')->active()->where('packages_count', '>', 1)->first();
+    $selectedTour = Tour::with(['packages', 'packages.pricings'])->active()
+        ->get()
+        ->filter(fn ($tour) => $tour->packages->count() > 0)
+        ->filter(fn ($tour) => $tour->packages->filter(fn ($package) => $package->pricings->count() > 0)->count() > 0)
+        ->first();
     $selectedPackage = $selectedTour->packages->first();
     $packagePricing = PackagePricing::wherePackageId($selectedPackage->id)->first();
     $livewire = Livewire::actingAs(User::factory()->customer()->create())
@@ -81,7 +85,7 @@ it('should be create booking as customer', function () {
         ->assertSet('bookingId', 0)
         ->call('nextStep')
         ->assertSet('currentStep', 5)
-        ->assertSet('bookingId', Booking::count())
+        ->assertSet('bookingId', Booking::latest()->first()->id)
         ->assertDispatchedBrowserEvent('getReadyForPayment')
         ->assertSuccessful();
 
@@ -99,7 +103,11 @@ it('should be create booking as customer', function () {
 it('should be create booking as staff', function () {
     $reservationCharge = app(BookingSetting::class)->reservation_charge_per_pax;
 
-    $selectedTour = Tour::with(['packages', 'packages.pricings'])->withCount('packages')->active()->where('packages_count', '>', 1)->first();
+    $selectedTour = Tour::with(['packages', 'packages.pricings'])->active()
+        ->get()
+        ->filter(fn ($tour) => $tour->packages->count() > 0)
+        ->filter(fn ($tour) => $tour->packages->filter(fn ($package) => $package->pricings->count() > 0)->count() > 0)
+        ->first();
     $selectedPackage = $selectedTour->packages->first();
     $packagePricing = PackagePricing::wherePackageId($selectedPackage->id)->first();
     $livewire = Livewire::actingAs(User::factory()->staff()->create())
@@ -145,7 +153,7 @@ it('should be create booking as staff', function () {
         ->call('nextStep')
         ->assertSet('currentStep', 5)
         ->call('previousStep')
-        ->assertSet('bookingId', Booking::count())
+        ->assertSet('bookingId', Booking::latest()->first()->id)
         ->assertSuccessful();
 
     $booking = Booking::find($livewire->bookingId);
