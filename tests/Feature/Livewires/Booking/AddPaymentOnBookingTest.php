@@ -26,7 +26,7 @@ beforeEach(function () {
         AirportSeeder::class,
         FlightSeeder::class,
         PackageSeeder::class,
-        BookingSeeder::class
+        BookingSeeder::class,
     ]);
 });
 
@@ -43,7 +43,7 @@ it('should add payment as customer', function () {
     ]);
     Livewire::actingAs($user)
         ->test(AddPaymentOnBooking::class, [
-            'booking' => $booking
+            'booking' => $booking,
         ])
         ->assertViewIs('livewire.booking.add-payment-on-booking')
         ->assertSet('booking', $booking)
@@ -61,7 +61,7 @@ it('should add payment as Admin', function () {
     ]);
     $livewire = Livewire::actingAs($user)
         ->test(AddPaymentOnBooking::class, [
-            'booking' => $booking
+            'booking' => $booking,
         ])
         ->assertViewIs('livewire.booking.add-payment-on-booking')
         ->assertSet('booking', $booking)
