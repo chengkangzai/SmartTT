@@ -81,7 +81,7 @@ class CreateBookingCard extends Component
         $bookingSetting = app(BookingSetting::class);
         $this->charge_per_child = $bookingSetting->charge_per_child;
         $this->reservation_charge_per_pax = $bookingSetting->reservation_charge_per_pax;
-        $this->paymentMethod = auth()->user()->hasRole('Customer') ? 'stripe' : 'manual';
+        $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
     }
 
     public function render(): Factory|View|Application
@@ -330,7 +330,7 @@ class CreateBookingCard extends Component
     private function finish()
     {
         session()->flash('success', __('Booking saved successfully'));
-        $this->redirectRoute('bookings.index');
+        $this->redirectRoute('bookings.show', $this->bookingId);
     }
     #endregion
 
