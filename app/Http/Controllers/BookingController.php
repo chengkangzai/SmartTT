@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
@@ -57,7 +56,7 @@ class BookingController extends Controller
     public function addPayment(Booking $booking)
     {
         abort_unless(auth()->user()->can('Create Payment'), 403);
-        $paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $paymentAmount = $booking->getRemaining();
         if ($paymentAmount <= 0) {
             return redirect()->route('bookings.show', $booking)->withErrors(__('Payment already completed'));
         }
