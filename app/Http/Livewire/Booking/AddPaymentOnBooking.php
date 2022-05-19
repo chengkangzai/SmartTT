@@ -51,7 +51,7 @@ class AddPaymentOnBooking extends Component
     public function mount(Booking $booking)
     {
         $this->booking = $booking;
-        $this->paymentAmount = $booking->total_price - $booking->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+        $this->paymentAmount = $booking->getRemaining();
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
 

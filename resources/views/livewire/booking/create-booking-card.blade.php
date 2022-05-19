@@ -129,7 +129,7 @@
                         <p class="float-end">{{ __('Itinerary') }}</p>
                     </td>
                     <td>
-                        <a href="{{ $tours->find($tour)->first()->getFirstMedia('itinerary')->getUrl() }}"
+                        <a href="{{ $tours->find($tour)->first()->getFirstMediaUrl('itinerary') ?? '#' }}"
                             target="_blank" class="btn btn-outline-primary">
                             {{ __('Itinerary') }}
                         </a>
@@ -272,8 +272,9 @@
                             wire:change.debounce="validateBilling('billingPhone')" placeholder="60123456789" />
                     </div>
                 </div>
-                <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
-                    {{ number_format($paymentAmount, 2) }}</p>
+                <p class="my-3">
+                    {{ __('Payable : ') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                </p>
             </div>
         @endif
         @if ($currentStep == 6)
@@ -291,7 +292,7 @@
                             <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
                             <p>{{ __('The payment has been successfully processed') }}</p>
                             <p>{{ __('You will receive an email confirmation shortly') }}</p>
-                            <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
+                            <a href="{{ $payment->getFirstMediaUrl('invoices')?? '#' }}"
                                 class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Invoice') }}
                             </a>
@@ -299,11 +300,11 @@
                         @if ($paymentMethod == 'manual')
                             <h3>{{ __('Booking Paid') }}</h3>
                             <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
-                            <a href="{{ $payment->getFirstMedia('invoices')->getUrl() }}"
+                            <a href="{{ $payment->getFirstMediaUrl('invoices')?? '#' }}"
                                 class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Invoice') }}
                             </a>
-                            <a href="{{ $payment->getFirstMedia('receipts')->getUrl() }}"
+                            <a href="{{ $payment->getFirstMediaUrl('receipts') ?? '#' }}"
                                 class="btn btn-outline-primary" target="_blank">
                                 {{ __('Download Receipt') }}
                             </a>

@@ -25,7 +25,7 @@ class TourFactory extends Factory
             'category' => $setting->category[array_rand($setting->category)],
             'nights' => rand(1, 5),
             'days' => rand(1, 5),
-            'is_active' => rand(0, 1),
+            'is_active' => true,
         ];
     }
 

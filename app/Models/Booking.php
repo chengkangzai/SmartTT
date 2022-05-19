@@ -45,6 +45,11 @@ class Booking extends Model
         return $amounts >= $this->total_price;
     }
 
+    public function getRemaining()
+    {
+        return $this->total_price - $this->payment->filter(fn (Payment $payment) => $payment->status === Payment::STATUS_PAID)->sum('amount');
+    }
+
     public function package(): BelongsTo
     {
         return $this->belongsTo(Package::class);
