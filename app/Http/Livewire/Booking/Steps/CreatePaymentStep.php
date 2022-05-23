@@ -6,6 +6,7 @@ use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\UpdateManualPaymentAction;
 use App\Actions\Booking\ValidateManualCardAction;
+use App\Models\Booking;
 use App\Models\PackagePricing;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
@@ -50,11 +51,17 @@ class CreatePaymentStep extends StepComponent
     /** @var PackagePricing */
     public $pricings;
 
+    /** @var Booking */
+    public $booking;
+
+    protected $listeners = ['cardSetupConfirmed'];
+
     public function mount()
     {
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->bookingId = $this->stateForStep('confirm-booking-detail-step')['booking']['id'];
+        $this->booking = Booking::find($this->bookingId);
         $this->guests = $this->stateForStep('register-booking-and-guest-step')['guests'];
         $this->billingName = $this->guests[0]['name'];
 
@@ -91,7 +98,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
             Log::info('PaymentIntent: ' . $this->paymentIntent . ' at ' . now());
@@ -123,8 +130,10 @@ class CreatePaymentStep extends StepComponent
         $user = auth()->user();
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
-        $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->package . ' Of Tour '
-            . $this->tours->find($this->tour)->first()->name, $this->paymentAmount * 100);
+        $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->booking->package->id
+            . ' Of Tour ' . $this->booking->package->tour->name,
+            $this->paymentAmount * 100
+        );
 
         $this->reduceAvailability();
         $this->generateInvoice();
@@ -173,7 +182,7 @@ class CreatePaymentStep extends StepComponent
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn ($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
