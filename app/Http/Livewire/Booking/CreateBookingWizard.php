@@ -21,6 +21,7 @@ class CreateBookingWizard extends WizardComponent
             ConfirmBookingDetailStep::class,
             CreatePaymentStep::class,
             ShowBookingSuccessDetailStep::class,
+
         ];
     }
 }

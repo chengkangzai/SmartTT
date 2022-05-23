@@ -207,7 +207,6 @@ class CreatePaymentStep extends StepComponent
     {
         if ($this->paymentMethod === 'manual') {
             $this->recordManualPayment();
-            parent::nextStep();
             return;
         }
 

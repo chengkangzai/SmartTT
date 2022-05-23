@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Booking\Steps;
 
+use App\Models\Payment;
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,19 +14,26 @@ class ShowBookingSuccessDetailStep extends StepComponent
     public string $paymentMethod;
     public string $defaultCurrency;
     public string $paymentAmount;
+    /** @var Payment $payment */
     public $payment;
 
     public function mount()
     {
-        dd($this->allStepsState());
-        $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
-        $this->paymentAmount = $this->stateForStep('confirm-booking-detail-step')['booking']['total_amount'];
-        $this->payment = $this->stateForStep('confirm-booking-detail-step')['booking']['payment'];
+
+        $previousState = $this->stateForStep('create-payment-step');
+        $this->paymentMethod = $previousState['paymentMethod'];
+        $this->paymentAmount = $previousState['paymentAmount'];
+        $this->payment = Payment::findOrFail($previousState['payment']['id']);
     }
 
     public function render(): Factory|View|Application
     {
         return view('livewire.booking.steps.show-booking-success-detail-step');
+    }
+
+    public function nextStep()
+    {
+        $this->redirectRoute('bookings.show', $this->payment->booking);
     }
 }
