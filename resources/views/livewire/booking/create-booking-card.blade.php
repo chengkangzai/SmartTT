@@ -80,7 +80,7 @@
                                             <option value="{{ $pricing['id'] }}"
                                                 @if ($loop->first) selected @endif>
                                                 {{ $pricing['name'] }}
-                                                ({{ $pricing['available_capacity'] . ' ' . __('Left') }})
+                                                ({{ $pricing['available_capacity'] . ' ' . __('Seat Left') }})
                                                 ({{ number_format($pricing['price'], 2) }})
                                             </option>
                                         @endforeach
