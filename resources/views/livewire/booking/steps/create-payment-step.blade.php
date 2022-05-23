@@ -105,6 +105,12 @@
             <p class="my-3">
                 {{ __('Payable : ') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
             </p>
+            <p>
+                @if($paymentType == 'reservation')
+                    {{__('Full Payment must be paid before : ')}}
+                    {{$booking->package->depart_time->addDays(config('invoices.date.pay_until_days'))->format('d M Y')}}
+                @endif
+            </p>
         </div>
     </div>
     <div class="card-footer">
