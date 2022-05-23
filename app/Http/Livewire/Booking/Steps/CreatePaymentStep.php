@@ -21,7 +21,6 @@ use Stripe\SetupIntent;
 
 class CreatePaymentStep extends StepComponent
 {
-
     public string $paymentType = Payment::TYPE_FULL;
     public string $paymentMethod;
     public string $manualType = Payment::METHOD_CARD;
@@ -43,12 +42,12 @@ class CreatePaymentStep extends StepComponent
     public int $paymentAmount = 0;
     private SetupIntent $paymentIntent;
 
-    /** @var Payment $payment */
+    /** @var Payment */
     public $payment;
     public string $defaultCurrency;
     public array $guests;
     public int $bookingId;
-    /** @var PackagePricing $pricings */
+    /** @var PackagePricing */
     public $pricings;
 
     public function mount()
@@ -92,7 +91,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
             Log::info('PaymentIntent: ' . $this->paymentIntent . ' at ' . now());
@@ -174,7 +173,7 @@ class CreatePaymentStep extends StepComponent
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
@@ -199,7 +198,6 @@ class CreatePaymentStep extends StepComponent
         $this->getReadyForPayment();
     }
 
-
     /**
      * @throws Exception
      */
@@ -207,6 +205,7 @@ class CreatePaymentStep extends StepComponent
     {
         if ($this->paymentMethod === 'manual') {
             $this->recordManualPayment();
+
             return;
         }
 

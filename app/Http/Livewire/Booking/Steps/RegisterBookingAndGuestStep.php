@@ -16,7 +16,7 @@ use Spatie\LivewireWizard\Components\StepComponent;
 class RegisterBookingAndGuestStep extends StepComponent
 {
     public int $package;
-    /** @var PackagePricing[]|Collection $pricings */
+    /** @var PackagePricing[]|Collection */
     public $pricings;
     public int $pricing = 0;
     public array $pricingsHolder;
@@ -68,7 +68,7 @@ class RegisterBookingAndGuestStep extends StepComponent
 
     public function updatePrice($index)
     {
-        if (!$this->guests[$index]['is_child']) {
+        if (! $this->guests[$index]['is_child']) {
             $this->guests[$index]['price'] = $this->pricings->find($this->guests[$index]['pricing'])->price;
         }
         $this->totalPrice = collect($this->guests)->sum('price');

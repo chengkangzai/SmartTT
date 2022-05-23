@@ -14,7 +14,7 @@ class ShowBookingSuccessDetailStep extends StepComponent
     public string $paymentMethod;
     public string $defaultCurrency;
     public string $paymentAmount;
-    /** @var Payment $payment */
+    /** @var Payment */
     public $payment;
 
     public function mount()

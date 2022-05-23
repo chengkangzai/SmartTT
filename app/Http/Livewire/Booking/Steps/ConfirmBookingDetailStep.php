@@ -17,15 +17,15 @@ class ConfirmBookingDetailStep extends StepComponent
 {
     public array $guests;
 
-    /** @var Tour $tour */
+    /** @var Tour */
     public $tour;
-    /** @var Package $package */
+    /** @var Package */
     public $package;
-    /** @var Collection $pricings */
+    /** @var Collection */
     public $pricings;
     public string $defaultCurrency;
     public int $totalPrice;
-    /** @var Booking $booking */
+    /** @var Booking */
     public $booking;
 
     public function render(): Factory|View|Application
