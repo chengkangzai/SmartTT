@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">{{ __('Choose Package') }}</h4>
+    </div>
+    <div class="card-body">
+        @include('partials.error-alert')
+        <h4>{{ __('Register Guest') }}</h4>
+        <div class="float-end btn-group">
+            <a wire:click="addNewGuest" class="btn btn-outline-primary my-2">{{ __('Add New guest') }}</a>
+            <a wire:click="addNewChild" class="btn btn-outline-primary my-2">{{ __('Add New Child') }}</a>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th>{{ __('Guest Name') }}</th>
+                <th>{{ __('Package') }} ({{ $defaultCurrency }})</th>
+                <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
+                <th>{{ __('Action') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($guests as $i => $guest)
+                <tr>
+                    <td>
+                        {{ $i + 1 }}
+                    </td>
+                    <td>
+                        <input type="text" wire:model.debounce="guests.{{ $i }}.name"
+                               id="guest-{{ $i }}-name" class="form-control" aria-label="Name">
+                    </td>
+                    <td>
+                        @if (!$guest['is_child'])
+                            <select wire:model.debounce="guests.{{ $i }}.pricing"
+                                    id="guest-{{ $i }}-pricings" class="form-control"
+                                    aria-label="Pricing" required wire:change="updatePrice({{ $i }})">
+                                @foreach ($pricingsHolder as $pricing)
+                                    <option value="{{ $pricing['id'] }}"
+                                            @if ($loop->first) selected @endif>
+                                        {{ $pricing['name'] }}
+                                        ({{ $pricing['available_capacity'] . ' ' . __('Left') }})
+                                        ({{ number_format($pricing['price'], 2) }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        @else
+                            <p class="float-end"> {{ number_format($guest['price'], 2) }}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <p> {{ number_format($guest['price'], 2) }}</p>
+                    </td>
+                    <td>
+                        <button wire:click="removeGuest({{ $i }})" class="btn btn-outline-danger"
+                                @if ($loop->first) disabled @endif>
+                            <svg class="icon icon-lg">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-trash') }}"></use>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <p class="float-end fw-bold ">{{ __('Total Price') }}</p>
+                </td>
+                <td colspan="2">
+                    <p class="fw-bold">{{ number_format($totalPrice, 2) }}</p>
+                </td>
+            </tfoot>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="float-end">
+            <button wire:click="previousStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                &larr; {{ __('Previous Step') }}
+            </button>
+            <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                {{ __('Next Step') }} &rarr;
+            </button>
+        </div>
+    </div>
+</div>
