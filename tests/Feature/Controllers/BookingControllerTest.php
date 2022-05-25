@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Booking\CreateBookingWizard;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
@@ -31,7 +32,7 @@ it('should return create view', function () {
     $this
         ->get(route('bookings.create'))
         ->assertViewIs('smartTT.booking.create')
-        ->assertSeeLivewire('booking.create-booking-card');
+        ->assertSeeLivewire(CreateBookingWizard::class);
 });
 
 it('should return show view', function () {
