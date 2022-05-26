@@ -29,10 +29,11 @@ class TourController extends Controller
         return view('smartTT.tour.index', compact('tours'));
     }
 
-    public function create(TourSetting $setting): Factory|View|Application
+    public function create(): Factory|View|Application
     {
         abort_unless(auth()->user()->can('Create Tour'), 403);
         $countries = Country::pluck('name', 'id');
+        $setting = app(TourSetting::class);
 
         return view('smartTT.tour.create', compact('countries', 'setting'));
     }
@@ -64,8 +65,9 @@ class TourController extends Controller
     {
         abort_unless(auth()->user()->can('Edit Tour'), 403);
         $countries = Country::pluck('name', 'id');
+        $setting = app(TourSetting::class);
 
-        return view('smartTT.tour.edit', compact('tour', 'countries'));
+        return view('smartTT.tour.edit', compact('tour', 'countries', 'setting'));
     }
 
     public function update(Request $request, Tour $tour, UpdateTourAction $action): RedirectResponse
