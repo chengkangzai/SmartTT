@@ -19,8 +19,9 @@ class BookingController extends Controller
         abort_unless($user->can('View Booking'), 403);
 
         $role = $user->roles()->first()->name;
-        $bookings = Booking::when($role === 'Customer', fn ($q) => $q->active()->where('user_id', $user->id))
-            ->with(['user', 'package', 'package.tour'])
+        $bookings = Booking::query()
+            ->when($role === 'Customer', fn($q) => $q->active()->where('user_id', $user->id))
+            ->with(['user', 'package', 'package.tour', 'payment:id,booking_id,amount'])
             ->orderByDesc('bookings.id')
             ->paginate(10);
         $setting = app(GeneralSetting::class);
@@ -38,7 +39,7 @@ class BookingController extends Controller
     public function show(Booking $booking): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View Booking'), 403);
-        $booking->load(['user', 'package', 'package.tour', 'payment', 'guests']);
+        $booking->load(['package.tour.countries', 'guests.packagePricing', 'payment:id,amount', 'payment.media', 'guests']);
         $setting = app(GeneralSetting::class);
         $bookingSetting = app(BookingSetting::class);
 
