@@ -12,7 +12,6 @@
         </ol>
     </nav>
 
-{{--    <livewire:booking.create-booking-card />--}}
     <livewire:booking.create-booking-wizard />
 @endsection
 
@@ -38,13 +37,13 @@
             $('#payment-button').attr('disabled', true);
             $('#payment-button-spinner').removeClass('d-none');
             stripe.confirmCardSetup(clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name: $('billing-name').val(),
-                    },
-                }
-            })
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: $('billing-name').val(),
+                        },
+                    }
+                })
                 .then(function(result) {
                     if (result.error) {
                         $('#card-error').text(result.error.message).removeClass('d-none');
@@ -59,4 +58,3 @@
         }
     </script>
 @endpush
-
