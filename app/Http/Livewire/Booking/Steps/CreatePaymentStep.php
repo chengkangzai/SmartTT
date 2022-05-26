@@ -98,7 +98,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
             Log::info('PaymentIntent: ' . $this->paymentIntent . ' at ' . now());
@@ -130,7 +130,8 @@ class CreatePaymentStep extends StepComponent
         $user = auth()->user();
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
-        $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->booking->package->id
+        $user->invoiceFor(
+            'Booking(' . $this->paymentType . ') for Package #' . $this->booking->package->id
             . ' Of Tour ' . $this->booking->package->tour->name,
             $this->paymentAmount * 100
         );
@@ -182,7 +183,7 @@ class CreatePaymentStep extends StepComponent
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });
