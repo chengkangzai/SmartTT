@@ -39,8 +39,13 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label for="category" class="form-label">{{ __('Category') }}</label>
-                        <input type="text" name="category" class="form-control" id="category"
-                            value="{{ old('category', $tour->category) }}" placeholder="{{ __('Category') }}">
+                        <select name="category" class="form-control" id="category">
+                            @foreach ($setting->category as $category)
+                                <option value="{{ $category }}" @selected(old('category', $tour->category))>
+                                    {{ $category }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col col-md-6">
                         <label for="country_id" class="form-label">{{ __('Country') }}</label>
