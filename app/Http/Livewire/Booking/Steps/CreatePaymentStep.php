@@ -59,8 +59,10 @@ class CreatePaymentStep extends StepComponent
     public function mount()
     {
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
-        $this->bookingId = $this->state()->forStep('confirm-booking-detail-step')['booking']['id'];
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
+
+        $state = $this->state()->all();
+        $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'];
         $this->booking = Booking::find($this->bookingId);
         $this->guests = $this->state()->forStep('register-booking-and-guest-step')['guests'];
         $this->billingName = $this->guests[0]['name'];

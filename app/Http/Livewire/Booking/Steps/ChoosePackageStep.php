@@ -19,7 +19,7 @@ class ChoosePackageStep extends StepComponent
 
         return view('livewire.booking.steps.choose-package-step', [
             'packages' => Package::where('tour_id', $tourId)->active()->get(),
-            'defaultCurrency' => app(GeneralSetting::class)->default_currency,
+            'defaultCurrency' => app(GeneralSetting::class)->default_currency_symbol,
         ]);
     }
 

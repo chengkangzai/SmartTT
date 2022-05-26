@@ -38,7 +38,7 @@
                             <tr>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Package') }}</th>
-                                <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
+                                <th>{{ __('Price') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>{{ $guest['name'] }}</td>
                                     <td>{{ $pricings->find($guest['pricing'])?->name ?? 'N/A' }}</td>
-                                    <td>{{ number_format($guest['price'], 2) }}</td>
+                                    <td>{{$defaultCurrency}} {{ number_format($guest['price'], 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -55,7 +55,7 @@
                                 <td colspan="2">
                                     <span class="float-end fw-bold ">{{ __('Total Price') }}</span>
                                 </td>
-                                <td>{{ number_format($totalPrice, 2) }}</td>
+                                <td>{{$defaultCurrency}} {{ number_format($totalPrice, 2) }}</td>
                         </tfoot>
                     </table>
                 </td>

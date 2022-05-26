@@ -38,7 +38,7 @@ class ConfirmBookingDetailStep extends StepComponent
         $this->package = Package::with('pricings')->find($package);
         $this->pricings = $this->package->pricings;
 
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
         $this->totalPrice = $registerStep['totalPrice'];
         $this->guests = $registerStep['guests'];
 

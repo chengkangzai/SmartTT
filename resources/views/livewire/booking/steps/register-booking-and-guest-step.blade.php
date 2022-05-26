@@ -26,8 +26,8 @@
                 <tr>
                     <th></th>
                     <th>{{ __('Guest Name') }}</th>
-                    <th>{{ __('Package') }} ({{ $defaultCurrency }})</th>
-                    <th>{{ __('Price') }} ({{ $defaultCurrency }}) {{ __('Per Pax') }}</th>
+                    <th>{{ __('Package') }} </th>
+                    <th>{{ __('Price') }} {{ __('Per Pax') }}</th>
                     <th>{{ __('Action') }}</th>
                 </tr>
             </thead>
@@ -51,7 +51,7 @@
                                             @if ($loop->first) selected @endif>
                                             {{ $pricing['name'] }}
                                             ({{ $pricing['available_capacity'] . ' ' . __('Seat Left') }})
-                                            ({{ number_format($pricing['price'], 2) }})
+                                            ({{$defaultCurrency}} {{ number_format($pricing['price'], 2) }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -60,7 +60,7 @@
                             @endif
                         </td>
                         <td>
-                            <p> {{ number_format($guest['price'], 2) }}</p>
+                            <p>{{$defaultCurrency}} {{ number_format($guest['price'], 2) }}</p>
                         </td>
                         <td>
                             <button wire:click="removeGuest({{ $i }})" class="btn btn-outline-danger"
@@ -79,7 +79,7 @@
                         <p class="float-end fw-bold ">{{ __('Total Price') }}</p>
                     </td>
                     <td colspan="2">
-                        <p class="fw-bold">{{ number_format($totalPrice, 2) }}</p>
+                        <p class="fw-bold">{{$defaultCurrency}} {{ number_format($totalPrice, 2) }}</p>
                     </td>
             </tfoot>
         </table>

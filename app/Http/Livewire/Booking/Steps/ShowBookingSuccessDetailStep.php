@@ -19,7 +19,7 @@ class ShowBookingSuccessDetailStep extends StepComponent
 
     public function mount()
     {
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
 
         $previousState = $this->state()->forStep('create-payment-step');
         $this->paymentMethod = $previousState['paymentMethod'];

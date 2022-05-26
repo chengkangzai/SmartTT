@@ -33,7 +33,7 @@ class RegisterBookingAndGuestStep extends StepComponent
         // remove the word Left to "Seat Left" , show "pax" after the price
         $this->package = $this->state()->forStep('choose-package-step')['package'];
         $this->updatePricings();
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
         if (count($this->guests) == 0) {
             $this->addNewGuest();
