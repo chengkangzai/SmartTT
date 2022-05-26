@@ -44,8 +44,7 @@
         </a>
     </li>
 
-
-    @role('Super Admin')
+    @role('Super Admin|Manager')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                 <svg class="nav-icon">

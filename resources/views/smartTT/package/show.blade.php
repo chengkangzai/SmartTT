@@ -111,12 +111,15 @@
                                         </a>
                                     @endcan
                                     @can('Delete Package Pricing')
-                                        <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
-                                            class="d-inline">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                        </form>
+                                        @if ($pricing->guests->count() == 0)
+                                            <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
+                                                class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input class="btn btn-outline-danger" type="submit"
+                                                    value="{{ __('Delete') }}" />
+                                            </form>
+                                        @endif
                                     @endcan
                                     @can('Audit Package Pricing')
                                         <a href="{{ route('packagePricings.audit', $pricing) }}"
@@ -185,6 +188,7 @@
             </div>
         </div>
     </div>
+    @include('partials.error-toast')
 @endsection
 
 

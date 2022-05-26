@@ -7,6 +7,7 @@ use App\Actions\Package\Pricings\DestroyPackagePricingAction;
 use App\Actions\Package\Pricings\UpdatePackagePricingAction;
 use App\Models\Package;
 use App\Models\PackagePricing;
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 
@@ -29,10 +30,14 @@ class PackagePricingController extends Controller
 
     public function destroy(PackagePricing $packagePricing, DestroyPackagePricingAction $action)
     {
-        abort_unless(auth()->user()->can('Delete Package Pricing'), 403);
-        $action->execute($packagePricing);
+        try {
+            abort_unless(auth()->user()->can('Delete Package Pricing'), 403);
+            $action->execute($packagePricing);
 
-        return redirect()->route('packages.show', $packagePricing->package)->with('success', __('Package pricing deleted successfully.'));
+            return redirect()->route('packages.show', $packagePricing->package)->with('success', __('Package pricing deleted successfully.'));
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 
     public function attachToPackage(Request $request, Package $package, AttachPricingToPackageAction $action)

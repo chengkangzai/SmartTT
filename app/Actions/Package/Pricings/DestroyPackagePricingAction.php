@@ -6,9 +6,15 @@ use App\Models\PackagePricing;
 
 class DestroyPackagePricingAction
 {
-    //TODO Check there is no booking for this pricing before delete
+    /**
+     * @throws \Exception
+     */
     public function execute(PackagePricing $packagePricing): ?bool
     {
+        if ($packagePricing->guests()->count() > 0) {
+            throw new \Exception('This pricing is used in a booking. You can not delete it.');
+        }
+
         return $packagePricing->delete();
     }
 }
