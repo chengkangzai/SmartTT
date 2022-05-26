@@ -23,6 +23,6 @@ return [
         Role::class => __('Role'),
         User::class => __('User'),
         Tour::class => __('Tour'),
-        TourDescription::class => __('Tour Description')
-    ]
+        TourDescription::class => __('Tour Description'),
+    ],
 ];
