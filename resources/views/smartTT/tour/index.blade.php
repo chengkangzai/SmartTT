@@ -17,7 +17,6 @@
 
     <div class="card">
         <div class="card-header">
-            <h2>{{ __('Tours') }}</h2>
             <div class="float-end">
                 @can('Create Tour')
                     <a href="{{ route('tours.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>

@@ -18,7 +18,6 @@
     </nav>
     <div class="card">
         <div class="card-header">
-            <h2>{{ __('Packages') }}</h2>
             <div class="float-end">
                 @can('Create Package')
                     <a href="{{ route('packages.create') }}" class="btn btn-outline-success">{{ __('Create') }}</a>
