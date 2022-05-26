@@ -55,6 +55,7 @@ class CreatePaymentStep extends StepComponent
     public $booking;
 
     protected $listeners = ['cardSetupConfirmed'];
+    public mixed $totalPrice;
 
     public function mount()
     {
@@ -64,8 +65,9 @@ class CreatePaymentStep extends StepComponent
         $state = $this->state()->all();
         $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'];
         $this->booking = Booking::find($this->bookingId);
-        $this->guests = $this->state()->forStep('register-booking-and-guest-step')['guests'];
+        $this->guests = $state['register-booking-and-guest-step']['guests'];
         $this->billingName = $this->guests[0]['name'];
+        $this->totalPrice = $state['register-booking-and-guest-step']['totalPrice'];
 
         $this->pricings = PackagePricing::all();
         $this->getReadyForPayment();
@@ -78,10 +80,9 @@ class CreatePaymentStep extends StepComponent
 
     private function getReadyForPayment(): void
     {
-        $totalPrice = $this->state()->forStep('register-booking-and-guest-step')['totalPrice'];
         $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax;
 
-        $this->updateOrCreatePayment($totalPrice, $reservation_charge_per_pax);
+        $this->updateOrCreatePayment($this->totalPrice, $reservation_charge_per_pax);
         $this->paymentAmount = $this->payment->amount;
 
         $this->dispatchBrowserEventIfInStripeMode();
@@ -100,7 +101,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
             Log::info('PaymentIntent: ' . $this->paymentIntent . ' at ' . now());
@@ -185,7 +186,7 @@ class CreatePaymentStep extends StepComponent
     private function reduceAvailability(): void
     {
         collect($this->guests)
-            ->filter(fn ($guest) => ! $guest['is_child'])
+            ->filter(fn($guest) => !$guest['is_child'])
             ->each(function ($guest) {
                 $this->pricings->find($guest['pricing'])->decrement('available_capacity');
             });

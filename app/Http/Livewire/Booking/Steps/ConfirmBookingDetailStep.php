@@ -30,9 +30,10 @@ class ConfirmBookingDetailStep extends StepComponent
 
     public function render(): Factory|View|Application
     {
-        $registerStep = $this->state()->forStep('register-booking-and-guest-step');
-        $tour = $this->state()->forStep('choose-tour-step')['tour'];
-        $package = $this->state()->forStep('choose-package-step')['package'];
+        $state = $this->state()->all();
+        $registerStep = $state['register-booking-and-guest-step'];
+        $tour = $state['choose-tour-step']['tour'];
+        $package = $state['choose-package-step']['package'];
 
         $this->tour = Tour::find($tour);
         $this->package = Package::with('pricings')->find($package);

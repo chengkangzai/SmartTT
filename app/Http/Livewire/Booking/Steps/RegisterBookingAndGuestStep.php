@@ -30,7 +30,6 @@ class RegisterBookingAndGuestStep extends StepComponent
 
     public function mount()
     {
-        // remove the word Left to "Seat Left" , show "pax" after the price
         $this->package = $this->state()->forStep('choose-package-step')['package'];
         $this->updatePricings();
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
