@@ -144,7 +144,7 @@
 
             let newClass = $('#new_class').val();
             $('#default_class').append(`<option value="${newClass}">${newClass}</option>`);
-            $('#supported_classes').append(`<input type="hidden" name="classes[]" value="${newClass}">`);
+            $('#supported_class').append(`<input type="text" hidden name="supported_class[]" value="${newClass}" >`);
 
             $('#defaultClassModal').modal('hide');
         }
@@ -153,7 +153,7 @@
             e.preventDefault();
             let newType = $('#new_type').val();
             $('#default_type').append(`<option value="${newType}">${newType}</option>`);
-            $('#supported_types').append(`<input type="hidden" name="types[]" value="${newType}">`);
+            $('#supported_type').append(`<input type="text" hidden name="supported_type[]" value="${newType}">`);
 
             $('#defaultTypeModal').modal('hide');
         }
