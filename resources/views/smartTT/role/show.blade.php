@@ -101,8 +101,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer">{{ $users->links() }}</div>
         </div>
+        <div class="card-footer">{{ $users->links() }}</div>
     </div>
 
     <div class="card mt-3">
@@ -126,8 +126,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer">{{ $permissions->links() }}</div>
         </div>
+        <div class="card-footer">{{ $permissions->links() }}</div>
     </div>
 @endsection
 @section('modal')
