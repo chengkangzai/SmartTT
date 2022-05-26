@@ -104,7 +104,7 @@ class CreatePaymentStep extends StepComponent
             if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
-            Log::info('PaymentIntent: ' . $this->paymentIntent . ' at ' . now());
+
             $this->dispatchBrowserEvent('getReadyForPayment', [
                 'clientSecret' => $this->paymentIntent->client_secret,
             ]);
