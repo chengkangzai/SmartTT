@@ -27,7 +27,7 @@
                 <th></th>
                 <th>{{ __('Guest Name') }}</th>
                 <th>{{ __('Package') }} ({{ $defaultCurrency }})</th>
-                <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
+                <th>{{ __('Price') }} ({{ $defaultCurrency }}) {{__('Per Pax')}}</th>
                 <th>{{ __('Action') }}</th>
             </tr>
             </thead>
