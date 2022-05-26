@@ -14,6 +14,7 @@ class DestroyPackagePricingAction
         if ($packagePricing->guests()->count() > 0) {
             throw new \Exception('This pricing is used in a booking. You can not delete it.');
         }
+
         return $packagePricing->delete();
     }
 }
