@@ -61,7 +61,9 @@
                 </td>
             </tr>
             <tr>
-                <td><p class="float-end">{{__('Billing Information')}}</p></td>
+                <td>
+                    <p class="float-end">{{ __('Billing Information') }}</p>
+                </td>
                 <td>
                     <table class="table table-bordered">
                         <tr>

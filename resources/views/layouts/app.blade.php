@@ -66,15 +66,15 @@ $language = $setting->default_language;
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
                             <a class="dropdown-item {{ App::currentLocale() == 'en' ? 'active' : '' }} "
-                               href="{{ route('setLocale', 'en') }}">
+                                href="{{ route('setLocale', 'en') }}">
                                 English
                             </a>
                             <a class="dropdown-item {{ App::currentLocale() == 'ms' ? 'active' : '' }} "
-                               href="{{ route('setLocale', 'ms') }}">
+                                href="{{ route('setLocale', 'ms') }}">
                                 Bahasa Malaysia
                             </a>
                             <a class="dropdown-item {{ App::currentLocale() == 'zh' ? 'active' : '' }} "
-                               href="{{ route('setLocale', 'zh') }}">
+                                href="{{ route('setLocale', 'zh') }}">
                                 简体中文
                             </a>
                         </div>

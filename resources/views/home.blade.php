@@ -83,11 +83,11 @@
                         @forelse($logs as $log)
                             <tr>
                                 <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
-                                <td> {{ trans('constant.model.'.$log->subject_type) }} </td>
+                                <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
                                 <td> {{ $log->causer->name ?? __('System') }}
                                     {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                                 </td>
-                                <td> {{ trans('constant.activity.'.$log->description) }} </td>
+                                <td> {{ trans('constant.activity.' . $log->description) }} </td>
                                 <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
                                 </td>
                                 <td> {{ $logData->find($log->subject_id)?->package?->tour?->name ?? '' }} </td>
