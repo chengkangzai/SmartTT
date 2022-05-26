@@ -65,12 +65,18 @@ $language = $setting->default_language;
                             </svg>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
-                            @foreach ($setting->supported_language as $lang)
-                                <a class="dropdown-item {{ App::currentLocale() == $lang ? 'active' : '' }} "
-                                    href="{{ route('setLocale', $lang) }}">
-                                    {{ $lang }}
-                                </a>
-                            @endforeach
+                            <a class="dropdown-item {{ App::currentLocale() == 'en' ? 'active' : '' }} "
+                               href="{{ route('setLocale', 'en') }}">
+                                English
+                            </a>
+                            <a class="dropdown-item {{ App::currentLocale() == 'ms' ? 'active' : '' }} "
+                               href="{{ route('setLocale', 'ms') }}">
+                                Bahasa Malaysia
+                            </a>
+                            <a class="dropdown-item {{ App::currentLocale() == 'zh' ? 'active' : '' }} "
+                               href="{{ route('setLocale', 'zh') }}">
+                                简体中文
+                            </a>
                         </div>
                     </li>
                     |

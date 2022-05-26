@@ -17,11 +17,11 @@
             @forelse($logs as $log)
                 <tr>
                     <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
-                    <td> {{ (new ReflectionClass($log->subject_type))->getShortName() }} </td>
+                    <td> {{ trans('constant.model.'.$log->subject_type) }} </td>
                     <td> {{ $log->causer->name ?? __('System') }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                     </td>
-                    <td> {{ $log->description }} </td>
+                    <td> {{ trans('constant.activity.'.$log->description) }} </td>
                     <td>
                         @forelse((collect($log->changes)->get('old') ?? []) as $key => $value)
                             <span>{{ $key }}: {{ $value }}</span><br>
@@ -39,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">{{ __('No logs found') }}</td>
+                    <td colspan="6" class="text-center">{{ __('No logs found') }}</td>
                 </tr>
             @endforelse
         </tbody>

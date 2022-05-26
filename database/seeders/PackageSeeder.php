@@ -15,7 +15,7 @@ class PackageSeeder extends Seeder
 
     public function run()
     {
-        Package::factory()->count(10)->afterCreating(function (Package $package) {
+        Package::factory()->count(50)->afterCreating(function (Package $package) {
             Flight::inRandomOrder()
                 ->take(2)
                 ->get()

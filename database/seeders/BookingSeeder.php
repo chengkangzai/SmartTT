@@ -14,7 +14,7 @@ class BookingSeeder extends Seeder
 {
     public function run()
     {
-        Booking::factory(10)
+        Booking::factory(40)
             ->afterCreating(function (Booking $booking) {
                 $setting = app(BookingSetting::class);
                 $guests = collect($booking->guests)
@@ -46,10 +46,10 @@ class BookingSeeder extends Seeder
                 if (app()->environment() != 'testing') {
                     foreach ($payments as $payment) {
                         app(GenerateInvoiceAction::class)->execute($payment);
-                        if ($payment->payment_type == 'full'
-                            && ($payment->payment_method == 'cash'
-                                || $payment->payment_method == 'card'
-                                || ($payment->payment_method == 'stripe' && $payment->status == 'paid')
+                        if (($payment->payment_type == Payment::TYPE_FULL || $payment->payment_type == Payment::TYPE_REMAINING)
+                            && ($payment->payment_method == Payment::METHOD_CASH
+                                || $payment->payment_method == Payment::METHOD_CARD
+                                || ($payment->payment_method == Payment::METHOD_STRIPE && $payment->status == Payment::STATUS_PAID)
                             )
                         ) {
                             app(GenerateReceiptAction::class)->execute($payment);
