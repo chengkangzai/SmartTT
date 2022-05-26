@@ -39,7 +39,7 @@ class BookingController extends Controller
     public function show(Booking $booking): Factory|View|Application
     {
         abort_unless(auth()->user()->can('View Booking'), 403);
-        $booking->load(['package.tour.countries', 'guests.packagePricing', 'payment:id,amount', 'payment.media', 'guests']);
+        $booking->load(['package.tour.countries', 'guests.packagePricing', 'payment', 'payment.media', 'guests']);
         $setting = app(GeneralSetting::class);
         $bookingSetting = app(BookingSetting::class);
 
