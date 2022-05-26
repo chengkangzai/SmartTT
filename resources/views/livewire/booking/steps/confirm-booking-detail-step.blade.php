@@ -60,6 +60,21 @@
                     </table>
                 </td>
             </tr>
+            <tr>
+                <td><p class="float-end">{{__('Billing Information')}}</p></td>
+                <td>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>{{ __('Full Name') }}</td>
+                            <td>{{ $billingName }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('Phone Number') }}</td>
+                            <td>{{ $billingPhone }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
         </table>
     </div>
     <div class="card-footer">
