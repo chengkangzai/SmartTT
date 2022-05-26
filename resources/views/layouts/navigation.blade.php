@@ -18,7 +18,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('packages*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
+        <a class="nav-link {{ request()->is('package*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
             </svg>
