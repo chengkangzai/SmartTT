@@ -16,8 +16,8 @@
                     <p class="float-end">{{ __('Itinerary') }}</p>
                 </td>
                 <td>
-                    <a href="{{ $tour->getFirstMediaUrl('itinerary') ?? '#' }}"
-                       target="_blank" class="btn btn-outline-primary">
+                    <a href="{{ $tour->getFirstMediaUrl('itinerary') ?? '#' }}" target="_blank"
+                        class="btn btn-outline-primary">
                         {{ __('Itinerary') }}
                     </a>
                 </td>
@@ -35,27 +35,27 @@
                 <td>
                     <table class="table table-bordered">
                         <thead>
-                        <tr>
-                            <th>{{ __('Name') }}</th>
-                            <th>{{ __('Package') }}</th>
-                            <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
-                        </tr>
+                            <tr>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Package') }}</th>
+                                <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach ($guests as $guest)
-                            <tr>
-                                <td>{{ $guest['name'] }}</td>
-                                <td>{{ $pricings->find($guest['pricing'])?->name ?? 'N/A' }}</td>
-                                <td>{{ number_format($guest['price'], 2) }}</td>
-                            </tr>
-                        @endforeach
+                            @foreach ($guests as $guest)
+                                <tr>
+                                    <td>{{ $guest['name'] }}</td>
+                                    <td>{{ $pricings->find($guest['pricing'])?->name ?? 'N/A' }}</td>
+                                    <td>{{ number_format($guest['price'], 2) }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
-                        <tr>
-                            <td colspan="2">
-                                <span class="float-end fw-bold ">{{ __('Total Price') }}</span>
-                            </td>
-                            <td>{{ number_format($totalPrice, 2) }}</td>
+                            <tr>
+                                <td colspan="2">
+                                    <span class="float-end fw-bold ">{{ __('Total Price') }}</span>
+                                </td>
+                                <td>{{ number_format($totalPrice, 2) }}</td>
                         </tfoot>
                     </table>
                 </td>
