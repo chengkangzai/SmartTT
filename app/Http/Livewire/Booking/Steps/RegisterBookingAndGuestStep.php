@@ -30,9 +30,8 @@ class RegisterBookingAndGuestStep extends StepComponent
 
     public function mount()
     {
-        //TODO : Show adult/ child age range
         // remove the word Left to "Seat Left" , show "pax" after the price
-        $this->package = $this->stateForStep('choose-package-step')['package'];
+        $this->package = $this->state()->forStep('choose-package-step')['package'];
         $this->updatePricings();
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
