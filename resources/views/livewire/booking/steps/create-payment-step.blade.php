@@ -84,21 +84,6 @@
                 @endif
             @endif
 
-            <div class="m-2 border"></div>
-
-            <div class="container row">
-                <h3>{{ __('Billing Information') }}</h3>
-                <div class="mb-3 col-12 col-md-6">
-                    <label for="billing-name">{{ __('Full Name') }}</label>
-                    <input type="text" class="form-control" id="billing-name" wire:model="billingName"
-                        wire:change.debounce="validateBilling('billingName')" placeholder="John Wick" />
-                </div>
-                <div class="mb-3 col-12 col-md-6">
-                    <label for="billing-phone">{{ __('Phone Number') }}</label>
-                    <input type="text" class="form-control" id="billing-phone" wire:model="billingPhone"
-                        wire:change.debounce="validateBilling('billingPhone')" placeholder="60123456789" />
-                </div>
-            </div>
             <p class="my-3">
                 {{ __('Payable : ') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
             </p>
