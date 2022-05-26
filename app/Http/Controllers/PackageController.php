@@ -58,7 +58,7 @@ class PackageController extends Controller
         $package->load([
             'flight:id,departure_date,arrival_date,airline_id,departure_airport_id,arrival_airport_id',
             'flight.airline:id,name',
-            'pricings', 'pricings.guests:id,package_pricing_id'
+            'pricings', 'pricings.guests:id,package_pricing_id',
         ]);
 
         return view('smartTT.package.show', compact('package'));

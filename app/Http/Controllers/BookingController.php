@@ -20,7 +20,7 @@ class BookingController extends Controller
 
         $role = $user->roles()->first()->name;
         $bookings = Booking::query()
-            ->when($role === 'Customer', fn($q) => $q->active()->where('user_id', $user->id))
+            ->when($role === 'Customer', fn ($q) => $q->active()->where('user_id', $user->id))
             ->with(['user', 'package', 'package.tour', 'payment:id,booking_id,amount'])
             ->orderByDesc('bookings.id')
             ->paginate(10);
