@@ -173,9 +173,9 @@
                         @endcan
                     </div>
                 </div>
-                <div class="card-body row gap-1">
+                <div class="card-body row">
                     @forelse($tourDes as $des)
-                        <div class="card col pb-4 pt-1 px-1">
+                        <div class="card col-md-3">
                             <div class="card-body">
                                 <h3 class="card-title">{{ $des->place }}</h3>
                                 <p class="card-text">{{ $des->description }}</p>
