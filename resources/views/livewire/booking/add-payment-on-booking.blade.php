@@ -6,6 +6,18 @@
         @include('partials.error-alert')
         <div class="row">
             @if ($currentStep == 1)
+                <div class="mb-3 col-12 col-md-6">
+                    <label for="billing-name">{{ __('Full Name') }}</label>
+                    <input type="text" class="form-control" id="billing-name" wire:model="billingName"
+                        wire:change.debounce="validateBilling('billingName')" placeholder="John Wick" />
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <label for="billing-phone">{{ __('Phone Number') }}</label>
+                    <input type="text" class="form-control" id="billing-phone" wire:model="billingPhone"
+                        wire:change.debounce="validateBilling('billingPhone')" placeholder="60123456789" />
+                </div>
+            @endif
+            @if ($currentStep == 2)
                 @if ($paymentMethod == 'manual')
                     <span class="my-2">{{ __('Choose payment method') }}</span>
                     <div class="btn-group row mx-0">
@@ -72,26 +84,11 @@
                         </div>
                     @endif
                 @endif
-                <div class="m-2 border"></div>
-
-                <div class="container row">
-                    <h3>{{ __('Billing Information') }}</h3>
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="billing-name">{{ __('Full Name') }}</label>
-                        <input type="text" class="form-control" id="billing-name" wire:model="billingName"
-                            wire:change.debounce="validateBilling('billingName')" placeholder="John Wick" />
-                    </div>
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="billing-phone">{{ __('Phone Number') }}</label>
-                        <input type="text" class="form-control" id="billing-phone" wire:model="billingPhone"
-                            wire:change.debounce="validateBilling('billingPhone')" placeholder="+60123456789" />
-                    </div>
-                    <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
-                        {{ number_format($paymentAmount, 2) }}
-                    </p>
-                </div>
+                <p class="my-3">{{ __('Payable : ') }} {{ $defaultCurrency }}
+                    {{ number_format($paymentAmount, 2) }}
+                </p>
             @endif
-            @if ($currentStep == 2)
+            @if ($currentStep == 3)
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-md-12">
@@ -131,7 +128,13 @@
     </div>
     <div class="card-footer">
         <div class="float-end">
-            @if ($currentStep == 1 && $paymentMethod == 'stripe')
+            @if ($currentStep == 1)
+                <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    {{ __('Next Step') }} &rarr;
+                </button>
+            @endif
+            @if ($currentStep == 2 && $paymentMethod == 'stripe')
                 <button type="button" class="btn btn-primary" id="payment-button" onclick="pay()"
                     wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -140,14 +143,14 @@
                     {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
-            @if ($currentStep == 1 && $paymentMethod == 'manual')
+            @if ($currentStep == 2 && $paymentMethod == 'manual')
                 <button type="button" class="btn btn-primary" wire:click="recordManualPayment"
                     wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Receive') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
                 </button>
             @endif
-            @if ($currentStep == 2)
+            @if ($currentStep == 3)
                 <button wire:click="finish" class="btn btn-success mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Finish') }} &rarr;
@@ -157,52 +160,4 @@
     </div>
 </div>
 
-@push('script')
-    @if ($paymentMethod == 'stripe')
-        <script src="https://js.stripe.com/v3/"></script>
-        <script>
-            const stripe = Stripe('{{ config('services.stripe.key') }}');
-            let clientSecret = '{{ $clientSecret }}';
-            let elements = stripe.elements({
-                locale: '{{ app()->getLocale() }}',
-            });
-            let cardElement = elements.create('card');
-            cardElement.mount('#card-element');
-
-            window.addEventListener('getReadyForPayment', (event) => {
-                clientSecret = event.detail.clientSecret;
-
-                //create an instance of the card Element that look like bootstrap form
-                elements = stripe.elements({
-                    locale: '{{ app()->getLocale() }}',
-                });
-                cardElement = elements.create('card');
-                cardElement.mount('#card-element');
-            });
-
-            function pay() {
-                $('#payment-button').attr('disabled', true);
-                $('#payment-button-spinner').removeClass('d-none');
-                stripe.confirmCardSetup(clientSecret, {
-                        payment_method: {
-                            card: cardElement,
-                            billing_details: {
-                                name: $('#billing-name').val(),
-                            },
-                        }
-                    })
-                    .then(function(result) {
-                        if (result.error) {
-                            $('#card-error').text(result.error.message).removeClass('d-none');
-                            $('#payment-button-spinner').addClass('d-none');
-                            $('#payment-button').attr('disabled', false);
-                        } else {
-                            $('#card-error').text('').addClass('d-none');
-                            $('#payment-button-spinner').addClass('d-none');
-                            Livewire.emit('cardSetupConfirmed', result.setupIntent.payment_method);
-                        }
-                    });
-            }
-        </script>
-    @endif
-@endpush
+@include('partials.initialStripeScript')

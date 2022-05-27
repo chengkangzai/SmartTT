@@ -33,10 +33,6 @@ class CreatePaymentStep extends StepComponent
 
     public string $billingName = '';
     public string $billingPhone = '';
-    public array $validateBillingRule = [
-        'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
-        'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
-    ];
 
     public string $stripePaymentMethod = '';
     public int $paymentAmount = 0;
@@ -65,10 +61,11 @@ class CreatePaymentStep extends StepComponent
         $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'];
         $this->booking = Booking::find($this->bookingId);
         $this->guests = $state['register-booking-and-guest-step']['guests'];
-        $this->billingName = $this->guests[0]['name'];
+        $this->billingName = $state['register-billing-info-step']['billingName'];
+        $this->billingPhone = $state['register-billing-info-step']['billingPhone'];
         $this->totalPrice = $state['register-booking-and-guest-step']['totalPrice'];
 
-        $this->pricings = PackagePricing::all();
+        $this->pricings = PackagePricing::whereIn('id', collect($this->guests)->pluck('pricing'))->get();
         $this->getReadyForPayment();
     }
 
@@ -138,6 +135,14 @@ class CreatePaymentStep extends StepComponent
             $this->paymentAmount * 100
         );
 
+        $this->payment->update([
+            'amount' => $this->paymentAmount,
+            'payment_type' => $this->paymentType,
+            'billing_name' => $this->billingName,
+            'billing_phone' => $this->billingPhone,
+            'status' => Payment::STATUS_PENDING,
+        ]);
+
         $this->reduceAvailability();
         $this->generateInvoice();
         parent::nextStep();
@@ -199,15 +204,6 @@ class CreatePaymentStep extends StepComponent
     private function generateInvoice()
     {
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
-    }
-
-    public function validateBilling(string $field)
-    {
-        $this->validate([
-            $field => $this->validateBillingRule[$field],
-        ]);
-
-        $this->getReadyForPayment();
     }
 
     /**

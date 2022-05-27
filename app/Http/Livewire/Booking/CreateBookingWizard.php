@@ -6,6 +6,7 @@ use App\Http\Livewire\Booking\Steps\ChoosePackageStep;
 use App\Http\Livewire\Booking\Steps\ChooseTourStep;
 use App\Http\Livewire\Booking\Steps\ConfirmBookingDetailStep;
 use App\Http\Livewire\Booking\Steps\CreatePaymentStep;
+use App\Http\Livewire\Booking\Steps\RegisterBillingInfoStep;
 use App\Http\Livewire\Booking\Steps\RegisterBookingAndGuestStep;
 use App\Http\Livewire\Booking\Steps\ShowBookingSuccessDetailStep;
 use Spatie\LivewireWizard\Components\WizardComponent;
@@ -18,6 +19,7 @@ class CreateBookingWizard extends WizardComponent
             ChooseTourStep::class,
             ChoosePackageStep::class,
             RegisterBookingAndGuestStep::class,
+            RegisterBillingInfoStep::class,
             ConfirmBookingDetailStep::class,
             CreatePaymentStep::class,
             ShowBookingSuccessDetailStep::class,

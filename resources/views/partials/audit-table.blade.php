@@ -17,11 +17,11 @@
             @forelse($logs as $log)
                 <tr>
                     <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
-                    <td> {{ trans('constant.model.'.$log->subject_type) }} </td>
+                    <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
                     <td> {{ $log->causer->name ?? __('System') }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                     </td>
-                    <td> {{ trans('constant.activity.'.$log->description) }} </td>
+                    <td> {{ trans('constant.activity.' . $log->description) }} </td>
                     <td>
                         @forelse((collect($log->changes)->get('old') ?? []) as $key => $value)
                             <span>{{ $key }}: {{ $value }}</span><br>

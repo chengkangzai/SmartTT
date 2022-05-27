@@ -19,6 +19,15 @@ use Stripe\SetupIntent;
 class AddPaymentOnBooking extends Component
 {
     #region Step 1
+    public string $billingName = '';
+    public string $billingPhone = '';
+    public array $validateBillingRule = [
+        'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
+        'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
+    ];
+    #endregion
+
+    #region Step 2
     public string $paymentType = Payment::TYPE_REMAINING;
     public string $paymentMethod;
     public string $manualType = Payment::METHOD_CARD;
@@ -28,13 +37,6 @@ class AddPaymentOnBooking extends Component
     public string $cardNumber = '';
     public string $cardExpiry = '';
     public string $cardCvc = '';
-
-    public string $billingName = '';
-    public string $billingPhone = '';
-    public array $validateBillingRule = [
-        'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
-        'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
-    ];
 
     public int $paymentAmount = 0;
     public string $clientSecret = '';
@@ -65,7 +67,25 @@ class AddPaymentOnBooking extends Component
         return view('livewire.booking.add-payment-on-booking');
     }
 
-    #region Step 1 Payment
+    #region Step 1
+    public function validateBilling(string $field)
+    {
+        $this->validate([
+            $field => $this->validateBillingRule[$field],
+        ]);
+    }
+
+    public function nextStep()
+    {
+        $this->validateBilling('billingName');
+        $this->validateBilling('billingPhone');
+
+        $this->currentStep++;
+        $this->getReadyForPayment();
+    }
+    #endregion
+
+    #region Step 2 Payment
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
@@ -97,6 +117,7 @@ class AddPaymentOnBooking extends Component
         ]);
 
         $this->generateInvoice();
+        $this->generateReceipt();
         $this->currentStep++;
     }
 
@@ -144,14 +165,6 @@ class AddPaymentOnBooking extends Component
     {
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
-
-    public function validateBilling(string $field)
-    {
-        $this->validate([
-            $field => $this->validateBillingRule[$field],
-        ]);
-    }
-
     #endregion
 
     public function finish()

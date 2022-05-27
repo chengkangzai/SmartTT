@@ -91,7 +91,9 @@
                             <th>{{ __('Total Capacity') }}</th>
                             <th>{{ __('Available Capacity') }}</th>
                             <th>{{ __('Active') }}</th>
-                            <th>{{ __('Action') }}</th>
+                            @canany(['Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing'])
+                                <th>{{ __('Action') }}</th>
+                            @endcanany
                         </tr>
                     </thead>
                     <tbody>
@@ -103,31 +105,33 @@
                                 <td>{{ $pricing->total_capacity }}</td>
                                 <td>{{ $pricing->available_capacity }}</td>
                                 <td>{{ $pricing->is_active ? 'Active' : 'Inactive' }}</td>
-                                <td>
-                                    @can('Edit Package Pricing')
-                                        <a href="{{ route('packagePricings.edit', $pricing) }}"
-                                            class="btn btn-outline-primary">
-                                            {{ __('Edit') }}
-                                        </a>
-                                    @endcan
-                                    @can('Delete Package Pricing')
-                                        @if ($pricing->guests->count() == 0)
-                                            <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
-                                                class="d-inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input class="btn btn-outline-danger" type="submit"
-                                                    value="{{ __('Delete') }}" />
-                                            </form>
-                                        @endif
-                                    @endcan
-                                    @can('Audit Package Pricing')
-                                        <a href="{{ route('packagePricings.audit', $pricing) }}"
-                                            class="btn btn-outline-info">
-                                            {{ __('Audit Trail') }}
-                                        </a>
-                                    @endcan
-                                </td>
+                                @canany(['Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing'])
+                                    <td>
+                                        @can('Edit Package Pricing')
+                                            <a href="{{ route('packagePricings.edit', $pricing) }}"
+                                                class="btn btn-outline-primary">
+                                                {{ __('Edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('Delete Package Pricing')
+                                            @if ($pricing->guests->count() == 0)
+                                                <form action="{{ route('packagePricings.destroy', $pricing) }}" method="POST"
+                                                    class="d-inline">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <input class="btn btn-outline-danger" type="submit"
+                                                        value="{{ __('Delete') }}" />
+                                                </form>
+                                            @endif
+                                        @endcan
+                                        @can('Audit Package Pricing')
+                                            <a href="{{ route('packagePricings.audit', $pricing) }}"
+                                                class="btn btn-outline-info">
+                                                {{ __('Audit Trail') }}
+                                            </a>
+                                        @endcan
+                                    </td>
+                                @endcanany
                             </tr>
                         @endforeach
                     </tbody>
@@ -149,7 +153,9 @@
                             <th>{{ __('Departure') }}</th>
                             <th>{{ __('Arrival') }}</th>
                             <th>{{ __('Airline') }}</th>
-                            <th>{{ __('Action') }}</th>
+                            @canany(['Show flight', 'Edit flight', 'Delete flight'])
+                                <th>{{ __('Action') }}</th>
+                            @endcanany
                         </tr>
                     </thead>
                     <tbody>
@@ -161,26 +167,28 @@
                                 <td>{{ $flight->arrival_date->toDayDateTimeString() }}
                                     {{ $flight->arrive_airport->name }} </td>
                                 <td>{{ $flight->airline->name }}</td>
-                                <td>
-                                    @can('Edit Flight')
-                                        <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
-                                            {{ __('Show') }}
-                                        </a>
-                                    @endcan
-                                    @can('Edit Flight')
-                                        <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
-                                            {{ __('Edit') }}
-                                        </a>
-                                    @endcan
-                                    @can('Delete Flight')
-                                        <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
-                                        </form>
-                                    @endcan
-                                </td>
+                                @canany(['Show flight', 'Edit flight', 'Delete flight'])
+                                    <td>
+                                        @can('Show Flight')
+                                            <a href="{{ route('flights.show', $flight) }}" class="btn btn-outline-info">
+                                                {{ __('Show') }}
+                                            </a>
+                                        @endcan
+                                        @can('Edit Flight')
+                                            <a href="{{ route('flights.edit', $flight) }}" class="btn btn-outline-primary">
+                                                {{ __('Edit') }}
+                                            </a>
+                                        @endcan
+                                        @can('Delete Flight')
+                                            <form action="{{ route('flights.destroy', $flight) }}" class="d-inline"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input class="btn btn-outline-danger" type="submit" value="{{ __('Delete') }}" />
+                                            </form>
+                                        @endcan
+                                    </td>
+                                @endcanany
                             </tr>
                         @endforeach
                     </tbody>

@@ -29,12 +29,11 @@
                                 <td>{{ number_format($booking->total_price, 2) }}</td>
                                 <td>{{ $booking->isFullPaid() ? __('Paid') : __('Pending') }}</td>
                                 <td>
-                                    @if ($booking->isFullPaid())
-                                        <a href="{{ route('bookings.show', $booking) }}"
-                                            class="btn btn-sm btn-outline-primary">
-                                            {{ __('View') }}
-                                        </a>
-                                    @else
+                                    <a href="{{ route('bookings.show', $booking) }}"
+                                        class="btn btn-sm btn-outline-primary">
+                                        {{ __('View') }}
+                                    </a>
+                                    @if (!$booking->isFullPaid())
                                         <a href="{{ route('bookings.addPayment', $booking) }}"
                                             class="btn btn-sm btn-outline-primary">
                                             {{ __('Pay') }}
