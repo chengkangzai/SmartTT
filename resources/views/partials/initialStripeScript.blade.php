@@ -20,14 +20,14 @@
             $('#payment-button').attr('disabled', true);
             $('#payment-button-spinner').removeClass('d-none');
             stripe.confirmCardSetup(clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name: $('billing-name').val(),
-                    },
-                }
-            })
-                .then(function (result) {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: $('billing-name').val(),
+                        },
+                    }
+                })
+                .then(function(result) {
                     if (result.error) {
                         $('#card-error').text(result.error.message).removeClass('d-none');
                         $('#payment-button-spinner').addClass('d-none');
