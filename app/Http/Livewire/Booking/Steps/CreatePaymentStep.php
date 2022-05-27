@@ -135,6 +135,14 @@ class CreatePaymentStep extends StepComponent
             $this->paymentAmount * 100
         );
 
+        $this->payment->update([
+            'amount' => $this->paymentAmount,
+            'payment_type' => $this->paymentType,
+            'billing_name' => $this->billingName,
+            'billing_phone' => $this->billingPhone,
+            'status' => Payment::STATUS_PENDING,
+        ]);
+
         $this->reduceAvailability();
         $this->generateInvoice();
         parent::nextStep();
