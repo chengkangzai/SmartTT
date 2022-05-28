@@ -47,7 +47,7 @@
                                         {{ $booking->package->tour->tour_code }}
                                     </a>
                                 </td>
-                                <td>{{ $booking->package->depart_time }}</td>
+                                <td>{{ $booking->package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                                 <td>{{ $booking->isFullPaid() ? __('Paid') : __('Pending') }}</td>
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ number_format($booking->total_price, 2) }}</td>

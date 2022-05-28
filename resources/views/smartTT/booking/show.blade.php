@@ -92,7 +92,7 @@
                 </tr>
                 @foreach ($booking->payment as $payment)
                     <tr>
-                        <td>{{ $payment->created_at->toDayDateTimeString() }}</td>
+                        <td>{{ $payment->created_at->translatedFormat(config('app.date_format')) }}</td>
                         <td class="text-uppercase">{{ $payment->payment_method }}</td>
                         <td class="text-uppercase">{{ $payment->status }}</td>
                         <td class="text-uppercase">{{ $payment->payment_type }}</td>
@@ -170,7 +170,7 @@
                                 @endforeach
                             </ul>
                         </td>
-                        <td>{{ $booking->package->depart_time->toDayDateTimeString() }}</td>
+                        <td>{{ $booking->package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                         <td>
                             <a class="btn btn-outline-primary"
                                 href="{{ $booking->package->tour->getFirstMediaUrl('itinerary') ?? '#' }}">

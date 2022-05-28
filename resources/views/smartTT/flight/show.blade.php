@@ -54,8 +54,8 @@
                     <tbody>
                         <tr>
                             <td>{{ $flight->id }}</td>
-                            <td>{{ $flight->departure_date }}</td>
-                            <td>{{ $flight->arrival_date }}</td>
+                            <td>{{ $flight->departure_date->translatedFormat(config('app.date_format')) }}</td>
+                            <td>{{ $flight->arrival_date->translatedFormat(config('app.date_format')) }}</td>
                             <td>RM {{ number_format($flight->price, 2) }}</td>
                             <td>{{ $flight->airline->name }}
                                 ({{ $flight->depart_airport->IATA }}) -> ({{ $flight->arrive_airport->IATA }})

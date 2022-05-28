@@ -42,7 +42,7 @@
                         @foreach ($packages as $package)
                             <tr>
                                 <td>{{ $package->id }}</td>
-                                <td>{{ $package->depart_time->format(config('app.date_format')) }}</td>
+                                <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                                 <td>{{ $package->tour->name }}</td>
                                 <td>
                                     <ol>
