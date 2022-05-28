@@ -195,6 +195,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-    'date_format' => 'd M Y H:i',
+    'date_format' => 'D, M j, Y g:i',
 
 ];
