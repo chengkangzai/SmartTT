@@ -52,7 +52,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $package->id }}</td>
-                            <td>{{ $package->depart_time }}</td>
+                            <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                             <td>{{ $package->tour->name }}</td>
                             <td>
                                 <ul>
@@ -162,9 +162,9 @@
                         @foreach ($package->flight as $flight)
                             <tr>
                                 <td>{{ $flight->id }}</td>
-                                <td>{{ $flight->departure_date->toDayDateTimeString() }}
+                                <td>{{ $flight->departure_date->translatedFormat(config('app.date_format')) }}
                                     {{ $flight->depart_airport->name }} </td>
-                                <td>{{ $flight->arrival_date->toDayDateTimeString() }}
+                                <td>{{ $flight->arrival_date->translatedFormat(config('app.date_format')) }}
                                     {{ $flight->arrive_airport->name }} </td>
                                 <td>{{ $flight->airline->name }}</td>
                                 @canany(['Show flight', 'Edit flight', 'Delete flight'])

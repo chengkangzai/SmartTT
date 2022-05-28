@@ -40,8 +40,8 @@
                         @foreach ($flights as $flight)
                             <tr>
                                 <td>{{ $flight->id }}</td>
-                                <td>{{ $flight->departure_date->format(config('app.date_format')) }}</td>
-                                <td>{{ $flight->arrival_date->format(config('app.date_format')) }}</td>
+                                <td>{{ $flight->departure_date->translatedFormat(config('app.date_format')) }}</td>
+                                <td>{{ $flight->arrival_date->translatedFormat(config('app.date_format')) }}</td>
                                 <td>{{ number_format($flight->price, 2) }}</td>
                                 <td>{{ $flight->airline->name }}
                                     ({{ $flight->depart_airport->IATA }})

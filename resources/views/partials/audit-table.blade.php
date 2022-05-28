@@ -16,7 +16,7 @@
         <tbody>
             @forelse($logs as $log)
                 <tr>
-                    <td> {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }} </td>
+                    <td> {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat(config('app.date_format')) }} </td>
                     <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
                     <td> {{ $log->causer->name ?? __('System') }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}

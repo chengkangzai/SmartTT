@@ -82,7 +82,7 @@
                                 {{ $user->roles->first()->name }}
                             </a>
                         </td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
                     </tr>
                 </tbody>
             </table>
