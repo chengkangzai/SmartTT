@@ -104,7 +104,7 @@
                                 <td>RM {{ number_format($pricing->price, 2) }}</td>
                                 <td>{{ $pricing->total_capacity }}</td>
                                 <td>{{ $pricing->available_capacity }}</td>
-                                <td>{{ $pricing->is_active ? 'Active' : 'Inactive' }}</td>
+                                <td>{{ $pricing->is_active ? __('Active') : __('Inactive') }}</td>
                                 @canany(['Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing'])
                                     <td>
                                         @can('Edit Package Pricing')
@@ -151,7 +151,9 @@
                         <tr>
                             <th>{{ __('ID') }}</th>
                             <th>{{ __('Departure') }}</th>
+                            <th>{{ __('Departure Airport') }}</th>
                             <th>{{ __('Arrival') }}</th>
+                            <th>{{ __('Arrival Airport') }}</th>
                             <th>{{ __('Airline') }}</th>
                             @canany(['Show flight', 'Edit flight', 'Delete flight'])
                                 <th>{{ __('Action') }}</th>
@@ -162,10 +164,10 @@
                         @foreach ($package->flight as $flight)
                             <tr>
                                 <td>{{ $flight->id }}</td>
-                                <td>{{ $flight->departure_date->translatedFormat(config('app.date_format')) }}
-                                    {{ $flight->depart_airport->name }} </td>
-                                <td>{{ $flight->arrival_date->translatedFormat(config('app.date_format')) }}
-                                    {{ $flight->arrive_airport->name }} </td>
+                                <td>{{ $flight->departure_date->translatedFormat(config('app.date_format')) }}</td>
+                                <td>{{ $flight->depart_airport->name }}</td>
+                                <td>{{ $flight->arrival_date->translatedFormat(config('app.date_format')) }}</td>
+                                <td>{{ $flight->arrive_airport->name }}</td>
                                 <td>{{ $flight->airline->name }}</td>
                                 @canany(['Show flight', 'Edit flight', 'Delete flight'])
                                     <td>
