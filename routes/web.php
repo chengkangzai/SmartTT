@@ -7,6 +7,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicIndexController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\SettingController;
@@ -29,9 +30,11 @@ Auth::routes();
 Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 
-Route::middleware(['web', 'auth'])->group(function () {
-    Route::redirect('/', '/home');
+Route::middleware(['web'])->as('front.')->group(function () {
+    Route::get('/', [PublicIndexController::class, 'index'])->name('index');
+});
 
+Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
