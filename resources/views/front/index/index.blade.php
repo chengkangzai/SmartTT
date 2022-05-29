@@ -67,7 +67,7 @@
     <section class="bg-gray-50 py-10">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
-                <div class="w-full px-4 pt-6 text-center md:w-4/12 lg:pt-12">
+                <div class="w-full transform px-4 pt-6 text-center transition duration-300 hover:scale-110 md:w-4/12">
                     <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
                         <div class="flex-auto px-4 py-5">
                             <div
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-4 text-center md:w-4/12">
+                <div class="w-full transform px-4 text-center transition duration-300 hover:scale-110 md:w-4/12">
                     <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
                         <div class="flex-auto px-4 py-5">
                             <div
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-4 pt-6 text-center md:w-4/12">
+                <div class="w-full transform px-4 pt-6 text-center transition duration-300 hover:scale-110 md:w-4/12">
                     <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
                         <div class="flex-auto px-4 py-5">
                             <div
