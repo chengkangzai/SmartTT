@@ -11,12 +11,12 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+
     </style>
 @endpush
 
 @section('content')
-    <div
-        class=" grid w-full place-items-center opacity-90 md:py-40" id="heroCover">
+    <div class="grid w-full place-items-center opacity-90 md:py-40" id="heroCover">
         <div class="container bg-white/30 p-3 md:rounded">
             <button class="rounded-t bg-white px-4 py-2 font-bold text-blue-900 hover:bg-gray-100">
                 <svg class="mr-2 inline h-5 w-5">
@@ -64,14 +64,14 @@
             </div>
         </div>
     </div>
-    <section class="py-10 bg-gray-50">
+    <section class="bg-gray-50 py-10">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
-                <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                        <div class="px-4 py-5 flex-auto">
+                <div class="w-full px-4 pt-6 text-center md:w-4/12 lg:pt-12">
+                    <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
+                        <div class="flex-auto px-4 py-5">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                                class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-400 p-3 text-center text-white shadow-lg">
                                 <svg class="inline h-6 w-6">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
                                 </svg>
@@ -85,12 +85,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full md:w-4/12 px-4 text-center">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                        <div class="px-4 py-5 flex-auto">
+                <div class="w-full px-4 text-center md:w-4/12">
+                    <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
+                        <div class="flex-auto px-4 py-5">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
-                                <svg class="inline h-6 w-6 text-black" >
+                                class="bg-lightBlue-400 mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full p-3 text-center text-white shadow-lg">
+                                <svg class="inline h-6 w-6 text-black">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
                                 </svg>
                             </div>
@@ -102,12 +102,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="pt-6 w-full md:w-4/12 px-4 text-center">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                        <div class="px-4 py-5 flex-auto">
+                <div class="w-full px-4 pt-6 text-center md:w-4/12">
+                    <div class="relative mb-8 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-lg">
+                        <div class="flex-auto px-4 py-5">
                             <div
-                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
-                                <svg class="inline h-6 w-6" >
+                                class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400 p-3 text-center text-white shadow-lg">
+                                <svg class="inline h-6 w-6">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-wallet') }}"></use>
                                 </svg>
                             </div>
