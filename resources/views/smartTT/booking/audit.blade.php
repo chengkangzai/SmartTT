@@ -2,7 +2,7 @@
 /** @var \App\Models\Booking $booking */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Booking Management') }}
 @endsection

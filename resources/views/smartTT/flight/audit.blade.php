@@ -2,7 +2,7 @@
 /** @var \App\Models\Flight $flight */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Flight Management') }}
 @endsection

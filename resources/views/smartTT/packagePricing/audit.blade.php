@@ -2,7 +2,7 @@
 /** @var \App\Models\PackagePricing $packagePricing */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Package Pricing Management') }}
 @endsection

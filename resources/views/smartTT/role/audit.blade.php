@@ -2,7 +2,7 @@
 /** @var \Spatie\Permission\Models\Role $role */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Role Management') }}
 @endsection

@@ -3,7 +3,7 @@
 /** @var \App\Models\TourDescription $des */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Tour Management') }}
 @endsection

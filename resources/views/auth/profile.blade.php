@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('content')
     <div class="card mb-4">

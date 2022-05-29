@@ -3,7 +3,7 @@
 /** @var \App\Models\Package $package */
 /** @var \App\Models\Settings\PackageSetting $setting */
 @endphp
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Edit Package') }}
 @endsection

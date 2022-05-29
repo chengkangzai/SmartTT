@@ -2,7 +2,7 @@
 /** @var \App\Models\Settings\BookingSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Booking Settings') }}

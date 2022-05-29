@@ -2,7 +2,7 @@
 /** @var \App\Models\Package $package */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Package Management') }}
 @endsection

@@ -6,7 +6,7 @@
 /** @var \App\Models\Settings\PackagePricingsSetting $pricingSetting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Create Package') }}
 @endsection

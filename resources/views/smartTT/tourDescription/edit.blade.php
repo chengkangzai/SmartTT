@@ -2,7 +2,7 @@
 /** @var \App\Models\TourDescription $tourDescription */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Edit Tour Description') }}
 @endsection
