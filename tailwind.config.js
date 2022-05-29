@@ -1,6 +1,7 @@
 module.exports = {
+    important: true,
     content: [
-        "./resources/front/**/*.blade.php",
+        "./resources/views/front/**/*.blade.php",
     ],
     theme: {
         extend: {},
