@@ -5,7 +5,7 @@
 
 @push('style')
     <style>
-        #heroCover{
+        #heroCover {
             background-image: url("{{ $imageUrl }}");
             background-size: cover;
             background-position: center;
@@ -64,4 +64,62 @@
             </div>
         </div>
     </div>
+    <section class="py-10 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                        <div class="px-4 py-5 flex-auto">
+                            <div
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                                <svg class="inline h-6 w-6">
+                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
+                                </svg>
+                            </div>
+                            <h6 class="text-xl font-semibold">Robust Planning</h6>
+                            <p class="mt-2 mb-4 text-gray-500">
+                                Don't know where to go ?
+                                <br>
+                                We always got you cover!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-4/12 px-4 text-center">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                        <div class="px-4 py-5 flex-auto">
+                            <div
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                                <svg class="inline h-6 w-6 text-black" >
+                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
+                                </svg>
+                            </div>
+                            <h6 class="text-xl font-semibold">No Hidden Cost</h6>
+                            <p class="mt-2 mb-4 text-gray-500">
+                                You pay exactly what
+                                id quoted !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-6 w-full md:w-4/12 px-4 text-center">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                        <div class="px-4 py-5 flex-auto">
+                            <div
+                                class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
+                                <svg class="inline h-6 w-6" >
+                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-wallet') }}"></use>
+                                </svg>
+                            </div>
+                            <h6 class="text-xl font-semibold">Wallet Friendly</h6>
+                            <p class="mt-2 mb-4 text-gray-500">
+                                Don't you worry ! <br>
+                                We won't break your bank !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
