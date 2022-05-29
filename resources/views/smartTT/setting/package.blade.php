@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\Settings\PackageSetting $setting */
+    /** @var \App\Models\Settings\PackageSetting $setting */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'package') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <label for="default_status">{{ __('Default Status') }}</label>

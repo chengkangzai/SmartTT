@@ -3,7 +3,7 @@
         <h4 class="card-title">{{ __('Choose Package') }}</h4>
     </div>
     <div class="card-body">
-        @include('partials.error-alert')
+        @include('smartTT.partials.error-alert')
         <table class="table table-bordered table-striped">
             <tr>
                 <th>{{ __('Depart Time') }}</th>
@@ -18,7 +18,7 @@
                     <td>{{ $package->pricings->sum('available_capacity') }}</td>
                     <td>
                         <input type="radio" wire:model="package" value="{{ $package->id }}"
-                            aria-label="{{ __('Choose this package') }}">
+                               aria-label="{{ __('Choose this package') }}">
                     </td>
                 </tr>
             @empty

@@ -3,7 +3,7 @@
         <h4 class="card-title">{{ __('Choose Package') }}</h4>
     </div>
     <div class="card-body">
-        @include('partials.error-alert')
+        @include('smartTT.partials.error-alert')
         <h4>{{ __('Register Guest') }}</h4>
         <div class="alert alert-primary d-flex flex-row align-items-center" role="alert">
             <svg class="icon">
@@ -23,64 +23,64 @@
         </div>
         <table class="table table-striped table-bordered">
             <thead>
-                <tr>
-                    <th></th>
-                    <th>{{ __('Guest Name') }}</th>
-                    <th>{{ __('Package') }} </th>
-                    <th>{{ __('Price') }} {{ __('Per Pax') }}</th>
-                    <th>{{ __('Action') }}</th>
-                </tr>
+            <tr>
+                <th></th>
+                <th>{{ __('Guest Name') }}</th>
+                <th>{{ __('Package') }} </th>
+                <th>{{ __('Price') }} {{ __('Per Pax') }}</th>
+                <th>{{ __('Action') }}</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach ($guests as $i => $guest)
-                    <tr>
-                        <td>
-                            {{ $i + 1 }}
-                        </td>
-                        <td>
-                            <input type="text" wire:model.debounce="guests.{{ $i }}.name"
-                                id="guest-{{ $i }}-name" class="form-control" aria-label="Name">
-                        </td>
-                        <td>
-                            @if (!$guest['is_child'])
-                                <select wire:model.debounce="guests.{{ $i }}.pricing"
+            @foreach ($guests as $i => $guest)
+                <tr>
+                    <td>
+                        {{ $i + 1 }}
+                    </td>
+                    <td>
+                        <input type="text" wire:model.debounce="guests.{{ $i }}.name"
+                               id="guest-{{ $i }}-name" class="form-control" aria-label="Name">
+                    </td>
+                    <td>
+                        @if (!$guest['is_child'])
+                            <select wire:model.debounce="guests.{{ $i }}.pricing"
                                     id="guest-{{ $i }}-pricings" class="form-control" aria-label="Pricing"
                                     required wire:change="updatePrice({{ $i }})">
-                                    @foreach ($pricingsHolder as $pricing)
-                                        <option value="{{ $pricing['id'] }}"
+                                @foreach ($pricingsHolder as $pricing)
+                                    <option value="{{ $pricing['id'] }}"
                                             @if ($loop->first) selected @endif>
-                                            {{ $pricing['name'] }}
-                                            ({{ $pricing['available_capacity'] . ' ' . __('Seat Left') }})
-                                            ({{ $defaultCurrency }} {{ number_format($pricing['price'], 2) }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                            @else
-                                <p class="float-end"> {{ number_format($guest['price'], 2) }}</p>
-                            @endif
-                        </td>
-                        <td>
-                            <p>{{ $defaultCurrency }} {{ number_format($guest['price'], 2) }}</p>
-                        </td>
-                        <td>
-                            <button wire:click="removeGuest({{ $i }})" class="btn btn-outline-danger"
+                                        {{ $pricing['name'] }}
+                                        ({{ $pricing['available_capacity'] . ' ' . __('Seat Left') }})
+                                        ({{ $defaultCurrency }} {{ number_format($pricing['price'], 2) }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        @else
+                            <p class="float-end"> {{ number_format($guest['price'], 2) }}</p>
+                        @endif
+                    </td>
+                    <td>
+                        <p>{{ $defaultCurrency }} {{ number_format($guest['price'], 2) }}</p>
+                    </td>
+                    <td>
+                        <button wire:click="removeGuest({{ $i }})" class="btn btn-outline-danger"
                                 @if ($loop->first) disabled @endif>
-                                <svg class="icon icon-lg">
-                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-trash') }}"></use>
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
+                            <svg class="icon icon-lg">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-trash') }}"></use>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
             <tfoot>
-                <tr>
-                    <td colspan="3">
-                        <p class="float-end fw-bold ">{{ __('Total Price') }}</p>
-                    </td>
-                    <td colspan="2">
-                        <p class="fw-bold">{{ $defaultCurrency }} {{ number_format($totalPrice, 2) }}</p>
-                    </td>
+            <tr>
+                <td colspan="3">
+                    <p class="float-end fw-bold ">{{ __('Total Price') }}</p>
+                </td>
+                <td colspan="2">
+                    <p class="fw-bold">{{ $defaultCurrency }} {{ number_format($totalPrice, 2) }}</p>
+                </td>
             </tfoot>
         </table>
     </div>

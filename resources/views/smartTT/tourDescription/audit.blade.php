@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\TourDescription $tourDescription */
+    /** @var \App\Models\TourDescription $tourDescription */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -25,7 +25,7 @@
             <h3 class="card-title">{{ __('Audit Trail') }}</h3>
         </div>
         <div class="card-body">
-            @include('partials.audit-table')
+            @include('smartTT.partials.audit-table')
         </div>
     </div>
 @endsection

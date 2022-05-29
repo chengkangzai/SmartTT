@@ -24,7 +24,6 @@
 <body>
 
 @yield('modal')
-@include('partials.success-toast')
 <div class="flex min-h-screen flex-col overscroll-none">
     <header class="fixed top-0 z-50 w-full">
         <div class="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
@@ -98,7 +97,7 @@
                     </button>
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
-                    class="hidden flex-grow flex-col gap-2 py-2 md:flex md:flex-row md:justify-end md:py-0">
+                     class="hidden flex-grow flex-col gap-2 py-2 md:flex md:flex-row md:justify-end md:py-0">
                     @auth
                         <a href="{{ route('home') }}"
                            class="my-auto m-1 rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">

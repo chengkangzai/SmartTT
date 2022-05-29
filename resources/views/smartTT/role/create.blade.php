@@ -18,12 +18,12 @@
         </div>
         <div class="card-body">
             <form role="form" action="{{ route('roles.store') }}" method="POST" id="createForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class=mb-3>
                     <label class="form-label" for="name">{{ __('Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name"
-                        placeholder="{{ __('User Role Name') }}">
+                           placeholder="{{ __('User Role Name') }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="permissions">{{ __('Permission') }}</label>

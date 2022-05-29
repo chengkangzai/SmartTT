@@ -19,13 +19,13 @@
         </div>
         <div class="card-body">
             <form role="form" action="{{ route('roles.update', $role) }}" method="POST" id="editForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label class="form-label" for="name">{{ __('Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name"
-                        placeholder="{{ __('User Role Name') }}" value="{{ old('name', $role->name) }}">
+                           placeholder="{{ __('User Role Name') }}" value="{{ old('name', $role->name) }}">
                 </div>
                 <div class="mb-3">
                     <label for="permissions" class="form-label">{{ __('Permissions') }}</label>

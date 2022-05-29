@@ -12,7 +12,7 @@
         </ol>
     </nav>
 
-    <livewire:booking.create-booking-wizard />
+    <livewire:booking.create-booking-wizard/>
 @endsection
 
-@include('partials.initialStripeScript')
+@include('smartTT.partials.initialStripeScript')
