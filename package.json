@@ -8,11 +8,13 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "format": "blade-formatter --write resources/**/*.blade.php"
+        "format": "blade-formatter --write resources/views/layouts/**/*.blade.php",
+        "format-tailwind": "blade-formatter --write resources/views/front/**/*.blade.php --sort-tailwindcss-classes"
     },
     "devDependencies": {
         "@coreui/coreui": "^4.0.2",
         "@popperjs/core": "^2.10.2",
+        "@tailwindcss/forms": "^0.5.2",
         "autoprefixer": "^10.4.7",
         "axios": "^0.25",
         "bootstrap": "^5.1.3",
