@@ -7,7 +7,7 @@
         <h3 class="pb-10 text-center text-3xl font-extrabold">{{ __('Why book with us?') }}</h3>
     </div>
     <div class="container mx-auto grid gap-4 md:grid-cols-3">
-        <div class="flex flex-col rounded-xl bg-amber-300 py-2 shadow-xl md:py-4">
+        <div class="flex flex-col rounded-xl bg-amber-300 pt-4 shadow-xl">
             <div class="mx-4 flex h-12 w-12 items-center justify-center rounded-md bg-red-500 text-white">
                 <svg class="inline h-5 w-5">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
@@ -20,7 +20,7 @@
                 </p>
             </div>
         </div>
-        <div class="flex flex-col rounded-xl bg-sky-300 py-2 shadow-xl md:py-4">
+        <div class="flex flex-col rounded-xl bg-sky-300 pt-4 shadow-xl">
             <div class="mx-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-500 text-white">
                 <svg class="inline h-5 w-5">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-map') }}"></use>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col rounded-xl bg-lime-300 py-2 shadow-xl md:py-4">
+        <div class="flex flex-col rounded-xl bg-lime-300 pt-4 shadow-xl">
             <div class="mx-4 flex h-12 w-12 items-center justify-center rounded-md bg-emerald-500 text-white">
                 <svg class="inline h-5 w-5">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-credit-card') }}"></use>
