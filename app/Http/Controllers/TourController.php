@@ -56,7 +56,7 @@ class TourController extends Controller
     {
         abort_unless(auth()->user()->can('View Tour'), 403);
         $tourDes = $tour->description()->paginate(9, ['*'], 'tourDes');
-        $packages = $tour->packages()->with('flight.airline:id,name')->paginate(9, ['*'], 'packages');
+        $packages = $tour->packages()->with(['flight.airline:id,name','pricings:id,price,package_id'])->paginate(9, ['*'], 'packages');
 
         return view('smartTT.tour.show', compact('tour', 'tourDes', 'packages'));
     }
