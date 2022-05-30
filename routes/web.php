@@ -32,7 +32,7 @@ Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
-//    Route::get('tours', [PublicIndexController::class, 'show'])->name('tours');
+    Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
 });
 
 Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
