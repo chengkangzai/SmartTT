@@ -127,19 +127,18 @@
             @foreach ($tours as $tour)
                 <div
                     class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
-                    <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="image" class="aspect-video w-full" />
+                    <a href="{{ route('front.tours', $tour) }}">
+                        <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="image" class="aspect-video w-full" />
+                    </a>
                     <div class="p-4 text-center md:px-7 md:pb-0">
-                        <h3>
-                            <a href="javascript:void(0)"
-                                class="text-dark block text-xl font-semibold hover:text-black md:mb-4">
-                                {{ $tour->name }}
-                            </a>
+                        <h3 class="text-dark block text-xl font-semibold hover:text-black md:mb-4">
+                            {{ $tour->name }}
                         </h3>
                     </div>
                     <div class="flex-grow">
 
                     </div>
-                    <a href="javascript:void(0)"
+                    <a href="{{ route('front.tours', $tour) }}"
                         class="mx-auto mb-6 w-fit rounded-full border py-2 px-7 text-base font-medium transition hover:border-black hover:bg-white hover:text-black">
                         {{ __('View Details') }}
                     </a>
