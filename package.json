@@ -27,6 +27,7 @@
         "tailwindcss": "^3.0.24"
     },
     "dependencies": {
+        "alpinejs": "^3.10.2",
         "chart.js": "^3.7.1"
     }
 }

@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/alpine.js": "/js/alpine.js",
     "/js/chart.js": "/js/chart.js",
     "/tailwind/app.css": "/tailwind/app.css",
     "/css/app.css": "/css/app.css"
