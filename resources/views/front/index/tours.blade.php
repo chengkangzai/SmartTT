@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Tour $tour */
+/** @var \App\Models\Tour $tour */
 @endphp
 
 @extends('front.layouts.app')
@@ -8,22 +8,21 @@
 @endsection
 
 @section('content')
-    <div
-        class="grid min-h-[50vh] w-full place-items-center bg-cover bg-center bg-no-repeat opacity-90 md:min-h-[60vh] md:py-40"
+    <div class="grid min-h-[50vh] w-full place-items-center bg-cover bg-center bg-no-repeat opacity-90 md:min-h-[60vh] md:py-40"
         style="background-image: url('{{ $tour->getFirstMediaUrl('thumbnail') }}');">
     </div>
     <div class="container mx-auto flex flex-wrap">
         <div class="mt-4 flex h-fit grow justify-evenly gap-8 px-8 py-2 text-center md:justify-start md:px-0">
             <a target="_self" href="{{ request()->fullUrl() }}#detail"
-               class="my-auto font-medium hover:text-gray-500 md:text-xl">
+                class="my-auto font-medium hover:text-gray-500 md:text-xl">
                 {{ __('Details') }}
             </a>
             <a target="_self" href="{{ request()->fullUrl() }}#itinerary"
-               class="my-auto font-medium hover:text-gray-500 md:text-xl">
+                class="my-auto font-medium hover:text-gray-500 md:text-xl">
                 {{ __('Itinerary') }}
             </a>
             <a target="_self" href="{{ request()->fullUrl() }}#packages-and-airlines"
-               class="my-auto font-medium hover:text-gray-500 md:text-xl">
+                class="my-auto font-medium hover:text-gray-500 md:text-xl">
                 {{ __('Packages & Airlines') }}
             </a>
         </div>
@@ -76,7 +75,7 @@
     </div>
     <div id="detail" class="container mx-auto px-4 md:px-0 md:pt-10">
         <a target="_self" href="{{ request()->fullUrl() }}#detail"
-           class="text-center text-2xl font-bold leading-relaxed md:text-4xl md:underline md:underline-offset-8">
+            class="text-center text-2xl font-bold leading-relaxed md:text-4xl md:underline md:underline-offset-8">
             # {{ $tour->name }}
         </a>
         <div class="my-4">
@@ -108,8 +107,7 @@
                 </div>
             </div>
             <div class="z-10 flex w-full flex-row rounded-xl bg-white shadow-xl">
-                <div
-                    class="mx-4 my-auto flex h-12 w-12 items-center justify-center rounded-md bg-purple-500 text-white">
+                <div class="mx-4 my-auto flex h-12 w-12 items-center justify-center rounded-md bg-purple-500 text-white">
                     <svg class="inline h-5 w-5">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-barcode') }}"></use>
                     </svg>
@@ -128,7 +126,7 @@
                     <template x-for="faq in faqs" :key="faq.question">
                         <div class="rounded-xl p-2 shadow-xl">
                             <button class="mt-4 flex w-full items-center justify-between py-3 font-bold"
-                                    @click="faqs = faqs.map(f => ({ ...f, isOpen: f.question !== faq.question ? false : !f.isOpen}))">
+                                @click="faqs = faqs.map(f => ({ ...f, isOpen: f.question !== faq.question ? false : !f.isOpen}))">
                                 <div class="text-xl" x-text="faq.question"></div>
                                 <span x-show="!faq.isOpen">&downarrow;</span>
                                 <span x-show="faq.isOpen">&uparrow;</span>
@@ -146,7 +144,7 @@
         <h3 class="px-2 pt-4 text-3xl font-bold">{{ __('Itinerary') }}</h3>
         <div class="my-2 w-full text-lg leading-loose md:w-2/3">
             <a href="{{ $tour->getFirstMediaUrl('itinerary') }}" target="_blank"
-               class="rounded-xl bg-green-600 px-4 py-2 text-white ring-2 ring-inset ring-offset-2 hover:bg-green-700">
+                class="rounded-xl bg-green-600 px-4 py-2 text-white ring-2 ring-inset ring-offset-2 hover:bg-green-700">
                 {{ __('Download Itinerary') }}
             </a>
         </div>
@@ -160,12 +158,12 @@
                     <div class="flex w-full flex-col gap-1">
                         <label for="date_from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
                         <input type="date" class="rounded-lg" id="date_from" placeholder="{{ __('From') }}"
-                               value="{{ now()->addMonth()->format('Y-m-d') }}">
+                            value="{{ now()->addMonth()->format('Y-m-d') }}">
                     </div>
                     <div class="flex w-full flex-col gap-1">
                         <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
                         <input type="date" class="rounded-lg" id="date_to" placeholder="{{ __('To') }}"
-                               value="{{ now()->addMonths(2)->format('Y-m-d') }}">
+                            value="{{ now()->addMonths(2)->format('Y-m-d') }}">
                     </div>
                 </div>
             </div>
@@ -175,12 +173,12 @@
                     <div class="flex w-full flex-col gap-1">
                         <label for="price_from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
                         <input type="number" class="rounded-lg" id="price_from" placeholder="{{ __('From') }}"
-                               value="{{ now()->addMonth()->format('Y-m-d') }}">
+                            value="{{ now()->addMonth()->format('Y-m-d') }}">
                     </div>
                     <div class="flex w-full flex-col gap-1">
                         <label for="price_to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
                         <input type="number" class="rounded-lg" id="price_to" placeholder="{{ __('To') }}"
-                               value="{{ now()->addMonths(2)->format('Y-m-d') }}">
+                            value="{{ now()->addMonths(2)->format('Y-m-d') }}">
                     </div>
                 </div>
             </div>
@@ -203,36 +201,36 @@
         <div class="relative my-2 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-left text-sm text-gray-500">
                 <thead class="bg-gray-100 text-xs uppercase text-gray-700">
-                <tr>
-                    <th scope="col" class="px-6 py-3">{{ __('Depart On') }}</th>
-                    <th scope="col" class="px-6 py-3">{{ __('Price Range') }}</th>
-                    <th scope="col" class="px-6 py-3">{{ __('Airlines') }}</th>
-                    <th scope="col" class="px-6 py-3">{{ __('Seat Left') }}</th>
-                    <th scope="col" class="px-6 py-3">{{ __('Action') }}</th>
-                </tr>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">{{ __('Depart On') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('Price Range') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('Airlines') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('Seat Left') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('Action') }}</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach($tour->activePackages as $package)
-                    <tr class="border-b bg-white">
-                        <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$package->depart_time->format('d M Y H:i')}}
-                        </th>
-                        <td class="px-6 py-4">{{$package->price}}</td>
-                        <td class="px-6 py-4">
-                            <ul class="list-disc">
-                                @foreach($package->flight->pluck('airline.name') as $airline)
-                                    <li>{{$airline}}</li>
-                                @endforeach
-                            </ul>
-                        </td>
-                        <td class="px-6 py-4">{{$package->pricings->sum('available_capacity')}}</td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 hover:underline">
-                                {{__('Book Now!')}}
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($tour->activePackages as $package)
+                        <tr class="border-b bg-white">
+                            <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $package->depart_time->format('d M Y H:i') }}
+                            </th>
+                            <td class="px-6 py-4">{{ $package->price }}</td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc">
+                                    @foreach ($package->flight->pluck('airline.name') as $airline)
+                                        <li>{{ $airline }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td class="px-6 py-4">{{ $package->pricings->sum('available_capacity') }}</td>
+                            <td class="px-6 py-4">
+                                <a href="#" class="font-medium text-blue-600 hover:underline">
+                                    {{ __('Book Now!') }}
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
