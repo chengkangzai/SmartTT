@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Tour $tour */
+/** @var \App\Models\Tour $tour */
 @endphp
 
 @extends('front.layouts.app')
@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="grid w-full place-items-center bg-cover bg-center bg-no-repeat py-20 opacity-90 md:py-40"
-         style="background-image: url('{{ $imageUrl }}');">
+        style="background-image: url('{{ $imageUrl }}');">
         <div class="container bg-white/30 p-3 md:rounded">
             <button class="rounded-t bg-white px-4 py-2 font-bold text-blue-900 hover:bg-gray-100">
                 <svg class="mr-2 inline h-5 w-5">
@@ -25,12 +25,12 @@
                 <div class="flex w-full flex-col gap-1">
                     <label for="from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
                     <input type="date" class="rounded-lg" id="from" placeholder="{{ __('From') }}"
-                           value="{{ now()->addMonth()->format('Y-m-d') }}">
+                        value="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 <div class="flex w-full flex-col gap-1">
                     <label for="to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
                     <input type="date" class="rounded-lg" id="to" placeholder="{{ __('To') }}"
-                           value="{{ now()->addMonths(2)->format('Y-m-d') }}">
+                        value="{{ now()->addMonths(2)->format('Y-m-d') }}">
                 </div>
             </div>
             <div class="flex flex-col gap-2 rounded-b bg-white p-2 md:flex-row">
@@ -116,5 +116,5 @@
             </div>
         </div>
     </section>
-    <livewire:front.index.index.featured-tour/>
+    <livewire:front.index.index.featured-tour />
 @endsection
