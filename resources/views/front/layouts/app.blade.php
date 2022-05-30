@@ -13,17 +13,15 @@ $language = $setting->default_language;
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@yield('title') - {{ $site_name }}</title>
     <meta name="theme-color" content="#ffffff">
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('tailwind/app.css') }}" rel="stylesheet">
     <link rel='icon' href='/icon.gif' type='image/gif' sizes='16x16'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @livewireStyles
-    <script src="//unpkg.com/alpinejs" defer></script>
     @stack('style')
 </head>
 
 <body>
-
     @yield('modal')
     <div class="flex min-h-screen flex-col overscroll-none">
         <header class="top-0 z-50 w-full">
@@ -103,7 +101,7 @@ $language = $setting->default_language;
                         @auth
                             <a href="{{ route('home') }}"
                                 class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
-                                {{ __('Home') }}</a>
+                                {{ __('Dashboard') }}</a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                 class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
@@ -138,6 +136,7 @@ $language = $setting->default_language;
 
         @include('front.partial.footer')
     </div>
+    <script src="{{ asset('js/alpine.js') }}"></script>
     @livewireScripts
     @stack('script')
 </body>
