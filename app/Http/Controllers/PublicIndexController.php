@@ -26,20 +26,13 @@ class PublicIndexController extends Controller
     public function tours(Tour $tour)
     {
         $tour->load([
-            'activePackages',
-            'activePackages.pricings',
-            'activePackages.flight.airline',
+            'activePackages:id,tour_id,depart_time,is_active',
+            'activePackages.pricings:id,price,name,package_id,available_capacity',
+            'activePackages.flight:id,departure_airport_id,arrival_airport_id,airline_id',
+            'activePackages.flight.airline:id,country_id,name',
             'description',
+            'countries:id,name',
         ]);
-        $setting = app(GeneralSetting::class);
-
-        $cheapestPackagePricing = $tour
-            ->activePackages
-            ->map(function ($package) {
-                return $package->pricings->sortBy('price')->first();
-            })
-            ->sortBy('price')
-            ->first();
 
         $des = $tour
             ->description
@@ -50,15 +43,6 @@ class PublicIndexController extends Controller
                 ];
             });
 
-        $airlines = $tour
-            ->activePackages
-            ->map(function ($package) {
-                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
-            })
-            ->flatten()
-            ->unique()
-            ->sort();
-
-        return view('front.index.tours', compact('tour', 'setting', 'cheapestPackagePricing', 'des', 'airlines'));
+        return view('front.index.tours', compact('tour', 'des'));
     }
 }
