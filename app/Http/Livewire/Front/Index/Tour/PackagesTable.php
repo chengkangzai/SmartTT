@@ -8,10 +8,8 @@ use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Component;
-use Log;
 
 class PackagesTable extends Component
 {
@@ -47,7 +45,7 @@ class PackagesTable extends Component
 
         $this->airlines = $tour->activePackages
             ->map(function ($package) {
-                return $package->flight->map(fn(Flight $airline) => $airline->airline)->unique()->sort();
+                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
             })
             ->flatten()
             ->unique()
@@ -83,9 +81,9 @@ class PackagesTable extends Component
     public function refreshData()
     {
         $this->packages = $this->tour->activePackages
-            ->when($this->priceFrom, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->pricings->sortBy('price')->first()->price >= $this->priceFrom))
-            ->when($this->priceTo, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->pricings->sortBy('price')->first()->price <= $this->priceTo))
-            ->when($this->month, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->depart_time->format('m') == $this->month))
-            ->when($this->airlineId, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->flight->filter(fn(Flight $flight) => $flight->airline_id == $this->airlineId)->count() > 0));
+            ->when($this->priceFrom, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->pricings->sortBy('price')->first()->price >= $this->priceFrom))
+            ->when($this->priceTo, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->pricings->sortBy('price')->first()->price <= $this->priceTo))
+            ->when($this->month, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->depart_time->format('m') == $this->month))
+            ->when($this->airlineId, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->flight->filter(fn (Flight $flight) => $flight->airline_id == $this->airlineId)->count() > 0));
     }
 }

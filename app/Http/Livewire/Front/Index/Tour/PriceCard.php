@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Front\Index\Tour;
 
-use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class PriceCard extends Component

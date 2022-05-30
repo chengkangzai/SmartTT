@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use App\Models\Flight;
-use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
