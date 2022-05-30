@@ -87,6 +87,5 @@ class PackagesTable extends Component
             ->when($this->priceTo, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->pricings->sortBy('price')->first()->price <= $this->priceTo))
             ->when($this->month, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->depart_time->format('m') == $this->month))
             ->when($this->airlineId, fn(Collection $packages) => $packages->filter(fn(Package $package) => $package->flight->filter(fn(Flight $flight) => $flight->airline_id == $this->airlineId)->count() > 0));
-
     }
 }
