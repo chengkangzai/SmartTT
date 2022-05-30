@@ -21,9 +21,9 @@
                 class="my-auto font-medium hover:text-gray-500 md:text-xl">
                 {{ __('Itinerary') }}
             </a>
-            <a target="_self" href="{{ request()->fullUrl() }}#packages-and-airlines"
+            <a target="_self" href="{{ request()->fullUrl() }}#packages"
                 class="my-auto font-medium hover:text-gray-500 md:text-xl">
-                {{ __('Packages & Airlines') }}
+                {{ __('Packages') }}
             </a>
         </div>
         <div class="z-10 mx-auto flex flex-col rounded-xl border bg-white py-4 shadow-xl md:-mt-80">
@@ -150,7 +150,8 @@
         </div>
     </div>
 
-    <div class="container mx-auto" id="packages-and-airlines">
+    <div class="container mx-auto" id="packages">
+        <h3 class="px-2 py-4 text-3xl font-bold">{{ __('Packages') }}</h3>
         <div class="flex flex-col gap-2 md:flex-row">
             <div class="rounded-xl border p-2">
                 <h3 class="px-2 py-1 text-lg font-bold">{{ __('Date') }}</h3>
