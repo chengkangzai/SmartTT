@@ -136,7 +136,7 @@ $language = $setting->default_language;
             </main>
         </div>
 
-        @yield('footer')
+        @include('front.partial.footer')
     </div>
     @livewireScripts
     @stack('script')
