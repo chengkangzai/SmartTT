@@ -34,8 +34,8 @@ Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
 });
 
-Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
+    Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
