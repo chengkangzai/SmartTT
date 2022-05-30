@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\Tour $tour */
+    /** @var \App\Models\Tour $tour */
 @endphp
 
 @extends('front.layouts.app')
@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="grid w-full place-items-center bg-cover bg-center bg-no-repeat py-20 opacity-90 md:py-40"
-        style="background-image: url('{{ $imageUrl }}');">
+         style="background-image: url('{{ $imageUrl }}');">
         <div class="container bg-white/30 p-3 md:rounded">
             <button class="rounded-t bg-white px-4 py-2 font-bold text-blue-900 hover:bg-gray-100">
                 <svg class="mr-2 inline h-5 w-5">
@@ -25,12 +25,12 @@
                 <div class="flex w-full flex-col gap-1">
                     <label for="from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
                     <input type="date" class="rounded-lg" id="from" placeholder="{{ __('From') }}"
-                        value="{{ now()->addMonth()->format('Y-m-d') }}">
+                           value="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 <div class="flex w-full flex-col gap-1">
                     <label for="to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
                     <input type="date" class="rounded-lg" id="to" placeholder="{{ __('To') }}"
-                        value="{{ now()->addMonths(2)->format('Y-m-d') }}">
+                           value="{{ now()->addMonths(2)->format('Y-m-d') }}">
                 </div>
             </div>
             <div class="flex flex-col gap-2 rounded-b bg-white p-2 md:flex-row">
@@ -116,39 +116,5 @@
             </div>
         </div>
     </section>
-    <div class="bg-gray-100 px-4">
-        <div class="container mx-auto py-10">
-            <h2
-                class="inline border-b-2 border-b-violet-500 bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-border bg-clip-border bg-clip-text text-3xl font-extrabold text-transparent underline underline-offset-8">
-                {{ __('Featured Tour') }}
-            </h2>
-        </div>
-        <div class="container mx-auto grid items-stretch gap-4 md:grid-cols-3">
-            @foreach ($tours as $tour)
-                <div
-                    class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
-                    <a href="{{ route('front.tours', $tour) }}">
-                        <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="image" class="aspect-video w-full" />
-                    </a>
-                    <div class="p-4 text-center md:px-7 md:pb-0">
-                        <h3 class="text-dark block text-xl font-semibold hover:text-black md:mb-4">
-                            {{ $tour->name }}
-                        </h3>
-                    </div>
-                    <div class="flex-grow">
-
-                    </div>
-                    <a href="{{ route('front.tours', $tour) }}"
-                        class="mx-auto mb-6 w-fit rounded-full border py-2 px-7 text-base font-medium transition hover:border-black hover:bg-white hover:text-black">
-                        {{ __('View Details') }}
-                    </a>
-                </div>
-            @endforeach
-        </div>
-        <div class="container mx-auto my-4 py-2">
-            <button class="mx-auto block animate-bounce rounded px-4 py-2 text-center hover:bg-gray-200">
-                {{ __('More') }} &downarrow;
-            </button>
-        </div>
-    </div>
+    <livewire:front.index.index.featured-tour/>
 @endsection

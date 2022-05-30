@@ -19,19 +19,8 @@ class PublicIndexController extends Controller
             ->first()
             ->getUrl();
         $countries = Country::select(['id', 'name'])->has('tours')->get();
-        $tours = Tour::query()
-            ->with([
-                'media',
-                'activePackages:id,is_active,depart_time',
-                'activePackages.pricings:id,price,package_id',
-                'countries:id,name',
-            ])
-            ->active()
-            ->select(['id', 'name'])
-            ->limit(6)
-            ->get();
 
-        return view('front.index.index', compact('categories', 'countries', 'imageUrl', 'tours'));
+        return view('front.index.index', compact('categories', 'countries', 'imageUrl'));
     }
 
     public function tours(Tour $tour)
