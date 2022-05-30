@@ -64,7 +64,7 @@ class PublicIndexController extends Controller
         $airlines = $tour
             ->activePackages
             ->map(function ($package) {
-                return $package->flight->map(fn(Flight $airline) => $airline->airline)->unique()->sort();
+                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
             })
             ->flatten()
             ->unique()
