@@ -10,7 +10,7 @@ it('should redirect when user is not logged in', function () {
 
 it('should return dashboard view', function () {
     $this->actingAs(User::factory()->create())
-        ->get('/home')
+        ->get(route('home'))
         ->assertViewIs('home')
         ->assertStatus(200);
 });
