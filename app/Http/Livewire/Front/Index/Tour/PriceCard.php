@@ -22,7 +22,8 @@ class PriceCard extends Component
         $this->tour = $tour;
 
         $this->default_currency_symbol = app(GeneralSetting::class)->default_currency_symbol;
-        $this->packageId = $tour->packages->first()->id;
+
+        $this->packageId = $tour->activePackages->first()->id;
         $this->cheapestPackagePricing = $tour
             ->activePackages
             ->map(function ($package) {
