@@ -32,7 +32,7 @@ class PublicIndexController extends Controller
             'countries:id,name',
         ]);
 
-        abort_if(!$tour->activePackages->count(), 404);
+        abort_if(! $tour->activePackages->count(), 404);
 
         $des = $tour
             ->description
