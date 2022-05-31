@@ -32,6 +32,8 @@ class PublicIndexController extends Controller
             'countries:id,name',
         ]);
 
+        abort_if(!$tour->activePackages->count(), 404);
+
         $des = $tour
             ->description
             ->map(function ($description) {

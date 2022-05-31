@@ -44,6 +44,7 @@ class FeaturedTour extends Component
                 'countries:id,name',
             ])
             ->active()
+            ->whereHas('activePackages.pricings')
             ->select(['id', 'name'])
             ->limit($this->limit)
             ->get();
