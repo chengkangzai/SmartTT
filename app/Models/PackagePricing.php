@@ -40,6 +40,12 @@ class PackagePricing extends Model
         return $this->belongsTo(Package::class);
     }
 
+    public function activePackage(): BelongsTo
+    {
+        return $this->belongsTo(Package::class)
+            ->where('is_active', true);
+    }
+
     public function guests(): HasMany
     {
         return $this->hasMany(BookingGuest::class);
