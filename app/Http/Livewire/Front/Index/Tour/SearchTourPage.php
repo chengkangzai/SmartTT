@@ -75,7 +75,7 @@ class SearchTourPage extends Component
                 'description',
                 'activePackages',
                 'activePackages.pricings',
-                'media'
+                'media',
             ])
             ->when($this->q, function ($query) {
                 return $query
@@ -148,7 +148,6 @@ class SearchTourPage extends Component
         $this->limit += 6;
         $this->getTours();
     }
-
 
     #region Attribute Updated
     public function updatedDateForm()

@@ -27,7 +27,7 @@ class PackagesTable extends Component
     {
         $this->tour = $tour;
         $this->packages = $tour->activePackages;
-        $pricing = $this->packages->map(fn($package) => $package->pricings->map->price)
+        $pricing = $this->packages->map(fn ($package) => $package->pricings->map->price)
             ->flatten()->sort()->values();
 
         $this->priceFrom = $pricing->first();
@@ -43,7 +43,7 @@ class PackagesTable extends Component
 
         $this->airlines = $tour->activePackages
             ->map(function ($package) {
-                return $package->flight->map(fn(Flight $airline) => $airline->airline)->unique()->sort();
+                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
             })
             ->flatten()
             ->unique()
