@@ -7,7 +7,7 @@
                 <div class="flex w-full flex-col gap-1">
                     <label for="month" class="block px-2 text-sm opacity-70">{{ __('Month') }}</label>
                     <select id="month" class="rounded-lg" wire:model.debounce="month">
-                        <option value="">{{ __('Select Month') }}</option>
+                        <option value="0">{{ __('Select Month') }}</option>
                         @foreach ($months as $key => $month)
                             <option value="{{ $key }}">{{ $month }}</option>
                         @endforeach

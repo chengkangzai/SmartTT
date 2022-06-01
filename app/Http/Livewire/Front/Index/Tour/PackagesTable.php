@@ -18,21 +18,20 @@ class PackagesTable extends Component
     public Collection $months;
     public array $airlines;
 
-    public int $month = 7;
+    public int $month = 0;
     public int $priceFrom = 0;
     public int $priceTo = 0;
-    public int $airlineId;
+    public int $airlineId = 0;
 
     public function mount(Tour $tour)
     {
         $this->tour = $tour;
         $this->packages = $tour->activePackages;
-        $pricing = $this->packages->map(function ($package) {
-            return $package->pricings->sortBy('price')->first();
-        })->sortBy('price');
+        $pricing = $this->packages->map(fn($package) => $package->pricings->map->price)
+            ->flatten()->sort()->values();
 
-        $this->priceFrom = $pricing->first()->price;
-        $this->priceTo = $pricing->last()->price;
+        $this->priceFrom = $pricing->first();
+        $this->priceTo = $pricing->last();
 
         $this->months = $tour->activePackages
             ->pluck('depart_time')
@@ -41,16 +40,14 @@ class PackagesTable extends Component
                     (int)$date->format('m') => $date->format('F'),
                 ];
             });
-        $this->month = $this->months->keys()->first();
 
         $this->airlines = $tour->activePackages
             ->map(function ($package) {
-                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
+                return $package->flight->map(fn(Flight $airline) => $airline->airline)->unique()->sort();
             })
             ->flatten()
             ->unique()
             ->toArray();
-        $this->airlineId = $this->airlines[0]?->id ?? 0;
     }
 
     public function render(): Factory|View|Application
@@ -58,6 +55,34 @@ class PackagesTable extends Component
         return view('livewire.front.index.tour.packages-table');
     }
 
+    public function refreshData()
+    {
+        $this->packages = $this->tour->activePackages
+            ->when($this->priceFrom, function (Collection $packages) {
+                return $packages->filter(function (Package $package) {
+                    return $package->pricings->sortBy('price')->first()->price >= $this->priceFrom;
+                });
+            })
+            ->when($this->priceTo, function (Collection $packages) {
+                return $packages->filter(function (Package $package) {
+                    return $package->pricings->sortBy('price')->first()->price <= $this->priceTo;
+                });
+            })
+            ->when($this->month != 0, function (Collection $packages) {
+                return $packages->filter(function (Package $package) {
+                    return $package->depart_time->format('m') == $this->month;
+                });
+            })
+            ->when($this->airlineId != 0, function (Collection $packages) {
+                return $packages->filter(function (Package $package) {
+                    return $package->flight->filter(function (Flight $flight) {
+                        return $flight->airline_id == $this->airlineId;
+                    })->isNotEmpty();
+                });
+            });
+    }
+
+    #region Filters
     public function updatedMonth()
     {
         $this->refreshData();
@@ -77,13 +102,5 @@ class PackagesTable extends Component
     {
         $this->refreshData();
     }
-
-    public function refreshData()
-    {
-        $this->packages = $this->tour->activePackages
-            ->when($this->priceFrom, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->pricings->sortBy('price')->first()->price >= $this->priceFrom))
-            ->when($this->priceTo, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->pricings->sortBy('price')->first()->price <= $this->priceTo))
-            ->when($this->month, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->depart_time->format('m') == $this->month))
-            ->when($this->airlineId, fn (Collection $packages) => $packages->filter(fn (Package $package) => $package->flight->filter(fn (Flight $flight) => $flight->airline_id == $this->airlineId)->count() > 0));
-    }
+    #endregion
 }
