@@ -14,6 +14,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Front\Index\Tour\SearchTourPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
+    Route::get('tours/search', SearchTourPage::class)->name('search');
     Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
 });
 
