@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "format": "blade-formatter --write resources/views/layouts/**/*.blade.php",
-        "format-tailwind": "blade-formatter --write resources/views/front/**/*.blade.php --sort-tailwindcss-classes"
+        "format-tailwind": "blade-formatter --write resources/views/front/**/*.blade.php --sort-tailwindcss-classes && blade-formatter --write resources/views/livewire/front/**/*.blade.php --sort-tailwindcss-classes"
     },
     "devDependencies": {
         "@coreui/coreui": "^4.0.2",
