@@ -17,7 +17,7 @@
                         {{ $tour->name }}
                     </h3>
                 </div>
-                <div class="flex-grow">
+                <div class="grow">
 
                 </div>
                 <a href="{{ route('front.tours', $tour) }}"
