@@ -136,8 +136,8 @@ $language = $setting->default_language;
 
         @include('front.partial.footer')
     </div>
-    <script src="{{ asset('js/alpine.js') }}"></script>
     @livewireScripts
+    <script src="{{ asset('js/alpine.js') }}"></script>
     @stack('script')
 </body>
 
