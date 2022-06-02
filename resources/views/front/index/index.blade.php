@@ -23,7 +23,7 @@
                             </div>
                             <h6 class="text-xl font-semibold">{{ __('Robust Planning') }}</h6>
                             <p class="mt-2 mb-4 text-gray-500">
-                                {{ __('Don\'t know where to go ?') }}
+                                {{ __('Dont know where to go ?') }}
                                 <br>
                                 {{ __('We always got you cover!') }}
                             </p>
@@ -57,8 +57,8 @@
                             </div>
                             <h6 class="text-xl font-semibold">{{ __('Wallet Friendly') }}</h6>
                             <p class="mt-2 mb-4 text-gray-500">
-                                {{ __('Don\'t you worry ! ') }} <br>
-                                {{ __('We won\'t break your bank !') }}
+                                {{ __('Dont you worry ! ') }} <br>
+                                {{ __('We wont break your bank !') }}
                             </p>
                         </div>
                     </div>
