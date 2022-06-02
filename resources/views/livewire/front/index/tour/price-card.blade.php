@@ -36,8 +36,8 @@
         @endforeach
     </div>
     <div class="mx-auto mt-4 py-4">
-        <a href="{{route('bookings.create',['package'=>$packageId])}}"
-           class="block animate-bounce rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400">
+        <a href="{{ route('bookings.create', ['package' => $packageId]) }}"
+            class="block animate-bounce rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400">
             {{ __('Book Now') }} &excl;
         </a>
     </div>
