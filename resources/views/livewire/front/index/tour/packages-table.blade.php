@@ -61,7 +61,7 @@
                 @foreach ($packages as $package)
                     <tr class="border-b bg-white">
                         <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $package->depart_time->format('d M Y H:i A') }}
+                            {{ $package->depart_time->translatedFormat('d M Y H:i A') }}
                         </th>
                         <td class="px-6 py-4">{{ $package->price }}</td>
                         <td class="px-6 py-4">
