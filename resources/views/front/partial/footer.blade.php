@@ -75,17 +75,12 @@
                 <h6 class="py-2 text-center text-2xl font-bold md:py-4">{{ __('Quick Links') }}</h6>
                 <div class="mx-auto flex flex-row justify-around gap-8 py-4 md:py-8">
                     <div class="flex flex-col">
-                        <p class="text-xl font-semibold">{{ __('Resources') }}</p>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
+                        <p class="text-2xl font-semibold">{{ __('Tours') }}</p>
+                        <a href="{{ route('front.index') }}">{{ __('Front Page') }}</a>
+                        <a href="{{ route('front.search') }}">{{ __('Search Tours') }}</a>
+                        <a href="{{ route('front.tours',\App\Models\Tour::inRandomOrder()->first()) }}">{{ __('Feeling Lucky') }}</a>
                     </div>
-                    <div class="flex flex-col">
-                        <p class="text-xl font-semibold">{{ __('Resources') }}</p>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
-                        <a href="{{ route('home') }}">{{ __('Home') }}</a>
-                    </div>
+                    <div class="flex flex-col grow"></div>
                 </div>
             </div>
             <div class="hidden border md:mx-8 md:flex"></div>
