@@ -1,7 +1,9 @@
 @php
 /** @var \App\Models\Tour $tour */
 @endphp
-
+@section('title')
+    {{__('Search Tour')}}
+@endsection
 
 <div>
     <div
@@ -168,12 +170,6 @@
                         <h1 class="text-3xl font-bold">{{ __('No tours found') }}</h1>
                     </div>
                 @endforelse
-                @if ($stillCanLoad)
-                    <button class="mx-auto block animate-bounce rounded px-4 py-2 text-center hover:bg-gray-200"
-                        wire:click="loadMore">
-                        {{ __('More') }} &downarrow;
-                    </button>
-                @endif
             </div>
         </div>
     </div>

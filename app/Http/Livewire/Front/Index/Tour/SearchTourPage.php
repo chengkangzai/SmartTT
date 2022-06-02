@@ -121,12 +121,7 @@ class SearchTourPage extends Component
                     });
                 });
             })
-            ->limit($this->limit)
             ->get();
-
-        if ($this->tours->count() < $this->limit) {
-            $this->stillCanLoad = false;
-        }
     }
 
     public function getCheapestPrice(Tour $tour): string
@@ -141,12 +136,6 @@ class SearchTourPage extends Component
                 ->price ?? 0;
 
         return number_format($price, 2);
-    }
-
-    public function loadMore()
-    {
-        $this->limit += 6;
-        $this->getTours();
     }
 
     #region Attribute Updated

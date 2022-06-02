@@ -49,7 +49,7 @@ class FeaturedTour extends Component
             ->limit($this->limit)
             ->get();
 
-        if ($this->tours->count() < $this->limit) {
+        if (Tour::count() < $this->limit) {
             $this->stillCanLoad = false;
         }
     }
