@@ -13,7 +13,7 @@
             </tr>
             @forelse($packages as $package)
                 <tr>
-                    <td>{{ $package->depart_time }}</td>
+                    <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                     <td>{{ $package->price, 2 }}</td>
                     <td>{{ $package->pricings->sum('available_capacity') }}</td>
                     <td>
