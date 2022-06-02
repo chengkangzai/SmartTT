@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class SearchTourPage extends Component
 {
@@ -63,7 +62,7 @@ class SearchTourPage extends Component
     public function render(): Factory|View|Application
     {
         return view('livewire.front.index.tour.search-tour-page', [
-            'tours' => $this->getTours()
+            'tours' => $this->getTours(),
         ])
             ->extends('front.layouts.app');
     }
@@ -71,6 +70,7 @@ class SearchTourPage extends Component
     private function getTours(): Paginator
     {
         Paginator::useTailwind();
+
         return Tour::query()
             ->with([
                 'description',

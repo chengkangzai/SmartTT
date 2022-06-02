@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tour;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PublicIndexController extends Controller
 {
