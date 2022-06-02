@@ -9,6 +9,7 @@ use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -27,7 +28,6 @@ class SearchTourPage extends Component
     public Collection $countrySelection;
     public string $imageUrl;
 
-    public Collection $tours;
     public string $default_currency_symbol;
 
     public bool $stillCanLoad = true;
@@ -56,20 +56,22 @@ class SearchTourPage extends Component
         $this->categories = Tour::select('category')->distinct()->pluck('category');
         $this->latestDepartTime = Package::active()->select('depart_time')->latest('depart_time')->first()->depart_time->format('Y-m-d');
 
-        $this->getTours();
-
         $this->default_currency_symbol = app(GeneralSetting::class)->default_currency_symbol;
     }
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.front.index.tour.search-tour-page')
+        return view('livewire.front.index.tour.search-tour-page', [
+            'tours' => $this->getTours(),
+        ])
             ->extends('front.layouts.app');
     }
 
-    private function getTours()
+    private function getTours(): Paginator
     {
-        $this->tours = Tour::query()
+        Paginator::useTailwind();
+
+        return Tour::query()
             ->with([
                 'description',
                 'activePackages',
@@ -120,7 +122,7 @@ class SearchTourPage extends Component
                     });
                 });
             })
-            ->get();
+            ->simplePaginate(6);
     }
 
     public function getCheapestPrice(Tour $tour): string
@@ -136,41 +138,4 @@ class SearchTourPage extends Component
 
         return number_format($price, 2);
     }
-
-    #region Attribute Updated
-    public function updatedDateForm()
-    {
-        $this->getTours();
-    }
-
-    public function updatedCategory()
-    {
-        $this->getTours();
-    }
-
-    public function updatedCapacity()
-    {
-        $this->getTours();
-    }
-
-    public function updatedDateTo()
-    {
-        $this->getTours();
-    }
-
-    public function updatedPriceForm()
-    {
-        $this->getTours();
-    }
-
-    public function updatedPriceTo()
-    {
-        $this->getTours();
-    }
-
-    public function updatedQ()
-    {
-        $this->getTours();
-    }
-    #endregion
 }

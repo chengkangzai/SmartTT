@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tour;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PublicIndexController extends Controller
 {
     public function index()
     {
-        $imageUrl = Media::whereCollectionName('thumbnail')
-            ->whereModelType(Tour::class)
-            ->inRandomOrder()
-            ->first()
-            ->getUrl();
-
-        return view('front.index.index', compact('imageUrl'));
+        return view('front.index.index');
     }
 
     public function tours(Tour $tour)

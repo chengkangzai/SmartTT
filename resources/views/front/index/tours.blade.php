@@ -28,7 +28,7 @@
         </div>
         <livewire:front.index.tour.price-card :tour="$tour" />
     </div>
-    <div id="detail" class="container mx-auto px-4 md:px-0 md:pt-10">
+    <div id="detail" class="container mx-auto px-4 md:px-2 md:pt-10">
         <a target="_self" href="{{ request()->fullUrl() }}#detail"
             class="text-center text-2xl font-bold leading-relaxed md:text-4xl md:underline md:underline-offset-8">
             # {{ $tour->name }}
