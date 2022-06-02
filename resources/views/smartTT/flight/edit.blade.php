@@ -1,9 +1,9 @@
 @php
-/** @var \App\Models\Flight $flight */
-/** @var \App\Models\Settings\FlightSetting $setting */
+    /** @var \App\Models\Flight $flight */
+    /** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Edit Flight') }}
 @endsection
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <form role="form" action="{{ route('flights.update', $flight) }}" method="POST" id="editForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -31,7 +31,8 @@
                     <select class="form-control" id="airline_id" name="airline_id">
                         <option value="">{{ __('Please Select') }}</option>
                         @foreach ($airlines as $airline)
-                            <option value="{{ $airline->id }}" @selected(old('airline_id', $airline->id) == $flight->airline_id)>
+                            <option
+                                value="{{ $airline->id }}" @selected(old('airline_id', $airline->id) == $flight->airline_id)>
                                 {{ $airline->name }}
                             </option>
                         @endforeach
@@ -40,7 +41,8 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label class="form-label" for="departure_airport_id">{{ __('Departure Airport') }}</label>
-                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id" multiple>
+                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id"
+                                multiple>
                             <option selected value="{{ $flight->departure_airport_id }}">
                                 {{ $flight->depart_airport->name }}
                             </option>
@@ -62,23 +64,23 @@
                             <small>({{ __('based on departure timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="departure_date" id="departure_date"
-                            min="{{ date('Y-m-d\TH:i') }}"
-                            value="{{ old('departure_date', $flight->departure_date->format('Y-m-d\TH:i')) }}" />
+                               min="{{ date('Y-m-d\TH:i') }}"
+                               value="{{ old('departure_date', $flight->departure_date->format('Y-m-d\TH:i')) }}"/>
                     </div>
                     <div class="col col-md-6">
                         <label class="form-label" for="arrival_date"> {{ __('Arrival Time') }}
                             <small>({{ __('based on arrival timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="arrival_date" id="arrival_date"
-                            min="{{ date('Y-m-d\TH:i') }}"
-                            value="{{ old('arrival_date', $flight->arrival_date->format('Y-m-d\TH:i')) }}" />
+                               min="{{ date('Y-m-d\TH:i') }}"
+                               value="{{ old('arrival_date', $flight->arrival_date->format('Y-m-d\TH:i')) }}"/>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="price">{{ __('Price') }}</label>
                     <input type="number" name="price" class="form-control" id="price"
-                        value="{{ old('price', $flight->price) }}" step="1" placeholder="{{ __('Flight Price') }}">
+                           value="{{ old('price', $flight->price) }}" step="1" placeholder="{{ __('Flight Price') }}">
                 </div>
 
 
@@ -97,7 +99,8 @@
                     <label class="form-label" for="type">{{ __('Flight Type') }}</label>
                     <select name="type" class="form-control" id="type">
                         @foreach ($setting->supported_type as $type)
-                            <option value="{{ $type }}" @selected(old('type', $flight->type) == $type)>{{ $type }}</option>
+                            <option
+                                value="{{ $type }}" @selected(old('type', $flight->type) == $type)>{{ $type }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -118,14 +121,14 @@
                 url: '{{ route('select2.flights.getAirports') }}',
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
+                data: function (params) {
                     return {
                         q: params.term,
                     };
                 },
-                processResults: function(data) {
+                processResults: function (data) {
                     return {
-                        results: $.map(data, function(item) {
+                        results: $.map(data, function (item) {
                             return {
                                 text: item.text,
                                 id: item.id

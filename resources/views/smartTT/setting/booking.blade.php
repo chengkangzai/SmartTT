@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Settings\BookingSetting $setting */
+    /** @var \App\Models\Settings\BookingSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Booking Settings') }}
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'booking') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <label for="default_payment_method"> {{ __('Default Payment Method') }}</label>
@@ -38,13 +38,13 @@
                 <div class="mb-3">
                     <label for="charge_per_child">{{ __('Charges for Children') }}</label>
                     <input name="charge_per_child" id="charge_per_child" class="form-control" type="number"
-                        value="{{ old('charge_per_child', $setting->charge_per_child) }}">
+                           value="{{ old('charge_per_child', $setting->charge_per_child) }}">
                 </div>
                 <div class="mb-3">
                     <label for="reservation_charge_per_pax">{{ __('Reservation Charge Per Pax') }}</label>
                     <input name="reservation_charge_per_pax" id="reservation_charge_per_pax" class="form-control"
-                        type="number"
-                        value="{{ old('reservation_charge_per_pax', $setting->reservation_charge_per_pax) }}">
+                           type="number"
+                           value="{{ old('reservation_charge_per_pax', $setting->reservation_charge_per_pax) }}">
                 </div>
             </form>
         </div>

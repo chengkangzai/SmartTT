@@ -3,9 +3,9 @@
 /** @var \App\Models\TourDescription $des */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
-    {{ __('Tour Management') }}
+    {{$tour->name}}
 @endsection
 
 @section('content')
@@ -105,7 +105,7 @@
                                 <tr>
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('Departure') }}</th>
-                                    <th>{{ __('Tour') }}</th>
+                                    <th>{{ __('Pricings') }}</th>
                                     <th>{{ __('Airline') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
@@ -115,7 +115,7 @@
                                     <tr>
                                         <td>{{ $package->id }}</td>
                                         <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
-                                        <td>{{ $tour->name }}</td>
+                                        <td>{{$package->price}}</td>
                                         <td>
                                             <ol>
                                                 @foreach ($package->flight as $flight)

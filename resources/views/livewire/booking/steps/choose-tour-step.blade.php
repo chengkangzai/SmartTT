@@ -3,7 +3,7 @@
         <h4 class="card-title">{{ __('Choose Tour') }}</h4>
     </div>
     <div class="card-body">
-        @include('partials.error-alert')
+        @include('smartTT.partials.error-alert')
         <div class="form-group">
             <label for="tour">{{ __('Tour') }}</label>
             <select wire:model="tour" class="form-control" id="tour">

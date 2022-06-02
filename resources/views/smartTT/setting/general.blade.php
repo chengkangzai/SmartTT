@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Settings\GeneralSetting $setting */
+    /** @var \App\Models\Settings\GeneralSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('General Settings') }}
@@ -23,11 +23,12 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'general') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <label for="name">{{ __('Site Name') }}</label>
-                    <input type="text" name="site_name" id="name" class="form-control" value="{{ $setting->site_name }}">
+                    <input type="text" name="site_name" id="name" class="form-control"
+                           value="{{ $setting->site_name }}">
                 </div>
                 <div class="mb-3">
                     <label for="default_language">{{ __('Default Language') }}</label>
@@ -53,13 +54,13 @@
                     <div class="col-12 mb-2 mb-md-0 col-md-6">
                         <label for="default_currency">{{ __('Default Currency') }}</label>
                         <input type="text" class="form-control" name="default_currency" id="default_currency"
-                            value="{{ old('default_currency', $setting->default_currency) }}">
+                               value="{{ old('default_currency', $setting->default_currency) }}">
                     </div>
                     <div class="col-12 mb-2 mb-md-0 col-md-6">
                         <label for="default_currency_symbol">{{ __('Default Currency Symbol') }}</label>
                         <input type="text" class="form-control" name="default_currency_symbol"
-                            id="default_currency_symbol"
-                            value="{{ old('default_currency_symbol', $setting->default_currency_symbol) }}">
+                               id="default_currency_symbol"
+                               value="{{ old('default_currency_symbol', $setting->default_currency_symbol) }}">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -77,24 +78,24 @@
                     <div class="col-12 mb-2 mb-md-0 col-md-4">
                         <label for="company_name">{{ __('Company Name') }}</label>
                         <input type="text" class="form-control" name="company_name" id="company_name"
-                            value="{{ old('company_name', $setting->company_name) }}">
+                               value="{{ old('company_name', $setting->company_name) }}">
                     </div>
                     <div class="col-12 mb-2 mb-md-0 col-md-4">
                         <label for="company_phone">{{ __('Default Currency Symbol') }}</label>
                         <input type="text" class="form-control" name="company_phone" id="company_phone"
-                            value="{{ old('company_phone', $setting->company_phone) }}">
+                               value="{{ old('company_phone', $setting->company_phone) }}">
                     </div>
                     <div class="col-12 mb-2 mb-md-0 col-md-4">
                         <label for="business_registration_no">{{ __('Business Registration Number') }}</label>
                         <input type="text" class="form-control" name="business_registration_no"
-                            id="business_registration_no"
-                            value="{{ old('business_registration_no', $setting->business_registration_no) }}">
+                               id="business_registration_no"
+                               value="{{ old('business_registration_no', $setting->business_registration_no) }}">
                     </div>
                 </div>
                 <div>
                     <label for="company_address">{{ __('Company Address') }}</label>
                     <textarea name="company_address" id="company_address" class="form-control"
-                        rows="3">{{ old('company_address', $setting->company_address) }}</textarea>
+                              rows="3">{{ old('company_address', $setting->company_address) }}</textarea>
                 </div>
             </form>
         </div>

@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Settings\FlightSetting $setting */
+    /** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Flight Settings') }}
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'flight') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div id="supported_class">
                     @foreach ($setting->supported_class as $class)
@@ -38,7 +38,7 @@
                 <div class="mb-3">
                     <label for="default_class"> {{ __('Default Class') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
-                            data-coreui-target="#defaultClassModal" href="#">
+                           data-coreui-target="#defaultClassModal" href="#">
                             {{ __('Create New Class') }}
                         </a>
                     </label>
@@ -53,7 +53,7 @@
                 <div class="mb-3">
                     <label for="default_type">{{ __('Default Type') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
-                            data-coreui-target="#defaultTypeModal" href="#">
+                           data-coreui-target="#defaultTypeModal" href="#">
                             {{ __('Create New Type') }}
                         </a>
                     </label>
@@ -96,13 +96,13 @@
                         <div class="form-group">
                             <label for="new_class">{{ __('Class') }}</label>
                             <input type="text" name="new_class" id="new_class" class="form-control"
-                                placeholder="{{ __('Class') }}">
+                                   placeholder="{{ __('Class') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
                     <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addClassForm">
                 </div>
             </div>
@@ -121,13 +121,13 @@
                         <div class="form-group">
                             <label for="new_type">{{ __('Type') }}</label>
                             <input type="text" name="new_type" id="new_type" class="form-control"
-                                placeholder="{{ __('Type') }}">
+                                   placeholder="{{ __('Type') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
                     <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addTypeForm">
                 </div>
             </div>

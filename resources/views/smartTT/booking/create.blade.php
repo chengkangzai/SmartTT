@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Create Booking') }}
 @endsection
@@ -11,8 +11,13 @@
             <li class="breadcrumb-item active" aria-current="page">{{ __('Create') }}</li>
         </ol>
     </nav>
-
-    <livewire:booking.create-booking-wizard />
+    @if(request('package'))
+        <livewire:booking.create-booking-wizard
+            show-step="register-booking-and-guest-step"
+            :package-id="request('package')"/>
+    @else
+        <livewire:booking.create-booking-wizard :package-id="request('package')"/>
+    @endif
 @endsection
 
-@include('partials.initialStripeScript')
+@include('smartTT.partials.initialStripeScript')

@@ -1,7 +1,7 @@
 @section('title')
     {{ __('Home') }}
 @endsection
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('content')
     <div class="container-lg">

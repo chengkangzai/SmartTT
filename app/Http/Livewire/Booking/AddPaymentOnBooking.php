@@ -72,13 +72,21 @@ class AddPaymentOnBooking extends Component
     {
         $this->validate([
             $field => $this->validateBillingRule[$field],
+        ], [], [
+            'billingName' => __('Billing Name'),
+            'billingPhone' => __('Billing Phone'),
         ]);
     }
 
     public function nextStep()
     {
-        $this->validateBilling('billingName');
-        $this->validateBilling('billingPhone');
+        $this->validate([
+            'billingName' => $this->validateBillingRule['billingName'],
+            'billingPhone' => $this->validateBillingRule['billingPhone'],
+        ], [], [
+            'billingName' => __('Billing Name'),
+            'billingPhone' => __('Billing Phone'),
+        ]);
 
         $this->currentStep++;
         $this->getReadyForPayment();

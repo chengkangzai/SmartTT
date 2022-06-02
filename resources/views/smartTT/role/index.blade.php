@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Roles Management') }}

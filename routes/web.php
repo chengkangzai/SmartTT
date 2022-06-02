@@ -7,12 +7,14 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicIndexController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourDescriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Front\Index\Tour\SearchTourPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +31,14 @@ Auth::routes();
 Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 
-Route::middleware(['web', 'auth'])->group(function () {
-    Route::redirect('/', '/home');
+Route::middleware(['web'])->as('front.')->group(function () {
+    Route::get('/', [PublicIndexController::class, 'index'])->name('index');
+    Route::get('tours/search', SearchTourPage::class)->name('search');
+    Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
+});
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
+    Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');

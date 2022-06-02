@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('smartTT.layouts.guest')
 
 @section('content')
     <div class="col-md-6">

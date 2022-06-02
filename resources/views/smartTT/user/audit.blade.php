@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\User $user */
+    /** @var \App\Models\User $user */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Users Management') }}
 @endsection
@@ -21,7 +21,7 @@
             <h3 class="card-title">{{ __('Audit Trail') }}</h3>
         </div>
         <div class="card-body">
-            @include('partials.audit-table')
+            @include('smartTT.partials.audit-table')
         </div>
     </div>
 @endsection

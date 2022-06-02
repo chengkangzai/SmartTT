@@ -1,9 +1,9 @@
 @php
-/** @var \App\Models\Tour $tour */
-/** @var \App\Models\Package $package */
-/** @var \App\Models\Settings\PackageSetting $setting */
+    /** @var \App\Models\Tour $tour */
+    /** @var \App\Models\Package $package */
+    /** @var \App\Models\Settings\PackageSetting $setting */
 @endphp
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 @section('title')
     {{ __('Edit Package') }}
 @endsection
@@ -24,7 +24,7 @@
             </div>
             <div class="card-body">
                 <form role="form" action="{{ route('packages.update', $package) }}" method="POST" id="editForm">
-                    @include('partials.error-alert')
+                    @include('smartTT.partials.error-alert')
                     @method('PUT')
                     @csrf
                     <div class="mb-3 row">
@@ -32,7 +32,8 @@
                             <label for="tour" class="form-label">{{ __('Tour') }}</label>
                             <select name="tour_id" class="form-control" id="tour">
                                 @foreach ($tours as $tour)
-                                    <option value="{{ $tour->id }}" @selected(old('tour_id', $package->tour_id) == $tour->id)>
+                                    <option
+                                        value="{{ $tour->id }}" @selected(old('tour_id', $package->tour_id) == $tour->id)>
                                         {{ $tour->name }} ({{ $tour->tour_code }})
                                     </option>
                                 @endforeach
@@ -41,8 +42,8 @@
                         <div class="col col-md-6">
                             <label for="depart_time" class="form-label">{{ __('Depart Time') }}</label>
                             <input type="datetime-local" class="form-control" name="depart_time" id="depart_time"
-                                min="{{ date('Y-m-d\TH:i') }}"
-                                value="{{ old('depart_time', $package->depart_time->format('Y-m-d\TH:i')) }}" />
+                                   min="{{ date('Y-m-d\TH:i') }}"
+                                   value="{{ old('depart_time', $package->depart_time->format('Y-m-d\TH:i')) }}"/>
                         </div>
                     </div>
 
@@ -59,7 +60,7 @@
 
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
-                            @checked(old('is_active', $package->is_active)) value="1">
+                               @checked(old('is_active', $package->is_active)) value="1">
                         <label class="form-check-label" for="is_active">
                             {{ __('Active this Package ') }}
                         </label>

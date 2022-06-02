@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Settings\TourSetting $setting */
+    /** @var \App\Models\Settings\TourSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Tour Settings') }}
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'tour') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <label for="default_status">{{ __('Default Status') }}</label>
@@ -40,19 +40,19 @@
                     <div class="col-12 col-md-6">
                         <label for="default_night">{{ __('Default Night') }}</label>
                         <input type="number" step="1" name="default_night" id="default_night" class="form-control"
-                            value="{{ old('default_night', $setting->default_night) }}">
+                               value="{{ old('default_night', $setting->default_night) }}">
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="default_day">{{ __('Default Night') }}</label>
                         <input type="number" step="1" name="default_day" id="default_day" class="form-control"
-                            value="{{ old('default_day', $setting->default_day) }}">
+                               value="{{ old('default_day', $setting->default_day) }}">
                     </div>
                 </div>
                 <div class="mb-3">
                     <p>
                         {{ __('Category') }}
                         <button type="button" class="btn btn-outline-primary btn-sm" data-coreui-toggle="modal"
-                            data-coreui-target="#exampleModal">
+                                data-coreui-target="#exampleModal">
                             {{ __('Add') }}
                         </button>
                     </p>
@@ -62,8 +62,8 @@
                                 {{ $category }}
                                 <input type="hidden" name="category[]" value="{{ $category }}">
                                 <span class="badge bg-primary rounded-pill mx-2" data-coreui-toggle="tooltip"
-                                    data-coreui-placement="right"
-                                    title="{{ __('Total Tour that are using this category') }}">
+                                      data-coreui-placement="right"
+                                      title="{{ __('Total Tour that are using this category') }}">
                                     {{ $viewBag['tours'][$category] ?? '0' }}
                                 </span>
                             </label>
@@ -91,14 +91,15 @@
                         <div class="form-group">
                             <label for="category">{{ __('Category') }}</label>
                             <input type="text" name="category" id="category" class="form-control"
-                                placeholder="{{ __('Category') }}">
+                                   placeholder="{{ __('Category') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
-                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addCategoryForm">
+                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
+                           form="addCategoryForm">
                 </div>
             </div>
         </div>
@@ -117,8 +118,8 @@
                                                   data-coreui-toggle="tooltip" data-coreui-placement="right"
                                                   title="{{ __('Newly added Category') }}">
                                                 {{ __('New') }}
-                                            </span>
-                                        </label>`);
+            </span>
+        </label>`);
             $('#exampleModal').modal('hide');
         }
     </script>

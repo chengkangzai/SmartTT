@@ -1,8 +1,8 @@
 @php
-/** @var \App\Models\Settings\PackagePricingsSetting $setting */
+    /** @var \App\Models\Settings\PackagePricingsSetting $setting */
 @endphp
 
-@extends('layouts.app')
+@extends('smartTT.layouts.app')
 
 @section('title')
     {{ __('Package Pricing Settings') }}
@@ -23,12 +23,12 @@
         </div>
         <div class="card-body">
             <form action="{{ route('settings.update', 'package_pricing') }}" method="post" id="storeForm">
-                @include('partials.error-alert')
+                @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
                     <div class="mb-3">
                         <button type="button" class="btn btn-outline-primary btn-sm" data-coreui-toggle="modal"
-                            data-coreui-target="#exampleModal">
+                                data-coreui-target="#exampleModal">
                             {{ __('Add') }}
                         </button>
                     </div>
@@ -37,28 +37,28 @@
                             <div class="mb-3 row">
                                 <div class="col col-md-5">
                                     <label for="default_namings-{{ $key }}"
-                                        class="form-label">{{ __('Name') }} </label>
+                                           class="form-label">{{ __('Name') }} </label>
                                     <input type="text" class="form-control" name="default_namings[{{ $key }}]"
-                                        id="default_namings-{{ $key }}"
-                                        value="{{ old('default_namings.' . $key, $name) }}" />
+                                           id="default_namings-{{ $key }}"
+                                           value="{{ old('default_namings.' . $key, $name) }}"/>
                                 </div>
                                 <div class="col col-md-4">
                                     <label for="default_capacity-{{ $key }}" class="form-label">
                                         {{ __('Total Capacity') }}
                                     </label>
                                     <input type="number" class="form-control"
-                                        name="default_capacity[{{ $key }}]"
-                                        id="default_capacity-{{ $key }}"
-                                        value="{{ old('default_capacity.' . $key, $setting->default_capacity[$key]) }}"
-                                        step="1">
+                                           name="default_capacity[{{ $key }}]"
+                                           id="default_capacity-{{ $key }}"
+                                           value="{{ old('default_capacity.' . $key, $setting->default_capacity[$key]) }}"
+                                           step="1">
                                 </div>
                                 <div class="col col-md-3">
                                     <label for="default_status-{{ $key }}" class="form-label">
                                         {{ __('Active this Pricing') }}
                                     </label>
                                     <input type="checkbox" class="form-check-input d-block"
-                                        name="default_status[{{ $key }}]" id="default_status-{{ $key }}"
-                                        value="1" {{ old('default_status.' . $key) == 1 ? 'checked' : '' }}>
+                                           name="default_status[{{ $key }}]" id="default_status-{{ $key }}"
+                                           value="1" {{ old('default_status.' . $key) == 1 ? 'checked' : '' }}>
                                 </div>
                             </div>
                         @endforeach
@@ -85,29 +85,29 @@
                         <div class="mb-3">
                             <label for="default_namings" class="form-label">{{ __('Name') }} </label>
                             <input type="text" class="form-control" name="default_namings" id="default_namings"
-                                value="{{ old('default_namings') }}" />
+                                   value="{{ old('default_namings') }}"/>
                         </div>
                         <div class="mb-3">
                             <label for="default_capacity" class="form-label">
                                 {{ __('Total Capacity') }}
                             </label>
                             <input type="number" class="form-control" name="default_capacity" id="default_capacity"
-                                value="{{ old('default_capacity') }}" step="1">
+                                   value="{{ old('default_capacity') }}" step="1">
                         </div>
                         <div class="mb-3">
                             <label for="default_status" class="form-label">
                                 {{ __('Active this Pricing') }}
                             </label>
                             <input type="checkbox" class="form-check-input d-block" name="default_status"
-                                id="default_status" value="1" {{ old('default_status') == 1 ? 'checked' : '' }}>
+                                   id="default_status" value="1" {{ old('default_status') == 1 ? 'checked' : '' }}>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
                     <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
-                        form="addPackagePricingForm">
+                           form="addPackagePricingForm">
                 </div>
             </div>
         </div>
@@ -137,18 +137,18 @@
                                 <div class="col col-md-4">
                                     <label for="default_capacity" class="form-label">
                                         {{ __('Total Capacity') }}
-                                    </label>
-                                    <input type="number" class="form-control"
-                                           name="default_capacity[${rowCount}]" id="default_capacity"
+            </label>
+            <input type="number" class="form-control"
+                   name="default_capacity[${rowCount}]" id="default_capacity"
                                            value="${defaultCapacity}"
                                            step="1">
                                 </div>
                                 <div class="col col-md-3">
                                     <label for="default_status" class="form-label">
                                         {{ __('Active this Pricing') }}
-                                    </label>
-                                    <input type="checkbox" class="form-check-input d-block"
-                                           name="default_status[${rowCount}]" id="default_status"
+            </label>
+            <input type="checkbox" class="form-check-input d-block"
+                   name="default_status[${rowCount}]" id="default_status"
                                            value="${defaultStatus}">
                                 </div>
                             </div>
