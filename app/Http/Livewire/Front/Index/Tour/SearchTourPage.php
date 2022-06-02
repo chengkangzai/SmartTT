@@ -30,7 +30,6 @@ class SearchTourPage extends Component
     public Collection $tours;
     public string $default_currency_symbol;
 
-    public mixed $limit = 6;
     public bool $stillCanLoad = true;
 
     protected $queryString = [
