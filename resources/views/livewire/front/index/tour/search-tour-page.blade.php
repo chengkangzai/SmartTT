@@ -169,6 +169,7 @@
                         <h1 class="text-3xl font-bold">{{ __('No tours found') }}</h1>
                     </div>
                 @endforelse
+                {{$tours->links()}}
             </div>
         </div>
     </div>
