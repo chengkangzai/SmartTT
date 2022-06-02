@@ -78,9 +78,10 @@
                         <p class="text-2xl font-semibold">{{ __('Tours') }}</p>
                         <a href="{{ route('front.index') }}">{{ __('Front Page') }}</a>
                         <a href="{{ route('front.search') }}">{{ __('Search Tours') }}</a>
-                        <a href="{{ route('front.tours',\App\Models\Tour::inRandomOrder()->first()) }}">{{ __('Feeling Lucky') }}</a>
+                        <a
+                            href="{{ route('front.tours', \App\Models\Tour::inRandomOrder()->first()) }}">{{ __('Feeling Lucky') }}</a>
                     </div>
-                    <div class="flex flex-col grow"></div>
+                    <div class="flex grow flex-col"></div>
                 </div>
             </div>
             <div class="hidden border md:mx-8 md:flex"></div>
