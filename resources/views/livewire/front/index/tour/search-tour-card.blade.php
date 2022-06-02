@@ -30,6 +30,7 @@
                 <div class="flex w-full flex-col gap-1">
                     <label for="category" class="block px-2 text-sm opacity-70">{{ __('Category') }}</label>
                     <select name="category" id="category" class="rounded-lg">
+                        <option value="">{{ __('All') }}</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category }}">{{ $category }}</option>
                         @endforeach
