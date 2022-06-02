@@ -47,13 +47,13 @@
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_from"
                                     class="px-2 text-sm opacity-70">{{ __('Price From') }}</label>
-                                <input type="number" class="w-full rounded-lg" id="price_from"
+                                <input type="number" class="w-full rounded-lg" id="price_from" step="50"
                                     wire:model.debounce="priceFrom" placeholder="{{ __('Price From') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_to"
                                     class="block px-2 text-sm opacity-70">{{ __('Price To') }}</label>
-                                <input type="number" class="w-full rounded-lg" id="price_to"
+                                <input type="number" class="w-full rounded-lg" id="price_to" step="50"
                                     wire:model.debounce="priceTo" placeholder="{{ __('Price To') }}" />
                             </div>
                         </div>
@@ -98,14 +98,14 @@
                                 <label for="price_from" class="px-2 text-sm opacity-70">
                                     {{ __('Price From') }}
                                 </label>
-                                <input type="number" class="w-full rounded-lg" id="price_from"
+                                <input type="number" class="w-full rounded-lg" id="price_from" step="50"
                                     wire:model.debounce="priceFrom" min="0" placeholder="{{ __('Price From') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_to" class="block px-2 text-sm opacity-70">
                                     {{ __('Price To') }}
                                 </label>
-                                <input type="number" class="w-full rounded-lg" id="price_to"
+                                <input type="number" class="w-full rounded-lg" id="price_to" step="50"
                                     wire:model.debounce="priceTo" min="0" placeholder="{{ __('Price To') }}" />
                             </div>
                         </div>
@@ -132,10 +132,9 @@
                     </div>
                 </div>
             </div>
-            <div class="flex grow flex-col gap-3">
+            <div class="flex grow flex-col gap-3" wire:loading.class="animate-pulse opacity-70 ">
                 @forelse ($tours as $tour)
-                    <div
-                        class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
+                    <div class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
                         <a href="{{ route('front.tours', $tour) }}" class="max-w-screen-sm md:max-w-xs">
                             <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="Image of {{ $tour->name }}"
                                 class="aspect-video rounded-t-lg md:rounded-t-none md:rounded-l-lg" />
