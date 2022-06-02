@@ -24,11 +24,11 @@
 <body>
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
-        <a href="{{ route('home') }}" class="sidebar-brand-full">
+        <a href="{{ route('front.index') }}" class="sidebar-brand-full">
             <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
         </a>
 
-        <a href="{{ route('home') }}" class="sidebar-brand-narrow">
+        <a href="{{ route('front.index') }}" class="sidebar-brand-narrow">
             <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="46">
         </a>
     </div>
