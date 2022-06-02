@@ -33,6 +33,9 @@ class RegisterBillingInfoStep extends StepComponent
     {
         $this->validate([
             $field => $this->validateBillingRule[$field],
+        ], [], [
+            'billingName' => __('Billing Name'),
+            'billingPhone' => __('Billing Phone'),
         ]);
     }
 
@@ -41,6 +44,9 @@ class RegisterBillingInfoStep extends StepComponent
         $this->validate([
             'billingName' => $this->validateBillingRule['billingName'],
             'billingPhone' => $this->validateBillingRule['billingPhone'],
+        ], [], [
+            'billingName' => __('Billing Name'),
+            'billingPhone' => __('Billing Phone'),
         ]);
 
         parent::nextStep();
