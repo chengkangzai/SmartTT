@@ -118,7 +118,9 @@ class TourSeeder extends Seeder
         $this->tours = Tour::all();
 
         $this->mapCountryToTour();
-        $this->attachMedia();
+        if (!app()->environment('testing')) {
+            $this->attachMedia();
+        }
 
         $this->attachDes();
     }
