@@ -105,6 +105,7 @@ it('should update setting', function ($mode, $data) {
         'company_name' => 'Some Company',
         'company_address' => 'Some Address',
         'company_phone' => 'Some Phone',
+        'company_email' => 'testt@smarttt.com',
         'business_registration_no' => 'Some Registration No',
     ]],
     ['tour', [
