@@ -2,7 +2,7 @@
 /** @var \App\Models\Tour $tour */
 @endphp
 @section('title')
-    {{__('Search Tour')}}
+    {{ __('Search Tour') }}
 @endsection
 
 <div>
@@ -132,11 +132,13 @@
                     </div>
                 </div>
             </div>
-            <div class="flex grow flex-col gap-3" wire:loading.class="animate-pulse opacity-70 ">
+            <div class="flex grow flex-col gap-3" wire:loading.class="animate-pulse opacity-70">
                 @forelse ($tours as $tour)
-                    <div class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
+                    <div
+                        class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
                         <a href="{{ route('front.tours', $tour) }}" class="max-w-screen-sm md:max-w-xs">
-                            <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="Image of {{ $tour->name }}"
+                            <img srcset="{{ $tour->getFirstMedia('thumbnail')->responsiveImages()->getSrcset() }}"
+                                alt="Image of {{ $tour->name }}"
                                 class="aspect-video rounded-t-lg md:rounded-t-none md:rounded-l-lg" />
                         </a>
                         <div class="container mx-auto flex flex-col py-2">
@@ -169,7 +171,7 @@
                         <h1 class="text-3xl font-bold">{{ __('No tours found') }}</h1>
                     </div>
                 @endforelse
-                {{$tours->links()}}
+                {{ $tours->links() }}
             </div>
         </div>
     </div>

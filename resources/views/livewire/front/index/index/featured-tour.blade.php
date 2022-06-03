@@ -9,9 +9,11 @@
         @foreach ($tours as $tour)
             <div
                 class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
-                <a href="{{ route('front.tours', $tour) }}">
-                    <img src="{{ $tour->getFirstMediaUrl('thumbnail') }}" alt="image" class="aspect-video w-full" />
-                </a>
+                <div class="aspect-video w-full">
+                    <a href="{{ route('front.tours', $tour) }}">
+                        {{ $tour->getFirstMedia('thumbnail') }}
+                    </a>
+                </div>
                 <div class="p-4 text-center md:px-7 md:pb-0">
                     <h3 class="text-dark block text-xl font-semibold hover:text-black md:mb-4">
                         {{ $tour->name }}
