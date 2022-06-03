@@ -35,9 +35,9 @@ class UpdatePackagePricingSettingAction implements UpdateSettingInterface
             'default_status' => 'required|array',
             'default_status.*' => 'required|boolean|max:255',
         ], customAttributes: [
-            'default_namings' => __('Default Naming'),
-            'default_capacity' => __('Default Capacity'),
-            'default_status' => __('Default Status'),
+            'default_namings' => trans('setting.package_pricing.default_namings'),
+            'default_capacity' => trans('setting.package_pricing.default_capacity'),
+            'default_status' => trans('setting.package_pricing.default_status'),
         ])->validate();
     }
 }

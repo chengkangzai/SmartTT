@@ -83,20 +83,22 @@
                 <div class="modal-body">
                     <form onsubmit="return addPackagePricing(event)" id="addPackagePricingForm">
                         <div class="mb-3">
-                            <label for="default_namings" class="form-label">{{ __('Name') }} </label>
+                            <label for="default_namings" class="form-label">
+                                {{ trans('setting.package_pricing.default_namings') }}
+                            </label>
                             <input type="text" class="form-control" name="default_namings" id="default_namings"
                                    value="{{ old('default_namings') }}"/>
                         </div>
                         <div class="mb-3">
                             <label for="default_capacity" class="form-label">
-                                {{ __('Total Capacity') }}
+                                {{ trans('setting.package_pricing.default_capacity') }}
                             </label>
                             <input type="number" class="form-control" name="default_capacity" id="default_capacity"
                                    value="{{ old('default_capacity') }}" step="1">
                         </div>
                         <div class="mb-3">
                             <label for="default_status" class="form-label">
-                                {{ __('Active this Pricing') }}
+                                {{ trans('setting.package_pricing.default_status') }}
                             </label>
                             <input type="checkbox" class="form-check-input d-block" name="default_status"
                                    id="default_status" value="1" {{ old('default_status') == 1 ? 'checked' : '' }}>
@@ -104,8 +106,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">
+                        {{ __('Close') }}
+                    </button>
                     <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
                            form="addPackagePricingForm">
                 </div>

@@ -26,7 +26,7 @@
                 @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label for="default_status">{{ __('Default Status') }}</label>
+                    <label for="default_status">{{ trans('setting.tour.default_status') }}</label>
                     <select name="default_status" id="default_status" class="form-select">
                         <option value="0" @selected(old('default_status', $setting->default_status) == 0)>
                             {{ __('Inactive') }}
@@ -38,12 +38,12 @@
                 </div>
                 <div class="mb-md-3 row">
                     <div class="col-12 col-md-6">
-                        <label for="default_night">{{ __('Default Night') }}</label>
+                        <label for="default_night">{{ trans('setting.tour.default_night') }}</label>
                         <input type="number" step="1" name="default_night" id="default_night" class="form-control"
                                value="{{ old('default_night', $setting->default_night) }}">
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="default_day">{{ __('Default Night') }}</label>
+                        <label for="default_day">{{ trans('setting.tour.default_day') }}</label>
                         <input type="number" step="1" name="default_day" id="default_day" class="form-control"
                                value="{{ old('default_day', $setting->default_day) }}">
                     </div>
@@ -89,7 +89,7 @@
                 <div class="modal-body">
                     <form onsubmit="return addTourCategory(event)" id="addCategoryForm">
                         <div class="form-group">
-                            <label for="category">{{ __('Category') }}</label>
+                            <label for="category">{{ trans('setting.tour.category') }}</label>
                             <input type="text" name="category" id="category" class="form-control"
                                    placeholder="{{ __('Category') }}">
                         </div>

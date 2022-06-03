@@ -31,10 +31,10 @@ class UpdateTourSettingAction implements UpdateSettingInterface
             'default_day' => 'required|integer|min:1',
             'category' => 'required|array',
         ], customAttributes: [
-            'default_status' => __('Default Status'),
-            'default_night' => __('Default Night'),
-            'default_day' => __('Default Day'),
-            'category' => __('Category'),
+            'default_status' => trans('setting.tour.default_status'),
+            'default_night' => trans('setting.tour.default_night'),
+            'default_day' => trans('setting.tour.default_day'),
+            'category' => trans('setting.tour.category'),
         ])->validate();
     }
 }

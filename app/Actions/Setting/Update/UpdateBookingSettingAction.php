@@ -34,9 +34,9 @@ class UpdateBookingSettingAction implements UpdateSettingInterface
             'charge_per_child' => 'required|numeric|min:0',
             'reservation_charge_per_pax' => 'required|numeric|min:0',
         ], customAttributes: [
-            'default_payment_method' => __('Default Payment Method'),
-            'charge_per_child' => __('Charge Per Child'),
-            'reservation_charge_per_pax' => __('Reservation Charge Per Pax'),
+            'default_payment_method' => trans('setting.booking.default_payment_method'),
+            'charge_per_child' => trans('setting.booking.charge_per_child'),
+            'reservation_charge_per_pax' => trans('setting.booking.reservation_charge_per_pax'),
         ])->validate();
     }
 }
