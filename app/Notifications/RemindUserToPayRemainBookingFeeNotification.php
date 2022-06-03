@@ -41,8 +41,8 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
             ->line(__('You have paid :paid of :total.', [
                 'paid' => $this->default_currency_symbol . number_format(
                     $this->booking->payment->filter(function (Payment $payment) {
-                            return $payment->status === Payment::STATUS_PAID || $payment->status == Payment::STATUS_PENDING;
-                        })->sum('amount'),
+                        return $payment->status === Payment::STATUS_PAID || $payment->status == Payment::STATUS_PENDING;
+                    })->sum('amount'),
                     2
                 ),
                 'total' => $this->default_currency_symbol . number_format($this->booking->total_price, 2),
