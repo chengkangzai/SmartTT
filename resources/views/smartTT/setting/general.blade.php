@@ -85,11 +85,19 @@
                         <input type="text" class="form-control" name="company_phone" id="company_phone"
                                value="{{ old('company_phone', $setting->company_phone) }}">
                     </div>
-                    <div class="col-12 mb-2 mb-md-0 col-md-4">
-                        <label for="business_registration_no">{{ __('Business Registration Number') }}</label>
+                </div>
+                <div class="row mb-md-2">
+                    <div class="col-12 mb-2 mb-md-0 col-md-6">
+                        <label for="business_registration_no">{{ trans('setting.general.business_registration_no') }}</label>
                         <input type="text" class="form-control" name="business_registration_no"
                                id="business_registration_no"
                                value="{{ old('business_registration_no', $setting->business_registration_no) }}">
+                    </div>
+                    <div class="col-12 mb-2 mb-md-0 col-md-6">
+                        <label for="company_email">{{ trans('setting.general.company_email') }}</label>
+                        <input type="text" class="form-control" name="company_email"
+                               id="company_email"
+                               value="{{ old('company_email', $setting->company_email) }}">
                     </div>
                 </div>
                 <div>
