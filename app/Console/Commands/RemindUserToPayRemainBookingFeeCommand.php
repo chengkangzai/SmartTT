@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Notifications\RemindUserToPayRemainBookingFeeNotification;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 
 class RemindUserToPayRemainBookingFeeCommand extends Command
 {
@@ -26,7 +26,7 @@ class RemindUserToPayRemainBookingFeeCommand extends Command
                     ->where('depart_time', '>', now());
             })
             ->get()
-            ->filter(fn(Booking $booking) => $booking->isFullPaid() === false)
+            ->filter(fn (Booking $booking) => $booking->isFullPaid() === false)
             ->tap(function ($booking) {
                 $this->info("Sending email to remind to user to pay remain booking fee...");
                 $this->getOutput()->progressStart($booking->count());

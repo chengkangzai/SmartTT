@@ -9,12 +9,12 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        RemindUserToPayRemainBookingFeeCommand::class
+        RemindUserToPayRemainBookingFeeCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command(RemindUserToPayRemainBookingFeeCommand::class)->dailyAt('09:00');
+        $schedule->command(RemindUserToPayRemainBookingFeeCommand::class)->dailyAt('09:00');
     }
 
     protected function commands()

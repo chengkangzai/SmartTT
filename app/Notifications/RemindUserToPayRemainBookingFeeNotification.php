@@ -31,7 +31,7 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
 
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject(__('Kindly pay your remaining booking fee'))
             ->line(__('Hi :name,', ['name' => $notifiable->name]))
             ->line(__('You have a booking on :date for :package.', [
@@ -40,10 +40,11 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
             ]))
             ->line(__('You have paid :paid of :total.', [
                 'paid' => $this->default_currency_symbol . number_format(
-                        $this->booking->payment->filter(function (Payment $payment) {
+                    $this->booking->payment->filter(function (Payment $payment) {
                             return $payment->status === Payment::STATUS_PAID || $payment->status == Payment::STATUS_PENDING;
                         })->sum('amount'),
-                        2),
+                    2
+                ),
                 'total' => $this->default_currency_symbol . number_format($this->booking->total_price, 2),
             ]))
             ->line(__('You still need to pay :remain before your booking is confirmed.', [
