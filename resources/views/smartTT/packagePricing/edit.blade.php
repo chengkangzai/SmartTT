@@ -45,6 +45,13 @@
                            placeholder="{{ __('Total Capacity of') }}"
                            value="{{ old('total_capacity', $packagePricing->total_capacity) }}" step="1">
                 </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
+                           @checked(old('is_active', $packagePricing->is_active)) value="1">
+                    <label class="form-check-label" for="is_active">
+                        {{ __('Active this Pricing ') }}
+                    </label>
+                </div>
             </form>
         </div>
         <div class="card-footer">
