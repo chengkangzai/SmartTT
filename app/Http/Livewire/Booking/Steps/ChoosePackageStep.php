@@ -18,7 +18,7 @@ class ChoosePackageStep extends StepComponent
         $tourId = $this->state()->forStep('choose-tour-step')['tour'];
 
         return view('livewire.booking.steps.choose-package-step', [
-            'packages' => Package::where('tour_id', $tourId)->active()->get(),
+            'packages' => Package::where('tour_id', $tourId)->active()->orderBy('depart_time')->get(),
             'defaultCurrency' => app(GeneralSetting::class)->default_currency_symbol,
         ]);
     }
