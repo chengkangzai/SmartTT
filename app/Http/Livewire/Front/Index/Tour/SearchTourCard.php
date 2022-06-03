@@ -28,8 +28,8 @@ class SearchTourCard extends Component
         $this->imageUrl = Media::whereCollectionName('thumbnail')
             ->whereModelType(Tour::class)
             ->inRandomOrder()
-            ->first()
-            ->getUrl();
+            ?->first()
+            ?->getUrl() ?? '#';
 
         $this->categories = Tour::select('category')->distinct()->pluck('category');
         $this->countries = Country::select(['id', 'name'])->has('tours')->get();

@@ -26,7 +26,7 @@ class StoreTourAction
 
             $tour->addMedia($data['itinerary'])->toMediaCollection('itinerary');
 
-            $tour->addMedia($data['thumbnail'])->toMediaCollection('thumbnail');
+            $tour->addMedia($data['thumbnail'])->withResponsiveImages()->toMediaCollection('thumbnail');
 
             $place = $data['place'];
             $des = $data['des'];
