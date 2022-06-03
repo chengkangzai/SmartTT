@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-lg-2">
             <div class="img-fluid">
-                <img srcset="{{$tour->getFirstMedia('thumbnail')->responsiveImages()->getSrcset()}}"
+                <img srcset="{{$tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() ?? '#' }}"
                      alt="{{ $tour->name }}" class="img-fluid">
             </div>
         </div>
