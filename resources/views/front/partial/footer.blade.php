@@ -63,7 +63,7 @@
                         {{ $setting->company_phone }}
                     </p>
                     <p class="text-center text-gray-800">
-                        {{ env('MAIL_FROM_ADDRESS') }}
+                        {{ $setting->company_email }}
                     </p>
                     <p class="text-center text-gray-800">
                         {!! str($setting->company_address)->replace(',', ', <br>') !!}
