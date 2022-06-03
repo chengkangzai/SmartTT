@@ -26,7 +26,7 @@
                 @include('smartTT.partials.error-alert')
                 @csrf
                 <div class="mb-3">
-                    <label for="default_status">{{ __('Default Status') }}</label>
+                    <label for="default_status">{{ trans('setting.package.default_status') }}</label>
                     <select name="default_status" id="default_status" class="form-select">
                         <option value="0" @selected(old('default_status', $setting->default_status) == 0)>
                             {{ __('Inactive') }}

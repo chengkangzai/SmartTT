@@ -22,6 +22,7 @@ return [
     'company_address' => 'Company Address',
     'company_name' => 'Company Name',
     'company_phone' => 'Company Phone',
+    'company_email' => 'Company Email',
     'default_country' => 'Default Country',
     'default_currency' => 'Default Currency',
     'default_currency_symbol' => 'Default Currency Symbol',

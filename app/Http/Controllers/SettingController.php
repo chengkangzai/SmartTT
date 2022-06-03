@@ -18,10 +18,9 @@ use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\PackagePricingsSetting;
 use App\Models\Settings\PackageSetting;
 use App\Models\Settings\TourSetting;
-use Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Spatie\LaravelSettings\Console\ClearCachedSettingsCommand;
+use Spatie\LaravelSettings\SettingsCache;
 
 class SettingController extends Controller
 {
@@ -93,7 +92,7 @@ class SettingController extends Controller
 
         try {
             $action->execute($request->all(), $setting);
-            Artisan::call(ClearCachedSettingsCommand::class);
+            app(SettingsCache::class)->clear();
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {

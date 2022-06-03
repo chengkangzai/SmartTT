@@ -36,7 +36,7 @@
                     @endforeach
                 </div>
                 <div class="mb-3">
-                    <label for="default_class"> {{ __('Default Class') }}
+                    <label for="default_class"> {{ trans('setting.flight.default_class') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
                            data-coreui-target="#defaultClassModal" href="#">
                             {{ __('Create New Class') }}
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="default_type">{{ __('Default Type') }}
+                    <label for="default_type">{{ trans('setting.flight.default_type') }}
                         <a class="btn btn-sm btn-outline-primary my-2" data-coreui-toggle="modal"
                            data-coreui-target="#defaultTypeModal" href="#">
                             {{ __('Create New Type') }}
@@ -66,7 +66,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="supported_countries">{{ __('Default Country') }}</label>
+                    <label for="supported_countries">{{ trans('setting.flight.supported_countries') }}</label>
                     <select name="supported_countries[]" id="supported_countries" class="form-select" multiple>
                         @foreach ($viewBag['countries'] as $country)
                             <option value="{{ $country->name }}" @selected(in_array($country->name, old('supported_countries', $setting->supported_countries)))>

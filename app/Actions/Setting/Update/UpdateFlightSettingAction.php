@@ -32,11 +32,11 @@ class UpdateFlightSettingAction implements UpdateSettingInterface
             'default_type' => 'required|string|max:255|in:' . implode(',', $data['supported_type']),
             'supported_countries' => 'required|array|max:255|exists:countries,name',
         ], customAttributes: [
-            'supported_class' => __('Supported Class'),
-            'supported_type' => __('Supported Type'),
-            'default_class' => __('Default Class'),
-            'default_type' => __('Default Type'),
-            'supported_countries' => __('Supported Country'),
+            'supported_class' => trans('setting.flight.supported_class'),
+            'supported_type' => trans('setting.flight.supported_type'),
+            'default_class' => trans('setting.flight.default_class'),
+            'default_type' => trans('setting.flight.default_type'),
+            'supported_countries' => trans('setting.flight.supported_countries'),
         ])->validate();
     }
 }

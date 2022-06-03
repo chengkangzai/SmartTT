@@ -22,6 +22,7 @@ return [
     'company_address' => 'Alamat syarikat',
     'company_name' => 'Nama syarikat',
     'company_phone' => 'Telefon Syarikat',
+    'company_email' => 'Emel Company',
     'default_country' => 'Negara Lalai',
     'default_currency' => 'Mata Wang Lalai',
     'default_currency_symbol' => 'Simbol Mata Wang Lalai',

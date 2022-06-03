@@ -36,6 +36,7 @@ it('should update general setting', function () {
         'company_name' => 'Some Company',
         'company_address' => 'Some Address',
         'company_phone' => 'Some Phone',
+        'company_email' => 'test@smarttt.com',
         'business_registration_no' => 'Some Registration No',
     ];
     $action = app(UpdateGeneralSettingAction::class);
@@ -75,4 +76,8 @@ it('should not update setting', function ($name, $data) {
     ['default_currency', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
     ['default_currency_symbol', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
     ['default_country', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
+    ['company_name', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
+    ['company_address', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
+    ['company_phone', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
+    ['company_email', ['', 'adsdasd', -1, null, 1, 'a' . str_repeat('a', 256)]],
 ]);

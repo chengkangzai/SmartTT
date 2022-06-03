@@ -28,7 +28,7 @@ class UpdatePackageSettingAction implements UpdateSettingInterface
         return Validator::make($data, [
             'default_status' => 'required|boolean',
         ], customAttributes: [
-            'default_status' => __('Default Status'),
+            'default_status' => trans('setting.package.default_status'),
         ])->validate();
     }
 }

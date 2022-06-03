@@ -10,17 +10,18 @@ return [
     'default_currency' => '默认货币',
     'default_currency_symbol' => '默认货币符号',
     'default_country' => '默认国家',
-    'company_name' => '公司名',
+    'company_name' => '公司名称',
     'company_address' => '公司地址',
     'company_phone' => '公司电话',
+      'company_email' => '公司电邮',
     'business_registration_no' => '商业登记号码',
   ],
   'tour' =>
   [
     'default_status' => '默认状态',
     'category' => '类别',
-    'default_night' => '默认夜间',
-    'default_day' => '默认日期',
+    'default_night' => '默认夜晚',
+    'default_day' => '默认天数',
   ],
   'package' =>
   [
