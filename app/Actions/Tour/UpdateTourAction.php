@@ -53,7 +53,14 @@ class UpdateTourAction
             $model_type = $media->model_type;
             $model = $model_type::find($media->model_id);
             $model->deleteMedia($media->id);
-            $tour->addMedia($data[$mode])->toMediaCollection($mode);
+            if ($mode == 'thumbnail') {
+                $tour->addMedia($data[$mode])
+                    ->withResponsiveImages()
+                    ->toMediaCollection($mode);
+            } else {
+                $tour->addMedia($data[$mode])
+                    ->toMediaCollection($mode);
+            }
         }
     }
 }

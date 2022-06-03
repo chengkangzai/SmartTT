@@ -175,7 +175,7 @@ class TourSeeder extends Seeder
     {
         $this->tours->each(function (Tour $tour) {
             $path = 'seeding_data/Tours/' . $tour->category . '/' . $tour->tour_code;
-            $tour->addMediaFromStream(File::get(storage_path($path . '.jpg')))->usingFileName($tour->tour_code . '.jpg')->toMediaCollection('thumbnail');
+            $tour->addMediaFromStream(File::get(storage_path($path . '.jpg')))->usingFileName($tour->tour_code . '.jpg')->withResponsiveImages()->toMediaCollection('thumbnail');
             $tour->addMediaFromStream(File::get(storage_path($path . '.pdf')))->usingFileName($tour->tour_code . '.pdf')->toMediaCollection('itinerary');
         });
     }
