@@ -26,7 +26,7 @@ class PackagesTable extends Component
     public function mount(Tour $tour)
     {
         $this->tour = $tour;
-        $this->packages = $tour->activePackages;
+        $this->getPackages();
         $pricing = $this->packages->map(fn ($package) => $package->pricings->map->price)
             ->flatten()->sort()->values();
 
@@ -52,10 +52,11 @@ class PackagesTable extends Component
 
     public function render(): Factory|View|Application
     {
+        $this->getPackages();
         return view('livewire.front.index.tour.packages-table');
     }
 
-    public function refreshData()
+    public function getPackages()
     {
         $this->packages = $this->tour->activePackages
             ->when($this->priceFrom, function (Collection $packages) {
@@ -81,26 +82,4 @@ class PackagesTable extends Component
                 });
             });
     }
-
-    #region Filters
-    public function updatedMonth()
-    {
-        $this->refreshData();
-    }
-
-    public function updatedPriceFrom()
-    {
-        $this->refreshData();
-    }
-
-    public function updatedPriceTo()
-    {
-        $this->refreshData();
-    }
-
-    public function updatedAirlineId()
-    {
-        $this->refreshData();
-    }
-    #endregion
 }
