@@ -1,10 +1,9 @@
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title">{{ __('Choose Package') }}</h4>
+        <h4 class="card-title">{{ __('Register Guest') }}</h4>
     </div>
     <div class="card-body">
         @include('smartTT.partials.error-alert')
-        <h4>{{ __('Register Guest') }}</h4>
         <div class="alert alert-primary d-flex flex-row align-items-center" role="alert">
             <svg class="icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-info') }}"></use>
