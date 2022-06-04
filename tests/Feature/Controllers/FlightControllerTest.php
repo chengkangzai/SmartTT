@@ -72,12 +72,12 @@ it('should store a flight', function () {
         ->assertSessionHas('success');
 
     $latestFlight = Flight::query()->orderByDesc('id')->get()->first();
-    expect($flight->price)->toEqual($latestFlight->price);
-    expect($flight->airline_id)->toEqual($latestFlight->airline_id);
-    expect($flight->departure_airport_id)->toEqual($latestFlight->departure_airport_id);
-    expect($flight->arrival_airport_id)->toEqual($latestFlight->arrival_airport_id);
-    expect($flight->class)->toEqual($latestFlight->class);
-    expect($flight->type)->toEqual($latestFlight->type);
+    expect($flight->price)->toEqual($latestFlight->price)
+        ->and($flight->airline_id)->toEqual($latestFlight->airline_id)
+        ->and($flight->departure_airport_id)->toEqual($latestFlight->departure_airport_id)
+        ->and($flight->arrival_airport_id)->toEqual($latestFlight->arrival_airport_id)
+        ->and($flight->class)->toEqual($latestFlight->class)
+        ->and($flight->type)->toEqual($latestFlight->type);
 });
 
 it('should update a flight', function () {
@@ -91,12 +91,12 @@ it('should update a flight', function () {
         ->assertSessionHas('success');
 
     $latestFlight = Flight::find($flight->id);
-    expect($newFlight->price)->toEqual($latestFlight->price);
-    expect($newFlight->airline_id)->toEqual($latestFlight->airline_id);
-    expect($newFlight->departure_airport_id)->toEqual($latestFlight->departure_airport_id);
-    expect($newFlight->arrival_airport_id)->toEqual($latestFlight->arrival_airport_id);
-    expect($newFlight->class)->toEqual($latestFlight->class);
-    expect($newFlight->type)->toEqual($latestFlight->type);
+    expect($newFlight->price)->toEqual($latestFlight->price)
+        ->and($newFlight->airline_id)->toEqual($latestFlight->airline_id)
+        ->and($newFlight->departure_airport_id)->toEqual($latestFlight->departure_airport_id)
+        ->and($newFlight->arrival_airport_id)->toEqual($latestFlight->arrival_airport_id)
+        ->and($newFlight->class)->toEqual($latestFlight->class)
+        ->and($newFlight->type)->toEqual($latestFlight->type);
 });
 
 

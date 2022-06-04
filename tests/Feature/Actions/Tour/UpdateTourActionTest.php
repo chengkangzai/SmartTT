@@ -26,15 +26,15 @@ it('should update tour', function () use ($faker) {
 
     expect($updatedTour)->toBeInstanceOf(Tour::class);
     assertModelExists($updatedTour);
-    expect($updatedTour->name)->toBe($mockTour->name);
-    expect($updatedTour->tour_code)->toBe($mockTour->tour_code);
-    expect($updatedTour->days)->toBe($mockTour->days);
-    expect($updatedTour->nights)->toBe($mockTour->nights);
+    expect($updatedTour->name)->toBe($mockTour->name)
+        ->and($updatedTour->tour_code)->toBe($mockTour->tour_code)
+        ->and($updatedTour->days)->toBe($mockTour->days)
+        ->and($updatedTour->nights)->toBe($mockTour->nights)
+        ->and($updatedTour->countries()->count())->toBe(3);
 
-    expect($updatedTour->countries()->count())->toBe(3);
     $updatedTour->countries()->each(function (Country $country) use ($mockTour) {
-        expect($country)->toBeInstanceOf(Country::class);
-        expect($country->id)->toBeIn($mockTour['countries']);
+        expect($country)->toBeInstanceOf(Country::class)
+            ->and($country->id)->toBeIn($mockTour['countries']);
     });
 });
 

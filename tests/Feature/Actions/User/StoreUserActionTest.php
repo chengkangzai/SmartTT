@@ -22,7 +22,9 @@ it('should store a new user', function () {
     $user['password_confirmation'] = 'password';
 
     $storedUser = app(StoreUserAction::class)->execute($user);
-    expect($storedUser)->toBeInstanceOf(User::class);
+    expect($storedUser)->toBeInstanceOf(User::class)
+        ->and($storedUser->name)->toBe($user['name'])
+        ->and($storedUser->email)->toBe($user['email']);
     assertModelExists($storedUser);
     expect($storedUser->roles->first()->name)->toBe('Customer');
 });

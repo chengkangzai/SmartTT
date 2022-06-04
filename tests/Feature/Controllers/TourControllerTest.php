@@ -79,10 +79,10 @@ it('should store a tour', function () use ($faker) {
         ->assertSessionHas('success');
 
     $newTour = Tour::query()->orderByDesc('id')->first();
-    expect($newTour->tour_code)->toBe($tour['tour_code']);
-    expect($newTour->name)->toBe($tour['name']);
-    expect($newTour->nights)->toBe($tour['nights']);
-    expect($newTour->days)->toBe($tour['days']);
+    expect($newTour->tour_code)->toBe($tour['tour_code'])
+        ->and($newTour->name)->toBe($tour['name'])
+        ->and($newTour->nights)->toBe($tour['nights'])
+        ->and($newTour->days)->toBe($tour['days']);
 });
 
 
@@ -97,7 +97,7 @@ it('should not store a tour bc w/o other param', function () use ($faker) {
 });
 
 
-it('should update a tour', function () {
+it('should update a tour', closure: function () {
     $oriTour = Tour::factory()->create();
     assertModelExists($oriTour);
 
@@ -111,12 +111,11 @@ it('should update a tour', function () {
         ->assertSessionHas('success');
 
     $newTour = $oriTour->refresh();
-    expect($newTour->tour_code)->toBe($oriTour['tour_code']);
-    expect($newTour->name)->toBe($oriTour['name']);
-    expect($newTour->nights)->toBe($oriTour['nights']);
-    expect($newTour->days)->toBe($oriTour['days']);
+    expect($newTour->tour_code)->toBe($oriTour['tour_code'])
+        ->and($newTour->name)->toBe($oriTour['name'])
+        ->and($newTour->nights)->toBe($oriTour['nights'])
+        ->and($newTour->days)->toBe($oriTour['days']);
 });
-
 
 it('should not update a tour bc w/o other param', function () {
     $oriTour = Tour::factory()->create();

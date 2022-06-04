@@ -12,6 +12,7 @@ it('should update a user', function () {
     $updatedUser = app(UpdateUserAction::class)->execute($mock->toArray(), $user);
     expect($updatedUser)->toBeInstanceOf(User::class);
     assertModelExists($updatedUser);
-    expect($updatedUser->id)->toBe($user->id);
-    expect($updatedUser->name)->toBe($mock->name);
+    expect($updatedUser->id)->toBe($user->id)
+        ->and($updatedUser->name)->toBe($mock->name)
+        ->and($updatedUser->email)->toBe($mock->email);
 });

@@ -47,8 +47,8 @@ it('should update tour description', function () {
         ->assertSessionHas('success');
 
     $updated = TourDescription::query()->orderByDesc('id')->first();
-    expect($updated->place)->toBe($mock->place);
-    expect($updated->description)->toBe($mock->description);
+    expect($updated->place)->toBe($mock->place)
+        ->and($updated->description)->toBe($mock->description);
 });
 
 it('should destroy package', function () {

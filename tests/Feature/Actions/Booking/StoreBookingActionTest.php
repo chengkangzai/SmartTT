@@ -56,15 +56,15 @@ it('should create a booking', function () {
     ]);
 
     assertModelExists($booking);
-    expect($booking->id)->toBeGreaterThan(0);
-    expect($booking->package_id)->toBe($package->id);
-    expect($booking->adult)->toBe($guests->where('is_child', false)->count());
-    expect($booking->child)->toBe($guests->where('is_child', true)->count());
-    expect($booking->total_price)->toBe(500);
-    expect($booking->guests->count())->toBe($guests->count());
-    expect($booking->guests->pluck('name')->toArray())->toBe($guests->pluck('name')->toArray());
-    expect($booking->guests->pluck('price')->toArray())->toBe($guests->pluck('price')->toArray());
-    expect($booking->guests->pluck('package_pricing_id')->toArray())->toBe($guests->pluck('package_pricing_id')->toArray());
-    expect($booking->user_id)->toBe($user->id);
-    expect($booking->discount)->toBe(0);
+    expect($booking->id)->toBeGreaterThan(0)
+        ->and($booking->package_id)->toBe($package->id)
+        ->and($booking->adult)->toBe($guests->where('is_child', false)->count())
+        ->and($booking->child)->toBe($guests->where('is_child', true)->count())
+        ->and($booking->total_price)->toBe(500)
+        ->and($booking->guests->count())->toBe($guests->count())
+        ->and($booking->guests->pluck('name')->toArray())->toBe($guests->pluck('name')->toArray())
+        ->and($booking->guests->pluck('price')->toArray())->toBe($guests->pluck('price')->toArray())
+        ->and($booking->guests->pluck('package_pricing_id')->toArray())->toBe($guests->pluck('package_pricing_id')->toArray())
+        ->and($booking->user_id)->toBe($user->id)
+        ->and($booking->discount)->toBe(0);
 });

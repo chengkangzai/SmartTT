@@ -27,7 +27,9 @@ it('should update tour description to tour', function () {
     $action = app(UpdateTourDescriptionAction::class);
     $dec = $action->execute($mock->toArray(), $td);
 
-    expect($dec)->toBeInstanceOf(TourDescription::class);
+    expect($dec)->toBeInstanceOf(TourDescription::class)
+        ->and($dec->description)->toBe($td->description)
+        ->and($dec->place)->toBe($td->place);
     assertModelExists($dec);
 });
 

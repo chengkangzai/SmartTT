@@ -42,8 +42,8 @@ it('should invalidate card that are expired', function () {
             'billing_phone' => '123456789',
         ]);
     } catch (ValidationException $exception) {
-        expect($exception->validator->errors()->get('card_expiry_date'))->toBeArray();
-        expect($exception->validator->errors()->get('card_expiry_date'))->toContain(__('Card expiry date must be after next month'));
+        expect($exception->validator->errors()->get('card_expiry_date'))->toBeArray()
+            ->and($exception->validator->errors()->get('card_expiry_date'))->toContain(__('Card expiry date must be after next month'));
     }
 });
 

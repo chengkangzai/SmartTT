@@ -54,10 +54,10 @@ it('should update Package Pricing', function () {
         ->assertSessionHas('success');
 
     $updated = PackagePricing::query()->orderByDesc('id')->first();
-    expect($updated->name)->toBe($mock->name);
-    expect($updated->price)->toBe($mock->price);
-    expect($updated->total_capacity)->toBe($mock->total_capacity);
-    expect($updated->available_capacity)->toBe($mock->available_capacity);
+    expect($updated->name)->toBe($mock->name)
+        ->and($updated->price)->toBe($mock->price)
+        ->and($updated->total_capacity)->toBe($mock->total_capacity)
+        ->and($updated->available_capacity)->toBe($mock->available_capacity);
 });
 
 it('should destroy package', function () {

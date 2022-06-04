@@ -32,8 +32,8 @@ it('should generate invoice', function () {
 
     $newPayment = app(GenerateInvoiceAction::class)->execute($payment);
 
-    expect($newPayment)->toBeInstanceOf(Payment::class);
-    expect($newPayment->getMedia('invoices'))->not->toBeEmpty();
-    expect($newPayment->getMedia('invoices')[0]->getPath())->toContain('_invoice_' . $payment->booking_id . '.pdf');
-    expect($newPayment->getMedia('invoices')[0]->getPath())->toContain('public');
+    expect($newPayment)->toBeInstanceOf(Payment::class)
+        ->and($newPayment->getMedia('invoices'))->not->toBeEmpty()
+        ->and($newPayment->getMedia('invoices')[0]->getPath())->toContain('_invoice_' . $payment->booking_id . '.pdf')
+        ->and($newPayment->getMedia('invoices')[0]->getPath())->toContain('public');
 });
