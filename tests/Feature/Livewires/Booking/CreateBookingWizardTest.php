@@ -67,7 +67,7 @@ it('should be able to book a packages as customer', function () {
         ->set('package', 0)
         ->call('nextStep')
         ->assertHasErrors()
-        ->set('package', 1)
+        ->set('package', $package->id)
         ->call('nextStep')
         ->assertHasNoErrors()
         ->emitEvents()->in($wizard);
@@ -75,6 +75,8 @@ it('should be able to book a packages as customer', function () {
     $wizard->assertSee('Register Guest');
 
     Livewire::test(RegisterBookingAndGuestStep::class)
+        ->set('package', $package->id)
+        ->call('updatePricings')
         ->set('guests.0.name', '')
         ->call('nextStep')
         ->assertHasErrors()
@@ -87,6 +89,7 @@ it('should be able to book a packages as customer', function () {
         ->set('guests.0.name', 'John Doe')
         ->set('guests.0.pricing', $package->pricings->first()->id)
         ->set('guests.0.price', $package->pricings->first()->price)
+        ->set('guests.0.is_child', false)
         ->call('addNewGuest')
         ->assertCount('guests', 2)
         ->call('removeGuest', 1)
@@ -155,7 +158,7 @@ it('should be able to book a packages as staff', function () {
         ->set('package', 0)
         ->call('nextStep')
         ->assertHasErrors()
-        ->set('package', 1)
+        ->set('package', $package->id)
         ->call('nextStep')
         ->assertHasNoErrors()
         ->emitEvents()->in($wizard);
@@ -163,6 +166,8 @@ it('should be able to book a packages as staff', function () {
     $wizard->assertSee('Register Guest');
 
     Livewire::test(RegisterBookingAndGuestStep::class)
+        ->set('package', $package->id)
+        ->call('updatePricings')
         ->set('guests.0.name', '')
         ->call('nextStep')
         ->assertHasErrors()
@@ -175,6 +180,7 @@ it('should be able to book a packages as staff', function () {
         ->set('guests.0.name', 'John Doe')
         ->set('guests.0.pricing', $package->pricings->first()->id)
         ->set('guests.0.price', $package->pricings->first()->price)
+        ->set('guests.0.is_child', false)
         ->call('addNewGuest')
         ->assertCount('guests', 2)
         ->call('removeGuest', 1)
@@ -210,7 +216,7 @@ it('should be able to book a packages as staff', function () {
         ->assertSee('Another John Doe')
         ->assertSee('0123456789');
 
-    $prev = Livewire::test(ConfirmBookingDetailStep::class)
+    Livewire::test(ConfirmBookingDetailStep::class)
         ->call('nextStep')
         ->assertHasNoErrors()
         ->emitEvents()->in($wizard);
