@@ -5439,16 +5439,16 @@
         },
         {
             "name": "spatie/laravel-livewire-wizard",
-            "version": "1.0.3",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-livewire-wizard.git",
-                "reference": "b6b60cf538cade5c35a12f2ffb4e4910be7cdf19"
+                "reference": "71df7e4fc4acb97551d4af4663bb625c969f38fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-livewire-wizard/zipball/b6b60cf538cade5c35a12f2ffb4e4910be7cdf19",
-                "reference": "b6b60cf538cade5c35a12f2ffb4e4910be7cdf19",
+                "url": "https://api.github.com/repos/spatie/laravel-livewire-wizard/zipball/71df7e4fc4acb97551d4af4663bb625c969f38fe",
+                "reference": "71df7e4fc4acb97551d4af4663bb625c969f38fe",
                 "shasum": ""
             },
             "require": {
@@ -5468,7 +5468,7 @@
                 "phpunit/phpunit": "^9.5.20",
                 "spatie/laravel-ray": "^1.26",
                 "spatie/pest-plugin-snapshots": "^1.1",
-                "spatie/phpunit-snapshot-assertions": "^4.2.11"
+                "spatie/phpunit-snapshot-assertions": "^4.2.12"
             },
             "type": "library",
             "extra": {
@@ -5507,9 +5507,9 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-livewire-wizard/tree/1.0.3"
+                "source": "https://github.com/spatie/laravel-livewire-wizard/tree/1.1.1"
             },
-            "time": "2022-05-30T11:51:32+00:00"
+            "time": "2022-06-03T09:05:32+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
