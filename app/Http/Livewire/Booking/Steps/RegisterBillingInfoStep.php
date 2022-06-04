@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Booking\Steps;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Log;
 use Spatie\LivewireWizard\Components\StepComponent;
 
 class RegisterBillingInfoStep extends StepComponent
@@ -15,13 +16,12 @@ class RegisterBillingInfoStep extends StepComponent
         'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
     ];
-    public array $guests;
 
     public function mount()
     {
         $state = $this->state()->all();
-        $this->guests = $state['register-booking-and-guest-step']['guests'];
-        $this->billingName = $this->guests[0]['name'];
+        $guests = $state['register-booking-and-guest-step']['guests'] ?? [];
+        $this->billingName = $guests[0]['name'] ?? '';
     }
 
     public function render(): Factory|View|Application

@@ -43,8 +43,8 @@ class CreatePaymentStep extends StepComponent
     public string $defaultCurrency;
     public array $guests;
     public int $bookingId;
-    /** @var PackagePricing */
-    public $pricings;
+//    /** @var PackagePricing */
+//    public $pricings;
 
     /** @var Booking */
     public $booking;
@@ -58,14 +58,14 @@ class CreatePaymentStep extends StepComponent
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
 
         $state = $this->state()->all();
-        $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'];
+        $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'] ?? 1;
         $this->booking = Booking::find($this->bookingId);
-        $this->guests = $state['register-booking-and-guest-step']['guests'];
-        $this->billingName = $state['register-billing-info-step']['billingName'];
-        $this->billingPhone = $state['register-billing-info-step']['billingPhone'];
-        $this->totalPrice = $state['register-booking-and-guest-step']['totalPrice'];
+        $this->guests = $state['register-booking-and-guest-step']['guests'] ?? [];
+        $this->billingName = $state['register-billing-info-step']['billingName'] ?? '';
+        $this->billingPhone = $state['register-billing-info-step']['billingPhone'] ?? '';
+        $this->totalPrice = $state['register-booking-and-guest-step']['totalPrice'] ?? 0;
 
-        $this->pricings = PackagePricing::whereIn('id', collect($this->guests)->pluck('pricing'))->get();
+//        $this->pricings = PackagePricing::whereIn('id', collect($this->guests)?->pluck('pricing'))->get();
         $this->getReadyForPayment();
     }
 
@@ -97,7 +97,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (! isset($this->paymentIntent)) {
+            if (!isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -189,10 +189,11 @@ class CreatePaymentStep extends StepComponent
 
     private function reduceAvailability(): void
     {
+        $pricings = PackagePricing::whereIn('id', collect($this->guests)->pluck('pricing'))->get();
         collect($this->guests)
-            ->filter(fn ($guest) => ! $guest['is_child'])
-            ->each(function ($guest) {
-                $this->pricings->find($guest['pricing'])->decrement('available_capacity');
+            ->filter(fn($guest) => !$guest['is_child'])
+            ->each(function ($guest) use ($pricings) {
+                $pricings->find($guest['pricing'])->decrement('available_capacity');
             });
     }
 
