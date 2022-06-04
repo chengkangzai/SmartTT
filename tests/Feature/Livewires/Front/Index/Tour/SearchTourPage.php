@@ -28,7 +28,7 @@ it('should be mountable', function () {
 });
 
 it('should filter as required', function () {
-    $tour = Tour::first();
+    $tour = Tour::whereHas('activePackages')->first();
     Livewire::test(SearchTourPage::class)
         ->set('q', $tour->name)
         ->set('category', $tour->category)

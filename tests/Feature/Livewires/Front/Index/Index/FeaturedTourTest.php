@@ -62,7 +62,7 @@ it('should load more tours', function () {
         ->assertCount('tours', 12)
         ->assertSet('stillCanLoad', true)
         ->call('loadMore')
-        ->assertCount('tours', Tour::count())
+        ->assertCount('tours', Tour::whereHas('activePackages')->count())
         ->assertSet('stillCanLoad', false)
         ->assertDontSee('Load More')
         ->assertSuccessful()
