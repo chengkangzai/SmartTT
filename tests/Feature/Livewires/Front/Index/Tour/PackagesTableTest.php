@@ -24,17 +24,17 @@ beforeEach(function () {
 
 it('should be mountable', function () {
     $tour = Tour::whereHas('activePackages')->first();
-    $pricing = $tour->activePackages->map(fn($package) => $package->pricings->map->price)
+    $pricing = $tour->activePackages->map(fn ($package) => $package->pricings->map->price)
         ->flatten()->sort()->values();
     $livewire = Livewire::test(PackagesTable::class, ['tour' => $tour])
         ->assertSet('tour', $tour)
         ->assertSet('packages', $tour->activePackages)
         ->assertSet('priceFrom', $pricing->first())
         ->assertSet('priceTo', $pricing->last())
-        ->assertSet('months', $tour->activePackages->pluck('depart_time')->mapWithKeys(fn($date) => [
+        ->assertSet('months', $tour->activePackages->pluck('depart_time')->mapWithKeys(fn ($date) => [
             (int)$date->format('m') => $date->format('F'),
         ]))
-        ->assertSet('airlines', $tour->activePackages->map(fn($package) => $package->flight->map(fn($airline) => $airline->airline)->unique()->sort())->flatten()->unique()->toArray())
+        ->assertSet('airlines', $tour->activePackages->map(fn ($package) => $package->flight->map(fn ($airline) => $airline->airline)->unique()->sort())->flatten()->unique()->toArray())
         ->assertSee('Packages');
 
     foreach ($tour->activePackages as $package) {
