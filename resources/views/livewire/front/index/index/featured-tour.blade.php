@@ -11,7 +11,7 @@
                 class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
                 <div class="aspect-video w-full">
                     <a href="{{ route('front.tours', $tour) }}">
-                        <img srcset="{{ $tour->getFirstMedia('thumbnail')->responsiveImages()->getSrcset() }}"
+                        <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() }}"
                              alt="image" class="aspect-video w-full" />
                     </a>
                 </div>
