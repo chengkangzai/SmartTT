@@ -23,7 +23,7 @@ beforeEach(function () {
 });
 
 it('should be mountable', function () {
-    $tour = Tour::first();
+    $tour = Tour::whereHas('activePackages')->first();
     $pricing = $tour->activePackages->map(fn($package) => $package->pricings->map->price)
         ->flatten()->sort()->values();
     $livewire = Livewire::test(PackagesTable::class, ['tour' => $tour])
@@ -45,15 +45,15 @@ it('should be mountable', function () {
 
 
 it('should filter tour as required', function () {
-    $tour = Tour::first();
+    $tour = Tour::whereHas('activePackages')->first();
     $livewire = Livewire::test(PackagesTable::class, ['tour' => $tour])
         ->assertSee('Packages');
 
-    $package = $tour->packages->first();
+    $package = $tour->activePackages->first();
     $livewire->set('month', $package->depart_time->month)
         ->assertSee(route('bookings.create', ['package' => $package->id]));
 
-    $package = $tour->packages->last();
+    $package = $tour->activePackages->last();
     $livewire->set('month', 0)
         ->set('airlineId', $package->flight->first()->airline->id)
         ->assertSee(route('bookings.create', ['package' => $package->id]));
