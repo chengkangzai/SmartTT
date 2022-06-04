@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
-use Log;
 use Spatie\LivewireWizard\Components\StepComponent;
 
 class RegisterBookingAndGuestStep extends StepComponent

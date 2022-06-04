@@ -97,7 +97,7 @@ class CreatePaymentStep extends StepComponent
     public function dispatchBrowserEventIfInStripeMode(): void
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
-            if (!isset($this->paymentIntent)) {
+            if (! isset($this->paymentIntent)) {
                 $this->paymentIntent = auth()->user()->createSetupIntent();
             }
 
@@ -191,7 +191,7 @@ class CreatePaymentStep extends StepComponent
     {
         $pricings = PackagePricing::whereIn('id', collect($this->guests)->pluck('pricing'))->get();
         collect($this->guests)
-            ->filter(fn($guest) => !$guest['is_child'])
+            ->filter(fn ($guest) => ! $guest['is_child'])
             ->each(function ($guest) use ($pricings) {
                 $pricings->find($guest['pricing'])->decrement('available_capacity');
             });

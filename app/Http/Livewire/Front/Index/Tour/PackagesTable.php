@@ -53,6 +53,7 @@ class PackagesTable extends Component
     public function render(): Factory|View|Application
     {
         $this->getPackages();
+
         return view('livewire.front.index.tour.packages-table');
     }
 

@@ -26,7 +26,9 @@ it('should be mountable', function () {
     Livewire::test(PriceCard::class, ['tour' => $tour])
         ->assertSet('tour', $tour)
         ->assertSet('packageId', $tour->activePackages->first()->id)
-        ->assertSet('cheapestPackagePricing', $tour
+        ->assertSet(
+            'cheapestPackagePricing',
+            $tour
             ->activePackages
             ->map(function ($package) {
                 return $package->pricings->sortBy('price')->first();

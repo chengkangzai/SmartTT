@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Livewire\Front\Index\Tour\SearchTourCard;
-use App\Models\Tour;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
@@ -25,4 +24,3 @@ it('should be mountable', function () {
     Livewire::test(SearchTourCard::class)
         ->assertSuccessful();
 });
-

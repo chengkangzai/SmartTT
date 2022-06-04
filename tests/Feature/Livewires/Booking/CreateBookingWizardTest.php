@@ -9,7 +9,6 @@ use App\Http\Livewire\Booking\Steps\RegisterBillingInfoStep;
 use App\Http\Livewire\Booking\Steps\RegisterBookingAndGuestStep;
 use App\Models\Package;
 use App\Models\User;
-use function Pest\Laravel\seed;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\BookingSeeder;
@@ -19,6 +18,7 @@ use Database\Seeders\PackageSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
+use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed([
@@ -32,7 +32,6 @@ beforeEach(function () {
         PackageSeeder::class,
         BookingSeeder::class,
     ]);
-
 });
 
 it('should be mountable', function () {
@@ -257,4 +256,3 @@ it('should be able to book a packages as staff', function () {
         ->assertSee('Download Invoice')
         ->assertSee('Download Receipt');
 });
-
