@@ -21,6 +21,13 @@ it('should update flight', function () {
     $mockFlight = Flight::factory()->make()->toArray();
     $newFlight = $action->execute($mockFlight, $data);
 
-    expect($newFlight)->toBeInstanceOf(Flight::class);
+    expect($newFlight)->toBeInstanceOf(Flight::class)
+        ->and($newFlight->id)->toBe($data->id)
+        ->and($newFlight->airline_id)->toBe($mockFlight['airline_id'])
+        ->and($newFlight->departure_airport_id)->toBe($mockFlight['departure_airport_id'])
+        ->and($newFlight->arrival_airport_id)->toBe($mockFlight['arrival_airport_id'])
+        ->and($newFlight->price)->toBe($mockFlight['price'])
+        ->and($newFlight->class)->toBe($mockFlight['class'])
+        ->and($newFlight->type)->toBe($mockFlight['type']);
     assertModelExists($newFlight);
 });
