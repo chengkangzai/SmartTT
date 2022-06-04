@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Booking\Steps;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Log;
 use Spatie\LivewireWizard\Components\StepComponent;
 
 class RegisterBillingInfoStep extends StepComponent

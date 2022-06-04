@@ -36,5 +36,4 @@ it('should get home data for customer', function () {
         ->and($payments)->toBeInstanceOf(LengthAwarePaginator::class)
         ->and($bookings)->toEqual($user->bookings()->paginate(10, ['*'], 'bookings'))
         ->and($payments)->toEqual($user->payments()->paginate(10, ['*'], 'payments'));
-
 });
