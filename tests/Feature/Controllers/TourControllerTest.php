@@ -97,7 +97,7 @@ it('should not store a tour bc w/o other param', function () use ($faker) {
 });
 
 
-it('should update a tour', closure: function () {
+it('should update a tour', function () {
     $oriTour = Tour::factory()->create();
     assertModelExists($oriTour);
 
