@@ -34,20 +34,20 @@ class ConfirmBookingDetailStep extends StepComponent
     public function render(): Factory|View|Application
     {
         $state = $this->state()->all();
-        $registerStep = $state['register-booking-and-guest-step'];
-        $tour = $state['choose-tour-step']['tour'];
-        $package = $state['choose-package-step']['package'];
+        $registerStep = $state['register-booking-and-guest-step'] ?? [];
+        $tour = $state['choose-tour-step']['tour'] ?? 0;
+        $package = $state['choose-package-step']['package'] ?? 1;
 
         $this->tour = Tour::find($tour);
         $this->package = Package::with('pricings')->find($package);
-        $this->pricings = $this->package->pricings;
+        $this->pricings = $this->package?->pricings;
 
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
-        $this->totalPrice = $registerStep['totalPrice'];
-        $this->guests = $registerStep['guests'];
+        $this->totalPrice = $registerStep['totalPrice'] ?? 0;
+        $this->guests = $registerStep['guests'] ?? [];
 
-        $this->billingName = $state['register-billing-info-step']['billingName'];
-        $this->billingPhone = $state['register-billing-info-step']['billingPhone'];
+        $this->billingName = $state['register-billing-info-step']['billingName'] ?? '';
+        $this->billingPhone = $state['register-billing-info-step']['billingPhone'] ?? '';
 
         return view('livewire.booking.steps.confirm-booking-detail-step');
     }

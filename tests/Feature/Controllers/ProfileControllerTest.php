@@ -28,6 +28,6 @@ it('should update profile', function () {
         ->assertSessionHas('success');
 
     $updated = User::first();
-    expect($updated->name)->toBe($user['name']);
-    expect($updated->email)->toBe($user['email']);
+    expect($updated->name)->toBe($user['name'])
+        ->and($updated->email)->toBe($user['email']);
 });

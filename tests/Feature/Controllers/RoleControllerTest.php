@@ -71,8 +71,8 @@ it('should store a role', function () use ($faker) {
         ->assertSessionHas('success');
 
     $updatedRole = Role::with('permissions')->orderByDesc('id')->get()->first();
-    expect($updatedRole->name)->toBe($role['name']);
-    expect($updatedRole->permissions->count())->toBe(3);
+    expect($updatedRole->name)->toBe($role['name'])
+        ->and($updatedRole->permissions->count())->toBe(3);
     $updatedRole->permissions()->each(function ($permission) use ($role) {
         expect($role['permissions'])->toContain($permission->id);
     });
@@ -113,8 +113,8 @@ it('should update a role', function () use ($faker) {
         ->assertSessionHas('success');
 
     $updatedRole = Role::with('permissions')->find($role->id);
-    expect($updatedRole->name)->toBe($newRole['name']);
-    expect($updatedRole->permissions->count())->toBe(3);
+    expect($updatedRole->name)->toBe($newRole['name'])
+        ->and($updatedRole->permissions->count())->toBe(3);
     $updatedRole->permissions()->each(function ($permission) use ($newRole) {
         expect($newRole['permissions'])->toContain($permission->id);
     });

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Booking;
+use App\Models\BookingGuest;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\User;
@@ -54,10 +56,10 @@ it('should update Package Pricing', function () {
         ->assertSessionHas('success');
 
     $updated = PackagePricing::query()->orderByDesc('id')->first();
-    expect($updated->name)->toBe($mock->name);
-    expect($updated->price)->toBe($mock->price);
-    expect($updated->total_capacity)->toBe($mock->total_capacity);
-    expect($updated->available_capacity)->toBe($mock->available_capacity);
+    expect($updated->name)->toBe($mock->name)
+        ->and($updated->price)->toBe($mock->price)
+        ->and($updated->total_capacity)->toBe($mock->total_capacity)
+        ->and($updated->available_capacity)->toBe($mock->available_capacity);
 });
 
 it('should destroy package', function () {
@@ -68,6 +70,24 @@ it('should destroy package', function () {
         ->assertSessionHas('success');
 
     assertSoftDeleted($pp);
+});
+
+
+it('should not destroy package because it been used', function () {
+    $package = Package::factory()->create();
+    $pp = PackagePricing::factory()->create([
+        'package_id' => $package->id,
+    ]);
+    assertModelExists($pp);
+    Booking::factory()->create();
+    $pp->guests()->createMany(BookingGuest::factory()->times(3)->make()->toArray());
+
+    $this->from(route('packages.show', $package))
+        ->delete(route('packagePricings.destroy', $pp))
+        ->assertRedirect(route('packages.show', $package))
+        ->assertSessionHasErrors();
+
+    assertModelExists($pp);
 });
 
 it('should attach a pricing to package', function () {

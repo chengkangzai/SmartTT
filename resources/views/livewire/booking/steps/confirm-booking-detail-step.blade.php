@@ -9,14 +9,14 @@
                 <td>
                     <p class="float-end">{{ __('Tour Name') }}</p>
                 </td>
-                <td>{{ $tour->name }}</td>
+                <td>{{ $tour->name ?? '' }}</td>
             </tr>
             <tr>
                 <td>
                     <p class="float-end">{{ __('Itinerary') }}</p>
                 </td>
                 <td>
-                    <a href="{{ $tour->getFirstMediaUrl('itinerary') ?? '#' }}" target="_blank"
+                    <a href="{{ $tour?->getFirstMediaUrl('itinerary') ?? '#' }}" target="_blank"
                         class="btn btn-outline-primary">
                         {{ __('Itinerary') }}
                     </a>
@@ -26,7 +26,7 @@
                 <td>
                     <p class="float-end">{{ __('Depart Date') }}</p>
                 </td>
-                <td>{{ $package->depart_time->toDayDateTimeString() }}</td>
+                <td>{{ $package?->depart_time?->translatedFormat(config('app.date_format')) ?? '' }}</td>
             </tr>
             <tr>
                 <td>
@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($guests as $guest)
                                 <tr>
-                                    <td>{{ $guest['name'] }}</td>
+                                    <td>{{ $guest['name'] ?? ''}}</td>
                                     <td>{{ $pricings->find($guest['pricing'])?->name ?? 'N/A' }}</td>
                                     <td>{{ $defaultCurrency }} {{ number_format($guest['price'], 2) }}</td>
                                 </tr>

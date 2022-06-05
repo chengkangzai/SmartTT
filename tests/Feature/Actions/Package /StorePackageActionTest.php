@@ -4,6 +4,7 @@ use App\Actions\Package\StorePackageAction;
 use App\Models\Flight;
 use App\Models\Package;
 use App\Models\PackagePricing;
+use Carbon\Carbon;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
@@ -37,8 +38,11 @@ it('should store package', function () use ($faker) {
     } catch (Throwable $e) {
         $this->fail($e->getMessage());
     }
+    expect($package)->toBeInstanceOf(Package::class)
+        ->and($package->id)->toBeGreaterThan(0)
+        ->and($package->depart_time->format('Y-m-d H:i:s'))->toBe(Carbon::parse($mockPackage['depart_time'])->format('Y-m-d H:i:s'))
+        ->and($package->tour_id)->toBe($mockPackage['tour_id']);
 
-    expect($package)->toBeInstanceOf(Package::class);
     assertModelExists($package);
 
     $package->refresh()->pricings()->get()->each(function ($pricing) use ($mockPackage) {

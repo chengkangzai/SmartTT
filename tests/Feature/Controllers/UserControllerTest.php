@@ -63,10 +63,10 @@ it('should store a user', function () {
         ->assertSessionHas('success');
 
     $latestUser = User::query()->orderByDesc('id')->get()->first();
-    expect($latestUser->name)->toBe($user['name']);
-    expect($latestUser->email)->toBe($user['email']);
-    expect($latestUser->roles()->count())->toBe(1);
-    expect($latestUser->roles()->first()->name)->toBe('Customer');
+    expect($latestUser->name)->toBe($user['name'])
+        ->and($latestUser->email)->toBe($user['email'])
+        ->and($latestUser->roles()->count())->toBe(1)
+        ->and($latestUser->roles()->first()->name)->toBe('Customer');
 });
 
 it('should update a user', function () {
@@ -80,8 +80,8 @@ it('should update a user', function () {
         ->assertSessionHas('success');
 
     $latestUser = User::find($oriUser->id);
-    expect($latestUser->name)->toBe($newUser->name);
-    expect($latestUser->email)->toBe($newUser->email);
+    expect($latestUser->name)->toBe($newUser->name)
+        ->and($latestUser->email)->toBe($newUser->email);
 });
 
 it('should destroy a user', function () {

@@ -47,18 +47,18 @@ it('should create payment w/ card', function () {
 
     expect($payment)->toBeInstanceOf(Payment::class);
     assertModelExists($payment);
-    expect($payment->payment_method)->toBe(Payment::METHOD_CARD);
-    expect($payment->status)->toBe(Payment::STATUS_PAID);
-    expect($payment->booking_id)->toBe($booking->id);
-    expect($payment->user_id)->toBe($user->id);
-    expect($payment->card_holder_name)->toBe('John Doe');
-    expect($payment->card_number)->toBe('1234567890123456');
-    expect($payment->card_expiry_date)->toBe('12/25');
-    expect($payment->card_cvc)->toBe('123');
-    expect($payment->amount)->toBe(100);
-    expect($payment->payment_type)->toBe(Payment::TYPE_REMAINING);
-    expect($payment->billing_name)->toBe('John Doe');
-    expect($payment->billing_phone)->toBe('123456789');
+    expect($payment->payment_method)->toBe(Payment::METHOD_CARD)
+        ->and($payment->status)->toBe(Payment::STATUS_PAID)
+        ->and($payment->booking_id)->toBe($booking->id)
+        ->and($payment->user_id)->toBe($user->id)
+        ->and($payment->card_holder_name)->toBe('John Doe')
+        ->and($payment->card_number)->toBe('1234567890123456')
+        ->and($payment->card_expiry_date)->toBe('12/25')
+        ->and($payment->card_cvc)->toBe('123')
+        ->and($payment->amount)->toBe(100)
+        ->and($payment->payment_type)->toBe(Payment::TYPE_REMAINING)
+        ->and($payment->billing_name)->toBe('John Doe')
+        ->and($payment->billing_phone)->toBe('123456789');
 });
 
 it('should create payment w/ cash', function () {
@@ -75,14 +75,14 @@ it('should create payment w/ cash', function () {
 
     expect($payment)->toBeInstanceOf(Payment::class);
     assertModelExists($payment);
-    expect($payment->payment_method)->toBe(Payment::METHOD_CASH);
-    expect($payment->status)->toBe(Payment::STATUS_PAID);
-    expect($payment->booking_id)->toBe($booking->id);
-    expect($payment->user_id)->toBe($user->id);
-    expect($payment->amount)->toBe(100);
-    expect($payment->payment_type)->toBe(Payment::TYPE_REMAINING);
-    expect($payment->billing_name)->toBe('John Doe');
-    expect($payment->billing_phone)->toBe('123456789');
+    expect($payment->payment_method)->toBe(Payment::METHOD_CASH)
+        ->and($payment->status)->toBe(Payment::STATUS_PAID)
+        ->and($payment->booking_id)->toBe($booking->id)
+        ->and($payment->user_id)->toBe($user->id)
+        ->and($payment->amount)->toBe(100)
+        ->and($payment->payment_type)->toBe(Payment::TYPE_REMAINING)
+        ->and($payment->billing_name)->toBe('John Doe')
+        ->and($payment->billing_phone)->toBe('123456789');
 });
 
 it('should throw exception when method is not support', function () {

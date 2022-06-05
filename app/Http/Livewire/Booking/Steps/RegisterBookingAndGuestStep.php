@@ -30,7 +30,7 @@ class RegisterBookingAndGuestStep extends StepComponent
 
     public function mount()
     {
-        $this->package = $this->state()->forStep('choose-package-step')['package'];
+        $this->package = $this->state()->forStep('choose-package-step')['package'] ?? 1;
         $this->updatePricings();
         $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;

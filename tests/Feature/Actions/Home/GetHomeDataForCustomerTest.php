@@ -32,9 +32,8 @@ it('should get home data for customer', function () {
     $user = User::first();
     [$bookings, $payments] = app(GetHomeDataForCustomer::class)->execute($user);
 
-    expect($bookings)->toBeInstanceOf(LengthAwarePaginator::class);
-    expect($payments)->toBeInstanceOf(LengthAwarePaginator::class);
-
-    expect($bookings)->toEqual($user->bookings()->paginate(10, ['*'], 'bookings'));
-    expect($payments)->toEqual($user->payments()->paginate(10, ['*'], 'payments'));
+    expect($bookings)->toBeInstanceOf(LengthAwarePaginator::class)
+        ->and($payments)->toBeInstanceOf(LengthAwarePaginator::class)
+        ->and($bookings)->toEqual($user->bookings()->paginate(10, ['*'], 'bookings'))
+        ->and($payments)->toEqual($user->payments()->paginate(10, ['*'], 'payments'));
 });

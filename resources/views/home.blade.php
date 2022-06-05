@@ -70,33 +70,37 @@
             <div class="card-body">
                 <table class="table table-sm table-responsive table-bordered table-striped text-center">
                     <thead>
-                        <tr>
-                            <th> {{ __('Date Time') }} </th>
-                            <th> {{ __('Subject') }} </th>
-                            <th> {{ __('Performed By') }} </th>
-                            <th> {{ __('Action') }} </th>
-                            <th>{{ __('Price') }}</th>
-                            <th>{{ __('Tour') }}</th>
-                        </tr>
+                    <tr>
+                        <th> {{ __('Date Time') }} </th>
+                        <th> {{ __('Subject') }} </th>
+                        <th> {{ __('Performed By') }} </th>
+                        <th> {{ __('Action') }} </th>
+                        <th>{{ __('Price') }}</th>
+                        <th>{{ __('Tour') }}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @forelse($logs as $log)
-                            <tr>
-                                <td> {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat(config('app.date_format')) }} </td>
+                    @forelse($logs as $log)
+                        <tr>
+                            <td> {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat(config('app.date_format')) }} </td>
+                            @if(in_array($log->subject_type, ['created','updated','deleted']))
                                 <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
-                                <td> {{ $log->causer->name ?? __('System') }}
-                                    {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
-                                </td>
-                                <td> {{ trans('constant.activity.' . $log->description) }} </td>
-                                <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
-                                </td>
-                                <td> {{ $logData->find($log->subject_id)?->package?->tour?->name ?? '' }} </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center">{{ __('No logs found') }}</td>
-                            </tr>
-                        @endforelse
+                            @else
+                                <td>{{$log->subject_type}}</td>
+                            @endif
+                            <td> {{ $log->causer->name ?? __('System') }}
+                                {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
+                            </td>
+                            <td> {{ trans('constant.activity.' . $log->description) }} </td>
+                            <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
+                            </td>
+                            <td> {{ $logData->find($log->subject_id)?->package?->tour?->name ?? '' }} </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">{{ __('No logs found') }}</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 {{ $logs->links() }}

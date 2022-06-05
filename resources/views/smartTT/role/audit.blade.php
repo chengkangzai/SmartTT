@@ -1,5 +1,5 @@
 @php
-    /** @var \Spatie\Permission\Models\Role $role */
+/** @var \Spatie\Permission\Models\Role $role */
 @endphp
 
 @extends('smartTT.layouts.app')

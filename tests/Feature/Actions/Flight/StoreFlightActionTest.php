@@ -15,11 +15,18 @@ beforeEach(function () {
 });
 
 it('should create flight', function () {
-    $data = Flight::factory()->make();
+    $flight = Flight::factory()->make();
 
-    $action = app(StoreFlightAction::class)->execute($data->toArray());
+    $action = app(StoreFlightAction::class)->execute($flight->toArray());
 
-    expect($action)->toBeInstanceOf(Flight::class);
+    expect($action)->toBeInstanceOf(Flight::class)
+        ->and($action->id)->toBeGreaterThan(0)
+        ->and($action->airline_id)->toBe($flight->airline_id)
+        ->and($action->departure_airport_id)->toBe($flight->departure_airport_id)
+        ->and($action->arrival_airport_id)->toBe($flight->arrival_airport_id)
+        ->and($action->price)->toBe($flight->price)
+        ->and($action->class)->toBe($flight->class)
+        ->and($action->type)->toBe($flight->type);
 
     assertModelExists($action);
 });

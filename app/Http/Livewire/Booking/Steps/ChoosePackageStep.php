@@ -15,7 +15,7 @@ class ChoosePackageStep extends StepComponent
 
     public function render(): Factory|View|Application
     {
-        $tourId = $this->state()->forStep('choose-tour-step')['tour'];
+        $tourId = $this->state()->forStep('choose-tour-step')['tour'] ?? 0;
 
         return view('livewire.booking.steps.choose-package-step', [
             'packages' => Package::where('tour_id', $tourId)->active()->orderBy('depart_time')->get(),

@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Package $package */
+/** @var \App\Models\Package $package */
 @endphp
 
 @extends('smartTT.layouts.app')

@@ -14,9 +14,9 @@ it('should update user profile', function () {
         'password' => 'new-password',
     ]);
     $action = app(UpdateProfileAction::class)->execute($new->toArray(), $ori);
-    expect($action)->toBeInstanceOf(User::class);
-    expect($action->name)->toBe($new->name);
-    expect($action->email)->toBe($new->email);
+    expect($action)->toBeInstanceOf(User::class)
+        ->and($action->name)->toBe($new->name)
+        ->and($action->email)->toBe($new->email);
 
     assertModelExists($action);
 });

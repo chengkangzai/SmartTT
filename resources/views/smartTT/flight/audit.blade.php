@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Flight $flight */
+/** @var \App\Models\Flight $flight */
 @endphp
 
 @extends('smartTT.layouts.app')

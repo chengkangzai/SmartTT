@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Settings\PackageSetting $setting */
+/** @var \App\Models\Settings\PackageSetting $setting */
 @endphp
 
 @extends('smartTT.layouts.app')

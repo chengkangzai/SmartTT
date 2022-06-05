@@ -26,7 +26,9 @@ it('should attach tour description to tour', function () {
     $dec = $action->execute($data, $tour);
 
     assertModelExists($dec);
-    assert($dec->tour_id === $tour->id);
+    expect($dec->tour_id)->toBe($tour->id)
+        ->and($dec->description)->toBe($data['description'])
+        ->and($dec->place)->toBe($data['place']);
     assert($tour->description()->count() === 1);
 });
 

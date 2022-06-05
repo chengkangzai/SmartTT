@@ -47,14 +47,14 @@ it('should update payment w/ card', function () {
         ]);
 
     assertModelExists($payment);
-    expect($payment->card_holder_name)->toBe('John Doe');
-    expect($payment->card_number)->toBe('1234567890123456');
-    expect($payment->card_expiry_date)->toBe('12/25');
-    expect($payment->card_cvc)->toBe('123');
-    expect($payment->amount)->toBe(100);
-    expect($payment->payment_type)->toBe(Payment::TYPE_RESERVATION);
-    expect($payment->billing_name)->toBe('John Doe');
-    expect($payment->billing_phone)->toBe('123456789');
+    expect($payment->card_holder_name)->toBe('John Doe')
+        ->and($payment->card_number)->toBe('1234567890123456')
+        ->and($payment->card_expiry_date)->toBe('12/25')
+        ->and($payment->card_cvc)->toBe('123')
+        ->and($payment->amount)->toBe(100)
+        ->and($payment->payment_type)->toBe(Payment::TYPE_RESERVATION)
+        ->and($payment->billing_name)->toBe('John Doe')
+        ->and($payment->billing_phone)->toBe('123456789');
 });
 
 it('should update payment w/ cash', function () {
@@ -73,10 +73,10 @@ it('should update payment w/ cash', function () {
         ]);
 
     assertModelExists($payment);
-    expect($payment->amount)->toBe(100);
-    expect($payment->payment_type)->toBe(Payment::TYPE_RESERVATION);
-    expect($payment->billing_name)->toBe('John Doe');
-    expect($payment->billing_phone)->toBe('123456789');
+    expect($payment->amount)->toBe(100)
+        ->and($payment->payment_type)->toBe(Payment::TYPE_RESERVATION)
+        ->and($payment->billing_name)->toBe('John Doe')
+        ->and($payment->billing_phone)->toBe('123456789');
 });
 
 it('should throw exception when method is not support', function () {

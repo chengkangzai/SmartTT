@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Settings\TourSetting $setting */
+/** @var \App\Models\Settings\TourSetting $setting */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -40,19 +40,19 @@
                     <div class="col-12 col-md-6">
                         <label for="default_night">{{ trans('setting.tour.default_night') }}</label>
                         <input type="number" step="1" name="default_night" id="default_night" class="form-control"
-                               value="{{ old('default_night', $setting->default_night) }}">
+                            value="{{ old('default_night', $setting->default_night) }}">
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="default_day">{{ trans('setting.tour.default_day') }}</label>
                         <input type="number" step="1" name="default_day" id="default_day" class="form-control"
-                               value="{{ old('default_day', $setting->default_day) }}">
+                            value="{{ old('default_day', $setting->default_day) }}">
                     </div>
                 </div>
                 <div class="mb-3">
                     <p>
                         {{ __('Category') }}
                         <button type="button" class="btn btn-outline-primary btn-sm" data-coreui-toggle="modal"
-                                data-coreui-target="#exampleModal">
+                            data-coreui-target="#exampleModal">
                             {{ __('Add') }}
                         </button>
                     </p>
@@ -62,8 +62,8 @@
                                 {{ $category }}
                                 <input type="hidden" name="category[]" value="{{ $category }}">
                                 <span class="badge bg-primary rounded-pill mx-2" data-coreui-toggle="tooltip"
-                                      data-coreui-placement="right"
-                                      title="{{ __('Total Tour that are using this category') }}">
+                                    data-coreui-placement="right"
+                                    title="{{ __('Total Tour that are using this category') }}">
                                     {{ $viewBag['tours'][$category] ?? '0' }}
                                 </span>
                             </label>
@@ -91,15 +91,14 @@
                         <div class="form-group">
                             <label for="category">{{ trans('setting.tour.category') }}</label>
                             <input type="text" name="category" id="category" class="form-control"
-                                   placeholder="{{ __('Category') }}">
+                                placeholder="{{ __('Category') }}">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                            data-coreui-dismiss="modal">{{ __('Close') }}</button>
-                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}"
-                           form="addCategoryForm">
+                        data-coreui-dismiss="modal">{{ __('Close') }}</button>
+                    <input type="submit" class="btn btn-primary" value="{{ __('Save changes') }}" form="addCategoryForm">
                 </div>
             </div>
         </div>

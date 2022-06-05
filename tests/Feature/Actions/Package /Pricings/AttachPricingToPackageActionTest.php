@@ -21,7 +21,15 @@ it('should attach pricing to to package', function () {
 
     $newPricing = $action->execute($fakePricing->toArray(), $package);
 
-    expect($newPricing)->toBeInstanceOf(PackagePricing::class);
+    expect($newPricing)->toBeInstanceOf(PackagePricing::class)
+        ->and($newPricing->id)->toBeGreaterThan(0)
+        ->and($newPricing->package_id)->toBe($fakePricing->package_id)
+        ->and($newPricing->price)->toBe($fakePricing->price)
+        ->and($newPricing->name)->toBe($fakePricing->name)
+        ->and($newPricing->total_capacity)->toBe($fakePricing->total_capacity)
+        ->and($newPricing->available_capacity)->toBe($fakePricing->available_capacity)
+        ->and($newPricing->is_active)->toBe($fakePricing->is_active);
+
 
     assertModelExists($newPricing);
 });

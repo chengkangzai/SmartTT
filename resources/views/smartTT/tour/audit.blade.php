@@ -1,6 +1,6 @@
 @php
-    /** @var \App\Models\Tour $tour */
-    /** @var \App\Models\TourDescription $des */
+/** @var \App\Models\Tour $tour */
+/** @var \App\Models\TourDescription $des */
 @endphp
 
 @extends('smartTT.layouts.app')

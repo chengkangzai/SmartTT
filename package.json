@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "format": "blade-formatter --write resources/views/layouts/**/*.blade.php",
+        "format": "blade-formatter --write resources/views/smartTT/**/*.blade.php",
         "format-tailwind": "blade-formatter --write resources/views/front/**/*.blade.php --sort-tailwindcss-classes && blade-formatter --write resources/views/livewire/front/**/*.blade.php --sort-tailwindcss-classes"
     },
     "devDependencies": {

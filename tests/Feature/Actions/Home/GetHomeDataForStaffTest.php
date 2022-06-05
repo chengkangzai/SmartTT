@@ -60,17 +60,17 @@ it('should get home data for customer', function () {
         ->andReturn([$userCount, $userData, $bookingCount, $bookingData, $tourCount, $packageCount, $logs]);
 
 
-    expect($userCount)->toBe(User::count());
-    expect($bookingCount)->toBe(Booking::active()->count());
-    expect($tourCount)->toBe(Tour::active()->count());
-    expect($packageCount)->toBe(Package::active()->count());
-    expect($logs)->toEqual(Activity::where('subject_type', Booking::class)->latest()->paginate(10, ['*'], 'logs'));
-    expect($userData)->toEqual([
-        'label' => getLastSevenDayInName(),
-        'data' => getDataByModelField(User::class, 'created_at'),
-    ]);
-    expect($bookingData)->toEqual([
-        'label' => getLastSevenDayInName(),
-        'data' => getDataByModelField(Booking::class, 'created_at'),
-    ]);
+    expect($userCount)->toBe(User::count())
+        ->and($bookingCount)->toBe(Booking::active()->count())
+        ->and($tourCount)->toBe(Tour::active()->count())
+        ->and($packageCount)->toBe(Package::active()->count())
+        ->and($logs)->toEqual(Activity::where('subject_type', Booking::class)->latest()->paginate(10, ['*'], 'logs'))
+        ->and($userData)->toEqual([
+            'label' => getLastSevenDayInName(),
+            'data' => getDataByModelField(User::class, 'created_at'),
+        ])
+        ->and($bookingData)->toEqual([
+            'label' => getLastSevenDayInName(),
+            'data' => getDataByModelField(Booking::class, 'created_at'),
+        ]);
 });

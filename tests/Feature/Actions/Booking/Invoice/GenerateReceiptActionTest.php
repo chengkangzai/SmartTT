@@ -34,10 +34,10 @@ it('should generate receipt', function () {
 
     $newPayment = app(GenerateReceiptAction::class)->execute($payment);
 
-    expect($newPayment)->toBeInstanceOf(Payment::class);
-    expect($newPayment->getMedia('receipts'))->not->toBeEmpty();
-    expect($newPayment->getMedia('receipts')[0]->getPath())->toContain('_receipt_' . $payment->booking_id . '.pdf');
-    expect($newPayment->getMedia('receipts')[0]->getPath())->toContain('public');
+    expect($newPayment)->toBeInstanceOf(Payment::class)
+        ->and($newPayment->getMedia('receipts'))->not->toBeEmpty()
+        ->and($newPayment->getMedia('receipts')[0]->getPath())->toContain('_receipt_' . $payment->booking_id . '.pdf')
+        ->and($newPayment->getMedia('receipts')[0]->getPath())->toContain('public');
 });
 
 it('should not generate receipt because its not paid', function ($statuses) {

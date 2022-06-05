@@ -28,9 +28,11 @@
         <exclude>
             <directory suffix=".php">./app/Providers</directory>
             <directory suffix=".php">./app/Http/Middleware</directory>
+            <directory suffix=".php">./app/Http/Kernel</directory>
             <directory suffix=".php">./app/Http/Controllers/Auth/</directory>
             <directory suffix=".php">./app/Http/Notifications</directory>
             <directory suffix=".php">./app/Http/Jobs</directory>
+            <directory suffix=".php">./app/Console/Kernel</directory>
             <file>./app/Http/Controllers/Controller</file>
         </exclude>
     </coverage>

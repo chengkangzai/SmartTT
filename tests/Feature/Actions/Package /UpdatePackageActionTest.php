@@ -29,7 +29,10 @@ it('should update package', function () {
 
     $action = app(UpdatePackageAction::class)->execute($mockPackage->toArray(), $ori);
 
-    expect($action)->toBeInstanceOf(Package::class);
+    expect($action)->toBeInstanceOf(Package::class)
+        ->and($action->id)->toBe($ori->id)
+        ->and($action->depart_time->format('Y-m-d H:i:s'))->toBe($mockPackage['depart_time']->format('Y-m-d H:i:s'))
+        ->and($action->tour_id)->toBe($mockPackage['tour_id']);
     assertModelExists($action);
     expect($action->flight->count())->toBe(4);
 });
