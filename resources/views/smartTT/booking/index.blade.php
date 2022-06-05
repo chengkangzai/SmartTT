@@ -32,7 +32,7 @@
                             <th>{{ __('Package') }}</th>
                             <th>{{ __('Depart Time') }}</th>
                             <th>{{ __('Payment Status') }}</th>
-                            <th>{{__('Payment Method')}}</th>
+                            <th>{{ __('Payment Method') }}</th>
                             <th>{{ __('Made By') }} </th>
                             <th>{{ __('Total Price') }} ({{ $setting->default_currency }})</th>
                             <th>{{ __('Action') }}</th>
@@ -48,7 +48,8 @@
                                         {{ $booking->package->tour->tour_code }}
                                     </a>
                                 </td>
-                                <td>{{ $booking->package->depart_time->translatedFormat(config('app.date_format')) }}</td>
+                                <td>{{ $booking->package->depart_time->translatedFormat(config('app.date_format')) }}
+                                </td>
                                 <td>{{ $booking->isFullPaid() ? __('Paid') : __('Pending') }}</td>
                                 <td>{{ $booking->payment->first()->payment_method }}</td>
                                 <td>{{ $booking->user->name }}</td>

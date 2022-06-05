@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\TourDescription $tourDescription */
+/** @var \App\Models\TourDescription $tourDescription */
 @endphp
 
 @extends('smartTT.layouts.app')

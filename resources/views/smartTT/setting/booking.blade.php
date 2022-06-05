@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Settings\BookingSetting $setting */
+/** @var \App\Models\Settings\BookingSetting $setting */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -38,13 +38,14 @@
                 <div class="mb-3">
                     <label for="charge_per_child">{{ trans('setting.booking.charge_per_child') }}</label>
                     <input name="charge_per_child" id="charge_per_child" class="form-control" type="number"
-                           value="{{ old('charge_per_child', $setting->charge_per_child) }}">
+                        value="{{ old('charge_per_child', $setting->charge_per_child) }}">
                 </div>
                 <div class="mb-3">
-                    <label for="reservation_charge_per_pax">{{ trans('setting.booking.reservation_charge_per_pax') }}</label>
+                    <label
+                        for="reservation_charge_per_pax">{{ trans('setting.booking.reservation_charge_per_pax') }}</label>
                     <input name="reservation_charge_per_pax" id="reservation_charge_per_pax" class="form-control"
-                           type="number"
-                           value="{{ old('reservation_charge_per_pax', $setting->reservation_charge_per_pax) }}">
+                        type="number"
+                        value="{{ old('reservation_charge_per_pax', $setting->reservation_charge_per_pax) }}">
                 </div>
             </form>
         </div>

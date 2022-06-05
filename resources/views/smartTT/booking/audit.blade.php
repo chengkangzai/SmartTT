@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\Booking $booking */
+/** @var \App\Models\Booking $booking */
 @endphp
 
 @extends('smartTT.layouts.app')

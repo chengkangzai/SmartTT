@@ -70,14 +70,14 @@
             <div class="card-body">
                 <table class="table table-sm table-responsive table-bordered table-striped text-center">
                     <thead>
-                        <tr>
-                            <th> {{ __('Date Time') }} </th>
-                            <th> {{ __('Subject') }} </th>
-                            <th> {{ __('Performed By') }} </th>
-                            <th> {{ __('Action') }} </th>
-                            <th>{{ __('Price') }}</th>
-                            <th>{{ __('Tour') }}</th>
-                        </tr>
+                    <tr>
+                        <th> {{ __('Date Time') }} </th>
+                        <th> {{ __('Subject') }} </th>
+                        <th> {{ __('Performed By') }} </th>
+                        <th> {{ __('Action') }} </th>
+                        <th>{{ __('Price') }}</th>
+                        <th>{{ __('Tour') }}</th>
+                    </tr>
                     </thead>
                     <tbody>
                         @forelse($logs as $log)

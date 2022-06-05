@@ -1,6 +1,6 @@
 @php
-    /** @var \App\Models\Flight $flight */
-    /** @var \App\Models\Settings\FlightSetting $setting */
+/** @var \App\Models\Flight $flight */
+/** @var \App\Models\Settings\FlightSetting $setting */
 @endphp
 @extends('smartTT.layouts.app')
 @section('title')
@@ -39,8 +39,7 @@
                 <div class="mb-3 row">
                     <div class="col col-md-6">
                         <label class="form-label" for="departure_airport_id">{{ __('Departure Airport') }}</label>
-                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id"
-                                multiple>
+                        <select name="departure_airport_id" class="form-control select2" id="departure_airport_id" multiple>
                             @if (old('departure_airport_id'))
                                 <option value="{{ old('departure_airport_id') }}" selected>
                                     @php
@@ -72,23 +71,23 @@
                             <small>({{ __('based on departure timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="departure_date" id="departure_date"
-                               min="{{ date('Y-m-d\TH:i') }}"
-                               value="{{ old('departure_date',now()->addMinutes(5)->format('Y-m-d\TH:i')) }}"/>
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('departure_date',now()->addMinutes(5)->format('Y-m-d\TH:i')) }}" />
                     </div>
                     <div class="col col-md-6">
                         <label class="form-label" for="arrival_date"> {{ __('Arrival Time') }}
                             <small>({{ __('based on arrival timezone') }})</small>
                         </label>
                         <input type='datetime-local' class="form-control" name="arrival_date" id="arrival_date"
-                               min="{{ date('Y-m-d\TH:i') }}"
-                               value="{{ old('arrival_date',now()->addMinutes(10)->format('Y-m-d\TH:i')) }}"/>
+                            min="{{ date('Y-m-d\TH:i') }}"
+                            value="{{ old('arrival_date',now()->addMinutes(10)->format('Y-m-d\TH:i')) }}" />
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="price">{{ __('Price') }}</label>
                     <input type="number" name="price" class="form-control" id="price" value="{{ old('price', 0) }}"
-                           step=".01" placeholder="{{ __('Flight Price') }}">
+                        step=".01" placeholder="{{ __('Flight Price') }}">
                 </div>
 
 
@@ -132,9 +131,9 @@
                 url: '{{ route('select2.flights.getAirports') }}',
                 dataType: 'json',
                 delay: 250,
-                processResults: function (data) {
+                processResults: function(data) {
                     return {
-                        results: $.map(data, function (item) {
+                        results: $.map(data, function(item) {
                             return {
                                 text: item.text,
                                 id: item.id

@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\PackagePricing $packagePricing */
+/** @var \App\Models\PackagePricing $packagePricing */
 @endphp
 
 @extends('smartTT.layouts.app')

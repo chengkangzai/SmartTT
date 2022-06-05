@@ -11,12 +11,11 @@
             <li class="breadcrumb-item active" aria-current="page">{{ __('Create') }}</li>
         </ol>
     </nav>
-    @if(request('package'))
-        <livewire:booking.create-booking-wizard
-            show-step="register-booking-and-guest-step"
-            :package-id="request('package')"/>
+    @if (request('package'))
+        <livewire:booking.create-booking-wizard show-step="register-booking-and-guest-step"
+            :package-id="request('package')" />
     @else
-        <livewire:booking.create-booking-wizard :package-id="request('package')"/>
+        <livewire:booking.create-booking-wizard :package-id="request('package')" />
     @endif
 @endsection
 
