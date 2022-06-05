@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BotManController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
@@ -33,6 +34,8 @@ Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
+    Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
+
     Route::get('tours/search', SearchTourPage::class)->name('search');
     Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
 });
