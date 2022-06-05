@@ -41,37 +41,37 @@ it('should be mountable', function () {
 });
 
 
-//it('should be able to book a packages as customer', function () {
-//    $this->actingAs(User::factory()->customer()->create());
-//    $package = Package::first();
-//
-//    $wizard = Livewire::test(CreateBookingWizard::class, [
-//        'packageId' => null,
-//    ])
-//        ->assertSuccessful()
-//        ->assertSee('Choose Tour');
-//
-//    Livewire::test(ChooseTourStep::class)
-//        ->set('tour', 0)
-//        ->call('nextStep')
-//        ->assertHasErrors()
-//        ->set('tour', $package->tour_id)
-//        ->call('nextStep')
-//        ->assertHasNoErrors()
-//        ->emitEvents()->in($wizard);
-//
-//    $wizard->assertSee('Choose Package');
-//
-//    Livewire::test(ChoosePackageStep::class)
-//        ->set('package', 0)
-//        ->call('nextStep')
-//        ->assertHasErrors()
-//        ->set('package', $package->id)
-//        ->call('nextStep')
-//        ->assertHasNoErrors()
-//        ->emitEvents()->in($wizard);
-//
-//    $wizard->assertSee('Register Guest');
+it('should be able to book a packages as customer', function () {
+    $this->actingAs(User::factory()->customer()->create());
+    $package = Package::first();
+
+    $wizard = Livewire::test(CreateBookingWizard::class, [
+        'packageId' => null,
+    ])
+        ->assertSuccessful()
+        ->assertSee('Choose Tour');
+
+    Livewire::test(ChooseTourStep::class)
+        ->set('tour', 0)
+        ->call('nextStep')
+        ->assertHasErrors()
+        ->set('tour', $package->tour_id)
+        ->call('nextStep')
+        ->assertHasNoErrors()
+        ->emitEvents()->in($wizard);
+
+    $wizard->assertSee('Choose Package');
+
+    Livewire::test(ChoosePackageStep::class)
+        ->set('package', 0)
+        ->call('nextStep')
+        ->assertHasErrors()
+        ->set('package', $package->id)
+        ->call('nextStep')
+        ->assertHasNoErrors()
+        ->emitEvents()->in($wizard);
+
+    $wizard->assertSee('Register Guest');
 //
 //    Livewire::test(RegisterBookingAndGuestStep::class)
 //        ->set('package', $package->id)
@@ -130,43 +130,42 @@ it('should be mountable', function () {
 //        ->emitEvents()->in($wizard);
 //
 //    $wizard->assertSee('Payment');
-//});
+});
 
-//it('should be able to book a packages as staff', function () {
-//    $this->actingAs(User::factory()->staff()->create());
-//    $package = Package::first();
-//
-//    $wizard = Livewire::test(CreateBookingWizard::class, [
-//        'packageId' => null,
-//    ])
-//        ->assertSuccessful()
-//        ->assertSee('Choose Tour');
-//
-//    Livewire::test(ChooseTourStep::class)
-//        ->set('tour', 0)
-//        ->call('nextStep')
-//        ->assertHasErrors()
-//        ->set('tour', $package->tour_id)
-//        ->call('nextStep')
-//        ->assertHasNoErrors()
-//        ->emitEvents()->in($wizard);
-//
-//    $wizard->assertSee('Choose Package');
-//
-//    Livewire::test(ChoosePackageStep::class)
-//        ->set('package', 0)
-//        ->call('nextStep')
-//        ->assertHasErrors()
-//        ->set('package', $package->id)
-//        ->call('nextStep')
-//        ->assertHasNoErrors()
-//        ->emitEvents()->in($wizard);
-//
-//    $wizard->assertSee('Register Guest');
-//
+it('should be able to book a packages as staff', function () {
+    $this->actingAs(User::factory()->staff()->create());
+    $package = Package::first();
+
+    $wizard = Livewire::test(CreateBookingWizard::class, [
+        'packageId' => null,
+    ])
+        ->assertSuccessful()
+        ->assertSee('Choose Tour');
+
+    Livewire::test(ChooseTourStep::class)
+        ->set('tour', 0)
+        ->call('nextStep')
+        ->assertHasErrors()
+        ->set('tour', $package->tour_id)
+        ->call('nextStep')
+        ->assertHasNoErrors()
+        ->emitEvents()->in($wizard);
+
+    $wizard->assertSee('Choose Package');
+
+    Livewire::test(ChoosePackageStep::class)
+        ->set('package', 0)
+        ->call('nextStep')
+        ->assertHasErrors()
+        ->set('package', $package->id)
+        ->call('nextStep')
+        ->assertHasNoErrors()
+        ->emitEvents()->in($wizard);
+
+    $wizard->assertSee('Register Guest');
+
 //    Livewire::test(RegisterBookingAndGuestStep::class)
 //        ->set('package', $package->id)
-//        ->call('updatePricings')
 //        ->set('guests.0.name', '')
 //        ->call('nextStep')
 //        ->assertHasErrors()
@@ -194,21 +193,21 @@ it('should be mountable', function () {
 //
 //    $wizard->assertSee('Billing Information');
 //
-//    Livewire::test(RegisterBillingInfoStep::class)
-//        ->set('billingName', '')
-//        ->call('nextStep')
-//        ->call('validateBilling', 'billingName')
-//        ->assertHasErrors()
-//        ->set('billingPhone', '')
-//        ->call('nextStep')
-//        ->call('validateBilling', 'billingPhone')
-//        ->assertHasErrors()
-//        ->set('billingName', 'Another John Doe')
-//        ->set('billingPhone', '0123456789')
-//        ->call('nextStep')
-//        ->assertHasNoErrors()
-//        ->emitEvents()->in($wizard);
-//
+    Livewire::test(RegisterBillingInfoStep::class)
+        ->set('billingName', '')
+        ->call('nextStep')
+        ->call('validateBilling', 'billingName')
+        ->assertHasErrors()
+        ->set('billingPhone', '')
+        ->call('nextStep')
+        ->call('validateBilling', 'billingPhone')
+        ->assertHasErrors()
+        ->set('billingName', 'Another John Doe')
+        ->set('billingPhone', '0123456789')
+        ->call('nextStep')
+        ->assertHasNoErrors()
+        ->emitEvents()->in($wizard);
+
 //    $wizard->assertSee('Confirm Booking Detail')
 //        ->assertSee($package->tour->name)
 //        ->assertSee($package->depart_time->translatedFormat(config('app.date_format')))
@@ -251,8 +250,8 @@ it('should be mountable', function () {
 //        ->call('nextStep')
 //        ->assertHasNoErrors()
 //        ->emitEvents()->in($wizard);
-//
+
 //    $wizard->assertSee('Booking Paid')
 //        ->assertSee('Download Invoice')
 //        ->assertSee('Download Receipt');
-//});
+});

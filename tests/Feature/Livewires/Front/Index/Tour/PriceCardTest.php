@@ -22,7 +22,7 @@ beforeEach(function () {
 });
 
 it('should be mountable', function () {
-    $tour = Tour::first();
+    $tour = Tour::whereHas('activePackages')->first();
     Livewire::test(PriceCard::class, ['tour' => $tour])
         ->assertSet('tour', $tour)
         ->assertSet('packageId', $tour->activePackages->first()->id)
