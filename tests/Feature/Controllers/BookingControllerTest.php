@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Booking\CreateBookingWizard;
 use App\Models\Booking;
+use App\Models\Package;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
@@ -39,7 +40,7 @@ it('should return create view', function () {
 
 it('should return create view and show Register Guest Component', function () {
     $this
-        ->get(route('bookings.create', ['package' => 1]))
+        ->get(route('bookings.create', ['package' => Package::inRandomOrder()->first()->id]))
         ->assertViewIs('smartTT.booking.create')
         ->assertSeeLivewire(CreateBookingWizard::class)
         ->assertSee('Register Guest');
