@@ -52,7 +52,7 @@ class SuggestTourConversation extends Conversation
     {
         $this->ask('Can i know how much is your budget per person?', function (Answer $answer) {
             $budget = $answer->getText();
-            if (!is_numeric($budget)) {
+            if (! is_numeric($budget)) {
                 $this->say('Sorry, I didn\'t understand that. Please enter a number.');
                 $this->askPriceRange();
             } else {
@@ -92,7 +92,6 @@ class SuggestTourConversation extends Conversation
                 $this->giveSuggestion();
             }
         });
-
     }
 
     private function giveSuggestion()
@@ -116,6 +115,7 @@ class SuggestTourConversation extends Conversation
 
         if ($tours->isEmpty()) {
             $this->say('Sorry, we don\'t have any tour for you');
+
             return;
         }
 
