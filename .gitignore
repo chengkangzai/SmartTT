@@ -2,7 +2,7 @@
 /storage/*.key
 /storage/app/
 /storage/media-library/
-/storage/botman/
+/storage/botman
 /vendor
 /public/adminer/
 /public/storage/
