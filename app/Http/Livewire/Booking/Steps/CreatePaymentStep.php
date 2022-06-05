@@ -43,8 +43,6 @@ class CreatePaymentStep extends StepComponent
     public string $defaultCurrency;
     public array $guests;
     public int $bookingId;
-//    /** @var PackagePricing */
-//    public $pricings;
 
     /** @var Booking */
     public $booking;
@@ -65,7 +63,6 @@ class CreatePaymentStep extends StepComponent
         $this->billingPhone = $state['register-billing-info-step']['billingPhone'] ?? '';
         $this->totalPrice = $state['register-booking-and-guest-step']['totalPrice'] ?? 0;
 
-//        $this->pricings = PackagePricing::whereIn('id', collect($this->guests)?->pluck('pricing'))->get();
         $this->getReadyForPayment();
     }
 
