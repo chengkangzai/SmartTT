@@ -138,6 +138,19 @@ $language = $setting->default_language;
     </div>
     @livewireScripts
     <script src="{{ asset('js/alpine.js') }}"></script>
+    <script>
+        var botmanWidget = {
+            aboutText: '{{ __('Chat with us') }}',
+            placeholderText: '{{ __('Send a message ...') }}',
+            introMessage: '✋' +
+                '{{ __('Hi! Im a chatbot. Im here to help you find the best place to visit in our package tour. What can I do for you?') }}' +
+                '🤖',
+            bubbleAvatarUrl: 'https://botman.io/img/logo.png',
+            userId: '{{ auth()->user()?->id ?? ''}}',
+            aboutLink: '{{ route('front.index') }}'
+        };
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     @stack('script')
 </body>
 

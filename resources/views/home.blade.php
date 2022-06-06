@@ -83,15 +83,15 @@
                     @forelse($logs as $log)
                         <tr>
                             <td> {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat(config('app.date_format')) }} </td>
-                            @if(in_array($log->subject_type, ['created','updated','deleted']))
-                                <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
-                            @else
-                                <td>{{$log->subject_type}}</td>
-                            @endif
+                            <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
                             <td> {{ $log->causer->name ?? __('System') }}
                                 {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                             </td>
+                            @if(in_array($log->description, ['created','updated','deleted']))
                             <td> {{ trans('constant.activity.' . $log->description) }} </td>
+                            @else
+                                <td>{{$log->description}}</td>
+                            @endif
                             <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
                             </td>
                             <td> {{ $logData->find($log->subject_id)?->package?->tour?->name ?? '' }} </td>

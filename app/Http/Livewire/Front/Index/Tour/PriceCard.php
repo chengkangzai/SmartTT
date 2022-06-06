@@ -27,7 +27,7 @@ class PriceCard extends Component
         $this->cheapestPackagePricing = $tour
             ->activePackages
             ->map(function ($package) {
-                return $package->pricings->sortBy('price')->first();
+                return $package->activePricings->sortBy('price')->first();
             })
             ->sortBy('price')
             ->first();

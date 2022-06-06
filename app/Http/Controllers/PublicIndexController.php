@@ -15,7 +15,7 @@ class PublicIndexController extends Controller
     {
         $tour->load([
             'activePackages:id,tour_id,depart_time,is_active',
-            'activePackages.pricings:id,price,name,package_id,available_capacity',
+            'activePackages.activePricings:id,price,name,package_id,available_capacity',
             'activePackages.flight:id,departure_airport_id,arrival_airport_id,airline_id',
             'activePackages.flight.airline:id,country_id,name',
             'description',

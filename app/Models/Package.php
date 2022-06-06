@@ -62,6 +62,13 @@ class Package extends Model
         return $this->hasMany(PackagePricing::class)->orderBy('price');
     }
 
+    public function activePricings(): HasMany
+    {
+        return $this->hasMany(PackagePricing::class)
+            ->orderBy('price')
+            ->where('is_active', true);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable()->logOnlyDirty();
