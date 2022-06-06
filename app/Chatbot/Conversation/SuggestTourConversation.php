@@ -3,6 +3,7 @@
 namespace App\Chatbot\Conversation;
 
 use App\Models\Package;
+use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -41,9 +42,9 @@ class SuggestTourConversation extends Conversation
                 $this->bot->userStorage()->save([
                     'category' => $category,
                 ]);
-                $this->askPriceRange();
                 $this->bot->types();
                 $this->say($this->bot->userStorage()->get('category') . '? Nice choice !');
+                $this->askPriceRange();
             }
         });
     }
@@ -111,6 +112,7 @@ class SuggestTourConversation extends Conversation
                 $query->where('price', '<=', $budget * 100);
             })
             ->limit(3)
+            ->inRandomOrder()
             ->get();
 
         if ($tours->isEmpty()) {
@@ -119,8 +121,9 @@ class SuggestTourConversation extends Conversation
             return;
         }
 
+        $default_currency_symbol = app(GeneralSetting::class)->default_currency_symbol;
         $this->say('Here are my suggestions, you can go with any of them');
-        $tours->each(function (Tour $tour) {
+        $tours->each(function (Tour $tour) use ($default_currency_symbol) {
             $startingPrice = $tour
                 ->activePackages
                 ->map(function ($package) {
@@ -130,7 +133,7 @@ class SuggestTourConversation extends Conversation
                 ->first();
 
             $attachment = new Image($tour->getFirstMediaUrl('thumbnail'));
-            $message = OutgoingMessage::create($tour->name . ', starting from ' . number_format($startingPrice->price, 2) . ' per person')
+            $message = OutgoingMessage::create($tour->name . ', starting from ' . $default_currency_symbol . number_format($startingPrice->price, 2) . ' per person')
                 ->withAttachment($attachment);
 
             $this->bot->typesAndWaits(2);
