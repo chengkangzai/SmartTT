@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Chatbot\Conversation\SuggestTourConversation;
 use BotMan\BotMan\BotMan;
+use Dialogflow2\DialogFlowV2;
 
 class BotManController extends Controller
 {
@@ -12,15 +13,12 @@ class BotManController extends Controller
         /** @var BotMan $botman */
         $botman = app('botman');
 
-        $botman->hears('.*Choose Tour.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Decide Tour.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Pick Tour.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Suggest Tour.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Choose Destination.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Decide Destination.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Pick Destination.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Suggest Destination.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
-        $botman->hears('.*Where to go.*', fn ($bot) => $bot->startConversation(new SuggestTourConversation()));
+        $dialogFlow = DialogFlowV2::create()->listenForAction();
+        $botman->middleware->received($dialogFlow);
+
+        $botman->hears('suggest_tour', function ($bot) {
+            $bot->startConversation(new SuggestTourConversation());
+        })->middleware($dialogFlow);
 
         $botman->fallback(function (BotMan $bot) {
             $bot->reply('Hello!, I\'m not sure what you mean. Try asking me something else.');
