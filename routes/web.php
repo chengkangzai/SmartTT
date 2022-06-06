@@ -34,7 +34,7 @@ Route::stripeWebhooks('/webhook');
 
 Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
-    Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
+    Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->name('botman');
 
     Route::get('tours/search', SearchTourPage::class)->name('search');
     Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
