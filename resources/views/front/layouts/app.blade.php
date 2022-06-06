@@ -146,7 +146,7 @@ $language = $setting->default_language;
                 '{{ __('Hi! Im a chatbot. Im here to help you find the best place to visit in our package tour. What can I do for you?') }}' +
                 '🤖',
             bubbleAvatarUrl: 'https://botman.io/img/logo.png',
-            userId: {{ auth()->user()?->id }},
+            userId: '{{ auth()->user()?->id ?? ''}}',
             aboutLink: '{{ route('front.index') }}'
         };
     </script>
