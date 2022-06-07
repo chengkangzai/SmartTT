@@ -58,6 +58,8 @@
                                     <th>{{ __('Tour Code') }}</th>
                                     <th>{{ __('Destination') }}</th>
                                     <th>{{ __('Category') }}</th>
+                                    <th>{{__('Days')}}</th>
+                                    <th>{{__('Nights')}}</th>
                                     <th>{{ __('Active') }}</th>
                                     <th>{{ __('Itinerary') }}</th>
                                 </tr>
@@ -75,6 +77,8 @@
                                         </ul>
                                     </td>
                                     <td>{{ $tour->category }}</td>
+                                    <td>{{$tour->days}}</td>
+                                    <td>{{$tour->nights}}</td>
                                     <td>{{ $tour->is_active ? __('Yes') : __('No') }}</td>
                                     <td>
                                         <a href="{{ $tour->getFirstMedia('itinerary')?->getUrl() ?? '#' }}"
