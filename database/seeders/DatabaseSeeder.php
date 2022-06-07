@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             UserRoleSeeder::class,
             CountrySeeder::class,
-            TourSeeder::class,
             AirlineSeeder::class,
             AirportSeeder::class,
             FlightSeeder::class,
+            TourSeeder::class,
             PackageSeeder::class,
             BookingSeeder::class
         ]);
