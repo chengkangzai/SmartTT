@@ -5,6 +5,7 @@ use App\Http\Controllers\BotManController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\MSOauthController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
@@ -46,6 +47,11 @@ Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('msOAuth', [MSOauthController::class, 'signin'])->name('msOAuth.signin');
+    Route::get('msOAuth/callback', [MSOauthController::class, 'callback'])->name('msOAuth.callback');
+    Route::get('msOAuth/disconnect', [MSOauthController::class, 'disconnect'])->name('msOAuth.disconnect');
+
     Route::post('select2/getUserWithoutTheRole', [Select2Controller::class, 'getUserWithoutTheRole'])->name('select2.role.getUser');
     Route::get('select2/getAirports', [Select2Controller::class, 'getAirports'])->name('select2.flights.getAirports');
 
