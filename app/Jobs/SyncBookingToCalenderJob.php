@@ -49,7 +49,7 @@ class SyncBookingToCalenderJob implements ShouldQueue
     {
         try {
             $events = $this->getEvents();
-            $bookingEvents = $this->formatBookingEvents($this->booking);
+            $bookingEvents = $this->formatBookingEvents();
             $eventExist = $this->checkEventExist($events);
             if (!$eventExist) {
                 $this->createEvent($bookingEvents);
@@ -84,8 +84,9 @@ class SyncBookingToCalenderJob implements ShouldQueue
     }
 
     #[ArrayShape(['subject' => "", 'attendees' => "", 'start' => "array", 'end' => "array", 'body' => "string[]"])]
-    private function formatBookingEvents(Booking $booking): array
+    private function formatBookingEvents(): array
     {
+        $booking = $this->booking;
         return [
             'subject' => $booking->package->tour->name,
             'attendees' => [[
