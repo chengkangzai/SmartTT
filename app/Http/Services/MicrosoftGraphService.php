@@ -32,10 +32,7 @@ class MicrosoftGraphService
     {
         $accessToken = $this->tokenService->getAccessToken($user);
 
-        // Create a Graph client
-        $graph = new MicrosoftGraph();
-        $graph->setAccessToken($accessToken);
-
-        return $graph;
+        return (new MicrosoftGraph())
+            ->setAccessToken($accessToken);
     }
 }
