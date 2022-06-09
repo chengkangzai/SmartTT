@@ -32,7 +32,7 @@ class TokenService
             return '';
         }
 
-        if (! $token->tokenExpires >= time() + 300) {
+        if (! $token->expired()) {
             return $token->accessToken;
         }
 
