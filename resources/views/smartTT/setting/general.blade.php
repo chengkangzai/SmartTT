@@ -42,7 +42,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="default_timezone">{{ trans('setting.general.default_timezone') }}</label>
-                    <select name="default_timezone" id="default_timezone" class="form-select">
+                    <select name="default_timezone" id="default_timezone" class="form-select" multiple>
                         @foreach ($viewBag['timezones'] as $timezone)
                             <option value="{{ $timezone }}" @selected(old('default_timezone', $setting->default_timezone->getName()) == $timezone)>
                                 {{ $timezone }}
@@ -66,7 +66,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="default_country">{{ trans('setting.general.default_country') }}</label>
-                    <select name="default_country" id="default_country" class="form-select">
+                    <select name="default_country" id="default_country" class="form-select" multiple>
                         @foreach ($viewBag['countries'] as $country)
                             <option value="{{ $country->name }}" @selected(old('default_country', $setting->default_country) == $country->name)>
                                 {{ $country->name }}
@@ -113,3 +113,12 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#default_timezone').select2();
+            $('#default_country').select2();
+        });
+    </script>
+@endpush

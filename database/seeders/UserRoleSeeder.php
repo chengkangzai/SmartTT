@@ -49,6 +49,7 @@ class UserRoleSeeder extends Seeder
                 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
                 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
                 'View User',
+                'Connect MS OAuth', 'Sync booking to MS Calendar'
             ])
             ->users()
             ->attach(User::where('id', ">", 4)->take(3)->get());
@@ -58,6 +59,7 @@ class UserRoleSeeder extends Seeder
                 'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
                 'Create Booking', 'View Booking', 'Edit Booking',
                 'View Payment', 'Create Payment',
+                'Connect MS OAuth', 'Sync booking to MS Calendar'
             ])
             ->users()
             ->attach(User::where('id', ">", 7)->take(3)->get());

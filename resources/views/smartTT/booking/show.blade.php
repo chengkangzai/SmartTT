@@ -34,6 +34,11 @@
                         {{ __('Audit Trail') }}
                     </a>
                 @endcan
+                @role('Customer')
+                    <a href="{{ route('bookings.sync', $booking) }}" class="btn btn-outline-primary">
+                        {{ __('Sync this booking to my calendar') }}
+                    </a>
+                @endrole
             </div>
         </div>
         <div class="card-body">
@@ -132,7 +137,8 @@
                 @foreach ($booking->guests as $guest)
                     <tr>
                         <td>{{ $guest->name }}</td>
-                        <td>{{ number_format($guest->packagePricing?->price ?: $bookingSetting->charge_per_child, 2) }}
+                        <td>
+                            {{ number_format($guest->packagePricing?->price ?: $bookingSetting->charge_per_child, 2) }}
                         </td>
                         <td>{{ $guest->packagePricing->name ?? 'N/A' }}</td>
                         <td>{{ $guest->is_child ? 'Child' : 'Adult' }}</td>
@@ -157,11 +163,9 @@
                     </tr>
                     <tr>
                         <td>
-
                             <a class="btn btn-outline-primary" href="{{ route('tours.show', $booking->package->tour) }}">
                                 {{ $booking->package->tour->tour_code }}
                             </a>
-
                         </td>
                         <td>
                             <ul>

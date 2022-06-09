@@ -2,7 +2,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-home') }}"></use>
             </svg>
             {{ __('Dashboard') }}
         </a>

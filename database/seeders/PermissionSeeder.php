@@ -31,6 +31,15 @@ class PermissionSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        $temp->push([
+            'name' => 'Connect MS OAuth',
+            'guard_name' => 'web',
+        ]);
+
+        $temp->push([
+            'name' => 'Sync booking to MS Calendar',
+            'guard_name' => 'web',
+        ]);
 
         DB::table('permissions')->insert($temp->toArray());
     }
