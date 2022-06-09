@@ -116,7 +116,7 @@
 
 @push('script')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#default_timezone').select2();
             $('#default_country').select2();
         });
