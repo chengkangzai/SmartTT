@@ -68,12 +68,13 @@ class BookingController extends Controller
 
     public function sync(Booking $booking)
     {
-        if (!auth()->user()->msOauth()->exists()) {
+        if (! auth()->user()->msOauth()->exists()) {
             return redirect()->to(route('profile.show'))
                 ->withErrors(__('Please connect your Microsoft account first'));
         }
 
         SyncBookingToCalenderJob::dispatch($booking, auth()->user());
+
         return redirect()->route('bookings.show', $booking)
             ->with('success', __('We are syncing your booking to your calendar, please give us a few minutes to finish'));
     }

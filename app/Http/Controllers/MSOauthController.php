@@ -41,11 +41,11 @@ class MSOauthController extends Controller
         $request->session()->forget('oauthState');
         $providedState = $request->query('state');
 
-        if (!isset($expectedState)) {
+        if (! isset($expectedState)) {
             return redirect(route('profile.show'));
         }
 
-        if (!isset($providedState) || $expectedState != $providedState) {
+        if (! isset($providedState) || $expectedState != $providedState) {
             return redirect(route('profile.show'))
                 ->with('error', 'Invalid auth state')
                 ->with('errorDetail', 'The provided auth state did not match the expected value');
