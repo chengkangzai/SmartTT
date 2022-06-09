@@ -87,6 +87,7 @@ class SyncBookingToCalenderJob implements ShouldQueue
     private function formatBookingEvents(): array
     {
         $booking = $this->booking;
+
         return [
             'subject' => $booking->package->tour->name,
             'attendees' => [[
