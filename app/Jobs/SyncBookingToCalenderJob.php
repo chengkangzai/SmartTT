@@ -51,7 +51,7 @@ class SyncBookingToCalenderJob implements ShouldQueue
             $events = $this->getEvents();
             $bookingEvents = $this->formatBookingEvents($this->booking);
             $eventExist = $this->checkEventExist($events);
-            if (!$eventExist) {
+            if (! $eventExist) {
                 $this->createEvent($bookingEvents);
             }
         } catch (GuzzleException|GraphException|Exception $e) {
@@ -90,9 +90,9 @@ class SyncBookingToCalenderJob implements ShouldQueue
             'subject' => $booking->package->tour->name,
             'attendees' => [[
                 'emailAddress' => [
-                    'address' => $this->user->email
+                    'address' => $this->user->email,
                 ],
-                'type' => 'required'
+                'type' => 'required',
             ]],
             'start' => [
                 'dateTime' => $booking->package->depart_time->toIso8601String(),
@@ -130,6 +130,7 @@ class SyncBookingToCalenderJob implements ShouldQueue
                 break;
             }
         }
+
         return $isEventCreatedBefore;
     }
 
