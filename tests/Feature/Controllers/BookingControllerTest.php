@@ -107,3 +107,28 @@ it('should destroy a booking', function () {
 
     assertSoftDeleted($booking);
 });
+
+it('will redirect user to profile page when user not linked to ms', function () {
+    $this->get(route('bookings.sync', Booking::first()))
+        ->assertRedirect(route('profile.show'))
+        ->assertSessionHasErrors();
+});
+
+it('will tell user that system will sync if the user is linked to ms', function () {
+    $user = User::factory()
+        ->afterCreating(function (User $user) {
+            $user->msOauth()->create([
+                'accessToken' => 'accessToken',
+                'refreshToken' => 'refreshToken',
+                'tokenExpires' => time() + 3600,
+                'userName' => 'userName',
+                'userEmail' => $user->email,
+                'userTimeZone' => 'userTimeZone',
+            ]);
+        })
+        ->create();
+    $this->actingAs($user)
+        ->get(route('bookings.sync', Booking::first()))
+        ->assertRedirect(route('bookings.show', Booking::first()))
+        ->assertSessionHas('success');
+});
