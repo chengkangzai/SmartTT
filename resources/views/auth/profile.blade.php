@@ -77,42 +77,44 @@
             </div>
         </form>
     </div>
-    <div class="card">
-        <div class="card-header">
-            {{ __('Connected accounts') }}
-        </div>
-        <div class="card-body">
-            <div class="list-group list-group-flush">
-                <div class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="my-auto">
-                            <svg class="icon">
-                                <use xlink:href="{{ asset('icons/brand.svg#cib-microsoft') }}"></use>
-                            </svg>
-                            {{__('Microsoft')}}
-                            <span class="my-auto">
+    @can('Connect MS OAuth')
+        <div class="card">
+            <div class="card-header">
+                {{ __('Connected accounts') }}
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="my-auto">
+                                <svg class="icon">
+                                    <use xlink:href="{{ asset('icons/brand.svg#cib-microsoft') }}"></use>
+                                </svg>
+                                {{__('Microsoft')}}
+                                <span class="my-auto">
                                 @if(auth()->user()->msOauth()->exists())
-                                    <span class="badge bg-success">{{__('Connected')}}</span>
-                                @else
-                                    <span class="badge bg-success">{{__('Not connected')}}</span>
-                                @endif
+                                        <span class="badge bg-success">{{__('Connected')}}</span>
+                                    @else
+                                        <span class="badge bg-secondary">{{__('Not connected')}}</span>
+                                    @endif
                             </span>
-                        </p>
-                        <div class="my-auto flex-grow">
-                            @if(auth()->user()->msOauth()->exists())
-                                <a href="{{ route('msOAuth.disconnect') }}"
-                                   class="btn btn-sm btn-danger rounded-pill">
-                                    {{ __('Disconnect') }}
-                                </a>
-                            @else
-                                <a href="{{ route('msOAuth.signin') }}" class="btn btn-sm btn-success rounded-pill">
-                                    {{ __('Connect') }}
-                                </a>
-                            @endif
+                            </p>
+                            <div class="my-auto flex-grow">
+                                @if(auth()->user()->msOauth()->exists())
+                                    <a href="{{ route('msOAuth.disconnect') }}"
+                                       class="btn btn-sm btn-danger rounded-pill">
+                                        {{ __('Disconnect') }}
+                                    </a>
+                                @else
+                                    <a href="{{ route('msOAuth.signin') }}" class="btn btn-sm btn-success rounded-pill">
+                                        {{ __('Connect') }}
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endcan
 @endsection
