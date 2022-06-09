@@ -88,9 +88,12 @@ class SyncBookingToCalenderJob implements ShouldQueue
     {
         return [
             'subject' => $booking->package->tour->name,
-            'attendees' => [
-                $this->user->email
-            ],
+            'attendees' => [[
+                'emailAddress' => [
+                    'address' => $this->user->email
+                ],
+                'type' => 'required'
+            ]],
             'start' => [
                 'dateTime' => $booking->package->depart_time->toIso8601String(),
                 'timeZone' => 'Asia/Kuala_Lumpur',
