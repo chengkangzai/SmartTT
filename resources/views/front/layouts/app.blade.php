@@ -140,6 +140,7 @@ $language = $setting->default_language;
     <script src="{{ asset('js/alpine.js') }}"></script>
     <script>
         var botmanWidget = {
+            title:'{{ __('Chat with us') }}',
             aboutText: '{{ __('Chat with us') }}',
             placeholderText: '{{ __('Send a message ...') }}',
             introMessage: '✋' +
