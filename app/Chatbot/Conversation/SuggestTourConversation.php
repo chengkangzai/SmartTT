@@ -33,7 +33,7 @@ class SuggestTourConversation extends Conversation
             })
             ->toArray();
 
-        $question = Question::create('Which of the following match your taste more ?')
+        $question = Question::create(__('Which of the following match your taste more ?'))
             ->addButtons($buttons);
 
         $this->ask($question, function (Answer $answer) {
@@ -43,7 +43,9 @@ class SuggestTourConversation extends Conversation
                     'category' => $category,
                 ]);
                 $this->bot->types();
-                $this->say($this->bot->userStorage()->get('category') . '? Nice choice !');
+                $this->say(__(':name ? Nice choice!', [
+                    'name' => $this->bot->userStorage()->get('category'),
+                ]));
                 $this->askPriceRange();
             }
         });
@@ -51,10 +53,10 @@ class SuggestTourConversation extends Conversation
 
     private function askPriceRange()
     {
-        $this->ask('Can i know how much is your budget per person?', function (Answer $answer) {
+        $this->ask(__('Can i know how much is your budget per person?'), function (Answer $answer) {
             $budget = $answer->getText();
-            if (! is_numeric($budget)) {
-                $this->say('Sorry, I didn\'t understand that. Please enter a number.');
+            if (!is_numeric($budget)) {
+                $this->say(__('Sorry, I didnt understand that. Please enter a number.'));
                 $this->askPriceRange();
             } else {
                 $this->bot->userStorage()->save([
@@ -76,13 +78,13 @@ class SuggestTourConversation extends Conversation
             })
             ->pluck('depart_time')
             ->map(function (Carbon $date) {
-                return Button::create($date->format('F'))->value($date->format('m'));
+                return Button::create($date->translatedFormat('F'))->value($date->format('m'));
             })
             ->unique()
-            ->add(Button::create('Any Time')->value('0'))
+            ->add(Button::create(__('Any Time'))->value('0'))
             ->toArray();
 
-        $question = Question::create('When are you free?')
+        $question = Question::create(__('When are you free?'))
             ->addButtons($buttons);
 
         $this->ask($question, function (Answer $answer) {
@@ -116,13 +118,13 @@ class SuggestTourConversation extends Conversation
             ->get();
 
         if ($tours->isEmpty()) {
-            $this->say('Sorry, we don\'t have any tour for you');
+            $this->say(__('Sorry, I could not find any tours matching your criteria.'));
 
             return;
         }
 
         $default_currency_symbol = app(GeneralSetting::class)->default_currency_symbol;
-        $this->say('Here are my suggestions, you can go with any of them');
+        $this->say(__('Here are my suggestions, you can go with any of them'));
         $tours->each(function (Tour $tour) use ($default_currency_symbol) {
             $startingPrice = $tour
                 ->activePackages
@@ -133,7 +135,11 @@ class SuggestTourConversation extends Conversation
                 ->first();
 
             $attachment = new Image($tour->getFirstMediaUrl('thumbnail'));
-            $message = OutgoingMessage::create($tour->name . ', starting from ' . $default_currency_symbol . number_format($startingPrice->price, 2) . ' per person')
+            $message = OutgoingMessage::create(
+                __(':name , starting from :price per person', [
+                    'name' => $tour->name,
+                    'price' => $default_currency_symbol . number_format($startingPrice->price, 2)
+                ]))
                 ->withAttachment($attachment);
 
             $this->bot->typesAndWaits(2);
