@@ -13,12 +13,45 @@ use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class SuggestTourConversation extends Conversation
 {
     public function run()
     {
         $this->bot->types();
+        $extra = $this->bot->getMessage()->getExtras();
+        $country = $extra['apiParameters']['country'];
+        $budget = $extra['apiParameters']['budget'];
+        $city = $extra['apiParameters']['geo-city'];
+
+        if ($country || $budget || $city) {
+            $tours = Tour::query()
+                ->with(['packages', 'activePackages','media','countries'])
+                ->when($country, function (Builder $query) use ($country) {
+                    return $query->whereHas('countries', function (Builder $query) use ($country) {
+                        return $query->where('name', 'LIKE', "%$country%");
+                    });
+                })
+                ->when($budget, function (Builder $query) use ($budget) {
+                    return $query->whereHas('activePackages', function (Builder $query) use ($budget) {
+                        return $query->whereHas('activePricings', function (Builder $query) use ($budget) {
+                            return $query->where('price', '<=', $budget * 100);
+                        });
+                    });
+                })
+                ->when($city, function (Builder $query) use ($city) {
+                    return $query->where('name', 'like', "%$city%");
+                })
+                ->limit(3)
+                ->inRandomOrder()
+                ->get();
+
+            $this->printTours($tours);
+
+            return;
+        }
+
         $this->askCategory();
     }
 
@@ -106,17 +139,22 @@ class SuggestTourConversation extends Conversation
         $tours = Tour::query()
             ->where('category', str($category)->lower())
             ->when($month != '0', function ($query) use ($month) {
-                $query->whereHas('activePackages', function (Builder $query) use ($month) {
+                return $query->whereHas('activePackages', function (Builder $query) use ($month) {
                     return $query->whereMonth('depart_time', $month);
                 });
             })
             ->whereHas('activePackages.activePricings', function (Builder $query) use ($budget) {
-                $query->where('price', '<=', $budget * 100);
+                return $query->where('price', '<=', $budget * 100);
             })
             ->limit(3)
             ->inRandomOrder()
             ->get();
 
+        $this->printTours($tours);
+    }
+
+    private function printTours(Collection $tours): void
+    {
         if ($tours->isEmpty()) {
             $this->say(__('Sorry, I could not find any tours matching your criteria.'));
 
@@ -142,7 +180,7 @@ class SuggestTourConversation extends Conversation
                 ]))
                 ->withAttachment($attachment);
 
-            $this->bot->typesAndWaits(2);
+            $this->bot->typesAndWaits(1);
             $this->bot->reply($message);
         });
     }
