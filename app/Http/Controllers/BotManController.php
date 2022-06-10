@@ -27,8 +27,9 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
 
         $botman->fallback(function (BotMan $bot) {
-            $bot->reply('Hello!, Im not sure what you mean. Try asking me something else.');
-            $bot->reply('You can ask me to suggest a tour, or to suggest a destination.');
+            $bot->types();
+            $bot->reply(__('Hello!, Im not sure what you mean. Try asking me something else.'));
+            $bot->reply(__('You can ask me to suggest a tour, or to suggest a destination.').'😉');
         });
 
         $botman->listen();
