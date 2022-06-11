@@ -40,9 +40,11 @@ class BookingSeeder extends Seeder
                             $payment->save();
                         }
                     })
-                    ->create([
+                    ->make([
                         'booking_id' => $booking->id,
                     ]);
+
+                $booking->payment()->saveMany($payments);
                 if (app()->environment() != 'testing') {
                     foreach ($payments as $payment) {
                         app(GenerateInvoiceAction::class)->dispatch($payment);
