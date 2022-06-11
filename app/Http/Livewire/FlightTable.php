@@ -13,7 +13,6 @@ class FlightTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
         $this->setTableAttributes([
             'default' => true,
             'class' => 'table table-hover',
@@ -33,8 +32,8 @@ class FlightTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__("ID"), "id")
-                ->sortable(),
+            Column::make('', "id")
+                ->format(fn() => ''),
             Column::make(__("Departure Date"), "departure_date")
                 ->format(fn($_, Flight $row) => $row->departure_date->translatedFormat(config('app.date_format')))
                 ->sortable(),
@@ -62,5 +61,14 @@ class FlightTable extends DataTableComponent
                 ])
                 ->hideIf(!auth()->user()->can('Edit Flight'))
         ];
+    }
+
+    public function deleteSelected()
+    {
+        foreach ($this->getSelected() as $item) {
+            FLight::find($item)->delete();
+        }
+        $this->clearSelected();
+        $this->emit('refreshDatatable');
     }
 }
