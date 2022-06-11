@@ -24,8 +24,6 @@ class PackageTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
-
         $this->setTableAttributes([
             'default' => true,
             'class' => 'table table-hover',
