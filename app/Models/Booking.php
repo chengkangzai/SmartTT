@@ -38,11 +38,7 @@ class Booking extends Model
 
     public function isFullPaid(): bool
     {
-        $amounts = $this->payment
-            ->filter(fn (Payment $payment) => $payment->status == Payment::STATUS_PAID)
-            ->sum('amount');
-
-        return $amounts >= $this->total_price;
+        return $this->getRemaining() <= 0;
     }
 
     public function getRemaining()
