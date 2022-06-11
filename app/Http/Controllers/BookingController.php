@@ -17,7 +17,7 @@ class BookingController extends Controller
     public function index(): Factory|View|Application
     {
         $user = auth()->user();
-        abort_unless($user->can('View Booking'), 403);
+        abort_unless($user->can('Access Booking'), 403);
 
         $role = $user->roles()->first()->name;
         $bookings = Booking::query()

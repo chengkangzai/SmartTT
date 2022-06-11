@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('View User'), 403);
+        abort_unless(auth()->user()->can('Access User'), 403);
         $users = User::orderByDesc('id')->paginate(10);
 
         return view('smartTT.user.index', compact('users'));

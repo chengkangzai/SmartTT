@@ -19,7 +19,7 @@ class FlightController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('View Flight'), 403);
+        abort_unless(auth()->user()->can('Access Flight'), 403);
         $flights = Flight::with(['airline:id,name', 'depart_airport:id,IATA', 'arrive_airport:id,IATA'])->orderByDesc('id')->paginate(10);
 
         return view('smartTT.flight.index', compact('flights'));

@@ -18,7 +18,7 @@ class RoleController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_unless(auth()->user()->can('View Role'), 403);
+        abort_unless(auth()->user()->can('Access Role'), 403);
         $roles = Role::paginate(10);
 
         return view('smartTT.role.index', compact('roles'));

@@ -19,7 +19,7 @@ class PackageController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        abort_unless(auth()->user()->can('View Package'), 403);
+        abort_unless(auth()->user()->can('Access Package'), 403);
         $role = auth()->user()->roles()->first()->name;
         $packages = Package::with('tour', 'flight.airline:id,name', 'pricings')
             ->when($role === 'Customer', fn ($q) => $q->active())
