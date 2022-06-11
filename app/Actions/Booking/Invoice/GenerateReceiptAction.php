@@ -13,7 +13,10 @@ use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateReceiptAction extends InvoiceAction implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public function handle(): Payment
     {
@@ -50,6 +53,7 @@ class GenerateReceiptAction extends InvoiceAction implements ShouldQueue
             throw new Exception('Payment is not paid');
         }
         $this->payment = $payment;
+
         return $this->handle();
     }
 }
