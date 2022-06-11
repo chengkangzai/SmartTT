@@ -5,28 +5,12 @@ use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\GeneralSetting;
 use App\Models\User;
-use Database\Seeders\AirlineSeeder;
-use Database\Seeders\AirportSeeder;
-use Database\Seeders\BookingSeeder;
-use Database\Seeders\CountrySeeder;
-use Database\Seeders\FlightSeeder;
-use Database\Seeders\PackageSeeder;
-use Database\Seeders\PermissionSeeder;
-use Database\Seeders\TourSeeder;
-use Database\Seeders\UserRoleSeeder;
+use Database\Seeders\DatabaseSeeder;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed([
-        PermissionSeeder::class,
-        UserRoleSeeder::class,
-        CountrySeeder::class,
-        TourSeeder::class,
-        AirlineSeeder::class,
-        AirportSeeder::class,
-        FlightSeeder::class,
-        PackageSeeder::class,
-        BookingSeeder::class,
+        DatabaseSeeder::class,
     ]);
 });
 

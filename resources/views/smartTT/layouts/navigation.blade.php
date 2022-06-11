@@ -8,6 +8,7 @@
         </a>
     </li>
 
+    @can('Access Tour')
     <li class="nav-item">
         <a class="nav-link {{ request()->is('tours*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
             <svg class="nav-icon">
@@ -16,7 +17,9 @@
             {{ __('Tour Management') }}
         </a>
     </li>
+    @endcan
 
+    @can('Access Package')
     <li class="nav-item">
         <a class="nav-link {{ request()->is('package*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
             <svg class="nav-icon">
@@ -25,7 +28,9 @@
             {{ __('Package Management') }}
         </a>
     </li>
+    @endcan
 
+    @can('Access Flight')
     <li class="nav-item">
         <a class="nav-link {{ request()->is('flights*') ? 'active' : '' }}" href="{{ route('flights.index') }}">
             <svg class="nav-icon">
@@ -34,7 +39,9 @@
             {{ __('Flight Management') }}
         </a>
     </li>
+    @endcan
 
+    @can('Access Booking')
     <li class="nav-item">
         <a class="nav-link {{ request()->is('bookings*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
             <svg class="nav-icon">
@@ -43,8 +50,9 @@
             {{ __('Booking Management') }}
         </a>
     </li>
+    @endcan
 
-    @role('Super Admin|Manager')
+    @can('Access User')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                 <svg class="nav-icon">
@@ -53,7 +61,9 @@
                 {{ __('Users') }}
             </a>
         </li>
+    @endcan
 
+    @can('Access Role')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('roles/*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
                 <svg class="nav-icon">
@@ -62,9 +72,9 @@
                 {{ __('Role Management') }}
             </a>
         </li>
-    @endrole
+    @endcan
 
-    @role('Super Admin|Manager')
+    @can('Access Setting')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('settings/*') ? 'active' : '' }}"
                 href="{{ route('settings.index') }}">
@@ -74,7 +84,7 @@
                 {{ __('Settings') }}
             </a>
         </li>
-    @endrole
+    @endcan
 
 
     <li class="nav-item">

@@ -20,6 +20,7 @@ class TourController extends Controller
 {
     public function index(): Factory|View|Application
     {
+        abort_if(! auth()->user()->can('Access Tour'), 403);
         $role = auth()->user()->roles()->first()->name;
         $tours = Tour::with('countries')
             ->when($role === 'Customer', fn ($q) => $q->active())

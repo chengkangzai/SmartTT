@@ -34,11 +34,11 @@
                         {{ __('Audit Trail') }}
                     </a>
                 @endcan
-                @role('Customer')
+                @can('Sync booking to MS Calendar')
                     <a href="{{ route('bookings.sync', $booking) }}" class="btn btn-outline-primary">
                         {{ __('Sync this booking to my calendar') }}
                     </a>
-                @endrole
+                @endcan
             </div>
         </div>
         <div class="card-body">

@@ -17,11 +17,11 @@ class BookingController extends Controller
     public function index(): Factory|View|Application
     {
         $user = auth()->user();
-        abort_unless($user->can('View Booking'), 403);
+        abort_unless($user->can('Access Booking'), 403);
 
         $role = $user->roles()->first()->name;
         $bookings = Booking::query()
-            ->when($role === 'Customer', fn ($q) => $q->active()->where('user_id', $user->id))
+            ->when($role === 'Customer', fn ($q) => $q->where('user_id', $user->id))
             ->with(['user', 'package', 'package.tour', 'payment:id,booking_id,amount,payment_method'])
             ->orderByDesc('bookings.id')
             ->paginate(10);
