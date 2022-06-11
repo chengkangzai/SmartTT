@@ -14,7 +14,7 @@ use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed([
-       DatabaseSeeder::class
+       DatabaseSeeder::class,
     ]);
 });
 
