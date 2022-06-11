@@ -17,6 +17,7 @@ $language = $setting->default_language;
     <link href="{{ asset('tailwind/app.css') }}" rel="stylesheet">
     <link rel='icon' href='/icon.gif' type='image/gif' sizes='16x16'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script defer src="{{ asset('js/alpine.js') }}"></script>
     @livewireStyles
     @stack('style')
 </head>
@@ -137,7 +138,6 @@ $language = $setting->default_language;
         @include('front.partial.footer')
     </div>
     @livewireScripts
-    <script src="{{ asset('js/alpine.js') }}"></script>
     <script>
         var botmanWidget = {
             title: '{{ __('Chat with us') }}',
