@@ -17,7 +17,6 @@ class TourTable extends DataTableComponent
 {
     protected $model = Tour::class;
 
-
     public function builder(): Builder
     {
         $role = auth()->user()->roles()->first()->name;
@@ -47,8 +46,8 @@ class TourTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__("ID"), "id")
-                ->sortable(),
+            Column::make('', "id")
+                ->format(fn() => ''),
             ImageColumn::make('')
                 ->location(fn(Tour $row) => $row->getFirstMedia('thumbnail')?->getUrl())
                 ->attributes(fn($row) => [
