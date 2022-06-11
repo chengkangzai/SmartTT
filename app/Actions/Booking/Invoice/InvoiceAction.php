@@ -3,6 +3,7 @@
 namespace App\Actions\Booking\Invoice;
 
 use App\Models\BookingGuest;
+use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Support\Collection;
@@ -16,8 +17,9 @@ class InvoiceAction
     protected Invoice $invoice;
     protected GeneralSetting $generalSetting;
     protected Party $client;
+    public Payment $payment;
 
-    public function __construct()
+    public function __construct(Payment $payment)
     {
         $this->generalSetting = app(GeneralSetting::class);
 
@@ -34,6 +36,8 @@ class InvoiceAction
                 'business id' => $this->generalSetting->business_registration_no,
             ],
         ]);
+
+        $this->payment = $payment;
     }
 
     protected static function getItems(Collection $guests): array
