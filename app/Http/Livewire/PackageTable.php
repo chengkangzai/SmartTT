@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Package;
 use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
@@ -16,8 +16,9 @@ class PackageTable extends DataTableComponent
     public function builder(): Builder
     {
         $role = auth()->user()->roles()->first()->name;
+
         return Package::query()
-            ->when($role === 'Customer', fn($q) => $q->active())
+            ->when($role === 'Customer', fn ($q) => $q->active())
             ->orderByDesc('depart_time');
     }
 
@@ -45,30 +46,30 @@ class PackageTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
-                ->format(fn() => ''),
+                ->format(fn () => ''),
             Column::make(__("Depart Time"), "depart_time")
-                ->format(fn($_, Package $row) => $row->depart_time->translatedFormat(config('app.date_format')))
+                ->format(fn ($_, Package $row) => $row->depart_time->translatedFormat(config('app.date_format')))
                 ->sortable(),
             Column::make(__("Tour Name"), "tour.name")
                 ->searchable()
                 ->sortable(),
             Column::make(__("Price"), 'pricings.price')
-                ->label(fn(Package $row) => $row->price)
+                ->label(fn (Package $row) => $row->price)
                 ->sortable()
                 ->setSortingPillTitle(__("Price")),
             Column::make(__('Airlines'), 'airlines.name')
                 ->collapseOnMobile()
-                ->label(fn(Package $row) => $row->flight->pluck('airline.name')->implode('<br>'))
+                ->label(fn (Package $row) => $row->flight->pluck('airline.name')->implode('<br>'))
                 ->html(),
             BooleanColumn::make(__("Active"), "is_active")
                 ->sortable(),
             LinkColumn::make(__('Action'))
-                ->title(fn($row) => __('Edit'))
-                ->location(fn($row) => route('packages.edit', $row))
-                ->attributes(fn($row) => [
+                ->title(fn ($row) => __('Edit'))
+                ->location(fn ($row) => route('packages.edit', $row))
+                ->attributes(fn ($row) => [
                     'class' => 'btn btn-outline-primary',
                 ])
-                ->hideIf(!auth()->user()->can('Edit Package'))
+                ->hideIf(! auth()->user()->can('Edit Package')),
         ];
     }
 

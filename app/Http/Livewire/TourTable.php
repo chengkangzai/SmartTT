@@ -3,10 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Actions\Tour\DestroyTourAction;
+use App\Models\Tour;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Tour;
 use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
@@ -20,8 +20,9 @@ class TourTable extends DataTableComponent
     public function builder(): Builder
     {
         $role = auth()->user()->roles()->first()->name;
+
         return Tour::query()
-            ->when($role === 'Customer', fn($q) => $q->active())
+            ->when($role === 'Customer', fn ($q) => $q->active())
             ->orderByDesc('id');
     }
 
@@ -47,10 +48,10 @@ class TourTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
-                ->format(fn() => ''),
+                ->format(fn () => ''),
             ImageColumn::make('')
-                ->location(fn(Tour $row) => $row->getFirstMedia('thumbnail')?->getUrl())
-                ->attributes(fn($row) => [
+                ->location(fn (Tour $row) => $row->getFirstMedia('thumbnail')?->getUrl())
+                ->attributes(fn ($row) => [
                     'class' => 'avatar avatar-lg',
                     'alt' => $row->name . ' Thumbnail',
                 ]),
@@ -66,7 +67,7 @@ class TourTable extends DataTableComponent
             Column::make(__('Countries'))
                 ->deselected()
                 ->collapseOnMobile()
-                ->label(fn($row) => $row->countries->pluck('name')->implode('<br>'))
+                ->label(fn ($row) => $row->countries->pluck('name')->implode('<br>'))
                 ->html(),
             Column::make(__("Days"), "days")
                 ->collapseOnMobile()
@@ -77,12 +78,12 @@ class TourTable extends DataTableComponent
             BooleanColumn::make(__("Active"), "is_active")
                 ->sortable(),
             LinkColumn::make(__('Action'))
-                ->title(fn($row) => __('Edit'))
-                ->location(fn($row) => route('tours.edit', $row))
-                ->attributes(fn($row) => [
+                ->title(fn ($row) => __('Edit'))
+                ->location(fn ($row) => route('tours.edit', $row))
+                ->attributes(fn ($row) => [
                     'class' => 'btn btn-outline-primary d-inline',
                 ])
-                ->hideIf(!auth()->user()->can('Edit Tour'))
+                ->hideIf(! auth()->user()->can('Edit Tour')),
         ];
     }
 
@@ -94,7 +95,7 @@ class TourTable extends DataTableComponent
                     Tour::select('category')
                         ->distinct()
                         ->pluck('category')
-                        ->mapWithKeys(fn($item) => [$item => $item])
+                        ->mapWithKeys(fn ($item) => [$item => $item])
                         ->toArray()
                 )
                 ->filter(function (Builder $builder, array $value) {
@@ -119,5 +120,4 @@ class TourTable extends DataTableComponent
         $this->clearSelected();
         $this->emit('refreshDatatable');
     }
-
 }

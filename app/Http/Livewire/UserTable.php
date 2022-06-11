@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\User;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class UserTable extends DataTableComponent
@@ -27,7 +27,7 @@ class UserTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
-                ->format(fn() => ''),
+                ->format(fn () => ''),
             Column::make(__("Name"), "name")
                 ->searchable()
                 ->sortable(),
@@ -37,12 +37,12 @@ class UserTable extends DataTableComponent
             Column::make(__("Join at"), "created_at")
                 ->sortable(),
             LinkColumn::make(__('Action'))
-                ->title(fn($row) => __('Edit'))
-                ->location(fn($row) => route('users.edit', $row))
-                ->attributes(fn($row) => [
+                ->title(fn ($row) => __('Edit'))
+                ->location(fn ($row) => route('users.edit', $row))
+                ->attributes(fn ($row) => [
                     'class' => 'btn btn-outline-primary',
                 ])
-                ->hideIf(!auth()->user()->can('Edit User'))
+                ->hideIf(! auth()->user()->can('Edit User')),
         ];
     }
 }

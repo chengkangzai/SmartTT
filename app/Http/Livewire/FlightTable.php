@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FLight;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\FLight;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class FlightTable extends DataTableComponent
@@ -33,15 +33,15 @@ class FlightTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
-                ->format(fn() => ''),
+                ->format(fn () => ''),
             Column::make(__("Departure Date"), "departure_date")
-                ->format(fn($_, Flight $row) => $row->departure_date->translatedFormat(config('app.date_format')))
+                ->format(fn ($_, Flight $row) => $row->departure_date->translatedFormat(config('app.date_format')))
                 ->sortable(),
             Column::make(__("Arrival Time"), "arrival_date")
-                ->format(fn($_, Flight $row) => $row->arrival_date->translatedFormat(config('app.date_format')))
+                ->format(fn ($_, Flight $row) => $row->arrival_date->translatedFormat(config('app.date_format')))
                 ->sortable(),
             Column::make(__("Price"), "price")
-                ->format(fn($_, $value) => number_format($value->price, 2))
+                ->format(fn ($_, $value) => number_format($value->price, 2))
                 ->sortable(),
             Column::make(__("Airline"), "airline.name")
                 ->sortable(),
@@ -54,12 +54,12 @@ class FlightTable extends DataTableComponent
             Column::make(__("Type"), "type")
                 ->sortable(),
             LinkColumn::make(__('Action'))
-                ->title(fn($row) => __('Edit'))
-                ->location(fn($row) => route('flights.edit', $row))
-                ->attributes(fn($row) => [
+                ->title(fn ($row) => __('Edit'))
+                ->location(fn ($row) => route('flights.edit', $row))
+                ->attributes(fn ($row) => [
                     'class' => 'btn btn-outline-primary',
                 ])
-                ->hideIf(!auth()->user()->can('Edit Flight'))
+                ->hideIf(! auth()->user()->can('Edit Flight')),
         ];
     }
 
