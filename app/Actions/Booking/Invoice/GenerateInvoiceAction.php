@@ -3,16 +3,19 @@
 namespace App\Actions\Booking\Invoice;
 
 use App\Models\Payment;
-use LaravelDaily\Invoices\Classes\Party;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use LaravelDaily\Invoices\Classes\Party;
 
 class GenerateInvoiceAction extends InvoiceAction implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public function handle(): Payment
     {
@@ -44,6 +47,7 @@ class GenerateInvoiceAction extends InvoiceAction implements ShouldQueue
     public function execute(Payment $payment): Payment
     {
         $this->payment = $payment;
+
         return $this->handle();
     }
 }
