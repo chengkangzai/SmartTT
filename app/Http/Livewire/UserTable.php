@@ -21,12 +21,6 @@ class UserTable extends DataTableComponent
             ->setTableRowUrl(function ($row) {
                 return route('users.show', $row);
             });
-
-        if (auth()->user()->can('Delete User')) {
-            $this->setBulkActions([
-                'deleteSelected' => __('Delete Selected'),
-            ]);
-        }
     }
 
     public function columns(): array
