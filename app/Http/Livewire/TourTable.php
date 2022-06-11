@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\Tour\DestroyTourAction;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Tour;
 use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
@@ -114,7 +114,7 @@ class TourTable extends DataTableComponent
     public function deleteSelected()
     {
         foreach ($this->getSelected() as $item) {
-            Tour::find($item)->delete();
+            app(DestroyTourAction::class)->execute(Tour::find($item)->delete());
         }
         $this->clearSelected();
         $this->emit('refreshDatatable');
