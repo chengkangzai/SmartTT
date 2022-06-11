@@ -45,14 +45,14 @@ class BookingSeeder extends Seeder
                     ]);
                 if (app()->environment() != 'testing') {
                     foreach ($payments as $payment) {
-                        app(GenerateInvoiceAction::class)->execute($payment);
+                        app(GenerateInvoiceAction::class)->dispatch($payment);
                         if (($payment->payment_type == Payment::TYPE_FULL || $payment->payment_type == Payment::TYPE_REMAINING)
                             && ($payment->payment_method == Payment::METHOD_CASH
                                 || $payment->payment_method == Payment::METHOD_CARD
                                 || ($payment->payment_method == Payment::METHOD_STRIPE && $payment->status == Payment::STATUS_PAID)
                             )
                         ) {
-                            app(GenerateReceiptAction::class)->execute($payment);
+                            app(GenerateReceiptAction::class)->dispatch($payment);
                         }
                     }
                 }
