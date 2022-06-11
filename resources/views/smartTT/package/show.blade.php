@@ -86,7 +86,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('ID') }}</th>
-                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Pricing Name') }}</th>
                             <th>{{ __('Price') }}</th>
                             <th>{{ __('Total Capacity') }}</th>
                             <th>{{ __('Available Capacity') }}</th>
@@ -218,14 +218,14 @@
                             @method('POST')
                             @include('smartTT.partials.error-toast')
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('Name') }}</label>
+                                <label for="name" class="form-label">{{ __('Pricing Name') }}</label>
                                 <input type="text" class="form-control" name="name" id="name"
                                     placeholder="{{ __('Pricing Name') }}" value="{{ old('name') }}">
                             </div>
                             <div class="mb-3">
                                 <label for="price" class="form-label">{{ __('Price') }}</label>
                                 <input type="number" class="form-control" name="price" id="price"
-                                    placeholder="{{ 'Price for Pricing ' }}" value="{{ old('price') }}" step="0.01">
+                                    placeholder="{{ __('Price for Pricing') }}" value="{{ old('price') }}" step="0.01">
                             </div>
                             <div class="mb-3">
                                 <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>
@@ -236,10 +236,10 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left"
+                        <button type="button" class="btn btn-danger pull-left"
                             data-coreui-dismiss="modal">{{ __('Close') }}</button>
                         <input form="addPackagePricingForm" type="submit" class="btn btn-outline-primary"
-                            value="{{ 'Submit' }}" />
+                            value="{{ __('Submit') }}" />
                     </div>
                 </div>
             </div>
