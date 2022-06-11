@@ -12,57 +12,71 @@ class UserRoleSeeder extends Seeder
 {
     public function run()
     {
-        $user = User::create([
+        $superAdmin = User::create([
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('P@$$w0rd'),
         ]);
-
-        User::factory()->count(9)->create();
-
         $role = Role::create(['name' => 'Super Admin'])->givePermissionTo(Permission::all());
+        $role->users()->attach($superAdmin);
 
-        $role->users()->attach($user);
-
+        $manager = User::create([
+            'name' => 'Manager',
+            'email' => 'manager@manager.com',
+            'password' => Hash::make('P@$$w0rd'),
+        ]);
         Role::create(['name' => 'Manager'])
             ->syncPermissions([
-                'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour', 'Audit Tour',
-                'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description', 'Audit Tour Description',
-                'View Package', 'Create Package', 'Edit Package', 'Delete Package', 'Audit Package',
-                'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing',
-                'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight', 'Audit Flight',
-                'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
-                'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
-                'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
-                'Update Setting', 'View Setting'
+                'Access Tour', 'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour', 'Audit Tour',
+                'Access Tour Description', 'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description', 'Audit Tour Description',
+                'Access Package', 'View Package', 'Create Package', 'Edit Package', 'Delete Package', 'Audit Package',
+                'Access Package Pricing', 'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing',
+                'Access Flight', 'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight', 'Audit Flight',
+                'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
+                'Access Payment', 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
+                'Access User', 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
+                'Access Setting', 'Update Setting', 'View Setting'
             ])
             ->users()
-            ->attach(User::where('id', ">", 1)->take(3)->get());
+            ->attach($manager);
+
+        $staff = User::create([
+            'name' => 'Staff',
+            'email' => 'staff@staff.com',
+            'password' => Hash::make('P@$$w0rd'),
+        ]);
 
         Role::create(['name' => 'Staff'])
             ->syncPermissions([
-                'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour',
-                'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description',
-                'View Package', 'Create Package', 'Edit Package', 'Delete Package',
-                'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing',
-                'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight',
-                'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
-                'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
+                'Access Tour', 'View Tour', 'Create Tour', 'Edit Tour', 'Delete Tour',
+                'Access Tour Description', 'View Tour Description', 'Create Tour Description', 'Edit Tour Description', 'Delete Tour Description',
+                'Access Package', 'View Package', 'Create Package', 'Edit Package', 'Delete Package',
+                'Access Package Pricing', 'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing',
+                'Access Flight', 'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight',
+                'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
+                'Access Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
                 'View User',
                 'Connect MS OAuth', 'Sync booking to MS Calendar'
             ])
             ->users()
-            ->attach(User::where('id', ">", 4)->take(3)->get());
+            ->attach($staff);
 
+        $customer = User::create([
+            'name' => 'Customer',
+            'email' => 'customer@customer.com',
+            'password' => Hash::make('P@$$w0rd'),
+        ]);
         Role::create(['name' => 'Customer'])
             ->syncPermissions([
-                'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
-                'Create Booking', 'View Booking', 'Edit Booking',
-                'View Payment', 'Create Payment',
+                'Access Tour', 'View Tour', 'View Package', 'View Flight', 'View Booking', 'View User',
+                'Access Package', 'View Package',
+                'Access Package Pricing',
+                'Access Booking', 'Create Booking', 'View Booking', 'Edit Booking',
+                'Access Payment', 'View Payment', 'Create Payment',
                 'Connect MS OAuth', 'Sync booking to MS Calendar'
             ])
             ->users()
-            ->attach(User::where('id', ">", 7)->take(3)->get());
+            ->attach($customer);
 
     }
 }
