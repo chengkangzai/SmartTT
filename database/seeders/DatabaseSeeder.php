@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use DB;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
@@ -12,6 +14,8 @@ class DatabaseSeeder extends Seeder
         if (app()->environment('local')) {
             Artisan::call('down');
         }
+        Model::unguard();
+        DB::beginTransaction();
         $this->call([
             PermissionSeeder::class,
             UserRoleSeeder::class,
@@ -23,6 +27,8 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             BookingSeeder::class
         ]);
+        DB::commit();
+        Model::reguard();
         if (app()->environment('local')) {
             Artisan::call('up');
         }
