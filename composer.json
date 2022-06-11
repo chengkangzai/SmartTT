@@ -43,7 +43,8 @@
         "pestphp/pest-plugin-laravel": "^1.2",
         "pestphp/pest-plugin-parallel": "^1.0",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "spatie/laravel-remote": "^1.2"
     },
     "autoload": {
         "psr-4": {
