@@ -9,47 +9,47 @@
     </li>
 
     @can('Access Tour')
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('tours*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
-            </svg>
-            {{ __('Tour Management') }}
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('tours*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
+                </svg>
+                {{ __('Tour Management') }}
+            </a>
+        </li>
     @endcan
 
     @can('Access Package')
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('package*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
-            </svg>
-            {{ __('Package Management') }}
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('package*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-flag-alt') }}"></use>
+                </svg>
+                {{ __('Package Management') }}
+            </a>
+        </li>
     @endcan
 
     @can('Access Flight')
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('flights*') ? 'active' : '' }}" href="{{ route('flights.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-airplane-mode') }}"></use>
-            </svg>
-            {{ __('Flight Management') }}
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('flights*') ? 'active' : '' }}" href="{{ route('flights.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-airplane-mode') }}"></use>
+                </svg>
+                {{ __('Flight Management') }}
+            </a>
+        </li>
     @endcan
 
     @can('Access Booking')
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('bookings*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-dollar') }}"></use>
-            </svg>
-            {{ __('Booking Management') }}
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('bookings*') ? 'active' : '' }}" href="{{ route('bookings.index') }}">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-dollar') }}"></use>
+                </svg>
+                {{ __('Booking Management') }}
+            </a>
+        </li>
     @endcan
 
     @can('Access User')
@@ -77,7 +77,7 @@
     @can('Access Setting')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('settings/*') ? 'active' : '' }}"
-                href="{{ route('settings.index') }}">
+               href="{{ route('settings.index') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-settings') }}"></use>
                 </svg>
@@ -86,6 +86,26 @@
         </li>
     @endcan
 
+    @can('Access Report')
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
+            </svg>
+            {{__('Reports')}}
+        </a>
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link" href="#" target="_top">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
+                    </svg>
+                    {{__('Sales')}}
+                </a>
+            </li>
+        </ul>
+    </li>
+    @endcan
 
     <li class="nav-item">
         <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">
@@ -95,23 +115,4 @@
             {{ __('About us') }}
         </a>
     </li>
-
-    {{-- <li class="nav-group" aria-expanded="false"> --}}
-    {{-- <a class="nav-link nav-group-toggle" href="#"> --}}
-    {{-- <svg class="nav-icon"> --}}
-    {{-- <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use> --}}
-    {{-- </svg> --}}
-    {{-- Two-level menu --}}
-    {{-- </a> --}}
-    {{-- <ul class="nav-group-items" style="height: 0px;"> --}}
-    {{-- <li class="nav-item"> --}}
-    {{-- <a class="nav-link" href="#" target="_top"> --}}
-    {{-- <svg class="nav-icon"> --}}
-    {{-- <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use> --}}
-    {{-- </svg> --}}
-    {{-- Child menu --}}
-    {{-- </a> --}}
-    {{-- </li> --}}
-    {{-- </ul> --}}
-    {{-- </li> --}}
 </ul>
