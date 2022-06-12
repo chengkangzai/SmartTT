@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Actions\Reports;
+namespace App\Actions\Reports\Export;
 
+use App\Actions\Reports\ExportReportInterface;
 use App\Models\Booking;
 use Spatie\SimpleExcel\SimpleExcelWriter;
 

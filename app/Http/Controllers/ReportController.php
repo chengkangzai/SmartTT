@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Reports\Export\ExportSalesReportAction;
 use App\Actions\Reports\ExportReportInterface;
-use App\Actions\Reports\ExportSalesReportAction;
+use App\Actions\Reports\ViewBag\GetViewBagForSalesReportAction;
+use App\Actions\Setting\Edit\GetViewBagForTourSettingAction;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 
@@ -16,11 +18,11 @@ class ReportController extends Controller
 
     public function index(string $mode)
     {
-        $data = [
-            'categories' => Tour::select('category')
-                ->distinct()
-                ->pluck('category')
-        ];
+        $action = match ($mode) {
+            'sales' => app(GetViewBagForSalesReportAction::class),
+        };
+
+        $data = $action->execute();
         return view('smartTT.report.sales', $data);
     }
 
