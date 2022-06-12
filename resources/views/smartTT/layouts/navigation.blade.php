@@ -77,7 +77,7 @@
     @can('Access Setting')
         <li class="nav-item">
             <a class="nav-link {{ request()->is('settings/*') ? 'active' : '' }}"
-               href="{{ route('settings.index') }}">
+                href="{{ route('settings.index') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-settings') }}"></use>
                 </svg>
@@ -87,24 +87,24 @@
     @endcan
 
     @can('Access Report')
-    <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
-            </svg>
-            {{__('Reports')}}
-        </a>
-        <ul class="nav-group-items" style="height: 0px;">
-            <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
-                    </svg>
-                    {{__('Sales')}}
-                </a>
-            </li>
-        </ul>
-    </li>
+        <li class="nav-group" aria-expanded="false">
+            <a class="nav-link nav-group-toggle" href="#">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-book') }}"></use>
+                </svg>
+                {{ __('Reports') }}
+            </a>
+            <ul class="nav-group-items" style="height: 0px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.index', 'sales') }}" target="_top">
+                        <svg class="nav-icon">
+                            <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
+                        </svg>
+                        {{ __('Sales') }}
+                    </a>
+                </li>
+            </ul>
+        </li>
     @endcan
 
     <li class="nav-item">

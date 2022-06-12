@@ -10,6 +10,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicIndexController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\SettingController;
@@ -89,4 +90,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('settings/index', [SettingController::class, 'index'])->name('settings.index');
     Route::get('settings/{mode}/edit', [SettingController::class, 'edit'])->name('settings.edit');
     Route::post('settings/{mode}/update', [SettingController::class, 'update'])->name('settings.update');
+
+    Route::get('reports/{mode}/index', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('reports/{mode}/export', [ReportController::class, 'export'])->name('reports.export');
 });
