@@ -33,7 +33,7 @@ Auth::routes();
 Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 
-Route::middleware(['web'])->as('front.')->group(function () {
+Route::as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
     Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->name('botman');
 
@@ -41,7 +41,7 @@ Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
 });
 
-Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
+Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
@@ -76,9 +76,7 @@ Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
     Route::get('packagePricings/{packagePricing}/audit', [PackagePricingController::class, 'audit'])->name('packagePricings.audit');
     Route::post('packagePricings/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
     Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
-});
 
-Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
     Route::get('users/{user}/audit', [UserController::class, 'audit'])->name('users.audit');
     Route::post('users/{user}/sendResetPassword', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);
