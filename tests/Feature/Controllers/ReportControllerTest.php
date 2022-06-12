@@ -6,7 +6,7 @@ use function Pest\Laravel\seed;
 
 beforeEach(function () {
     seed([
-        DatabaseSeeder::class
+        DatabaseSeeder::class,
     ]);
 });
 
@@ -30,11 +30,10 @@ it('should not return the view for generating the sales report as not correct pa
 it('should export sales report', function () {
     $this
         ->actingAs(User::first())
-        ->post(route('reports.export', 'sales'),[
+        ->post(route('reports.export', 'sales'), [
             'start_date' => '2020-01-01',
             'end_date' => '2022-01-31',
             'category' => '',
         ])
         ->assertStatus(500) ;// for some reason it got error, but it will work
 });
-

@@ -11,19 +11,20 @@ class ReportController extends Controller
 {
     public function index(string $mode)
     {
-        abort_if(!auth()->user()->can('Access Report'), 403);
+        abort_if(! auth()->user()->can('Access Report'), 403);
         abort_if($mode !== 'sales', 404);
         $action = match ($mode) {
             'sales' => app(GetViewBagForSalesReportAction::class),
         };
 
         $data = $action->execute();
+
         return view('smartTT.report.sales', $data);
     }
 
     public function export(Request $request, string $mode)
     {
-        abort_if(!auth()->user()->can('Access Report'), 403);
+        abort_if(! auth()->user()->can('Access Report'), 403);
         abort_if($mode !== 'sales', 404);
 
         /** @var ExportReportInterface $action */

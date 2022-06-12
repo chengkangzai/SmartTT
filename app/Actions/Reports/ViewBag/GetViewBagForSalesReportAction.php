@@ -14,7 +14,7 @@ class GetViewBagForSalesReportAction
             'categories' => Tour::select('category')
                 ->distinct()
                 ->pluck('category')
-                ->toArray()
+                ->toArray(),
         ];
     }
 }

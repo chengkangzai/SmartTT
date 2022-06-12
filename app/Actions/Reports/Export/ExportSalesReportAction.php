@@ -41,10 +41,9 @@ class ExportSalesReportAction implements ExportReportInterface
             ]);
         }
 
-        $writer->addRow(['', '', '', '','Total', number_format($booking->sum('total_price'),2)]);
+        $writer->addRow(['', '', '', '','Total', number_format($booking->sum('total_price'), 2)]);
 
         $writer->toBrowser();
         $writer->close();
-
     }
 }
