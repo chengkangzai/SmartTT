@@ -36,6 +36,8 @@ class CreateBookingWizard extends WizardComponent
     {
         $this->packageId = $packageId;
         $this->package = Package::find($packageId);
+        abort_if(!$this->package->is_active, 404);
+        abort_if(!$this->package->tour->is_active, 404);
     }
 
     #[ArrayShape(['choose-tour-step' => "int[]", 'choose-package-step' => "int[]"])]
