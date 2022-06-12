@@ -67,7 +67,7 @@ class PackagesTable extends Component
             })
             ->when($this->priceTo, function (Collection $packages) {
                 return $packages->filter(function (Package $package) {
-                    return $package->pricings->sortBy('price')->first()->price <= $this->priceTo;
+                    return $package->pricings->sortByDesc('price')->first()->price <= $this->priceTo;
                 });
             })
             ->when($this->month != 0, function (Collection $packages) {
