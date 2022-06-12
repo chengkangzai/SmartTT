@@ -44,6 +44,7 @@ class PackageTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
+                ->searchable()
                 ->format(fn () => ''),
             Column::make(__("Depart Time"), "depart_time")
                 ->format(fn ($_, Package $row) => $row->depart_time->translatedFormat(config('app.date_format')))

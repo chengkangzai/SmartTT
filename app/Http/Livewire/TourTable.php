@@ -48,6 +48,7 @@ class TourTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
+                ->searchable()
                 ->format(fn () => ''),
             ImageColumn::make('')
                 ->location(fn (Tour $row) => $row->getFirstMedia('thumbnail')?->getUrl())
