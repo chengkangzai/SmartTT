@@ -42,7 +42,7 @@
                         <select name="category" class="form-control" id="category">
                             @foreach ($setting->category as $category)
                                 <option value="{{ $category }}"
-                                    {{old('category',$tour->category)==$category ? 'selected' : ''}}>
+                                    {{ old('category', $tour->category) == $category ? 'selected' : '' }}>
                                     {{ $category }}
                                 </option>
                             @endforeach

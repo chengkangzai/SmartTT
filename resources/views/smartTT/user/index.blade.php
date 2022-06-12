@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
             @include('smartTT.partials.error-alert')
-            <livewire:user-table/>
+            <livewire:user-table />
         </div>
     </div>
 @endsection

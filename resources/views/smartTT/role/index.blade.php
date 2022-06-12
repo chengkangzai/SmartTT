@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="card-body">
-            <livewire:role-table/>
+            <livewire:role-table />
         </div>
     </div>
 @endsection

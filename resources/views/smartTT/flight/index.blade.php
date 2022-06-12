@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="card-body">
-           <livewire:flight-table/>
+            <livewire:flight-table />
         </div>
     </div>
 @endsection

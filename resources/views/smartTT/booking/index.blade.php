@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="card-body">
-            <livewire:booking-table/>
+            <livewire:booking-table />
         </div>
     </div>
 @endsection
