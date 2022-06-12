@@ -21,7 +21,6 @@ class SearchTourPage extends Component
     public int $priceFrom = 0;
     public int $priceTo = 0;
     public string $category = '';
-    public int $capacity = 0;
 
     public string $latestDepartTime;
     public Collection $categories;
@@ -31,6 +30,7 @@ class SearchTourPage extends Component
     public string $default_currency_symbol;
 
     public bool $stillCanLoad = true;
+    public int $limit = 6;
 
     protected $queryString = [
         'q',
@@ -39,7 +39,6 @@ class SearchTourPage extends Component
         'priceFrom',
         'priceTo',
         'category',
-        'capacity',
     ];
 
     public function mount()
@@ -138,4 +137,10 @@ class SearchTourPage extends Component
 
         return number_format($price, 2);
     }
+
+    public function loadMore()
+    {
+        $this->limit += 6;
+    }
 }
+
