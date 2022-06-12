@@ -14,10 +14,11 @@ class BookingTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        $role = auth()->user()->roles()->first()->name;
+        $user = auth()->user();
+        $role = $user->roles()->first()->name;
 
         return Booking::query()
-            ->when($role === 'Customer', fn ($q) => $q->where('user_id', auth()->user()->id))
+            ->when($role === 'Customer', fn ($q) => $q->where('user_id', $user->id))
             ->with(['user', 'package', 'package.tour', 'payment'])
             ->orderByDesc('bookings.id');
     }
