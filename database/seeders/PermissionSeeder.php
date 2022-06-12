@@ -42,6 +42,11 @@ class PermissionSeeder extends Seeder
         ]);
 
         $temp->push([
+            'name' => 'Access Report',
+            'guard_name' => 'web',
+        ]);
+
+        $temp->push([
             'name' => 'Sync booking to MS Calendar',
             'guard_name' => 'web',
         ]);

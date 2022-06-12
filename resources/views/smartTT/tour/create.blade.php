@@ -24,7 +24,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="name" class="form-label">{{ __('Name') }}</label>
+                    <label for="name" class="form-label">{{ __('Tour Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}"
                         placeholder="{{ __('Tour Name') }}">
                 </div>

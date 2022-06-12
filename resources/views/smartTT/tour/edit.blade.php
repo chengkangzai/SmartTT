@@ -27,7 +27,7 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="name" class="form-label">{{ __('Name') }}</label>
+                    <label for="name" class="form-label">{{ __('Tour Name') }}</label>
                     <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $tour->name) }}"
                         placeholder="{{ __('Tour Name') }}">
                 </div>
@@ -41,7 +41,8 @@
                         <label for="category" class="form-label">{{ __('Category') }}</label>
                         <select name="category" class="form-control" id="category">
                             @foreach ($setting->category as $category)
-                                <option value="{{ $category }}" @selected(old('category', $tour->category))>
+                                <option value="{{ $category }}"
+                                    {{ old('category', $tour->category) == $category ? 'selected' : '' }}>
                                     {{ $category }}
                                 </option>
                             @endforeach

@@ -10,6 +10,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackagePricingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicIndexController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\SettingController;
@@ -33,7 +34,7 @@ Auth::routes();
 Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 
-Route::middleware(['web'])->as('front.')->group(function () {
+Route::as('front.')->group(function () {
     Route::get('/', [PublicIndexController::class, 'index'])->name('index');
     Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->name('botman');
 
@@ -41,7 +42,7 @@ Route::middleware(['web'])->as('front.')->group(function () {
     Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
 });
 
-Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
+Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
@@ -76,9 +77,7 @@ Route::middleware(['web', 'auth'])->prefix('dashboard')->group(function () {
     Route::get('packagePricings/{packagePricing}/audit', [PackagePricingController::class, 'audit'])->name('packagePricings.audit');
     Route::post('packagePricings/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
     Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
-});
 
-Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
     Route::get('users/{user}/audit', [UserController::class, 'audit'])->name('users.audit');
     Route::post('users/{user}/sendResetPassword', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);
@@ -91,4 +90,7 @@ Route::group(['middleware' => ['role:Super Admin|Manager']], function () {
     Route::get('settings/index', [SettingController::class, 'index'])->name('settings.index');
     Route::get('settings/{mode}/edit', [SettingController::class, 'edit'])->name('settings.edit');
     Route::post('settings/{mode}/update', [SettingController::class, 'update'])->name('settings.update');
+
+    Route::get('reports/{mode}/index', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('reports/{mode}/export', [ReportController::class, 'export'])->name('reports.export');
 });

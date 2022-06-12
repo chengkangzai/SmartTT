@@ -21,38 +21,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="indexTable" class="table table-bordered table-hover ">
-                    <thead>
-                        <tr>
-                            <th>{{ __('ID') }}</th>
-                            <th>{{ __('Role Name') }}</th>
-                            <th>{{ __('Action') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($roles as $role)
-                            <tr>
-                                <td>{{ $role->id }}</td>
-                                <td>{{ $role->name }}</td>
-                                <td>
-                                    @can('View Role')
-                                        <a href="{{ route('roles.show', $role) }}" class="btn btn-outline-info">
-                                            {{ __('Show') }}
-                                        </a>
-                                    @endcan
-                                    @can('Edit Role')
-                                        <a href="{{ route('roles.edit', $role) }}" class="btn btn-outline-primary">
-                                            {{ __('Edit') }}
-                                        </a>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $roles->links() }}
-            </div>
+            <livewire:role-table />
         </div>
     </div>
 @endsection
