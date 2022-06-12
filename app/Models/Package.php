@@ -66,7 +66,7 @@ class Package extends Model
     {
         return $this->hasMany(PackagePricing::class)
             ->orderBy('price')
-            ->where('is_active', true);
+            ->where('package_pricings.is_active', true);
     }
 
     public function getActivitylogOptions(): LogOptions

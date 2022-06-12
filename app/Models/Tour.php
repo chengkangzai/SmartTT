@@ -37,7 +37,7 @@ class Tour extends Model implements HasMedia
     public function activePackages(): HasMany
     {
         return $this->hasMany(Package::class)
-            ->where('is_active', true)
+            ->where('packages.is_active', true)
             ->where('depart_time', '>=', now())
             ->orderBy('depart_time');
     }
