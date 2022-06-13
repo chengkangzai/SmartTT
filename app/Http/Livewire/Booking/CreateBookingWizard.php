@@ -15,7 +15,7 @@ use Spatie\LivewireWizard\Components\WizardComponent;
 
 class CreateBookingWizard extends WizardComponent
 {
-    private ?string $packageId;
+    private ?string $packageId = '';
 
     private ?Package $package;
 
@@ -34,10 +34,12 @@ class CreateBookingWizard extends WizardComponent
 
     public function mount(?string $packageId)
     {
-        $this->packageId = $packageId;
-        $this->package = Package::find($packageId);
-        abort_if(!$this->package->is_active, 404);
-        abort_if(!$this->package->tour->is_active, 404);
+        if ($packageId) {
+            $this->packageId = $packageId;
+            $this->package = Package::find($packageId);
+            abort_if(!$this->package->is_active, 404);
+            abort_if(!$this->package->tour->is_active, 404);
+        }
     }
 
     #[ArrayShape(['choose-tour-step' => "int[]", 'choose-package-step' => "int[]"])]
@@ -48,7 +50,7 @@ class CreateBookingWizard extends WizardComponent
                 'tour' => $this->package->tour_id ?? 0,
             ],
             'choose-package-step' => [
-                'package' => (int)$this->packageId,
+                'package' => (int)$this->packageId ?? 0,
             ],
         ];
     }
