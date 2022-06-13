@@ -13,7 +13,7 @@ class PublicIndexController extends Controller
 
     public function tours(Tour $tour)
     {
-        abort_if(!$tour->is_active, 404);
+        abort_if(! $tour->is_active, 404);
         $tour->load([
             'activePackages:id,tour_id,depart_time,is_active',
             'activePackages.activePricings:id,price,name,package_id,available_capacity',
@@ -23,7 +23,7 @@ class PublicIndexController extends Controller
             'countries:id,name',
         ]);
 
-        abort_if(!$tour->activePackages->count(), 404);
+        abort_if(! $tour->activePackages->count(), 404);
 
         $des = $tour
             ->description

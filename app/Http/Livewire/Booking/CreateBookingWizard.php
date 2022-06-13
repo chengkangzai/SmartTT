@@ -37,8 +37,8 @@ class CreateBookingWizard extends WizardComponent
         if ($packageId) {
             $this->packageId = $packageId;
             $this->package = Package::find($packageId);
-            abort_if(!$this->package->is_active, 404);
-            abort_if(!$this->package->tour->is_active, 404);
+            abort_if(! $this->package->is_active, 404);
+            abort_if(! $this->package->tour->is_active, 404);
         }
     }
 

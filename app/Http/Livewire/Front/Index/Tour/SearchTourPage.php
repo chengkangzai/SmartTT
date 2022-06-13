@@ -157,4 +157,3 @@ class SearchTourPage extends Component
         $this->limit += 6;
     }
 }
-
