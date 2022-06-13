@@ -28,15 +28,6 @@
             </div>
             <div class="flex flex-col gap-2 rounded-b bg-white p-2 md:flex-row">
                 <div class="flex w-full flex-col gap-1">
-                    <label for="category" class="block px-2 text-sm opacity-70">{{ __('Category') }}</label>
-                    <select name="category" id="category" class="rounded-lg">
-                        <option value="">{{ __('All') }}</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category }}">{{ $category }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="flex w-full flex-col gap-1">
                     <label for="price_from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
                     <input type="number" class="rounded-lg" id="price_from" name="priceFrom"
                         wire:model.debounce="priceFrom" min="0" max="{{ $priceTo }}"
