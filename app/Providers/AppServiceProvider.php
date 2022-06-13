@@ -5,6 +5,7 @@ namespace App\Providers;
 use App;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Scout\Builder;
 use URL;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +31,11 @@ class AppServiceProvider extends ServiceProvider
         if (App::isProduction()) {
             URL::forceScheme('https');
         }
+
+        Builder::macro('count', function () {
+            return $this->engine()->getTotalCount(
+                $this->engine()->search($this)
+            );
+        });
     }
 }

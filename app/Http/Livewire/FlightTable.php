@@ -33,6 +33,7 @@ class FlightTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
+                ->searchable()
                 ->format(fn () => ''),
             Column::make(__("Departure Date"), "departure_date")
                 ->format(fn ($_, Flight $row) => $row->departure_date->translatedFormat(config('app.date_format')))
@@ -46,8 +47,10 @@ class FlightTable extends DataTableComponent
             Column::make(__("Airline"), "airline.name")
                 ->sortable(),
             Column::make(__("Departure airport"), "depart_airport.name")
+                ->searchable()
                 ->sortable(),
             Column::make(__("Arrival airport"), "arrive_airport.name")
+                ->searchable()
                 ->sortable(),
             Column::make(__("Class"), "class")
                 ->sortable(),

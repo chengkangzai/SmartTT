@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
@@ -19,6 +20,7 @@ class Tour extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
     use LogsActivity;
+    use Searchable;
 
     protected $fillable = [
         'tour_code',
@@ -37,7 +39,7 @@ class Tour extends Model implements HasMedia
     public function activePackages(): HasMany
     {
         return $this->hasMany(Package::class)
-            ->where('is_active', true)
+            ->where('packages.is_active', true)
             ->where('depart_time', '>=', now())
             ->orderBy('depart_time');
     }
@@ -62,5 +64,17 @@ class Tour extends Model implements HasMedia
     public function scopeActive(Builder $q): Builder
     {
         return $q->where('is_active', 1);
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'tour_code' => $this->tour_code,
+            'category' => $this->category,
+            'description' => $this->description->pluck('description')->implode(' '),
+            'place' => $this->description->pluck('place')->implode(' '),
+            'countries' => $this->countries->pluck('name')->implode(' '),
+        ];
     }
 }

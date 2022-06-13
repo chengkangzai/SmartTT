@@ -1,4 +1,5 @@
-<div class="z-10 mx-auto flex flex-col rounded-xl border bg-white py-2 md:py-4 md:px-4 shadow-xl md:-mt-80 w-full md:w-min">
+<div
+    class="z-10 mx-auto flex w-full flex-col rounded-xl border bg-white py-2 shadow-xl md:-mt-80 md:w-min md:py-4 md:px-4">
     <div class="mx-auto pb-2">
         <h5 class="text-xl font-medium">{{ __('Price Start From') }}</h5>
         <h1 class="text-3xl font-extrabold">
@@ -37,7 +38,7 @@
     </div>
     <div class="mx-auto mt-4 py-4">
         <a href="{{ route('bookings.create', ['package' => $packageId]) }}"
-            class="block md:animate-bounce rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400">
+            class="block rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400 md:animate-bounce">
             {{ __('Book Now') }} &excl;
         </a>
     </div>

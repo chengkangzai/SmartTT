@@ -6,6 +6,7 @@ use App\Models\Package;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\GeneralSetting;
+use App\Models\Tour;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use function Pest\Laravel\assertModelExists;
@@ -39,12 +40,42 @@ it('should return create view', function () {
 
 
 it('should return create view and show Register Guest Component', function () {
+    $package = Package::with('tour')
+        ->whereHas('tour', function ($query) {
+            $query->where('is_active', true);
+        })
+        ->inRandomOrder()
+        ->first();
+
     $this
-        ->get(route('bookings.create', ['package' => Package::inRandomOrder()->first()->id]))
+        ->get(route('bookings.create', ['package' => $package->id]))
         ->assertViewIs('smartTT.booking.create')
         ->assertSeeLivewire(CreateBookingWizard::class)
         ->assertSee('Register Guest');
 });
+
+it('should abort when package is not active', function () {
+    $package = Package::factory()->create([
+        'is_active' => false,
+    ]);
+
+    $this
+        ->get(route('bookings.create', ['package' => $package->id]))
+        ->assertNotFound();
+});
+
+it('should abort when package tour is not active', function () {
+    $tour = Tour::factory()->create([
+        'is_active' => false,
+    ]);
+    $package = Package::factory()->create([
+        'tour_id' => $tour->id,
+    ]);
+    $this
+        ->get(route('bookings.create', ['package' => $package->id]))
+        ->assertNotFound();
+});
+
 
 it('should return show view', function () {
     $booking = Booking::first();

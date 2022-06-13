@@ -71,17 +71,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="rounded-lg border p-2 md:hidden">
-                    <h3 class="px-2 pb-1 text-lg font-bold">{{ __('Capacity') }}</h3>
-                    <div class="flex w-full flex-col gap-1">
-                        <label for="capacity" class="px-2 text-sm opacity-70">{{ __('Capacity') }}</label>
-                        <input type="number" class="rounded-lg" id="capacity" wire:model.debounce="capacity"
-                            placeholder="{{ __('Capacity') }}" />
-                    </div>
-                </div>
                 <div class="flex flex-col">
                     <input value="{{ __('Search') }}" type="submit"
                         class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
+                    <small>{{__('Powered by')}}
+                        <img class="h-4 d-inline" src="{{asset('icons/algolia.png')}}" alt="Powered By Algolia"/>
+                    </small>
                 </div>
             </div>
         </div>
@@ -121,14 +116,6 @@
                                 <option value="{{ $category }}">{{ $category }}</option>
                             @endforeach
                         </select>
-                    </div>
-                </div>
-                <div class="hidden rounded-lg border bg-white p-2 md:block">
-                    <h3 class="px-2 pb-1 text-lg font-bold">{{ __('Capacity') }}</h3>
-                    <div class="flex w-full flex-col gap-1">
-                        <label for="capacity" class="px-2 text-sm opacity-70">{{ __('Capacity') }}</label>
-                        <input type="number" class="rounded-lg" id="capacity" wire:model.debounce="capacity"
-                            placeholder="{{ __('Capacity') }}" />
                     </div>
                 </div>
             </div>
@@ -171,7 +158,14 @@
                         <h1 class="text-3xl font-bold">{{ __('No tours found') }}</h1>
                     </div>
                 @endforelse
-                {{ $tours->links() }}
+                @if ($stillCanLoad)
+                    <div class="container mx-auto py-2">
+                        <button class="mx-auto block animate-bounce rounded px-4 py-2 text-center hover:bg-gray-200"
+                            wire:click="loadMore">
+                            {{ __('More') }} &downarrow;
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

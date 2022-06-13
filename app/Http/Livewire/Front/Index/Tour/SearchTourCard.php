@@ -31,7 +31,6 @@ class SearchTourCard extends Component
             ?->first()
             ?->getUrl() ?? '#';
 
-        $this->categories = Tour::select('category')->distinct()->pluck('category');
         $this->countries = Country::select(['id', 'name'])->has('tours')->get();
         $this->latestDepartTime = Package::active()->latest('depart_time')->first()->depart_time->format('Y-m-d');
 

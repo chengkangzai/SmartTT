@@ -27,6 +27,7 @@ class UserTable extends DataTableComponent
     {
         return [
             Column::make('', "id")
+                ->searchable()
                 ->format(fn () => ''),
             Column::make(__("Name"), "name")
                 ->searchable()

@@ -9,7 +9,6 @@ use App\Models\Tour;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -21,7 +20,6 @@ class SearchTourPage extends Component
     public int $priceFrom = 0;
     public int $priceTo = 0;
     public string $category = '';
-    public int $capacity = 0;
 
     public string $latestDepartTime;
     public Collection $categories;
@@ -31,6 +29,7 @@ class SearchTourPage extends Component
     public string $default_currency_symbol;
 
     public bool $stillCanLoad = true;
+    public int $limit = 6;
 
     protected $queryString = [
         'q',
@@ -39,7 +38,6 @@ class SearchTourPage extends Component
         'priceFrom',
         'priceTo',
         'category',
-        'capacity',
     ];
 
     public function mount()
@@ -67,62 +65,77 @@ class SearchTourPage extends Component
             ->extends('front.layouts.app');
     }
 
-    private function getTours(): Paginator
+    private function getTours()
     {
-        Paginator::useTailwind();
+        if ($this->q !== '') {
+            $tours = Tour::search($this->q)
+                ->query(function ($query) {
+                    return $query->with([
+                        'description',
+                        'activePackages',
+                        'activePackages.activePricings',
+                        'media',
+                        'countries',
+                    ])
+                        ->active()
+                        ->when($this->dateFrom !== '' && $this->dateTo !== '', function ($query) {
+                            return $query->whereHas('activePackages', function ($query) {
+                                return $query->where('depart_time', '>=', $this->dateFrom)
+                                    ->where('depart_time', '<=', $this->dateTo);
+                            });
+                        })
+                        ->when($this->priceFrom !== 0 && $this->priceTo !== 0, function ($query) {
+                            return $query->whereHas('activePackages', function ($query) {
+                                return $query->whereHas('activePricings', function ($query) {
+                                    return $query->where('price', '>=', $this->priceFrom * 100)
+                                        ->where('price', '<=', $this->priceTo * 100);
+                                });
+                            });
+                        })
+                        ->when($this->category !== '', function ($query) {
+                            return $query->where('category', $this->category);
+                        });
+                })
+                ->get();
 
-        return Tour::query()
+            if ($tours->count() <= $this->limit) {
+                $this->stillCanLoad = false;
+            }
+
+            return $tours->take($this->limit);
+        }
+        $tours = Tour::query()
             ->with([
                 'description',
                 'activePackages',
-                'activePackages.pricings',
+                'activePackages.activePricings',
                 'media',
+                'countries',
             ])
-            ->when($this->q, function ($query) {
-                return $query
-                    ->orWhere('name', 'like', "%$this->q%")
-                    ->orWhere('tour_code', 'like', "%$this->q%")
-                    ->whereHas('description', function ($query) {
-                        return $query
-                            ->orWhere('description', 'like', "%$this->q%")
-                            ->orWhere('place', 'like', "%$this->q%");
+            ->active()
+            ->when($this->dateFrom !== '' && $this->dateTo !== '', function ($query) {
+                return $query->whereHas('activePackages', function ($query) {
+                    return $query->where('depart_time', '>=', $this->dateFrom)
+                        ->where('depart_time', '<=', $this->dateTo);
+                });
+            })
+            ->when($this->priceFrom !== 0 && $this->priceTo !== 0, function ($query) {
+                return $query->whereHas('activePackages', function ($query) {
+                    return $query->whereHas('activePricings', function ($query) {
+                        return $query->where('price', '>=', $this->priceFrom * 100)
+                            ->where('price', '<=', $this->priceTo * 100);
                     });
+                });
             })
             ->when($this->category !== '', function ($query) {
-                return $query->orWhere('category', $this->category);
-            })
-            ->when($this->dateFrom, function ($query) {
-                return $query->whereHas('packages', function ($query) {
-                    return $query->where('depart_time', '>=', $this->dateFrom);
-                });
-            })
-            ->when($this->dateTo, function ($query) {
-                return $query->whereHas('packages', function ($query) {
-                    return $query->where('depart_time', '<=', $this->dateTo);
-                });
-            })
-            ->when($this->priceFrom, function ($query) {
-                return $query->whereHas('activePackages', function ($query) {
-                    return $query->whereHas('pricings', function ($query) {
-                        return $query->orWhere('price', '>=', $this->priceFrom);
-                    });
-                });
-            })
-            ->when($this->priceTo, function ($query) {
-                return $query->whereHas('activePackages', function ($query) {
-                    return $query->whereHas('pricings', function ($query) {
-                        return $query->orWhere('price', '<=', $this->priceTo);
-                    });
-                });
-            })
-            ->when($this->capacity, function ($query) {
-                return $query->whereHas('activePackages', function ($query) {
-                    return $query->whereHas('pricings', function ($query) {
-                        return $query->where('available_capacity', '>=', $this->capacity);
-                    });
-                });
-            })
-            ->simplePaginate(6);
+                return $query->where('category', $this->category);
+            });
+
+        if ($tours->count() <= $this->limit) {
+            $this->stillCanLoad = false;
+        }
+
+        return $tours->limit($this->limit)->get();
     }
 
     public function getCheapestPrice(Tour $tour): string
@@ -130,12 +143,17 @@ class SearchTourPage extends Component
         $price = $tour
                 ->activePackages
                 ->map(function ($package) {
-                    return $package->pricings->sortBy('price')->first();
+                    return $package->activePricings->sortBy('price')->first();
                 })
                 ->sortBy('price')
                 ->first()
                 ->price ?? 0;
 
         return number_format($price, 2);
+    }
+
+    public function loadMore()
+    {
+        $this->limit += 6;
     }
 }
