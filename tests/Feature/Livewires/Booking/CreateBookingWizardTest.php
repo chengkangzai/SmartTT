@@ -8,6 +8,7 @@ use App\Http\Livewire\Booking\Steps\CreatePaymentStep;
 use App\Http\Livewire\Booking\Steps\RegisterBillingInfoStep;
 use App\Http\Livewire\Booking\Steps\RegisterBookingAndGuestStep;
 use App\Models\Package;
+use App\Models\Tour;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use function Pest\Laravel\seed;
@@ -23,7 +24,25 @@ it('should be mountable', function () {
         ->assertSuccessful()
         ->assertSee('Choose Tour');
 });
+it('should abort when package is not active', function () {
+    $package = Package::factory()->create([
+        'is_active' => false,
+    ]);
 
+    Livewire::test(CreateBookingWizard::class, ['packageId' => $package->id])
+        ->assertNotFound();
+});
+
+it('should abort when package tour is not active', function () {
+    $tour = Tour::factory()->create([
+        'is_active' => false,
+    ]);
+    $package = Package::factory()->create([
+        'tour_id' => $tour->id,
+    ]);
+    Livewire::test(CreateBookingWizard::class, ['packageId' => $package->id])
+        ->assertNotFound();
+});
 
 it('should be able to book a packages as customer', function () {
     $this->actingAs(User::factory()->customer()->create());
