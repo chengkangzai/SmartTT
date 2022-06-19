@@ -76,6 +76,6 @@ class Package extends Model
 
     public function scopeActive(Builder $q): Builder
     {
-        return $q->where('is_active', true);
+        return $q->where('packages.is_active', true);
     }
 }
