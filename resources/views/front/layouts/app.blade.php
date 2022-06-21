@@ -26,7 +26,7 @@ $language = $setting->default_language;
     @yield('modal')
     <div class="flex min-h-screen flex-col overscroll-none">
         <header class="top-0 z-50 w-full">
-            <div class="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
+            <div class="bg-gray-700 text-gray-200">
                 <div
                     class="container mx-auto flex hidden flex-col px-4 md:flex md:flex-row md:items-center md:justify-between">
                     <p class="inline text-xs">
@@ -74,7 +74,7 @@ $language = $setting->default_language;
                     </nav>
                 </div>
             </div>
-            <div class="bg-gray-200 dark:bg-gray-800 dark:text-gray-200">
+            <div class="bg-gray-800 text-gray-200">
                 <div x-data="{ open: false }"
                     class="container mx-auto flex flex-col px-4 py-2 md:flex-row md:items-center md:justify-between">
                     <div class="flex flex-row items-center justify-between">
