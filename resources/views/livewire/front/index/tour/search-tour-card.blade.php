@@ -14,30 +14,30 @@
                     <input type="text" class="rounded-lg" id="q" name="q" placeholder="{{ __('Keyword') }}">
                 </div>
                 <div class="flex w-full flex-col gap-1">
-                    <label for="date_from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
+                    <label for="date_from" class="block px-2 text-sm opacity-70">{{ __('Date From') }}</label>
                     <input type="date" class="rounded-lg" id="date_from" name="dateFrom"
-                        placeholder="{{ __('From') }}" min="{{ now()->format('Y-m-d') }}"
-                        max="{{ $latestDepartTime }}" value="{{ now()->addMonth()->format('Y-m-d') }}">
+                        min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
+                        value="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 <div class="flex w-full flex-col gap-1">
-                    <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
+                    <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
                     <input type="date" class="rounded-lg" id="date_to" name="dateTo"
-                        placeholder="{{ __('To') }}" min="{{ now()->format('Y-m-d') }}"
-                        max="{{ $latestDepartTime }}" value="{{ $latestDepartTime }}">
+                        min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
+                        value="{{ $latestDepartTime }}">
                 </div>
             </div>
             <div class="flex flex-col gap-2 rounded-b bg-white p-2 md:flex-row">
                 <div class="flex w-full flex-col gap-1">
-                    <label for="price_from" class="block px-2 text-sm opacity-70">{{ __('From') }}</label>
+                    <label for="price_from" class="block px-2 text-sm opacity-70">{{ __('Price From') }}</label>
                     <input type="number" class="rounded-lg" id="price_from" name="priceFrom"
                         wire:model.debounce="priceFrom" min="0" max="{{ $priceTo }}"
-                        placeholder="{{ __('From') }}" />
+                        placeholder="{{ __('Price From') }}" />
                 </div>
                 <div class="flex w-full flex-col gap-1">
-                    <label for="price_to" class="block px-2 text-sm opacity-70">{{ __('To') }}</label>
+                    <label for="price_to" class="block px-2 text-sm opacity-70">{{ __('Price To') }}</label>
                     <input type="number" class="rounded-lg" id="price_to" name="priceTo"
                         wire:model.debounce="priceTo" min="0" max="{{ $priceTo }}"
-                        placeholder="{{ __('To') }}" />
+                        placeholder="{{ __('Price To') }}" />
                 </div>
                 <div class="flex flex-col">
                     <div class="flex-grow"></div>
