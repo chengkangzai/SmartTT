@@ -33,7 +33,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <td>{{ __('ID') }}</td>
@@ -65,7 +65,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table " id="usersTable">
+                <table class="table table-striped" id="usersTable">
                     <thead>
                         <tr>
                             <td>{{ __('ID') }}</td>
