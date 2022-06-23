@@ -11,6 +11,9 @@ class StoreRoleAction
         $data = \Validator::make($data, [
             'name' => 'required|unique:roles,name',
             'permissions' => 'required|array|exists:permissions,id',
+        ], customAttributes: [
+            'name' => __('Name'),
+            'permissions' => __('Permissions'),
         ])->validate();
 
         $role = Role::create([

@@ -45,5 +45,5 @@ it('should not update tour bc w/o country', function () {
 
     $mockTour = Tour::factory()->make();
     expect(fn () => app(UpdateTourAction::class)->execute($mockTour->toArray(), $oriTour))
-        ->toThrow('The countries field is required.');
+        ->toThrow('The Countries field is required.');
 });

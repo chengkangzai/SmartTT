@@ -60,7 +60,7 @@ it('should not store a tour bc w/o des', function () use ($faker) {
     } catch (ValidationException $e) {
         expect($e)->toBeInstanceOf(ValidationException::class)
             ->and($e->errors())->toHaveCount(1)
-            ->and($e->errors()['des'])->toBe([0 => 'The description field is required.']);
+            ->and($e->errors()['des'])->toBe([0 => 'The Description field is required.']);
     } catch (Exception|Throwable $e) {
         $this->fail('Unexpected exception thrown: ' . $e->getMessage());
     }
@@ -78,7 +78,7 @@ it('should not store a tour bc w/o place', function () use ($faker) {
     } catch (ValidationException $e) {
         expect($e)->toBeInstanceOf(ValidationException::class)
             ->and($e->errors())->toHaveCount(1)
-            ->and($e->errors()['place'])->toBe([0 => 'The place field is required.']);
+            ->and($e->errors()['place'])->toBe([0 => 'The Place field is required.']);
     } catch (Exception|Throwable $e) {
         $this->fail('Unexpected exception thrown: ' . $e->getMessage());
     }
@@ -96,7 +96,7 @@ it('should not store a tour bc w/o countries', function () use ($faker) {
     } catch (ValidationException $e) {
         expect($e)->toBeInstanceOf(ValidationException::class)
             ->and($e->errors())->toHaveCount(1)
-            ->and($e->errors()['countries'])->toBe([0 => 'The countries field is required.']);
+            ->and($e->errors()['countries'])->toBe([0 => 'The Countries field is required.']);
     } catch (Exception|Throwable $e) {
         $this->fail('Unexpected exception thrown: ' . $e->getMessage());
     }
