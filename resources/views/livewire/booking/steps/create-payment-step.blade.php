@@ -66,7 +66,7 @@
                                 <label for="card-element">{{ __('Credit/Debit Card Number') }}</label>
                                 <input type="text" class="form-control" id="card-element" wire:model="cardNumber"
                                        wire:change.debounce="validateCard('cardNumber')"
-                                       placeholder="1234 5678 1234 5678"/>
+                                       placeholder="1234567812345678"/>
                             </div>
                             <div class="col-md-2">
                                 <label for="card-expiry-month">{{ __('Expiration Date') }}</label>
