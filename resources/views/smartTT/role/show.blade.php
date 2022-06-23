@@ -125,9 +125,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $permissions->links() }}
             </div>
         </div>
-        <div class="card-footer">{{ $permissions->links() }}</div>
     </div>
 @endsection
 @section('modal')

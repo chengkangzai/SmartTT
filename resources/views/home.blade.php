@@ -68,13 +68,14 @@
                 <h2>{{ __('Recent Bookings') }}</h2>
             </div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-sm table-responsive table-bordered table-striped text-center">
                     <thead>
                     <tr>
                         <th> {{ __('Date Time') }} </th>
-                        <th> {{ __('Subject') }} </th>
-                        <th> {{ __('Performed By') }} </th>
-                        <th> {{ __('Action') }} </th>
+                        <th class="d-none d-sm-table-cell"> {{ __('Subject') }} </th>
+                        <th class="d-none d-sm-table-cell"> {{ __('Performed By') }} </th>
+                        <th class="d-none d-sm-table-cell"> {{ __('Action') }} </th>
                         <th>{{ __('Price') }}</th>
                         <th>{{ __('Tour') }}</th>
                     </tr>
@@ -83,14 +84,14 @@
                     @forelse($logs as $log)
                         <tr>
                             <td> {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat(config('app.date_format')) }} </td>
-                            <td> {{ trans('constant.model.' . $log->subject_type) }} </td>
-                            <td> {{ $log->causer->name ?? __('System') }}
+                            <td class="d-none d-sm-table-cell"> {{ trans('constant.model.' . $log->subject_type) }} </td>
+                            <td class="d-none d-sm-table-cell"> {{ $log->causer->name ?? __('System') }}
                                 {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                             </td>
                             @if(in_array($log->description, ['created','updated','deleted']))
-                            <td> {{ trans('constant.activity.' . $log->description) }} </td>
+                            <td class="d-none d-sm-table-cell"> {{ trans('constant.activity.' . $log->description) }} </td>
                             @else
-                                <td>{{$log->description}}</td>
+                                <td class="d-none d-sm-table-cell">{{$log->description}}</td>
                             @endif
                             <td> {{ number_format($logData->find($log->subject_id)?->total_price ?? 0, 2) }}
                             </td>
@@ -104,6 +105,7 @@
                     </tbody>
                 </table>
                 {{ $logs->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -62,8 +62,9 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table">
-                <thead>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
                         <th>{{ __('ID') }}</th>
                         <th>{{ __('User Name') }}</th>
@@ -71,8 +72,8 @@
                         <th>{{ __('User Role') }}</th>
                         <th>{{ __('User Joined At') }}</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
@@ -84,8 +85,9 @@
                         </td>
                         <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

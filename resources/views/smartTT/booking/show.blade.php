@@ -85,7 +85,8 @@
             @endcan
         </div>
         <div class="card-body">
-            <table class="table table-responsive">
+            <div class="table-responsive">
+            <table class="table table-striped">
                 <tr>
                     <th>{{ __('Payment Date') }}</th>
                     <th>{{ __('Payment Method') }}</th>
@@ -119,6 +120,7 @@
                     </tr>
                 @endforeach
             </table>
+            </div>
         </div>
     </div>
 
@@ -127,7 +129,8 @@
             <h3 class="card-title">{{ __('Guests') }}</h3>
         </div>
         <div class="card-body">
-            <table class="table table-responsive">
+            <div class="table-responsive">
+            <table class="table table-striped">
                 <tr>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Price') }}</th>
@@ -145,6 +148,7 @@
                     </tr>
                 @endforeach
             </table>
+            </div>
         </div>
     </div>
 
@@ -154,7 +158,8 @@
                 <h3 class="card-title">{{ __('Tour and Packages') }}</h3>
             </div>
             <div class="card-body">
-                <table class="table table-responsive">
+                <div class="table-responsive">
+                <table class="table table-striped">
                     <tr>
                         <th>{{ __('Tour Code') }}</th>
                         <th>{{ __('Destination') }}</th>
@@ -183,6 +188,7 @@
                         </td>
                     </tr>
                 </table>
+                </div>
             </div>
         </div>
     @endcan
