@@ -1,8 +1,8 @@
 @php
 /** @var \Spatie\Activitylog\Models\Activity $log */
 @endphp
-<div>
-    <table class="table table-responsive table-striped">
+<div class="table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th> {{ __('Date Time') }} </th>

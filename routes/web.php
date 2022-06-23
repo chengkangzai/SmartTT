@@ -44,7 +44,6 @@ Route::as('front.')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::view('about', 'about')->name('about');
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');

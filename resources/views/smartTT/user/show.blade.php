@@ -62,30 +62,33 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('User Name') }}</th>
-                        <th>{{ __('User Email') }}</th>
-                        <th>{{ __('User Role') }}</th>
-                        <th>{{ __('User Joined At') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <a href="{{ route('roles.show', $user->roles->first()) }}" class="btn btn-outline-primary">
-                                {{ $user->roles->first()->name }}
-                            </a>
-                        </td>
-                        <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('User Name') }}</th>
+                            <th>{{ __('User Email') }}</th>
+                            <th>{{ __('User Role') }}</th>
+                            <th>{{ __('User Joined At') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <a href="{{ route('roles.show', $user->roles->first()) }}"
+                                    class="btn btn-outline-primary">
+                                    {{ $user->roles->first()->name }}
+                                </a>
+                            </td>
+                            <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

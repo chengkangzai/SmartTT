@@ -45,9 +45,6 @@ $language = $setting->default_language;
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                     </svg>
                 </button>
-                <a class="header-brand d-md-none" href="{{ route('front.index') }}">
-                    <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
-                </a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>

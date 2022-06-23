@@ -32,10 +32,6 @@ class RoleTable extends DataTableComponent
             Column::make("Name", "name")
                 ->searchable()
                 ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
             LinkColumn::make(__('Action'))
                 ->title(fn ($row) => __('Edit'))
                 ->location(fn ($row) => route('roles.edit', $row))

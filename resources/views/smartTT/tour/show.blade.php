@@ -50,7 +50,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>{{ __('ID') }}</th>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>{{ __('ID') }}</th>
@@ -213,9 +213,9 @@
                     @empty
                         <p class="text-center">{{ __('Nothing to show') }}</p>
                     @endforelse
-                </div>
-                <div class="card-footer">
-                    {{ $tourDes->links() }}
+                    <div>
+                        {{ $tourDes->links() }}
+                    </div>
                 </div>
             </div>
         </div>

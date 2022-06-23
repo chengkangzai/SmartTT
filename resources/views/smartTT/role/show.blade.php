@@ -33,7 +33,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <td>{{ __('ID') }}</td>
@@ -65,7 +65,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table " id="usersTable">
+                <table class="table table-striped" id="usersTable">
                     <thead>
                         <tr>
                             <td>{{ __('ID') }}</td>
@@ -111,7 +111,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table" id="permissionTable">
+                <table class="table table-striped" id="permissionTable">
                     <thead>
                         <tr>
                             <td>{{ __('Name') }}</td>
@@ -125,9 +125,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $permissions->links() }}
             </div>
         </div>
-        <div class="card-footer">{{ $permissions->links() }}</div>
     </div>
 @endsection
 @section('modal')
