@@ -10,7 +10,7 @@ class AttachUserToRoleAction
     {
         $data = \Validator::make($data, [
             'users' => 'required|array|exists:users,id',
-        ],customAttributes: [
+        ], customAttributes: [
             'users' => __('Users'),
         ])->validate();
 

@@ -12,7 +12,7 @@ class UpdateTourDescriptionAction
             'place' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'order' => 'nullable|integer|min:0',
-        ],customAttributes: [
+        ], customAttributes: [
             'description' => __('Description'),
             'place' => __('Place'),
         ])->validate();
