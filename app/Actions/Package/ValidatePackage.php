@@ -6,7 +6,7 @@ trait ValidatePackage
 {
     public function validate(array $data, bool $isStore = false): array
     {
-        if (! isset($data['is_active'])) {
+        if (!isset($data['is_active'])) {
             $data['is_active'] = false;
         }
 
@@ -33,33 +33,28 @@ trait ValidatePackage
             }
         }
 
-        return \Validator::make(
-            $data,
-            [
-                'tour_id' => 'required|integer|exists:tours,id',
-                'depart_time' => 'required|date|after:now',
-                'flights' => 'required|array|exists:flights,id',
-                'is_active' => 'required|boolean',
-                ...$rules,
-            ],
-            [
-                'name.*.required' => __('Name of the Pricing :index is required'),
-                'name.*.max' => __('Name of the Pricing :index must be less than 255 characters'),
-                'price.*.required' => __('Price of the Pricing :index is required'),
-                'price.*.max' => __('Price of the Pricing :index must be less than 255 characters'),
-                'total_capacity.*.required' => __('Total Capacity of the Pricing :index is required'),
-                'total_capacity.*.max' => __('Total Capacity of the Pricing :index must be less than 255 characters'),
-                'depart_time.after' => __('Depart Time must be after current time'),
-            ],
-            [
-                'tour_id' => __('Tour'),
-                'depart_time' => __('Depart Time'),
-                'flights' => __('Flights'),
-                'is_active' => __('Active'),
-                'name.*' => __('Name'),
-                'price.*' => __('Price'),
-                'total_capacity.*' => __('Total Capacity'),
-            ]
-        )->validate();
+        return \Validator::make($data, [
+            'tour_id' => 'required|integer|exists:tours,id',
+            'depart_time' => 'required|date|after:now',
+            'flights' => 'required|array|exists:flights,id',
+            'is_active' => 'required|boolean',
+            ...$rules,
+        ], [
+            'name.*.required' => __('Name of the Pricing :index is required'),
+            'name.*.max' => __('Name of the Pricing :index must be less than 255 characters'),
+            'price.*.required' => __('Price of the Pricing :index is required'),
+            'price.*.max' => __('Price of the Pricing :index must be less than 255 characters'),
+            'total_capacity.*.required' => __('Total Capacity of the Pricing :index is required'),
+            'total_capacity.*.max' => __('Total Capacity of the Pricing :index must be less than 255 characters'),
+            'depart_time.after' => __('Depart Time must be after current time'),
+        ], [
+            'tour_id' => __('Tour'),
+            'depart_time' => __('Depart Time'),
+            'flights' => __('Flights'),
+            'is_active' => __('Active'),
+            'name.*' => __('Name'),
+            'price.*' => __('Price'),
+            'total_capacity.*' => __('Total Capacity'),
+        ])->validate();
     }
 }
