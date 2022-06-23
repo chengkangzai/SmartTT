@@ -49,8 +49,8 @@ trait ValidateTour
             'tour_code' => __('Tour Code'),
             'itinerary' => __('Itinerary'),
             'thumbnail' => __('Thumbnail'),
-            'des.*' => __('Description'),
-            'place.*' => __('Place'),
+            'des' => __('Description'),
+            'place' => __('Place'),
         ])->validate();
     }
 }
