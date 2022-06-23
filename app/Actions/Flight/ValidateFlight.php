@@ -30,6 +30,11 @@ trait ValidateFlight
             'departure_airport_id' => __('Departure airport'),
             'arrival_airport_id' => __('Arrival airport'),
             'airline_id' => __('Airline'),
+            'class' => __('Class'),
+            'type' => __('Type'),
+            'price' => __('Price'),
+            'departure_date' => __('Departure date'),
+            'arrival_date' => __('Arrival date'),
         ])->validate();
     }
 }
