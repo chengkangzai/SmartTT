@@ -109,20 +109,20 @@ $language = $setting->default_language;
                                 class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Logout') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                                @csrf
+                            </form>
                         @endauth
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
-                            @csrf
-                            @guest
-                                <a href="{{ route('login') }}"
-                                    class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
-                                    {{ __('Login') }}
-                                </a>
-                                <a href="{{ route('register') }}"
-                                    class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
-                                    {{ __('Register') }}
-                                </a>
-                            @endguest
-                        </form>
+                        @guest
+                            <a href="{{ route('login') }}"
+                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                {{ __('Login') }}
+                            </a>
+                            <a href="{{ route('register') }}"
+                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                {{ __('Register') }}
+                            </a>
+                        @endguest
                     </nav>
                 </div>
             </div>
