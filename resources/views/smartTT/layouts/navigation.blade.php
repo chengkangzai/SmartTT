@@ -107,12 +107,12 @@
         </li>
     @endcan
 
-{{--    <li class="nav-item">--}}
-{{--        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">--}}
-{{--            <svg class="nav-icon">--}}
-{{--                <use xlink:href="{{ asset('icons/coreui.svg#cil-fire') }}"></use>--}}
-{{--            </svg>--}}
-{{--            {{ __('About us') }}--}}
-{{--        </a>--}}
-{{--    </li>--}}
+    {{-- <li class="nav-item"> --}}
+    {{-- <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}"> --}}
+    {{-- <svg class="nav-icon"> --}}
+    {{-- <use xlink:href="{{ asset('icons/coreui.svg#cil-fire') }}"></use> --}}
+    {{-- </svg> --}}
+    {{-- {{ __('About us') }} --}}
+    {{-- </a> --}}
+    {{-- </li> --}}
 </ul>
