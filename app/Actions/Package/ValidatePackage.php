@@ -49,6 +49,7 @@ trait ValidatePackage
                 'price.*.max' => __('Price of the Pricing :index must be less than 255 characters'),
                 'total_capacity.*.required' => __('Total Capacity of the Pricing :index is required'),
                 'total_capacity.*.max' => __('Total Capacity of the Pricing :index must be less than 255 characters'),
+                'depart_time.after' => __('Depart Time must be after current time'),
             ],
             [
                 'tour_id' => __('Tour'),
