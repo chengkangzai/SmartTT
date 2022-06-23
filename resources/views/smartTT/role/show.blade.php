@@ -111,7 +111,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table" id="permissionTable">
+                <table class="table table-striped" id="permissionTable">
                     <thead>
                         <tr>
                             <td>{{ __('Name') }}</td>
