@@ -42,6 +42,8 @@
                             <h6 class="text-xl font-semibold">{{ __('No Hidden Cost') }}</h6>
                             <p class="mt-2 mb-4 text-gray-500">
                                 {{ __('You pay exactly what we quoted !') }}
+                                <br>
+                                {{ __('No hidden cost!') }}
                             </p>
                         </div>
                     </div>
