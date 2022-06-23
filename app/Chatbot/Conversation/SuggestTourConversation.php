@@ -90,7 +90,7 @@ class SuggestTourConversation extends Conversation
     {
         $this->ask(__('Can i know how much is your budget per person?'), function (Answer $answer) {
             $budget = $answer->getText();
-            if (!is_numeric($budget)) {
+            if (! is_numeric($budget)) {
                 $this->say(__('Sorry, I didnt understand that. Please enter a number.'));
                 $this->askPriceRange();
             } else {
