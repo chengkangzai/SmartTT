@@ -78,6 +78,10 @@
                 </td>
             </tr>
         </table>
+        <div class="alert alert-danger">
+            {{ __('Please note that you can not change your booking after this step') }} <br>
+            {{ __('If you want to change your booking after booking, please contact us') }}
+        </div>
     </div>
     <div class="card-footer">
         <div class="float-end">
