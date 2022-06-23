@@ -156,4 +156,18 @@ class SearchTourPage extends Component
     {
         $this->limit += 6;
     }
+
+    public function updatingPriceTo($newValue)
+    {
+        if (is_numeric($newValue)) {
+            $this->priceTo = $newValue;
+        }
+    }
+
+    public function updatingPriceFrom($newValue)
+    {
+        if (is_numeric($newValue)) {
+            $this->priceFrom = $newValue;
+        }
+    }
 }
