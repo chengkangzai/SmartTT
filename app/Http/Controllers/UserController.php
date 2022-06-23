@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\User\ChangeUserRoleAction;
 use App\Actions\User\StoreUserAction;
 use App\Actions\User\UpdateUserAction;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Password;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -44,6 +46,23 @@ class UserController extends Controller
         $user->load('roles');
 
         return view('smartTT.user.show', compact('user'));
+    }
+
+    public function editRole(User $user): Factory|View|Application
+    {
+        abort_unless(auth()->user()->can('Change User Role'), 403);
+        $user->load('roles');
+        $roles = Role::all();
+
+        return view('smartTT.user.editRole', compact('user', 'roles'));
+    }
+
+    public function updateRole(Request $request, User $user): RedirectResponse
+    {
+        abort_unless(auth()->user()->can('Change User Role'), 403);
+        app(ChangeUserRoleAction::class)->execute($user, $request->all());
+
+        return redirect()->route('users.show', $user)->with('success', __('User Role Updated Successfully'));
     }
 
     public function edit(User $user): Factory|View|Application
