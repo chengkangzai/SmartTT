@@ -99,7 +99,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center">{{ __('No logs found') }}</td>
+                            <td colspan="6" class="text-center">{{ __('No bookings found') }}</td>
                         </tr>
                     @endforelse
                     </tbody>
