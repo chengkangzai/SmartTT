@@ -81,7 +81,7 @@ class RoleController extends Controller
 
     public function attachUser(Role $role, Request $request, AttachUserToRoleAction $action): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Edit User'), 403);
+        abort_unless(auth()->user()->can('Change User Role'), 403);
         $action->execute($request->all(), $role);
 
         return redirect()->route('roles.show', $role)->with('success', __('User attached successfully'));
@@ -89,7 +89,7 @@ class RoleController extends Controller
 
     public function detachUser(Role $role, Request $request, DetachUserToRoleAction $action): RedirectResponse
     {
-        abort_unless(auth()->user()->can('Edit User'), 403);
+        abort_unless(auth()->user()->can('Change User Role'), 403);
         $action->execute($request->all(), $role);
 
         return redirect()->route('roles.show', $role)->with('success', __('User detached successfully'));
