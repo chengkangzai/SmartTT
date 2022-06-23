@@ -47,14 +47,18 @@ class FlightTable extends DataTableComponent
             Column::make(__("Airline"), "airline.name")
                 ->sortable(),
             Column::make(__("Departure airport"), "depart_airport.name")
+                ->collapseOnMobile()
                 ->searchable()
                 ->sortable(),
             Column::make(__("Arrival airport"), "arrive_airport.name")
+                ->collapseOnMobile()
                 ->searchable()
                 ->sortable(),
             Column::make(__("Class"), "class")
+                ->collapseOnMobile()
                 ->sortable(),
             Column::make(__("Type"), "type")
+                ->collapseOnMobile()
                 ->sortable(),
             LinkColumn::make(__('Action'))
                 ->title(fn ($row) => __('Edit'))
