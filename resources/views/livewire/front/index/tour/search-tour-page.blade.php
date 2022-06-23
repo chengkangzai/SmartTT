@@ -75,7 +75,8 @@
                     <input value="{{ __('Search') }}" type="submit"
                         class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
                     <small>{{ __('Powered by') }}
-                        <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}" alt="Powered By Algolia" />
+                        <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}"
+                            alt="Powered By Algolia" />
                     </small>
                 </div>
             </div>
@@ -83,7 +84,7 @@
     </div>
 
     <div class="container mx-auto my-4 px-4 md:px-0">
-        <div class="gap-5 md:flex md:flex-row">
+        <div class="gap-6 md:flex md:flex-row">
             <div class="hidden h-full gap-1 rounded-lg p-3 shadow-md md:flex md:flex-col">
                 <div class="hidden rounded-lg border bg-white px-2 py-2 md:block">
                     <h3 class="px-2 text-lg font-bold">{{ __('Price') }}</h3>

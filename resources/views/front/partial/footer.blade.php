@@ -7,7 +7,7 @@
         <h3 class="pb-10 text-center text-3xl font-extrabold">{{ __('Why book with us?') }}</h3>
     </div>
     <div class="container mx-auto grid gap-4 md:grid-cols-3">
-        <div class="flex flex-col rounded-xl bg-amber-300 pt-4 shadow-xl">
+        <div class="flex flex-col rounded-xl bg-amber-200 pt-4 shadow-xl">
             <div class="mx-4 flex h-12 w-12 items-center justify-center rounded-md bg-red-500 text-white">
                 <svg class="inline h-5 w-5">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
@@ -81,7 +81,6 @@
                         <a
                             href="{{ route('front.tours', \App\Models\Tour::inRandomOrder()->first()) }}">{{ __('Feeling Lucky') }}</a>
                     </div>
-                    <div class="flex grow flex-col"></div>
                 </div>
             </div>
             <div class="hidden border md:mx-8 md:flex"></div>

@@ -27,7 +27,7 @@ class SuggestTourConversation extends Conversation
 
         if ($country || $budget || $city) {
             $tours = Tour::query()
-                ->with(['packages', 'activePackages','media','countries'])
+                ->with(['packages', 'activePackages', 'media', 'countries'])
                 ->when($country, function (Builder $query) use ($country) {
                     return $query->whereHas('countries', function (Builder $query) use ($country) {
                         return $query->where('name', 'LIKE', "%$country%");
@@ -69,7 +69,7 @@ class SuggestTourConversation extends Conversation
         $question = Question::create(__('Which of the following match your taste more ?'))
             ->addButtons($buttons);
 
-        $this->ask($question, function (Answer $answer) {
+        $this->ask($question, function (Answer $answer) use ($question) {
             if ($answer->isInteractiveMessageReply()) {
                 $category = $answer->getValue();
                 $this->bot->userStorage()->save([
@@ -80,6 +80,8 @@ class SuggestTourConversation extends Conversation
                     'name' => $this->bot->userStorage()->get('category'),
                 ]));
                 $this->askPriceRange();
+            } else {
+                $this->repeat($question);
             }
         });
     }
@@ -120,12 +122,14 @@ class SuggestTourConversation extends Conversation
         $question = Question::create(__('When are you free?'))
             ->addButtons($buttons);
 
-        $this->ask($question, function (Answer $answer) {
+        $this->ask($question, function (Answer $answer) use ($question) {
             if ($answer->isInteractiveMessageReply()) {
                 $this->bot->userStorage()->save([
                     'month' => $answer->getValue(),
                 ]);
                 $this->giveSuggestion();
+            } else {
+                $this->repeat($question);
             }
         });
     }
@@ -133,9 +137,10 @@ class SuggestTourConversation extends Conversation
     private function giveSuggestion()
     {
         $this->bot->typesAndWaits(2);
-        $category = $this->bot->userStorage()->get('category');
-        $budget = $this->bot->userStorage()->get('budget');
-        $month = $this->bot->userStorage()->get('month');
+        $storage = $this->bot->userStorage();
+        $category = $storage->get('category');
+        $budget = $storage->get('budget');
+        $month = $storage->get('month');
         $tours = Tour::query()
             ->where('category', str($category)->lower())
             ->when($month != '0', function ($query) use ($month) {
@@ -184,5 +189,7 @@ class SuggestTourConversation extends Conversation
             $this->bot->typesAndWaits(1);
             $this->bot->reply($message);
         });
+
+        $this->bot->userStorage()->delete();
     }
 }

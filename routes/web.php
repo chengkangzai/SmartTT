@@ -77,6 +77,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('packagePricings/{package}', [PackagePricingController::class, 'attachToPackage'])->name('packagePricings.attach');
     Route::resource('packagePricings', PackagePricingController::class)->only(['edit', 'update', 'destroy']);
 
+    Route::get('users/{user}/editRole', [UserController::class, 'editRole'])->name('users.editRole');
+    Route::post('users/{user}/updateRole', [UserController::class, 'updateRole'])->name('users.updateRole');
     Route::get('users/{user}/audit', [UserController::class, 'audit'])->name('users.audit');
     Route::post('users/{user}/sendResetPassword', [UserController::class, 'sendResetPassword'])->name('users.sendResetPassword');
     Route::resource('users', UserController::class);

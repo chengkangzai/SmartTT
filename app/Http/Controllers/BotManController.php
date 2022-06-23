@@ -26,6 +26,11 @@ class BotManController extends Controller
             $bot->reply(__('We support all sorts of payment methods, including all credit cards, debit cards, If you prefer cash, please contact call us.'));
         })->middleware($dialogFlow);
 
+        $botman->hears('input.stop_conversation', function (BotMan $bot) {
+            $bot->reply(__('Bye!, See you next time!'));
+            $bot->userStorage()->delete();
+        })->middleware($dialogFlow)->stopsConversation();
+
         $botman->fallback(function (BotMan $bot) {
             $bot->types();
             $bot->reply(__('Hello!, Im not sure what you mean. Try asking me something else.'));

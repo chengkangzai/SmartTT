@@ -29,16 +29,22 @@ $language = $setting->default_language;
             <div class="bg-gray-700 text-gray-200">
                 <div
                     class="container mx-auto flex hidden flex-col px-4 md:flex md:flex-row md:items-center md:justify-between">
-                    <p class="inline text-xs">
+                    <p class="inline text-xs px-2">
                         <svg class="inline h-5 w-5">
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-phone') }}"></use>
                         </svg>
                         {{ $setting->company_phone }}
                     </p>
+                    <p class="inline text-xs px-2">
+                        <svg class="inline-block pb-1 h-6 w-6">
+                            <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-closed') }}"></use>
+                        </svg>
+                        {{ $setting->company_email }}
+                    </p>
                     <nav class="hidden flex-grow flex-col gap-2 md:flex md:flex-row md:justify-end md:pb-0">
                         <div @click.away="open = false" class="relative inline" x-data="{ open: false }">
                             <button @click="open = !open" aria-label="Drop Down trigger"
-                                class="focus:shadow-outline cursor-pointer rounded bg-transparent py-1 px-2 hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
+                                class="focus:shadow-outline cursor-pointer rounded bg-transparent py-1 px-2 text-gray-200 hover:bg-gray-600 hover:text-gray-100 hover:text-white focus:bg-gray-800 focus:bg-gray-600 focus:text-gray-100 focus:text-white focus:outline-none">
                                 <span>
                                     {{ __('Language') }}
                                     <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5" fill="none"
@@ -61,12 +67,12 @@ $language = $setting->default_language;
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95"
                                 class="absolute right-0 mt-1 w-full origin-top-right rounded-md shadow-lg md:w-48">
-                                <div class="rounded-md bg-white px-2 py-2 shadow dark:bg-gray-800">
-                                    <a class="@if (app()->getLocale() == 'en') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
+                                <div class="rounded-md bg-gray-800 p-1 shadow-lg ring-0 ring-white ring-offset-2">
+                                    <a class="@if (app()->getLocale() == 'en') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
                                         href="{{ route('setLocale', 'en') }}">English</a>
-                                    <a class="@if (app()->getLocale() == 'zh') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
+                                    <a class="@if (app()->getLocale() == 'zh') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
                                         href="{{ route('setLocale', 'zh') }}">简体中文</a>
-                                    <a class="@if (app()->getLocale() == 'ms') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
+                                    <a class="@if (app()->getLocale() == 'ms') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
                                         href="{{ route('setLocale', 'ms') }}">Bahasa Malaysia</a>
                                 </div>
                             </div>
@@ -87,11 +93,11 @@ $language = $setting->default_language;
                             @click="open = !open">
                             <svg fill="currentColor" viewBox="0 0 20 20" class="h-6 w-6">
                                 <path x-show="!open" fill-rule="evenodd" clip-rule="evenodd"
-                                    class="text-dark fill-current dark:hover:text-white"
+                                    class="fill-current hover:text-white"
                                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z">
                                 </path>
                                 <path x-show="open" fill-rule="evenodd" clip-rule="evenodd"
-                                    class="text-dark fill-current dark:hover:text-white"
+                                    class="fill-current hover:text-white"
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z">
                                 </path>
                             </svg>
@@ -101,26 +107,25 @@ $language = $setting->default_language;
                         class="hidden flex-grow flex-col gap-2 py-2 md:flex md:flex-row md:justify-end md:py-0">
                         @auth
                             <a href="{{ route('home') }}"
-                                class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
-                                {{ __('Dashboard') }}</a>
+                                class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                {{ __('Dashboard') }}
+                            </a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
+                                class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Logout') }}
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                                 @csrf
                             </form>
                         @endauth
-
                         @guest
                             <a href="{{ route('login') }}"
-                                class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
+                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Login') }}
                             </a>
                             <a href="{{ route('register') }}"
-                                class="m-1 my-auto rounded border p-2 font-medium leading-none hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800 focus:text-gray-100 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white">
+                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Register') }}
                             </a>
                         @endguest

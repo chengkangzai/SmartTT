@@ -29,6 +29,7 @@ class BookingSeeder extends Seeder
                         ];
                     });
 
+                activity()->disableLogging();
                 $booking->total_price = $guests->sum('price');
                 $booking->save();
 
@@ -58,6 +59,7 @@ class BookingSeeder extends Seeder
                         }
                     }
                 }
+                activity()->enableLogging();
             })
             ->create();
     }

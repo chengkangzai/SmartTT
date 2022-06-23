@@ -55,7 +55,7 @@
         <div class="card-header">
             <h3 class="card-title">{{ __('User with this role') }}</h3>
             <div class="float-end">
-                @can('Edit Role')
+                @can('Change User Role')
                     <button type="button" class="btn btn-outline-success" data-coreui-toggle="modal"
                         data-coreui-target="#addUserModal">
                         {{ __('Add') }}
@@ -86,7 +86,7 @@
                                             {{ __('Show') }}
                                         </a>
                                     @endcan
-                                    @can('Edit Role')
+                                    @can('Change User Role')
                                         <form action="{{ route('roles.detachUserToRole', $role) }}" style="display: inline;"
                                             method="POST">
                                             @csrf
@@ -131,7 +131,7 @@
     </div>
 @endsection
 @section('modal')
-    @can('Edit Role')
+    @can('Change User Role')
         <div class="modal fade" id="addUserModal">
             <div class="modal-dialog">
                 <div class="modal-content">
