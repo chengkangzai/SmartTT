@@ -51,6 +51,11 @@ class PermissionSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        $temp->push([
+            'name' => 'Change User Role',
+            'guard_name' => 'web',
+        ]);
+
         DB::table('permissions')->insert($temp->toArray());
     }
 }
