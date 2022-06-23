@@ -25,7 +25,8 @@ class ValidateManualCardAction
                 'cardNumber' => __('Card Number'),
                 'cardExpiry' => __('Card Expiry'),
                 'cardCvc' => __('Card CVC'),
-            ])->validate();
+            ]
+        )->validate();
 
         if ($field == 'cardExpiry') {
             $isBeforeNextMonth = Carbon::createFromFormat('m/y', $value)->isBefore(Carbon::now());

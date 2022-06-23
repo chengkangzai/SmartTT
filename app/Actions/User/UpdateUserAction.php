@@ -11,7 +11,7 @@ class UpdateUserAction
         $data = \Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        ],customAttributes: [
+        ], customAttributes: [
             'name' => __('Name'),
             'email' => __('Email'),
         ])->validate();

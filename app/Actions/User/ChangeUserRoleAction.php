@@ -12,7 +12,7 @@ class ChangeUserRoleAction
     {
         $data = Validator::make($data, [
             'role' => 'required|numeric|max:255|exists:roles,id',
-        ],customAttributes: [
+        ], customAttributes: [
             'role' => __('Role'),
         ])->validate();
 

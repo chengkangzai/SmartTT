@@ -23,7 +23,7 @@ trait ValidateCash
             'payment_type' => 'required|in:'.implode(',', Payment::TYPES),
             'billing_name' => 'required|string|max:255',
             'billing_phone' => 'required|string|max:255',
-        ],customAttributes: [
+        ], customAttributes: [
             'amount' => __('Amount'),
             'payment_type' => __('Payment Type'),
             'billing_name' => __('Billing Name'),
