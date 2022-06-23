@@ -57,7 +57,7 @@ class BookingTable extends DataTableComponent
                 ->format(fn ($value) => number_format($value, 2))
                 ->sortable(),
             Column::make(__("Payment Status"))
-                ->label(fn (Booking $value) => $value->isFullPaid() ? __('Paid') : __('Pending'))
+                ->label(fn (Booking $value) => $value->isFullPaid() ? __('Paid') : __('Partial Paid'))
                 ->sortable(),
         ];
     }
