@@ -29,11 +29,17 @@ $language = $setting->default_language;
             <div class="bg-gray-700 text-gray-200">
                 <div
                     class="container mx-auto flex hidden flex-col px-4 md:flex md:flex-row md:items-center md:justify-between">
-                    <p class="inline text-xs">
+                    <p class="inline text-xs px-2">
                         <svg class="inline h-5 w-5">
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-phone') }}"></use>
                         </svg>
                         {{ $setting->company_phone }}
+                    </p>
+                    <p class="inline text-xs px-2">
+                        <svg class="inline-block pb-1 h-6 w-6">
+                            <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-closed') }}"></use>
+                        </svg>
+                        {{ $setting->company_email }}
                     </p>
                     <nav class="hidden flex-grow flex-col gap-2 md:flex md:flex-row md:justify-end md:pb-0">
                         <div @click.away="open = false" class="relative inline" x-data="{ open: false }">
