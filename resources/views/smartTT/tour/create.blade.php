@@ -81,9 +81,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="is_active" class="form-check-label">{{ __('Active this Tour') }}</label>
                     <input type="checkbox" name="is_active" class="form-check-primary" id="is_active" value="1"
                         @checked(old('is_active', $setting->default_status))>
+                    <label for="is_active" class="form-check-label">{{ __('Active this Tour') }}</label>
                 </div>
             </div>
         </div>
