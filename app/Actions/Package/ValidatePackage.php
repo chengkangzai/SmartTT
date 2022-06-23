@@ -52,6 +52,12 @@ trait ValidatePackage
             ],
             [
                 'tour_id' => __('Tour'),
+                'depart_time' => __('Depart Time'),
+                'flights' => __('Flights'),
+                'is_active' => __('Active'),
+                'name.*' => __('Name'),
+                'price.*' => __('Price'),
+                'total_capacity.*' => __('Total Capacity'),
             ]
         )->validate();
     }

@@ -20,10 +20,10 @@ trait ValidateCard
             'billing_name' => 'required',
             'billing_phone' => 'required',
         ], customAttributes: [
-            'card_holder_name' => 'Card Holder Name',
-            'card_number' => 'Card Number',
-            'card_expiry_date' => 'Card Expiry',
-            'card_cvc' => 'Card CVC',
+            'card_holder_name' => __('Card Holder Name'),
+            'card_number' => __('Card Number'),
+            'card_expiry_date' => __('Card Expiry'),
+            'card_cvc' => __('Card CVC'),
         ])->validate();
 
         $isBeforeNextMonth = Carbon::createFromFormat('m/y', $data['card_expiry_date'])->isBefore(Carbon::now());

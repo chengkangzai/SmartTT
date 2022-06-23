@@ -17,7 +17,15 @@ class ValidateManualCardAction
 
     public function execute(string $field, string $value): void
     {
-        Validator::make([$field => $value], [$field => $this->validateCardRule[$field]])->validate();
+        Validator::make(
+            [$field => $value],
+            [$field => $this->validateCardRule[$field]],
+            customAttributes: [
+                'cardHolderName' => __('Card Holder Name'),
+                'cardNumber' => __('Card Number'),
+                'cardExpiry' => __('Card Expiry'),
+                'cardCvc' => __('Card CVC'),
+            ])->validate();
 
         if ($field == 'cardExpiry') {
             $isBeforeNextMonth = Carbon::createFromFormat('m/y', $value)->isBefore(Carbon::now());

@@ -25,7 +25,7 @@ trait ValidateFlight
             'class' => 'required|string',
             'type' => 'required|string',
         ], [
-            'arrival_airport_id.not_in' => 'Arrival airport must not be the same as departure airport',
+            'arrival_airport_id.not_in' => __('Arrival airport must not be the same as departure airport'),
         ], [
             'departure_airport_id' => __('Departure airport'),
             'arrival_airport_id' => __('Arrival airport'),

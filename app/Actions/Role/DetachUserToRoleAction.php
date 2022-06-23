@@ -11,7 +11,7 @@ class DetachUserToRoleAction
         $data = \Validator::make($data, [
             'user_id' => 'required|exists:users,id',
         ], customAttributes: [
-            'user_id' => 'User',
+            'user_id' => __('User'),
         ])->validate();
 
         $role->users()->detach($data['user_id']);
