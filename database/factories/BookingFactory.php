@@ -31,6 +31,7 @@ class BookingFactory extends Factory
     public function configure(): BookingFactory
     {
         return $this->afterCreating(function (Booking $booking) {
+            activity()->disableLogging();
             $guests = BookingGuest::factory(rand(2, 5))
                 ->afterCreating(function (BookingGuest $guest) use ($booking) {
                     $guest->package_pricing_id = $guest->is_child
@@ -44,6 +45,7 @@ class BookingFactory extends Factory
             $booking->adult = $guests->where('is_child', false)->count();
             $booking->child = $guests->where('is_child', true)->count();
             $booking->save();
+            activity()->enableLogging();
         });
     }
 }
