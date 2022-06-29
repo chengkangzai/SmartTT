@@ -18,7 +18,20 @@ $language = $setting->default_language;
 
 <body>
 
+    <header class="header">
+        <a class="header-brand" href="{{ route('front.index') }}">
+            <img src="{{ asset('button_smart-tt.png') }}" height="24" class="d-inline-block align-top" alt="CoreUI Logo">
+        </a>
+        <ul class="header-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('front.index') }}">{{ __('Home') }}
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </header>
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+
         <div class="container">
             <div class="row justify-content-center">
                 @yield('content')
