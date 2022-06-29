@@ -20,7 +20,8 @@ $language = $setting->default_language;
 
     <header class="header">
         <a class="header-brand" href="{{ route('front.index') }}">
-            <img src="{{ asset('button_smart-tt.png') }}" height="24" class="d-inline-block align-top" alt="CoreUI Logo">
+            <img src="{{ asset('button_smart-tt.png') }}" height="24" class="d-inline-block align-top"
+                alt="Brand Logo">
         </a>
         <ul class="header-nav mr-auto">
             <li class="nav-item active">
