@@ -15,13 +15,13 @@
                 </div>
                 <div class="flex w-full flex-col gap-1">
                     <label for="date_from" class="block px-2 text-sm opacity-70">{{ __('Date From') }}</label>
-                    <input type="date" class="rounded-lg" id="date_from" name="dateFrom"
+                    <input type="date" class="rounded-lg w-full" id="date_from" name="dateFrom"
                         min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
                         value="{{ now()->addMonth()->format('Y-m-d') }}">
                 </div>
                 <div class="flex w-full flex-col gap-1">
                     <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
-                    <input type="date" class="rounded-lg" id="date_to" name="dateTo"
+                    <input type="date" class="rounded-lg w-full" id="date_to" name="dateTo"
                         min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
                         value="{{ $latestDepartTime }}">
                 </div>
