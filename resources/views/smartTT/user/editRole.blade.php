@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\User $user */
+/** @var \App\Models\User $user */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -27,7 +27,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="role">{{ __('Role') }}</label>
                     <select class="form-control" id="role" name="role">
-                        @foreach($roles as $role)
+                        @foreach ($roles as $role)
                             <option value="{{ $role->id }}" @selected($user->hasRole($role->name))>
                                 {{ $role->name }}
                             </option>

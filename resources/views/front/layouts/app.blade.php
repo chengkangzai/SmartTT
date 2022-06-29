@@ -29,14 +29,14 @@ $language = $setting->default_language;
             <div class="bg-gray-700 text-gray-200">
                 <div
                     class="container mx-auto flex hidden flex-col px-4 md:flex md:flex-row md:items-center md:justify-between">
-                    <p class="inline text-xs px-2">
+                    <p class="inline px-2 text-xs">
                         <svg class="inline h-5 w-5">
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-phone') }}"></use>
                         </svg>
                         {{ $setting->company_phone }}
                     </p>
-                    <p class="inline text-xs px-2">
-                        <svg class="inline-block pb-1 h-6 w-6">
+                    <p class="inline px-2 text-xs">
+                        <svg class="inline-block h-6 w-6 pb-1">
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-closed') }}"></use>
                         </svg>
                         {{ $setting->company_email }}
@@ -104,15 +104,15 @@ $language = $setting->default_language;
                         </button>
                     </div>
                     <nav :class="{'flex': open, 'hidden': !open}"
-                        class="hidden flex-grow flex-col gap-2 py-2 md:flex md:flex-row md:justify-end md:py-0">
+                        class="hidden flex-grow flex-col gap-2 py-2 text-center md:flex md:flex-row md:justify-end md:py-0">
                         @auth
                             <a href="{{ route('home') }}"
-                                class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Dashboard') }}
                             </a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
@@ -121,14 +121,49 @@ $language = $setting->default_language;
                         @endauth
                         @guest
                             <a href="{{ route('login') }}"
-                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Login') }}
                             </a>
                             <a href="{{ route('register') }}"
-                               class="m-1 my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Register') }}
                             </a>
                         @endguest
+                        <div @click.away="open = false" x-data="{ open: false }" class="md:hidden">
+                            <button @click="open = !open" aria-label="Language Selector"
+                                class="my-auto block w-full rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
+                                <span>
+                                    {{ __('Language') }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <svg viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                                        class="inline h-4 w-4 transform fill-current transition-transform duration-200">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                                x-transition:enter-start="transform opacity-0 scale-95"
+                                x-transition:enter-end="transform opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="transform opacity-100 scale-100"
+                                x-transition:leave-end="transform opacity-0 scale-95"
+                                class="absolute left-1/2 mx-auto origin-top-right rounded-md shadow-lg md:w-48">
+                                <div class="rounded-md bg-gray-800 shadow-lg ring-0 ring-white ring-offset-2">
+                                    <a class="@if (app()->getLocale() == 'en') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
+                                        href="{{ route('setLocale', 'en') }}">English</a>
+                                    <a class="@if (app()->getLocale() == 'zh') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
+                                        href="{{ route('setLocale', 'zh') }}">简体中文</a>
+                                    <a class="@if (app()->getLocale() == 'ms') bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none md:mb-1"
+                                        href="{{ route('setLocale', 'ms') }}">Bahasa Malaysia</a>
+                                </div>
+                            </div>
+                        </div>
                     </nav>
                 </div>
             </div>

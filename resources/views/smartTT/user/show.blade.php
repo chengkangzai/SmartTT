@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\User $user */
+/** @var \App\Models\User $user */
 @endphp
 
 @extends('smartTT.layouts.app')
@@ -22,7 +22,7 @@
             <div class="float-end">
                 <div class="btn-group">
                     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-coreui-toggle="dropdown"
-                            aria-expanded="false">
+                        aria-expanded="false">
                         {{ __('Action') }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -36,24 +36,24 @@
                                 <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
                                     @method('DELETE')
                                     @csrf
-                                    <input class="dropdown-item" type="submit" value="{{ __('Delete') }}"/>
+                                    <input class="dropdown-item" type="submit" value="{{ __('Delete') }}" />
                                 </form>
                             </li>
                         @endcan
                         @can('Edit User')
                             <li>
                                 <form action="{{ route('users.sendResetPassword', $user) }}" method="POST"
-                                      style="display: inline">
+                                    style="display: inline">
                                     @csrf
                                     <input class="dropdown-item" type="submit"
-                                           value="{{ __('Send Password Reset Email') }}"/>
+                                        value="{{ __('Send Password Reset Email') }}" />
                                 </form>
                             </li>
                         @endcan
                         @can('Change User Role')
                             <li>
-                                <a href="{{route('users.editRole',$user)}}" class="dropdown-item">
-                                    {{__('Manage Role')}}
+                                <a href="{{ route('users.editRole', $user) }}" class="dropdown-item">
+                                    {{ __('Manage Role') }}
                                 </a>
                             </li>
                         @endcan
@@ -72,27 +72,27 @@
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('User Name') }}</th>
-                        <th>{{ __('User Email') }}</th>
-                        <th>{{ __('User Role') }}</th>
-                        <th>{{ __('User Joined At') }}</th>
-                    </tr>
+                        <tr>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('User Name') }}</th>
+                            <th>{{ __('User Email') }}</th>
+                            <th>{{ __('User Role') }}</th>
+                            <th>{{ __('User Joined At') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <a href="{{ route('roles.show', $user->roles->first()) }}"
-                               class="btn btn-outline-primary">
-                                {{ $user->roles->first()->name }}
-                            </a>
-                        </td>
-                        <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <a href="{{ route('roles.show', $user->roles->first()) }}"
+                                    class="btn btn-outline-primary">
+                                    {{ $user->roles->first()->name }}
+                                </a>
+                            </td>
+                            <td>{{ $user->created_at->translatedFormat(config('app.date_format')) }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
