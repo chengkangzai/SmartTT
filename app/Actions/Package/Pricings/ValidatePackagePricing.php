@@ -15,6 +15,11 @@ trait ValidatePackagePricing
             'price' => 'required|numeric|min:1',
             'total_capacity' => 'required|numeric|min:1',
             'is_active' => 'required|boolean',
+        ], customAttributes: [
+            'name' => __('Name'),
+            'price' => __('Price'),
+            'total_capacity' => __('Total Capacity'),
+            'is_active' => __('Active'),
         ])
             ->validate();
     }

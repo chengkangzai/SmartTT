@@ -40,10 +40,17 @@ trait ValidateTour
             'des.*.required' => __('Description :index is required'),
             'place.*.required' => __('Place :index is required'),
         ], [
-            'des' => 'description',
-            'des.*' => 'description',
-            'place' => 'place',
-            'place.*' => 'place',
+            'name' => __('Name'),
+            'category' => __('Category'),
+            'countries' => __('Countries'),
+            'nights' => __('Nights'),
+            'days' => __('Days'),
+            'is_active' => __('Active'),
+            'tour_code' => __('Tour Code'),
+            'itinerary' => __('Itinerary'),
+            'thumbnail' => __('Thumbnail'),
+            'des' => __('Description'),
+            'place' => __('Place'),
         ])->validate();
     }
 }

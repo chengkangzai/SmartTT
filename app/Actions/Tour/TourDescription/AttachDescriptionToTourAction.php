@@ -13,7 +13,8 @@ class AttachDescriptionToTourAction
             'place' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ], customAttributes: [
-            'description' => 'Description',
+            'description' => __('Description'),
+            'place' => __('Place'),
         ])->validate();
 
         return $tour->description()->create([
