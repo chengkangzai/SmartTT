@@ -18,7 +18,7 @@ $language = $setting->default_language;
 
 <body>
 
-    <header class="header">
+    <header class="header position-sticky top-0">
         <a class="header-brand" href="{{ route('front.index') }}">
             <img src="{{ asset('button_smart-tt.png') }}" height="24" class="d-inline-block align-top"
                 alt="Brand Logo">
@@ -32,7 +32,6 @@ $language = $setting->default_language;
         </ul>
     </header>
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-
         <div class="container">
             <div class="row justify-content-center">
                 @yield('content')
