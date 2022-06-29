@@ -1,9 +1,9 @@
 @php
-    /** @var \App\Models\User $user */
+/** @var \App\Models\User $user */
 @endphp
 @extends('smartTT.layouts.app')
 @section('title')
-    {{__('Profile')}}
+    {{ __('Profile') }}
 @endsection
 
 @section('content')
@@ -26,9 +26,9 @@
                         </svg>
                     </span>
                     <input class="form-control" type="text" name="name" placeholder="{{ __('Name') }}"
-                           value="{{ old('name', auth()->user()->name) }}" required>
+                        value="{{ old('name', auth()->user()->name) }}" required>
                     @error('name')
-                    <span class="invalid-feedback">
+                        <span class="invalid-feedback">
                             {{ $message }}
                         </span>
                     @enderror
@@ -40,9 +40,9 @@
                         </svg>
                     </span>
                     <input class="form-control" type="text" name="email" placeholder="{{ __('Email') }}"
-                           value="{{ old('email', auth()->user()->email) }}" required>
+                        value="{{ old('email', auth()->user()->email) }}" required>
                     @error('email')
-                    <span class="invalid-feedback">
+                        <span class="invalid-feedback">
                             {{ $message }}
                         </span>
                     @enderror
@@ -55,9 +55,9 @@
                         </svg>
                     </span>
                     <input class="form-control @error('password') is-invalid @enderror" type="password" name="password"
-                           placeholder="{{ __('New password') }}" required>
+                        placeholder="{{ __('New password') }}" required>
                     @error('password')
-                    <span class="invalid-feedback">
+                        <span class="invalid-feedback">
                             {{ $message }}
                         </span>
                     @enderror
@@ -69,7 +69,7 @@
                         </svg>
                     </span>
                     <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password"
-                           name="password_confirmation" placeholder="{{ __('New password confirmation') }}" required>
+                        name="password_confirmation" placeholder="{{ __('New password confirmation') }}" required>
                 </div>
             </div>
             <div class="card-footer">
@@ -90,19 +90,18 @@
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('icons/brand.svg#cib-microsoft') }}"></use>
                                 </svg>
-                                {{__('Microsoft')}}
+                                {{ __('Microsoft') }}
                                 <span class="my-auto">
-                                @if(auth()->user()->msOauth()->exists())
-                                        <span class="badge bg-success">{{__('Connected')}}</span>
+                                    @if (auth()->user()->msOauth()->exists())
+                                        <span class="badge bg-success">{{ __('Connected') }}</span>
                                     @else
-                                        <span class="badge bg-secondary">{{__('Not connected')}}</span>
+                                        <span class="badge bg-secondary">{{ __('Not connected') }}</span>
                                     @endif
-                            </span>
+                                </span>
                             </p>
                             <div class="my-auto flex-grow">
-                                @if(auth()->user()->msOauth()->exists())
-                                    <a href="{{ route('msOAuth.disconnect') }}"
-                                       class="btn btn-sm btn-danger rounded-pill">
+                                @if (auth()->user()->msOauth()->exists())
+                                    <a href="{{ route('msOAuth.disconnect') }}" class="btn btn-sm btn-danger rounded-pill">
                                         {{ __('Disconnect') }}
                                     </a>
                                 @else
