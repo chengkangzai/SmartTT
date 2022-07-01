@@ -1,4 +1,12 @@
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
+
+    <li class="d-block d-md-none nav-item">
+        <a class="nav-link" href="{{ route('front.index') }}">
+            <img src="{{ asset('button_smart-tt.png') }}" alt="" height="40">
+        </a>
+        <div style="border: 1"></div>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">
             <svg class="nav-icon">
