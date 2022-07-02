@@ -125,7 +125,6 @@ class AddPaymentOnBooking extends Component
         ]);
 
         $this->generateInvoice();
-        $this->generateReceipt();
         $this->currentStep++;
     }
 

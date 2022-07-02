@@ -1,6 +1,11 @@
 <div class="card">
     <div class="card-header">
-        <h2>{{ __('Add Payment') }}</h2>
+        @if ($currentStep == 1)
+            <h4 class="card-title">{{__('Billing Information')}}</h4>
+        @endif
+        @if ($currentStep == 2)
+            <h4 class="card-title">{{__('Payment')}}</h4>
+        @endif
     </div>
     <div class="card-body">
         @include('smartTT.partials.error-alert')
