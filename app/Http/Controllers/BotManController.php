@@ -17,11 +17,11 @@ class BotManController extends Controller
         $dialogFlow = DialogFlowV2::create()->listenForAction();
         $botman->middleware->received($dialogFlow);
 
-        $this->input_SuggestTour($botman, $dialogFlow);
-        $this->input_Welcome($botman, $dialogFlow);
-        $this->input_BadWord($botman, $dialogFlow);
-        $this->input_Refund($botman, $dialogFlow);
-        $this->input_CompanyInfo($botman, $dialogFlow);
+        $this->registerSuggestTourHandler($botman, $dialogFlow);
+        $this->registerWelcomeHandler($botman, $dialogFlow);
+        $this->registerBadWordDetectionHandler($botman, $dialogFlow);
+        $this->registerRefundHandler($botman, $dialogFlow);
+        $this->registerCompanyInfoHandler($botman, $dialogFlow);
         $botman->hears('input.ask_for_payment_method', function (BotMan $bot) {
             $bot->reply(__('We support all sorts of payment methods, including all credit cards, debit cards, If you prefer cash, please contact call us.'));
         })->middleware($dialogFlow);
@@ -34,13 +34,20 @@ class BotManController extends Controller
         $botman->fallback(function (BotMan $bot) {
             $bot->types();
             $bot->reply(__('Hello!, Im not sure what you mean. Try asking me something else.'));
-            $bot->reply(__('You can ask me to suggest a tour, or to suggest a destination.').'😉');
+            $bot->reply(__('You can ask me to suggest a tour, or to suggest a destination.') . '😉');
         });
 
         $botman->listen();
     }
 
-    private function input_Welcome(BotMan $botman, DialogFlowV2 $dialogFlow)
+    private function registerSuggestTourHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
+    {
+        $botman->hears('input.suggest_tour', function (BotMan $bot) {
+            $bot->startConversation(new SuggestTourConversation());
+        })->middleware($dialogFlow);
+    }
+
+    private function registerWelcomeHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.welcome', function (BotMan $bot) {
             $welcomeMessage = [
@@ -56,7 +63,7 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
     }
 
-    private function input_BadWord(BotMan $botman, DialogFlowV2 $dialogFlow)
+    private function registerBadWordDetectionHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.bad_word', function (BotMan $bot) {
             $helpMessage = [
@@ -71,14 +78,8 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
     }
 
-    private function input_SuggestTour(BotMan $botman, DialogFlowV2 $dialogFlow)
-    {
-        $botman->hears('input.suggest_tour', function (BotMan $bot) {
-            $bot->startConversation(new SuggestTourConversation());
-        })->middleware($dialogFlow);
-    }
 
-    private function input_Refund(BotMan $botman, DialogFlowV2 $dialogFlow)
+    private function registerRefundHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.refund', function (BotMan $bot) {
             $setting = app(GeneralSetting::class);
@@ -95,7 +96,7 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
     }
 
-    private function input_CompanyInfo(BotMan $botman, DialogFlowV2 $dialogFlow)
+    private function registerCompanyInfoHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.company_info', function (BotMan $bot) {
             $setting = app(GeneralSetting::class);
