@@ -230,8 +230,7 @@
                             <div class="mb-3">
                                 <label for="total_capacity" class="form-label">{{ __('Total Capacity') }}</label>
                                 <input type="number" class="form-control" name="total_capacity" id="total_capacity"
-                                    placeholder="{{ __('Total Capacity of') }}" value="{{ old('total_capacity') }}"
-                                    step="1">
+                                    placeholder="{{ __('Total Capacity') }}" value="{{ old('total_capacity') }}" step="1">
                             </div>
                         </form>
                     </div>
