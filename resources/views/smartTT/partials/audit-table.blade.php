@@ -22,7 +22,12 @@
                     <td> {{ $log->causer->name ?? __('System') }} <br>
                         {{ $log->causer?->email ? '<' . $log->causer->email . '>' : '' }}
                     </td>
-                    <td> {{ trans('constant.activity.' . $log->description) }} </td>
+                    @if (in_array($log->description, ['created', 'updated', 'deleted']))
+                        <td class="d-none d-sm-table-cell"> {{ trans('constant.activity.' . $log->description) }}
+                        </td>
+                    @else
+                        <td class="d-none d-sm-table-cell">{{ $log->description }}</td>
+                    @endif
                     <td>
                         @forelse((collect($log->changes)->get('old') ?? []) as $key => $value)
                             <span>{{ $key }}: {{ $value }}</span><br>
