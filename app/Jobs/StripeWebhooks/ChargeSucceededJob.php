@@ -38,7 +38,7 @@ class ChargeSucceededJob implements ShouldQueue
             return;
         }
 
-        $payment = Payment::where('user_id', $user->id)->whereNull('paid_at')->latest()->first();
+        $payment = Payment::whereBelongsTo($user)->whereNull('paid_at')->latest()->first();
 
         if (!$payment) {
             return;
