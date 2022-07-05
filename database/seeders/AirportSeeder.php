@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\LazyCollection;
 
 class AirportSeeder extends Seeder
 {
@@ -5836,8 +5837,8 @@ class AirportSeeder extends Seeder
             ['name' => 'Desierto de Atacama Airport', 'city' => 'Copiapo', 'country_id' => 43, 'IATA' => 'CPO', 'ICAO' => 'SCAT', 'latitude' => '-27.261200', 'longitude' => '-70.779198', 'altitude' => '670', 'offset_UTC' => '', 'DST' => '', 'timezoneTz' => ''],
         ];
 
-        collect($airports)
-            ->chunk(500)
+        LazyCollection::make($airports)
+            ->chunk(100)
             ->each(function ($chunk) {
                 DB::table('airports')->insert($chunk->toArray());
             });
