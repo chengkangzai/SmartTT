@@ -33,17 +33,23 @@ class ChargeSucceededJob implements ShouldQueue
     {
         $charge = $this->webhookCall->payload['data']['object'];
         $user = User::where('stripe_id', $charge['customer'])->first();
-        if ($user) {
-            $payment = Payment::where('user_id', $user->id)->whereNull('paid_at')->latest()->first();
-            if ($payment) {
-                $payment->update([
-                    'paid_at' => now(),
-                    'status' => Payment::STATUS_PAID,
-                ]);
-                $payment = app(GenerateReceiptAction::class)->execute($payment->refresh());
 
-                $user->notify(new PaymentSuccessNotification($payment));
-            }
+        if (! $user) {
+            return;
         }
+
+        $payment = Payment::whereBelongsTo($user)->whereNull('paid_at')->latest()->first();
+
+        if (! $payment) {
+            return;
+        }
+
+        $payment->update([
+            'paid_at' => now(),
+            'status' => Payment::STATUS_PAID,
+        ]);
+        $payment = app(GenerateReceiptAction::class)->execute($payment->refresh());
+
+        $user->notify(new PaymentSuccessNotification($payment));
     }
 }

@@ -27,7 +27,7 @@ class SuggestTourConversation extends Conversation
 
         if ($country || $budget || $city) {
             $tours = Tour::query()
-                ->with(['packages', 'activePackages', 'media', 'countries'])
+                ->with(['activePackages', 'activePackages.activePricings', 'media', 'countries'])
                 ->when($country, function (Builder $query) use ($country) {
                     return $query->whereHas('countries', function (Builder $query) use ($country) {
                         return $query->where('name', 'LIKE', "%$country%");
@@ -142,14 +142,17 @@ class SuggestTourConversation extends Conversation
         $budget = $storage->get('budget');
         $month = $storage->get('month');
         $tours = Tour::query()
+            ->with(['activePackages', 'activePackages.activePricings', 'media'])
             ->where('category', str($category)->lower())
             ->when($month != '0', function ($query) use ($month) {
                 return $query->whereHas('activePackages', function (Builder $query) use ($month) {
                     return $query->whereMonth('depart_time', $month);
                 });
             })
-            ->whereHas('activePackages.activePricings', function (Builder $query) use ($budget) {
-                return $query->where('price', '<=', $budget * 100);
+            ->whereHas('activePackages', function (Builder $query) use ($budget) {
+                return $query->whereHas('activePricings', function (Builder $query) use ($budget) {
+                    return $query->where('price', '<=', $budget * 100);
+                });
             })
             ->limit(3)
             ->inRandomOrder()
