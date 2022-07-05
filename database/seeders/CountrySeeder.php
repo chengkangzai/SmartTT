@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Country;
+use DB;
 use Illuminate\Database\Seeder;
 
 class CountrySeeder extends Seeder
@@ -1211,6 +1212,16 @@ class CountrySeeder extends Seeder
                 'short_code' => 'zw',
             ],
         ];
+        //check if the db driver is sqlsrv
+        //if so, we need to unset the id column
+        //this is because the sqlsrv driver does not support
+        //the insert with primary key
+        //this is a known issue with the sqlsrv driver
+        if (DB::connection()->getDriverName() == 'sqlsrv') {
+            foreach ($countries as $key => $value) {
+                unset($countries[$key]['id']);
+            }
+        }
 
         Country::insert($countries);
     }
