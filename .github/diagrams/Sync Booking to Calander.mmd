@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant MS as Microsoft Graph   
+    U->>S: requests to view the list of bookings
+    alt User do not have permission to view the bookings
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of bookings
+
+    U->>S: Click Sync Booking to calender button
+    
+    alt User do not have permission to sync
+    S-->>U: Redirect to the booking index page
+    end
+
+    alt User not connect their MS account
+    S-->>U: Redirect to the profile page and ask to connect
+    end
+
+    S->>MS: requests to sync the bookings
+    MS-->>S: inform calendar events created successfully
+
+    S-->>U: show the sync success message

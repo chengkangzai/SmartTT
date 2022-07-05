@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+
+    U->>S: requests to view the list of roles
+    alt User do not have permission to view the roles
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of roles
+
+    U->>S: Click the role in the role index page
+    
+    alt User do not have permission to view role
+    S-->>U: Redirect to the roles index page
+    end
+
+    S-->>U: returns the details of the roles
+    U->>S: Click the Attach button and submit the form
+
+    alt Invalid form data
+    S-->>U: Redirect to detail page with the error messages
+    end
+
+    S-->>U: returns success message

@@ -1,0 +1,14 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant A as Algolia API
+
+    U->>S: Enter Search Tour Page 
+    S-->>U: returns the view of Search Tour Page
+
+    U->>S: Type in keyword and filter of the tour
+    S->>A: Send the search parameter to Algolia API
+
+    A->>S: Returns the search result
+    S-->>U: returns the related tour with filter applied
