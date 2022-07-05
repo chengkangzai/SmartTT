@@ -1,0 +1,38 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant SP as Stripe Payment Gateway
+    U->>S: Request to view booking detail
+
+    alt User do not have permission to view the booking
+    S-->>U: Redirect to the booking index page
+    end
+    S-->>U: returns the detail of the booking
+
+    U->>S: Click Pay Remaining button
+    alt User do not have permission to create payment
+    S-->>U: Redirect to the booking detail page
+    end
+
+    S-->>U: Ask user to Fill up Billing information
+    U->>S: Fill up guest information and submit the form
+
+    alt Invalid Form
+    S-->>U: Repeat fill up billing information step
+    end
+
+    S->>SP: Inform Stripe to the user are ready to pay
+    SP-->>S: Return Payment Intent secret
+
+    S-->>U: Show the Stripe Payment Card UI
+    U->>SP: Input the payment card details and submit the form
+
+    alt Invalid Card Detail
+    SP-->>U: Repeat the payment card details step
+    end
+    SP-->>S: Notify payment is successful
+    S-->>U: Show the payment success message
+    
+    U->>S: Click Finish button
+    S-->>U: Redirect to the booking detail page

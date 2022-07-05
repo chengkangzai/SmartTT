@@ -1,0 +1,62 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant SP as Stripe Payment Gateway
+    U->>S: requests to view the list of models
+
+    alt User do not have permission to view the models
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of models
+
+    U->>S: Click Create button
+    alt User do not have permission to create booking
+    S-->>U: Redirect to the booking index page
+    end
+
+    S-->>U: Ask user to choose tour
+    U->>S: Select the tour and submit the form
+
+    alt Invalid Form
+    S-->>U: Repeat tour selection step
+    end
+
+    S-->>U: Ask user to choose packages
+    U->>S: Select the packages and submit the form
+
+    alt Invalid Form
+    S-->>U: Repeat packages selection step
+    end
+
+    S-->>U: Ask user to register guest
+    U->>S: Fill up guest information and submit the form
+
+    alt Invalid Form
+    S-->>U: Repeat guest information registration step
+    end
+
+    S-->>U: Ask user to Fill up Billing information
+    U->>S: Fill up guest information and submit the form
+
+    alt Invalid Form
+    S-->>U: Repeat fill up billing information step
+    end
+
+    S-->>U: Ask user to Confirm the datail of the booking
+    U->>S: Confirm the booking and submit the form
+
+    S->>SP: Inform Stripe to the user are ready to pay
+    SP-->>S: Return Payment Intent secret
+
+    S-->>U: Show the Stripe Payment Card UI
+    U->>SP: Input the payment card details and submit the form
+
+    alt Invalid Card Detail
+    SP-->>U: Repeat the payment card details step
+    end
+    SP-->>S: Notify payment is successful
+    
+    S-->>U: Show the booking detail
+    U->>S: Click Finish button
+    S-->>U: Redirect to the booking detail page

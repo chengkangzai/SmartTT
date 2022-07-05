@@ -1,0 +1,18 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+
+    U->>S: requests to view the profile 
+    alt User do not have permission to view the profile
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns profile information
+
+    U->>S: fill up the update profile form
+    
+    alt User do not have permission to update profile
+    S-->>U: Redirect to the profile page with error message
+    end
+
+    S-->>U: Redirect to the profile page with success message

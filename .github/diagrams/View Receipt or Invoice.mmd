@@ -1,0 +1,12 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    U->>S: requests to view the list of bookings
+    alt User do not have permission to view the bookings
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of bookings
+
+    U->>S: Click View button on Invoice column
+    S-->>U: show the Invoice
