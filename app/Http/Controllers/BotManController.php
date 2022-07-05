@@ -78,7 +78,6 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
     }
 
-
     private function registerRefundHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.refund', function (BotMan $bot) {

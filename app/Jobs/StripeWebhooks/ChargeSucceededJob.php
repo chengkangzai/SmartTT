@@ -34,13 +34,13 @@ class ChargeSucceededJob implements ShouldQueue
         $charge = $this->webhookCall->payload['data']['object'];
         $user = User::where('stripe_id', $charge['customer'])->first();
 
-        if (!$user) {
+        if (! $user) {
             return;
         }
 
         $payment = Payment::whereBelongsTo($user)->whereNull('paid_at')->latest()->first();
 
-        if (!$payment) {
+        if (! $payment) {
             return;
         }
 
