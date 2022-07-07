@@ -53,7 +53,7 @@ it('should add payment as Admin', function () {
         ->assertSet('paymentAmount', $booking->getRemaining())
         ->assertSet('defaultCurrency', app(GeneralSetting::class)->default_currency);
 
-    $err = $livewire->call('getReadyForPayment')
+    $livewire->call('getReadyForPayment')
         ->call('recordManualPayment')
         ->assertHasErrors([
             'billing_phone', 'card_holder_name', 'card_number', 'card_expiry_date', 'card_cvc', 'billing_phone',

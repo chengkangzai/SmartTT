@@ -13,7 +13,7 @@ beforeEach(function () {
     seed(UserRoleSeeder::class);
 });
 
-it('should attach one user to role', function () {
+it('should attach one user from role', function () {
     $user = User::factory()->create();
     assertModelExists($user);
 
@@ -23,7 +23,7 @@ it('should attach one user to role', function () {
     $user->assignRole($role);
     assert($user->roles()->count() === 1);
 
-    $action = app(DetachUserToRoleAction::class)->execute(['user_id'=>$user->id], $role);
+    $action = app(DetachUserToRoleAction::class)->execute(['user_id' => $user->id], $role);
     expect($action)->toBeInstanceOf(Role::class);
     assert($user->roles()->count() === 0);
 });

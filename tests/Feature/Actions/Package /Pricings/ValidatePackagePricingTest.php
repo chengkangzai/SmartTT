@@ -24,6 +24,6 @@ it('should invalidate invalid data', function ($name, $data) {
 })->with([
     ['name', ['', -1, null, $faker->sentence(256)]],
     ['price', ['', -1, null, 0]],
-    ['price', ['', -1, null, 0]],
+    ['total_capacity', ['', -1, null, 0]],
     ['is_active', ['', -1]],
 ]);

@@ -28,12 +28,12 @@ it('should be mountable', function () {
 });
 
 it('should filter as required', function () {
-    $tour = Tour::whereHas('activePackages')->first();
+    $tour = Tour::whereHas('activePackages')->active()->first();
+    $departTime = $tour->activePackages->sortBy('depart_time');
     Livewire::test(SearchTourPage::class)
         ->set('q', $tour->name)
         ->set('category', $tour->category)
-        ->set('dateFrom', $tour->activePackages->sortBy('depart_time')->first()->depart_time->format('Y-m-d'))
-        ->set('dateTo', $tour->activePackages->sortBy('depart_time')->last()->depart_time->format('Y-m-d'))
-        ->set('capacity', $tour->activePackages->first()->pricings->first()->available_capacity)
+        ->set('dateFrom', $departTime->first()->depart_time->format('Y-m-d'))
+        ->set('dateTo', $departTime->last()->depart_time->format('Y-m-d'))
         ->assertSee($tour->name);
 });

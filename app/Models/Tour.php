@@ -68,13 +68,19 @@ class Tour extends Model implements HasMedia
 
     public function toSearchableArray(): array
     {
-        return [
-            'name' => $this->name,
-            'tour_code' => $this->tour_code,
-            'category' => $this->category,
-            'description' => $this->description->pluck('description')->implode(' '),
-            'place' => $this->description->pluck('place')->implode(' '),
-            'countries' => $this->countries->pluck('name')->implode(' '),
-        ];
+        /**
+         * If the driver is algolia, then we need to add the following fields to the index
+         * Because database driver do not support table joining
+         */
+        if (config('scout.driver') === 'algolia') {
+            return [
+                ...$this->toArray(),
+                'description' => $this->description->pluck('description')->implode(' '),
+                'place' => $this->description->pluck('place')->implode(' '),
+                'countries' => $this->countries->pluck('name')->implode(' '),
+            ];
+        }
+
+        return $this->toArray();
     }
 }

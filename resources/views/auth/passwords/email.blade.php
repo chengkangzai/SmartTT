@@ -7,7 +7,7 @@
                 <h1>{{ __('Reset Password') }}</h1>
                 <form action="{{ route('password.email') }}" method="POST">
                     @csrf
-
+                    @include('auth.partial.status-alert')
                     <div class="input-group mb-3"><span class="input-group-text">
                             <svg class="icon">
                                 <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>

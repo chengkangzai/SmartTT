@@ -51,7 +51,7 @@ it('should update tour description', function () {
         ->and($updated->description)->toBe($mock->description);
 });
 
-it('should destroy package', function () {
+it('should destroy tour description', function () {
     $des = TourDescription::factory()->create();
     assertModelExists($des);
     $this

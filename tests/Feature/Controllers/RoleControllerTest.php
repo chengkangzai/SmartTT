@@ -78,7 +78,7 @@ it('should store a role', function () use ($faker) {
     });
 });
 
-it('should not store a role bc w/o other param', function () use ($faker) {
+it('should not store a role because w/o other parameter', function () use ($faker) {
     $this
         ->from(route('roles.create'))
         ->post(route('roles.store'), [])
@@ -134,7 +134,7 @@ it('should destroy a role', function () use ($faker) {
     assertModelMissing($role);
 });
 
-it('should destroy role with user', function () use ($faker) {
+it('should destroy not role with user', function () use ($faker) {
     $role = Role::create([
         'name' => $faker->name,
     ]);

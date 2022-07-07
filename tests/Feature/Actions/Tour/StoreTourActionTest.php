@@ -48,7 +48,7 @@ it('should store a tour', function () use ($faker) {
     });
 });
 
-it('should not store a tour bc w/o des', function () use ($faker) {
+it('should not store a tour because w/o des', function () use ($faker) {
     $mockTour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
     $mockTour['place'] = [1 => $faker->word, $faker->word, $faker->word];
     $mockTour['countries'] = Country::inRandomOrder()->take(3)->pluck('id')->toArray();
@@ -66,7 +66,7 @@ it('should not store a tour bc w/o des', function () use ($faker) {
     }
 });
 
-it('should not store a tour bc w/o place', function () use ($faker) {
+it('should not store a tour because w/o place', function () use ($faker) {
     $mockTour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
     $mockTour['des'] = [1 => $faker->word, $faker->word, $faker->word];
     $mockTour['countries'] = Country::inRandomOrder()->take(3)->pluck('id')->toArray();
@@ -84,7 +84,7 @@ it('should not store a tour bc w/o place', function () use ($faker) {
     }
 });
 
-it('should not store a tour bc w/o countries', function () use ($faker) {
+it('should not store a tour because w/o countries', function () use ($faker) {
     $mockTour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
     $mockTour['des'] = [1 => $faker->word, $faker->word, $faker->word];
     $mockTour['place'] = [1 => $faker->word, $faker->word, $faker->word];

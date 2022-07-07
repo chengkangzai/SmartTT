@@ -39,7 +39,7 @@ it('should update tour', function () use ($faker) {
 });
 
 
-it('should not update tour bc w/o country', function () {
+it('should not update tour because w/o country', function () {
     $oriTour = Tour::factory()->create();
     assertModelExists($oriTour);
 
