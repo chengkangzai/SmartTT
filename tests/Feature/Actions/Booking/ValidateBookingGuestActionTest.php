@@ -74,16 +74,15 @@ it('should invalidate invalid data', function ($name, $guests) {
         assertNotEmpty($e->validator->errors());
     }
 })->with([
-    ['guests', [
-        ['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true], ],
+    ['guests',
+        [['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true],],
         [['name' => 'John', 'pricing' => null, 'price' => 200, 'is_child' => true]],
         [['name' => 'John', 'pricing' => 0, 'price' => -1, 'is_child' => true]],
         [['name' => 'Johm', 'pricing' => 0, 'price' => 200, 'is_child' => false]],
         [['name' => 'Johm', 'pricing' => 0, 'price' => 200]],
         [['name' => 'Johm', 'pricing' => 0, 'is_child' => false]],
         [['name' => 'Johm', 'price' => 200, 'is_child' => false]],
-        [['pricing' => 0, 'price' => 200, 'is_child' => false],
-        ],
+        [['pricing' => 0, 'price' => 200, 'is_child' => false]]
     ],
 ]);
 

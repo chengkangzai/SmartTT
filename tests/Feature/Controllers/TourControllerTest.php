@@ -86,7 +86,7 @@ it('should store a tour', function () use ($faker) {
 });
 
 
-it('should not store a tour bc w/o other param', function () use ($faker) {
+it('should not store a tour because w/o other parameter', function () use ($faker) {
     $tour = Tour::factory()->withItineraryAndThumbnailBinary()->make();
 
     $this
@@ -117,7 +117,7 @@ it('should update a tour', function () {
         ->and($newTour->days)->toBe($oriTour['days']);
 });
 
-it('should not update a tour bc w/o other param', function () {
+it('should not update a tour because w/o other parameter', function () {
     $oriTour = Tour::factory()->create();
     assertModelExists($oriTour);
 

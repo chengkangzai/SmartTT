@@ -13,7 +13,7 @@ beforeEach(function () {
     seed(TourSeeder::class);
 });
 
-it('should attach pricing to to package', function () {
+it('should attach pricing to package', function () {
     $package = Package::factory()->create();
     $action = app(AttachPricingToPackageAction::class);
 

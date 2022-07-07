@@ -111,7 +111,7 @@ it('should return add payment view', function () {
         ->assertSeeLivewire('booking.add-payment-on-booking');
 });
 
-it('should not return payment view bc its fully paid', function () {
+it('should not return payment view because its fully paid', function () {
     $booking = Booking::factory()->afterCreating(function (Booking $b) {
         Payment::factory()->create([
             'booking_id' => $b->id,

@@ -137,7 +137,7 @@ it('should update setting', function ($mode, $data) {
 ]);
 
 
-it('should not update setting bc w/o required param', function ($mode, $data) {
+it('should not update setting because w/o required parameter', function ($mode, $data) {
     $settings = [
         'general' => app(GeneralSetting::class),
         'tour' => app(TourSetting::class),

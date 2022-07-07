@@ -104,7 +104,7 @@ it('should store a package', function () use ($faker) {
     });
 });
 
-it('should not store a package bc w/o other param', function () use ($faker) {
+it('should not store a package because w/o other parameter', function () use ($faker) {
     $package = Package::factory()->make()->toArray();
 
     $this
@@ -145,7 +145,7 @@ it('should update a package', function () use ($faker) {
     });
 });
 
-it('should not update a package bc w/o required param', function () use ($faker) {
+it('should not update a package because w/o required parameter', function () use ($faker) {
     $package = Package::factory()->create();
     assertModelExists($package);
 
