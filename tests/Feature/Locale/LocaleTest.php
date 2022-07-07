@@ -3,7 +3,6 @@
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertNotNull;
 
-
 it('should not have empty english key', function () {
     $enLocale = json_decode(file_get_contents(lang_path() . '/en.json'), true);
     foreach ($enLocale as $value) {

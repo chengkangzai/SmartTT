@@ -82,7 +82,7 @@ it('should invalidate invalid data', function ($name, $guests) {
         [['name' => 'Johm', 'pricing' => 0, 'price' => 200]],
         [['name' => 'Johm', 'pricing' => 0, 'is_child' => false]],
         [['name' => 'Johm', 'price' => 200, 'is_child' => false]],
-        [['pricing' => 0, 'price' => 200, 'is_child' => false]]
+        [['pricing' => 0, 'price' => 200, 'is_child' => false]],
     ],
 ]);
 
