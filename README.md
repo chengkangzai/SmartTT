@@ -1,64 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# SmartTT
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+SmartTT is a simple, fast, and powerful tool for managing your travel agencies and bring it to online business with ease!
 
-## About Laravel
+## Getting Started
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Requirement
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Composer](https://getcomposer.org/doc/00-intro.md)
+- [PHP8](https://www.php.net/downloads.php#v8.0.11)
+- [Node 14](https://nodejs.org/en/download/)
+- [NPM](https://www.npmjs.com/get-npm)
+- [MySQL](https://www.mysql.com/products/workbench/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Setting up
 
-## Learning Laravel
+Go into the repo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```shell
+cd SmartTT
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Copy and Setting up the environment file
+```shell
+cp .env.example .env
+```
+Now you have to fill up the environment file by your IDE/Code Editor
 
-## Laravel Sponsors
+#### Installing Dependencies
+Assume you have installed Composer and Node and NPM
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Installing Composer dependencies
+```shell
+ composer install
+```
+Installing NPM dependencies and build it
+```shell
+npm install
+npm run dev
+```
+#### Setting up laravel
+Generate Application Key
+```shell
+php artisan key:generate
+```
+Migrate the database and seed the data
+```shell
+php artisan migrate --seed
+```
+#### FINALLY
+Server the application
+```shell
+php artisan server
+```
+visit `http://localhost:8000` to see the website
 
-### Premium Partners
+##### Running the tests
+```shell
+composer test
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Algolia
+To set up Algolia, you need to register the application on Algolia and get the API key and Application ID.
+Otherwise, you will not be able to use the search feature.
+After you get the API key and Application ID, you can set them in the .env file as shown below.
 
-## Contributing
+```shell
+ALGOLIA_APP_ID=xxxxx
+ALGOLIA_SECRET=xxxxx
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Stripe API
+To set up Stripe, you need to register the application on Stripe and get the API key.
+Otherwise, you will not be able to use the payment feature.
+After you get the API key, you can set it in the .env file as shown below.
 
-## Code of Conduct
+```shell
+STRIPE_KEY=xxxxx
+STRIPE_SECRET=xxxxx
+STRIPE_WEBHOOK_SECRET=xxxxx
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Microsoft Graph API
+To set up Microsoft Graph to synchronize calendar, you need to register the application on Microsoft Graph and get the API key.
+Otherwise, you will not be able to use the calendar feature.
+After you get the API key, you can set it in the .env file as shown below.
 
-## Security Vulnerabilities
+```shell
+OAUTH_APP_ID=xxxx
+OAUTH_APP_SECRET=xxxx
+OAUTH_REDIRECT_URI=xxxx
+OAUTH_SCOPES='openid profile offline_access user.read mailboxsettings.read calendars.readwrite'
+OAUTH_AUTHORITY=https://login.microsoftonline.com/common
+OAUTH_AUTHORIZE_ENDPOINT=/oauth2/v2.0/authorize
+OAUTH_TOKEN_ENDPOINT=/oauth2/v2.0/token
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Amazon S3
+To set up Amazon S3, you need to register the application on Amazon S3 and get the API key.
+Otherwise, you will not be able to use the storage feature.
+After you get the API key, you can set it in the .env file as shown below.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```shell
+AWS_ACCESS_KEY_ID=xxxxx
+AWS_SECRET_ACCESS_KEY=xxxxx
+AWS_DEFAULT_REGION=xxxxx
+AWS_BUCKET=xxxxx
+```
