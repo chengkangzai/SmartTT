@@ -80,6 +80,7 @@ class Tour extends Model implements HasMedia
                 'countries' => $this->countries->pluck('name')->implode(' '),
             ];
         }
+
         return $this->toArray();
     }
 }
