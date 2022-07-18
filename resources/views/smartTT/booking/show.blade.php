@@ -36,7 +36,7 @@
                 @endcan
                 @can('Sync booking to MS Calendar')
                     <a href="{{ route('bookings.sync', $booking) }}" class="btn btn-outline-primary">
-                        {{ __('Sync this booking to my calendar') }}
+                        {{ __('Sync booking to Outlook') }}
                     </a>
                 @endcan
             </div>
