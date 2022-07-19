@@ -33,7 +33,7 @@
                                 <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
                                 <input type="date" class="w-full rounded-lg" id="date_to" name="dateTo"
                                        min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
-                                       value="{{ now()->addMonths(2)->format('Y-m-d') }}" />
+                                       value="{{ $latestDepartTime }}" />
                             </div>
                         </div>
                     </div>

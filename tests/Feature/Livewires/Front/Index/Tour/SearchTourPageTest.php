@@ -28,7 +28,7 @@ it('should be mountable', function () {
 });
 
 it('should filter as required', function () {
-    $tour = Tour::whereHas('activePackages')->active()->first();
+    $tour = Tour::whereHas('activePackages.activePricings')->active()->first();
     $departTime = $tour->activePackages->sortBy('depart_time');
     Livewire::test(SearchTourPage::class)
         ->set('q', $tour->name)
