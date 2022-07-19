@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant A as Algolia
+
+    U->>S: requests to view the list of tours
+    alt User do not have permission to view the tours
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of all tours
+
+    U->>S: Click the Edit button in the tour index page
+    
+    alt User do not have permission to edit a tour
+    S-->>U: Redirect to the tour index page
+    end
+
+    S-->>U: Display Edit tour page
+    U->>S: Fill up the and submit the edit form
+
+    alt Invalid form data
+    S-->>U: Redirect to the edit tour page with the error message
+    end
+
+    S->>A: Update the tour in the Algolia
+    A-->>S: Tour updated and reindexed
+
+    S-->>U: Database update and redirect to the tour index page
