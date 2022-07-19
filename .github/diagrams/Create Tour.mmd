@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant S as System
+    participant A as Algolia
+
+    U->>S: requests to view the list of tours
+    alt User do not have permission to view the tours
+    S-->>U: Redirect to the login page
+    end
+    S-->>U: returns the list of tours
+
+    U->>S: Click the Create button in the tour index page
+    
+    alt User do not have permission to create a tour
+    S-->>U: Redirect to the tour index page
+    end
+
+    S-->>U: Display Create tour page
+    U->>S: Fill up the and submit the create form
+
+    alt Invalid form data
+    S-->>U: Redirect to the create form with the error messages
+    end
+
+    S->>A: Create new Tour for indexing
+    A-->>S: Tour created and indexed successfully
+
+    S-->>U: Database update and redirect to the tour index page
