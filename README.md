@@ -60,6 +60,13 @@ Migrate the database and seed the data
 php artisan migrate --seed
 ```
 
+To generate responsive image, invoice, receipt,
+This command will take awhile to run
+```shell
+php artisan queue:work
+```
+
+
 #### FINALLY
 
 Server the application
@@ -105,11 +112,12 @@ To set up Microsoft Graph to synchronize calendar, you need to register the appl
 API key.
 Otherwise, you will not be able to use the calendar feature.
 After you get the API key, you can set it in the .env file as shown below.
+The feautre require you to have SSL certificate to work as the microsoft policy.
 
 ```shell
 OAUTH_APP_ID=xxxx
 OAUTH_APP_SECRET=xxxx
-OAUTH_REDIRECT_URI=xxxx
+OAUTH_REDIRECT_URI=https://127.0.0.1:8000/dashboard/msOAuth/callback
 OAUTH_SCOPES='openid profile offline_access user.read mailboxsettings.read calendars.readwrite'
 OAUTH_AUTHORITY=https://login.microsoftonline.com/common
 OAUTH_AUTHORIZE_ENDPOINT=/oauth2/v2.0/authorize
@@ -140,3 +148,20 @@ AWS_SECRET_ACCESS_KEY=xxxxx
 AWS_DEFAULT_REGION=xxxxx
 AWS_BUCKET=xxxxx
 ```
+
+### SMTP (Email)
+To set up Email service, you should enter your credential for the system to send email. 
+Otherwise, you will not be able to use the email feature.
+Your .env should look somewhat like below.
+```shell
+MAIL_MAILER=smtp
+MAIL_HOST=<SMTP host>
+MAIL_PORT=<SMTP port>
+MAIL_USERNAME=<email address>
+MAIL_PASSWORD=<email password>
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="admin@smartTT.com"
+MAIL_FROM_NAME=${APP_NAME}
+```
+
+
