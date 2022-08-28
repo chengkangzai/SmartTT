@@ -130,16 +130,12 @@ class TourSeeder extends Seeder
     {
         $tour = $this->tours->where('tour_code', $touCode)->first();
         if (is_array($country)) {
-            $this->countries->whereIn('name', $country)->each(function (Country $country, $index) use ($tour) {
-                $tour->countries()->attach($country->id, [
-                    'order' => $index,
-                ]);
+            $this->countries->whereIn('name', $country)->each(function (Country $country) use ($tour) {
+                $tour->countries()->attach($country->id);
             });
         } else {
-            $this->countries->where('name', $country)->each(function (Country $country, $index) use ($tour) {
-                $tour->countries()->attach($country->id, [
-                    'order' => $index,
-                ]);
+            $this->countries->where('name', $country)->each(function (Country $country) use ($tour) {
+                $tour->countries()->attach($country->id);
             });
         }
     }

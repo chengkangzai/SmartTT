@@ -40,8 +40,8 @@ class StoreTourAction
             }
 
             collect($data['countries'])
-                ->each(function ($country, $index) use ($tour) {
-                    $tour->countries()->attach($country, ['order' => $index]);
+                ->each(function ($country) use ($tour) {
+                    $tour->countries()->attach($country);
                 });
 
             return $tour->refresh();

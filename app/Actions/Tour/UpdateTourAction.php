@@ -22,8 +22,8 @@ class UpdateTourAction
 
         return \DB::transaction(function () use ($data, $tour) {
             $tour->countries()->detach($tour->countries->pluck('id')->toArray());
-            collect($data['countries'])->each(function ($country, $index) use ($tour) {
-                $tour->countries()->attach($country, ['order' => $index]);
+            collect($data['countries'])->each(function ($country) use ($tour) {
+                $tour->countries()->attach($country);
             });
 
             if (isset($data['itinerary'])) {
