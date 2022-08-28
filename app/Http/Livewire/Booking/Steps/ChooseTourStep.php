@@ -15,7 +15,7 @@ class ChooseTourStep extends StepComponent
     public function render(): Factory|View|Application
     {
         return view('livewire.booking.steps.choose-tour-step', [
-            'tours' => Tour::active()->get(['id', 'name']),
+            'tours' => Tour::active()->whereHas('activePackages.activePricings')->get(['id', 'name']),
         ]);
     }
 
