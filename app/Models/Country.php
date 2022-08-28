@@ -15,9 +15,7 @@ class Country extends Model
 
     public function tours(): BelongsToMany
     {
-        return $this->belongsToMany(Tour::class)
-            ->withPivot(['order'])
-            ->orderByPivot('order');
+        return $this->belongsToMany(Tour::class);
     }
 
     public function airline(): HasMany
