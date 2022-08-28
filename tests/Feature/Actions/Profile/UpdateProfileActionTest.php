@@ -3,6 +3,7 @@
 use App\Actions\Profile\UpdateProfileAction;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\assertModelExists;
 use function PHPUnit\Framework\assertNotEmpty;
 

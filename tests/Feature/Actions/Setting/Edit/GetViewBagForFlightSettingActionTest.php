@@ -4,6 +4,7 @@ use App\Actions\Setting\Edit\GetViewBagForFlightSettingAction;
 use App\Models\Country;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Support\Collection;
+
 use function Pest\Laravel\seed;
 
 beforeEach(function () {

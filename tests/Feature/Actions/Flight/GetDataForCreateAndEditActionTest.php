@@ -6,6 +6,7 @@ use App\Models\Settings\FlightSetting;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 

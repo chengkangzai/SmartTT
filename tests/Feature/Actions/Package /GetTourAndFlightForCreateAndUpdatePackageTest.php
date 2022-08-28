@@ -9,6 +9,7 @@ use Database\Seeders\CountrySeeder;
 use Database\Seeders\FlightSeeder;
 use Database\Seeders\TourSeeder;
 use Illuminate\Support\Collection;
+
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEmpty;

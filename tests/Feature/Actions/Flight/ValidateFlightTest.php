@@ -2,6 +2,7 @@
 
 use App\Actions\Flight\ValidateFlight;
 use Illuminate\Validation\ValidationException;
+
 use function PHPUnit\Framework\assertNotEmpty;
 
 it('should invalidate invalid data', function ($name, $data) {
