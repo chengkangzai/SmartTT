@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,7 +14,7 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use Notifiable;
     use HasRoles;
@@ -55,5 +56,10 @@ class User extends Authenticatable
     public function msOauth(): HasOne
     {
         return $this->hasOne(MicrosoftOAuth::class);
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return true;
     }
 }
