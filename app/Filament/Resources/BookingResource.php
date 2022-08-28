@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
-use App\Filament\Resources\BookingResource\RelationManagers;
 use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
@@ -28,7 +27,7 @@ class BookingResource extends Resource
                 Forms\Components\TextInput::make('package_id')
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
-                    ->mask(fn(Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Mask $mask) => $mask->money('RM'))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->required(),

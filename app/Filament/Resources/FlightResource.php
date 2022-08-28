@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FlightResource\Pages;
-use App\Filament\Resources\FlightResource\RelationManagers;
 use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
 use Filament\Forms;

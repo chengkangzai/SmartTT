@@ -15,7 +15,6 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use function Pest\Laravel\options;
 
 class PackageResource extends Resource
 {
@@ -53,9 +52,10 @@ class PackageResource extends Resource
                                     return $flight->asSelection;
                                 });
                         }
+
                         return [];
                     })
-                    ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->asSelection)
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => $record->asSelection)
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
@@ -79,8 +79,8 @@ class PackageResource extends Resource
                         ])
                         ->columnSpan(2)
                         ->defaultItems(2)
-                        ->columns(8)
-                ])
+                        ->columns(8),
+                ]),
             ]);
     }
 

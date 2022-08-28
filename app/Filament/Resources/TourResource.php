@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TourResource\Pages;
-use App\Filament\Resources\TourResource\RelationManagers;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Filament\Forms;
@@ -80,7 +79,7 @@ class TourResource extends Resource
                                     ->required(),
                             ])
                             ->orderable('order')
-                            ->columns(6)
+                            ->columns(6),
                     ]),
             ]);
     }
