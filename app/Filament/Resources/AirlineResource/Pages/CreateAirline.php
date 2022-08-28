@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAirline extends CreateRecord
 {
     protected static string $resource = AirlineResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
