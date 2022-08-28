@@ -15,7 +15,6 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use function Pest\Laravel\options;
 
 class PackageResource extends Resource
 {
@@ -40,10 +39,10 @@ class PackageResource extends Resource
                     ->reactive(),
                 Forms\Components\MultiSelect::make('flight_id')
                     ->relationship('flight', 'departure_date')
-                    ->getSearchResultsUsing(function (string $values, Closure $get) {
+                    ->getSearchResultsUsing(function (string $search, Closure $get) {
                         $airlineID = $get('airline_id');
                         $departTime = $get('depart_time');
-                        if ($airlineID) {
+                        if ($airlineID && $departTime) {
                             return Flight::query()
                                 ->with('airline')
                                 ->where('airline_id', $airlineID)
