@@ -5,6 +5,7 @@ use App\Models\Country;
 use App\Models\Tour;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 

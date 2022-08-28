@@ -4,6 +4,7 @@ use App\Actions\Tour\ValidateTour;
 use App\Models\Tour;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertNotEmpty;
 

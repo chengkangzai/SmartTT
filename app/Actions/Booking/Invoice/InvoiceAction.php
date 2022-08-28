@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
+
 use function public_path;
 
 class InvoiceAction

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use function app;
+
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;

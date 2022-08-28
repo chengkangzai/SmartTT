@@ -7,6 +7,7 @@ use App\Models\TourDescription;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\seed;

@@ -12,6 +12,7 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Illuminate\Pagination\LengthAwarePaginator;
+
 use function Pest\Laravel\seed;
 
 beforeEach(function () {

@@ -2,6 +2,7 @@
 
 use App\Actions\User\UpdateUserAction;
 use App\Models\User;
+
 use function Pest\Laravel\assertModelExists;
 
 it('should update a user', function () {

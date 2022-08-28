@@ -3,6 +3,7 @@
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
+
 use function Pest\Laravel\seed;
 
 it('should return a view when its logged in', function () {

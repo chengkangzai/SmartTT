@@ -3,6 +3,7 @@
 use App\Actions\Setting\Update\UpdateBookingSettingAction;
 use App\Models\Settings\BookingSetting;
 use Illuminate\Validation\ValidationException;
+
 use function PHPUnit\Framework\assertNotEmpty;
 
 it('should update booking setting', function () {

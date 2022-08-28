@@ -6,6 +6,7 @@ use App\Models\TourDescription;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertNotEmpty;
@@ -50,4 +51,5 @@ it('should not attach tour description as invalid data', function ($name, $data)
 })->with([
     ['place', ['', -1, null, 1, 'a' . str_repeat('a', 256)]],
     ['description', [-1, 100, null, 'a' . str_repeat('a', 256)]],
-]);;
+]);
+;
