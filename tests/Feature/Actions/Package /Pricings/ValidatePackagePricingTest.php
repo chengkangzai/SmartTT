@@ -3,6 +3,7 @@
 use App\Actions\Package\Pricings\ValidatePackagePricing;
 use Faker\Factory;
 use Illuminate\Validation\ValidationException;
+
 use function PHPUnit\Framework\assertNotEmpty;
 
 $faker = Factory::create();

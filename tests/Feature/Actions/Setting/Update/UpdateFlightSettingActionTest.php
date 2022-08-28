@@ -4,6 +4,7 @@ use App\Actions\Setting\Update\UpdateFlightSettingAction;
 use App\Models\Settings\FlightSetting;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertNotEmpty;
 

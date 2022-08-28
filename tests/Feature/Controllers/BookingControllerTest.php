@@ -9,6 +9,7 @@ use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\seed;

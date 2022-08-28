@@ -2,6 +2,7 @@
 
 use App\Actions\Reports\ViewBag\GetViewBagForSalesReportAction;
 use Database\Seeders\DatabaseSeeder;
+
 use function Pest\Laravel\seed;
 
 beforeEach(function () {

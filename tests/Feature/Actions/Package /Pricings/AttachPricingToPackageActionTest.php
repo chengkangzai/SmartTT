@@ -5,6 +5,7 @@ use App\Models\Package;
 use App\Models\PackagePricing;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\TourSeeder;
+
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\seed;
 

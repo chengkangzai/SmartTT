@@ -14,7 +14,9 @@ use Database\Seeders\PackageSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
+
 use function Pest\Laravel\seed;
+
 use Spatie\Activitylog\Models\Activity;
 
 beforeEach(function () {
