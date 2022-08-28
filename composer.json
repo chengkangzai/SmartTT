@@ -9,6 +9,7 @@
         "ext-gd": "*",
         "algolia/algoliasearch-client-php": "^3.2",
         "barryvdh/laravel-translation-manager": "^0.6.3",
+        "bezhansalleh/filament-language-switch": "^1.0",
         "botman/botman": "^2.7",
         "botman/driver-web": "^1.5",
         "doctrine/dbal": "^3.4",
