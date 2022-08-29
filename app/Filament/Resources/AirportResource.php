@@ -17,7 +17,11 @@ class AirportResource extends Resource
 {
     protected static ?string $model = Airport::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-office-building';
+
+    protected static ?string $navigationGroup = 'Features';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
