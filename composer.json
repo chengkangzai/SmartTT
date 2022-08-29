@@ -12,6 +12,7 @@
         "bezhansalleh/filament-language-switch": "^1.0",
         "botman/botman": "^2.7",
         "botman/driver-web": "^1.5",
+        "codeat3/blade-maki-icons": "^1.4",
         "doctrine/dbal": "^3.4",
         "fakerphp/faker": "^1.9.1",
         "filament/filament": "^2.0",

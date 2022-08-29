@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "879177da1444ee14aaf73c4c6dc2f0e3",
+    "content-hash": "9fb8b248f9c26ed8389c744246c1a790",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -858,6 +858,78 @@
                 }
             ],
             "time": "2022-08-10T22:54:19+00:00"
+        },
+        {
+            "name": "codeat3/blade-maki-icons",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeat3/blade-maki-icons.git",
+                "reference": "c9564fdcf077dec44238dc97b6e8fadc73c47662"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeat3/blade-maki-icons/zipball/c9564fdcf077dec44238dc97b6e8fadc73c47662",
+                "reference": "c9564fdcf077dec44238dc97b6e8fadc73c47662",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.1",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "codeat3/blade-icon-generation-helpers": "^0.1",
+                "codeat3/phpcs-styles": "^1.0",
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codeat3\\BladeMakiIcons\\BladeMakiIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codeat3\\BladeMakiIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Swapnil Sarwe",
+                    "homepage": "https://swapnilsarwe.com"
+                },
+                {
+                    "name": "Dries Vints",
+                    "homepage": "https://driesvints.com"
+                }
+            ],
+            "description": "A package to easily make use of Maki Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/codeat3/blade-maki-icons",
+            "keywords": [
+                "blade",
+                "icons",
+                "laravel",
+                "maki"
+            ],
+            "support": {
+                "issues": "https://github.com/codeat3/blade-maki-icons/issues",
+                "source": "https://github.com/codeat3/blade-maki-icons/tree/1.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/swapnilsarwe",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-03-28T12:49:04+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
