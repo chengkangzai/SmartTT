@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TourResource\Pages;
+use App\Filament\Resources\TourResource\RelationManagers\DescriptionRelationManager;
+use App\Filament\Resources\TourResource\RelationManagers\PackagesRelationManager;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Filament\Forms;
@@ -84,7 +86,7 @@ class TourResource extends Resource
                             ])
                             ->orderable('order')
                             ->columns(6),
-                    ]),
+                    ])->hiddenOn('view'),
             ]);
     }
 
@@ -120,7 +122,8 @@ class TourResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PackagesRelationManager::class,
+            DescriptionRelationManager::class
         ];
     }
 

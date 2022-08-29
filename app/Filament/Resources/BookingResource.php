@@ -3,6 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
+use App\Filament\Resources\BookingResource\RelationManagers\GuestRelationManager;
+use App\Filament\Resources\BookingResource\RelationManagers\PackageRelationManager;
+use App\Filament\Resources\BookingResource\RelationManagers\PaymentRelationManager;
 use App\Models\Booking;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
@@ -31,7 +34,7 @@ class BookingResource extends Resource
                 Forms\Components\TextInput::make('package_id')
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
-                    ->mask(fn (Mask $mask) => $mask->money('RM'))
+                    ->mask(fn(Mask $mask) => $mask->money('RM'))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->required(),
@@ -71,7 +74,9 @@ class BookingResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PaymentRelationManager::class,
+            GuestRelationManager::class,
+            PackageRelationManager::class
         ];
     }
 

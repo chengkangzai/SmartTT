@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
+use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
+use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Airline;
 use App\Models\Flight;
 use App\Models\Package;
@@ -38,28 +40,12 @@ class PackageResource extends Resource
                     ->reactive()
                     ->required(),
                 Forms\Components\Select::make('airline_id')
+                    ->label('Airline')
                     ->options(Airline::get()->pluck('name', 'id'))
                     ->required()
                     ->reactive(),
                 Forms\Components\MultiSelect::make('flight_id')
-                    ->relationship('flight', 'departure_date')
-                    ->getSearchResultsUsing(function (string $search, Closure $get) {
-                        $airlineID = $get('airline_id');
-                        $departTime = $get('depart_time');
-                        if ($airlineID && $departTime) {
-                            return Flight::query()
-                                ->with('airline')
-                                ->where('airline_id', $airlineID)
-                                ->where('departure_date', '>=', $departTime)
-                                ->get()
-                                ->map(function (Flight $flight) {
-                                    return $flight->asSelection;
-                                });
-                        }
-
-                        return [];
-                    })
-                    ->getOptionLabelFromRecordUsing(fn (Model $record) => $record->asSelection)
+                    ->relationship('flight', 'name')
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
@@ -84,7 +70,7 @@ class PackageResource extends Resource
                         ->columnSpan(2)
                         ->defaultItems(2)
                         ->columns(8),
-                ]),
+                ])->hiddenOn('view'),
             ]);
     }
 
@@ -93,11 +79,16 @@ class PackageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('tour.name')
+                    ->limit(40)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('depart_time')
+                    ->sortable()
                     ->dateTime(),
                 Tables\Columns\BooleanColumn::make('is_active'),
                 Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('flight.airline')
+                    ->label('Airline')
+                    ->sortable()
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -117,7 +108,8 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PricingsRelationManager::class,
+            FlightRelationManager::class
         ];
     }
 

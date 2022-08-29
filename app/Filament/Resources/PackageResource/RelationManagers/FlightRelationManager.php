@@ -1,29 +1,22 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\PackageResource\RelationManagers;
 
-use App\Filament\Resources\FlightResource\Pages;
-use App\Filament\Resources\FlightResource\RelationManagers\AirlineRelationManager;
-use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FlightResource extends Resource
+class FlightRelationManager extends RelationManager
 {
-    protected static ?string $model = Flight::class;
+    protected static string $relationship = 'flight';
 
-    protected static ?string $navigationIcon = 'maki-airport';
-
-    protected static ?string $navigationGroup = 'Features';
-
-    protected static ?int $navigationSort = 3;
+    protected static ?string $recordTitleAttribute = 'airline';
 
     public static function form(Form $form): Form
     {
@@ -36,7 +29,7 @@ class FlightResource extends Resource
                     ->columnSpan(2),
                 Forms\Components\TextInput::make('price')
                     ->columnSpan(2)
-                    ->mask(fn(Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
@@ -67,27 +60,30 @@ class FlightResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('depart_airport.name')
-                    ->searchable()
-                    ->limit(30),
-                Tables\Columns\TextColumn::make('arrive_airport.name')
-                    ->searchable()
-                    ->limit(30),
+                Tables\Columns\TextColumn::make('airline'),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('MYR'),
+                    ->money('MYR '),
+                Tables\Columns\TextColumn::make('depart_airport.name'),
+                Tables\Columns\TextColumn::make('arrive_airport.name'),
                 Tables\Columns\TextColumn::make('departure_date')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('arrival_date')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('airline')
-                    ->searchable(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TrashedFilter::make()
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ForceDeleteAction::make(),
+                    Tables\Actions\RestoreAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -96,26 +92,9 @@ class FlightResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    protected function getTableQuery(): Builder
     {
-        return [
-            AirlineRelationManager::class
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListFlights::route('/'),
-            'create' => Pages\CreateFlight::route('/create'),
-            'view' => Pages\ViewFlight::route('/{record}'),
-            'edit' => Pages\EditFlight::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
+        return parent::getTableQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
