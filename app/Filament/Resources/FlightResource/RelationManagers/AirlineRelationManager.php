@@ -51,7 +51,7 @@ class AirlineRelationManager extends RelationManager
                     ->label('IATA'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

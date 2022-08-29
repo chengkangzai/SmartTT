@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
-use App\Models\Booking;
-use App\Models\Payment;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -51,7 +49,7 @@ class PaymentRelationManager extends RelationManager
 
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
 

@@ -35,7 +35,7 @@ class FlightsAsDepartureRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

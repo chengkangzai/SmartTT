@@ -71,7 +71,7 @@ class FlightRelationManager extends RelationManager
                     ->dateTime(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
@@ -83,7 +83,7 @@ class FlightRelationManager extends RelationManager
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\RestoreAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

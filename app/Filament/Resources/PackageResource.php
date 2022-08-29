@@ -6,16 +6,13 @@ use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Airline;
-use App\Models\Flight;
 use App\Models\Package;
-use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PackageResource extends Resource
@@ -88,7 +85,7 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('flight.airline')
                     ->label('Airline')
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -109,7 +106,7 @@ class PackageResource extends Resource
     {
         return [
             PricingsRelationManager::class,
-            FlightRelationManager::class
+            FlightRelationManager::class,
         ];
     }
 

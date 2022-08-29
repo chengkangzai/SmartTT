@@ -7,7 +7,6 @@ use App\Models\Airport;
 use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use JetBrains\PhpStorm\ArrayShape;
 
 class FlightFactory extends Factory
 {
@@ -19,6 +18,7 @@ class FlightFactory extends Factory
         $airport = Airport::inRandomOrder()->take(2)->get();
 
         $airline = Airline::inRandomOrder()->first();
+
         return [
             'departure_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
             'arrival_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),

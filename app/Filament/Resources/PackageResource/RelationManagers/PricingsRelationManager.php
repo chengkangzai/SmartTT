@@ -40,10 +40,10 @@ class PricingsRelationManager extends RelationManager
                     ->sortable(),
                 Tables\Columns\TextColumn::make('available_capacity')
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\BooleanColumn::make('is_active'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

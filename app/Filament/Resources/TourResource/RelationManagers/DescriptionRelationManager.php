@@ -42,12 +42,13 @@ class DescriptionRelationManager extends RelationManager
                     ->limit(70),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (HasRelationshipTable $livewire, array $data) {
                         $data['order'] = $livewire->getRelationship()->count() + 1;
+
                         return $data;
                     }),
             ])

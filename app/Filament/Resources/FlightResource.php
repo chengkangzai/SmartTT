@@ -36,7 +36,7 @@ class FlightResource extends Resource
                     ->columnSpan(2),
                 Forms\Components\TextInput::make('price')
                     ->columnSpan(2)
-                    ->mask(fn(Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
@@ -99,7 +99,7 @@ class FlightResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AirlineRelationManager::class
+            AirlineRelationManager::class,
         ];
     }
 

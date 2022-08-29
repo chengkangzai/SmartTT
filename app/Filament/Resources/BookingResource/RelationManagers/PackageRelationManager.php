@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
-use App\Models\Airline;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -53,10 +52,10 @@ class PackageRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('flight.airline')
                     ->label('Airline')
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
             ])

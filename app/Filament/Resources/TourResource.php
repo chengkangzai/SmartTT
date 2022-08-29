@@ -123,7 +123,7 @@ class TourResource extends Resource
     {
         return [
             PackagesRelationManager::class,
-            DescriptionRelationManager::class
+            DescriptionRelationManager::class,
         ];
     }
 

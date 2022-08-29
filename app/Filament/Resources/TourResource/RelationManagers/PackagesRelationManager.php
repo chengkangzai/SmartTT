@@ -4,7 +4,6 @@ namespace App\Filament\Resources\TourResource\RelationManagers;
 
 use App\Filament\Resources\PackageResource;
 use App\Models\Package;
-use App\Tables\Columns\FlightAirlineColumn;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -44,7 +43,7 @@ class PackagesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('flight.airline')
                     ->label('Airline')
                     ->default('-')
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -54,7 +53,7 @@ class PackagesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->url(fn(Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
