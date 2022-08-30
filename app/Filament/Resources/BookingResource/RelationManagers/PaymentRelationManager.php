@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
+use App\Models\Payment;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -22,7 +23,7 @@ class PaymentRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('amount')
-                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
+                    ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_method')
                     ->disabled(),
@@ -42,9 +43,42 @@ class PaymentRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Payment Date')
                     ->dateTime(),
-                Tables\Columns\BadgeColumn::make('payment_method'),
-                Tables\Columns\BadgeColumn::make('status'),
-                Tables\Columns\BadgeColumn::make('payment_type'),
+                Tables\Columns\BadgeColumn::make('payment_method')
+                    ->enum(Payment::METHODS)
+                    ->colors([
+                        'primary' => 'stripe',
+                        'warning' => 'cash',
+                        'success' => 'card',
+                    ])
+                    ->icons([
+                        'heroicon-o-credit-card' => 'card',
+                        'heroicon-o-cash' => 'cash',
+                        'fab-stripe' => 'stripe',
+                    ]),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->enum(Payment::STATUSES)
+                    ->colors([
+                        'primary' => 'pending',
+                        'danger' => 'failed',
+                        'success' => 'paid',
+                    ])
+                    ->icons([
+                        'heroicon-o-status-online' => 'pending',
+                        'heroicon-o-x-circle' => 'failed',
+                        'heroicon-o-check-circle' => 'paid',
+                    ]),
+                Tables\Columns\BadgeColumn::make('payment_type')
+                    ->enum(Payment::STATUSES)
+                    ->colors([
+                        'success' => 'full',
+                        'warning' => 'reservation',
+                        'primary' => 'remaining',
+                    ])
+                    ->icons([
+                        'heroicon-o-status-online' => 'pending',
+                        'heroicon-o-x-circle' => 'failed',
+                        'heroicon-o-check-circle' => 'paid',
+                    ]),
                 Tables\Columns\TextColumn::make('amount')
                     ->money('MYR '),
 
@@ -55,7 +89,7 @@ class PaymentRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make('Pay remaining')
                     ->label('Pay remaining')
-                    ->visible(fn (HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
+                    ->visible(fn(HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
