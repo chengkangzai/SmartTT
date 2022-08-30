@@ -4,7 +4,6 @@ namespace App\Filament\Resources\BookingResource\RelationManagers;
 
 use App\Filament\Resources\TourResource;
 use App\Models\Package;
-use App\Models\Tour;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -65,10 +64,10 @@ class PackageRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ViewAction::make('View Tour')
                     ->label('Tour')
-                    ->url(fn(Package $record) => TourResource::getUrl('view', ['record' => $record->tour_id])),
+                    ->url(fn (Package $record) => TourResource::getUrl('view', ['record' => $record->tour_id])),
                 Tables\Actions\ViewAction::make('View Itinerary')
                     ->label('Itinerary')
-                    ->url(fn(Package $record) => $record->tour->getFirstMediaUrl('itinerary'))
+                    ->url(fn (Package $record) => $record->tour->getFirstMediaUrl('itinerary'))
                     ->openUrlInNewTab(),
                 Tables\Actions\RestoreAction::make(),
             ]);

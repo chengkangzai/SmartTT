@@ -10,7 +10,6 @@ use Filament\Notifications;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-
 class ViewBooking extends ViewRecord
 {
     protected static string $resource = BookingResource::class;
@@ -21,7 +20,7 @@ class ViewBooking extends ViewRecord
             Actions\EditAction::make(),
             Actions\Action::make('Sync Booking to Outlook')
                 ->color('secondary')
-                ->action('sync')
+                ->action('sync'),
         ];
     }
 
@@ -33,7 +32,7 @@ class ViewBooking extends ViewRecord
         /** @var User $user */
         $user = auth()->user();
 
-        if (!$user->msOauth()->exists()) {
+        if (! $user->msOauth()->exists()) {
             return Notifications\Notification::make()
                 ->title('Warning')
                 ->body('Please connect your Microsoft account first')

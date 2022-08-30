@@ -4,8 +4,8 @@ namespace App\Filament\Resources\TourResource\Pages;
 
 use App\Filament\Resources\TourResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Pages\Actions\Action;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewTour extends ViewRecord
 {
@@ -17,8 +17,8 @@ class ViewTour extends ViewRecord
             Actions\EditAction::make(),
             Action::make('Itinerary')
                 ->label('Itinerary')
-                ->url(fn() => $this->record->getFirstMediaUrl('itinerary'))
-                ->openUrlInNewTab()
+                ->url(fn () => $this->record->getFirstMediaUrl('itinerary'))
+                ->openUrlInNewTab(),
 
         ];
     }
