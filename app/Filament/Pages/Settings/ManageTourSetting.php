@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\PackageSetting;
 use Filament\Forms\Components\Card;
@@ -23,7 +23,6 @@ class ManagePackageSetting extends SettingsPage
     {
         return [
             Toggle::make('default_status')
-                ->inline(false)
                 ->label('Default Status'),
             Card::make([
                 TableRepeater::make('default_pricing')

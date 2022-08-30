@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\BookingSetting;
 use Filament\Forms\Components\Select;
