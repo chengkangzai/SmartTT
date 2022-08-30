@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
+use App\Models\Package;
 use App\Models\Payment;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -16,7 +17,7 @@ class PaymentRelationManager extends RelationManager
 {
     protected static string $relationship = 'payment';
 
-    protected static ?string $recordTitleAttribute = 'amount';
+    protected static ?string $recordTitleAttribute = 'created_at';
 
     public static function form(Form $form): Form
     {
@@ -93,6 +94,17 @@ class PaymentRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make('View Invoice')
+                    ->icon('heroicon-s-document')
+                    ->label('Invoice')
+                    ->url(fn(Payment $record) => $record->getFirstMediaUrl('invoices'))
+                    ->openUrlInNewTab(),
+                Tables\Actions\ViewAction::make('View Receipt')
+                    ->icon('heroicon-s-document-text')
+                    ->label('Receipt')
+                    ->openUrlInNewTab()
+                    ->hidden(fn(Payment $record) => $record->getFirstMediaUrl('receipts') === '')
+                    ->url(fn(Payment $record) => $record->getFirstMediaUrl('receipts')),
             ])
             ->bulkActions([
 
