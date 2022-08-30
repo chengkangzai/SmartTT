@@ -4,7 +4,6 @@ namespace App\Filament\Pages;
 
 use App\Models\Settings\PackageSetting;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
@@ -42,8 +41,8 @@ class ManagePackageSetting extends SettingsPage
                             ->required(),
                     ])
                     ->collapsible()
-                    ->columns(6)
-            ])
+                    ->columns(6),
+            ]),
         ];
     }
 }

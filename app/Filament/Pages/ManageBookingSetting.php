@@ -20,7 +20,7 @@ class ManageBookingSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $paymentMethods = collect(app(BookingSetting::class)->supported_payment_method)
-            ->mapWithKeys(fn($item) => [$item => $item])
+            ->mapWithKeys(fn ($item) => [$item => $item])
             ->toArray();
 
         return [
