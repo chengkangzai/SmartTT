@@ -34,6 +34,7 @@ class UserPolicy
         if ($isSuperAdmin) {
             return false;
         }
+
         return $user->can('Edit User');
     }
 

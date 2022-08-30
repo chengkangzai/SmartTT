@@ -30,6 +30,7 @@ class RolePolicy
         if ($role->name == 'Super Admin') {
             return false;
         }
+
         return $user->can('Edit Role');
     }
 
@@ -38,6 +39,7 @@ class RolePolicy
         if ($role->name == 'Super Admin') {
             return false;
         }
+
         return $user->can('Delete Role');
     }
 
@@ -51,6 +53,7 @@ class RolePolicy
         if ($role->name == 'Super Admin') {
             return false;
         }
+
         return $user->can('Delete Role');
     }
 
