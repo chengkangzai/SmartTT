@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
+use App\Filament\Resources\TourResource;
+use App\Models\Package;
+use App\Models\Tour;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -49,7 +52,6 @@ class PackageRelationManager extends RelationManager
                     ->sortable()
                     ->dateTime(),
                 Tables\Columns\BooleanColumn::make('is_active'),
-                Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('flight.airline')
                     ->label('Airline')
                     ->sortable(),
@@ -61,6 +63,13 @@ class PackageRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make('View Tour')
+                    ->label('Tour')
+                    ->url(fn(Package $record) => TourResource::getUrl('view', ['record' => $record->tour_id])),
+                Tables\Actions\ViewAction::make('View Itinerary')
+                    ->label('Itinerary')
+                    ->url(fn(Package $record) => $record->tour->getFirstMediaUrl('itinerary'))
+                    ->openUrlInNewTab(),
                 Tables\Actions\RestoreAction::make(),
             ]);
     }
