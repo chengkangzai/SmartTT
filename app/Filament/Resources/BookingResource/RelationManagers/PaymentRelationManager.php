@@ -23,7 +23,7 @@ class PaymentRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('amount')
-                    ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_method')
                     ->disabled(),
@@ -89,7 +89,7 @@ class PaymentRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make('Pay remaining')
                     ->label('Pay remaining')
-                    ->visible(fn(HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
+                    ->visible(fn (HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
