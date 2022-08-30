@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a12894f901ccc16c8708a3b31035048a",
+    "content-hash": "f2d4bd4906440aa642981ffedf98cb2d",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3348,6 +3348,74 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+            "name": "lab404/laravel-impersonate",
+            "version": "1.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/404labfr/laravel-impersonate.git",
+                "reference": "7c1f9c5cefd40247993f52f4b7724fd8b580084f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/7c1f9c5cefd40247993f52f4b7724fd8b580084f",
+                "reference": "7c1f9c5cefd40247993f52f4b7724fd8b580084f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0 | ^7.0 | ^8.0 | ^9.0",
+                "php": "^7.2 | ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "orchestra/database": "^4.0 | ^5.0 | ^6.0 | ^7.0",
+                "orchestra/testbench": "^4.0 | ^5.0 | ^6.0 | ^7.0",
+                "phpunit/phpunit": "^7.5 | ^8.0 | ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lab404\\Impersonate\\ImpersonateServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Lab404\\Impersonate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marceau Casals",
+                    "email": "marceau@casals.fr"
+                }
+            ],
+            "description": "Laravel Impersonate is a plugin that allows to you to authenticate as your users.",
+            "keywords": [
+                "auth",
+                "impersonate",
+                "impersonation",
+                "laravel",
+                "laravel-package",
+                "laravel-plugin",
+                "package",
+                "plugin",
+                "user"
+            ],
+            "support": {
+                "issues": "https://github.com/404labfr/laravel-impersonate/issues",
+                "source": "https://github.com/404labfr/laravel-impersonate/tree/1.7.3"
+            },
+            "time": "2022-01-15T13:39:35+00:00"
+        },
+        {
             "name": "laravel/cashier",
             "version": "v13.15.1",
             "source": {
@@ -6160,6 +6228,72 @@
                 }
             ],
             "time": "2022-07-30T15:51:26+00:00"
+        },
+        {
+            "name": "phpsa/filament-authentication",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpsa/filament-authentication.git",
+                "reference": "cec9d9c8ffd0385854d37b56c175f247d44bd2af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpsa/filament-authentication/zipball/cec9d9c8ffd0385854d37b56c175f247d44bd2af",
+                "reference": "cec9d9c8ffd0385854d37b56c175f247d44bd2af",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.12.18",
+                "lab404/laravel-impersonate": "^1.7",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.10",
+                "spatie/laravel-permission": "^5.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Phpsa\\FilamentAuthentication\\FilamentAuthenticationProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phpsa\\FilamentAuthentication\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Craig G Smith",
+                    "email": "vxdhost@gmail.com"
+                }
+            ],
+            "description": "User & Role (via Spatie Roles/Permissions) Manager Resource For Filament Admin",
+            "homepage": "https://cgs4k.nz",
+            "keywords": [
+                "cli",
+                "filament",
+                "laravel",
+                "resource",
+                "ui",
+                "user"
+            ],
+            "support": {
+                "issues": "https://github.com/phpsa/filament-authentication/issues",
+                "source": "https://github.com/phpsa/filament-authentication/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/phpsa",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-11T20:55:59+00:00"
         },
         {
             "name": "psr/cache",

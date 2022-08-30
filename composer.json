@@ -31,6 +31,7 @@
         "livewire/livewire": "^2.10",
         "microsoft/microsoft-graph": "^1.67",
         "owenvoke/blade-fontawesome": "^2.0",
+        "phpsa/filament-authentication": "^2.2",
         "rappasoft/laravel-livewire-tables": "^2.7",
         "spatie/laravel-activitylog": "^4.5",
         "spatie/laravel-livewire-wizard": "^1.0.1",
