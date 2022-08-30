@@ -10,38 +10,43 @@ class {{ class }}
 {
     use HandlesAuthorization;
 
-    public function viewAny({{ user }} $user)
+    public function viewAny({{ user }} $user): bool
     {
-        //
+        return $user->can('Access {{ model }}');
     }
 
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function view({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return $user->can('View {{ model }}');
     }
 
-    public function create({{ user }} $user)
+    public function create({{ user }} $user): bool
     {
-        //
+        return $user->can('Create {{ model }}');
     }
 
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function update({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return $user->can('Edit {{ model }}');
     }
 
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return $user->can('Delete {{ model }}');
     }
 
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return $user->can('Delete {{ model }}');
     }
 
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
     {
-        //
+        return $user->can('Delete {{ model }}');
+    }
+
+    public function audit({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return $user->can('Audit {{ model }}');
     }
 }
