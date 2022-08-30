@@ -52,20 +52,6 @@
             </div>
         </div>
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingPackagePricing">
-                <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse"
-                    data-coreui-target="#collapsePackagePricing" aria-expanded="false"
-                    aria-controls="collapsePackagePricing">
-                    {{ __('Package Pricing') }}
-                </button>
-            </h2>
-            <div id="collapsePackagePricing" class="accordion-collapse collapse" aria-labelledby="headingPackagePricing">
-                <div class="accordion-body">
-                    <x-setting-table mode="package_pricing" :settings="$settings" />
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
             <h2 class="accordion-header" id="headingFlight">
                 <button class="accordion-button collapsed" type="button" data-coreui-toggle="collapse"
                     data-coreui-target="#collapseFlight" aria-expanded="false" aria-controls="collapseFlight">

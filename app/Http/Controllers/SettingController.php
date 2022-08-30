@@ -15,7 +15,6 @@ use App\Actions\Setting\Update\UpdateTourSettingAction;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\FlightSetting;
 use App\Models\Settings\GeneralSetting;
-use App\Models\Settings\PackagePricingsSetting;
 use App\Models\Settings\PackageSetting;
 use App\Models\Settings\TourSetting;
 use Illuminate\Http\Request;
@@ -32,7 +31,6 @@ class SettingController extends Controller
             'general' => app(GeneralSetting::class),
             'tour' => app(TourSetting::class),
             'package' => app(PackageSetting::class),
-            'package_pricing' => app(PackagePricingsSetting::class),
             'flight' => app(FlightSetting::class),
             'booking' => app(BookingSetting::class),
         ];

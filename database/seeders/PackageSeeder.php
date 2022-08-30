@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Flight;
 use App\Models\Package;
 use App\Models\PackagePricing;
-use App\Models\Settings\PackagePricingsSetting;
+use App\Models\Settings\PackageSetting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
 
@@ -22,14 +22,14 @@ class PackageSeeder extends Seeder
                 ->each(function ($flight, $index) use ( $package) {
                     $package->flight()->attach($flight, ['order' => $index]);
                 });
-            $setting = app(PackagePricingsSetting::class);
-            foreach ($setting->default_namings as $key => $name) {
+            $setting = app(PackageSetting::class);
+            foreach ($setting->default_pricing as $pricing) {
                 PackagePricing::factory()->create([
                     'package_id' => $package->id,
-                    'name' => $name,
-                    'available_capacity' => $setting->default_capacity[$key],
-                    'total_capacity' => $setting->default_capacity[$key],
-                    'is_active' => $setting->default_status[$key],
+                    'name' => $pricing['name'],
+                    'available_capacity' =>$pricing['capacity'],
+                    'total_capacity' => $pricing['capacity'],
+                    'is_active' => $pricing['status'],
                 ]);
             }
         })->create();
