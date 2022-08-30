@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App;
+use Filament\Facades\Filament;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Scout\Builder;
@@ -37,5 +38,11 @@ class AppServiceProvider extends ServiceProvider
                 $this->engine()->search($this)
             );
         });
+
+        Filament::registerNavigationGroups([
+            'Features',
+            'Authentication',
+            'Settings',
+        ]);
     }
 }
