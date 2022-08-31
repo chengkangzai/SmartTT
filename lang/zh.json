@@ -34,10 +34,10 @@
     "Applied Sorting": "已应用的排序",
     "Arrival": "抵达",
     "Arrival Airport": "抵达机场",
+    "Arrival Date": "到达日期",
     "Arrival Time": "抵达时间",
     "Arrival airport": "抵达机场",
     "Arrival airport must not be the same as departure airport": "到达机场不能与出发机场相同",
-    "Arrival Date": "到达日期",
     "Audit Trail": "审计追踪",
     "Available Capacity": "可用容量",
     "Available Packages": "可用套餐",
@@ -509,5 +509,6 @@
     "the description for the place above": "上述地点的描述",
     "the main visit place": "主要参观地点",
     "the name of the Place": "地点的名称",
-    "to": "至"
+    "to": "至",
+    "Features": "功能"
 }

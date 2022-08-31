@@ -34,10 +34,10 @@
     "Applied Sorting": "Applied Sorting",
     "Arrival": "Arrival",
     "Arrival Airport": "Arrival Airport",
+    "Arrival Date": "Arrival date",
     "Arrival Time": "Arrival Time",
     "Arrival airport": "Arrival airport",
     "Arrival airport must not be the same as departure airport": "Arrival airport must not be the same as departure airport",
-    "Arrival Date": "Arrival date",
     "Audit Trail": "Audit Trail",
     "Available Capacity": "Available Capacity",
     "Available Packages": "Available Packages",
@@ -510,5 +510,6 @@
     "the description for the place above": "the description for the place above",
     "the main visit place": "the main visit place",
     "the name of the Place": "the name of the Place",
-    "to": "to"
+    "to": "to",
+    "Features": "Features"
 }

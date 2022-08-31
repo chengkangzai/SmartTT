@@ -33,8 +33,8 @@ trait ValidateFlight
             'class' => __('Class'),
             'type' => __('Type'),
             'price' => __('Price'),
-            'departure_date' => __('Departure date'),
-            'arrival_date' => __('Arrival date'),
+            'departure_date' => __('Departure Date'),
+            'arrival_date' => __('Arrival Date'),
         ])->validate();
     }
 }

@@ -34,10 +34,10 @@
     "Applied Sorting": "Penyortiran yang Diterapkan",
     "Arrival": "Ketibaan",
     "Arrival Airport": "Lapangan Terbang Ketibaan",
+    "Arrival Date": "Tarikh ketibaan",
     "Arrival Time": "Masa ketibaan",
     "Arrival airport": "Lapangan terbang ketibaan",
     "Arrival airport must not be the same as departure airport": "Lapangan terbang ketibaan mestilah tidak sama dengan lapangan terbang berlepas",
-    "Arrival Date": "Tarikh ketibaan",
     "Audit Trail": "Jejak Audit",
     "Available Capacity": "Kapasiti Tersedia",
     "Available Packages": "Pakej Tersedia",
@@ -510,5 +510,6 @@
     "the description for the place above": "penerangan untuk tempat di atas",
     "the main visit place": "tempat lawatan utama",
     "the name of the Place": "ama Tempat",
-    "to": "ke"
+    "to": "ke",
+    "Features": "Kegunnaan"
 }
