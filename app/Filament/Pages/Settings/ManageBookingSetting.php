@@ -13,9 +13,22 @@ class ManageBookingSetting extends SettingsPage
 
     protected static string $settings = BookingSetting::class;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 5;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Settings');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('Booking Settings');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('Booking Settings');
+    }
 
     protected function getFormSchema(): array
     {
@@ -25,12 +38,15 @@ class ManageBookingSetting extends SettingsPage
 
         return [
             TextInput::make('charge_per_child')
+                ->label(__('Charge Per Child'))
                 ->required()
                 ->numeric(),
             TextInput::make('reservation_charge_per_pax')
+                ->label(__('Reservation Charge Per Pax'))
                 ->required()
                 ->numeric(),
             Select::make('default_payment_method')
+                ->label(__('Default Payment Method'))
                 ->required()
                 ->options($paymentMethods),
         ];

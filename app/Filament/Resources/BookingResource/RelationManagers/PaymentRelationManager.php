@@ -18,20 +18,32 @@ class PaymentRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'created_at';
 
+    public static function getTitle(): string
+    {
+        return __('Payment');
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return __('Payment');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('amount')
+                    ->label(__('Amount'))
                     ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_method')
+                    ->label(__('Payment Method'))
                     ->disabled(),
                 Forms\Components\TextInput::make('status')
+                    ->label(__('Payment Status'))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_type')
-                    ->disabled(),
-                Forms\Components\TextInput::make('amount')
+                    ->label(__('Payment Type'))
                     ->disabled(),
             ]);
     }
@@ -41,9 +53,10 @@ class PaymentRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Payment Date')
+                    ->label(__('Payment Date'))
                     ->dateTime(),
                 Tables\Columns\BadgeColumn::make('payment_method')
+                    ->label(__('Payment Method'))
                     ->enum(Payment::METHODS)
                     ->colors([
                         'primary' => 'stripe',
@@ -56,6 +69,7 @@ class PaymentRelationManager extends RelationManager
                         'fab-stripe' => 'stripe',
                     ]),
                 Tables\Columns\BadgeColumn::make('status')
+                    ->label(__('Payment Status'))
                     ->enum(Payment::STATUSES)
                     ->colors([
                         'primary' => 'pending',
@@ -68,6 +82,7 @@ class PaymentRelationManager extends RelationManager
                         'heroicon-o-check-circle' => 'paid',
                     ]),
                 Tables\Columns\BadgeColumn::make('payment_type')
+                    ->label(__('Payment Type'))
                     ->enum(Payment::STATUSES)
                     ->colors([
                         'success' => 'full',
@@ -80,6 +95,7 @@ class PaymentRelationManager extends RelationManager
                         'heroicon-o-check-circle' => 'paid',
                     ]),
                 Tables\Columns\TextColumn::make('amount')
+                    ->label(__('Amount'))
                     ->money('MYR '),
 
             ])
@@ -88,19 +104,19 @@ class PaymentRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make('Pay remaining')
-                    ->label('Pay remaining')
+                    ->label(__('Pay remaining'))
                     ->visible(fn (HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ViewAction::make('View Invoice')
                     ->icon('heroicon-s-document')
-                    ->label('Invoice')
+                    ->label(__('Invoice'))
                     ->url(fn (Payment $record) => $record->getFirstMediaUrl('invoices'))
                     ->openUrlInNewTab(),
                 Tables\Actions\ViewAction::make('View Receipt')
                     ->icon('heroicon-s-document-text')
-                    ->label('Receipt')
+                    ->label(__('Receipt'))
                     ->openUrlInNewTab()
                     ->hidden(fn (Payment $record) => $record->getFirstMediaUrl('receipts') === '')
                     ->url(fn (Payment $record) => $record->getFirstMediaUrl('receipts')),

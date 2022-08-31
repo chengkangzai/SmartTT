@@ -17,26 +17,39 @@ class ManageTourSetting extends SettingsPage
 
     protected static string $settings = TourSetting::class;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Settings');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('Tour Settings');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('Tour Settings');
+    }
 
     protected function getFormSchema(): array
     {
         return [
             Toggle::make('default_status')
                 ->inline(false)
-                ->label('Default Status')
+                ->label(__('Default Status'))
                 ->required(),
             TagsInput::make('category')
-                ->label('Category')
-                ->hint('Cannot delete category if at least one tour is in this category')
+                ->label(__('Category'))
+                ->hint(__('Cannot delete category if at least one tour is in this category'))
                 ->required(),
             TextInput::make('default_night')
-                ->label('Default Night')
+                ->label(__('Default Night'))
                 ->required(),
             TextInput::make('default_day')
-                ->label('Default Day')
+                ->label(__('Default Day'))
                 ->required(),
         ];
     }
@@ -52,12 +65,12 @@ class ManageTourSetting extends SettingsPage
             if ($tagInUse) {
                 Notification::make()
                     ->warning()
-                    ->title('Category ' . $deletedCategory . ' is in use')
-                    ->body('You can not delete this category because it is in use.')
+                    ->title(__('Category is in use', ['category' => $deletedCategory]))
+                    ->body(__('You can not delete this category because it is in use.'))
                     ->send();
 
                 throw ValidationException::withMessages([
-                    'category' => 'You can not delete this category because it is in use.',
+                    'category' => __('You can not delete this category because it is in use.'),
                 ]);
             }
         }

@@ -21,54 +21,68 @@ class AirportResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-office-building';
 
-    protected static ?string $navigationGroup = 'Features';
-
     protected static ?int $navigationSort = 5;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Airports');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('country_id')
+                    ->label(__('Countries'))
                     ->relationship('country', 'name'),
                 Forms\Components\TextInput::make('city')
+                    ->label(__('City'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('name')
-                    ->label('Airport Name')
+                    ->label(__('Airport Name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('IATA')
-                    ->hint('International Air Transport Association code')
-                    ->placeholder('3 letter code')
+                    ->label(__('IATA'))
+                    ->hint(__('International Air Transport Association code'))
+                    ->placeholder(__('3 letter code'))
                     ->required()
-                    ->label('IATA')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('ICAO')
-                    ->hint('International Civil Aviation Organization code')
-                    ->placeholder('4 letter code')
+                    ->label(__('ICAO'))
+                    ->hint(__('International Civil Aviation Organization code'))
+                    ->placeholder(__('4 letter code'))
                     ->required()
-                    ->label('ICAO')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
-                    ->hint('Latitude in decimal degrees')
-                    ->placeholder('Eg. 1.641310')
+                    ->label(__('Latitude'))
+                    ->hint(__('Latitude in decimal degrees'))
+                    ->placeholder(__('Eg. 1.641310'))
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('longitude')
-                    ->hint('Longitude in decimal degrees')
-                    ->placeholder('Eg. 103.669998')
+                    ->label(__('Longitude'))
+                    ->hint(__('Longitude in decimal degrees'))
+                    ->placeholder(__('Eg. 103.669998'))
                     ->required(),
                 Forms\Components\TextInput::make('altitude')
-                    ->hint('Altitude in meters')
-                    ->placeholder('Eg -135')
+                    ->label(__('Altitude'))
+                    ->hint(__('Altitude in meters'))
+                    ->placeholder(__('Eg -135'))
                     ->required(),
                 Forms\Components\TextInput::make('DST')
-                    ->hint('Daylight Saving Time of the airport')
+                    ->label(__('DST'))
+                    ->hint(__('Daylight Saving Time of the airport'))
                     ->required()
-                    ->label('DST')
                     ->maxLength(255),
                 Forms\Components\Select::make('timezoneTz')
+                    ->label(__('Timezone'))
                     ->searchable()
                     ->options(DateTimeZone::listIdentifiers())
                     ->required(),
@@ -80,14 +94,16 @@ class AirportResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('Airport Name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country.name')
-                    ->label('Country'),
-                Tables\Columns\TextColumn::make('city'),
+                    ->label(__('Country')),
+                Tables\Columns\TextColumn::make('city')
+                    ->label(__('City')),
                 Tables\Columns\TextColumn::make('IATA')
-                    ->label('IATA'),
+                    ->label(__('IATA')),
                 Tables\Columns\TextColumn::make('ICAO')
-                    ->label('ICAO'),
+                    ->label(__('ICAO')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

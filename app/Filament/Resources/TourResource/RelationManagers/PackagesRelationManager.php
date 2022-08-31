@@ -18,14 +18,26 @@ class PackagesRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'depart_time';
 
+    public static function getTitle(): string
+    {
+        return __('Packages');
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return __('Package');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\DateTimePicker::make('depart_time')
+                    ->label(__('Depart Time'))
                     ->rules(['required', 'date', 'after_or_equal:today'])
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->inline(false)
                     ->required(),
             ]);
@@ -36,12 +48,15 @@ class PackagesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('depart_time')
+                    ->label(__('Depart Time'))
                     ->sortable()
                     ->dateTime(),
-                Tables\Columns\BooleanColumn::make('is_active'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
+                Tables\Columns\TextColumn::make('price')
+                    ->label(__('Price')),
                 Tables\Columns\TextColumn::make('flight.airline')
-                    ->label('Airline')
+                    ->label(__('Airline'))
                     ->default('-')
                     ->sortable(),
             ])
@@ -53,7 +68,7 @@ class PackagesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->url(fn (Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
+                    ->url(fn(Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),

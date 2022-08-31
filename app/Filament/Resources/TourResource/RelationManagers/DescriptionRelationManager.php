@@ -17,14 +17,26 @@ class DescriptionRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'place';
 
+    public static function getTitle(): string
+    {
+        return __('Tour Description');
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return __('Tour Description');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('place')
+                    ->label(__('Place'))
                     ->columnSpan(2)
                     ->required(),
                 Forms\Components\Textarea::make('description')
+                    ->label(__('Description'))
                     ->columnSpan(4)
                     ->rows(2)
                     ->required(),
@@ -36,8 +48,10 @@ class DescriptionRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('place')
+                    ->label(__('Place'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->label(__('Description'))
                     ->searchable()
                     ->limit(70),
             ])

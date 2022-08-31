@@ -19,41 +19,54 @@ class ManageGeneralSetting extends SettingsPage
 
     protected static string $settings = GeneralSetting::class;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Settings');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('General Settings');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('General Settings');
+    }
 
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn ($lang) => $lang['name'])->toArray();
+            ->map(fn($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn ($val, $key) => $key)->toArray();
+            ->map(fn($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn ($country) => [$country => $country])
+            ->mapWithKeys(fn($country) => [$country => $country])
             ->toArray();
 
 
         return [
-            Section::make('Site Settings')
+            Section::make(__('Site Settings'))
                 ->schema([
                     TextInput::make('site_name')
+                        ->label(__('Site Name'))
                         ->columnSpan(2)
-                        ->label('Site Name')
                         ->required(),
                     Select::make('default_language')
-                        ->label('Default Language')
+                        ->label(__('Default Language'))
                         ->options($languages)
                         ->required(),
                     Select::make('default_timezone')
                         ->searchable()
-                        ->label('Default Timezone')
+                        ->label(__('Default Timezone'))
                         ->afterStateHydrated(function (Closure $set) {
                             $timezone = app(GeneralSetting::class)->default_timezone->getName();
                             $set('default_timezone', $timezone);
@@ -61,7 +74,7 @@ class ManageGeneralSetting extends SettingsPage
                         ->options($timezones)
                         ->required(),
                     Select::make('default_currency')
-                        ->label('Default Currency')
+                        ->label(__('Default Currency'))
                         ->searchable()
                         ->reactive()
                         ->afterStateUpdated(function (Closure $get, Closure $set) {
@@ -74,32 +87,32 @@ class ManageGeneralSetting extends SettingsPage
                     TextInput::make('default_currency_symbol')
                         ->disabled(),
                     Select::make('default_country')
-                        ->label('Default Country')
+                        ->label(__('Default Country'))
                         ->searchable()
                         ->options($countries)
                         ->required(),
                 ])->columns(2),
-            Section::make('Company Settings')
+            Section::make(__('Company Settings'))
                 ->schema([
                     TextInput::make('company_name')
-                        ->label('Company Name')
+                        ->label(__('Company Name'))
                         ->required()
                         ->maxLength(255),
                     TextInput::make('company_phone')
-                        ->label('Company Phone')
+                        ->label(__('Company Phone'))
                         ->required()
                         ->maxLength(255),
                     TextInput::make('company_email')
-                        ->label('Company Email')
+                        ->label(__('Company Email'))
                         ->required()
                         ->maxLength(255),
                     TextInput::make('business_registration_no')
-                        ->label('Business Registration Number')
+                        ->label(__('Business Registration Number'))
                         ->required()
                         ->maxLength(255),
                     Textarea::make('company_address')
                         ->columnSpan(2)
-                        ->label('Company Address')
+                        ->label(__('Company Address'))
                         ->required()
                         ->maxLength(255)
                         ->rows(4),

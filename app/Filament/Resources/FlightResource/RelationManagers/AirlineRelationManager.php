@@ -16,22 +16,34 @@ class AirlineRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getTitle(): string
+    {
+        return __('Airlines');
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return __('Airline');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('country_id')
                     ->relationship('country', 'name')
+                    ->label(__('Country'))
                     ->required(),
                 Forms\Components\TextInput::make('ICAO')
-                    ->label('ICAO')
+                    ->label(__('ICAO'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('IATA')
-                    ->label('IATA')
+                    ->label(__('IATA'))
                     ->required()
                     ->maxLength(255),
             ]);
@@ -42,8 +54,10 @@ class AirlineRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country.name')
+                    ->label(__('Country'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ICAO')
                     ->label('ICAO'),

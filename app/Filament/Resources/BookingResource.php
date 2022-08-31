@@ -22,25 +22,39 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Features';
-
     protected static ?int $navigationSort = 4;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Bookings');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id'),
+                Forms\Components\TextInput::make('user_id')
+                    ->label(__('Made By')),
                 Forms\Components\TextInput::make('package_id')
+                    ->label(__('Package'))
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
-                    ->mask(fn (Mask $mask) => $mask->money('RM'))
+                    ->label(__('Total Price'))
+                    ->mask(fn(Mask $mask) => $mask->money('RM'))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
+                    ->label(__('Discount'))
                     ->required(),
                 Forms\Components\TextInput::make('adult')
+                    ->label(__('Adult'))
                     ->required(),
                 Forms\Components\TextInput::make('child')
+                    ->label(__('Child'))
                     ->required(),
             ]);
     }
@@ -49,13 +63,22 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('package.tour.name'),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label(__('Made By'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('package.tour.name')
+                    ->label(__('Tour'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('total_price')
+                    ->label(__('Total Price'))
+                    ->sortable()
                     ->money(),
-                Tables\Columns\TextColumn::make('adult'),
-                Tables\Columns\TextColumn::make('child'),
+                Tables\Columns\TextColumn::make('adult')
+                    ->label(__('Adult'))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('child')
+                    ->label(__('Child'))
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -84,7 +107,7 @@ class BookingResource extends Resource
     {
         return [
             'index' => Pages\ListBookings::route('/'),
-            'create' => Pages\CreateBooking::route('/create'),
+//            'create' => Pages\CreateBooking::route('/create'),
             'view' => Pages\ViewBooking::route('/{record}'),
             'edit' => Pages\EditBooking::route('/{record}/edit'),
         ];

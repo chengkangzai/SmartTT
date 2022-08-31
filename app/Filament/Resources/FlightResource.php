@@ -21,9 +21,17 @@ class FlightResource extends Resource
 
     protected static ?string $navigationIcon = 'maki-airport';
 
-    protected static ?string $navigationGroup = 'Features';
-
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Flights');
+    }
 
     public static function form(Form $form): Form
     {
@@ -31,32 +39,40 @@ class FlightResource extends Resource
             ->schema([
                 Forms\Components\Select::make('airline_id')
                     ->relationship('airline', 'name')
+                    ->label(__('Airline'))
                     ->searchable()
                     ->required()
                     ->columnSpan(2),
                 Forms\Components\TextInput::make('price')
+                    ->label(__('Price'))
                     ->columnSpan(2)
-                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn(Mask $mask) => $mask->money('MYR '))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
+                    ->label(__('Departure Airport'))
                     ->searchable()
                     ->required(),
                 Forms\Components\Select::make('arrival_airport_id')
                     ->relationship('arrive_airport', 'name')
+                    ->label(__('Arrival Airport'))
                     ->searchable()
                     ->required(),
                 Forms\Components\DateTimePicker::make('departure_date')
+                    ->label(__('Departure Date'))
                     ->rules(['date', 'after_or_equal:today'])
                     ->required(),
                 Forms\Components\DateTimePicker::make('arrival_date')
+                    ->label(__('Arrival Date'))
                     ->rules(['date', 'after_or_equal:departure_date'])
                     ->required(),
                 Forms\Components\Select::make('class')
+                    ->label(__('Flight Class'))
                     ->default(app(FlightSetting::class)->default_class)
                     ->options(app(FlightSetting::class)->supported_class)
                     ->required(),
                 Forms\Components\Select::make('type')
+                    ->label(__('Flight Type'))
                     ->default(app(FlightSetting::class)->default_type)
                     ->options(app(FlightSetting::class)->supported_type)
                     ->required(),
@@ -68,19 +84,25 @@ class FlightResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('depart_airport.name')
+                    ->limit(30)
                     ->searchable()
-                    ->limit(30),
+                    ->label(__('Departure Airport')),
                 Tables\Columns\TextColumn::make('arrive_airport.name')
+                    ->limit(30)
                     ->searchable()
-                    ->limit(30),
+                    ->label(__('Arrival Airport')),
+                Tables\Columns\TextColumn::make('airline')
+                    ->searchable()
+                    ->label(__('Airline')),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('MYR'),
+                    ->label(__('Price'))
+                    ->money('MYR '),
                 Tables\Columns\TextColumn::make('departure_date')
+                    ->label(__('Departure Date'))
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('arrival_date')
+                    ->label(__('Arrival Date'))
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('airline')
-                    ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

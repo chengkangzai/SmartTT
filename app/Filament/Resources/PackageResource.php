@@ -21,9 +21,17 @@ class PackageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
-    protected static ?string $navigationGroup = 'Features';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Packages');
+    }
 
     public static function form(Form $form): Form
     {
@@ -31,35 +39,44 @@ class PackageResource extends Resource
             ->schema([
                 Forms\Components\Select::make('tour_id')
                     ->relationship('tour', 'name')
+                    ->label(__('Tour'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('depart_time')
+                    ->label(__('Departure Time'))
                     ->rules(['required', 'date', 'after_or_equal:today'])
                     ->reactive()
                     ->required(),
                 Forms\Components\Select::make('airline_id')
-                    ->label('Airline')
+                    ->label(__('Airline'))
                     ->options(Airline::get()->pluck('name', 'id'))
                     ->required()
                     ->reactive(),
                 Forms\Components\MultiSelect::make('flight_id')
                     ->relationship('flight', 'name')
+                    ->label(__('Flight'))
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->required(),
                 Forms\Components\Card::make([
                     Forms\Components\Repeater::make('pricings')
                         ->relationship('pricings')
+                        ->label(__('Pricings'))
                         ->schema([
                             Forms\Components\TextInput::make('name')
+                                ->label(__('Pricing Name'))
                                 ->columnSpan(3)
                                 ->required(),
                             Forms\Components\TextInput::make('price')
+                                ->label(__('Price'))
                                 ->columnSpan(2)
                                 ->required(),
                             Forms\Components\TextInput::make('capacity')
+                                ->label(__('Capacity'))
                                 ->columnSpan(2)
                                 ->required(),
                             Forms\Components\Toggle::make('is_active')
+                                ->label(__('Active'))
                                 ->columnSpan(1)
                                 ->inline(false)
                                 ->required(),
@@ -76,15 +93,19 @@ class PackageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('tour.name')
+                    ->label(__('Tour'))
                     ->limit(40)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('depart_time')
+                    ->label(__('Departure Time'))
                     ->sortable()
                     ->dateTime(),
-                Tables\Columns\BooleanColumn::make('is_active'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
+                Tables\Columns\TextColumn::make('price')
+                    ->label(__('Price')),
                 Tables\Columns\TextColumn::make('flight.airline')
-                    ->label('Airline')
+                    ->label(__('Airline'))
                     ->sortable(),
             ])
             ->filters([

@@ -16,13 +16,40 @@ class PricingsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getTitle(): string
+    {
+        return __('Package Pricing');
+    }
+
+    protected static function getRecordLabel(): ?string
+    {
+        return __('Package Pricing');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\Card::make([
+
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                    ->label(__('Pricing Name'))
+                    ->columnSpan(3)
+                    ->required(),
+                Forms\Components\TextInput::make('price')
+                    ->label(__('Price'))
+                    ->columnSpan(2)
+                    ->required(),
+                Forms\Components\TextInput::make('capacity')
+                    ->label(__('Capacity'))
+                    ->columnSpan(2)
+                    ->required(),
+                Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
+                    ->columnSpan(1)
+                    ->inline(false)
+                    ->required(),
+                ])->columns(8)
             ]);
     }
 
@@ -31,16 +58,21 @@ class PricingsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->label(__('Price'))
                     ->money('MYR ')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_capacity')
+                    ->label(__('Total Capacity'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('available_capacity')
+                    ->label(__('Available Capacity'))
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active'),
+                Tables\Columns\BooleanColumn::make('is_active')
+                ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

@@ -19,6 +19,7 @@ class ViewBooking extends ViewRecord
         return [
             Actions\EditAction::make(),
             Actions\Action::make('Sync Booking to Outlook')
+                ->label(__('Sync booking to Outlook'))
                 ->color('secondary')
                 ->action('sync'),
         ];
@@ -34,11 +35,13 @@ class ViewBooking extends ViewRecord
 
         if (! $user->msOauth()->exists()) {
             return Notifications\Notification::make()
-                ->title('Warning')
-                ->body('Please connect your Microsoft account first')
+                ->warning()
+                ->body(__('Please connect your Microsoft account first'))
                 ->actions([
                     Notifications\Actions\Action::make('Connect')
+                        ->label(__('Connect'))
                         ->url(route('profile.show'))
+                        ->openUrlInNewTab()
                         ->button()
                         ->color('warning'),
                 ])
@@ -49,8 +52,8 @@ class ViewBooking extends ViewRecord
         SyncBookingToCalenderJob::dispatch($booking, auth()->user());
 
         return Notifications\Notification::make()
-            ->title('Success')
-            ->body('We are syncing your booking to your calendar, please give us a few minutes to finish')
+            ->success()
+            ->body(__('We are syncing your booking to your calendar, please give us a few minutes to finish'))
             ->success()
             ->send();
     }

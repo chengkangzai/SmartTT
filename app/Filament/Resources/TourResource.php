@@ -14,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TourResource extends Resource
@@ -22,7 +23,15 @@ class TourResource extends Resource
 
     protected static ?string $navigationIcon = 'maki-beach';
 
-    protected static ?string $navigationGroup = 'Features';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Tours');
+    }
 
     protected static ?int $navigationSort = 1;
 
@@ -31,27 +40,35 @@ class TourResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Tour Name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('tour_code')
+                    ->label(__('Tour Code'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('category')
+                    ->label(__('Category'))
                     ->options(app(TourSetting::class)->category)
                     ->searchable()
                     ->required(),
                 Forms\Components\MultiSelect::make('countries')
+                    ->label(__('Countries'))
                     ->preload()
                     ->relationship('countries', 'name')
                     ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('days')
+                    ->label(__('Days'))
                     ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('nights')
+                    ->label(__('Nights'))
                     ->numeric()
                     ->required(),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('itinerary')
+                    ->placeholder(__('Drag & Drop your file or browse'))
+                    ->label(__('Itinerary'))
                     ->collection('itinerary')
                     ->required()
                     ->maxSize(2048)
@@ -60,6 +77,8 @@ class TourResource extends Resource
                         'accept' => 'application/pdf',
                     ]),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
+                    ->placeholder(__('Drag & Drop your file or browse'))
+                    ->label(__('Thumbnail'))
                     ->collection('thumbnail')
                     ->required()
                     ->maxSize(2048)
@@ -68,18 +87,22 @@ class TourResource extends Resource
                         'accept' => 'image/*',
                     ]),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->columnSpan(2)
                     ->required(),
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\Repeater::make('Description')
+                            ->label(__('Tour Description'))
                             ->relationship('description')
                             ->columnSpan(2)
                             ->schema([
                                 Forms\Components\TextInput::make('place')
+                                    ->label(__('Place'))
                                     ->columnSpan(2)
                                     ->required(),
                                 Forms\Components\Textarea::make('description')
+                                    ->label(__('Description'))
                                     ->columnSpan(4)
                                     ->rows(2)
                                     ->required(),
@@ -95,14 +118,21 @@ class TourResource extends Resource
         return $table
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumbnail')
+                    ->label(__('Thumbnail'))
                     ->rounded()
                     ->collection('thumbnail'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('tour_code'),
-                Tables\Columns\BadgeColumn::make('category'),
-                Tables\Columns\TextColumn::make('days'),
-                Tables\Columns\TextColumn::make('nights'),
-                Tables\Columns\BooleanColumn::make('is_active'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('Tour Name')),
+                Tables\Columns\TextColumn::make('tour_code')
+                    ->label(__('Tour Name')),
+                Tables\Columns\BadgeColumn::make('category')
+                    ->label(__('Category')),
+                Tables\Columns\TextColumn::make('days')
+                    ->label(__('Days')),
+                Tables\Columns\TextColumn::make('nights')
+                    ->label(__('Nights')),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

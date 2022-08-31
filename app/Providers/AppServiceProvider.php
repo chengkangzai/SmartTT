@@ -40,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Filament::registerNavigationGroups([
-            'Features',
-            'Authentication',
-            'Settings',
+            __('Features'),
+            __('Authentication'),
+            __('Settings'),
         ]);
     }
 }

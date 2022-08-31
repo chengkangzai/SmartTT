@@ -15,26 +15,43 @@ class ManagePackageSetting extends SettingsPage
 
     protected static string $settings = PackageSetting::class;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Settings');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('Package Settings');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('Package Settings');
+    }
 
     protected function getFormSchema(): array
     {
         return [
             Toggle::make('default_status')
-                ->label('Default Status'),
+                ->label(__('Default Status')),
             Card::make([
                 TableRepeater::make('default_pricing')
+                    ->label(__('Default Pricing'))
                     ->schema([
                         TextInput::make('name')
+                            ->label(__('Pricing Name'))
                             ->columnSpan(3)
                             ->required(),
                         TextInput::make('capacity')
+                            ->label(__('Capacity'))
                             ->columnSpan(2)
                             ->numeric()
                             ->required(),
                         Toggle::make('status')
+                            ->label(__('Active'))
                             ->inline(false)
                             ->columnSpan(1)
                             ->required(),
