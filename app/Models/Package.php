@@ -31,8 +31,8 @@ class Package extends Model
 
     public function price(): Attribute
     {
-        $min = $this->pricings->min('price');
-        $max = $this->pricings->max('price');
+        $min = $this->activePricings->min('price');
+        $max = $this->activePricings->max('price');
 
         return Attribute::make(
             get: fn ($value) => number_format($min, 2) . ' - ' . number_format($max, 2),
