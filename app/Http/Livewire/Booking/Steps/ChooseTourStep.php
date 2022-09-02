@@ -26,8 +26,10 @@ class ChooseTourStep extends StepComponent
 
     public function nextStep()
     {
-        $this->validate([
+        $this->validate(rules:[
             'tour' => 'required|integer|exists:tours,id',
+        ],attributes: [
+            'tour' => __('Tour'),
         ]);
 
         parent::nextStep();
