@@ -28,7 +28,7 @@ class ChooseTourStep extends StepComponent
     {
         $this->validate(rules:[
             'tour' => 'required|integer|exists:tours,id',
-        ],attributes: [
+        ], attributes: [
             'tour' => __('Tour'),
         ]);
 

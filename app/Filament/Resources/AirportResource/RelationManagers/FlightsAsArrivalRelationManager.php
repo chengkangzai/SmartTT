@@ -43,7 +43,7 @@ class FlightsAsArrivalRelationManager extends RelationManager
                 Forms\Components\TextInput::make('price')
                     ->label(__('Price'))
                     ->columnSpan(2)
-                    ->mask(fn(Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')

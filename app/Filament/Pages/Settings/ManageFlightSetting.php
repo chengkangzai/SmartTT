@@ -35,15 +35,15 @@ class ManageFlightSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $supportedClass = collect(app(FlightSetting::class)->supported_class)
-            ->mapWithKeys(fn($item) => [$item => $item])
+            ->mapWithKeys(fn ($item) => [$item => $item])
             ->toArray();
 
         $supportedType = collect(app(FlightSetting::class)->supported_type)
-            ->mapWithKeys(fn($item) => [$item => $item])
+            ->mapWithKeys(fn ($item) => [$item => $item])
             ->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn($country) => [$country => $country])
+            ->mapWithKeys(fn ($country) => [$country => $country])
             ->toArray();
 
         return [

@@ -17,8 +17,8 @@ use Filament\Resources\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Spatie\Activitylog\Models\Activity;
 
@@ -55,6 +55,7 @@ class ActivityResource extends Resource
                 'description' => trans('constant.activity.' . $record->description),
             ]);
         }
+
         return $record->description;
     }
 
@@ -84,6 +85,7 @@ class ActivityResource extends Resource
                                         'description' => trans('constant.activity.' . $record->description),
                                     ]));
                                 }
+
                                 return $component->state($record->description);
                             })
                             ->label(__('Description'))
@@ -113,7 +115,7 @@ class ActivityResource extends Resource
                             ->content(function (?Activity $record): string {
                                 return $record->created_at ? "{$record->created_at->format('d/m/Y H:i')}" : '-';
                             }),
-                    ])
+                    ]),
                 ]),
                 Card::make([
                     KeyValue::make('properties.attributes')
@@ -121,7 +123,7 @@ class ActivityResource extends Resource
                     KeyValue::make('properties.old')
                         ->label(__('Old Attributes')),
                 ])->columns(2)
-                    ->visible(fn($record) => $record->properties?->count() > 0)
+                    ->visible(fn ($record) => $record->properties?->count() > 0),
             ])
             ->columns(['sm' => 4, 'lg' => null]);
     }
@@ -136,6 +138,7 @@ class ActivityResource extends Resource
                 return [$item->subject_type => trans('constant.model.' . $item->subject_type)];
             })
             ->toArray();
+
         return $table
             ->columns([
                 TextColumn::make('id')
@@ -148,6 +151,7 @@ class ActivityResource extends Resource
                         if (str($state)->contains(['created', 'updated', 'deleted', 'restored'])) {
                             return trans("constant.activity.{$state}");
                         }
+
                         return $state;
                     })
                     ->searchable(),
@@ -157,7 +161,7 @@ class ActivityResource extends Resource
                         return $column->getRecord()->causer?->name ?? __('System');
                     }),
                 TextColumn::make('subject_type')
-                    ->hidden(fn(Component $livewire) => $livewire instanceof ActivitiesRelationManager)
+                    ->hidden(fn (Component $livewire) => $livewire instanceof ActivitiesRelationManager)
                     ->label(__('Subject'))
                     ->formatStateUsing(function (TextColumn $column) {
                         return trans('constant.model.' . $column->getRecord()->subject_type) ?? __('System');
@@ -179,7 +183,7 @@ class ActivityResource extends Resource
                                 ->label(__('Created From')),
                             DatePicker::make('created_until')
                                 ->label(__('Created Until')),
-                        ])->columns(2)
+                        ])->columns(2),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -189,7 +193,7 @@ class ActivityResource extends Resource
                             ->when($data['created_until'], function (Builder $query, $date): Builder {
                                 return $query->whereDate('created_at', '<=', $date);
                             });
-                    })
+                    }),
             ])
             ->defaultSort('created_at', 'DESC');
     }
