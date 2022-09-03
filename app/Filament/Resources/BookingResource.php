@@ -104,7 +104,8 @@ class BookingResource extends Resource
             GuestRelationManager::class,
             PackageRelationManager::class,
             ActivitiesRelationManager::class,
-        ];
+        ]
+            + (auth()->user()?->can('Audit Booking') ? [ActivitiesRelationManager::class] : []);
     }
 
     public static function getPages(): array

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\ActivityResource\Pages;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Placeholder;
@@ -14,8 +16,10 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivityResource extends Resource
@@ -28,7 +32,20 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('Features');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Audit Trail');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return __('Audit Trail');
+    }
 
     public static function getRecordTitle(?Model $record): ?string
     {
@@ -111,10 +128,19 @@ class ActivityResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $subjects = Activity::select('subject_type')
+            ->distinct()
+            ->get()
+            ->filter()
+            ->mapWithKeys(function ($item) {
+                return [$item->subject_type => trans('constant.model.' . $item->subject_type)];
+            })
+            ->toArray();
         return $table
             ->columns([
                 TextColumn::make('id')
                     ->label(__('ID'))
+                    ->hidden()
                     ->sortable(),
                 TextColumn::make('description')
                     ->label(__('Description'))
@@ -126,19 +152,42 @@ class ActivityResource extends Resource
                     })
                     ->searchable(),
                 TextColumn::make('causer')
+                    ->label(__('User'))
                     ->formatStateUsing(function (TextColumn $column) {
                         return $column->getRecord()->causer?->name ?? __('System');
-                    })
-                    ->label(__('User')),
+                    }),
+                TextColumn::make('subject_type')
+                    ->hidden(fn(Component $livewire) => $livewire instanceof ActivitiesRelationManager)
+                    ->label(__('Subject'))
+                    ->formatStateUsing(function (TextColumn $column) {
+                        return trans('constant.model.' . $column->getRecord()->subject_type) ?? __('System');
+                    }),
                 TextColumn::make('created_at')
                     ->label(__('Date Time'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
-                Filter::make('has_subject')
-                    ->label(__('has_subject'))
-                    ->query(fn(Builder $query) => $query->has('subject')),
+                SelectFilter::make('subject_type')
+                    ->options($subjects),
+                Filter::make('created_at')
+                    ->form([
+                        Card::make([
+                            DatePicker::make('created_from')
+                                ->label(__('Created From')),
+                            DatePicker::make('created_until')
+                                ->label(__('Created Until')),
+                        ])->columns(2)
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['created_from'], function (Builder $query, $date): Builder {
+                                return $query->whereDate('created_at', '>=', $date);
+                            })
+                            ->when($data['created_until'], function (Builder $query, $date): Builder {
+                                return $query->whereDate('created_at', '<=', $date);
+                            });
+                    })
             ])
             ->defaultSort('created_at', 'DESC');
     }

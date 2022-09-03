@@ -129,8 +129,8 @@ class PackageResource extends Resource
         return [
             PricingsRelationManager::class,
             FlightRelationManager::class,
-            ActivitiesRelationManager::class,
-        ];
+        ]
+            + (auth()->user()?->can('Audit Package') ? [ActivitiesRelationManager::class] : []);
     }
 
     public static function getPages(): array

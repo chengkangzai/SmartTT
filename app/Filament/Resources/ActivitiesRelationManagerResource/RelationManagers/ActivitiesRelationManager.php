@@ -11,6 +11,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Activitylog\Models\Activity;
 
 class ActivitiesRelationManager extends RelationManager
 {
@@ -21,6 +22,11 @@ class ActivitiesRelationManager extends RelationManager
     public static function getTitle(): string
     {
         return __('Audit Trail');
+    }
+
+    public function mount(Activity $activity)
+    {
+        dd($activity);
     }
 
     public static function form(Form $form): Form

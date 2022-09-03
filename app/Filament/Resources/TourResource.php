@@ -153,10 +153,10 @@ class TourResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PackagesRelationManager::class,
-            DescriptionRelationManager::class,
-            ActivitiesRelationManager::class,
-        ];
+                PackagesRelationManager::class,
+                DescriptionRelationManager::class,
+            ]
+            + (auth()->user()?->can('Audit Tour') ? [ActivitiesRelationManager::class] : []);
     }
 
     public static function getPages(): array

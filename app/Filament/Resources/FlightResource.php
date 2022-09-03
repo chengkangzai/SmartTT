@@ -124,7 +124,8 @@ class FlightResource extends Resource
         return [
             AirlineRelationManager::class,
             ActivitiesRelationManager::class,
-        ];
+        ]
+            + (auth()->user()?->can('Audit Flight') ? [ActivitiesRelationManager::class] : []);
     }
 
     public static function getPages(): array
