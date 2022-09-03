@@ -169,8 +169,10 @@ class ActivityResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('subject_type')
+                    ->label(__('Subject'))
                     ->options($subjects),
                 Filter::make('created_at')
+                    ->label(__('Date Time'))
                     ->form([
                         Card::make([
                             DatePicker::make('created_from')
