@@ -1,19 +1,21 @@
 <?php
 
+use App\Filament\Resources\TourResource;
 use App\Models\User;
 
 it('should use the default locale', function () {
     $this->actingAs(User::factory()->create())
-        ->get(route('home'))
-        ->assertSee('Home');
+        ->get('/')
+        ->assertSee('Tours')
+        ->assertSee('Features');
 });
 
-it('should change the locale', function ($name, $locales) {
+it('should change the locale', function () {
+    $locales = ['ms', 'zh'];
     foreach ($locales as $locale) {
         $this->actingAs(User::factory()->create())
-            ->get(route('home', ['locale' => $locale]))
-            ->assertSee(__('Home'));
+            ->get('/', ['locale' => $locale])
+            ->assertSee(__('Tours'))
+            ->assertSee(__('Features'));;
     }
-})->with([
-    ['locale', ['ms', 'zh'],],
-]);
+});
