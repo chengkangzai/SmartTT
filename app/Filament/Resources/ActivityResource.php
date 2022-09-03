@@ -32,6 +32,8 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
 
+    protected static ?int $navigationSort = 6;
+
     protected static function getNavigationGroup(): ?string
     {
         return __('Features');
