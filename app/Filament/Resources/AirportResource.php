@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\AirportResource\Pages;
 use App\Filament\Resources\AirportResource\RelationManagers\FlightsAsArrivalRelationManager;
 use App\Filament\Resources\AirportResource\RelationManagers\FlightsAsDepartureRelationManager;
@@ -125,6 +126,7 @@ class AirportResource extends Resource
         return [
             FlightsAsArrivalRelationManager::class,
             FlightsAsDepartureRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

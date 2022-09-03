@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\TourResource\Pages;
 use App\Filament\Resources\TourResource\RelationManagers\DescriptionRelationManager;
 use App\Filament\Resources\TourResource\RelationManagers\PackagesRelationManager;
@@ -154,6 +155,7 @@ class TourResource extends Resource
         return [
             PackagesRelationManager::class,
             DescriptionRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

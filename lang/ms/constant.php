@@ -25,4 +25,5 @@ return [
         Tour::class => __('Tour'),
         TourDescription::class => __('Tour Description'),
     ],
+    ':subject was :description' => ':subject telah :description',
 ];

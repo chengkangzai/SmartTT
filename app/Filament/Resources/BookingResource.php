@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers\GuestRelationManager;
 use App\Filament\Resources\BookingResource\RelationManagers\PackageRelationManager;
@@ -102,6 +103,7 @@ class BookingResource extends Resource
             PaymentRelationManager::class,
             GuestRelationManager::class,
             PackageRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

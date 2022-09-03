@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
@@ -128,6 +129,7 @@ class PackageResource extends Resource
         return [
             PricingsRelationManager::class,
             FlightRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

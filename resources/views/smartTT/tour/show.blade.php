@@ -125,7 +125,7 @@
                                         <td>
                                             <ol>
                                                 @foreach ($package->flight as $flight)
-                                                    <li>{{ $flight->airline->name }}</li>
+{{--                                                    <li>{{ $flight->airline->name }}</li>--}}
                                                 @endforeach
                                             </ol>
                                         </td>

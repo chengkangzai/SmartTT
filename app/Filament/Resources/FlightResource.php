@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\FlightResource\Pages;
 use App\Filament\Resources\FlightResource\RelationManagers\AirlineRelationManager;
 use App\Models\Flight;
@@ -122,6 +123,7 @@ class FlightResource extends Resource
     {
         return [
             AirlineRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 
