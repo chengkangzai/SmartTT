@@ -27,7 +27,7 @@ class PackagesTable extends Component
     {
         $this->tour = $tour;
         $this->getPackages();
-        $pricing = $this->packages->map(fn(Package $package) => $package->activePricings->map->price)
+        $pricing = $this->packages->map(fn (Package $package) => $package->activePricings->map->price)
             ->flatten()->sort()->values();
 
         $this->priceFrom = $pricing->first();
