@@ -106,11 +106,11 @@ $language = $setting->default_language;
                     <nav :class="{'flex': open, 'hidden': !open}"
                         class="hidden flex-grow flex-col gap-2 py-2 text-center md:flex md:flex-row md:justify-end md:py-0">
                         @auth
-                            <a href="{{ route('home') }}"
+                            <a href="{{ route('filament.auth.login') }}"
                                 class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Dashboard') }}
                             </a>
-                            <a href="{{ route('logout') }}"
+                            <a href="{{ route('filament.auth.logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                 class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Logout') }}
@@ -120,11 +120,11 @@ $language = $setting->default_language;
                             </form>
                         @endauth
                         @guest
-                            <a href="{{ route('login') }}"
+                            <a href="{{ route('filament.auth.login') }}"
                                 class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Login') }}
                             </a>
-                            <a href="{{ route('register') }}"
+                            <a href="{{ route('filament.auth.login') }}"
                                 class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Register') }}
                             </a>

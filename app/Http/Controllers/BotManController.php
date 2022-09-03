@@ -27,7 +27,7 @@ class BotManController extends Controller
         })->middleware($dialogFlow);
 
         $botman->hears('input.stop_conversation', function (BotMan $bot) {
-            $bot->reply(__('Bye!, See you next time!'));
+            $bot->reply(__('Bye, See you next time!'));
             $bot->userStorage()->delete();
         })->middleware($dialogFlow)->stopsConversation();
 

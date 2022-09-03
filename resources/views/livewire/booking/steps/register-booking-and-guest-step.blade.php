@@ -11,7 +11,7 @@
             </ul>
         </div>
         <div class="container">
-            <a wire:click="addNewGuest" class="btn btn-outline-dark my-2">{{ __('Add New guest') }}</a>
+            <a wire:click="addNewGuest" class="btn btn-outline-dark my-2">{{ __('Add New Guest') }}</a>
             <a wire:click="addNewChild" class="btn btn-outline-dark my-2">{{ __('Add New Child') }}</a>
         </div>
         <table class="table table-striped table-bordered">
