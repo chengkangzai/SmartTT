@@ -38,10 +38,12 @@ class BookingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
                     ->label(__('Made By')),
-                Forms\Components\TextInput::make('package_id')
-                    ->label(__('Package'))
+                Forms\Components\Select::make('package_id')
+                    ->relationship('package', 'depart_time')
+                    ->label(__('Depart Time'))
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
                     ->label(__('Total Price'))
@@ -107,7 +109,7 @@ class BookingResource extends Resource
     {
         return [
             'index' => Pages\ListBookings::route('/'),
-//            'create' => Pages\CreateBooking::route('/create'),
+            'create' => Pages\BookingWizard::route('/create'),
             'view' => Pages\ViewBooking::route('/{record}'),
             'edit' => Pages\EditBooking::route('/{record}/edit'),
         ];
