@@ -49,7 +49,7 @@ class PricingsRelationManager extends RelationManager
                     ->columnSpan(1)
                     ->inline(false)
                     ->required(),
-                ])->columns(8)
+                ])->columns(8),
             ]);
     }
 

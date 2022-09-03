@@ -48,7 +48,7 @@ class BookingResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
                     ->label(__('Total Price'))
-                    ->mask(fn(Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Mask $mask) => $mask->money('RM'))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->label(__('Discount'))

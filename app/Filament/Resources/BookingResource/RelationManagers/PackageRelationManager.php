@@ -81,10 +81,10 @@ class PackageRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ViewAction::make('View Tour')
                     ->label(__('Tour'))
-                    ->url(fn(Package $record) => TourResource::getUrl('view', ['record' => $record->tour_id])),
+                    ->url(fn (Package $record) => TourResource::getUrl('view', ['record' => $record->tour_id])),
                 Tables\Actions\ViewAction::make('View Itinerary')
                     ->label(__('Itinerary'))
-                    ->url(fn(Package $record) => $record->tour->getFirstMediaUrl('itinerary'))
+                    ->url(fn (Package $record) => $record->tour->getFirstMediaUrl('itinerary'))
                     ->openUrlInNewTab(),
                 Tables\Actions\RestoreAction::make(),
             ]);

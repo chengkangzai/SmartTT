@@ -3,14 +3,11 @@
 namespace App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers;
 
 use App\Filament\Resources\ActivityResource;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivitiesRelationManager extends RelationManager
@@ -42,7 +39,7 @@ class ActivitiesRelationManager extends RelationManager
         return ActivityResource::table($table)
             ->actions([
                 Tables\Actions\ViewAction::make('View')
-                    ->url(fn($record) => ActivityResource::getUrl('view', ['record' => $record]))
+                    ->url(fn ($record) => ActivityResource::getUrl('view', ['record' => $record]))
                     ->openUrlInNewTab(),
             ]);
     }

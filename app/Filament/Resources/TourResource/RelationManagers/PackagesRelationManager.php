@@ -68,7 +68,7 @@ class PackagesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->url(fn(Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),

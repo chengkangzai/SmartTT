@@ -35,7 +35,7 @@ class PaymentRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('amount')
                     ->label(__('Amount'))
-                    ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_method')
                     ->label(__('Payment Method'))
@@ -105,25 +105,25 @@ class PaymentRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make('Pay remaining')
-                    ->url(fn(HasRelationshipTable $livewire) => BookingResource::getUrl('add_payment', [
-                        'record' => $livewire->getRelationship()->getParent()->id
+                    ->url(fn (HasRelationshipTable $livewire) => BookingResource::getUrl('add_payment', [
+                        'record' => $livewire->getRelationship()->getParent()->id,
                     ]))
                     ->label(__('Pay remaining'))
-                    ->visible(fn(HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
+                    ->visible(fn (HasRelationshipTable $livewire): bool => $livewire->getRelationship()->getParent()->getRemaining() > 0),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ViewAction::make('View Invoice')
                     ->icon('heroicon-s-document')
                     ->label(__('Invoice'))
-                    ->url(fn(Payment $record) => $record->getFirstMediaUrl('invoices'))
+                    ->url(fn (Payment $record) => $record->getFirstMediaUrl('invoices'))
                     ->openUrlInNewTab(),
                 Tables\Actions\ViewAction::make('View Receipt')
                     ->icon('heroicon-s-document-text')
                     ->label(__('Receipt'))
                     ->openUrlInNewTab()
-                    ->hidden(fn(Payment $record) => $record->getFirstMediaUrl('receipts') === '')
-                    ->url(fn(Payment $record) => $record->getFirstMediaUrl('receipts')),
+                    ->hidden(fn (Payment $record) => $record->getFirstMediaUrl('receipts') === '')
+                    ->url(fn (Payment $record) => $record->getFirstMediaUrl('receipts')),
             ])
             ->bulkActions([
 
