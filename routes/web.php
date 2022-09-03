@@ -32,7 +32,6 @@ Route::as('front.')->group(function () {
 });
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
-
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
