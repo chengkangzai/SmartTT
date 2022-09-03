@@ -7,15 +7,6 @@
         <div style="border: 1"></div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-home') }}"></use>
-            </svg>
-            {{ __('Dashboard') }}
-        </a>
-    </li>
-
     @can('Access Report')
         <li class="nav-group" aria-expanded="false">
             <a class="nav-link nav-group-toggle" href="#">
