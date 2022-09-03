@@ -50,7 +50,7 @@ it('should be mountable', function () {
         ->assertSee(route('front.tours', $tour[4]->id))
         ->assertSee(route('front.tours', $tour[5]->id))
         ->assertSuccessful()
-        ->assertSee('Featured Tours');
+        ->assertSee('Featured Tour');
 });
 
 
@@ -67,5 +67,5 @@ it('should load more tours', function () {
         ->assertSet('stillCanLoad', false)
         ->assertDontSee('Load More')
         ->assertSuccessful()
-        ->assertSee('Featured Tours');
+        ->assertSee('Featured Tour');
 });

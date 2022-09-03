@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Front\Index\Tour;
 
+use App\Filament\Resources\BookingResource;
 use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
@@ -36,5 +37,10 @@ class PriceCard extends Component
     public function render(): Factory|View|Application
     {
         return view('livewire.front.index.tour.price-card');
+    }
+
+    public function generateBookNowLink(int $packageId): string
+    {
+        return BookingResource::getUrl('create', ['package_id' => $packageId]);
     }
 }

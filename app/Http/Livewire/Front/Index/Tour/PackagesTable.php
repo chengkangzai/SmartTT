@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Front\Index\Tour;
 
-use App\Models\Flight;
+use App\Filament\Resources\BookingResource;
 use App\Models\Package;
 use App\Models\Tour;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,13 +22,12 @@ class PackagesTable extends Component
     public int $month = 0;
     public int $priceFrom = 0;
     public int $priceTo = 0;
-    public int $airlineId = 0;
 
     public function mount(Tour $tour)
     {
         $this->tour = $tour;
         $this->getPackages();
-        $pricing = $this->packages->map(fn (Package $package) => $package->activePricings->map->price)
+        $pricing = $this->packages->map(fn(Package $package) => $package->activePricings->map->price)
             ->flatten()->sort()->values();
 
         $this->priceFrom = $pricing->first();
@@ -35,19 +35,11 @@ class PackagesTable extends Component
 
         $this->months = $tour->activePackages
             ->pluck('depart_time')
-            ->mapWithKeys(function ($date) {
+            ->mapWithKeys(function (Carbon $date) {
                 return [
-                    (int)$date->format('m') => $date->format('F'),
+                    (int)$date->format('m') => $date->translatedFormat('F'),
                 ];
             });
-
-        $this->airlines = $tour->activePackages
-            ->map(function ($package) {
-                return $package->flight->map(fn (Flight $airline) => $airline->airline)->unique()->sort();
-            })
-            ->flatten()
-            ->unique()
-            ->toArray();
     }
 
     public function render(): Factory|View|Application
@@ -74,13 +66,11 @@ class PackagesTable extends Component
                 return $packages->filter(function (Package $package) {
                     return $package->depart_time->format('m') == $this->month;
                 });
-            })
-            ->when($this->airlineId != 0, function (Collection $packages) {
-                return $packages->filter(function (Package $package) {
-                    return $package->flight->filter(function (Flight $flight) {
-                        return $flight->airline_id == $this->airlineId;
-                    })->isNotEmpty();
-                });
             });
+    }
+
+    public function generateBookNowLink(int $packageId): string
+    {
+        return BookingResource::getUrl('create', ['package_id' => $packageId]);
     }
 }
