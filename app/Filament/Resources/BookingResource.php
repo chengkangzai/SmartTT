@@ -112,6 +112,7 @@ class BookingResource extends Resource
             'create' => Pages\BookingWizard::route('/create'),
             'view' => Pages\ViewBooking::route('/{record}'),
             'edit' => Pages\EditBooking::route('/{record}/edit'),
+            'add_payment' => Pages\AddPaymentWizard::route('/{record}/add-payment'),
         ];
     }
 

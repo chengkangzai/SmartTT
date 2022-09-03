@@ -157,7 +157,7 @@
                 </button>
             @endif
             @if ($currentStep == 3)
-                <button wire:click="finish" class="btn btn-success mx-1" wire:loading.attr="disabled">
+                <button wire:click="finish" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ __('Finish') }} &rarr;
                 </button>
