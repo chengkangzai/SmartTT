@@ -60,8 +60,8 @@ class PackageResource extends Resource
                     ->label(__('Active'))
                     ->required(),
                 Forms\Components\Card::make([
-                    Forms\Components\Repeater::make('pricings')
-                        ->relationship('pricings')
+                    Forms\Components\Repeater::make('packagePricing')
+                        ->relationship('packagePricing')
                         ->label(__('Pricings'))
                         ->schema([
                             Forms\Components\TextInput::make('name')

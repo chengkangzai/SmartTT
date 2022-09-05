@@ -84,7 +84,7 @@ class PackagesRelationManager extends RelationManager
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->with('pricings')
+            ->with('packagePricing')
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

@@ -32,7 +32,7 @@ it('should be mountable', function () {
             $tour
             ->activePackages
             ->map(function ($package) {
-                return $package->pricings->sortBy('price')->first();
+                return $package->packagePricing->sortBy('price')->first();
             })
             ->sortBy('price')
             ->first()

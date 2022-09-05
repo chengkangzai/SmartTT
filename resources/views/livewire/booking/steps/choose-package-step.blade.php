@@ -19,7 +19,7 @@
                     </td>
                     <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                     <td>{{ $package->price, 2 }}</td>
-                    <td>{{ $package->pricings->sum('available_capacity') }}</td>
+                    <td>{{ $package->packagePricing->sum('available_capacity') }}</td>
                 </tr>
             @empty
                 <tr>

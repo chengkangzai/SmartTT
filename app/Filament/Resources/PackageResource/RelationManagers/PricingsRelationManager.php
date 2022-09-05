@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PricingsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'pricings';
+    protected static string $relationship = 'packagePricing';
 
     protected static ?string $recordTitleAttribute = 'name';
 

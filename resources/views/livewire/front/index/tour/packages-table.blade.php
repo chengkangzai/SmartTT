@@ -60,7 +60,7 @@
                             @endforeach
                         </ul>
                     </td>
-                    <td class="px-6 py-4">{{ $package->pricings->sum('available_capacity') }}</td>
+                    <td class="px-6 py-4">{{ $package->packagePricing->sum('available_capacity') }}</td>
                     <td class="px-6 py-4">
                         <a href="{{ $this->generateBookNowLink($package->id) }}"
                            class="font-medium text-blue-600 hover:underline">

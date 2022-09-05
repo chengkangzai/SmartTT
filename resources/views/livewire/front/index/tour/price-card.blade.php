@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="flex w-full flex-col gap-1 px-4">
-        @foreach ($tour->packages->find($packageId)->pricings as $packagePrice)
+        @foreach ($tour->packages->find($packageId)->packagePricing as $packagePrice)
             <div class="flex w-full flex-row text-lg">
                 <div class="grow">
                     {{ $packagePrice->name }}

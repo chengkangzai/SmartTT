@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Livewire\Front\Index\Index\FeaturedTour;
+use App\Models\Package;
+use App\Models\PackagePricing;
 use App\Models\Tour;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
@@ -12,14 +14,15 @@ use Database\Seeders\TourSeeder;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    seed([
-        CountrySeeder::class,
-        TourSeeder::class,
-        AirlineSeeder::class,
-        AirportSeeder::class,
-        FlightSeeder::class,
-        PackageSeeder::class,
-    ]);
+    Tour::factory()
+        ->has(
+            Package::factory()
+                ->has(PackagePricing::factory()->count(3))
+                ->count(1)
+        )
+        ->count(12)
+        ->create();
+
 });
 
 it('should be mountable', function () {
@@ -27,11 +30,11 @@ it('should be mountable', function () {
         ->with([
             'media',
             'activePackages:id,is_active,depart_time',
-            'activePackages.pricings:id,price,package_id',
+            'activePackages.packagePricing:id,price,package_id',
             'countries:id,name',
         ])
         ->active()
-        ->whereHas('activePackages.pricings')
+        ->whereHas('activePackages.packagePricing')
         ->select(['id', 'name'])
         ->limit(6)
         ->get();

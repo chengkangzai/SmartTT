@@ -27,7 +27,7 @@ beforeEach(function () {
 
 it('should be mountable', function () {
     $tour = Tour::whereHas('activePackages')->first();
-    $pricing = $tour->activePackages->map(fn ($package) => $package->pricings->map->price)
+    $pricing = $tour->activePackages->map(fn ($package) => $package->packagePricing->map->price)
         ->flatten()->sort()->values();
     $livewire = Livewire::test(PackagesTable::class, ['tour' => $tour])
         ->assertSet('tour', $tour)
