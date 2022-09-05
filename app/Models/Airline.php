@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Airline extends Model
 {
     use SoftDeletes;
+    use HasFactory;
     use LogsActivity;
 
     protected $fillable = [

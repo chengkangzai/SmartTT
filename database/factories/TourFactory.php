@@ -16,7 +16,7 @@ class TourFactory extends Factory
     #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'nights' => "int", 'days' => "int", 'is_active' => "int"])]
     public function definition(): array
     {
-        $country = Country::inRandomOrder()->first();
+        $country = Country::factory()->create();
         $setting = app(TourSetting::class);
 
         return [

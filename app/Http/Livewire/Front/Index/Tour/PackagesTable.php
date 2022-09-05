@@ -54,12 +54,12 @@ class PackagesTable extends Component
         $this->packages = $this->tour->activePackages
             ->when($this->priceFrom, function (Collection $packages) {
                 return $packages->filter(function (Package $package) {
-                    return $package->pricings->sortBy('price')->first()->price >= $this->priceFrom;
+                    return $package->packagePricing->sortBy('price')->first()->price >= $this->priceFrom;
                 });
             })
             ->when($this->priceTo, function (Collection $packages) {
                 return $packages->filter(function (Package $package) {
-                    return $package->pricings->sortByDesc('price')->first()->price <= $this->priceTo;
+                    return $package->packagePricing->sortByDesc('price')->first()->price <= $this->priceTo;
                 });
             })
             ->when($this->month != 0, function (Collection $packages) {

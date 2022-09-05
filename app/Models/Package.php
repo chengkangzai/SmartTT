@@ -57,7 +57,7 @@ class Package extends Model
             ->withPivot(['order']);
     }
 
-    public function pricings(): HasMany
+    public function packagePricing(): HasMany
     {
         return $this->hasMany(PackagePricing::class)->orderBy('price');
     }

@@ -15,9 +15,10 @@ class FlightFactory extends Factory
     public function definition(): array
     {
         $flightSetting = app(FlightSetting::class);
-        $airport = Airport::inRandomOrder()->take(2)->get();
+        $airport = Airport::factory()->count(2)->create();
 
-        $airline = Airline::inRandomOrder()->first();
+        /** @var Airline $airline */
+        $airline = Airline::factory()->create();
 
         return [
             'departure_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),

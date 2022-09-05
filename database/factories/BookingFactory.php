@@ -19,7 +19,7 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => User::where('id', '>', 1)->inRandomOrder()->first()->id,
-            'package_id' => Package::inRandomOrder()->first()->id,
+            'package_id' => Package::factory(),
             'total_price' => rand(100, 1000),
             'discount' => 0,
             'adult' => rand(1, 10),
@@ -36,7 +36,7 @@ class BookingFactory extends Factory
                 ->afterCreating(function (BookingGuest $guest) use ($booking) {
                     $guest->package_pricing_id = $guest->is_child
                         ? null
-                        : PackagePricing::wherePackageId($booking->package_id)->inRandomOrder()->first()->id;
+                        : PackagePricing::factory(['package_id' => $booking->package_id])->create()->id;
                 })
                 ->create([
                     'booking_id' => $booking->id,
