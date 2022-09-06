@@ -1,20 +1,20 @@
 <?php
 
+use App\Filament\Resources\PackageResource;
 use App\Models\Airline;
 use App\Models\Flight;
-use App\Models\User;
 use App\Models\Package;
-use App\Filament\Resources\PackageResource;
+use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     seed([
@@ -32,7 +32,7 @@ it('should render package index page', function () {
 it('should render list package component ', function () {
     $packages = Package::factory()->count(10)->create();
 
-    livewire(PackageResource\Pages\ListPackages ::class)
+    livewire(PackageResource\Pages\ListPackages::class)
         ->assertCanSeeTableRecords($packages);
 });
 
@@ -88,7 +88,7 @@ it('can validate input', function () {
 
 it('should render package view page', function () {
     get(PackageResource::getUrl('view', [
-        'record' => Package::factory()->create()
+        'record' => Package::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -112,7 +112,7 @@ it('should render page to view package record ', function () {
 
 it('should render package edit page', function () {
     get(PackageResource::getUrl('edit', [
-        'record' => Package::factory()->create()
+        'record' => Package::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -160,7 +160,6 @@ it('should edit package', function () {
         ->tour_id->toBe($package->tour_id)
         ->depart_time->toDateTimeString()->toBe($package->depart_time->toDateTimeString())
         ->is_active->toBe($package->is_active);
-
 });
 
 it('should delete package', function () {
@@ -186,5 +185,4 @@ it('should render Relationship Manager', function () {
         ])
             ->assertSuccessful();
     }
-
 });

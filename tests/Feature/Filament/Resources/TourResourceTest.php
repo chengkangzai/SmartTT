@@ -1,21 +1,20 @@
 <?php
 
+use App\Filament\Resources\TourResource;
 use App\Models\Country;
 use App\Models\Package;
+use App\Models\Tour;
 use App\Models\TourDescription;
 use App\Models\User;
-use App\Models\Tour;
-use App\Filament\Resources\TourResource;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
-use Illuminate\Http\UploadedFile;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     seed([
@@ -33,7 +32,7 @@ it('should render tour index page', function () {
 it('should render list tour component ', function () {
     $tours = Tour::factory()->count(10)->create();
 
-    livewire(TourResource\Pages\ListTours ::class)
+    livewire(TourResource\Pages\ListTours::class)
         ->assertCanSeeTableRecords($tours);
 });
 
@@ -58,7 +57,7 @@ it('should create tour', function () {
         ->call('create')
         ->assertHasFormErrors([
             'itinerary',
-            'thumbnail'
+            'thumbnail',
         ]);
 });
 
@@ -76,13 +75,13 @@ it('can validate input', function () {
             'nights',
             'is_active',
             'itinerary',
-            'thumbnail'
+            'thumbnail',
         ]);
 });
 
 it('should render tour view page', function () {
     get(TourResource::getUrl('view', [
-        'record' => Tour::factory()->create()
+        'record' => Tour::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -105,7 +104,7 @@ it('should render page to view tour record ', function () {
 
 it('should render tour edit page', function () {
     get(TourResource::getUrl('edit', [
-        'record' => Tour::factory()->create()
+        'record' => Tour::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -145,7 +144,7 @@ it('should edit tour', function () {
         ->assertHasFormErrors([
             'countries',
             'itinerary',
-            'thumbnail'
+            'thumbnail',
         ]);
 });
 
@@ -174,5 +173,4 @@ it('should render Description Relationship Manager', function () {
         ])
             ->assertSuccessful();
     }
-
 });

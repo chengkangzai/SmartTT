@@ -1,17 +1,15 @@
 <?php
 
-use App\Models\User;
-use App\Models\Booking;
 use App\Filament\Resources\BookingResource;
+use App\Models\Booking;
+use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
-use Filament\Pages\Actions\DeleteAction;
+
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     seed([
@@ -29,7 +27,7 @@ it('should render booking index page', function () {
 it('should render list booking component ', function () {
     $bookings = Booking::factory()->count(10)->create();
 
-    livewire(BookingResource\Pages\ListBookings ::class)
+    livewire(BookingResource\Pages\ListBookings::class)
         ->assertCanSeeTableRecords($bookings);
 });
 
@@ -40,7 +38,7 @@ it('should render booking create page', function () {
 
 it('should render booking view page', function () {
     get(BookingResource::getUrl('view', [
-        'record' => Booking::factory()->create()
+        'record' => Booking::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -71,5 +69,4 @@ it('should render Relationship Manager', function () {
         ])
             ->assertSuccessful();
     }
-
 });

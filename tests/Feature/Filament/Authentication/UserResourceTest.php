@@ -4,13 +4,15 @@ use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
-use Phpsa\FilamentAuthentication\Resources\UserResource;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
+
+use Phpsa\FilamentAuthentication\Resources\UserResource;
 
 beforeEach(function () {
     seed([
@@ -28,7 +30,7 @@ it('should render user index page', function () {
 it('should render list user component ', function () {
     $users = User::factory()->count(5)->create();
 
-    livewire(UserResource\Pages\ListUsers ::class)
+    livewire(UserResource\Pages\ListUsers::class)
         ->assertCanSeeTableRecords($users);
 });
 
@@ -72,7 +74,7 @@ it('can validate input', function () {
 
 it('should render user view page', function () {
     get(UserResource::getUrl('view', [
-        'record' => User::factory()->create()
+        'record' => User::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -90,7 +92,7 @@ it('should render page to view user record ', function () {
 
 it('should render user edit page', function () {
     get(UserResource::getUrl('edit', [
-        'record' => User::factory()->create()
+        'record' => User::factory()->create(),
     ]))->assertSuccessful();
 });
 

@@ -4,14 +4,6 @@ use App\Http\Livewire\Front\Index\Index\FeaturedTour;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\Tour;
-use Database\Seeders\AirlineSeeder;
-use Database\Seeders\AirportSeeder;
-use Database\Seeders\CountrySeeder;
-use Database\Seeders\FlightSeeder;
-use Database\Seeders\PackageSeeder;
-use Database\Seeders\TourSeeder;
-
-use function Pest\Laravel\seed;
 
 beforeEach(function () {
     Tour::factory()
@@ -22,7 +14,6 @@ beforeEach(function () {
         )
         ->count(12)
         ->create();
-
 });
 
 it('should be mountable', function () {

@@ -4,14 +4,16 @@ use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
-use Phpsa\FilamentAuthentication\Resources\RoleResource;
-use Spatie\Permission\Models\Role;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
+
+use Phpsa\FilamentAuthentication\Resources\RoleResource;
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     seed([
@@ -39,7 +41,7 @@ it('should render role create page', function () {
 });
 
 it('should create role', function () {
-    $role = new Role;
+    $role = new Role();
     $role->name = 'test';
     $role->guard_name = 'web';
 
@@ -109,7 +111,7 @@ it('should render page to show role record in edit view', function () {
 
 it('should edit role', function () {
     $role = Role::get()->get(2);
-    $newRole = new Role;
+    $newRole = new Role();
     $newRole->name = 'test';
     $newRole->guard_name = 'web';
 

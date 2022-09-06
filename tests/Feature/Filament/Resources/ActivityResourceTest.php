@@ -1,14 +1,16 @@
 <?php
 
-use App\Models\User;
 use App\Filament\Resources\ActivityResource;
+use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
-use Spatie\Activitylog\Models\Activity;
+
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\get;
+
+use Spatie\Activitylog\Models\Activity;
 
 beforeEach(function () {
     seed([
@@ -25,7 +27,7 @@ it('should render activity index page', function () {
 
 it('should render activity view page', function () {
     get(ActivityResource::getUrl('view', [
-        'record' => Activity::create(['description' => 'test'])
+        'record' => Activity::create(['description' => 'test']),
     ]))->assertSuccessful();
 });
 
@@ -39,4 +41,3 @@ it('should render page to view activity record ', function () {
             'description' => $activity->description,
         ]);
 });
-

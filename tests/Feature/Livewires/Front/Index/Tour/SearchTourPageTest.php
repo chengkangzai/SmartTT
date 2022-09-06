@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Livewire\Front\Index\Tour\SearchTourPage;
-use App\Models\Tour;
 use Database\Seeders\AirlineSeeder;
 use Database\Seeders\AirportSeeder;
 use Database\Seeders\CountrySeeder;

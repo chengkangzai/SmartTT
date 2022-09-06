@@ -1,18 +1,18 @@
 <?php
 
-use App\Models\User;
-use App\Models\Airport;
 use App\Filament\Resources\AirportResource;
+use App\Models\Airport;
+use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     seed([
@@ -30,7 +30,7 @@ it('should render airport index page', function () {
 it('should render list airport component ', function () {
     $airports = Airport::factory()->count(10)->create();
 
-    livewire(AirportResource\Pages\ListAirports ::class)
+    livewire(AirportResource\Pages\ListAirports::class)
         ->assertCanSeeTableRecords($airports);
 });
 
@@ -98,7 +98,7 @@ it('can validate input', function () {
 
 it('should render airport view page', function () {
     get(AirportResource::getUrl('view', [
-        'record' => Airport::factory()->create()
+        'record' => Airport::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -123,7 +123,7 @@ it('should render page to view airport record ', function () {
 
 it('should render airport edit page', function () {
     get(AirportResource::getUrl('edit', [
-        'record' => Airport::factory()->create()
+        'record' => Airport::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -192,5 +192,4 @@ it('should render Relationship Manager', function () {
         ])
             ->assertSuccessful();
     }
-
 });

@@ -1,18 +1,18 @@
 <?php
 
-use App\Models\User;
-use App\Models\Flight;
 use App\Filament\Resources\FlightResource;
+use App\Models\Flight;
+use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
+use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function Pest\Laravel\assertModelExists;
-use function Pest\Laravel\get;
 
 beforeEach(function () {
     seed([
@@ -30,7 +30,7 @@ it('should render flight index page', function () {
 it('should render list flight component ', function () {
     $flights = Flight::factory()->count(10)->create();
 
-    livewire(FlightResource\Pages\ListFlights ::class)
+    livewire(FlightResource\Pages\ListFlights::class)
         ->assertCanSeeTableRecords($flights);
 });
 
@@ -94,7 +94,7 @@ it('can validate input', function () {
 
 it('should render flight view page', function () {
     get(FlightResource::getUrl('view', [
-        'record' => Flight::factory()->create()
+        'record' => Flight::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -118,7 +118,7 @@ it('should render page to view flight record ', function () {
 
 it('should render flight edit page', function () {
     get(FlightResource::getUrl('edit', [
-        'record' => Flight::factory()->create()
+        'record' => Flight::factory()->create(),
     ]))->assertSuccessful();
 });
 
@@ -194,6 +194,4 @@ it('should render Relationship Manager', function () {
         ])
             ->assertSuccessful();
     }
-
 });
-
