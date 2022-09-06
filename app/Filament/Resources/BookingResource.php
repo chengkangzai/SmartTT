@@ -76,7 +76,7 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('total_price')
                     ->label(__('Total Price'))
                     ->sortable()
-                    ->money(),
+                    ->money('MYR'),
                 Tables\Columns\TextColumn::make('adult')
                     ->label(__('Adult'))
                     ->sortable(),
