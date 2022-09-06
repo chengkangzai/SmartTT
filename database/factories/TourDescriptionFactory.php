@@ -14,13 +14,11 @@ class TourDescriptionFactory extends Factory
     #[ArrayShape(['place' => "string", 'description' => "string", 'tour_id' => "int", 'order' => "int"])]
     public function definition(): array
     {
-        $tour = Tour::inRandomOrder()->first();
-
         return [
             'place' => join(" ", $this->faker->words(3)),
             'description' => $this->faker->text,
-            'tour_id' => $tour->id,
-            'order' => TourDescription::whereBelongsTo($tour)->count() + 1,
+            'tour_id' => Tour::factory(),
+            'order' => rand(1, 10),
         ];
     }
 }
