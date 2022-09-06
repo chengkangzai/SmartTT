@@ -27,15 +27,3 @@ it('should be mountable', function () {
     Livewire::test(SearchTourPage::class)
         ->assertSuccessful();
 });
-
-it('should filter as required', function () {
-    $tour = Tour::whereHas('activePackages.activePricings')->active()->oldest()->first();
-    $departTime = $tour->activePackages->sortBy('depart_time');
-    Livewire::test(SearchTourPage::class)
-//        ->set('q', $tour->name)
-        ->set('category', $tour->category)
-        ->set('dateFrom', $departTime->first()->depart_time->format('Y-m-d'))
-//        ->set('dateTo', $departTime->last()->depart_time->format('Y-m-d'))
-        ->assertSee($tour->name)
-    ;
-});
