@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 Route::get('/locale/{locale}', [LocaleController::class, 'changeLocale'])->name('setLocale');
 Route::stripeWebhooks('/webhook');
 

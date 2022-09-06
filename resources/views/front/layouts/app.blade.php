@@ -115,7 +115,7 @@ $language = $setting->default_language;
                                 class="my-auto rounded border bg-transparent p-2 font-medium leading-none text-gray-200 hover:bg-gray-600 hover:text-white focus:bg-gray-600 focus:text-white focus:outline-none">
                                 {{ __('Logout') }}
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                            <form id="logout-form" action="{{ route('filament.auth.logout') }}" method="POST" hidden>
                                 @csrf
                             </form>
                         @endauth
