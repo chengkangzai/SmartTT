@@ -48,10 +48,11 @@ class BookingResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
                     ->label(__('Total Price'))
-                    ->mask(fn (Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Mask $mask) => $mask->money('MYR'))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->label(__('Discount'))
+                    ->mask(fn (Mask $mask) => $mask->money('MYR'))
                     ->required(),
                 Forms\Components\TextInput::make('adult')
                     ->label(__('Adult'))
@@ -114,7 +115,6 @@ class BookingResource extends Resource
             'index' => Pages\ListBookings::route('/'),
             'create' => Pages\BookingWizard::route('/create'),
             'view' => Pages\ViewBooking::route('/{record}'),
-            'edit' => Pages\EditBooking::route('/{record}/edit'),
             'add_payment' => Pages\AddPaymentWizard::route('/{record}/add-payment'),
         ];
     }

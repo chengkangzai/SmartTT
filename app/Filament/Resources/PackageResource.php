@@ -51,7 +51,8 @@ class PackageResource extends Resource
                     ->label(__('Airline'))
                     ->options(Airline::get()->pluck('name', 'id'))
                     ->required()
-                    ->reactive(),
+                    ->reactive()
+                    ->hiddenOn('view'),
                 Forms\Components\MultiSelect::make('flight_id')
                     ->relationship('flight', 'name')
                     ->label(__('Flight'))
@@ -127,9 +128,9 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PricingsRelationManager::class,
-            FlightRelationManager::class,
-        ]
+                PricingsRelationManager::class,
+                FlightRelationManager::class,
+            ]
             + (auth()->user()?->can('Audit Package') ? [ActivitiesRelationManager::class] : []);
     }
 
