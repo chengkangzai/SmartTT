@@ -21,11 +21,6 @@ class ActivitiesRelationManager extends RelationManager
         return __('Audit Trail');
     }
 
-    public function mount(Activity $activity)
-    {
-        dd($activity);
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -42,20 +37,5 @@ class ActivitiesRelationManager extends RelationManager
                     ->url(fn ($record) => ActivityResource::getUrl('view', ['record' => $record]))
                     ->openUrlInNewTab(),
             ]);
-    }
-
-    protected function canCreate(): bool
-    {
-        return false;
-    }
-
-    protected function canEdit(Model $record): bool
-    {
-        return false;
-    }
-
-    protected function canDelete(Model $record): bool
-    {
-        return false;
     }
 }
