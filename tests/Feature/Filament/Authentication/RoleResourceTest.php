@@ -98,11 +98,12 @@ it('should render role edit page', function () {
 });
 
 it('should render page to show role record in edit view', function () {
-    $role = Role::latest()->first();
+    $role = Role::get()->get(2);
 
     livewire(RoleResource\Pages\EditRole::class, [
         'record' => $role->getKey(),
     ])
+        ->assertSuccessful()
         ->assertFormSet([
             'name' => $role->name,
             'guard_name' => $role->guard_name,
