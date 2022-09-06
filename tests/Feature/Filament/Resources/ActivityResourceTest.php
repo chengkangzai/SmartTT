@@ -18,14 +18,25 @@ beforeEach(function () {
     actingAs(User::factory()->superAdmin()->create());
 });
 
-it('should render index page', function () {
+it('should render activity index page', function () {
     get(ActivityResource::getUrl('index'))
         ->assertSuccessful();
 });
 
-it('should render view page', function () {
-    $record = Activity::create(['description' => 'should render view page']);
+it('should render activity view page', function () {
     get(ActivityResource::getUrl('view', [
-        'record' => $record
+        'record' => Activity::create(['description' => 'test'])
     ]))->assertSuccessful();
 });
+
+it('should render page to view activity record ', function () {
+    $activity = Activity::create(['description' => 'test']);
+
+    livewire(ActivityResource\Pages\ViewActivity::class, [
+        'record' => $activity->getKey(),
+    ])
+        ->assertFormSet([
+            'description' => $activity->description,
+        ]);
+});
+
