@@ -27,14 +27,6 @@ class PackagePricing extends Model
         'is_active',
     ];
 
-    public function price(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
     public function package(): BelongsTo
     {
         return $this->belongsTo(Package::class);
