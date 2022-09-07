@@ -8,6 +8,8 @@ use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManage
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Airline;
 use App\Models\Package;
+use App\Models\Settings\BookingSetting;
+use App\Models\Settings\PackageSetting;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -15,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use phpDocumentor\Reflection\Types\Collection;
 
 class PackageResource extends Resource
 {
@@ -36,6 +39,15 @@ class PackageResource extends Resource
 
     public static function form(Form $form): Form
     {
+//        $defaultPricing =[];
+//        $setting = app(PackageSetting::class);
+//        foreach ($setting->default_pricing as $pricing) {
+//            $defaultPricing[] = [
+//                'name' => $pricing['name'],
+//                'capacity' => $pricing['total_capacity'],
+//                'is_active' => $pricing['is_active'],
+//            ];
+//        }
         return $form
             ->schema([
                 Forms\Components\Select::make('tour_id')
@@ -83,8 +95,10 @@ class PackageResource extends Resource
                                 ->inline(false)
                                 ->required(),
                         ])
+                        ->collapsed()
                         ->columnSpan(2)
-                        ->defaultItems(2)
+                        ->defaultItems(3)
+                        ->default(app(PackageSetting::class)->default_pricing)
                         ->columns(8),
                 ])->hiddenOn(['view', 'edit']),
             ]);

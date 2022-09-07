@@ -61,10 +61,12 @@ class TourResource extends Resource
                 Forms\Components\TextInput::make('days')
                     ->label(__('Days'))
                     ->numeric()
+                    ->default(app(TourSetting::class)->default_day)
                     ->required(),
                 Forms\Components\TextInput::make('nights')
                     ->label(__('Nights'))
                     ->numeric()
+                    ->default(app(TourSetting::class)->default_night)
                     ->required(),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('itinerary')
                     ->placeholder(__('Drag & Drop your file or browse'))
@@ -90,6 +92,7 @@ class TourResource extends Resource
                     ->label(__('Active'))
                     ->hidden(! auth()->user()->isInternalUser())
                     ->columnSpan(2)
+                    ->default(app(TourSetting::class)->default_status)
                     ->required(),
                 Forms\Components\Card::make()
                     ->schema([
