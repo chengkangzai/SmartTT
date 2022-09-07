@@ -31,24 +31,31 @@ class PricingsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Card::make([
-
-                Forms\Components\TextInput::make('name')
-                    ->label(__('Pricing Name'))
-                    ->columnSpan(3)
-                    ->required(),
-                Forms\Components\TextInput::make('price')
-                    ->label(__('Price'))
-                    ->columnSpan(2)
-                    ->required(),
-                Forms\Components\TextInput::make('capacity')
-                    ->label(__('Capacity'))
-                    ->columnSpan(2)
-                    ->required(),
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('Active'))
-                    ->columnSpan(1)
-                    ->inline(false)
-                    ->required(),
+                    Forms\Components\TextInput::make('name')
+                        ->label(__('Pricing Name'))
+                        ->columnSpan(3)
+                        ->required(),
+                    Forms\Components\TextInput::make('price')
+                        ->numeric()
+                        ->label(__('Price'))
+                        ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money('MYR'))
+                        ->columnSpan(2)
+                        ->required(),
+                    Forms\Components\TextInput::make('total_capacity')
+                        ->numeric()
+                        ->label(__('Capacity'))
+                        ->columnSpan(2)
+                        ->required()
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, Closure $set) {
+                            $set('available_capacity', $state);
+                        }),
+                    Forms\Components\Hidden::make('available_capacity'),
+                    Forms\Components\Toggle::make('is_active')
+                        ->label(__('Active'))
+                        ->columnSpan(1)
+                        ->inline(false)
+                        ->required(),
                 ])->columns(8),
             ]);
     }
