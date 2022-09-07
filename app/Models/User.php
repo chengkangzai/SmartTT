@@ -62,4 +62,11 @@ class User extends Authenticatable implements FilamentUser
     {
         return true;
     }
+
+    public function isInternalUser(): ?bool
+    {
+        return $this?->roles
+            ->whereIn('name', ['Super Admin', 'Manager', 'Staff'])
+            ->isNotEmpty();
+    }
 }
