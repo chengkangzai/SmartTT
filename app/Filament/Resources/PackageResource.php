@@ -8,7 +8,6 @@ use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManage
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Airline;
 use App\Models\Package;
-use App\Models\Settings\BookingSetting;
 use App\Models\Settings\PackageSetting;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -17,7 +16,6 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use phpDocumentor\Reflection\Types\Collection;
 
 class PackageResource extends Resource
 {

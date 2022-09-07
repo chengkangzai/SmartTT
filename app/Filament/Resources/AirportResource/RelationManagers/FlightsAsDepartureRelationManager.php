@@ -3,14 +3,9 @@
 namespace App\Filament\Resources\AirportResource\RelationManagers;
 
 use App\Filament\Resources\FlightResource;
-use App\Models\Settings\FlightSetting;
-use App\Models\Settings\GeneralSetting;
-use Filament\Forms;
-use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
-use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
