@@ -15,6 +15,17 @@ class ManageBookingSetting extends SettingsPage
 
     protected static ?int $navigationSort = 5;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View Setting');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('View Setting'), 403);
+        parent::mount();
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('Settings');
@@ -40,14 +51,17 @@ class ManageBookingSetting extends SettingsPage
             TextInput::make('charge_per_child')
                 ->label(__('Charge Per Child'))
                 ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             TextInput::make('reservation_charge_per_pax')
                 ->label(__('Reservation Charge Per Pax'))
                 ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             Select::make('default_payment_method')
                 ->label(__('Default Payment Method'))
                 ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->options($paymentMethods),
         ];
     }

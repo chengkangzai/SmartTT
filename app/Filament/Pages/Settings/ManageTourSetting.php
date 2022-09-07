@@ -19,6 +19,17 @@ class ManageTourSetting extends SettingsPage
 
     protected static ?int $navigationSort = 2;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View Setting');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('View Setting'), 403);
+        parent::mount();
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('Settings');
@@ -40,17 +51,21 @@ class ManageTourSetting extends SettingsPage
             Toggle::make('default_status')
                 ->inline(false)
                 ->label(__('Default Status'))
-                ->required(),
+                ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting')),
             TagsInput::make('category')
                 ->label(__('Category'))
                 ->hint(__('Cannot delete category if at least one tour is in this category'))
-                ->required(),
+                ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting')),
             TextInput::make('default_night')
                 ->label(__('Default Night'))
-                ->required(),
+                ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting')),
             TextInput::make('default_day')
                 ->label(__('Default Day'))
-                ->required(),
+                ->required()
+                ->disabled(auth()->user()->cannot('Edit Setting')),
         ];
     }
 

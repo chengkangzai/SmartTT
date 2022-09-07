@@ -22,12 +22,7 @@ class PermissionSeeder extends Seeder
         }
 
         $temp->push([
-            'name' => 'Access Setting',
-            'guard_name' => 'web',
-        ]);
-
-        $temp->push([
-            'name' => 'Update Setting',
+            'name' => 'Edit Setting',
             'guard_name' => 'web',
         ]);
 

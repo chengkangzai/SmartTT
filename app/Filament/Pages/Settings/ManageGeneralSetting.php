@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
+use Spatie\LaravelSettings\Settings;
 
 class ManageGeneralSetting extends SettingsPage
 {
@@ -20,6 +21,17 @@ class ManageGeneralSetting extends SettingsPage
     protected static string $settings = GeneralSetting::class;
 
     protected static ?int $navigationSort = 1;
+
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View Setting');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('View Setting'), 403);
+        parent::mount();
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -39,17 +51,17 @@ class ManageGeneralSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn ($lang) => $lang['name'])->toArray();
+            ->map(fn($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn ($val, $key) => $key)->toArray();
+            ->map(fn($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn ($country) => [$country => $country])
+            ->mapWithKeys(fn($country) => [$country => $country])
             ->toArray();
 
 
@@ -59,10 +71,12 @@ class ManageGeneralSetting extends SettingsPage
                     TextInput::make('site_name')
                         ->label(__('Site Name'))
                         ->columnSpan(2)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->required(),
                     Select::make('default_language')
                         ->label(__('Default Language'))
                         ->options($languages)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->required(),
                     Select::make('default_timezone')
                         ->searchable()
@@ -72,6 +86,7 @@ class ManageGeneralSetting extends SettingsPage
                             $set('default_timezone', $timezone);
                         })
                         ->options($timezones)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->required(),
                     Select::make('default_currency')
                         ->label(__('Default Currency'))
@@ -83,6 +98,7 @@ class ManageGeneralSetting extends SettingsPage
                             $set('default_currency_symbol', $symbol['symbol']);
                         })
                         ->options($currencies)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->required(),
                     TextInput::make('default_currency_symbol')
                         ->disabled(),
@@ -90,6 +106,7 @@ class ManageGeneralSetting extends SettingsPage
                         ->label(__('Default Country'))
                         ->searchable()
                         ->options($countries)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->required(),
                 ])->columns(2),
             Section::make(__('Company Settings'))
@@ -97,24 +114,29 @@ class ManageGeneralSetting extends SettingsPage
                     TextInput::make('company_name')
                         ->label(__('Company Name'))
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->disabled(auth()->user()->cannot('Edit Setting')),
                     TextInput::make('company_phone')
                         ->label(__('Company Phone'))
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->disabled(auth()->user()->cannot('Edit Setting')),
                     TextInput::make('company_email')
                         ->label(__('Company Email'))
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->disabled(auth()->user()->cannot('Edit Setting')),
                     TextInput::make('business_registration_no')
                         ->label(__('Business Registration Number'))
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->disabled(auth()->user()->cannot('Edit Setting')),
                     Textarea::make('company_address')
                         ->columnSpan(2)
                         ->label(__('Company Address'))
                         ->required()
                         ->maxLength(255)
+                        ->disabled(auth()->user()->cannot('Edit Setting'))
                         ->rows(4),
                 ])->columns(2),
         ];

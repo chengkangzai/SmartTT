@@ -122,9 +122,11 @@ class TourResource extends Resource
                     ->rounded()
                     ->collection('thumbnail'),
                 Tables\Columns\TextColumn::make('name')
+                    ->limit(30)
                     ->label(__('Tour Name')),
                 Tables\Columns\TextColumn::make('tour_code')
-                    ->label(__('Tour Name')),
+                    ->limit(30)
+                    ->label(__('Tour Code')),
                 Tables\Columns\BadgeColumn::make('category')
                     ->label(__('Category')),
                 Tables\Columns\TextColumn::make('days')

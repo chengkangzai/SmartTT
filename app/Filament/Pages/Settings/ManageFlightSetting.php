@@ -17,6 +17,17 @@ class ManageFlightSetting extends SettingsPage
 
     protected static ?int $navigationSort = 4;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View Setting');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('View Setting'), 403);
+        parent::mount();
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('Settings');
@@ -55,6 +66,7 @@ class ManageFlightSetting extends SettingsPage
                     'First Class' => 'First Class',
                     'Premium Economy' => 'Premium Economy',
                 ])
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             TagsInput::make('supported_type')
                 ->label(__('Supported Type'))
@@ -63,18 +75,22 @@ class ManageFlightSetting extends SettingsPage
                     'One Way' => 'One Way',
                     'Multi-city' => 'Multi-city',
                 ])
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_class')
                 ->label(__('Default Class'))
                 ->options($supportedClass)
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_type')
                 ->label(__('Default Type'))
                 ->options($supportedType)
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             MultiSelect::make('supported_countries')
                 ->label(__('Supported Country'))
                 ->options($countries)
+                ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->columnSpan(2)
                 ->searchable()
                 ->required(),

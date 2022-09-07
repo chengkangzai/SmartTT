@@ -17,6 +17,17 @@ class ManagePackageSetting extends SettingsPage
 
     protected static ?int $navigationSort = 3;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View Setting');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('View Setting'), 403);
+        parent::mount();
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('Settings');
@@ -36,9 +47,12 @@ class ManagePackageSetting extends SettingsPage
     {
         return [
             Toggle::make('default_status')
-                ->label(__('Default Status')),
+                ->label(__('Default Status'))
+                ->inline(false)
+                ->disabled(auth()->user()->cannot('Edit Setting')),
             Card::make([
                 TableRepeater::make('default_pricing')
+                    ->disabled(auth()->user()->cannot('Edit Setting'))
                     ->label(__('Default Pricing'))
                     ->schema([
                         TextInput::make('name')
