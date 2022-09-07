@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AirportResource\RelationManagers;
 
 use App\Models\Settings\FlightSetting;
+use App\Models\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
@@ -41,7 +42,7 @@ class FlightsAsDepartureRelationManager extends RelationManager
                 Forms\Components\TextInput::make('price')
                     ->label(__('Price'))
                     ->columnSpan(2)
-                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
@@ -91,7 +92,7 @@ class FlightsAsDepartureRelationManager extends RelationManager
                     ->label(__('Airline')),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price'))
-                    ->money('MYR '),
+                    ->money(app(GeneralSetting::class)->default_currency),
                 Tables\Columns\TextColumn::make('departure_date')
                     ->label(__('Departure Date'))
                     ->dateTime(),

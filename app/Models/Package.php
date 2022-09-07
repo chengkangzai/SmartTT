@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,9 +39,9 @@ class Package extends Model
                 get: fn ($value) => '-',
             );
         }
-
+        $currency = app(GeneralSetting::class)->default_currency;
         return Attribute::make(
-            get: fn ($value) => money($min, 'MYR') . ' - ' . money($max, 'MYR'),
+            get: fn ($value) => money($min, $currency) . ' - ' . money($max, $currency),
         );
     }
 

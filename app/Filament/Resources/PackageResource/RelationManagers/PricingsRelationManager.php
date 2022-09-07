@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PackageResource\RelationManagers;
 
+use App\Models\Settings\GeneralSetting;
 use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -39,7 +40,7 @@ class PricingsRelationManager extends RelationManager
                     Forms\Components\TextInput::make('price')
                         ->numeric()
                         ->label(__('Price'))
-                        ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('MYR'))
+                        ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                         ->columnSpan(2)
                         ->required(),
                     Forms\Components\TextInput::make('total_capacity')
@@ -70,7 +71,7 @@ class PricingsRelationManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price'))
-                    ->money('MYR ')
+                    ->money(app(GeneralSetting::class)->default_currency)
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_capacity')

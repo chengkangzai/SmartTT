@@ -4,6 +4,7 @@ namespace App\Filament\Resources\BookingResource\RelationManagers;
 
 use App\Filament\Resources\BookingResource;
 use App\Models\Payment;
+use App\Models\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -35,7 +36,7 @@ class PaymentRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('amount')
                     ->label(__('Amount'))
-                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('RM'))
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->disabled(),
                 Forms\Components\TextInput::make('payment_method')
                     ->label(__('Payment Method'))
@@ -97,7 +98,7 @@ class PaymentRelationManager extends RelationManager
                     ]),
                 Tables\Columns\TextColumn::make('amount')
                     ->label(__('Amount'))
-                    ->money('MYR '),
+                    ->money(app(GeneralSetting::class)->default_currency),
 
             ])
             ->filters([

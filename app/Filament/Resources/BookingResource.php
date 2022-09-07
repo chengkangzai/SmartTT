@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Settings\GeneralSetting;
 use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers\GuestRelationManager;
@@ -48,11 +49,11 @@ class BookingResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
                     ->label(__('Total Price'))
-                    ->mask(fn (Mask $mask) => $mask->money('MYR'))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->label(__('Discount'))
-                    ->mask(fn (Mask $mask) => $mask->money('MYR'))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\TextInput::make('adult')
                     ->label(__('Adult'))
@@ -76,7 +77,7 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('total_price')
                     ->label(__('Total Price'))
                     ->sortable()
-                    ->money('MYR'),
+                    ->money(app(GeneralSetting::class)->default_currency),
                 Tables\Columns\TextColumn::make('adult')
                     ->label(__('Adult'))
                     ->sortable(),

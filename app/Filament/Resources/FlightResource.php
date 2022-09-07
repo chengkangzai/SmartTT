@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Settings\GeneralSetting;
 use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\FlightResource\Pages;
 use App\Filament\Resources\FlightResource\RelationManagers\AirlineRelationManager;
@@ -47,7 +48,7 @@ class FlightResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->label(__('Price'))
                     ->columnSpan(2)
-                    ->mask(fn (Mask $mask) => $mask->money('MYR '))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
@@ -97,7 +98,7 @@ class FlightResource extends Resource
                     ->label(__('Airline')),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price'))
-                    ->money('MYR '),
+                    ->money(app(GeneralSetting::class)->default_currency),
                 Tables\Columns\TextColumn::make('departure_date')
                     ->label(__('Departure Date'))
                     ->dateTime(),

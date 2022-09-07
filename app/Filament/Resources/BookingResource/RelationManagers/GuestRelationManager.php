@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BookingResource\RelationManagers;
 
+use App\Models\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -62,7 +63,7 @@ class GuestRelationManager extends RelationManager
                     ->label(__('Is Child')),
                 Tables\Columns\TextColumn::make('packagePricing.price')
                     ->label(__('Price'))
-                    ->money('MYR '),
+                    ->money(app(GeneralSetting::class)->default_currency),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

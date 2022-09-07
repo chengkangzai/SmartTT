@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Settings\GeneralSetting;
 use App\Models\Booking;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -53,7 +54,7 @@ class LatestOrders extends BaseWidget
                 }),
             TextColumn::make('subject.total_price')
                 ->label(__('Price'))
-                ->money('MYR '),
+                ->money(app(GeneralSetting::class)->default_currency),
             TextColumn::make('subject.package.tour.name')
                 ->searchable()
                 ->limit(20)
