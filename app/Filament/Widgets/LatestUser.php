@@ -33,7 +33,7 @@ class LatestUser extends BaseWidget
         return auth()->user()
                 ->roles
                 ->pluck('name')
-                ->filter(fn($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+                ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
                 ->isNotEmpty();
     }
 }

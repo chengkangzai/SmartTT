@@ -39,7 +39,7 @@ class PricingsRelationManager extends RelationManager
                     Forms\Components\TextInput::make('price')
                         ->numeric()
                         ->label(__('Price'))
-                        ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money('MYR'))
+                        ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money('MYR'))
                         ->columnSpan(2)
                         ->required(),
                     Forms\Components\TextInput::make('total_capacity')
@@ -105,7 +105,7 @@ class PricingsRelationManager extends RelationManager
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

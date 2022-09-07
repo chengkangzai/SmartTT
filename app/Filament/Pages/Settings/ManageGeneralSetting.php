@@ -12,7 +12,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
-use Spatie\LaravelSettings\Settings;
 
 class ManageGeneralSetting extends SettingsPage
 {
@@ -51,17 +50,17 @@ class ManageGeneralSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn($lang) => $lang['name'])->toArray();
+            ->map(fn ($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn($val, $key) => $key)->toArray();
+            ->map(fn ($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn($country) => [$country => $country])
+            ->mapWithKeys(fn ($country) => [$country => $country])
             ->toArray();
 
 

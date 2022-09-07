@@ -88,7 +88,7 @@ class TourResource extends Resource
                     ]),
                 Forms\Components\Toggle::make('is_active')
                     ->label(__('Active'))
-                    ->hidden(!auth()->user()->isInternalUser())
+                    ->hidden(! auth()->user()->isInternalUser())
                     ->columnSpan(2)
                     ->required(),
                 Forms\Components\Card::make()
@@ -140,7 +140,7 @@ class TourResource extends Resource
                     ->label(__('Nights'))
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
-                    ->hidden(!auth()->user()->isInternalUser())
+                    ->hidden(! auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])
             ->filters([
@@ -180,7 +180,7 @@ class TourResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

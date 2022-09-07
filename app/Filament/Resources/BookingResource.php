@@ -122,8 +122,8 @@ class BookingResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
-                $query->where('user_id',auth()->id());
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+                $query->where('user_id', auth()->id());
             })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,

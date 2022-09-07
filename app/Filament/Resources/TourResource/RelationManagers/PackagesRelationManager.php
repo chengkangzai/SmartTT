@@ -85,7 +85,7 @@ class PackagesRelationManager extends RelationManager
     {
         return parent::getTableQuery()
             ->with('packagePricing')
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

@@ -9,7 +9,6 @@ use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 
-
 class StatsOverview extends BaseWidget
 {
     protected static ?string $pollingInterval = '50s';
@@ -29,7 +28,7 @@ class StatsOverview extends BaseWidget
         return auth()->user()
             ->roles
             ->pluck('name')
-            ->filter(fn($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+            ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
             ->isNotEmpty();
     }
 }

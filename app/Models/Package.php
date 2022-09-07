@@ -33,11 +33,12 @@ class Package extends Model
     {
         $min = $this->activePricings->min('price');
         $max = $this->activePricings->max('price');
-        if (!$min || !$max) {
+        if (! $min || ! $max) {
             return Attribute::make(
                 get: fn ($value) => '-',
             );
         }
+
         return Attribute::make(
             get: fn ($value) => money($min, 'MYR') . ' - ' . money($max, 'MYR'),
         );

@@ -16,12 +16,12 @@ class ActivityPolicy
         return $user->roles()->first()?->permissions->filter(function (Permission $permission) {
             return str($permission->name)->contains('Audit');
         })?->isNotEmpty() ?? false;
-
     }
 
     public function view(User $user, Activity $activity): bool
     {
         $model = str($activity->subject_type)->afterLast('\\')->basename();
+
         return $user->roles()->first()?->permissions->filter(function (Permission $permission) use ($model) {
             return str($permission->name)->contains('Audit '.$model);
         })?->isNotEmpty() ?? false;
