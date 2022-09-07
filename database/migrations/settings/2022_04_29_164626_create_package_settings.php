@@ -9,17 +9,17 @@ class CreatePackageSettings extends SettingsMigration
         $this->migrator->add('package.default_status', true);
         $this->migrator->add('package.default_pricing', [
             [
-                'status' => true,
+                'is_active' => true,
                 'name' => 'Early Bird',
                 'capacity' => 5,
             ],
             [
-                'status' => true,
+                'is_active' => true,
                 'name' => 'Regular',
                 'capacity' => 25,
             ],
             [
-                'status' => true,
+                'is_active' => true,
                 'name' => 'Late Bird',
                 'capacity' => 10,
             ]

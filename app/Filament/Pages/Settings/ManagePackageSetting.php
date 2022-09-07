@@ -64,7 +64,7 @@ class ManagePackageSetting extends SettingsPage
                             ->columnSpan(2)
                             ->numeric()
                             ->required(),
-                        Toggle::make('status')
+                        Toggle::make('is_active')
                             ->label(__('Active'))
                             ->inline(false)
                             ->columnSpan(1)

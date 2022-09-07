@@ -37,7 +37,7 @@ class UserRoleSeeder extends Seeder
                 'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
                 'Access Payment', 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
                 'Access User', 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
-                'Access Setting', 'Edit Setting', 'View Setting',
+                'View Setting', 'Edit Setting',
                 'Change User Role'
             ])
             ->users()

@@ -29,7 +29,7 @@ class PackageSeeder extends Seeder
                     'name' => $pricing['name'],
                     'available_capacity' =>$pricing['capacity'],
                     'total_capacity' => $pricing['capacity'],
-                    'is_active' => $pricing['status'],
+                    'is_active' => $pricing['is_active'],
                 ]);
             }
         })->create();
