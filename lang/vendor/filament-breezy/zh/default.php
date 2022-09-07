@@ -9,7 +9,7 @@ return [
     "password_confirm" => [
         "heading" => "确认密码",
         "description" => "请先确认您的密码再进行此操作。",
-        "current_password" => "现有密码"
+        "current_password" => "现有密码",
     ],
     "two_factor" => [
         "heading" => "双重认证",
@@ -22,7 +22,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "丢失设备？",
         "recovery_code_link" => "使用紧急恢复代码",
-        "back_to_login_link" => "回到登陆页面"
+        "back_to_login_link" => "回到登陆页面",
     ],
     "registration" => [
         "title" => "注册",
@@ -82,28 +82,28 @@ return [
                 "regenerate_codes"=>"重新生成代码",
                 "disable"=>"禁用",
                 "confirm_finish" => "确认并完成",
-                "cancel_setup" => "取消设置"
+                "cancel_setup" => "取消设置",
             ],
             "setup_key" => "设置密钥",
             "not_enabled" => [
                 "title" => "您还没有启用双重身份验证。",
-                "description"=>"启用双重身份验证后，系统会在身份验证过程中提示您输入一个安全的随机令牌。您可以从手机的 Google Authenticator 应用程序中检索此令牌。"
+                "description"=>"启用双重身份验证后，系统会在身份验证过程中提示您输入一个安全的随机令牌。您可以从手机的 Google Authenticator 应用程序中检索此令牌。",
             ],
             "finish_enabling" => [
                 "title"=>"完成启用双重身份验证。",
-                "description" => "要完成启用双重身份验证，请使用手机的身份验证器应用程序扫描以下二维码，或输入设置密钥并提供生成的一次性代码。"
+                "description" => "要完成启用双重身份验证，请使用手机的身份验证器应用程序扫描以下二维码，或输入设置密钥并提供生成的一次性代码。",
             ],
             "enabled"=>[
                 "title"=>"您已启用两因素身份验证！",
                 "description"=> "现在启用双重身份验证。使用手机的身份验证器应用程序扫描以下二维码或输入设置密钥。",
                 "store_codes"=>"将这些恢复代码存储在安全的密码管理器中。如果您的两因素身份验证设备丢失，它们可用于恢复对您帐户的访问。",
                 "show_codes"=> "显示恢复代码",
-                "hide_codes" => "隐藏恢复代码"
+                "hide_codes" => "隐藏恢复代码",
             ],
             "confirmation" => [
                 "success_notification" => '代码已验证。启用两因素身份验证。',
                 "invalid_code" => "您输入的代码无效。",
-            ]
+            ],
         ],
         "sanctum" => [
             "title" => "API 令牌",
@@ -130,8 +130,8 @@ return [
         "token_name" => "令牌名称",
         "abilities" => "能力",
         "2fa_code" => "代码",
-        "2fa_recovery_code" => "恢复代码"
+        "2fa_recovery_code" => "恢复代码",
     ],
     "or" => "或",
-    "cancel" => "取消"
+    "cancel" => "取消",
 ];

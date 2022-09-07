@@ -22,7 +22,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Elveszett készülék?",
         "recovery_code_link" => "Használjon helyreállítási kódot",
-        "back_to_login_link" => "Vissza a bejelentkezéshez"
+        "back_to_login_link" => "Vissza a bejelentkezéshez",
     ],
     "registration" => [
         "title" => "Regisztráció",
@@ -82,16 +82,16 @@ return [
                 "regenerate_codes"=>"Új kódok generálása",
                 "disable"=>"Tiltás",
                 "confirm_finish" => "Megerősítés és befejezés",
-                "cancel_setup" => "A beállítás megszakítása"
+                "cancel_setup" => "A beállítás megszakítása",
             ],
             "setup_key" => "Beállítási kulcs",
             "not_enabled" => [
                 "title" => "Nem engedélyezte a kéttényezős hitelesítést.",
-                "description"=>"Ha a kéttényezős hitelesítés engedélyezve van, a rendszer a hitelesítés során egy biztonságos, véletlenszerű tokent kér. Ezt a tokent telefonja Google Authenticator alkalmazásából kérheti le."
+                "description"=>"Ha a kéttényezős hitelesítés engedélyezve van, a rendszer a hitelesítés során egy biztonságos, véletlenszerű tokent kér. Ezt a tokent telefonja Google Authenticator alkalmazásából kérheti le.",
             ],
             "finish_enabling" => [
                 "title"=>"Kétfaktoros hitelesítés engedélyezésének befejezése.",
-                "description" => "A kétfaktoros hitelesítés engedélyezésének befejezéséhez olvassa be a következő QR-kódot telefonja hitelesítő alkalmazásával, vagy adja meg a beállítási kulcsot, és adja meg a generált egyszeri kódot."
+                "description" => "A kétfaktoros hitelesítés engedélyezésének befejezéséhez olvassa be a következő QR-kódot telefonja hitelesítő alkalmazásával, vagy adja meg a beállítási kulcsot, és adja meg a generált egyszeri kódot.",
             ],
             "enabled"=>[
                 "title"=>"Engedélyezte a kéttényezős hitelesítést!",
@@ -102,8 +102,8 @@ return [
             ],
             "confirmation" => [
                 "success_notification" => 'A kód ellenőrizve. Kétfaktoros hitelesítés engedélyezve.',
-                "invalid_code" => "A megadott kód érvénytelen."
-            ]
+                "invalid_code" => "A megadott kód érvénytelen.",
+            ],
         ],
         "sanctum" => [
             "title" => "API Tokenek",

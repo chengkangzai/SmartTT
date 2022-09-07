@@ -87,23 +87,23 @@ return [
             "setup_key" => "Setare cheie",
             "not_enabled" => [
                 "title" => "Nu ați activat autentificarea in doi pași.",
-                "description"=>"Când autentificarea in doi pași este activată, vi se va solicita un token securizat, aleatoriu în timpul autentificării. Puteți prelua acest simbol din aplicația Google Authenticator a telefonului dvs."
+                "description"=>"Când autentificarea in doi pași este activată, vi se va solicita un token securizat, aleatoriu în timpul autentificării. Puteți prelua acest simbol din aplicația Google Authenticator a telefonului dvs.",
             ],
             "finish_enabling" => [
                 "title"=>"Finalizați activarea autentificării in doi pași.",
-                "description" => "Pentru a finaliza activarea autentificării in doi pași, scanați următorul cod QR folosind aplicația de autentificare a telefonului sau introduceți cheia de configurare și furnizați codul OTP generat."
+                "description" => "Pentru a finaliza activarea autentificării in doi pași, scanați următorul cod QR folosind aplicația de autentificare a telefonului sau introduceți cheia de configurare și furnizați codul OTP generat.",
             ],
             "enabled"=>[
                 "title"=>"Ați activat autentificarea in doi pași!",
                 "description"=>"Autentificarea in doi pași este acum activată. Scanați următorul cod QR folosind aplicația de autentificare a telefonului sau introduceți cheia de configurare.",
                 "store_codes"=>"Păstrați aceste coduri de recuperare într-un manager de parole securizat. Acestea pot fi folosite pentru a recupera accesul la contul dvs. dacă dispozitivul de autentificare in doi pașii este pierdut.",
                 "show_codes"=>'Afișare coduri de recuperare',
-                "hide_codes" => 'Ascunde codurile de recuperare'
+                "hide_codes" => 'Ascunde codurile de recuperare',
             ],
             "confirmation" => [
                 "success_notification" => 'Cod verificat. Autentificarea in doi pași este activată.',
-                "invalid_code" => "Codul pe care l-ați introdus este nevalid."
-            ]
+                "invalid_code" => "Codul pe care l-ați introdus este nevalid.",
+            ],
         ],
         "sanctum" => [
             "title" => "API Tokens",

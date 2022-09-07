@@ -9,7 +9,7 @@ return [
     "password_confirm" => [
         "heading" => "Confirm password",
         "description" => "Please confirm your password to complete this action.",
-        "current_password" => "Current password"
+        "current_password" => "Current password",
     ],
     "two_factor" => [
         "heading" => "Two Factor Challenge",
@@ -22,7 +22,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Lost device?",
         "recovery_code_link" => "Use a recovery code",
-        "back_to_login_link" => "Back to login"
+        "back_to_login_link" => "Back to login",
     ],
     "registration" => [
         "title" => "Register",
@@ -82,28 +82,28 @@ return [
                 "regenerate_codes"=>"Regenerate Codes",
                 "disable"=>"Disable",
                 "confirm_finish" => "Confirm & finish",
-                "cancel_setup" => "Cancel setup"
+                "cancel_setup" => "Cancel setup",
             ],
             "setup_key" => "Setup key",
             "not_enabled" => [
                 "title" => "You have not enabled two factor authentication.",
-                "description"=>"When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application."
+                "description"=>"When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.",
             ],
             "finish_enabling" => [
                 "title"=>"Finish enabling two factor authentication.",
-                "description" => "To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code."
+                "description" => "To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code.",
             ],
             "enabled"=>[
                 "title"=>"You have enabled two factor authentication!",
                 "description"=>"Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application or enter the setup key.",
                 "store_codes"=>"Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.",
                 "show_codes"=>'Show Recovery Codes',
-                "hide_codes" => 'Hide Recovery Codes'
+                "hide_codes" => 'Hide Recovery Codes',
             ],
             "confirmation" => [
                 "success_notification" => 'Code verified. Two factor authentication enabled.',
-                "invalid_code" => "The code you have entered is invalid."
-            ]
+                "invalid_code" => "The code you have entered is invalid.",
+            ],
         ],
         "sanctum" => [
             "title" => "API Tokens",
@@ -130,8 +130,8 @@ return [
         "token_name" => "Token name",
         "abilities" => "Abilities",
         "2fa_code" => "Code",
-        "2fa_recovery_code" => "Recovery Code"
+        "2fa_recovery_code" => "Recovery Code",
     ],
     "or" => "Or",
-    "cancel" => "Cancel"
+    "cancel" => "Cancel",
 ];

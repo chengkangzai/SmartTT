@@ -17,7 +17,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Perangkat hilang?",
         "recovery_code_link" => "Gunakan kode pemulihan",
-        "back_to_login_link" => "Kembali ke login"
+        "back_to_login_link" => "Kembali ke login",
     ],
     "registration" => [
         "title" => "Register",
@@ -77,28 +77,28 @@ return [
                 "regenerate_codes"=>"Buat ulang kode",
                 "disable"=>"Nonaktifkan",
                 "confirm_finish" => "Konfirmasi & selesai",
-                "cancel_setup" => "Batalkan pengaturan"
+                "cancel_setup" => "Batalkan pengaturan",
             ],
             "setup_key" => "Kunci pengaturan",
             "not_enabled" => [
                 "title" => "Anda belum mengaktifkan two factor authentication.",
-                "description"=>"Ketika two factor authentication aktif, Anda akan diminta token acak yang aman saat autentikasi. Anda mungkin menerima token ini dari aplikasi Google Authenticator dari ponsel Anda."
+                "description"=>"Ketika two factor authentication aktif, Anda akan diminta token acak yang aman saat autentikasi. Anda mungkin menerima token ini dari aplikasi Google Authenticator dari ponsel Anda.",
             ],
             "finish_enabling" => [
                 "title"=>"Selesai mengaktifkan two factor authentication.",
-                "description" => "Untuk selesai mengaktifkan two factor authentication, scan QR code berikut menggunakan aplikasi authenticator dari ponsel Anda atau masukkan kunci pengaturan dan masukkan kode OTP yang dihasilkan."
+                "description" => "Untuk selesai mengaktifkan two factor authentication, scan QR code berikut menggunakan aplikasi authenticator dari ponsel Anda atau masukkan kunci pengaturan dan masukkan kode OTP yang dihasilkan.",
             ],
             "enabled"=>[
                 "title"=>"Anda telah mengaktifkan two factor authentication!",
                 "description"=>"Two factor authentication sudah diaktifkan. Scan QR code berikut menggunakan aplikasi authenticator ponsel Anda atau masukkan kunci pengaturan.",
                 "store_codes"=>"Simpan kode pemulihan ini di tempat yang aman. Kode ini dapat digunakan untuk memulihkan akses ke akun Anda jika perangkat two factor authentication Anda hilang.",
                 "show_codes"=>'Perlihatkan Kode Pemulihan',
-                "hide_codes" => 'Sembunyikan Kode Pemulihan'
+                "hide_codes" => 'Sembunyikan Kode Pemulihan',
             ],
             "confirmation" => [
                 "success_notification" => 'Kode terverifikasi. Two factor authentication diaktifkan.',
-                "invalid_code" => "Kode yang Anda masukkan tidak valid."
-            ]
+                "invalid_code" => "Kode yang Anda masukkan tidak valid.",
+            ],
         ],
         "sanctum" => [
             "title" => "API Tokens",
@@ -125,8 +125,8 @@ return [
         "token_name" => "Nama Token",
         "abilities" => "Kemampuan",
         "2fa_code" => "Kode",
-        "2fa_recovery_code" => "Kode Pemulihan"
+        "2fa_recovery_code" => "Kode Pemulihan",
     ],
     "or" => "Atau",
-    "cancel" => "Batal"
+    "cancel" => "Batal",
 ];

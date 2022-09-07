@@ -40,6 +40,7 @@ class Package extends Model
             );
         }
         $currency = app(GeneralSetting::class)->default_currency;
+
         return Attribute::make(
             get: fn ($value) => money($min, $currency) . ' - ' . money($max, $currency),
         );

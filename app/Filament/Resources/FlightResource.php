@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Settings\GeneralSetting;
 use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\FlightResource\Pages;
 use App\Filament\Resources\FlightResource\RelationManagers\AirlineRelationManager;
 use App\Models\Flight;
 use App\Models\Settings\FlightSetting;
+use App\Models\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;

@@ -9,7 +9,7 @@ return [
     "password_confirm" => [
         "heading" => "Parolayı doğrula",
         "description" => "Bu işlemi tamamlamak için lütfen şifrenizi onaylayın.",
-        "current_password" => "Mevcut parola"
+        "current_password" => "Mevcut parola",
     ],
     "two_factor" => [
         "heading" => "İki Adımlı Doğrulama",
@@ -22,7 +22,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Kayıp cihaz?",
         "recovery_code_link" => "Bir kurtarma kodu kullanın",
-        "back_to_login_link" => "Girişe geri dön"
+        "back_to_login_link" => "Girişe geri dön",
     ],
     "registration" => [
         "title" => "Kaydol",
@@ -82,28 +82,28 @@ return [
                 "regenerate_codes"=>"Kodları Yeniden Oluştur",
                 "disable"=>"Devredışı bırak",
                 "confirm_finish" => "Onayla & bitir",
-                "cancel_setup" => "Kurulumu iptal et"
+                "cancel_setup" => "Kurulumu iptal et",
             ],
             "setup_key" => "Kurulum anahtarı",
             "not_enabled" => [
                 "title" => "İki adımlı kimlik doğrulamayı etkinleştirmediniz.",
-                "description"=>"İki adımlı kimlik doğrulaması etkinleştirildiğinde, kimlik doğrulaması sırasında güvenli, rasgele bir belirteç istenir. Bu belirteci telefonunuzun Google Authenticator uygulamasından alabilirsiniz."
+                "description"=>"İki adımlı kimlik doğrulaması etkinleştirildiğinde, kimlik doğrulaması sırasında güvenli, rasgele bir belirteç istenir. Bu belirteci telefonunuzun Google Authenticator uygulamasından alabilirsiniz.",
             ],
             "finish_enabling" => [
                 "title"=>"İki adımlı kimlik doğrulamayı etkinleştirmeyi bitirin.",
-                "description" => "İki adımlı kimlik doğrulamayı etkinleştirmeyi bitirmek için telefonunuzun kimlik doğrulayıcı uygulamasını kullanarak aşağıdaki QR kodunu tarayın veya kurulum anahtarını girin ve oluşturulan OTP kodunu girin."
+                "description" => "İki adımlı kimlik doğrulamayı etkinleştirmeyi bitirmek için telefonunuzun kimlik doğrulayıcı uygulamasını kullanarak aşağıdaki QR kodunu tarayın veya kurulum anahtarını girin ve oluşturulan OTP kodunu girin.",
             ],
             "enabled"=>[
                 "title"=>"İki adımlı kimlik doğrulamayı etkinleştirdiniz!",
                 "description"=>"İki adımlı kimlik doğrulama artık etkin. Telefonunuzun kimlik doğrulayıcı uygulamasını kullanarak aşağıdaki QR kodunu tarayın veya kurulum anahtarını girin.",
                 "store_codes"=>"Bu kurtarma kodlarını güvenli bir parola yöneticisinde saklayın. İki adımlı kimlik doğrulama cihazınız kaybolursa hesabınıza erişimi kurtarmak için kullanılabilirler.",
                 "show_codes"=>'Kurtarma Kodlarını Göster',
-                "hide_codes" => 'Kurtarma Kodlarını Gizle'
+                "hide_codes" => 'Kurtarma Kodlarını Gizle',
             ],
             "confirmation" => [
                 "success_notification" => 'Kod doğrulandı. İki adımlı kimlik doğrulaması etkin.',
-                "invalid_code" => "Girdiğiniz kod geçersiz."
-            ]
+                "invalid_code" => "Girdiğiniz kod geçersiz.",
+            ],
         ],
         "sanctum" => [
             "title" => "API Belirteçleri",
@@ -130,8 +130,8 @@ return [
         "token_name" => "Belirteç adı",
         "abilities" => "Yetenekler",
         "2fa_code" => "Kod",
-        "2fa_recovery_code" => "Kurtarma Kodu"
+        "2fa_recovery_code" => "Kurtarma Kodu",
     ],
     "or" => "Veya",
-    "cancel" => "Vazgeç"
+    "cancel" => "Vazgeç",
 ];

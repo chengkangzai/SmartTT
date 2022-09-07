@@ -17,7 +17,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Appareil perdu ?",
         "recovery_code_link" => "Utiliser un code de récupération",
-        "back_to_login_link" => "Retour à la page de connexion"
+        "back_to_login_link" => "Retour à la page de connexion",
     ],
     "registration" => [
         "title" => "S'inscrire",
@@ -25,7 +25,7 @@ return [
         "submit" => [
             "label" => "S'inscrire",
         ],
-        "notification_unique" => "Un compte avec cet email existe déjà. Veuillez vous connecter."
+        "notification_unique" => "Un compte avec cet email existe déjà. Veuillez vous connecter.",
     ],
     "reset_password" => [
         "title" => "Mot de passe oublié",
@@ -77,28 +77,28 @@ return [
                 "regenerate_codes"=>"Régénérer les codes",
                 "disable"=>"Désactiver",
                 "confirm_finish" => "Confirmer et terminer",
-                "cancel_setup" => "Annuler la configuration"
+                "cancel_setup" => "Annuler la configuration",
             ],
             "setup_key" => "Clé de configuration",
             "not_enabled" => [
                 "title" => "Vous n'avez pas activé l'authentification à deux facteurs.",
-                "description"=>"Lorsque l'authentification à deux facteurs est activée, un jeton sécurisé et aléatoire vous sera demandé lors de l'authentification. Vous pouvez récupérer ce jeton à partir de l'application Google Authenticator de votre téléphone."
+                "description"=>"Lorsque l'authentification à deux facteurs est activée, un jeton sécurisé et aléatoire vous sera demandé lors de l'authentification. Vous pouvez récupérer ce jeton à partir de l'application Google Authenticator de votre téléphone.",
             ],
             "finish_enabling" => [
                 "title"=>"Terminez l'activation de l'authentification à deux facteurs.",
-                "description" => "Pour terminer l'activation de l'authentification à deux facteurs, scannez le code QR suivant à l'aide de l'application d'authentification de votre téléphone ou entrez la clé de configuration et fournissez le code OTP généré."
+                "description" => "Pour terminer l'activation de l'authentification à deux facteurs, scannez le code QR suivant à l'aide de l'application d'authentification de votre téléphone ou entrez la clé de configuration et fournissez le code OTP généré.",
             ],
             "enabled"=>[
                 "title"=>"Vous avez activé l'authentification à deux facteurs !",
                 "description"=>"L'authentification à deux facteurs est maintenant activée. Scannez le code QR suivant en utilisant l'application d'authentification de votre téléphone ou entrez la clé de configuration.",
                 "store_codes"=>"Conservez ces codes de récupération dans un gestionnaire de mots de passe sécurisé. Ils peuvent être utilisés pour récupérer l'accès à votre compte si votre dispositif d'authentification à deux facteurs est perdu.",
                 "show_codes"=>"Afficher les codes de récupération",
-                "hide_codes" => "Cacher les codes de récupération"
+                "hide_codes" => "Cacher les codes de récupération",
             ],
             "confirmation" => [
                 "success_notification" => "Code vérifié. Authentification à deux facteurs activée.",
-                "invalid_code" => "Le code que vous avez saisi n'est pas valide."
-            ]
+                "invalid_code" => "Le code que vous avez saisi n'est pas valide.",
+            ],
         ],
         "sanctum" => [
             "title" => "Jetons d'API",
@@ -125,8 +125,8 @@ return [
         "token_name" => "Nom du jeton",
         "abilities" => "Aptitudes",
         "2fa_code" => "Code",
-        "2fa_recovery_code" => "Code de récupération"
+        "2fa_recovery_code" => "Code de récupération",
     ],
     "or" => "Ou",
-    "cancel" => "Annuler"
+    "cancel" => "Annuler",
 ];

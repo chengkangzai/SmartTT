@@ -9,7 +9,7 @@ return [
     "password_confirm" => [
         "heading" => "Sahkan kata laluan",
         "description" => "Sila sahkan kata laluan anda untuk melengkapkan tindakan ini.",
-        "current_password" => "Kata laluan semasa"
+        "current_password" => "Kata laluan semasa",
     ],
     "two_factor" => [
         "heading" => "Cabaran Dua Faktor",
@@ -22,7 +22,7 @@ return [
         "recovery_code_placeholder" => "abcdef-98765",
         "recovery_code_text" => "Peranti hilang?",
         "recovery_code_link" => "Gunakan kod pemulihan",
-        "back_to_login_link" => "Kembali ke log masuk"
+        "back_to_login_link" => "Kembali ke log masuk",
     ],
     "registration" => [
         "title" => "Daftar",
@@ -82,28 +82,28 @@ return [
                 "regenerate_codes" =>"Regenerate Codes",
                 "disable" =>"Lumpuhkan",
                 "confirm_finish" => "Sahkan & selesaikan",
-                "cancel_setup" => "Batalkan persediaan"
+                "cancel_setup" => "Batalkan persediaan",
             ],
             "setup_key" => "Kunci persediaan",
             "not_enabled" => [
                 "title" => "Anda belum mendayakan pengesahan dua faktor.",
-                "description" =>"Apabila pengesahan dua faktor didayakan, anda akan digesa untuk mendapatkan token rawak yang selamat semasa pengesahan. Anda boleh mendapatkan semula token ini daripada aplikasi Google Authenticator telefon anda."
+                "description" =>"Apabila pengesahan dua faktor didayakan, anda akan digesa untuk mendapatkan token rawak yang selamat semasa pengesahan. Anda boleh mendapatkan semula token ini daripada aplikasi Google Authenticator telefon anda.",
             ],
             "finish_enabling" => [
                 "title" =>"Selesai mendayakan pengesahan dua faktor.",
-                "description" => "Untuk menyelesaikan mendayakan pengesahan dua faktor, imbas kod QR berikut menggunakan aplikasi pengesah telefon anda atau masukkan kekunci persediaan dan berikan kod OTP yang dijana."
+                "description" => "Untuk menyelesaikan mendayakan pengesahan dua faktor, imbas kod QR berikut menggunakan aplikasi pengesah telefon anda atau masukkan kekunci persediaan dan berikan kod OTP yang dijana.",
             ],
             "enabled"=>[
                 "title" =>"Anda telah mendayakan pengesahan dua faktor!",
                 "description" =>"Pengesahan dua faktor kini didayakan. Imbas kod QR berikut menggunakan aplikasi pengesah telefon anda atau masukkan kekunci persediaan.",
                 "store_codes" =>"Simpan kod pemulihan ini dalam pengurus kata laluan yang selamat. Ia boleh digunakan untuk memulihkan akses kepada akaun anda jika peranti pengesahan dua faktor anda hilang.",
                 "show_codes" => 'Tunjukkan Kod Pemulihan',
-                "hide_codes" => 'Sembunyikan Kod Pemulihan'
+                "hide_codes" => 'Sembunyikan Kod Pemulihan',
             ],
             "confirmation" => [
                 "success_notification" => 'Kod disahkan. Pengesahan dua faktor didayakan.',
-                "invalid_code" => "Kod yang anda masukkan tidak sah."
-            ]
+                "invalid_code" => "Kod yang anda masukkan tidak sah.",
+            ],
         ],
         "sanctum" => [
             "title" => "Token API",
@@ -111,7 +111,7 @@ return [
             "create" => [
                 "notify" => "Token API baru telah dicipta.",
                 "submit" => [
-                    "label" => "Cipta Token Baru"
+                    "label" => "Cipta Token Baru",
                 ],
             ],
             "update" => [
