@@ -27,4 +27,13 @@ class LatestUser extends BaseWidget
                 ->sortable(),
         ];
     }
+
+    public static function canView(): bool
+    {
+        return auth()->user()
+                ->roles
+                ->pluck('name')
+                ->filter(fn($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+                ->isNotEmpty();
+    }
 }

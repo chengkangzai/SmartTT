@@ -27,8 +27,9 @@ class StatsOverview extends BaseWidget
     public static function canView(): bool
     {
         return auth()->user()
-                ->pluck('name')
-                ->filter(fn($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
-                ->count() >= 1;
+            ->roles
+            ->pluck('name')
+            ->filter(fn($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+            ->isNotEmpty();
     }
 }
