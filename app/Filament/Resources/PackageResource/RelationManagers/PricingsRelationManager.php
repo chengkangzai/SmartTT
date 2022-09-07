@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PackageResource\RelationManagers;
 
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -79,7 +80,7 @@ class PricingsRelationManager extends RelationManager
                     ->label(__('Available Capacity'))
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
-                ->label(__('Active')),
+                    ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -104,6 +105,9 @@ class PricingsRelationManager extends RelationManager
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+                $query->active();
+            })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

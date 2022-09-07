@@ -86,7 +86,7 @@ class PackageResource extends Resource
                         ->columnSpan(2)
                         ->defaultItems(2)
                         ->columns(8),
-                ])->hiddenOn('view'),
+                ])->hiddenOn(['view', 'edit']),
             ]);
     }
 
@@ -103,6 +103,7 @@ class PackageResource extends Resource
                     ->sortable()
                     ->dateTime(),
                 Tables\Columns\BooleanColumn::make('is_active')
+                    ->hidden(!auth()->user()->isInternalUser())
                     ->label(__('Active')),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price')),
@@ -147,6 +148,9 @@ class PackageResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+                $query->active();
+            })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);

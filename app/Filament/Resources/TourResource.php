@@ -88,6 +88,7 @@ class TourResource extends Resource
                     ]),
                 Forms\Components\Toggle::make('is_active')
                     ->label(__('Active'))
+                    ->hidden(!auth()->user()->isInternalUser())
                     ->columnSpan(2)
                     ->required(),
                 Forms\Components\Card::make()
@@ -123,17 +124,23 @@ class TourResource extends Resource
                     ->collection('thumbnail'),
                 Tables\Columns\TextColumn::make('name')
                     ->limit(30)
-                    ->label(__('Tour Name')),
+                    ->label(__('Tour Name'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('tour_code')
+                    ->searchable()
                     ->limit(30)
                     ->label(__('Tour Code')),
                 Tables\Columns\BadgeColumn::make('category')
+                    ->searchable()
                     ->label(__('Category')),
                 Tables\Columns\TextColumn::make('days')
-                    ->label(__('Days')),
+                    ->label(__('Days'))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('nights')
-                    ->label(__('Nights')),
+                    ->label(__('Nights'))
+                    ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
+                    ->hidden(!auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])
             ->filters([
@@ -173,6 +180,9 @@ class TourResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+                $query->active();
+            })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
