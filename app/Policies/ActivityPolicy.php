@@ -13,7 +13,7 @@ class ActivityPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->roles()->first()?->permissions->filter(function (Permission $permission) {
+        return $user->roles->first()?->permissions->filter(function (Permission $permission) {
             return str($permission->name)->contains('Audit');
         })?->isNotEmpty() ?? false;
     }
@@ -22,7 +22,7 @@ class ActivityPolicy
     {
         $model = str($activity->subject_type)->afterLast('\\')->basename();
 
-        return $user->roles()->first()?->permissions->filter(function (Permission $permission) use ($model) {
+        return $user->roles->first()?->permissions->filter(function (Permission $permission) use ($model) {
             return str($permission->name)->contains('Audit '.$model);
         })?->isNotEmpty() ?? false;
     }
