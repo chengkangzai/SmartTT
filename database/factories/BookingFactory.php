@@ -19,7 +19,7 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => User::where('id', '>', 1)->inRandomOrder()->first()->id,
-            'package_id' => Package::factory(),
+            'package_id' => Package::count() > 1 ? Package::inRandomOrder()->first()->id : Package::factory()->create()->id,
             'total_price' => rand(100, 1000),
             'discount' => 0,
             'adult' => rand(1, 10),

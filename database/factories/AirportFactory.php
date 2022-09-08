@@ -13,7 +13,7 @@ class AirportFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->city(),
             'city' => $this->faker->city(),
             'IATA' => $this->faker->word(),
             'ICAO' => $this->faker->word(),
