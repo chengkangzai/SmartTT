@@ -9,6 +9,7 @@ use App\Filament\Resources\TourResource\RelationManagers\PackagesRelationManager
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -90,7 +91,7 @@ class TourResource extends Resource
                     ]),
                 Forms\Components\Toggle::make('is_active')
                     ->label(__('Active'))
-                    ->hidden(! auth()->user()->isInternalUser())
+                    ->hidden(!auth()->user()->isInternalUser())
                     ->columnSpan(2)
                     ->default(app(TourSetting::class)->default_status)
                     ->required(),
@@ -143,7 +144,7 @@ class TourResource extends Resource
                     ->label(__('Nights'))
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
-                    ->hidden(! auth()->user()->isInternalUser())
+                    ->hidden(!auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])
             ->filters([
@@ -152,12 +153,31 @@ class TourResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->action(function ($record) {
+                        if ($record->packages->count() > 0) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete this record because it has related packages.'))
+                                ->send();
+                        }
+                        return $record->delete();
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->action(function (Builder $records) {
+                        $records->each(function (Tour $record) {
+                            if ($record->packages()->count() > 0) {
+                                Notification::make('cannot_delete')
+                                    ->danger()
+                                    ->body(__('Cannot delete one of the record because it has related packages.'))
+                                    ->send();
+                            }
+                            $record->delete();
+                        });
+                    }),
                 Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
             ]);
     }
 
@@ -183,7 +203,7 @@ class TourResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([
