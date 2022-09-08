@@ -9,13 +9,18 @@ use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationMana
 use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
+use App\Models\Tour;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
+use Livewire\Component;
 
 class PackageResource extends Resource
 {
@@ -37,15 +42,6 @@ class PackageResource extends Resource
 
     public static function form(Form $form): Form
     {
-//        $defaultPricing =[];
-//        $setting = app(PackageSetting::class);
-//        foreach ($setting->default_pricing as $pricing) {
-//            $defaultPricing[] = [
-//                'name' => $pricing['name'],
-//                'capacity' => $pricing['total_capacity'],
-//                'is_active' => $pricing['is_active'],
-//            ];
-//        }
         return $form
             ->schema([
                 Forms\Components\Select::make('tour_id')
@@ -64,10 +60,12 @@ class PackageResource extends Resource
                     ->reactive()
                     ->hiddenOn('view'),
                 Forms\Components\MultiSelect::make('flight_id')
+                    ->hiddenOn(['view'])
                     ->relationship('flight', 'name')
                     ->label(__('Flight'))
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
+                    ->inline(false)
                     ->label(__('Active'))
                     ->required(),
                 Forms\Components\Card::make([
@@ -98,7 +96,8 @@ class PackageResource extends Resource
                         ->defaultItems(3)
                         ->default(app(PackageSetting::class)->default_pricing)
                         ->columns(8),
-                ])->hiddenOn(['view', 'edit']),
+                ])
+                    ->hiddenOn(['view', 'edit']),
             ]);
     }
 
@@ -109,19 +108,22 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('tour.name')
                     ->label(__('Tour'))
                     ->limit(40)
+                    ->hidden(fn (Component $livewire) => $livewire instanceof RelationManager)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('depart_time')
                     ->label(__('Departure Time'))
                     ->sortable()
                     ->dateTime(),
-                Tables\Columns\BooleanColumn::make('is_active')
-                    ->hidden(! auth()->user()->isInternalUser())
-                    ->label(__('Active')),
                 Tables\Columns\TextColumn::make('price')
                     ->label(__('Price')),
                 Tables\Columns\TextColumn::make('flight.airline')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->label(__('Airline'))
                     ->sortable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->visible(auth()->user()->isInternalUser())
+                    ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -129,12 +131,35 @@ class PackageResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->hidden(fn(Package $record) => $record->bookings->count() > 0),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->action(function (Collection $records) {
+                        $havePackages = $records->some(function (Package $package) {
+                            return $package->bookings->count() > 0;
+                        });
 
+                        if ($havePackages) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because some of the packages have related bookings.'))
+                                ->send();
+                        }
+
+                        $records->filter(function (Package $package) {
+                            return $package->bookings->count() === 0;
+                        })->each(function (Package $tour) {
+                            $tour->delete();
+                        });
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
+                    }),
+                Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
 
@@ -160,7 +185,8 @@ class PackageResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->with(['activePricings', 'bookings'])
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

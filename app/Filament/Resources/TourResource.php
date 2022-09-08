@@ -17,6 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class TourResource extends Resource
 {
@@ -91,7 +92,7 @@ class TourResource extends Resource
                     ]),
                 Forms\Components\Toggle::make('is_active')
                     ->label(__('Active'))
-                    ->hidden(! auth()->user()->isInternalUser())
+                    ->visible(auth()->user()->isInternalUser())
                     ->columnSpan(2)
                     ->default(app(TourSetting::class)->default_status)
                     ->required(),
@@ -144,7 +145,7 @@ class TourResource extends Resource
                     ->label(__('Nights'))
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
-                    ->hidden(! auth()->user()->isInternalUser())
+                    ->visible(auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])
             ->filters([
@@ -154,31 +155,35 @@ class TourResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->action(function ($record) {
-                        if ($record->packages->count() > 0) {
-                            return Notification::make('cannot_delete')
-                                ->danger()
-                                ->body(__('Cannot delete this record because it has related packages.'))
-                                ->send();
-                        }
-
-                        return $record->delete();
-                    }),
+                    ->hidden(fn(Tour $record) => $record->packages->count() > 0),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make()
-                    ->action(function (Builder $records) {
-                        $records->each(function (Tour $record) {
-                            if ($record->packages()->count() > 0) {
-                                Notification::make('cannot_delete')
-                                    ->danger()
-                                    ->body(__('Cannot delete one of the record because it has related packages.'))
-                                    ->send();
-                            }
-                            $record->delete();
+                    ->action(function (Collection $records) {
+                        $havePackages = $records->some(function (Tour $tour) {
+                            return $tour->packages->count() > 0;
                         });
+
+                        if ($havePackages) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because some of the tours have related packages.'))
+                                ->send();
+                        }
+
+                        $records->filter(function (Tour $tour) {
+                            return $tour->packages->count() === 0;
+                        })->each(function (Tour $tour) {
+                            $tour->delete();
+                        });
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
                     }),
-                Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make()
             ]);
     }
 
@@ -204,7 +209,8 @@ class TourResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->with('packages')
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

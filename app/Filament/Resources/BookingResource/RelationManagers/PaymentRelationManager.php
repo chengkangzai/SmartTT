@@ -125,9 +125,6 @@ class PaymentRelationManager extends RelationManager
                     ->openUrlInNewTab()
                     ->hidden(fn (Payment $record) => $record->getFirstMediaUrl('receipts') === '')
                     ->url(fn (Payment $record) => $record->getFirstMediaUrl('receipts')),
-            ])
-            ->bulkActions([
-
             ]);
     }
 

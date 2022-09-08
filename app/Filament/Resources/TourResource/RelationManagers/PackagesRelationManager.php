@@ -30,54 +30,12 @@ class PackagesRelationManager extends RelationManager
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\DateTimePicker::make('depart_time')
-                    ->label(__('Depart Time'))
-                    ->rules(['required', 'date', 'after_or_equal:today'])
-                    ->required(),
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('Active'))
-                    ->inline(false)
-                    ->required(),
-            ]);
+        return PackageResource::form($form);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('depart_time')
-                    ->label(__('Depart Time'))
-                    ->sortable()
-                    ->dateTime(),
-                Tables\Columns\BooleanColumn::make('is_active')
-                    ->label(__('Active')),
-                Tables\Columns\TextColumn::make('price')
-                    ->label(__('Price')),
-                Tables\Columns\TextColumn::make('flight.airline')
-                    ->label(__('Airline'))
-                    ->default('-')
-                    ->sortable(),
-            ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->url(fn (Package $record): string => PackageResource::getUrl('view', ['record' => $record])),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                                Tables\Actions\RestoreAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-
-            ]);
+        return PackageResource::table($table);
     }
 
     protected function getTableQuery(): Builder

@@ -2,15 +2,19 @@
 
 namespace App\Filament\Resources\PackageResource\RelationManagers;
 
+use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
+use App\Models\Tour;
 use Closure;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class PricingsRelationManager extends RelationManager
 {
@@ -40,7 +44,7 @@ class PricingsRelationManager extends RelationManager
                     Forms\Components\TextInput::make('price')
                         ->numeric()
                         ->label(__('Price'))
-                        ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
+                        ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                         ->columnSpan(2)
                         ->required(),
                     Forms\Components\TextInput::make('total_capacity')
@@ -92,19 +96,57 @@ class PricingsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->action(function (PackagePricing $packagePricing) {
+                        if ($packagePricing->guests->count() > 0) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because some of the pricing is in used.'))
+                                ->send();
+                        }
+                        $packagePricing->delete();
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
+                    })
+                ,
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make()
+                    ->action(function (Collection $records) {
+                        $havePackages = $records->some(function (PackagePricing $pricing) {
+                            return $pricing->guests->count() > 0;
+                        });
+
+                        if ($havePackages) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because some of the pricing is in used.'))
+                                ->send();
+                        }
+
+                        $records->filter(function (PackagePricing $pricing) {
+                            return $pricing->guests->count() === 0;
+                        })->each(function (PackagePricing $pricing) {
+                            $pricing->delete();
+                        });
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
+                    }),
             ]);
     }
 
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources\FlightResource\RelationManagers;
 
+use App\Models\Airline;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class AirlineRelationManager extends RelationManager
 {
@@ -73,11 +76,48 @@ class AirlineRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->action(function (Airline $airline) {
+                        if ($airline->flights->count() > 0) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because the airline is in used.'))
+                                ->send();
+                        }
+                        $airline->delete();
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
+                    }),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->action(function (Collection $records) {
+                        $havePackages = $records->some(function (Airline $airline) {
+                            return $airline->flights->count() > 0;
+                        });
+
+                        if ($havePackages) {
+                            return Notification::make('cannot_delete')
+                                ->danger()
+                                ->body(__('Cannot delete records because some of the tours have related packages.'))
+                                ->send();
+                        }
+
+                        $records->filter(function (Airline $airline) {
+                            return $airline->flights->count() === 0;
+                        })->each(function (Airline $airline) {
+                            $airline->delete();
+                        });
+
+                        return Notification::make('success')
+                            ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }

@@ -48,7 +48,7 @@ class FlightResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->label(__('Price'))
                     ->columnSpan(2)
-                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
+                    ->mask(fn(Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\Select::make('departure_airport_id')
                     ->relationship('depart_airport', 'name')
@@ -86,25 +86,28 @@ class FlightResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('depart_airport.name')
-                    ->limit(30)
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->searchable()
                     ->label(__('Departure Airport')),
                 Tables\Columns\TextColumn::make('arrive_airport.name')
-                    ->limit(30)
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->searchable()
                     ->label(__('Arrival Airport')),
                 Tables\Columns\TextColumn::make('airline')
                     ->searchable()
                     ->label(__('Airline')),
-                Tables\Columns\TextColumn::make('price')
-                    ->label(__('Price'))
-                    ->money(app(GeneralSetting::class)->default_currency),
                 Tables\Columns\TextColumn::make('departure_date')
                     ->label(__('Departure Date'))
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('arrival_date')
                     ->label(__('Arrival Date'))
                     ->dateTime(),
+                Tables\Columns\TextColumn::make('price')
+                    ->label(__('Price'))
+                    ->visible(auth()->user()->isInternalUser())
+                    ->money(app(GeneralSetting::class)->default_currency),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -123,9 +126,9 @@ class FlightResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AirlineRelationManager::class,
-            ActivitiesRelationManager::class,
-        ]
+                AirlineRelationManager::class,
+                ActivitiesRelationManager::class,
+            ]
             + (auth()->user()?->can('Audit Flight') ? [ActivitiesRelationManager::class] : []);
     }
 

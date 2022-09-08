@@ -33,19 +33,7 @@ class FlightRelationManager extends RelationManager
 
     public static function table(Table $table): Table
     {
-        return FlightResource::table($table)
-            ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
-                                        Tables\Actions\RestoreAction::make(),
-                ]),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-            ]);
+        return FlightResource::table($table);
     }
 
     protected function getTableQuery(): Builder
