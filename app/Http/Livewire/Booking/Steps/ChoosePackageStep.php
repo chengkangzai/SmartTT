@@ -32,6 +32,8 @@ class ChoosePackageStep extends StepComponent
     {
         $this->validate([
             'package' => 'required|integer|exists:packages,id',
+        ], attributes: [
+            'package' => __('Package'),
         ]);
 
         parent::nextStep();

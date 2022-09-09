@@ -51,9 +51,7 @@ class Tour extends Model implements HasMedia
 
     public function countries(): BelongsToMany
     {
-        return $this->belongsToMany(Country::class)
-            ->withPivot(['order'])
-            ->orderByPivot('order');
+        return $this->belongsToMany(Country::class);
     }
 
     public function getActivitylogOptions(): LogOptions

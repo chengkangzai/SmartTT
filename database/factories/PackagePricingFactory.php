@@ -15,12 +15,12 @@ class PackagePricingFactory extends Factory
     public function definition(): array
     {
         return [
-            'package_id' => Package::inRandomOrder()->first()->id,
+            'package_id' => Package::count() > 1 ? Package::inRandomOrder()->first()->id : Package::factory(),
             'price' => rand(500, 5000),
             'name' => $this->faker->words(rand(1, 3), true),
             'total_capacity' => 10,
             'available_capacity' => 10,
-            'is_active' => rand(0, 1),
+            'is_active' => true,
         ];
     }
 }

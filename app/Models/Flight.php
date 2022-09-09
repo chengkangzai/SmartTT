@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,27 +26,14 @@ class Flight extends Model
         'arrival_airport_id',
         'class',
         'type',
+        'airline',
+        'name',
     ];
 
     protected $dates = [
         'departure_date',
         'arrival_date',
     ];
-
-    public function price(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
-    public function asSelection(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $this->airline->name . " (" . $this->departure_date->format('d/m/Y H:i') . ") -> (" . $this->arrival_date->format('d/m/Y H:i') . ")",
-        );
-    }
 
     public function packages(): BelongsToMany
     {

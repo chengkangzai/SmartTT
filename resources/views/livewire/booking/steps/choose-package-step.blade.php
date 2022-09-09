@@ -6,20 +6,20 @@
         @include('smartTT.partials.error-alert')
         <table class="table table-bordered table-striped">
             <tr>
+                <th>{{ __('Select') }}</th>
                 <th>{{ __('Depart Time') }}</th>
                 <th>{{ __('Price') }} ({{ $defaultCurrency }})</th>
                 <th>{{ __('Seat') }}</th>
-                <th>{{ __('Select') }}</th>
             </tr>
             @forelse($packages as $package)
                 <tr>
-                    <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
-                    <td>{{ $package->price, 2 }}</td>
-                    <td>{{ $package->pricings->sum('available_capacity') }}</td>
                     <td>
                         <input type="radio" wire:model="package" value="{{ $package->id }}"
                                aria-label="{{ __('Choose this package') }}">
                     </td>
+                    <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
+                    <td>{{ $package->price, 2 }}</td>
+                    <td>{{ $package->packagePricing->sum('available_capacity') }}</td>
                 </tr>
             @empty
                 <tr>

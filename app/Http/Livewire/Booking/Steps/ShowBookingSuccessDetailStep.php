@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Booking\Steps;
 
+use App\Filament\Resources\BookingResource;
 use App\Models\Payment;
 use App\Models\Settings\GeneralSetting;
 use Illuminate\Contracts\Foundation\Application;
@@ -34,6 +35,6 @@ class ShowBookingSuccessDetailStep extends StepComponent
 
     public function nextStep()
     {
-        $this->redirectRoute('bookings.show', $this->payment->booking);
+        $this->redirect(BookingResource::getUrl('view', ['record' => $this->payment->booking_id]));
     }
 }

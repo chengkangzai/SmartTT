@@ -3,5 +3,6 @@
     "/js/alpine.js": "/js/alpine.js",
     "/js/chart.js": "/js/chart.js",
     "/tailwind/app.css": "/tailwind/app.css",
+    "/booking_css/booking_css.css": "/booking_css/booking_css.css",
     "/css/app.css": "/css/app.css"
 }

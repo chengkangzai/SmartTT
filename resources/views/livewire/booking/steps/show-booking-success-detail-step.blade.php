@@ -37,7 +37,7 @@
     </div>
     <div class="card-footer">
         <div class="float-end">
-            <button wire:click="nextStep" class="btn btn-success mx-1" wire:loading.attr="disabled">
+            <button wire:click="nextStep" class="btn btn-primary mx-1" wire:loading.attr="disabled">
                 <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 {{ __('Finish') }} &rarr;
             </button>

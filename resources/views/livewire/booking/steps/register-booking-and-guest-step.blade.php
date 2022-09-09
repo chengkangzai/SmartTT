@@ -5,20 +5,14 @@
     <div class="card-body">
         @include('smartTT.partials.error-alert')
         <div class="alert alert-primary d-flex flex-row align-items-center" role="alert">
-            <svg class="icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-info') }}"></use>
-            </svg>
             <ul class="my-0 flex-grow-1">
                 <li>{{ __('Please note that the price is per person') }}</li>
                 <li>{{ __('Child is defined as age between 2 and 12') }}</li>
             </ul>
-            <div class="float-end">
-                <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
-            </div>
         </div>
-        <div class="float-end btn-group">
-            <a wire:click="addNewGuest" class="btn btn-outline-primary my-2">{{ __('Add New guest') }}</a>
-            <a wire:click="addNewChild" class="btn btn-outline-primary my-2">{{ __('Add New Child') }}</a>
+        <div class="container">
+            <a wire:click="addNewGuest" class="btn btn-outline-dark my-2">{{ __('Add New Guest') }}</a>
+            <a wire:click="addNewChild" class="btn btn-outline-dark my-2">{{ __('Add New Child') }}</a>
         </div>
         <table class="table table-striped table-bordered">
             <thead>

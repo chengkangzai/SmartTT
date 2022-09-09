@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Settings\GeneralSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,11 +32,17 @@ class Package extends Model
 
     public function price(): Attribute
     {
-        $min = $this->pricings->min('price');
-        $max = $this->pricings->max('price');
+        $min = $this->activePricings->min('price');
+        $max = $this->activePricings->max('price');
+        if (! $min || ! $max) {
+            return Attribute::make(
+                get: fn ($value) => '-',
+            );
+        }
+        $currency = app(GeneralSetting::class)->default_currency;
 
         return Attribute::make(
-            get: fn ($value) => number_format($min, 2) . ' - ' . number_format($max, 2),
+            get: fn ($value) => money($min, $currency) . ' - ' . money($max, $currency),
         );
     }
 
@@ -57,7 +64,7 @@ class Package extends Model
             ->withPivot(['order']);
     }
 
-    public function pricings(): HasMany
+    public function packagePricing(): HasMany
     {
         return $this->hasMany(PackagePricing::class)->orderBy('price');
     }

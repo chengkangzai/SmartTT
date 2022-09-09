@@ -6,9 +6,9 @@
     </div>
     <div class="card-body">
         @include('smartTT.partials.error-alert')
-        <div class="row">
+        <div class="container">
             <span class="my-2">{{ __('Choose payment type') }}</span>
-            <div class="btn-group row mx-0 ">
+            <div class="btn-group row mx-2">
                 <button class="col-md-6 btn {{ $paymentType == 'full' ? 'btn-primary' : 'btn-outline-primary' }}"
                         wire:click="$set('paymentType','full')">
                     {{ __('Full Payment') }}
@@ -21,7 +21,7 @@
             </div>
             @if ($paymentMethod == 'manual')
                 <span class="my-2">{{ __('Choose payment method') }}</span>
-                <div class="btn-group row mx-0">
+                <div class="btn-group row mx-2">
                     <button class="col-md-6 btn {{ $manualType == 'cash' ? 'btn-primary' : 'btn-outline-primary' }}"
                             wire:click="$set('manualType','cash')">
                         {{ __('Cash') }}
@@ -35,7 +35,7 @@
 
             @if ($paymentMethod == 'stripe')
                 <span class="my-2">{{ __('Credit/Debit Card Information') }}</span>
-                <div class="container">
+                <div>
                     <div id="card-element" class="form-control py-2"></div>
                     <div class="alert alert-danger mt-4 d-none" id="card-error"></div>
                 </div>
@@ -43,7 +43,7 @@
 
             @if ($paymentMethod == 'manual')
                 @if ($manualType == 'cash')
-                    <div class="container my-2">
+                    <div class="my-2">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="false" id="receivedCheckBox" required
                                    wire:model="paymentCashReceived"/>
@@ -54,7 +54,7 @@
                     </div>
                 @endif
                 @if ($manualType == 'card')
-                    <div class="container my-2">
+                    <div class="my-2">
                         <div class="row mb-3">
                             <div class="col-md-5">
                                 <label for="card-holder-name">{{ __('Card Holder Name') }}</label>

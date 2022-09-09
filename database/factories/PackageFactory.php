@@ -16,7 +16,7 @@ class PackageFactory extends Factory
     public function definition(): array
     {
         return [
-            'tour_id' => Tour::inRandomOrder()->first()->id,
+            'tour_id' => Tour::count() > 1 ? Tour::inRandomOrder()->first()->id : Tour::factory(),
             'depart_time' => Carbon::now()->addDays(rand(30, 180))->addSeconds(rand(7000, rand(0, 100000))),
             'is_active' => true,
         ];

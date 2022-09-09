@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Settings\GeneralSetting;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
 class Locale
@@ -19,7 +19,7 @@ class Locale
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        $locale = Session::get('locale', Config::get('app.locale', 'en'));
+        $locale = Session::get('locale', app(GeneralSetting::class)->default_language);
 
         App::setLocale($locale);
 

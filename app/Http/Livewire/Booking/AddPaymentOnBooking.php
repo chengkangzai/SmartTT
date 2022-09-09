@@ -6,6 +6,7 @@ use App\Actions\Booking\CreatePaymentAction;
 use App\Actions\Booking\Invoice\GenerateInvoiceAction;
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Actions\Booking\ValidateManualCardAction;
+use App\Filament\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\GeneralSetting;
@@ -172,11 +173,12 @@ class AddPaymentOnBooking extends Component
     {
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
+
     #endregion
 
     public function finish()
     {
         session()->flash('success', __('Payment recorded successfully'));
-        $this->redirectRoute('bookings.show', $this->booking);
+        $this->redirect(BookingResource::getUrl('view', ['record' => $this->payment->booking_id]));
     }
 }

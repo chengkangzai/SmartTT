@@ -35,7 +35,7 @@ it('should return index view', function () {
 it('should return search view', function () {
     $tour = Tour::whereHas('activePackages')->first()->load([
         'activePackages:id,tour_id,depart_time,is_active',
-        'activePackages.pricings:id,price,name,package_id,available_capacity',
+        'activePackages.packagePricing:id,price,name,package_id,available_capacity',
         'activePackages.flight:id,departure_airport_id,arrival_airport_id,airline_id',
         'activePackages.flight.airline:id,country_id,name',
         'description',

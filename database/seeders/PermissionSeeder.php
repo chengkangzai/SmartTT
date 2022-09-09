@@ -9,7 +9,7 @@ class PermissionSeeder extends Seeder
 {
     public function run()
     {
-        $modules = ['Tour', 'Tour Description', 'Package', 'Package Pricing', 'Flight', 'Role', 'Booking', 'Payment', 'User'];
+        $modules = ['Tour', 'Tour Description', 'Package', 'Package Pricing', 'Flight', 'Role', 'Booking', 'Payment', 'User', 'Permission', 'Airport', 'Airline'];
         $operation = ['Access', 'Create', 'View', 'Edit', 'Delete', 'Audit'];
         $temp = collect([]);
         foreach ($modules as $module) {
@@ -22,12 +22,7 @@ class PermissionSeeder extends Seeder
         }
 
         $temp->push([
-            'name' => 'Access Setting',
-            'guard_name' => 'web',
-        ]);
-
-        $temp->push([
-            'name' => 'Update Setting',
+            'name' => 'Edit Setting',
             'guard_name' => 'web',
         ]);
 

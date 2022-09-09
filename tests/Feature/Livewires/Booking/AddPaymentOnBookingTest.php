@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Resources\BookingResource;
 use App\Http\Livewire\Booking\AddPaymentOnBooking;
 use App\Models\Booking;
 use App\Models\Payment;
@@ -82,5 +83,5 @@ it('should add payment as Admin', function () {
         ->assertSet('currentStep', 2)
         ->call('finish')
         ->assertSessionHas('success')
-        ->assertRedirect(route('bookings.show', $booking));
+        ->assertRedirect(BookingResource::getUrl('view', ['record' => $booking->id]));
 });

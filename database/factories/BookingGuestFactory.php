@@ -24,12 +24,7 @@ class BookingGuestFactory extends Factory
             'name' => $this->faker->name,
             'package_pricing_id' => $isChild
                 ? null
-                : PackagePricing::wherePackageId($booking->package_id)
-                    ->active()
-                    ->available()
-                    ->inRandomOrder()
-                    ->first()
-                    ->id,
+                : PackagePricing::factory(),
             'booking_id' => $booking->id,
             'is_child' => $isChild,
         ];

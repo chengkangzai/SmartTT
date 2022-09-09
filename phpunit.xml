@@ -20,6 +20,9 @@
         <testsuite name="Livewires">
             <directory suffix="Test.php">./tests/Feature/Livewires</directory>
         </testsuite>
+        <testsuite name="Filament">
+            <directory suffix="Test.php">./tests/Feature/Filament</directory>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>

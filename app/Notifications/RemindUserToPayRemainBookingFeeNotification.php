@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Filament\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\GeneralSetting;
@@ -50,7 +51,7 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
             ->line(__('You still need to pay :remain before your booking is confirmed.', [
                 'remain' => $this->default_currency_symbol . number_format($this->booking->getRemaining(), 2),
             ]))
-            ->action(__('Pay now'), route('bookings.show', $this->booking->id));
+            ->action(__('Pay now'), BookingResource::getUrl('view', ['record'=>$this->booking->id]));
     }
 
     public function toArray($notifiable): array

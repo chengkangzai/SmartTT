@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="flex w-full flex-col gap-1 px-4">
-        @foreach ($tour->packages->find($packageId)->pricings as $packagePrice)
+        @foreach ($tour->packages->find($packageId)->packagePricing as $packagePrice)
             <div class="flex w-full flex-row text-lg">
                 <div class="grow">
                     {{ $packagePrice->name }}
@@ -37,9 +37,9 @@
         @endforeach
     </div>
     <div class="mx-auto mt-4 py-4">
-        <a href="{{ route('bookings.create', ['package' => $packageId]) }}"
+        <a href="{{ $this->generateBookNowLink($packageId) }}"
             class="block rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400 md:animate-bounce">
-            {{ __('Book Now') }} &excl;
+            {{ __('Book Now!') }} &excl;
         </a>
     </div>
 </div>

@@ -1,0 +1,47 @@
+// If you want to override variables do it here
+@import "@coreui/coreui/scss/functions";
+@import "variables";
+@import "@coreui/coreui/scss/maps";
+@import "@coreui/coreui/scss/mixins";
+@import "@coreui/coreui/scss/utilities";
+
+$enable-ltr: true; /* stylelint-disable-line scss/dollar-variable-default */
+$enable-rtl: true; /* stylelint-disable-line scss/dollar-variable-default */
+
+// Import styles
+
+@import "@coreui/coreui/scss/containers";
+@import "@coreui/coreui/scss/grid";
+@import "@coreui/coreui/scss/tables";
+@import "@coreui/coreui/scss/forms";
+@import "@coreui/coreui/scss/buttons";
+@import "@coreui/coreui/scss/dropdown";
+@import "@coreui/coreui/scss/card";
+@import "@coreui/coreui/scss/alert";
+
+@import "@coreui/coreui/scss/icon";
+
+@import "layout";
+
+// If you want to add custom CSS you can put it here.
+@import "custom";
+
+//prevent overscroll
+body {
+    overscroll-behavior-y: none !important;
+}
+
+.btn-primary,
+.btn-info,
+.btn-success,
+.btn-danger {
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-info:hover,
+.btn-success:hover,
+.btn-danger:hover {
+    color: white;
+}
+

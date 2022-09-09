@@ -1,5 +1,6 @@
 // If you want to override variables do it here
-@import "variables";
+@import "@coreui/coreui/scss/functions";
+@import "@coreui/coreui/scss/variables";
 
 $enable-ltr: true; /* stylelint-disable-line scss/dollar-variable-default */
 $enable-rtl: true; /* stylelint-disable-line scss/dollar-variable-default */
