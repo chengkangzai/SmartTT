@@ -111,6 +111,69 @@ class FlightResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\MultiSelectFilter::make('airline')
+                    ->label(__('Airline'))
+                    ->relationship('airline', 'name'),
+                Tables\Filters\Filter::make('departure_date')
+                    ->form([
+                       Forms\Components\Card::make([
+                           Forms\Components\DatePicker::make('depart_from')
+                               ->label(__('Depart From')),
+                           Forms\Components\DatePicker::make('depart_until')
+                               ->label(__('Depart Until')),
+                       ])->columns(2)
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['depart_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('departure_date', '>=', $date),
+                            )
+                            ->when($data['depart_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('departure_date', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\Filter::make('arrival_date')
+                    ->form([
+                        Forms\Components\Card::make([
+                            Forms\Components\DatePicker::make('arrive_from')
+                                ->label(__('Arrive From')),
+                            Forms\Components\DatePicker::make('arrive_until')
+                                ->label(__('Arrive Until')),
+                        ])->columns(2)
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['arrive_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('arrival_date', '>=', $date),
+                            )
+                            ->when($data['arrive_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('arrival_date', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\Filter::make('price')
+                    ->form([
+                        Forms\Components\Card::make([
+                            Forms\Components\DatePicker::make('price_from')
+                                ->label(__('Price From')),
+                            Forms\Components\DatePicker::make('price_until')
+                                ->label(__('Price Until')),
+                        ])->columns(2)
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['price_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('price', '>=', $date),
+                            )
+                            ->when($data['price_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('price', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\MultiSelectFilter::make('arrive_airport')
+                    ->label(__('Arrival Airport'))
+                    ->relationship('arrive_airport', 'name'),
+                Tables\Filters\MultiSelectFilter::make('depart_airport')
+                    ->label(__('Depart Airport'))
+                    ->relationship('depart_airport', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

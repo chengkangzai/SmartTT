@@ -123,9 +123,42 @@ class PackageResource extends Resource
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->visible(auth()->user()->isInternalUser())
-                    ->label(__('Active')),
+                    ->label(__('Active'))
             ])
             ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label(__('Active'))
+                    ->column('is_active'),
+                Tables\Filters\MultiSelectFilter::make('tour')
+                    ->relationship('tour','name'),
+                Tables\Filters\Filter::make('depart_time')
+                    ->form([
+                        Forms\Components\DatePicker::make('depart_from'),
+                        Forms\Components\DatePicker::make('depart_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['depart_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '>=', $date),
+                            )
+                            ->when($data['depart_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from'),
+                        Forms\Components\DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when($data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
@@ -161,6 +194,11 @@ class PackageResource extends Resource
                     }),
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
+    }
+
+    protected function getTableFiltersFormColumns(): int
+    {
+        return 3;
     }
 
     public static function getRelations(): array

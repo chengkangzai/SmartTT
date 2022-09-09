@@ -121,6 +121,12 @@ class TourResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $categoryOption = Tour::select('category')
+            ->distinct()
+            ->pluck('category')
+            ->mapWithKeys(fn($value) => [$value => $value])
+            ->toArray();
+
         return $table
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumbnail')
@@ -150,6 +156,26 @@ class TourResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label(__('Active'))
+                    ->column('is_active'),
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from'),
+                        Forms\Components\DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when($data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\MultiSelectFilter::make('category')
+                    ->options($categoryOption)
+                    ->column('category')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
