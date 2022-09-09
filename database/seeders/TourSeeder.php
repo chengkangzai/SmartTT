@@ -8,6 +8,7 @@ use App\Models\Tour;
 use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
+use Str;
 
 class TourSeeder extends Seeder
 {
@@ -26,90 +27,105 @@ class TourSeeder extends Seeder
             [
                 'tour_code' => '5BKK',
                 'name' => '5D4N Bangkok + Hua Hin Tour',
+                'slug' => Str::slug('5D4N Bangkok + Hua Hin Tour'),
                 'category' => 'Asia',
                 'days' => 5,
                 'nights' => 4,
             ], [
                 'tour_code' => '5DPS',
                 'name' => '5D4N Bali Dolphin',
+                'slug' => Str::slug('5D4N Bali Dolphin'),
                 'category' => 'Asia',
                 'days' => 5,
                 'nights' => 4,
             ], [
                 'tour_code' => '5HAN',
                 'name' => '5D4N Hanoi – Halong Bay – Ninh Binh Bich Dong Tour',
+                'slug' => Str::slug('5D4N Hanoi – Halong Bay – Ninh Binh Bich Dong Tour'),
                 'category' => 'Asia',
                 'days' => 5,
                 'nights' => 4,
             ], [
                 'tour_code' => '5JBP',
                 'name' => '5D4N Jakart– Puncak – Bandung Tour',
+                'slug' => Str::slug('5D4N Jakart– Puncak – Bandung Tour'),
                 'category' => 'Asia',
                 'days' => 5,
                 'nights' => 4,
             ], [
                 'tour_code' => '6TPE',
                 'name' => '6D5N Taiwan Value West Tour',
+                'slug' => Str::slug('6D5N Taiwan Value West Tour'),
                 'category' => 'Asia',
                 'days' => 6,
                 'nights' => 5,
             ], [
                 'tour_code' => '7TPE',
                 'name' => '7D6N West Of Taiwan + Explorer Alishan Tour',
+                'slug' => Str::slug('7D6N West Of Taiwan + Explorer Alishan Tour'),
                 'category' => 'Asia',
                 'days' => 7,
                 'nights' => 6,
             ], [
                 'tour_code' => '8EGNP',
                 'name' => '8D6N Always Popular Europe Trips',
+                'slug' => Str::slug('8D6N Always Popular Europe Trips'),
                 'category' => 'Europe',
                 'days' => 8,
                 'nights' => 6,
             ], [
                 'tour_code' => '8ITL',
                 'name' => '8D5N Best of Italy',
+                'slug' => Str::slug('8D5N Best of Italy'),
                 'category' => 'Europe',
                 'days' => 8,
                 'nights' => 5,
             ], [
                 'tour_code' => '11ELPS',
                 'name' => '11D8N Europe Classic Full Board',
+                'slug' => Str::slug('11D8N Europe Classic Full Board'),
                 'category' => 'Europe',
                 'days' => 11,
                 'nights' => 8,
             ], [
                 'tour_code' => '14EGSA',
                 'name' => '14D11N The Best of Austria and Switzerland',
+                'slug' => Str::slug('14D11N The Best of Austria and Switzerland'),
                 'category' => 'Europe',
                 'days' => 14,
                 'nights' => 11,
             ], [
                 'tour_code' => '14ESIMF',
                 'name' => '14D11N The Best of Switzerland - Italy - Monaco - French Riviera',
+                'slug' => Str::slug('14D11N The Best of Switzerland - Italy - Monaco - French Riviera'),
                 'category' => 'Europe',
                 'days' => 14,
                 'nights' => 11,
             ], [
                 'tour_code' => '14EWP',
                 'name' => '14D11N Classic Eastern Europe',
+                'slug' => Str::slug('14D11N Classic Eastern Europe'),
                 'category' => 'Europe',
                 'days' => 14,
                 'nights' => 11,
             ], [
                 'tour_code' => '8XSAB',
                 'name' => '8D5N South Africa Explorer Tour',
+                'slug' => Str::slug('8D5N South Africa Explorer Tour'),
                 'category' => 'Exotic',
                 'days' => 8,
                 'nights' => 5,
             ], [
                 'tour_code' => '9CAI',
                 'name' => '9D7N Cairo & 5 Star Nile Cruise',
+                'slug' => Str::slug('9D7N Cairo & 5 Star Nile Cruise'),
                 'category' => 'Exotic',
                 'days' => 9,
                 'nights' => 7,
             ], [
                 'tour_code' => '10XII',
                 'name' => '10D7N Best of Turkey',
+                'slug' => Str::slug('10D7N Best of Turkey'),
                 'category' => 'Exotic',
                 'days' => 10,
                 'nights' => 7,
