@@ -8,6 +8,7 @@ use App\Filament\Resources\TourResource\RelationManagers\DescriptionRelationMana
 use App\Filament\Resources\TourResource\RelationManagers\PackagesRelationManager;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
+use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
@@ -18,6 +19,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Str;
 
 class TourResource extends Resource
 {
@@ -41,81 +43,110 @@ class TourResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('Tour Name'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('tour_code')
-                    ->label(__('Tour Code'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('category')
-                    ->label(__('Category'))
-                    ->options(app(TourSetting::class)->category)
-                    ->searchable()
-                    ->required(),
-                Forms\Components\MultiSelect::make('countries')
-                    ->label(__('Countries'))
-                    ->preload()
-                    ->relationship('countries', 'name')
-                    ->searchable()
-                    ->required(),
-                Forms\Components\TextInput::make('days')
-                    ->label(__('Days'))
-                    ->numeric()
-                    ->default(app(TourSetting::class)->default_day)
-                    ->required(),
-                Forms\Components\TextInput::make('nights')
-                    ->label(__('Nights'))
-                    ->numeric()
-                    ->default(app(TourSetting::class)->default_night)
-                    ->required(),
-                Forms\Components\SpatieMediaLibraryFileUpload::make('itinerary')
-                    ->placeholder(__('Drag & Drop your file or browse'))
-                    ->label(__('Itinerary'))
-                    ->collection('itinerary')
-                    ->required()
-                    ->maxSize(2048)
-                    ->rule('mimes:pdf')
-                    ->extraInputAttributes([
-                        'accept' => 'application/pdf',
-                    ]),
-                Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
-                    ->placeholder(__('Drag & Drop your file or browse'))
-                    ->label(__('Thumbnail'))
-                    ->collection('thumbnail')
-                    ->required()
-                    ->maxSize(2048)
-                    ->rule('mimes:jpeg,bmp,png')
-                    ->extraInputAttributes([
-                        'accept' => 'image/*',
-                    ]),
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('Active'))
-                    ->visible(auth()->user()->isInternalUser())
-                    ->columnSpan(2)
-                    ->default(app(TourSetting::class)->default_status)
-                    ->required(),
-                Forms\Components\Card::make()
+                Forms\Components\Tabs::make('create')
                     ->schema([
-                        Forms\Components\Repeater::make('Description')
-                            ->label(__('Tour Description'))
-                            ->relationship('description')
-                            ->columnSpan(2)
+                        Forms\Components\Tabs\Tab::make('tour')
+                            ->label(__('Tour'))
                             ->schema([
-                                Forms\Components\TextInput::make('place')
-                                    ->label(__('Place'))
+                                Forms\Components\TextInput::make('name')
+                                    ->label(__('Tour Name'))
+                                    ->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(function (Closure $set, $state) {
+                                        $slug = Str::slug($state);
+                                        $isUnique = Tour::query()
+                                            ->withTrashed()
+                                            ->where('slug', $slug)
+                                            ->doesntExist();
+                                        if ($isUnique) {
+                                            $set('slug', $slug);
+                                        } else {
+                                            $set('slug', $slug . '-' . Str::random(5));
+                                        }
+                                    })
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('slug')
+                                    ->label(__('Slug'))
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('tour_code')
+                                    ->label(__('Tour Code'))
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\Select::make('category')
+                                    ->label(__('Category'))
+                                    ->options(app(TourSetting::class)->category)
+                                    ->searchable()
+                                    ->required(),
+                                Forms\Components\MultiSelect::make('countries')
+                                    ->label(__('Countries'))
+                                    ->preload()
+                                    ->relationship('countries', 'name')
+                                    ->searchable()
+                                    ->required(),
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label(__('Active'))
+                                    ->inline(false)
+                                    ->visible(auth()->user()->isInternalUser())
+                                    ->default(app(TourSetting::class)->default_status)
+                                    ->required(),
+                                Forms\Components\Card::make([
+                                    Forms\Components\TextInput::make('days')
+                                        ->label(__('Days'))
+                                        ->numeric()
+                                        ->default(app(TourSetting::class)->default_day)
+                                        ->required(),
+                                    Forms\Components\TextInput::make('nights')
+                                        ->label(__('Nights'))
+                                        ->numeric()
+                                        ->default(app(TourSetting::class)->default_night)
+                                        ->required(),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('itinerary')
+                                        ->placeholder(__('Drag & Drop your file or browse'))
+                                        ->label(__('Itinerary'))
+                                        ->collection('itinerary')
+                                        ->required()
+                                        ->maxSize(2048)
+                                        ->rule('mimes:pdf')
+                                        ->extraInputAttributes([
+                                            'accept' => 'application/pdf',
+                                        ]),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
+                                        ->placeholder(__('Drag & Drop your file or browse'))
+                                        ->label(__('Thumbnail'))
+                                        ->collection('thumbnail')
+                                        ->required()
+                                        ->maxSize(2048)
+                                        ->rule('mimes:jpeg,bmp,png')
+                                        ->extraInputAttributes([
+                                            'accept' => 'image/*',
+                                        ]),
+                                ])->columns(2),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('description')
+                            ->label(__('Tour Description'))
+                            ->schema([
+                                Forms\Components\Repeater::make('Description')
+                                    ->label(__('Tour Description'))
+                                    ->relationship('description')
                                     ->columnSpan(2)
-                                    ->required(),
-                                Forms\Components\Textarea::make('description')
-                                    ->label(__('Description'))
-                                    ->columnSpan(4)
-                                    ->rows(2)
-                                    ->required(),
-                            ])
-                            ->orderable('order')
-                            ->columns(6),
-                    ])->hiddenOn('view'),
+                                    ->schema([
+                                        Forms\Components\TextInput::make('place')
+                                            ->label(__('Place'))
+                                            ->required()
+                                            ->columnSpan(2),
+                                        Forms\Components\Textarea::make('description')
+                                            ->label(__('Description'))
+                                            ->required()
+                                            ->columnSpan(4)
+                                            ->rows(2),
+                                    ])
+                                    ->orderable('order')
+                                    ->columns(6),
+                            ])->hiddenOn('view'),
+                    ])
+                    ->columns(2)
+                    ->columnSpan(2)
             ]);
     }
 
@@ -124,7 +155,7 @@ class TourResource extends Resource
         $categoryOption = Tour::select('category')
             ->distinct()
             ->pluck('category')
-            ->mapWithKeys(fn ($value) => [$value => $value])
+            ->mapWithKeys(fn($value) => [$value => $value])
             ->toArray();
 
         return $table
@@ -168,11 +199,11 @@ class TourResource extends Resource
                         return $query
                             ->when(
                                 $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
                 Tables\Filters\MultiSelectFilter::make('category')
@@ -183,7 +214,7 @@ class TourResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->hidden(fn (Tour $record) => $record->packages->count() > 0),
+                    ->hidden(fn(Tour $record) => $record->packages->count() > 0),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
@@ -238,7 +269,7 @@ class TourResource extends Resource
     {
         return parent::getEloquentQuery()
             ->with('packages')
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

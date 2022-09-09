@@ -8,20 +8,23 @@ use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
+use Str;
 
 class TourFactory extends Factory
 {
     protected $model = Tour::class;
 
-    #[ArrayShape(['tour_code' => "string", 'name' => "string", 'category' => "string", 'nights' => "int", 'days' => "int", 'is_active' => "int"])]
     public function definition(): array
     {
         $country = Country::factory()->create();
         $setting = app(TourSetting::class);
 
+        $name = rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package";
+
         return [
             'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
-            'name' => rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package",
+            'name' => $name,
+            'slug' => Str::slug($name),
             'category' => $setting->category[array_rand($setting->category)],
             'nights' => rand(1, 5),
             'days' => rand(1, 5),
