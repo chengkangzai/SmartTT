@@ -16,8 +16,7 @@ class EditTour extends EditRecord
     {
         return [
             Actions\ViewAction::make(),
-            Actions\DeleteAction::make()
-                ->action(fn(Tour $record) => app(DeleteTourAction::class)->execute($record)),
+            Actions\DeleteAction::make(),
             Actions\RestoreAction::make(),
         ];
     }
