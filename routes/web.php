@@ -27,7 +27,7 @@ Route::as('front.')->group(function () {
     Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->name('botman');
 
     Route::get('tours/search', SearchTourPage::class)->name('search');
-    Route::get('tours/{tour}', [PublicIndexController::class, 'tours'])->name('tours');
+    Route::get('tours/{tour:slug}', [PublicIndexController::class, 'tours'])->name('tours');
 });
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {

@@ -45,7 +45,7 @@ class FeaturedTour extends Component
             ])
             ->active()
             ->whereHas('activePackages.activePricings')
-            ->select(['id', 'name'])
+            ->select(['id', 'name', 'slug'])
             ->limit($this->limit)
             ->get();
 

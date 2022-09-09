@@ -26,7 +26,7 @@ it('should be mountable', function () {
         ])
         ->active()
         ->whereHas('activePackages.packagePricing')
-        ->select(['id', 'name'])
+        ->select(['id', 'name', 'slug'])
         ->limit(6)
         ->get();
     Livewire::test(FeaturedTour::class)
@@ -37,12 +37,12 @@ it('should be mountable', function () {
         ->assertSee($tour[3]->name)
         ->assertSee($tour[4]->name)
         ->assertSee($tour[5]->name)
-        ->assertSee(route('front.tours', $tour[0]->id))
-        ->assertSee(route('front.tours', $tour[1]->id))
-        ->assertSee(route('front.tours', $tour[2]->id))
-        ->assertSee(route('front.tours', $tour[3]->id))
-        ->assertSee(route('front.tours', $tour[4]->id))
-        ->assertSee(route('front.tours', $tour[5]->id))
+        ->assertSee(route('front.tours', $tour[0]->slug))
+        ->assertSee(route('front.tours', $tour[1]->slug))
+        ->assertSee(route('front.tours', $tour[2]->slug))
+        ->assertSee(route('front.tours', $tour[3]->slug))
+        ->assertSee(route('front.tours', $tour[4]->slug))
+        ->assertSee(route('front.tours', $tour[5]->slug))
         ->assertSuccessful()
         ->assertSee('Featured Tour');
 });
