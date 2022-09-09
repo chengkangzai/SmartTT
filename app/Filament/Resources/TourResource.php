@@ -124,7 +124,7 @@ class TourResource extends Resource
         $categoryOption = Tour::select('category')
             ->distinct()
             ->pluck('category')
-            ->mapWithKeys(fn($value) => [$value => $value])
+            ->mapWithKeys(fn ($value) => [$value => $value])
             ->toArray();
 
         return $table
@@ -166,22 +166,24 @@ class TourResource extends Resource
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when($data['created_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
-                            ->when($data['created_until'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
                 Tables\Filters\MultiSelectFilter::make('category')
                     ->options($categoryOption)
-                    ->column('category')
+                    ->column('category'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->hidden(fn(Tour $record) => $record->packages->count() > 0),
+                    ->hidden(fn (Tour $record) => $record->packages->count() > 0),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
@@ -209,7 +211,7 @@ class TourResource extends Resource
                             ->success()
                             ->send();
                     }),
-                Tables\Actions\RestoreBulkAction::make()
+                Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
 
@@ -236,7 +238,7 @@ class TourResource extends Resource
     {
         return parent::getEloquentQuery()
             ->with('packages')
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([
