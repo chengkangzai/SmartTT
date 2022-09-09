@@ -9,7 +9,6 @@ use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationMana
 use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
-use App\Models\Tour;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
@@ -123,14 +122,14 @@ class PackageResource extends Resource
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->visible(auth()->user()->isInternalUser())
-                    ->label(__('Active'))
+                    ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('Active'))
                     ->column('is_active'),
                 Tables\Filters\MultiSelectFilter::make('tour')
-                    ->relationship('tour','name'),
+                    ->relationship('tour', 'name'),
                 Tables\Filters\Filter::make('depart_time')
                     ->form([
                         Forms\Components\DatePicker::make('depart_from'),
@@ -138,11 +137,13 @@ class PackageResource extends Resource
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when($data['depart_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '>=', $date),
+                            ->when(
+                                $data['depart_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('depart_time', '>=', $date),
                             )
-                            ->when($data['depart_until'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '<=', $date),
+                            ->when(
+                                $data['depart_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('depart_time', '<=', $date),
                             );
                     }),
                 Tables\Filters\Filter::make('created_at')
@@ -152,11 +153,13 @@ class PackageResource extends Resource
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when($data['created_from'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
-                            ->when($data['created_until'],
-                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
                 Tables\Filters\TrashedFilter::make(),
@@ -165,7 +168,7 @@ class PackageResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->hidden(fn(Package $record) => $record->bookings->count() > 0),
+                    ->hidden(fn (Package $record) => $record->bookings->count() > 0),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make()
@@ -224,7 +227,7 @@ class PackageResource extends Resource
     {
         return parent::getEloquentQuery()
             ->with(['activePricings', 'bookings'])
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

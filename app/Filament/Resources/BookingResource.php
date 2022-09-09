@@ -50,11 +50,11 @@ class BookingResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('total_price')
                     ->label(__('Total Price'))
-                    ->mask(fn(Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\TextInput::make('discount')
                     ->label(__('Discount'))
-                    ->mask(fn(Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
+                    ->mask(fn (Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                     ->required(),
                 Forms\Components\TextInput::make('adult')
                     ->label(__('Adult'))
@@ -68,6 +68,7 @@ class BookingResource extends Resource
     public static function table(Table $table): Table
     {
         $tours = Tour::pluck('name', 'id');
+
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
@@ -98,10 +99,11 @@ class BookingResource extends Resource
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when($data['tour_id'],
-                                fn(Builder $query, $tourId): Builder => $query->whereHas('package', fn(Builder $query) => $query->where('tour_id', $tourId))
+                            ->when(
+                                $data['tour_id'],
+                                fn (Builder $query, $tourId): Builder => $query->whereHas('package', fn (Builder $query) => $query->where('tour_id', $tourId))
                             );
-                    })
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -138,7 +140,7 @@ class BookingResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->where('user_id', auth()->id());
             })
             ->withoutGlobalScopes([

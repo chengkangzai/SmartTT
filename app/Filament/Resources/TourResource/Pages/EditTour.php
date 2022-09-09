@@ -2,9 +2,7 @@
 
 namespace App\Filament\Resources\TourResource\Pages;
 
-use App\Actions\Tour\DeleteTourAction;
 use App\Filament\Resources\TourResource;
-use App\Models\Tour;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 

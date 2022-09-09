@@ -4,7 +4,6 @@ namespace App\Filament\Resources\PackageResource\RelationManagers;
 
 use App\Models\PackagePricing;
 use App\Models\Settings\GeneralSetting;
-use App\Models\Tour;
 use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
@@ -44,7 +43,7 @@ class PricingsRelationManager extends RelationManager
                     Forms\Components\TextInput::make('price')
                         ->numeric()
                         ->label(__('Price'))
-                        ->mask(fn(Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
+                        ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(app(GeneralSetting::class)->default_currency))
                         ->columnSpan(2)
                         ->required(),
                     Forms\Components\TextInput::make('total_capacity')
@@ -146,7 +145,7 @@ class PricingsRelationManager extends RelationManager
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([
