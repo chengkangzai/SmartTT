@@ -77,14 +77,14 @@ class AirlineRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->action(function (Airline $airline) {
-                        if ($airline->flights->count() > 0) {
+                    ->action(function (Airline $record) {
+                        if ($record->flights->count() > 0) {
                             return Notification::make('cannot_delete')
                                 ->danger()
                                 ->body(__('Cannot delete records because the airline is in used.'))
                                 ->send();
                         }
-                        $airline->delete();
+                        $record->delete();
 
                         return Notification::make('success')
                             ->body(__('filament-support::actions/delete.multiple.messages.deleted'))

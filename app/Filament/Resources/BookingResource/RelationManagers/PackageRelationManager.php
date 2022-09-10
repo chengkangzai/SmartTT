@@ -75,8 +75,6 @@ class PackageRelationManager extends RelationManager
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ViewAction::make('View Tour')

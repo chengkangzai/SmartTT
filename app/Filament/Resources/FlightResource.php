@@ -11,11 +11,13 @@ use App\Models\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Component;
 
 class FlightResource extends Resource
 {
@@ -180,6 +182,10 @@ class FlightResource extends Resource
                 Tables\Filters\MultiSelectFilter::make('depart_airport')
                     ->label(__('Depart Airport'))
                     ->relationship('depart_airport', 'name'),
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->visible(fn (Component $livewire) => $livewire instanceof RelationManager),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
