@@ -166,7 +166,10 @@ class PackageResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->url(fn(Package $record) => PackageResource::getUrl('view', [
+                        'record' => $record,
+                    ])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->hidden(fn(Package $record) => $record->bookings->count() > 0),
