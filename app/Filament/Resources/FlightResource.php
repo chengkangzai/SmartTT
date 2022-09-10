@@ -185,7 +185,7 @@ class FlightResource extends Resource
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->visible(fn(Component $livewire) => $livewire instanceof RelationManager)
+                    ->visible(fn (Component $livewire) => $livewire instanceof RelationManager),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
