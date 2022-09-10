@@ -96,14 +96,15 @@ class PricingsRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->action(function (PackagePricing $packagePricing) {
-                        if ($packagePricing->guests->count() > 0) {
+                    ->action(function (PackagePricing $record) {
+                        if ($record->guests->count() > 0) {
                             return Notification::make('cannot_delete')
                                 ->danger()
                                 ->body(__('Cannot delete records because some of the pricing is in used.'))
                                 ->send();
                         }
-                        $packagePricing->delete();
+
+                        $record->delete();
 
                         return Notification::make('success')
                             ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
