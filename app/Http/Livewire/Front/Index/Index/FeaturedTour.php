@@ -15,7 +15,9 @@ class FeaturedTour extends Component
      * @var Tour[]
      */
     public Collection $tours;
+
     public int $limit = 6;
+
     public bool $stillCanLoad = true;
 
     public function mount()

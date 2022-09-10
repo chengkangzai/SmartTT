@@ -52,9 +52,9 @@ class ActivityResource extends Resource
     public static function getRecordTitle(?Model $record): ?string
     {
         if (str($record->description)->contains(['created', 'updated', 'deleted', 'restored'])) {
-            return trans('constant.' . ':subject was :description', [
-                'subject' => trans('constant.model.' . $record->subject_type),
-                'description' => trans('constant.activity.' . $record->description),
+            return trans('constant.'.':subject was :description', [
+                'subject' => trans('constant.model.'.$record->subject_type),
+                'description' => trans('constant.activity.'.$record->description),
             ]);
         }
 
@@ -75,16 +75,16 @@ class ActivityResource extends Resource
 
                         TextInput::make('subject_type')
                             ->afterStateHydrated(function ($component, ?Activity $record, $state) {
-                                return $state ? $component->state(str($state)->afterLast('\\')->headline() . ' # ' . $record->subject_id) : '-';
+                                return $state ? $component->state(str($state)->afterLast('\\')->headline().' # '.$record->subject_id) : '-';
                             })
                             ->label(__('Subject')),
 
                         Textarea::make('description')
                             ->afterStateHydrated(function ($component, ?Activity $record) {
                                 if (str($record->description)->contains(['created', 'updated', 'deleted', 'restored'])) {
-                                    return $component->state(trans('constant.' . ':subject was :description', [
-                                        'subject' => trans('constant.model.' . $record->subject_type),
-                                        'description' => trans('constant.activity.' . $record->description),
+                                    return $component->state(trans('constant.'.':subject was :description', [
+                                        'subject' => trans('constant.model.'.$record->subject_type),
+                                        'description' => trans('constant.activity.'.$record->description),
                                     ]));
                                 }
 
@@ -137,7 +137,7 @@ class ActivityResource extends Resource
             ->get()
             ->filter()
             ->mapWithKeys(function ($item) {
-                return [$item->subject_type => trans('constant.model.' . $item->subject_type)];
+                return [$item->subject_type => trans('constant.model.'.$item->subject_type)];
             })
             ->toArray();
 
@@ -166,7 +166,7 @@ class ActivityResource extends Resource
                     ->hidden(fn (Component $livewire) => $livewire instanceof ActivitiesRelationManager)
                     ->label(__('Subject'))
                     ->formatStateUsing(function (TextColumn $column) {
-                        return trans('constant.model.' . $column->getRecord()->subject_type) ?? __('System');
+                        return trans('constant.model.'.$column->getRecord()->subject_type) ?? __('System');
                     }),
                 TextColumn::make('created_at')
                     ->label(__('Date Time'))

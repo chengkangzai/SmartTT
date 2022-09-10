@@ -61,7 +61,7 @@ class TourResource extends Resource
                                         if ($isUnique) {
                                             $set('slug', $slug);
                                         } else {
-                                            $set('slug', $slug . '-' . Str::random(5));
+                                            $set('slug', $slug.'-'.Str::random(5));
                                         }
                                     })
                                     ->maxLength(255),
@@ -249,9 +249,9 @@ class TourResource extends Resource
     public static function getRelations(): array
     {
         return [
-                PackagesRelationManager::class,
-                DescriptionRelationManager::class,
-            ]
+            PackagesRelationManager::class,
+            DescriptionRelationManager::class,
+        ]
             + (auth()->user()?->can('Audit Tour') ? [ActivitiesRelationManager::class] : []);
     }
 

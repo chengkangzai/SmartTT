@@ -18,10 +18,10 @@ class TourFactory extends Factory
         $country = Country::factory()->create();
         $setting = app(TourSetting::class);
 
-        $name = rand(1, 5) . "D" . rand(1, 5) . "N " . $country->name . " Package";
+        $name = rand(1, 5).'D'.rand(1, 5).'N '.$country->name.' Package';
 
         return [
-            'tour_code' => rand(1, 5) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter) . strtoupper($this->faker->randomLetter),
+            'tour_code' => rand(1, 5).strtoupper($this->faker->randomLetter).strtoupper($this->faker->randomLetter).strtoupper($this->faker->randomLetter),
             'name' => $name,
             'slug' => Str::slug($name),
             'category' => $setting->category[array_rand($setting->category)],
@@ -39,7 +39,7 @@ class TourFactory extends Factory
 
         return $this->afterCreating(function (Tour $tour) {
             $tour->addMedia(UploadedFile::fake()->image('s.png', 640, 480))->toMediaCollection('thumbnail');
-            $tour->addMedia(UploadedFile::fake()->create(time() . 'document.pdf', 100))->toMediaCollection('itinerary');
+            $tour->addMedia(UploadedFile::fake()->create(time().'document.pdf', 100))->toMediaCollection('itinerary');
         });
     }
 
@@ -47,8 +47,8 @@ class TourFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'itinerary' => UploadedFile::fake()->create(time() . 'document.pdf', 100),
-                'thumbnail' => UploadedFile::fake()->image(time() . 'avatar.jpg', 200, 200),
+                'itinerary' => UploadedFile::fake()->create(time().'document.pdf', 100),
+                'thumbnail' => UploadedFile::fake()->image(time().'avatar.jpg', 200, 200),
             ];
         });
     }

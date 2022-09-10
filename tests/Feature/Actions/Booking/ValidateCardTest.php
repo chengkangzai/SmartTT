@@ -3,7 +3,6 @@
 use App\Actions\Booking\ValidateCard;
 use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
-
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertNotEmpty;
 
@@ -62,10 +61,10 @@ it('should invalidate invalid data', function ($name, $data) {
         }
     }
 })->with([
-    ['card_holder_name', ['', -1, null, 'a' . str_repeat('a', 255)]],
-    ['card_number', ['', -1, 100, null, 'a' . str_repeat('a', 255), '1234', '123456781234567']],
-    ['card_expiry_date', ['asda', -1, 100, null, 1111, 1122, 'a' . str_repeat('a', 255)]],
-    ['card_cvc', ['asda', -1, 100, null, 1, '12345', 'a' . str_repeat('a', 255)]],
+    ['card_holder_name', ['', -1, null, 'a'.str_repeat('a', 255)]],
+    ['card_number', ['', -1, 100, null, 'a'.str_repeat('a', 255), '1234', '123456781234567']],
+    ['card_expiry_date', ['asda', -1, 100, null, 1111, 1122, 'a'.str_repeat('a', 255)]],
+    ['card_cvc', ['asda', -1, 100, null, 1, '12345', 'a'.str_repeat('a', 255)]],
     ['amount', [null]],
     ['payment_type', [null]],
     ['billing_name', [null]],

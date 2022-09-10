@@ -63,7 +63,6 @@ class ManageGeneralSetting extends SettingsPage
             ->mapWithKeys(fn ($country) => [$country => $country])
             ->toArray();
 
-
         return [
             Section::make(__('Site Settings'))
                 ->schema([
@@ -93,7 +92,7 @@ class ManageGeneralSetting extends SettingsPage
                         ->reactive()
                         ->afterStateUpdated(function (Closure $get, Closure $set) {
                             $currency = $get('default_currency');
-                            $symbol = config('money.' . $currency);
+                            $symbol = config('money.'.$currency);
                             $set('default_currency_symbol', $symbol['symbol']);
                         })
                         ->options($currencies)

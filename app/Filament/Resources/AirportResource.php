@@ -123,9 +123,9 @@ class AirportResource extends Resource
     public static function getRelations(): array
     {
         return [
-                FlightsAsArrivalRelationManager::class,
-                FlightsAsDepartureRelationManager::class,
-            ] + (auth()->user()?->can('Audit Airport') ? [ActivitiesRelationManager::class] : []);
+            FlightsAsArrivalRelationManager::class,
+            FlightsAsDepartureRelationManager::class,
+        ] + (auth()->user()?->can('Audit Airport') ? [ActivitiesRelationManager::class] : []);
     }
 
     public static function getPages(): array

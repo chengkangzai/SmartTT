@@ -4,12 +4,10 @@ use App\Filament\Resources\ActivityResource;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-
 use Spatie\Activitylog\Models\Activity;
 
 beforeEach(function () {

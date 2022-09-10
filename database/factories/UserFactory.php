@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
 {
-    #[ArrayShape(['name' => "string", 'email' => "string", 'email_verified_at' => "\Illuminate\Support\Carbon", 'password' => "string", 'remember_token' => "string", 'created_at' => "\Illuminate\Support\Carbon"])]
+    #[ArrayShape(['name' => 'string', 'email' => 'string', 'email_verified_at' => "\Illuminate\Support\Carbon", 'password' => 'string', 'remember_token' => 'string', 'created_at' => "\Illuminate\Support\Carbon"])]
     public function definition(): array
     {
         return [

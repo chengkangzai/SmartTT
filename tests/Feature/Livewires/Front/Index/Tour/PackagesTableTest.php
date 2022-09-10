@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Filament\Resources\BookingResource;
 use App\Http\Livewire\Front\Index\Tour\PackagesTable;
 use App\Models\Tour;
@@ -11,7 +10,6 @@ use Database\Seeders\CountrySeeder;
 use Database\Seeders\FlightSeeder;
 use Database\Seeders\PackageSeeder;
 use Database\Seeders\TourSeeder;
-
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -35,7 +33,7 @@ it('should be mountable', function () {
         ->assertSet('priceFrom', $pricing->first())
         ->assertSet('priceTo', $pricing->last())
         ->assertSet('months', $tour->activePackages->pluck('depart_time')->mapWithKeys(fn (Carbon $date) => [
-            (int)$date->format('m') => $date->translatedFormat('F'),
+            (int) $date->format('m') => $date->translatedFormat('F'),
         ]))
         ->assertSee('Packages');
 
@@ -44,7 +42,6 @@ it('should be mountable', function () {
             ->assertSee(BookingResource::getUrl('create', ['package_id' => $package->id]));
     }
 });
-
 
 it('should filter tour as required', function () {
     $tour = Tour::whereHas('activePackages')->first();

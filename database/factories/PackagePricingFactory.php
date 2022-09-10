@@ -11,7 +11,7 @@ class PackagePricingFactory extends Factory
 {
     protected $model = PackagePricing::class;
 
-    #[ArrayShape(['package_id' => "int|mixed", 'price' => "int", 'name' => "array|string", 'total_capacity' => "int", 'available_capacity' => "int", 'is_active' => "int"])]
+    #[ArrayShape(['package_id' => 'int|mixed', 'price' => 'int', 'name' => 'array|string', 'total_capacity' => 'int', 'available_capacity' => 'int', 'is_active' => 'int'])]
     public function definition(): array
     {
         return [

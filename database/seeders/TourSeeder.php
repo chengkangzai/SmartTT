@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Country;
 use App\Models\Tour;
 use File;
@@ -13,6 +12,7 @@ use Str;
 class TourSeeder extends Seeder
 {
     private Collection $countries;
+
     /** @var Collection|Tour[] */
     private Collection|array $tours;
 
@@ -129,19 +129,19 @@ class TourSeeder extends Seeder
                 'category' => 'Exotic',
                 'days' => 10,
                 'nights' => 7,
-            ]
+            ],
         ]);
         $this->tours = Tour::all();
 
         $this->mapCountryToTour();
-        if (!app()->environment('testing')) {
+        if (! app()->environment('testing')) {
             $this->attachMedia();
         }
 
         $this->attachDes();
     }
 
-    #region Map Country to Tour
+    //region Map Country to Tour
     private function attachCountry(string $touCode, $country)
     {
         $tour = $this->tours->where('tour_code', $touCode)->first();
@@ -181,14 +181,14 @@ class TourSeeder extends Seeder
         }
     }
 
-    #endregion
+    //endregion
 
     private function attachMedia()
     {
         $this->tours->each(function (Tour $tour) {
-            $path = 'seeding_data/Tours/' . $tour->category . '/' . $tour->tour_code;
-            $tour->addMediaFromStream(File::get(storage_path($path . '.jpg')))->usingFileName($tour->tour_code . '.jpg')->withResponsiveImages()->toMediaCollection('thumbnail');
-            $tour->addMediaFromStream(File::get(storage_path($path . '.pdf')))->usingFileName($tour->tour_code . '.pdf')->toMediaCollection('itinerary');
+            $path = 'seeding_data/Tours/'.$tour->category.'/'.$tour->tour_code;
+            $tour->addMediaFromStream(File::get(storage_path($path.'.jpg')))->usingFileName($tour->tour_code.'.jpg')->withResponsiveImages()->toMediaCollection('thumbnail');
+            $tour->addMediaFromStream(File::get(storage_path($path.'.pdf')))->usingFileName($tour->tour_code.'.pdf')->toMediaCollection('itinerary');
         });
     }
 
@@ -199,25 +199,25 @@ class TourSeeder extends Seeder
                 'Ploern Wan Market' => 'look like back to the place in times past and imitate that period of lifestyle.',
                 'Hua Hin Railway Station' => 'it is one of the oldest railway stations in Thailand and it was once the Thai royal family dedicated waiting station',
                 'Hua Hin Safari' => 'it gives a fun filled variety entertainment and activities for you and your family.',
-                'Asiatique the Riverfront' => 'original appearance of the marina and the old warehouse are retained, redesigned and new packaging, now become a famous tourist night market.'
+                'Asiatique the Riverfront' => 'original appearance of the marina and the old warehouse are retained, redesigned and new packaging, now become a famous tourist night market.',
             ]],
             ['5DPS', [
                 'Kintamani Tour ~ Lovina Beach' => 'After breakfast, visit Celuk Mas Village for see the amazing gold and silver art. Then visit the TirtaEmpul Temple, Kintamani Volcano.',
                 'Dolphin Hunting' => 'Early Morning visit to Dolphin Hunting by traditional boat.',
                 'Kuta' => 'Lunch at local restaurant and BBQ Seafood Jimbaran Beach Dinner.',
-                'Tanah Lot Temple' => 'In the afternoon visiting to Candi Kuning Market and Tanah Lot Temple while watching beautiful sunset. Buffet Lunch at Local restaurant and Local restaurant Dinner.'
+                'Tanah Lot Temple' => 'In the afternoon visiting to Candi Kuning Market and Tanah Lot Temple while watching beautiful sunset. Buffet Lunch at Local restaurant and Local restaurant Dinner.',
             ]],
             ['5HAN', [
                 'FREE' => 'Water puppet show Vietnam cultural',
                 'Tasting' => 'French Style Afternoon Tea',
                 'The One Pillar Pagoda' => 'historic Buddhist temple in Hanoi, the capital of Vietnam. It is regarded alongside the Perfume Temple, as one of Vietnam\'s two most iconic temples.',
-                'Water Puppet Show' => 'The farmers in this region devised a form of entertainment using what natural medium they can find in their environment.'
+                'Water Puppet Show' => 'The farmers in this region devised a form of entertainment using what natural medium they can find in their environment.',
             ]],
             ['5JBP', [
                 'Museum Gajah' => 'The museum is regarded as one of the most complete and the best in Indonesia, as well as one of the finest museum in Southeast Asia',
                 'Factory Outlet Grand' => 'This large and complete mall is right in the city centre and houses a good selection of shops of high-end brands and entertainment outlets.',
                 'Semanggi Plaza' => 'It was a very crowded and popular shopping mall in Jarkarta and its located in Down town in Jakarta',
-                'Kawah Putih Valcano' => 'Patuha is a twin stratovolcano about 50 km to the southwest of Bandung in West Java, Indonesia'
+                'Kawah Putih Valcano' => 'Patuha is a twin stratovolcano about 50 km to the southwest of Bandung in West Java, Indonesia',
             ]],
             ['6TPE', [
                 'Shilin Night Market' => 'a night market in the Shilin District of Taipei, Taiwan, and is often considered to be the largest and most famous night market in the city.',
@@ -241,13 +241,13 @@ class TourSeeder extends Seeder
                 'Rome' => 'Vatican City, St. Peter’s Square, St. Peter’s Basilica, Constantin, Arch de Triumph, Circus Maximus, Victor Emmanuel Monument, Piazza Venezia, Roman Forum, Trevi Fountain, Spanish Steps.',
                 'Florence' => 'Michelangelo Square, Ponte Vecchio Bridge, Duomo Cathedral Factory Outlet – designer shopping',
                 'La Spezia' => 'Italian Rivieria – views of Mediterranean Sea',
-                'Cinque Terre' => 'is a string of centuries-old seaside villages on the rugged Italian Riviera coastline. A UNESCO World Heritage Site'
+                'Cinque Terre' => 'is a string of centuries-old seaside villages on the rugged Italian Riviera coastline. A UNESCO World Heritage Site',
             ]],
             ['11ELPS', [
                 'England,London' => 'Panoramic views of St Paul’s Cathedral, Tower Bridge, London Bridge, London Tower, Parliament House',
                 'Eurostar' => 'by high speed train – London to Brussels,Belgium',
                 'Belgium, Brussels' => 'View the Atomium, Grand Place, MannekenPis',
-                'Holland, Amsterdam' => 'Enjoy Canal Cruise, Visit ZaanseSchaan – typical Dutch Village, Cheese Farm, Clog Factory, Windmills, Diamond Factory, Red Light District.'
+                'Holland, Amsterdam' => 'Enjoy Canal Cruise, Visit ZaanseSchaan – typical Dutch Village, Cheese Farm, Clog Factory, Windmills, Diamond Factory, Red Light District.',
             ]],
             ['14EGSA', [
                 'Munich' => 'Marienplatz , Peterskirche, Cathedral of our Lady',
@@ -277,14 +277,14 @@ class TourSeeder extends Seeder
                 'Great Pyramid of Giza and the Sphinx' => 'It is the oldest of the Seven Wonders of the Ancient World and still remains largely intact.',
                 'Temple of Karnak' => 'Largest temple complex ever constructed anywhere in the world.',
                 'Temple of Luxor' => 'It is also famous with its huge columns which end with the shape of papyrus plant.',
-                'Temple of Philae' => 'One of the most important monuments sites and was an ancient pilgrimage center'
+                'Temple of Philae' => 'One of the most important monuments sites and was an ancient pilgrimage center',
             ]],
             ['10XII', [
                 '4 Star Hotel' => 'Local 4 Star Hotel Accommodation',
                 'Istanbul' => 'Excursion Bosphorus Cruise along Istanbul’s famous waterway dividing Europe and Asia 2 continents',
                 'HIPPODROME' => 'visit HIPPODROME is the scene of chariot races and the center of Byzantine civic life',
-                'Pamukkale' => 'surreal, brilliant white travertine terraces and warm, limpid pools of Pamukkale hang, recognize – by UNESCO World Heritage in 1988.'
-            ]]
+                'Pamukkale' => 'surreal, brilliant white travertine terraces and warm, limpid pools of Pamukkale hang, recognize – by UNESCO World Heritage in 1988.',
+            ]],
         ];
         foreach ($des as $de) {
             /** @var Tour $tour */
@@ -293,7 +293,7 @@ class TourSeeder extends Seeder
                 $tour->description()->create([
                     'place' => $b,
                     'description' => $a,
-                    'order' => $tour->description()->count()
+                    'order' => $tour->description()->count(),
                 ]);
             });
         }

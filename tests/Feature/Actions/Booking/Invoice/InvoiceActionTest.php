@@ -11,7 +11,6 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-
 use function Pest\Laravel\seed;
 
 beforeEach(function () {

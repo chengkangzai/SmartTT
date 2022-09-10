@@ -110,8 +110,7 @@ class PricingsRelationManager extends RelationManager
                             ->body(__('filament-support::actions/delete.multiple.messages.deleted'))
                             ->success()
                             ->send();
-                    })
-                ,
+                    }),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([

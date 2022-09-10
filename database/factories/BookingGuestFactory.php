@@ -7,14 +7,13 @@ use App\Models\BookingGuest;
 use App\Models\PackagePricing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-
 use function rand;
 
 class BookingGuestFactory extends Factory
 {
     protected $model = BookingGuest::class;
 
-    #[ArrayShape(['name' => "string", 'package_pricing_id' => "int|mixed", 'booking_id' => "int|mixed", 'is_child' => "int"])]
+    #[ArrayShape(['name' => 'string', 'package_pricing_id' => 'int|mixed', 'booking_id' => 'int|mixed', 'is_child' => 'int'])]
     public function definition(): array
     {
         $isChild = rand(0, 100) > 90;

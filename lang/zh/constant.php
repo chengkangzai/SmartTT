@@ -29,5 +29,5 @@ return [
         Tour::class => __('Tour'),
         TourDescription::class => __('Tour Description'),
     ],
-    ':subject was :description'=>':subject :description',
+    ':subject was :description' => ':subject :description',
 ];

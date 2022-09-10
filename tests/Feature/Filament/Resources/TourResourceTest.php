@@ -9,7 +9,6 @@ use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;

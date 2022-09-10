@@ -18,6 +18,5 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.company_address', 'No. 1, Jalan Taman Bukit Bintang, Bukit Bintang, Kuala Lumpur');
         $this->migrator->add('general.company_phone', '+603-88888888');
         $this->migrator->add('general.business_registration_no', '123456789');
-
     }
 }

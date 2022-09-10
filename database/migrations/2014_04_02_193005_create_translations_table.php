@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTranslationsTable extends Migration
 {
-
     public function up()
     {
         Schema::create('ltm_translations', function (Blueprint $table) {
@@ -24,5 +23,4 @@ class CreateTranslationsTable extends Migration
     {
         Schema::drop('ltm_translations');
     }
-
 }

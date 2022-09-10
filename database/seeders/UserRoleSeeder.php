@@ -38,7 +38,7 @@ class UserRoleSeeder extends Seeder
                 'Access Payment', 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
                 'Access User', 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
                 'View Setting', 'Edit Setting',
-                'Change User Role'
+                'Change User Role',
             ])
             ->users()
             ->attach($manager);
@@ -60,7 +60,7 @@ class UserRoleSeeder extends Seeder
                 'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
                 'Access Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
                 'View User',
-                'Connect MS OAuth', 'Sync booking to MS Calendar'
+                'Connect MS OAuth', 'Sync booking to MS Calendar',
             ])
             ->users()
             ->attach($staff);
@@ -77,10 +77,9 @@ class UserRoleSeeder extends Seeder
                 'Access Package Pricing',
                 'Access Booking', 'Create Booking', 'View Booking', 'Edit Booking',
                 'Access Payment', 'View Payment', 'Create Payment',
-                'Connect MS OAuth', 'Sync booking to MS Calendar'
+                'Connect MS OAuth', 'Sync booking to MS Calendar',
             ])
             ->users()
             ->attach($customer);
-
     }
 }

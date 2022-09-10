@@ -26,7 +26,7 @@ class GenerateReceiptAction extends InvoiceAction implements ShouldQueue
             'phone' => $payment->billing_phone,
         ]);
 
-        $fileName = time() . '_receipt_' . $payment->booking_id;
+        $fileName = time().'_receipt_'.$payment->booking_id;
         $this->invoice
             ->name('Receipt')
             ->series('RE')
@@ -39,7 +39,7 @@ class GenerateReceiptAction extends InvoiceAction implements ShouldQueue
             ->addItems(parent::getItems($payment->booking->guests))
             ->save('public');
 
-        $payment->addMediaFromDisk($fileName . '.pdf', 'public')->toMediaCollection('receipts');
+        $payment->addMediaFromDisk($fileName.'.pdf', 'public')->toMediaCollection('receipts');
 
         return $payment->refresh();
     }

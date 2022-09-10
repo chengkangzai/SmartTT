@@ -16,11 +16,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class SearchTourCard extends Component
 {
     public string $latestDepartTime;
+
     public Collection $categories;
+
     public Collection $countries;
+
     public string $imageUrl;
 
     public int $priceFrom;
+
     public int $priceTo;
 
     public function mount()

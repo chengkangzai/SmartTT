@@ -10,14 +10,16 @@ use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
-
 use function public_path;
 
 class InvoiceAction
 {
     protected Invoice $invoice;
+
     protected GeneralSetting $generalSetting;
+
     protected Party $client;
+
     public Payment $payment;
 
     public function __construct(Payment $payment)

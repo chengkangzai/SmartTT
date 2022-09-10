@@ -11,7 +11,6 @@ use Database\Seeders\PackageSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
-
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -37,7 +36,7 @@ it('should generate receipt', function () {
 
     expect($newPayment)->toBeInstanceOf(Payment::class)
         ->and($newPayment->getMedia('receipts'))->not->toBeEmpty()
-        ->and($newPayment->getMedia('receipts')[0]->getPath())->toContain('_receipt_' . $payment->booking_id . '.pdf')
+        ->and($newPayment->getMedia('receipts')[0]->getPath())->toContain('_receipt_'.$payment->booking_id.'.pdf')
         ->and($newPayment->getMedia('receipts')[0]->getPath())->toContain('public');
 });
 

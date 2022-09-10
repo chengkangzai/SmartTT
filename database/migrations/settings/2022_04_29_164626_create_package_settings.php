@@ -22,7 +22,7 @@ class CreatePackageSettings extends SettingsMigration
                 'is_active' => true,
                 'name' => 'Late Bird',
                 'capacity' => 10,
-            ]
+            ],
         ]);
     }
 }

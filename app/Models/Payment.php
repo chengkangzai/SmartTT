@@ -20,8 +20,11 @@ class Payment extends Model implements HasMedia
     use InteractsWithMedia;
 
     public const STATUS_PENDING = 'pending';
+
     public const STATUS_FAILED = 'failed';
+
     public const STATUS_PAID = 'paid';
+
     public const STATUSES = [
         self::STATUS_PENDING,
         self::STATUS_FAILED,
@@ -29,8 +32,11 @@ class Payment extends Model implements HasMedia
     ];
 
     public const METHOD_CARD = 'card';
+
     public const METHOD_CASH = 'cash';
+
     public const METHOD_STRIPE = 'stripe';
+
     public const METHODS = [
         self::METHOD_CARD,
         self::METHOD_CASH,
@@ -38,8 +44,11 @@ class Payment extends Model implements HasMedia
     ];
 
     public const TYPE_FULL = 'full';
+
     public const TYPE_RESERVATION = 'reservation';
+
     public const TYPE_REMAINING = 'remaining';
+
     public const TYPES = [
         self::TYPE_FULL,
         self::TYPE_RESERVATION,

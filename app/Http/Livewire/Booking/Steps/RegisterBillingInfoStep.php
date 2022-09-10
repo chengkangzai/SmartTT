@@ -10,7 +10,9 @@ use Spatie\LivewireWizard\Components\StepComponent;
 class RegisterBillingInfoStep extends StepComponent
 {
     public string $billingName = '';
+
     public string $billingPhone = '';
+
     public array $validateBillingRule = [
         'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],

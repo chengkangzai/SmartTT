@@ -1,6 +1,6 @@
 <?php
 
 return [
-  'next' => 'Seterusnya »',
-  'previous' => '« Sebelumnya',
+    'next' => 'Seterusnya »',
+    'previous' => '« Sebelumnya',
 ];

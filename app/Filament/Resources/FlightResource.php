@@ -118,12 +118,12 @@ class FlightResource extends Resource
                     ->relationship('airline', 'name'),
                 Tables\Filters\Filter::make('departure_date')
                     ->form([
-                       Forms\Components\Card::make([
-                           Forms\Components\DatePicker::make('depart_from')
-                               ->label(__('Depart From')),
-                           Forms\Components\DatePicker::make('depart_until')
-                               ->label(__('Depart Until')),
-                       ])->columns(2),
+                        Forms\Components\Card::make([
+                            Forms\Components\DatePicker::make('depart_from')
+                                ->label(__('Depart From')),
+                            Forms\Components\DatePicker::make('depart_until')
+                                ->label(__('Depart Until')),
+                        ])->columns(2),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
@@ -201,9 +201,9 @@ class FlightResource extends Resource
     public static function getRelations(): array
     {
         return [
-                AirlineRelationManager::class,
-                ActivitiesRelationManager::class,
-            ]
+            AirlineRelationManager::class,
+            ActivitiesRelationManager::class,
+        ]
             + (auth()->user()?->can('Audit Flight') ? [ActivitiesRelationManager::class] : []);
     }
 

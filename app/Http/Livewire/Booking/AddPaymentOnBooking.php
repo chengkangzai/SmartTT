@@ -19,34 +19,47 @@ use Stripe\SetupIntent;
 
 class AddPaymentOnBooking extends Component
 {
-    #region Step 1
+    //region Step 1
     public string $billingName = '';
+
     public string $billingPhone = '';
+
     public array $validateBillingRule = [
         'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
     ];
-    #endregion
+    //endregion
 
-    #region Step 2
+    //region Step 2
     public string $paymentType = Payment::TYPE_REMAINING;
+
     public string $paymentMethod;
+
     public string $manualType = Payment::METHOD_CARD;
+
     public bool $paymentCashReceived = false;
 
     public string $cardHolderName = '';
+
     public string $cardNumber = '';
+
     public string $cardExpiry = '';
+
     public string $cardCvc = '';
 
     public int $paymentAmount = 0;
+
     public string $clientSecret = '';
+
     public Payment $payment;
+
     private SetupIntent $paymentIntent;
-    #endregion
+    //endregion
 
     public Booking $booking;
+
     public string $defaultCurrency;
+
     public int $currentStep = 1;
 
     protected $listeners = ['cardSetupConfirmed'];
@@ -68,7 +81,7 @@ class AddPaymentOnBooking extends Component
         return view('livewire.booking.add-payment-on-booking');
     }
 
-    #region Step 1
+    //region Step 1
     public function validateBilling(string $field)
     {
         $this->validate([
@@ -92,9 +105,9 @@ class AddPaymentOnBooking extends Component
         $this->currentStep++;
         $this->getReadyForPayment();
     }
-    #endregion
+    //endregion
 
-    #region Step 2 Payment
+    //region Step 2 Payment
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
@@ -113,8 +126,8 @@ class AddPaymentOnBooking extends Component
         $user = auth()->user();
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
-        $user->invoiceFor('Booking(' . $this->paymentType . ') for Package #' . $this->booking->package_id . ' Of Tour '
-            . $this->booking->package->tour->name, $this->paymentAmount * 100);
+        $user->invoiceFor('Booking('.$this->paymentType.') for Package #'.$this->booking->package_id.' Of Tour '
+            .$this->booking->package->tour->name, $this->paymentAmount * 100);
 
         $this->payment = Payment::create([
             'booking_id' => $this->booking->id,
@@ -174,7 +187,7 @@ class AddPaymentOnBooking extends Component
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
 
-    #endregion
+    //endregion
 
     public function finish()
     {

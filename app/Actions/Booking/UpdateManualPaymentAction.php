@@ -42,7 +42,7 @@ class UpdateManualPaymentAction
         activity()
             ->performedOn($payment->booking)
             ->causedBy($user)
-            ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $payment->booking_id);
+            ->log('Payment#'.$payment->id.'(Card) recorded for booking #'.$payment->booking_id);
 
         return $payment;
     }
@@ -59,7 +59,7 @@ class UpdateManualPaymentAction
         activity()
             ->performedOn($payment->booking)
             ->causedBy($user)
-            ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $payment->booking_id);
+            ->log('Payment#'.$payment->id.'(Cash) recorded for booking #'.$payment->booking_id);
 
         return $payment;
     }

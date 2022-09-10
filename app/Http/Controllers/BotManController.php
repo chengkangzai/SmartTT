@@ -34,7 +34,7 @@ class BotManController extends Controller
         $botman->fallback(function (BotMan $bot) {
             $bot->types();
             $bot->reply(__('Hello!, Im not sure what you mean. Try asking me something else.'));
-            $bot->reply(__('You can ask me to suggest a tour, or to suggest a destination.') . '😉');
+            $bot->reply(__('You can ask me to suggest a tour, or to suggest a destination.').'😉');
         });
 
         $botman->listen();
@@ -51,11 +51,11 @@ class BotManController extends Controller
     {
         $botman->hears('input.welcome', function (BotMan $bot) {
             $welcomeMessage = [
-                __('Hi! How are you doing?') . '👋',
-                __('Hello! How can I help you?') . '👋',
-                __('Good day! What can I do for you today?') . '👋',
-                __('Greetings! How can I assist?') . '👋',
-                __('Howdy! What can I do for you today?') . '👋',
+                __('Hi! How are you doing?').'👋',
+                __('Hello! How can I help you?').'👋',
+                __('Good day! What can I do for you today?').'👋',
+                __('Greetings! How can I assist?').'👋',
+                __('Howdy! What can I do for you today?').'👋',
             ];
             $welcomeMessage = $welcomeMessage[array_rand($welcomeMessage)];
             $bot->types();
@@ -67,9 +67,9 @@ class BotManController extends Controller
     {
         $botman->hears('input.bad_word', function (BotMan $bot) {
             $helpMessage = [
-                __('Mind your language, i am gonna pretend you didnt say that.') . '😡',
-                __('Dont be so hard on me, i am just a bot.') . '😡',
-                __('Dont use bad word plase.') . '😡',
+                __('Mind your language, i am gonna pretend you didnt say that.').'😡',
+                __('Dont be so hard on me, i am just a bot.').'😡',
+                __('Dont use bad word plase.').'😡',
 
             ];
             $helpMessage = $helpMessage[array_rand($helpMessage)];
@@ -104,9 +104,9 @@ class BotManController extends Controller
             $company_email = $setting->company_email;
 
             $bot->types();
-            $bot->reply(__('Our company locate at : ') . $company_address);
-            $bot->reply(__('Our phone number is : ') . $company_phone);
-            $bot->reply(__('Our email is : ') . $company_email);
+            $bot->reply(__('Our company locate at : ').$company_address);
+            $bot->reply(__('Our phone number is : ').$company_phone);
+            $bot->reply(__('Our email is : ').$company_email);
         })->middleware($dialogFlow);
     }
 }

@@ -47,7 +47,6 @@ it('should be mountable', function () {
         ->assertSee('Featured Tour');
 });
 
-
 it('should load more tours', function () {
     Livewire::test(FeaturedTour::class)
         ->assertViewIs('livewire.front.index.index.featured-tour')

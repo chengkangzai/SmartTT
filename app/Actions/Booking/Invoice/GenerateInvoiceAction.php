@@ -26,7 +26,7 @@ class GenerateInvoiceAction extends InvoiceAction implements ShouldQueue
             'phone' => $payment->billing_phone,
         ]);
 
-        $fileName = time() . '_invoice_' . $booking->id;
+        $fileName = time().'_invoice_'.$booking->id;
         if ($payment->status == Payment::STATUS_PAID) {
             $this->invoice->payUntilDays(-1);
         }
@@ -39,7 +39,7 @@ class GenerateInvoiceAction extends InvoiceAction implements ShouldQueue
             ->addItems(parent::getItems($booking->guests))
             ->save('public');
 
-        $payment->addMediaFromDisk($fileName . '.pdf', 'public')->toMediaCollection('invoices');
+        $payment->addMediaFromDisk($fileName.'.pdf', 'public')->toMediaCollection('invoices');
 
         return $payment->refresh();
     }

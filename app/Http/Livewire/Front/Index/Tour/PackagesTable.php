@@ -15,12 +15,17 @@ use Livewire\Component;
 class PackagesTable extends Component
 {
     public Tour $tour;
+
     public $packages;
+
     public Collection $months;
+
     public array $airlines;
 
     public int $month = 0;
+
     public int $priceFrom = 0;
+
     public int $priceTo = 0;
 
     public function mount(Tour $tour)
@@ -37,7 +42,7 @@ class PackagesTable extends Component
             ->pluck('depart_time')
             ->mapWithKeys(function (Carbon $date) {
                 return [
-                    (int)$date->format('m') => $date->translatedFormat('F'),
+                    (int) $date->format('m') => $date->translatedFormat('F'),
                 ];
             });
     }

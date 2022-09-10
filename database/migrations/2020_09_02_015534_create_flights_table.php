@@ -28,4 +28,3 @@ class CreateFlightsTable extends Migration
         Schema::dropIfExists('flights');
     }
 }
-
