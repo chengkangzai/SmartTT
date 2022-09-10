@@ -2,7 +2,6 @@
 
 use App\Actions\Booking\ValidateManualCardAction;
 use Illuminate\Validation\ValidationException;
-
 use function PHPUnit\Framework\assertNotEmpty;
 use function PHPUnit\Framework\assertTrue;
 
@@ -31,10 +30,10 @@ it('should invalidate invalid data', function ($name, $data) {
         }
     }
 })->with([
-    ['cardHolderName', ['', 1, -1, 'a' . str_repeat('a', 255)]],
-    ['cardNumber', ['', 'asdas', 1, -1, 'a' . str_repeat('a', 255)]],
-    ['cardExpiry', ['', 'asdas', 1, -1, 'a' . str_repeat('a', 255)]],
-    ['cardCvc', ['', 'asdas', 1, -1, 'a' . str_repeat('a', 255)]],
+    ['cardHolderName', ['', 1, -1, 'a'.str_repeat('a', 255)]],
+    ['cardNumber', ['', 'asdas', 1, -1, 'a'.str_repeat('a', 255)]],
+    ['cardExpiry', ['', 'asdas', 1, -1, 'a'.str_repeat('a', 255)]],
+    ['cardCvc', ['', 'asdas', 1, -1, 'a'.str_repeat('a', 255)]],
 ]);
 
 it('should invalidate card that are almost expired', function () {

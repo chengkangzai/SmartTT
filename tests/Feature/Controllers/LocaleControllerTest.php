@@ -16,6 +16,5 @@ it('should change the locale', function () {
             ->get('/', ['locale' => $locale])
             ->assertSee(__('Tours'))
             ->assertSee(__('Features'));
-        ;
     }
 });

@@ -8,7 +8,6 @@ use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
@@ -172,7 +171,6 @@ it('should delete package', function () {
 
     assertSoftDeleted($package);
 });
-
 
 it('should render Relationship Manager', function () {
     $package = Package::factory()->create();

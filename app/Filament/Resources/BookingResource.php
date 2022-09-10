@@ -119,11 +119,11 @@ class BookingResource extends Resource
     public static function getRelations(): array
     {
         return [
-                PaymentRelationManager::class,
-                GuestRelationManager::class,
-                PackageRelationManager::class,
-                ActivitiesRelationManager::class,
-            ]
+            PaymentRelationManager::class,
+            GuestRelationManager::class,
+            PackageRelationManager::class,
+            ActivitiesRelationManager::class,
+        ]
             + (auth()->user()?->can('Audit Booking') ? [ActivitiesRelationManager::class] : []);
     }
 

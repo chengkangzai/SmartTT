@@ -7,7 +7,6 @@ use Database\Seeders\CountrySeeder;
 use Database\Seeders\FlightSeeder;
 use Database\Seeders\PackageSeeder;
 use Database\Seeders\TourSeeder;
-
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -20,7 +19,6 @@ beforeEach(function () {
         PackageSeeder::class,
     ]);
 });
-
 
 it('should be mountable', function () {
     Livewire::test(SearchTourPage::class)

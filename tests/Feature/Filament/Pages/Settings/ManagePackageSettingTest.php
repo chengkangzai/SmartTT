@@ -2,10 +2,8 @@
 
 use App\Filament\Pages\Settings\ManagePackageSetting;
 use App\Models\User;
-
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;

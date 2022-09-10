@@ -42,7 +42,7 @@ class CreateBookingWizard extends WizardComponent
         }
     }
 
-    #[ArrayShape(['choose-tour-step' => "int[]", 'choose-package-step' => "int[]"])]
+    #[ArrayShape(['choose-tour-step' => 'int[]', 'choose-package-step' => 'int[]'])]
     public function initialState(): array
     {
         return [
@@ -50,7 +50,7 @@ class CreateBookingWizard extends WizardComponent
                 'tour' => $this->package->tour_id ?? 0,
             ],
             'choose-package-step' => [
-                'package' => (int)$this->packageId ?? 0,
+                'package' => (int) $this->packageId ?? 0,
             ],
         ];
     }

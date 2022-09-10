@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Flight;
 use Illuminate\Database\Seeder;
 

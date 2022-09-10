@@ -3,7 +3,6 @@
 namespace App\Jobs\StripeWebhooks;
 
 use function app;
-
 use App\Actions\Booking\Invoice\GenerateReceiptAction;
 use App\Models\Payment;
 use App\Models\User;
@@ -13,9 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
 use function now;
-
 use Spatie\WebhookClient\Models\WebhookCall;
 
 class ChargeSucceededJob implements ShouldQueue

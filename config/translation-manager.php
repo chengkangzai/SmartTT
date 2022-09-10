@@ -21,7 +21,7 @@ return [
     /**
      * Enable deletion of translations
      *
-     * @type boolean
+     * @type bool
      */
     'delete_enabled' => true,
 
@@ -49,12 +49,12 @@ return [
      *        'de',
      *    )
      */
-    'exclude_langs'  => [],
+    'exclude_langs' => [],
 
     /**
      * Export translations with keys output alphabetically.
      */
-    'sort_keys'     => true,
+    'sort_keys' => true,
 
     'trans_functions' => [
         'trans',

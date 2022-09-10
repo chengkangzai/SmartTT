@@ -3,7 +3,6 @@
 use App\Actions\Booking\ValidateCash;
 use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
-
 use function PHPUnit\Framework\assertNotEmpty;
 
 it('should validate valid data', function () {
@@ -37,12 +36,11 @@ it('should invalidate invalid data', function ($name, $data) {
         }
     }
 })->with([
-    ['amount', ['asda', -1, null, '', 'a' . str_repeat('a', 256)]],
+    ['amount', ['asda', -1, null, '', 'a'.str_repeat('a', 256)]],
     ['payment_type', [-1, 100, null, now()->subDays(2)->toString()]],
-    ['billing_name', [-1, 100, null, 1, 'a' . str_repeat('a', 256)]],
+    ['billing_name', [-1, 100, null, 1, 'a'.str_repeat('a', 256)]],
     ['billing_phone', [-1, 100, null, 1]],
 ]);
-
 
 it('should invalidate paymentCashReceived is false', function () {
     $action = Mockery::mock(ValidateCash::class);

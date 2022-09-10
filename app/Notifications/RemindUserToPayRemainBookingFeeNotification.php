@@ -40,18 +40,18 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
                 'package' => $this->booking->package->tour->name,
             ]))
             ->line(__('You have paid :paid of :total.', [
-                'paid' => $this->default_currency_symbol . number_format(
+                'paid' => $this->default_currency_symbol.number_format(
                     $this->booking->payment->filter(function (Payment $payment) {
                         return $payment->status === Payment::STATUS_PAID || $payment->status == Payment::STATUS_PENDING;
                     })->sum('amount'),
                     2
                 ),
-                'total' => $this->default_currency_symbol . number_format($this->booking->total_price, 2),
+                'total' => $this->default_currency_symbol.number_format($this->booking->total_price, 2),
             ]))
             ->line(__('You still need to pay :remain before your booking is confirmed.', [
-                'remain' => $this->default_currency_symbol . number_format($this->booking->getRemaining(), 2),
+                'remain' => $this->default_currency_symbol.number_format($this->booking->getRemaining(), 2),
             ]))
-            ->action(__('Pay now'), BookingResource::getUrl('view', ['record'=>$this->booking->id]));
+            ->action(__('Pay now'), BookingResource::getUrl('view', ['record' => $this->booking->id]));
     }
 
     public function toArray($notifiable): array

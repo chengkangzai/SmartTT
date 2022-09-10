@@ -21,4 +21,3 @@ class AirlineSeeder extends Seeder
         DB::table('airlines')->insert($airlines);
     }
 }
-

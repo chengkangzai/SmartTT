@@ -14,8 +14,11 @@ use Livewire\Component;
 class PriceCard extends Component
 {
     public string $default_currency_symbol;
+
     public Tour $tour;
+
     public int $packageId;
+
     public PackagePricing $cheapestPackagePricing;
 
     public function mount(Tour $tour)

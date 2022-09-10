@@ -214,9 +214,9 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-                PricingsRelationManager::class,
-                FlightRelationManager::class,
-            ]
+            PricingsRelationManager::class,
+            FlightRelationManager::class,
+        ]
             + (auth()->user()?->can('Audit Package') ? [ActivitiesRelationManager::class] : []);
     }
 

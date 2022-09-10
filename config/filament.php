@@ -87,7 +87,7 @@ return [
     'auth' => [
         'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
         'pages' => [
-//            'login' => \Filament\Http\Livewire\Auth\Login::class,
+            //            'login' => \Filament\Http\Livewire\Auth\Login::class,
             'login' => \JeffGreco13\FilamentBreezy\Http\Livewire\Auth\Login::class,
 
         ],
@@ -144,8 +144,8 @@ return [
             \App\Filament\Widgets\StatsOverview::class,
             \App\Filament\Widgets\LatestOrders::class,
             \App\Filament\Widgets\LatestUser::class,
-//            Widgets\AccountWidget::class,
-//            Widgets\FilamentInfoWidget::class,
+            //            Widgets\AccountWidget::class,
+            //            Widgets\FilamentInfoWidget::class,
         ],
     ],
 
@@ -293,7 +293,7 @@ return [
             SubstituteBindings::class,
             DispatchServingFilamentEvent::class,
             MirrorConfigToSubpackages::class,
-            \App\Http\Middleware\Locale::class
+            \App\Http\Middleware\Locale::class,
         ],
     ],
 

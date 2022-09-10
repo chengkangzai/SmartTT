@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use function app;
-
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
@@ -15,7 +14,7 @@ class PaymentFactory extends Factory
 {
     protected $model = Payment::class;
 
-    #[ArrayShape(['paid_at' => "\DateTime", 'status' => "mixed|string", 'amount' => "float|int|mixed", 'payment_method' => "mixed", 'payment_type' => "mixed", 'user_id' => "int|mixed", 'booking_id' => "int|mixed", 'billing_name' => "string", 'billing_phone' => "string"])]
+    #[ArrayShape(['paid_at' => "\DateTime", 'status' => 'mixed|string', 'amount' => 'float|int|mixed', 'payment_method' => 'mixed', 'payment_type' => 'mixed', 'user_id' => 'int|mixed', 'booking_id' => 'int|mixed', 'billing_name' => 'string', 'billing_phone' => 'string'])]
     public function definition(): array
     {
         $paymentMethod = $this->faker->randomElement(Payment::METHODS);
@@ -36,7 +35,7 @@ class PaymentFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'booking_id' => $booking->id,
             'billing_name' => $this->faker->name,
-            'billing_phone' =>$this->faker->phoneNumber,
+            'billing_phone' => $this->faker->phoneNumber,
         ];
     }
 }

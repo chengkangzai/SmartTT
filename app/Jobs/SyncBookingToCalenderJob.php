@@ -29,9 +29,13 @@ class SyncBookingToCalenderJob implements ShouldQueue
     use SerializesModels;
 
     private Booking $booking;
+
     private Graph $graph;
+
     private DateTimeZone $timeZone;
+
     private User $user;
+
     private string $companyName;
 
     public function __construct(Booking $booking, User $user)
@@ -72,17 +76,17 @@ class SyncBookingToCalenderJob implements ShouldQueue
             '$top' => 50,
         ];
 
-        $getEventsUrl = '/me/calendarView?' . http_build_query($queryParams);
+        $getEventsUrl = '/me/calendarView?'.http_build_query($queryParams);
 
         return $this->graph->createRequest('GET', $getEventsUrl)
             ->addHeaders([
-                'Prefer' => 'outlook.timezone="' . $this->timeZone->getName() . '"',
+                'Prefer' => 'outlook.timezone="'.$this->timeZone->getName().'"',
             ])
             ->setReturnType(Model\Event::class)
             ->execute();
     }
 
-    #[ArrayShape(['subject' => "", 'attendees' => "", 'start' => "array", 'end' => "array", 'body' => "string[]"])]
+    #[ArrayShape(['subject' => '', 'attendees' => '', 'start' => 'array', 'end' => 'array', 'body' => 'string[]'])]
     private function formatBookingEvents(): array
     {
         $booking = $this->booking;
@@ -106,12 +110,11 @@ class SyncBookingToCalenderJob implements ShouldQueue
                 'timeZone' => $this->timeZone->getName(),
             ],
             'body' => [
-                'content' =>
-                    "Hi," . $this->user->name . ",\n" .
-                    "You have a booking for " . $tour->name . " on " .
-                    $depart_time->format('d/m/Y') . ".\n" .
-                    "Please contact us if you have any questions.\n" .
-                    "Regards,\n" . $this->companyName,
+                'content' => 'Hi,'.$this->user->name.",\n".
+                    'You have a booking for '.$tour->name.' on '.
+                    $depart_time->format('d/m/Y').".\n".
+                    "Please contact us if you have any questions.\n".
+                    "Regards,\n".$this->companyName,
                 'contentType' => 'text',
             ],
         ];

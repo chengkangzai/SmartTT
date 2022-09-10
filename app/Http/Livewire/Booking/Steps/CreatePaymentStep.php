@@ -22,32 +22,45 @@ use Stripe\SetupIntent;
 class CreatePaymentStep extends StepComponent
 {
     public string $paymentType = Payment::TYPE_FULL;
+
     public string $paymentMethod;
+
     public string $manualType = Payment::METHOD_CARD;
+
     public bool $paymentCashReceived = false;
 
     public string $cardHolderName = '';
+
     public string $cardNumber = '';
+
     public string $cardExpiry = '';
+
     public string $cardCvc = '';
 
     public string $billingName = '';
+
     public string $billingPhone = '';
 
     public string $stripePaymentMethod = '';
+
     public int $paymentAmount = 0;
+
     private SetupIntent $paymentIntent;
 
     /** @var Payment */
     public $payment;
+
     public string $defaultCurrency;
+
     public array $guests;
+
     public int $bookingId;
 
     /** @var Booking */
     public $booking;
 
     protected $listeners = ['cardSetupConfirmed'];
+
     public mixed $totalPrice;
 
     public function mount()
@@ -127,8 +140,8 @@ class CreatePaymentStep extends StepComponent
         $user->createOrGetStripeCustomer();
         $user->updateDefaultPaymentMethod($paymentMethod);
         $user->invoiceFor(
-            'Booking(' . $this->paymentType . ') for Package #' . $this->booking->package->id
-            . ' Of Tour ' . $this->booking->package->tour->name,
+            'Booking('.$this->paymentType.') for Package #'.$this->booking->package->id
+            .' Of Tour '.$this->booking->package->tour->name,
             $this->paymentAmount * 100
         );
 

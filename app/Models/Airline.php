@@ -22,6 +22,7 @@ class Airline extends Model
         'ICAO',
         'IATA',
     ];
+
     public $timestamps = false;
 
     public function flights(): HasMany

@@ -11,7 +11,6 @@ use Database\Seeders\PackageSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
-
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
@@ -35,6 +34,6 @@ it('should generate invoice', function () {
 
     expect($newPayment)->toBeInstanceOf(Payment::class)
         ->and($newPayment->getMedia('invoices'))->not->toBeEmpty()
-        ->and($newPayment->getMedia('invoices')[0]->getPath())->toContain('_invoice_' . $payment->booking_id . '.pdf')
+        ->and($newPayment->getMedia('invoices')[0]->getPath())->toContain('_invoice_'.$payment->booking_id.'.pdf')
         ->and($newPayment->getMedia('invoices')[0]->getPath())->toContain('public');
 });

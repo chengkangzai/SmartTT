@@ -18,6 +18,7 @@ use Microsoft\Graph\Model\User;
 class MSOauthController extends Controller
 {
     private MicrosoftGraphService $MSGraphService;
+
     private TokenService $tokenService;
 
     public function __construct()

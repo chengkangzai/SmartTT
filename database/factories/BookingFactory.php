@@ -14,7 +14,7 @@ class BookingFactory extends Factory
 {
     protected $model = Booking::class;
 
-    #[ArrayShape(['user_id' => "\Illuminate\Database\Eloquent\HigherOrderBuilderProxy|int|mixed", 'package_id' => "int|mixed", 'total_price' => "int", 'discount' => "int", 'adult' => "int", 'child' => "int", 'created_at' => "\Illuminate\Support\Carbon"])]
+    #[ArrayShape(['user_id' => "\Illuminate\Database\Eloquent\HigherOrderBuilderProxy|int|mixed", 'package_id' => 'int|mixed', 'total_price' => 'int', 'discount' => 'int', 'adult' => 'int', 'child' => 'int', 'created_at' => "\Illuminate\Support\Carbon"])]
     public function definition(): array
     {
         return [

@@ -48,10 +48,9 @@ class ValidateBookingGuestAction
             });
 
         if ($isValid->pluck('valid')->filter(fn ($v) => $v == false)->isNotEmpty()) {
-            throw ValidationException::withMessages(['guests' =>
-                __('There is not enough capacity for the selected pricing of :packageName', [
-                    'packageName' => $isValid->pluck('pricing')->filter()->first(),
-                ]),
+            throw ValidationException::withMessages(['guests' => __('There is not enough capacity for the selected pricing of :packageName', [
+                'packageName' => $isValid->pluck('pricing')->filter()->first(),
+            ]),
             ]);
         }
     }

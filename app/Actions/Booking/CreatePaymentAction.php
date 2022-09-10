@@ -43,7 +43,7 @@ class CreatePaymentAction
         activity()
             ->performedOn($booking)
             ->causedBy($user)
-            ->log('Payment#' . $payment->id . '(Card) recorded for booking #' . $booking->id);
+            ->log('Payment#'.$payment->id.'(Card) recorded for booking #'.$booking->id);
 
         return $payment;
     }
@@ -61,7 +61,7 @@ class CreatePaymentAction
         activity()
             ->performedOn($booking)
             ->causedBy($user)
-            ->log('Payment#' . $payment->id . '(Cash) recorded for booking #' . $booking->id);
+            ->log('Payment#'.$payment->id.'(Cash) recorded for booking #'.$booking->id);
 
         return $payment;
     }

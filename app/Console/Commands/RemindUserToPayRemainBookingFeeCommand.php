@@ -28,7 +28,7 @@ class RemindUserToPayRemainBookingFeeCommand extends Command
             ->get()
             ->filter(fn (Booking $booking) => $booking->isFullPaid() === false)
             ->tap(function ($booking) {
-                $this->info("Sending email to remind to user to pay remain booking fee...");
+                $this->info('Sending email to remind to user to pay remain booking fee...');
                 $this->getOutput()->progressStart($booking->count());
             })
             ->each(function ($booking) {

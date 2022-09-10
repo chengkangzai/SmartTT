@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\BookingSetting;
 use App\Models\Settings\FlightSetting;
+use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\PackageSetting;
 use App\Models\Settings\TourSetting;
 
@@ -17,7 +17,7 @@ return [
         BookingSetting::class,
         FlightSetting::class,
         PackageSetting::class,
-        TourSetting::class
+        TourSetting::class,
     ],
 
     /*

@@ -184,7 +184,7 @@ class SuggestTourConversation extends Conversation
             $message = OutgoingMessage::create(
                 __(':name , starting from :price per person', [
                     'name' => $tour->name,
-                    'price' => $default_currency_symbol . number_format($startingPrice->price, 2),
+                    'price' => $default_currency_symbol.number_format($startingPrice->price, 2),
                 ])
             )
                 ->withAttachment($attachment);

@@ -13,8 +13,11 @@ use Spatie\LivewireWizard\Components\StepComponent;
 class ShowBookingSuccessDetailStep extends StepComponent
 {
     public string $paymentMethod;
+
     public string $defaultCurrency;
+
     public string $paymentAmount;
+
     /** @var Payment */
     public $payment;
 

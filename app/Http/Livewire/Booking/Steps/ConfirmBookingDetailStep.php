@@ -19,16 +19,22 @@ class ConfirmBookingDetailStep extends StepComponent
 
     /** @var Tour */
     public $tour;
+
     /** @var Package */
     public $package;
+
     /** @var Collection */
     public $pricings;
+
     public string $defaultCurrency;
+
     public int $totalPrice;
+
     /** @var Booking */
     public $booking;
 
     public string $billingName = '';
+
     public string $billingPhone = '';
 
     public function render(): Factory|View|Application

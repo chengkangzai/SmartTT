@@ -19,7 +19,7 @@ class PackageSeeder extends Seeder
             Flight::inRandomOrder()
                 ->take(2)
                 ->get()
-                ->each(function ($flight, $index) use ( $package) {
+                ->each(function ($flight, $index) use ($package) {
                     $package->flight()->attach($flight, ['order' => $index]);
                 });
             $setting = app(PackageSetting::class);
@@ -27,12 +27,11 @@ class PackageSeeder extends Seeder
                 PackagePricing::factory()->create([
                     'package_id' => $package->id,
                     'name' => $pricing['name'],
-                    'available_capacity' =>$pricing['capacity'],
+                    'available_capacity' => $pricing['capacity'],
                     'total_capacity' => $pricing['capacity'],
                     'is_active' => $pricing['is_active'],
                 ]);
             }
         })->create();
-
     }
 }

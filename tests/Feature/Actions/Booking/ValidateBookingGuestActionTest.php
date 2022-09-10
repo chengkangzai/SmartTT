@@ -13,7 +13,6 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Illuminate\Validation\ValidationException;
-
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertNotEmpty;
@@ -76,7 +75,7 @@ it('should invalidate invalid data', function ($name, $guests) {
     }
 })->with([
     ['guests',
-        [['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true],],
+        [['name' => '', 'pricing' => 0, 'price' => 200, 'is_child' => true]],
         [['name' => 'John', 'pricing' => null, 'price' => 200, 'is_child' => true]],
         [['name' => 'John', 'pricing' => 0, 'price' => -1, 'is_child' => true]],
         [['name' => 'Johm', 'pricing' => 0, 'price' => 200, 'is_child' => false]],

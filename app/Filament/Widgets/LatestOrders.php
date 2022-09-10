@@ -35,7 +35,7 @@ class LatestOrders extends BaseWidget
                 ->toggleable(isToggledHiddenByDefault: true)
                 ->label(__('Subject'))
                 ->formatStateUsing(function (TextColumn $column) {
-                    return trans('constant.model.' . $column->getRecord()->subject_type) ?? __('System');
+                    return trans('constant.model.'.$column->getRecord()->subject_type) ?? __('System');
                 }),
             TextColumn::make('causer.name')
                 ->toggleable(isToggledHiddenByDefault: true)

@@ -12,7 +12,7 @@ class PackageFactory extends Factory
 {
     protected $model = Package::class;
 
-    #[ArrayShape(['tour_id' => "int|mixed", 'depart_time' => "\Carbon\Carbon", 'is_active' => "int"])]
+    #[ArrayShape(['tour_id' => 'int|mixed', 'depart_time' => "\Carbon\Carbon", 'is_active' => 'int'])]
     public function definition(): array
     {
         return [
