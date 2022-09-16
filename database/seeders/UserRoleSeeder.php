@@ -37,6 +37,7 @@ class UserRoleSeeder extends Seeder
                 'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
                 'Access Payment', 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
                 'Access User', 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
+                'Access Feedback', 'View Feedback', 'Create Feedback', 'Edit Feedback', 'Delete Feedback', 'Audit Feedback',
                 'View Setting', 'Edit Setting',
                 'Change User Role',
             ])
@@ -59,6 +60,7 @@ class UserRoleSeeder extends Seeder
                 'Access Airport', 'View Airport', 'Create Airport', 'Edit Airport', 'Delete Airport', 'Audit Airport',
                 'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking',
                 'Access Payment', 'Create Payment', 'Edit Payment', 'Delete Payment',
+                'Access Feedback', 'View Feedback', 'Create Feedback', 'Delete Feedback',
                 'View User',
                 'Connect MS OAuth', 'Sync booking to MS Calendar',
             ])
@@ -77,6 +79,7 @@ class UserRoleSeeder extends Seeder
                 'Access Package Pricing',
                 'Access Booking', 'Create Booking', 'View Booking', 'Edit Booking',
                 'Access Payment', 'View Payment', 'Create Payment',
+                'Access Feedback', 'View Feedback', 'Create Feedback', 'Edit Feedback', 'Delete Feedback',
                 'Connect MS OAuth', 'Sync booking to MS Calendar',
             ])
             ->users()
