@@ -28,9 +28,7 @@ class FeedbackResource extends Resource
 
     protected static ?string $slug = 'feedback';
 
-    protected static ?string $recordTitleAttribute = 'content';
-
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): ?string
     {
@@ -100,6 +98,11 @@ class FeedbackResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('content')
+                    ->limit(50)
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('user.name')
                     ->searchable()
                     ->sortable(),
 
@@ -114,6 +117,7 @@ class FeedbackResource extends Resource
         return [
             'index' => Pages\ListFeedback::route('/'),
             'create' => Pages\CreateFeedback::route('/create'),
+            'view' => Pages\ViewFeedback::route('/{record}'),
             'edit' => Pages\EditFeedback::route('/{record}/edit'),
         ];
     }
