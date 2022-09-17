@@ -24,6 +24,8 @@ class FeedbackResource extends Resource
 
     protected static ?string $slug = 'feedback';
 
+    protected static ?string $navigationIcon = 'heroicon-o-chat-alt-2';
+
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): ?string
