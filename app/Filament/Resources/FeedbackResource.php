@@ -123,8 +123,8 @@ class FeedbackResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
-                 $query->where('user_id',auth()->user()->id)
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+                return $query->where('user_id', auth()->user()->id);
             })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
