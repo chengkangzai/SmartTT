@@ -15,11 +15,11 @@ class ViewTour extends ViewRecord
     {
         return [
             Actions\EditAction::make(),
+            Actions\DeleteAction::make(),
             Action::make('Itinerary')
                 ->label(__('Itinerary'))
                 ->url(fn () => $this->record->getFirstMediaUrl('itinerary'))
                 ->openUrlInNewTab(),
-
         ];
     }
 }

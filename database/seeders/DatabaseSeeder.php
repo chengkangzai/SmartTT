@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             TourSeeder::class,
             PackageSeeder::class,
             BookingSeeder::class,
+
+            FeedbackSeeder::class,
         ]);
         DB::commit();
         Model::reguard();
