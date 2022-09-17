@@ -124,6 +124,7 @@ class FeedbackResource extends Resource
     {
         return parent::getEloquentQuery()
             ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+                 $query->where('user_id',auth()->user()->id)
             })
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
