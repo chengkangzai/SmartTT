@@ -40,7 +40,7 @@ it('should fail to update user profile due to invalid data', function ($name, $d
         }
     }
 })->with([
-    ['name', [100, -1, null, '', 'a' . str_repeat('a', 255)]],
-    ['email', [100, -1, null, '', 'a', 'a' . str_repeat('a', 255)]],
-    ['password', [100, -1, 'a',]],
+    ['name', [100, -1, null, '', 'a'.str_repeat('a', 255)]],
+    ['email', [100, -1, null, '', 'a', 'a'.str_repeat('a', 255)]],
+    ['password', [100, -1, 'a']],
 ]);

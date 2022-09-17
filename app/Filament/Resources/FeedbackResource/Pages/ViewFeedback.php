@@ -4,7 +4,6 @@ namespace App\Filament\Resources\FeedbackResource\Pages;
 
 use App\Filament\Resources\FeedbackResource;
 use Filament\Pages\Actions;
-use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewFeedback extends ViewRecord

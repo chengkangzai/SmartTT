@@ -4,11 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeedbackResource\Pages;
 use App\Models\Feedback;
-use App\Models\Tour;
 use Closure;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -20,7 +17,6 @@ use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Str;
 
 class FeedbackResource extends Resource
 {
@@ -125,11 +121,10 @@ class FeedbackResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
-
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
             })
             ->withoutGlobalScopes([
-                SoftDeletingScope::class
+                SoftDeletingScope::class,
             ]);
     }
 }

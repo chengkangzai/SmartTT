@@ -18,11 +18,11 @@ class Feedback extends Model implements HasMedia
     use InteractsWithMedia;
     use LogsActivity;
 
-    protected $fillable=[
+    protected $fillable = [
         'content',
         'name',
         'is_listed',
-        'user_id'
+        'user_id',
     ];
 
     public function getActivitylogOptions(): LogOptions
