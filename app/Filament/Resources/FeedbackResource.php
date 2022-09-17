@@ -123,7 +123,7 @@ class FeedbackResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
                 return $query->where('user_id', auth()->user()->id);
             })
             ->withoutGlobalScopes([
