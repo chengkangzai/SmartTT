@@ -172,6 +172,7 @@ class ManageGeneralSetting extends SettingsPage
                                     ->inline(false),
                                 TextInput::make('whatsapp_link')
                                     ->label(__('setting.general.whatsapp_link'))
+                                    ->hint('https://faq.whatsapp.com/452366545421244/?locale=en_US')
                                     ->columnSpan(3)
                                     ->required(),
                             ])->columns(4),
