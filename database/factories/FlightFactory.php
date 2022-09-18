@@ -27,7 +27,7 @@ class FlightFactory extends Factory
         return [
             'departure_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
             'arrival_date' => now()->addDays(rand(1, 30))->addSeconds(rand(0, 100000)),
-            'price' => rand(100, 2000),
+            'price' => rand(100, 2000) * 100,
             'airline_id' => $airline->id,
             'airline' => $airline->name,
             'departure_airport_id' => $airport[0]->id,
