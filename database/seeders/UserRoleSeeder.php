@@ -33,7 +33,7 @@ class UserRoleSeeder extends Seeder
                 'Access Package Pricing', 'View Package Pricing', 'Create Package Pricing', 'Edit Package Pricing', 'Delete Package Pricing', 'Audit Package Pricing',
                 'Access Flight', 'View Flight', 'Create Flight', 'Edit Flight', 'Delete Flight', 'Audit Flight',
                 'Access Airport', 'View Airport', 'Create Airport', 'Edit Airport', 'Delete Airport', 'Audit Airport',
-                'Access Permission', 'View Permission', 'Create Permission', 'Edit Permission', 'Delete Permission', 'Audit Permission',
+                'Access Permission', 'View Permission',
                 'Access Booking', 'View Booking', 'Create Booking', 'Edit Booking', 'Delete Booking', 'Audit Booking',
                 'Access Payment', 'View Payment', 'Create Payment', 'Edit Payment', 'Delete Payment', 'Audit Payment',
                 'Access User', 'View User', 'Create User', 'Edit User', 'Delete User', 'Audit User',
