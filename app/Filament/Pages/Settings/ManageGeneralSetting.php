@@ -53,21 +53,21 @@ class ManageGeneralSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn($lang) => $lang['name'])->toArray();
+            ->map(fn ($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn($val, $key) => $key)->toArray();
+            ->map(fn ($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn($country) => [$country => $country])
+            ->mapWithKeys(fn ($country) => [$country => $country])
             ->toArray();
 
         $siteModes = collect(app(GeneralSetting::class)->supported_site_mode)
-            ->mapWithKeys(fn($mode) => [$mode => __('setting.general.available_site_mode.' . $mode)]);
+            ->mapWithKeys(fn ($mode) => [$mode => __('setting.general.available_site_mode.'.$mode)]);
 
         return [
             Tabs::make('Heading')
@@ -101,7 +101,7 @@ class ManageGeneralSetting extends SettingsPage
                                 ->reactive()
                                 ->afterStateUpdated(function (Closure $get, Closure $set) {
                                     $currency = $get('default_currency');
-                                    $symbol = config('money.' . $currency);
+                                    $symbol = config('money.'.$currency);
                                     $set('default_currency_symbol', $symbol['symbol']);
                                 })
                                 ->options($currencies)
@@ -248,7 +248,7 @@ class ManageGeneralSetting extends SettingsPage
         if (app(GeneralSetting::class)->registration_enable != $data['registration_enable']) {
             $enable = $data['registration_enable'] ? 'true' : 'false';
             $envFile = file_get_contents(base_path('.env'));
-            $envFile = preg_replace('/APP_ENABLE_REGISTRATION=(.*)/', 'APP_ENABLE_REGISTRATION=' . $enable, $envFile);
+            $envFile = preg_replace('/APP_ENABLE_REGISTRATION=(.*)/', 'APP_ENABLE_REGISTRATION='.$enable, $envFile);
             file_put_contents(base_path('.env'), $envFile);
         }
 
