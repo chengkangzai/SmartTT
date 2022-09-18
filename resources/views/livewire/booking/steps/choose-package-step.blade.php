@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <input type="radio" wire:model="package" value="{{ $package->id }}"
-                               aria-label="{{ __('Choose this package') }}">
+                            aria-label="{{ __('Choose this package') }}">
                     </td>
                     <td>{{ $package->depart_time->translatedFormat(config('app.date_format')) }}</td>
                     <td>{{ $package->price, 2 }}</td>
