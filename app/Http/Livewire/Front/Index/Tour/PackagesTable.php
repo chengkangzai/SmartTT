@@ -32,9 +32,9 @@ class PackagesTable extends Component
     {
         $this->tour = $tour;
         $this->getPackages();
-        $pricing = $this->packages->map(fn(Package $package) => $package->activePricings->map->price)
+        $pricing = $this->packages->map(fn (Package $package) => $package->activePricings->map->price)
             ->flatten()
-            ->map(fn($price) => (int)$price / 100)
+            ->map(fn ($price) => (int) $price / 100)
             ->sort()
             ->values();
 
@@ -45,7 +45,7 @@ class PackagesTable extends Component
             ->pluck('depart_time')
             ->mapWithKeys(function (Carbon $date) {
                 return [
-                    (int)$date->format('m') => $date->translatedFormat('F'),
+                    (int) $date->format('m') => $date->translatedFormat('F'),
                 ];
             });
     }

@@ -12,12 +12,19 @@ class TourEnquiry extends ModalComponent
     private Tour $tour;
 
     public bool $facebook_enable;
+
     public bool $instagram_enable;
+
     public bool $whatsapp_enable;
+
     public bool $twitter_enable;
+
     public string $facebook_link;
+
     public string $instagram_link;
+
     public string $whatsapp_link;
+
     public string $twitter_link;
 
     public function mount(Tour $tour)

@@ -27,7 +27,7 @@ it('should be mountable', function () {
     $tour = Tour::whereHas('activePackages')->first();
     $pricing = $tour->activePackages->map(fn ($package) => $package->packagePricing->map->price)
         ->flatten()
-        ->map(fn($price) => (int)$price / 100)
+        ->map(fn ($price) => (int) $price / 100)
         ->sort()
         ->values();
 

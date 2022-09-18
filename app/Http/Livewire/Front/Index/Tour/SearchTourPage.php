@@ -56,10 +56,10 @@ class SearchTourPage extends Component
             ->orderBy('price')
             ->get()
             ->pluck('price')
-            ->map(fn($price) => (string)($price / 100));
-        
-        $this->priceFrom = (string)$sortByPrice->first();
-        $this->priceTo = (string)$sortByPrice->last();
+            ->map(fn ($price) => (string) ($price / 100));
+
+        $this->priceFrom = (string) $sortByPrice->first();
+        $this->priceTo = (string) $sortByPrice->last();
 
         $this->categories = Tour::select('category')->distinct()->pluck('category');
         $this->latestDepartTime = Package::active()->select('depart_time')->latest('depart_time')->first()->depart_time->format('Y-m-d');
@@ -97,8 +97,8 @@ class SearchTourPage extends Component
                         ->when($this->priceFrom !== '' && $this->priceTo !== '', function ($query) {
                             return $query->whereHas('activePackages', function ($query) {
                                 return $query->whereHas('activePricings', function ($query) {
-                                    return $query->where('price', '>=', ((int)$this->priceFrom) * 100)
-                                        ->where('price', '<=', ((int)$this->priceTo) * 100);
+                                    return $query->where('price', '>=', ((int) $this->priceFrom) * 100)
+                                        ->where('price', '<=', ((int) $this->priceTo) * 100);
                                 });
                             });
                         })
@@ -132,8 +132,8 @@ class SearchTourPage extends Component
             ->when($this->priceFrom !== '' && $this->priceTo !== '', function ($query) {
                 return $query->whereHas('activePackages', function ($query) {
                     return $query->whereHas('activePricings', function ($query) {
-                        return $query->where('price', '>=', ((int)$this->priceFrom) * 100)
-                            ->where('price', '<=', ((int)$this->priceTo) * 100);
+                        return $query->where('price', '>=', ((int) $this->priceFrom) * 100)
+                            ->where('price', '<=', ((int) $this->priceTo) * 100);
                     });
                 });
             })
