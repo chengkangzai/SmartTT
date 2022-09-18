@@ -35,9 +35,11 @@
         @endforeach
     </div>
     <div class="mx-auto mt-4 py-4">
-        <a href="{{ $this->generateBookNowLink($packageId) }}"
-            class="block rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400 md:animate-bounce">
-            {{ __('Book Now!') }} &excl;
-        </a>
+        @if(app(\App\Models\Settings\GeneralSetting::class)->site_mode == 'Online Booking')
+            <a href="{{ $this->generateBookNowLink($packageId) }}"
+               class="block rounded-xl bg-green-500 px-8 py-2 font-bold ring ring-lime-200 hover:animate-none hover:bg-green-400 md:animate-bounce">
+                {{ __('Book Now!') }} &excl;
+            </a>
+        @endif
     </div>
 </div>
