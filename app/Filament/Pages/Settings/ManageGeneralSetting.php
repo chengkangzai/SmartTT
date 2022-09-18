@@ -7,11 +7,13 @@ use App\Models\Settings\GeneralSetting;
 use Carbon\CarbonTimeZone;
 use Closure;
 use DateTimeZone;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 
 class ManageGeneralSetting extends SettingsPage
@@ -151,7 +153,53 @@ class ManageGeneralSetting extends SettingsPage
                         ]),
                     Tabs\Tab::make(__('Social Settings'))
                         ->schema([
+                            Card::make([
+                                Toggle::make('facebook_enable')
+                                    ->label(__('setting.general.facebook_enable'))
+                                    ->columnSpan(1)
+                                    ->required()
+                                    ->inline(false),
+                                TextInput::make('facebook_link')
+                                    ->label(__('setting.general.facebook_link'))
+                                    ->columnSpan(3)
+                                    ->required()
+                            ])->columns(4),
 
+                            Card::make([
+                                Toggle::make('whatsapp_enable')
+                                    ->label(__('setting.general.whatsapp_enable'))
+                                    ->columnSpan(1)
+                                    ->required()
+                                    ->inline(false),
+                                TextInput::make('whatsapp_link')
+                                    ->label(__('setting.general.whatsapp_link'))
+                                    ->columnSpan(3)
+                                    ->required()
+                            ])->columns(4),
+
+                            Card::make([
+                                Toggle::make('instagram_enable')
+                                    ->label(__('setting.general.instagram_enable'))
+                                    ->columnSpan(1)
+                                    ->required()
+                                    ->inline(false),
+                                TextInput::make('instagram_link')
+                                    ->label(__('setting.general.instagram_link'))
+                                    ->columnSpan(3)
+                                    ->required()
+                            ])->columns(4),
+
+                            Card::make([
+                                Toggle::make('twitter_enable')
+                                    ->label(__('setting.general.twitter_enable'))
+                                    ->columnSpan(1)
+                                    ->required()
+                                    ->inline(false),
+                                TextInput::make('twitter_link')
+                                    ->label(__('setting.general.twitter_link'))
+                                    ->columnSpan(3)
+                                    ->required()
+                            ])->columns(4),
                         ]),
                 ])
                 ->columns(2)
