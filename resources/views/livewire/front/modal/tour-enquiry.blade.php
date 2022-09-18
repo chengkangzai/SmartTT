@@ -13,7 +13,7 @@
                 <a href="{{$facebook_link}}"
                    class="bg-[#1877F2] px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                     <x-bi-facebook class="w-5 h-5 fill-current"/>
-                    <span>Facebook</span>
+                    <span>{{__('Facebook')}}</span>
                 </a>
             @endif
 
@@ -21,7 +21,7 @@
                 <a href="{{$twitter_link}}"
                    class="bg-[#1DA1F2] px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                     <x-bi-twitter class="w-5 h-5 fill-current"/>
-                    <span>Twitter</span>
+                    <span>{{__('Twitter')}}</span>
                 </a>
             @endif
 
@@ -29,7 +29,7 @@
                 <a href="{{$whatsapp_link}}"
                    class="bg-[#25D366] px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                     <x-bi-whatsapp class="w-5 h-5 fill-current"/>
-                    <span>WhatsApp</span>
+                    <span>{{__('WhatsApp')}}</span>
                 </a>
             @endif
 
@@ -37,7 +37,7 @@
                 <a href="{{$instagram_link}}"
                     class="bg-[#E4405F] px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                     <x-bi-instagram class="w-5 h-5 fill-current"/>
-                    <span>Instagram</span>
+                    <span>{{__('Instagram')}}</span>
                 </a>
             @endif
         </div>
