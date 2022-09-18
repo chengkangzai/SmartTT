@@ -51,35 +51,40 @@ class ManageGeneralSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn ($lang) => $lang['name'])->toArray();
+            ->map(fn($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn ($val, $key) => $key)->toArray();
+            ->map(fn($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn ($country) => [$country => $country])
+            ->mapWithKeys(fn($country) => [$country => $country])
             ->toArray();
+
+        $siteModes = collect(app(GeneralSetting::class)->supported_site_mode)
+            ->mapWithKeys(fn($mode) => [$mode => $mode]);
 
         return [
             Tabs::make('Heading')
                 ->tabs([
-                    Tabs\Tab::make(__('Site Settings'))
+                    Tabs\Tab::make('Site Settings')
+                        ->label(__('Site Settings'))
                         ->schema([
                             TextInput::make('site_name')
-                                ->label(__('Site Name'))
+                                ->label(trans('setting.general.site_name'))
                                 ->columnSpan(2)
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->required(),
                             Select::make('default_language')
-                                ->label(__('Default Language'))
+                                ->label(trans('setting.general.default_language'))
                                 ->options($languages)
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->required(),
                             Select::make('default_timezone')
+                                ->label(trans('setting.general.default_timezone'))
                                 ->searchable()
                                 ->label(__('Default Timezone'))
                                 ->afterStateHydrated(function (Closure $set) {
@@ -90,7 +95,7 @@ class ManageGeneralSetting extends SettingsPage
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->required(),
                             Select::make('default_currency')
-                                ->label(__('Default Currency'))
+                                ->label(trans('setting.general.default_currency'))
                                 ->searchable()
                                 ->reactive()
                                 ->afterStateUpdated(function (Closure $get, Closure $set) {
@@ -102,43 +107,52 @@ class ManageGeneralSetting extends SettingsPage
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->required(),
                             TextInput::make('default_currency_symbol')
+                                ->label(trans('setting.general.default_currency_symbol'))
                                 ->disabled(),
                             Select::make('default_country')
-                                ->label(__('Default Country'))
+                                ->label(trans('setting.general.default_country'))
                                 ->searchable()
                                 ->options($countries)
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->required(),
+                            Select::make('site_mode')
+                                ->label(trans('setting.general.site_mode'))
+                                ->options($siteModes)
                         ]),
-                    Tabs\Tab::make(__('Company Settings'))
+                    Tabs\Tab::make('Company Settings')
+                        ->label(__('Company Settings'))
                         ->schema([
                             TextInput::make('company_name')
-                                ->label(__('Company Name'))
+                                ->label(trans('setting.general.company_name'))
                                 ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             TextInput::make('company_phone')
-                                ->label(__('Company Phone'))
+                                ->label(trans('setting.general.company_phone'))
                                 ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             TextInput::make('company_email')
-                                ->label(__('Company Email'))
+                                ->label(trans('setting.general.company_email'))
                                 ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             TextInput::make('business_registration_no')
-                                ->label(__('Business Registration Number'))
+                                ->label(trans('setting.general.business_registration_no'))
                                 ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             Textarea::make('company_address')
+                                ->label(trans('setting.general.company_address'))
                                 ->columnSpan(2)
-                                ->label(__('Company Address'))
                                 ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->rows(4),
+                        ]),
+                    Tabs\Tab::make(__('Social Settings'))
+                        ->schema([
+
                         ]),
                 ])
                 ->columns(2)

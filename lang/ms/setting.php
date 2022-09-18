@@ -30,11 +30,12 @@ return [
     ],
     'package' => [
         'default_status' => 'Status Lalai',
-    ],
-    'package_pricing' => [
-        'default_capacity' => 'Kapasiti Lalai',
-        'default_namings' => 'Penamaan Lalai',
-        'default_status' => 'Status Lalai',
+        'default_pricing' => 'Penetapan Harga Lalai',
+        'package_pricing' => [
+            'capacity' => 'Kapasiti Lalai',
+            'name' => 'Penamaan Lalai',
+            'is_active' => 'Status Lalai',
+        ],
     ],
     'tour' => [
         'category' => 'Kategori',

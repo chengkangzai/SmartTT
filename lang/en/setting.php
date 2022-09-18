@@ -30,11 +30,12 @@ return [
     ],
     'package' => [
         'default_status' => 'Default Status',
-    ],
-    'package_pricing' => [
-        'default_capacity' => 'Default Capacity',
-        'default_namings' => 'Default Namings',
-        'default_status' => 'Default Status',
+        'default_pricing' => 'Default Pricing',
+        'package_pricing' => [
+            'capacity' => 'Default Capacity',
+            'name' => 'Default Namings',
+            'is_active' => 'Default Status',
+        ],
     ],
     'tour' => [
         'category' => 'Category',

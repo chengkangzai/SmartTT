@@ -23,11 +23,12 @@ return [
     ],
     'package' => [
         'default_status' => '默认状态',
-    ],
-    'package_pricing' => [
-        'default_status' => '默认状态',
-        'default_namings' => '默认命名',
-        'default_capacity' => '默认容量',
+        'default_pricing' => '默认定价',
+        'package_pricing' => [
+            'is_active' => '默认状态',
+            'name' => '默认命名',
+            'capacity' => '默认容量',
+        ],
     ],
     'flight' => [
         'supported_countries' => '支持的国家',

@@ -49,16 +49,17 @@ class ManageBookingSetting extends SettingsPage
 
         return [
             TextInput::make('charge_per_child')
-                ->label(__('Charge Per Child'))
+                ->label(trans('setting.booking.charge_per_child'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             TextInput::make('reservation_charge_per_pax')
-                ->label(__('Reservation Charge Per Pax'))
+                ->label(trans('setting.booking.reservation_charge_per_pax'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             Select::make('default_payment_method')
+                ->label(trans('setting.booking.default_payment_method'))
                 ->label(__('Default Payment Method'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))

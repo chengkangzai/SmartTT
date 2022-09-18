@@ -46,20 +46,20 @@ class ManageFlightSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $supportedClass = collect(app(FlightSetting::class)->supported_class)
-            ->mapWithKeys(fn ($item) => [$item => $item])
+            ->mapWithKeys(fn($item) => [$item => $item])
             ->toArray();
 
         $supportedType = collect(app(FlightSetting::class)->supported_type)
-            ->mapWithKeys(fn ($item) => [$item => $item])
+            ->mapWithKeys(fn($item) => [$item => $item])
             ->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn ($country) => [$country => $country])
+            ->mapWithKeys(fn($country) => [$country => $country])
             ->toArray();
 
         return [
             TagsInput::make('supported_class')
-                ->label(__('Supported Class'))
+                ->label(trans('setting.flight.supported_class'))
                 ->suggestions([
                     'Economy' => 'Economy',
                     'Business' => 'Business',
@@ -69,7 +69,7 @@ class ManageFlightSetting extends SettingsPage
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             TagsInput::make('supported_type')
-                ->label(__('Supported Type'))
+                ->label(trans('setting.flight.supported_type'))
                 ->suggestions([
                     'Round' => 'Round',
                     'One Way' => 'One Way',
@@ -78,17 +78,17 @@ class ManageFlightSetting extends SettingsPage
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_class')
-                ->label(__('Default Class'))
+                ->label(trans('setting.flight.default_class'))
                 ->options($supportedClass)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_type')
-                ->label(__('Default Type'))
+                ->label(trans('setting.flight.default_type'))
                 ->options($supportedType)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             MultiSelect::make('supported_countries')
-                ->label(__('Supported Country'))
+                ->label(trans('setting.flight.supported_countries'))
                 ->options($countries)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->columnSpan(2)
