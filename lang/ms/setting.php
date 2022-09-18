@@ -46,6 +46,9 @@ return [
         'instagram_link' => 'Pautan Akaun Instagram',
         'whatsapp_link' => 'Pautan Akaun WhatsApp',
         'twitter_link' => 'Pautan Akaun Twitter',
+        'chat_bot_enable' => 'Dayakan Bot Sembang',
+        'multi_language_enable' => 'Dayakan Multi Bahasa',
+        'registration_enable' => 'Dayakan Pendaftaran Pengguna',
     ],
     'package' => [
         'default_status' => 'Status Lalai',

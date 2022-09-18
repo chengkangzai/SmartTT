@@ -51,6 +51,10 @@ class GeneralSetting extends Settings
 
     public string $twitter_link;
 
+    public bool $chat_bot_enable;
+    public bool $multi_language_enable;
+    public bool $registration_enable;
+
     public static function group(): string
     {
         return 'general';

@@ -29,6 +29,9 @@ return [
         'instagram_link' => 'Instagram帐户链接',
         'whatsapp_link' => 'WhatsApp帐户链接',
         'twitter_link' => 'Twitter帐户链接',
+        'chat_bot_enable' => '启用聊天机器人',
+        'multi_language_enable' => '启用多语言',
+        'registration_enable' => '启用注册',
     ],
     'tour' => [
         'default_status' => '默认状态',

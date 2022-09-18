@@ -70,7 +70,7 @@ return [
     |--------------------------------------------------------------------------
     | Enable or disable registration.
     */
-    'enable_registration' => true,
+    'enable_registration' => env('APP_ENABLE_REGISTRATION', true),
     /*
     |--------------------------------------------------------------------------
     | Path to registration Livewire component.
