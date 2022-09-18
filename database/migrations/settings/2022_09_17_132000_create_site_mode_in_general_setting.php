@@ -6,7 +6,7 @@ class CreateSiteModeInGeneralSetting extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('general.supported_site_mode', ['Online Booking','Enquiry', 'Maintenance']);
+        $this->migrator->add('general.supported_site_mode', ['Online Booking', 'Enquiry', 'Maintenance']);
         $this->migrator->add('general.site_mode', 'Online Booking');
         $this->migrator->add('general.facebook_enable', false);
         $this->migrator->add('general.instagram_enable', false);
