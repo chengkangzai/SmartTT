@@ -8,7 +8,6 @@ use Carbon\CarbonTimeZone;
 use Closure;
 use DateTimeZone;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
@@ -53,21 +52,21 @@ class ManageGeneralSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $languages = collect(config('filament-language-switch.locales'))
-            ->map(fn($lang) => $lang['name'])->toArray();
+            ->map(fn ($lang) => $lang['name'])->toArray();
 
         $timezones = collect(DateTimeZone::listIdentifiers())
-            ->mapWithKeys(fn($timezone) => [$timezone => $timezone])
+            ->mapWithKeys(fn ($timezone) => [$timezone => $timezone])
             ->toArray();
 
         $currencies = collect(config('money'))
-            ->map(fn($val, $key) => $key)->toArray();
+            ->map(fn ($val, $key) => $key)->toArray();
 
         $countries = Country::all()->pluck('name')
-            ->mapWithKeys(fn($country) => [$country => $country])
+            ->mapWithKeys(fn ($country) => [$country => $country])
             ->toArray();
 
         $siteModes = collect(app(GeneralSetting::class)->supported_site_mode)
-            ->mapWithKeys(fn($mode) => [$mode => __('setting.general.available_site_mode.' . $mode)]);
+            ->mapWithKeys(fn ($mode) => [$mode => __('setting.general.available_site_mode.'.$mode)]);
 
         return [
             Tabs::make('Heading')
@@ -101,7 +100,7 @@ class ManageGeneralSetting extends SettingsPage
                                 ->reactive()
                                 ->afterStateUpdated(function (Closure $get, Closure $set) {
                                     $currency = $get('default_currency');
-                                    $symbol = config('money.' . $currency);
+                                    $symbol = config('money.'.$currency);
                                     $set('default_currency_symbol', $symbol['symbol']);
                                 })
                                 ->options($currencies)
@@ -118,7 +117,7 @@ class ManageGeneralSetting extends SettingsPage
                                 ->required(),
                             Select::make('site_mode')
                                 ->label(__('setting.general.site_mode'))
-                                ->options($siteModes)
+                                ->options($siteModes),
                         ]),
                     Tabs\Tab::make('Company Settings')
                         ->label(__('Company Settings'))
@@ -162,7 +161,7 @@ class ManageGeneralSetting extends SettingsPage
                                 TextInput::make('facebook_link')
                                     ->label(__('setting.general.facebook_link'))
                                     ->columnSpan(3)
-                                    ->required()
+                                    ->required(),
                             ])->columns(4),
 
                             Card::make([
@@ -174,7 +173,7 @@ class ManageGeneralSetting extends SettingsPage
                                 TextInput::make('whatsapp_link')
                                     ->label(__('setting.general.whatsapp_link'))
                                     ->columnSpan(3)
-                                    ->required()
+                                    ->required(),
                             ])->columns(4),
 
                             Card::make([
@@ -186,7 +185,7 @@ class ManageGeneralSetting extends SettingsPage
                                 TextInput::make('instagram_link')
                                     ->label(__('setting.general.instagram_link'))
                                     ->columnSpan(3)
-                                    ->required()
+                                    ->required(),
                             ])->columns(4),
 
                             Card::make([
@@ -198,12 +197,12 @@ class ManageGeneralSetting extends SettingsPage
                                 TextInput::make('twitter_link')
                                     ->label(__('setting.general.twitter_link'))
                                     ->columnSpan(3)
-                                    ->required()
+                                    ->required(),
                             ])->columns(4),
                         ]),
                 ])
                 ->columns(2)
-                ->columnSpan(2)
+                ->columnSpan(2),
         ];
     }
 
