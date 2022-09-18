@@ -67,7 +67,7 @@ class ManageGeneralSetting extends SettingsPage
             ->toArray();
 
         $siteModes = collect(app(GeneralSetting::class)->supported_site_mode)
-            ->mapWithKeys(fn($mode) => [$mode => $mode]);
+            ->mapWithKeys(fn($mode) => [$mode => trans('setting.general.available_site_mode.' . $mode)]);
 
         return [
             Tabs::make('Heading')

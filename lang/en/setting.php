@@ -6,6 +6,10 @@ return [
         'default_payment_method' => 'Default Payment Method',
         'reservation_charge_per_pax' => 'Reservation Charge Per Pax',
         'supported_payment_method' => 'Supported Payment Method',
+        'available_payment_method' => [
+            'Cash' => 'Cash',
+            'Stripe' => 'Stripe',
+        ],
     ],
     'flight' => [
         'default_class' => 'Default Class',
@@ -28,6 +32,11 @@ return [
         'site_name' => 'Site Name',
         'supported_language' => 'Supported Languages',
         'supported_site_mode' => 'Supported Site Mode',
+        'available_site_mode' => [
+            'Online Booking' => 'Online Booking',
+            'Enquiry' => 'Enquiry',
+            'Maintenance' => 'Maintenance',
+        ],
         'site_mode' => 'Site Mode',
         'facebook_enable' => 'Enable Facebook Social Display',
         'instagram_enable' => 'Enable Instagram Social Display',

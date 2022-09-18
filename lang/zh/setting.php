@@ -15,6 +15,11 @@ return [
         'company_email' => '公司电邮',
         'business_registration_no' => '商业登记号码',
         'supported_site_mode' => '支持的网站模式',
+        'available_site_mode' => [
+            'Online Booking' => '在线预订模式',
+            'Enquiry' => '询问模式',
+            'Maintenance' => '维护模式',
+        ],
         'site_mode' => '网站模式',
         'facebook_enable' => '启用Facebook社交显示',
         'instagram_enable' => '启用Instagram社交显示',
@@ -52,5 +57,9 @@ return [
         'default_payment_method' => '默认付款方式',
         'supported_payment_method' => '支持的付款方式',
         'reservation_charge_per_pax' => '每人预订费',
+        'available_payment_method' => [
+            'Cash' => '现金',
+            'Stripe' => 'Stripe',
+        ],
     ],
 ];

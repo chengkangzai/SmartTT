@@ -6,6 +6,10 @@ return [
         'default_payment_method' => 'Kaedah Pembayaran Lalai',
         'reservation_charge_per_pax' => 'Caj Tempahan Setiap Orang',
         'supported_payment_method' => 'Kaedah Pembayaran yang Disokong',
+        'available_payment_method' => [
+            'Cash' => 'Tunai',
+            'Stripe' => 'Stripe',
+        ],
     ],
     'flight' => [
         'default_class' => 'Kelas Lalai',
@@ -28,6 +32,11 @@ return [
         'site_name' => 'Nama Tapak',
         'supported_language' => 'Bahasa yang Disokong',
         'supported_site_mode' => 'Mod Tapak yang Disokong',
+        'available_site_mode' => [
+            'Online Booking' => 'Tempahan Atas Talian',
+            'Enquiry' => 'Pertanyaan',
+            'Maintenance' => 'Penyelenggaraan',
+        ],
         'site_mode' => 'Mod Tapak',
         'facebook_enable' => 'Dayakan Paparan Sosial Facebook',
         'instagram_enable' => 'Dayakan Paparan Sosial Instagram',
