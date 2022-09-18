@@ -1,5 +1,6 @@
 @php
     /** @var \App\Models\Package $package */
+    $siteMode = app(\App\Models\Settings\GeneralSetting::class)->site_mode;
 @endphp
 <div class="container mx-auto" id="packages">
     <h3 class="px-2 py-4 text-3xl font-bold">{{ __('Packages') }}</h3>
@@ -62,10 +63,18 @@
                     </td>
                     <td class="px-6 py-4">{{ $package->packagePricing->sum('available_capacity') }}</td>
                     <td class="px-6 py-4">
-                        <a href="{{ $this->generateBookNowLink($package->id) }}"
-                           class="font-medium text-blue-600 hover:underline">
-                            {{ __('Book Now!') }}
-                        </a>
+                        @if($siteMode == 'Online Booking')
+                            <a href="{{ $this->generateBookNowLink($package->id) }}"
+                               class="font-medium text-blue-600 hover:underline hover:cursor-pointer">
+                                {{ __('Book Now!') }}
+                            </a>
+                        @endif
+                        @if($siteMode == 'Enquiry')
+                            <button wire:click='$emit("openModal", "front.modal.tour-enquiry", {{ json_encode(["tour" => $tour]) }})'
+                               class="font-medium text-blue-600 hover:underline hover:cursor-pointer">
+                                {{ __('Send Your Enquiry!') }} &excl;
+                            </button>
+                        @endif
                     </td>
                 </tr>
             @endforeach

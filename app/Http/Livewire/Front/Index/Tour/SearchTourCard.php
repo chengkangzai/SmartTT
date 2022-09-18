@@ -42,7 +42,8 @@ class SearchTourCard extends Component
             ->select(['id', 'price'])
             ->orderBy('price')
             ->get()
-            ->pluck('price');
+            ->pluck('price')
+            ->map(fn ($price) => (int) $price / 100);
 
         $this->priceFrom = $sortByPrice->first();
         $this->priceTo = $sortByPrice->last();

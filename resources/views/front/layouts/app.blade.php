@@ -176,6 +176,7 @@ $language = $setting->default_language;
         </div>
 
         @include('front.partial.footer')
+        @livewire('livewire-ui-modal')
     </div>
     @livewireScripts
     <script>
@@ -193,6 +194,7 @@ $language = $setting->default_language;
     </script>
     <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     @stack('script')
+
 </body>
 
 </html>

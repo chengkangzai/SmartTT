@@ -14,6 +14,21 @@ return [
         'company_phone' => '公司电话',
         'company_email' => '公司电邮',
         'business_registration_no' => '商业登记号码',
+        'supported_site_mode' => '支持的网站模式',
+        'available_site_mode' => [
+            'Online Booking' => '在线预订模式',
+            'Enquiry' => '询问模式',
+            'Maintenance' => '维护模式',
+        ],
+        'site_mode' => '网站模式',
+        'facebook_enable' => '启用Facebook社交显示',
+        'instagram_enable' => '启用Instagram社交显示',
+        'whatsapp_enable' => '启用WhatsApp社交显示',
+        'twitter_enable' => '启用Twitter社交显示',
+        'facebook_link' => 'Facebook页面链接',
+        'instagram_link' => 'Instagram帐户链接',
+        'whatsapp_link' => 'WhatsApp帐户链接',
+        'twitter_link' => 'Twitter帐户链接',
     ],
     'tour' => [
         'default_status' => '默认状态',
@@ -23,11 +38,12 @@ return [
     ],
     'package' => [
         'default_status' => '默认状态',
-    ],
-    'package_pricing' => [
-        'default_status' => '默认状态',
-        'default_namings' => '默认命名',
-        'default_capacity' => '默认容量',
+        'default_pricing' => '默认定价',
+        'package_pricing' => [
+            'is_active' => '默认状态',
+            'name' => '默认命名',
+            'capacity' => '默认容量',
+        ],
     ],
     'flight' => [
         'supported_countries' => '支持的国家',
@@ -41,5 +57,9 @@ return [
         'default_payment_method' => '默认付款方式',
         'supported_payment_method' => '支持的付款方式',
         'reservation_charge_per_pax' => '每人预订费',
+        'available_payment_method' => [
+            'Cash' => '现金',
+            'Stripe' => 'Stripe',
+        ],
     ],
 ];

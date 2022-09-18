@@ -55,7 +55,8 @@ class SearchTourPage extends Component
             ->select(['id', 'price'])
             ->orderBy('price')
             ->get()
-            ->pluck('price');
+            ->pluck('price')
+            ->map(fn ($price) => (string) ($price / 100));
 
         $this->priceFrom = (string) $sortByPrice->first();
         $this->priceTo = (string) $sortByPrice->last();
@@ -150,15 +151,15 @@ class SearchTourPage extends Component
     public function getCheapestPrice(Tour $tour): string
     {
         $price = $tour
-                ->activePackages
-                ->map(function ($package) {
-                    return $package->activePricings->sortBy('price')->first();
-                })
-                ->sortBy('price')
-                ->first()
-                ->price ?? 0;
+            ->activePackages
+            ->map(function ($package) {
+                return $package->activePricings->sortBy('price')->first();
+            })
+            ->sortBy('price')
+            ->first()
+            ->price ?? 0;
 
-        return number_format($price, 2);
+        return money($price, app(GeneralSetting::class)->default_currency);
     }
 
     public function loadMore()
