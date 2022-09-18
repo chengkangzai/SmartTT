@@ -19,7 +19,6 @@ class PermissionSeeder extends Seeder
             'Booking',
             'Payment',
             'User',
-            'Permission',
             'Airport',
             'Airline',
             'Feedback',
@@ -62,6 +61,16 @@ class PermissionSeeder extends Seeder
 
         $temp->push([
             'name' => 'Change User Role',
+            'guard_name' => 'web',
+        ]);
+
+        $temp->push([
+            'name' => 'Access Permission',
+            'guard_name' => 'web',
+        ]);
+
+        $temp->push([
+            'name' => 'View Permission',
             'guard_name' => 'web',
         ]);
 

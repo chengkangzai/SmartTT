@@ -22,31 +22,31 @@ class PermissionPolicy
 
     public function create(User $user): bool
     {
-        return $user->can('Create Permission');
+        return false;
     }
 
     public function update(User $user, Permission $permission): bool
     {
-        return $user->can('Edit Permission');
+        return false;
     }
 
     public function delete(User $user, Permission $permission): bool
     {
-        return $user->can('Delete Permission');
+        return false;
     }
 
     public function restore(User $user, Permission $permission): bool
     {
-        return $user->can('Delete Permission');
+        return false;
     }
 
     public function forceDelete(User $user, Permission $permission): bool
     {
-        return $user->can('Delete Permission');
+        return false;
     }
 
     public function audit(User $user, Permission $permission): bool
     {
-        return $user->can('Audit Permission');
+        return false;
     }
 }
