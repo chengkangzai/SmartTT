@@ -59,7 +59,7 @@ class ManageFlightSetting extends SettingsPage
 
         return [
             TagsInput::make('supported_class')
-                ->label(trans('setting.flight.supported_class'))
+                ->label(__('setting.flight.supported_class'))
                 ->suggestions([
                     'Economy' => 'Economy',
                     'Business' => 'Business',
@@ -69,7 +69,7 @@ class ManageFlightSetting extends SettingsPage
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             TagsInput::make('supported_type')
-                ->label(trans('setting.flight.supported_type'))
+                ->label(__('setting.flight.supported_type'))
                 ->suggestions([
                     'Round' => 'Round',
                     'One Way' => 'One Way',
@@ -78,17 +78,17 @@ class ManageFlightSetting extends SettingsPage
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_class')
-                ->label(trans('setting.flight.default_class'))
+                ->label(__('setting.flight.default_class'))
                 ->options($supportedClass)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             Select::make('default_type')
-                ->label(trans('setting.flight.default_type'))
+                ->label(__('setting.flight.default_type'))
                 ->options($supportedType)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
             MultiSelect::make('supported_countries')
-                ->label(trans('setting.flight.supported_countries'))
+                ->label(__('setting.flight.supported_countries'))
                 ->options($countries)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->columnSpan(2)

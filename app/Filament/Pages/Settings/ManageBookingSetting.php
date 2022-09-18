@@ -44,22 +44,22 @@ class ManageBookingSetting extends SettingsPage
     protected function getFormSchema(): array
     {
         $paymentMethods = collect(app(BookingSetting::class)->supported_payment_method)
-            ->mapWithKeys(fn($item) => [$item => trans('setting.booking.available_payment_method.'.$item)])
+            ->mapWithKeys(fn($item) => [$item => __('setting.booking.available_payment_method.'.$item)])
             ->toArray();
 
         return [
             TextInput::make('charge_per_child')
-                ->label(trans('setting.booking.charge_per_child'))
+                ->label(__('setting.booking.charge_per_child'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             TextInput::make('reservation_charge_per_pax')
-                ->label(trans('setting.booking.reservation_charge_per_pax'))
+                ->label(__('setting.booking.reservation_charge_per_pax'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->numeric(),
             Select::make('default_payment_method')
-                ->label(trans('setting.booking.default_payment_method'))
+                ->label(__('setting.booking.default_payment_method'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->options($paymentMethods),

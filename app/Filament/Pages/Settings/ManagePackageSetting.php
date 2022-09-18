@@ -47,25 +47,25 @@ class ManagePackageSetting extends SettingsPage
     {
         return [
             Toggle::make('default_status')
-                ->label(trans('setting.package.default_status'))
+                ->label(__('setting.package.default_status'))
                 ->inline(false)
                 ->disabled(auth()->user()->cannot('Edit Setting')),
             Card::make([
                 TableRepeater::make('default_pricing')
                     ->disabled(auth()->user()->cannot('Edit Setting'))
-                    ->label(trans('setting.package.default_pricing'))
+                    ->label(__('setting.package.default_pricing'))
                     ->schema([
                         TextInput::make('name')
-                            ->label(trans('setting.package.package_pricing.name'))
+                            ->label(__('setting.package.package_pricing.name'))
                             ->columnSpan(3)
                             ->required(),
                         TextInput::make('capacity')
-                            ->label(trans('setting.package.package_pricing.capacity'))
+                            ->label(__('setting.package.package_pricing.capacity'))
                             ->columnSpan(2)
                             ->numeric()
                             ->required(),
                         Toggle::make('is_active')
-                            ->label(trans('setting.package.package_pricing.is_active'))
+                            ->label(__('setting.package.package_pricing.is_active'))
                             ->inline(false)
                             ->columnSpan(1)
                             ->required(),
