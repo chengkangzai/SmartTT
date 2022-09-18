@@ -60,7 +60,6 @@ class ManageBookingSetting extends SettingsPage
                 ->numeric(),
             Select::make('default_payment_method')
                 ->label(trans('setting.booking.default_payment_method'))
-                ->label(__('Default Payment Method'))
                 ->required()
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->options($paymentMethods),

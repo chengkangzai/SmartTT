@@ -86,7 +86,6 @@ class ManageGeneralSetting extends SettingsPage
                             Select::make('default_timezone')
                                 ->label(trans('setting.general.default_timezone'))
                                 ->searchable()
-                                ->label(__('Default Timezone'))
                                 ->afterStateHydrated(function (Closure $set) {
                                     $timezone = app(GeneralSetting::class)->default_timezone->getName();
                                     $set('default_timezone', $timezone);
