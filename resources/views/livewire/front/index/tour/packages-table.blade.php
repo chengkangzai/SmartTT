@@ -62,10 +62,12 @@
                     </td>
                     <td class="px-6 py-4">{{ $package->packagePricing->sum('available_capacity') }}</td>
                     <td class="px-6 py-4">
-                        <a href="{{ $this->generateBookNowLink($package->id) }}"
-                           class="font-medium text-blue-600 hover:underline">
-                            {{ __('Book Now!') }}
-                        </a>
+                        @if(app(\App\Models\Settings\GeneralSetting::class)->site_mode == 'Online Booking')
+                            <a href="{{ $this->generateBookNowLink($package->id) }}"
+                               class="font-medium text-blue-600 hover:underline">
+                                {{ __('Book Now!') }}
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

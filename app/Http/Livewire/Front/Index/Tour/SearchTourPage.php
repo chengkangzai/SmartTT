@@ -55,10 +55,11 @@ class SearchTourPage extends Component
             ->select(['id', 'price'])
             ->orderBy('price')
             ->get()
-            ->pluck('price');
-
-        $this->priceFrom = (string) $sortByPrice->first();
-        $this->priceTo = (string) $sortByPrice->last();
+            ->pluck('price')
+            ->map(fn($price) => (string)($price / 100));
+        
+        $this->priceFrom = (string)$sortByPrice->first();
+        $this->priceTo = (string)$sortByPrice->last();
 
         $this->categories = Tour::select('category')->distinct()->pluck('category');
         $this->latestDepartTime = Package::active()->select('depart_time')->latest('depart_time')->first()->depart_time->format('Y-m-d');
@@ -96,8 +97,8 @@ class SearchTourPage extends Component
                         ->when($this->priceFrom !== '' && $this->priceTo !== '', function ($query) {
                             return $query->whereHas('activePackages', function ($query) {
                                 return $query->whereHas('activePricings', function ($query) {
-                                    return $query->where('price', '>=', ((int) $this->priceFrom) * 100)
-                                        ->where('price', '<=', ((int) $this->priceTo) * 100);
+                                    return $query->where('price', '>=', ((int)$this->priceFrom) * 100)
+                                        ->where('price', '<=', ((int)$this->priceTo) * 100);
                                 });
                             });
                         })
@@ -131,8 +132,8 @@ class SearchTourPage extends Component
             ->when($this->priceFrom !== '' && $this->priceTo !== '', function ($query) {
                 return $query->whereHas('activePackages', function ($query) {
                     return $query->whereHas('activePricings', function ($query) {
-                        return $query->where('price', '>=', ((int) $this->priceFrom) * 100)
-                            ->where('price', '<=', ((int) $this->priceTo) * 100);
+                        return $query->where('price', '>=', ((int)$this->priceFrom) * 100)
+                            ->where('price', '<=', ((int)$this->priceTo) * 100);
                     });
                 });
             })
@@ -150,15 +151,15 @@ class SearchTourPage extends Component
     public function getCheapestPrice(Tour $tour): string
     {
         $price = $tour
-                ->activePackages
-                ->map(function ($package) {
-                    return $package->activePricings->sortBy('price')->first();
-                })
-                ->sortBy('price')
-                ->first()
-                ->price ?? 0;
+            ->activePackages
+            ->map(function ($package) {
+                return $package->activePricings->sortBy('price')->first();
+            })
+            ->sortBy('price')
+            ->first()
+            ->price ?? 0;
 
-        return number_format($price, 2);
+        return money($price, app(GeneralSetting::class)->default_currency);
     }
 
     public function loadMore()
