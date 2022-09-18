@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($guests as $guest)
                                 <tr>
-                                    <td>{{ $guest['name'] ?? ''}}</td>
+                                    <td>{{ $guest['name'] ?? '' }}</td>
                                     <td>{{ $pricings->find($guest['pricing'])?->name ?? 'N/A' }}</td>
                                     <td>{{ $defaultCurrency }} {{ number_format($guest['price'], 2) }}</td>
                                 </tr>

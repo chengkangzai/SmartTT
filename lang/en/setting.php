@@ -46,6 +46,9 @@ return [
         'instagram_link' => 'Instagram Account Link',
         'whatsapp_link' => 'WhatsApp Account Link',
         'twitter_link' => 'Twitter Account Link',
+        'chat_bot_enable' => 'Enable Chat Bot',
+        'multi_language_enable' => 'Enable Multi Language',
+        'registration_enable' => 'Enable User Registration',
     ],
     'package' => [
         'default_status' => 'Default Status',

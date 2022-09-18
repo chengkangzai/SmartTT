@@ -4,6 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\GeneralSetting;
+use Artisan;
 use Carbon\CarbonTimeZone;
 use Closure;
 use DateTimeZone;
@@ -151,7 +152,8 @@ class ManageGeneralSetting extends SettingsPage
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->rows(4),
                         ]),
-                    Tabs\Tab::make(__('Social Settings'))
+                    Tabs\Tab::make('Social Settings')
+                        ->label(__('Social Settings'))
                         ->schema([
                             Card::make([
                                 Toggle::make('facebook_enable')
@@ -210,6 +212,29 @@ class ManageGeneralSetting extends SettingsPage
                                     ->required(),
                             ])->columns(4),
                         ]),
+                    Tabs\Tab::make('Feature Settings')
+                        ->label(__('Feature Settings'))
+                        ->schema([
+                            Toggle::make('chat_bot_enable')
+                                ->label(__('setting.general.chat_bot_enable'))
+                                ->disabled(auth()->user()->cannot('Edit Setting'))
+                                ->columnSpan(1)
+                                ->required()
+                                ->inline(false),
+                            Toggle::make('multi_language_enable')
+                                ->label(__('setting.general.multi_language_enable'))
+                                ->disabled(auth()->user()->cannot('Edit Setting'))
+                                ->columnSpan(1)
+                                ->required()
+                                ->inline(false),
+                            Toggle::make('registration_enable')
+                                ->label(__('setting.general.registration_enable'))
+                                ->disabled(auth()->user()->cannot('Edit Setting'))
+                                ->columnSpan(1)
+                                ->required()
+                                ->inline(false),
+                        ])
+                        ->columns(3),
                 ])
                 ->columns(2)
                 ->columnSpan(2),
@@ -219,6 +244,15 @@ class ManageGeneralSetting extends SettingsPage
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $data['default_timezone'] = CarbonTimeZone::create($data['default_timezone']);
+
+        if (app(GeneralSetting::class)->registration_enable != $data['registration_enable']) {
+            $enable = $data['registration_enable'] ? 'true' : 'false';
+            $envFile = file_get_contents(base_path('.env'));
+            $envFile = preg_replace('/APP_ENABLE_REGISTRATION=(.*)/', 'APP_ENABLE_REGISTRATION='.$enable, $envFile);
+            file_put_contents(base_path('.env'), $envFile);
+        }
+
+        Artisan::call('cache:clear');
 
         return $data;
     }

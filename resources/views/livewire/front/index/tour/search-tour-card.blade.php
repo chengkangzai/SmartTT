@@ -25,15 +25,15 @@
                                     {{ __('Date From') }}
                                 </label>
                                 <input type="date" class="w-full rounded-lg" id="date_from" name="dateFrom"
-                                       min="{{ now()->format('Y-m-d') }}"
-                                       max="{{ $latestDepartTime }}"
-                                       value="{{ now()->addMonth()->format('Y-m-d') }}" />
+                                    min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
+                                    value="{{ now()->addMonth()->format('Y-m-d') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
-                                <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
+                                <label for="date_to"
+                                    class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
                                 <input type="date" class="w-full rounded-lg" id="date_to" name="dateTo"
-                                       min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
-                                       value="{{ $latestDepartTime }}" />
+                                    min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
+                                    value="{{ $latestDepartTime }}" />
                             </div>
                         </div>
                     </div>
@@ -44,25 +44,25 @@
                         <div class="flex flex-row justify-between gap-2 md:w-full">
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_from"
-                                       class="px-2 text-sm opacity-70">{{ __('Price From') }}</label>
+                                    class="px-2 text-sm opacity-70">{{ __('Price From') }}</label>
                                 <input type="number" class="w-full rounded-lg" id="price_from" name="priceFrom"
-                                       wire:model.debounce="priceFrom" placeholder="{{ __('Price From') }}" />
+                                    wire:model.debounce="priceFrom" placeholder="{{ __('Price From') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_to"
-                                       class="block px-2 text-sm opacity-70">{{ __('Price To') }}</label>
+                                    class="block px-2 text-sm opacity-70">{{ __('Price To') }}</label>
                                 <input type="number" class="w-full rounded-lg" id="price_to" name="priceTo"
-                                       wire:model.debounce="priceTo" placeholder="{{ __('Price To') }}" />
+                                    wire:model.debounce="priceTo" placeholder="{{ __('Price To') }}" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col">
                     <input value="{{ __('Search') }}" type="submit"
-                           class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
+                        class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
                     <small>{{ __('Powered by') }}
                         <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}"
-                             alt="Powered By Algolia" />
+                            alt="Powered By Algolia" />
                     </small>
                 </div>
             </div>
