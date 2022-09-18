@@ -117,6 +117,7 @@ class ManageGeneralSetting extends SettingsPage
                                 ->required(),
                             Select::make('site_mode')
                                 ->label(__('setting.general.site_mode'))
+                                ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->options($siteModes),
                         ]),
                     Tabs\Tab::make('Company Settings')
@@ -155,11 +156,13 @@ class ManageGeneralSetting extends SettingsPage
                             Card::make([
                                 Toggle::make('facebook_enable')
                                     ->label(__('setting.general.facebook_enable'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(1)
                                     ->required()
                                     ->inline(false),
                                 TextInput::make('facebook_link')
                                     ->label(__('setting.general.facebook_link'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(3)
                                     ->required(),
                             ])->columns(4),
@@ -167,11 +170,13 @@ class ManageGeneralSetting extends SettingsPage
                             Card::make([
                                 Toggle::make('whatsapp_enable')
                                     ->label(__('setting.general.whatsapp_enable'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(1)
                                     ->required()
                                     ->inline(false),
                                 TextInput::make('whatsapp_link')
                                     ->label(__('setting.general.whatsapp_link'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->hint('https://faq.whatsapp.com/452366545421244/?locale=en_US')
                                     ->columnSpan(3)
                                     ->required(),
@@ -180,11 +185,13 @@ class ManageGeneralSetting extends SettingsPage
                             Card::make([
                                 Toggle::make('instagram_enable')
                                     ->label(__('setting.general.instagram_enable'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(1)
                                     ->required()
                                     ->inline(false),
                                 TextInput::make('instagram_link')
                                     ->label(__('setting.general.instagram_link'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(3)
                                     ->required(),
                             ])->columns(4),
@@ -192,11 +199,13 @@ class ManageGeneralSetting extends SettingsPage
                             Card::make([
                                 Toggle::make('twitter_enable')
                                     ->label(__('setting.general.twitter_enable'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(1)
                                     ->required()
                                     ->inline(false),
                                 TextInput::make('twitter_link')
                                     ->label(__('setting.general.twitter_link'))
+                                    ->disabled(auth()->user()->cannot('Edit Setting'))
                                     ->columnSpan(3)
                                     ->required(),
                             ])->columns(4),
