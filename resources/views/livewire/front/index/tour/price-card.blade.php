@@ -48,7 +48,7 @@
             <button
                 wire:click='$emit("openModal", "front.modal.tour-enquiry", {{ json_encode(["tour" => $tour]) }})'
                 class="block rounded-xl bg-green-500 px-8 py-2 font-bold">
-                {{ __('Send Your Enquiry!') }} &excl;
+                {{ __('Enquiry Now!') }} &excl;
             </button>
         @endif
     </div>

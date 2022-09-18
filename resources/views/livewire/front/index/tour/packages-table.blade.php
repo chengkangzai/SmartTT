@@ -72,7 +72,7 @@
                         @if($siteMode == 'Enquiry')
                             <button wire:click='$emit("openModal", "front.modal.tour-enquiry", {{ json_encode(["tour" => $tour]) }})'
                                class="font-medium text-blue-600 hover:underline hover:cursor-pointer">
-                                {{ __('Send Your Enquiry!') }} &excl;
+                                {{ __('Enquiry Now!') }} &excl;
                             </button>
                         @endif
                     </td>
