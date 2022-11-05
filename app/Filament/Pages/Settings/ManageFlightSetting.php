@@ -87,7 +87,8 @@ class ManageFlightSetting extends SettingsPage
                 ->options($supportedType)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
-            MultiSelect::make('supported_countries')
+            Select::make('supported_countries')
+                ->multiple()
                 ->label(__('setting.flight.supported_countries'))
                 ->options($countries)
                 ->disabled(auth()->user()->cannot('Edit Setting'))

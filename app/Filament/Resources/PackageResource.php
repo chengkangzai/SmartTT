@@ -9,6 +9,7 @@ use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationMana
 use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
+use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
@@ -58,7 +59,8 @@ class PackageResource extends Resource
                     ->required()
                     ->reactive()
                     ->hiddenOn('view'),
-                Forms\Components\MultiSelect::make('flight_id')
+                Forms\Components\Select::make('flight_id')
+                    ->multiple()
                     ->hiddenOn(['view'])
                     ->relationship('flight', 'name')
                     ->label(__('Flight'))
@@ -81,9 +83,18 @@ class PackageResource extends Resource
                                 ->columnSpan(2)
                                 ->required(),
                             Forms\Components\TextInput::make('capacity')
+                                ->reactive()
+                                ->afterStateUpdated(function (Closure $get, Closure $set, string $context) {
+                                    if ($context === 'create') {
+                                        $set('total_capacity', $get('capacity'));
+                                        $set('available_capacity', $get('capacity'));
+                                    }
+                                })
                                 ->label(__('Capacity'))
                                 ->columnSpan(2)
                                 ->required(),
+                            Forms\Components\Hidden::make('total_capacity'),
+                            Forms\Components\Hidden::make('available_capacity'),
                             Forms\Components\Toggle::make('is_active')
                                 ->label(__('Active'))
                                 ->columnSpan(1)
@@ -107,7 +118,7 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('tour.name')
                     ->label(__('Tour'))
                     ->limit(40)
-                    ->hidden(fn (Component $livewire) => $livewire instanceof RelationManager)
+                    ->hidden(fn(Component $livewire) => $livewire instanceof RelationManager)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('depart_time')
                     ->label(__('Departure Time'))
@@ -127,8 +138,9 @@ class PackageResource extends Resource
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('Active'))
-                    ->column('is_active'),
-                Tables\Filters\MultiSelectFilter::make('tour')
+                    ->attribute('is_active'),
+                Tables\Filters\SelectFilter::make('tour')
+                    ->multiple()
                     ->relationship('tour', 'name'),
                 Tables\Filters\Filter::make('depart_time')
                     ->form([
@@ -139,11 +151,11 @@ class PackageResource extends Resource
                         return $query
                             ->when(
                                 $data['depart_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('depart_time', '>=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '>=', $date),
                             )
                             ->when(
                                 $data['depart_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('depart_time', '<=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('depart_time', '<=', $date),
                             );
                     }),
                 Tables\Filters\Filter::make('created_at')
@@ -155,27 +167,27 @@ class PackageResource extends Resource
                         return $query
                             ->when(
                                 $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->url(fn (Package $record) => PackageResource::getUrl('view', [
+                    ->url(fn(Package $record) => PackageResource::getUrl('view', [
                         'record' => $record,
                     ])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
-                    ->hidden(fn (Package $record) => $record->bookings->count() > 0),
+                    ->hidden(fn(Package $record) => $record->bookings->count() > 0),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->visible(fn (Component $livewire) => $livewire instanceof RelationManager),
+                    ->visible(fn(Component $livewire) => $livewire instanceof RelationManager),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make()
@@ -214,9 +226,9 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PricingsRelationManager::class,
-            FlightRelationManager::class,
-        ]
+                PricingsRelationManager::class,
+                FlightRelationManager::class,
+            ]
             + (auth()->user()?->can('Audit Package') ? [ActivitiesRelationManager::class] : []);
     }
 
@@ -234,7 +246,7 @@ class PackageResource extends Resource
     {
         return parent::getEloquentQuery()
             ->with(['activePricings', 'bookings'])
-            ->when(! auth()->user()->isInternalUser(), function (Builder $query) {
+            ->when(!auth()->user()->isInternalUser(), function (Builder $query) {
                 $query->active();
             })
             ->withoutGlobalScopes([

@@ -4,6 +4,7 @@ use App\Filament\Resources\PackageResource;
 use App\Models\Airline;
 use App\Models\Flight;
 use App\Models\Package;
+use App\Models\PackagePricing;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
@@ -44,6 +45,9 @@ it('should create package', function () {
     $package = Package::factory()->make();
     $airline = Airline::factory()->create();
     $flight = Flight::factory()->create();
+    $pricing = PackagePricing::factory()
+        ->count(3)
+        ->make();
     livewire(PackageResource\Pages\CreatePackage::class)
         ->fillForm([
             'tour_id' => $package->tour_id,
@@ -51,6 +55,14 @@ it('should create package', function () {
             'flight_id' => $flight->id,
             'airline_id' => $airline->id,
             'is_active' => $package->is_active,
+            'packagePricing' => $pricing->map(fn($item, $key) => [
+                'price' => $item->price,
+                'name' => $item->name,
+                'capacity' => $item->total_capacity,
+                'is_active' => $item->is_active,
+                'total_capacity' => $item->total_capacity,
+                'available_capacity' => $item->available_capacity,
+            ])->toArray(),
         ])
         ->call('create')
         ->assertHasNoFormErrors();

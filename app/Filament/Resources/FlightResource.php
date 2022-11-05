@@ -113,7 +113,7 @@ class FlightResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\MultiSelectFilter::make('airline')
+                Tables\Filters\SelectFilter::make('airline')
                     ->label(__('Airline'))
                     ->relationship('airline', 'name'),
                 Tables\Filters\Filter::make('departure_date')
@@ -176,10 +176,12 @@ class FlightResource extends Resource
                                 fn (Builder $query, $date): Builder => $query->whereDate('price', '<=', $date),
                             );
                     }),
-                Tables\Filters\MultiSelectFilter::make('arrive_airport')
+                Tables\Filters\SelectFilter::make('arrive_airport')
+                    ->multiple()
                     ->label(__('Arrival Airport'))
                     ->relationship('arrive_airport', 'name'),
-                Tables\Filters\MultiSelectFilter::make('depart_airport')
+                Tables\Filters\SelectFilter::make('depart_airport')
+                    ->multiple()
                     ->label(__('Depart Airport'))
                     ->relationship('depart_airport', 'name'),
             ])
