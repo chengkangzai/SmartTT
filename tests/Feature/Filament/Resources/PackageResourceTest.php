@@ -55,7 +55,7 @@ it('should create package', function () {
             'flight_id' => $flight->id,
             'airline_id' => $airline->id,
             'is_active' => $package->is_active,
-            'packagePricing' => $pricing->map(fn($item, $key) => [
+            'packagePricing' => $pricing->map(fn ($item, $key) => [
                 'price' => $item->price,
                 'name' => $item->name,
                 'capacity' => $item->total_capacity,
