@@ -78,7 +78,8 @@ class TourResource extends Resource
                                     ->options(app(TourSetting::class)->category)
                                     ->searchable()
                                     ->required(),
-                                Forms\Components\MultiSelect::make('countries')
+                                Forms\Components\Select::make('countries')
+                                    ->multiple()
                                     ->label(__('Countries'))
                                     ->preload()
                                     ->relationship('countries', 'name')
@@ -206,7 +207,7 @@ class TourResource extends Resource
                                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
-                Tables\Filters\MultiSelectFilter::make('category')
+                Tables\Filters\SelectFilter::make('category')
                     ->options($categoryOption)
                     ->column('category'),
             ])

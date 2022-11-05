@@ -46,7 +46,8 @@ class PackageRelationManager extends RelationManager
                     ->label(__('Active'))
                     ->inline(false)
                     ->required(),
-                Forms\Components\MultiSelect::make('flight_id')
+                Forms\Components\Select::make('flight_id')
+                    ->multiple()
                     ->relationship('flight', 'name')
                     ->label(__('Flight'))
                     ->columnSpan(2)

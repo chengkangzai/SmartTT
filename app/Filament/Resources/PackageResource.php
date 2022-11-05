@@ -9,6 +9,7 @@ use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationMana
 use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
+use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Form;
@@ -58,7 +59,8 @@ class PackageResource extends Resource
                     ->required()
                     ->reactive()
                     ->hiddenOn('view'),
-                Forms\Components\MultiSelect::make('flight_id')
+                Forms\Components\Select::make('flight_id')
+                    ->multiple()
                     ->hiddenOn(['view'])
                     ->relationship('flight', 'name')
                     ->label(__('Flight'))
@@ -81,9 +83,18 @@ class PackageResource extends Resource
                                 ->columnSpan(2)
                                 ->required(),
                             Forms\Components\TextInput::make('capacity')
+                                ->reactive()
+                                ->afterStateUpdated(function (Closure $get, Closure $set, string $context) {
+                                    if ($context === 'create') {
+                                        $set('total_capacity', $get('capacity'));
+                                        $set('available_capacity', $get('capacity'));
+                                    }
+                                })
                                 ->label(__('Capacity'))
                                 ->columnSpan(2)
                                 ->required(),
+                            Forms\Components\Hidden::make('total_capacity'),
+                            Forms\Components\Hidden::make('available_capacity'),
                             Forms\Components\Toggle::make('is_active')
                                 ->label(__('Active'))
                                 ->columnSpan(1)
@@ -127,8 +138,9 @@ class PackageResource extends Resource
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('Active'))
-                    ->column('is_active'),
-                Tables\Filters\MultiSelectFilter::make('tour')
+                    ->attribute('is_active'),
+                Tables\Filters\SelectFilter::make('tour')
+                    ->multiple()
                     ->relationship('tour', 'name'),
                 Tables\Filters\Filter::make('depart_time')
                     ->form([

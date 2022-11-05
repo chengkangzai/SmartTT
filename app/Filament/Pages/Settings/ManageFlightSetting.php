@@ -4,7 +4,6 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\FlightSetting;
-use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Pages\SettingsPage;
@@ -87,7 +86,8 @@ class ManageFlightSetting extends SettingsPage
                 ->options($supportedType)
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->required(),
-            MultiSelect::make('supported_countries')
+            Select::make('supported_countries')
+                ->multiple()
                 ->label(__('setting.flight.supported_countries'))
                 ->options($countries)
                 ->disabled(auth()->user()->cannot('Edit Setting'))

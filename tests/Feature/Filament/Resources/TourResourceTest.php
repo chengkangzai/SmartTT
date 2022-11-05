@@ -70,9 +70,6 @@ it('can validate input', function () {
             'tour_code',
             'category',
             'countries',
-            'days',
-            'nights',
-            'is_active',
             'itinerary',
             'thumbnail',
         ]);
