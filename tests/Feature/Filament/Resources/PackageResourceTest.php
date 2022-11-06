@@ -43,7 +43,6 @@ it('should render package create page', function () {
 
 it('should create package', function () {
     $package = Package::factory()->make();
-    $airline = Airline::factory()->create();
     $flight = Flight::factory()->create();
     $pricing = PackagePricing::factory()
         ->count(3)
@@ -53,7 +52,6 @@ it('should create package', function () {
             'tour_id' => $package->tour_id,
             'depart_time' => $package->depart_time,
             'flight_id' => $flight->id,
-            'airline_id' => $airline->id,
             'is_active' => $package->is_active,
             'packagePricing' => $pricing->map(fn ($item, $key) => [
                 'price' => $item->price,
