@@ -82,7 +82,6 @@ it('can validate input', function () {
             'tour_id' => null,
             'depart_time' => null,
             'flight_id' => null,
-            'airline_id' => null,
             'is_active' => null,
         ])
         ->call('create')
@@ -90,7 +89,6 @@ it('can validate input', function () {
             'tour_id',
             'depart_time',
             'flight_id',
-            'airline_id',
             'is_active',
         ]);
 });
