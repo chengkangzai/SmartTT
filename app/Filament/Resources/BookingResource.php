@@ -9,7 +9,6 @@ use App\Filament\Resources\BookingResource\RelationManagers\PackageRelationManag
 use App\Filament\Resources\BookingResource\RelationManagers\PaymentRelationManager;
 use App\Models\Booking;
 use App\Models\Settings\GeneralSetting;
-use App\Models\Tour;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
@@ -90,7 +89,7 @@ class BookingResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\SelectFilter::make('tour_id')
                     ->relationship('tour', 'name')
-                    ->label(__('Tour'))
+                    ->label(__('Tour')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

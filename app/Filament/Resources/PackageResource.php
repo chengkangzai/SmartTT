@@ -6,7 +6,6 @@ use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\Ac
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
-use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
 use Closure;
