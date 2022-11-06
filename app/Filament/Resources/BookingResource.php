@@ -9,7 +9,6 @@ use App\Filament\Resources\BookingResource\RelationManagers\PackageRelationManag
 use App\Filament\Resources\BookingResource\RelationManagers\PaymentRelationManager;
 use App\Models\Booking;
 use App\Models\Settings\GeneralSetting;
-use App\Models\Tour;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
@@ -67,14 +66,12 @@ class BookingResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $tours = Tour::pluck('name', 'id');
-
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(__('Made By'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('package.tour.name')
+                Tables\Columns\TextColumn::make('tour.name')
                     ->label(__('Tour'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_price')
@@ -90,20 +87,9 @@ class BookingResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
-                Tables\Filters\Filter::make('tour_id')
-                    ->label(__('Tour'))
-                    ->form([
-                        Forms\Components\Select::make('tour_id')
-                            ->label(__('Tour'))
-                            ->options($tours),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['tour_id'],
-                                fn (Builder $query, $tourId): Builder => $query->whereHas('package', fn (Builder $query) => $query->where('tour_id', $tourId))
-                            );
-                    }),
+                Tables\Filters\SelectFilter::make('tour_id')
+                    ->relationship('tour', 'name')
+                    ->label(__('Tour')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

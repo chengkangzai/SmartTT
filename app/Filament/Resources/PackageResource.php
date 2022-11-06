@@ -6,7 +6,6 @@ use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\Ac
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
-use App\Models\Airline;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
 use Closure;
@@ -53,12 +52,6 @@ class PackageResource extends Resource
                     ->rules(['required', 'date', 'after_or_equal:today'])
                     ->reactive()
                     ->required(),
-                Forms\Components\Select::make('airline_id')
-                    ->label(__('Airline'))
-                    ->options(Airline::get()->pluck('name', 'id'))
-                    ->required()
-                    ->reactive()
-                    ->hiddenOn('view'),
                 Forms\Components\Select::make('flight_id')
                     ->multiple()
                     ->hiddenOn(['view'])
@@ -131,7 +124,8 @@ class PackageResource extends Resource
                     ->toggledHiddenByDefault()
                     ->label(__('Airline'))
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean()
                     ->visible(auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])

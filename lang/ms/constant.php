@@ -2,6 +2,7 @@
 
 use App\Models\Booking;
 use App\Models\BookingGuest;
+use App\Models\Feedback;
 use App\Models\Flight;
 use App\Models\Package;
 use App\Models\PackagePricing;
@@ -28,6 +29,7 @@ return [
         User::class => __('User'),
         Tour::class => __('Tour'),
         TourDescription::class => __('Tour Description'),
+        Feedback::class => __('Feedbacks'),
     ],
     ':subject was :description' => ':subject telah :description',
 ];
