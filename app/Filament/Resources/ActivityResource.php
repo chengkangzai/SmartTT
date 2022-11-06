@@ -132,15 +132,6 @@ class ActivityResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $subjects = Activity::select('subject_type')
-            ->distinct()
-            ->get()
-            ->filter()
-            ->mapWithKeys(function ($item) {
-                return [$item->subject_type => trans('constant.model.'.$item->subject_type)];
-            })
-            ->toArray();
-
         return $table
             ->columns([
                 TextColumn::make('id')
@@ -174,9 +165,6 @@ class ActivityResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('subject_type')
-                    ->label(__('Subject'))
-                    ->options($subjects),
                 Filter::make('created_at')
                     ->label(__('Date Time'))
                     ->form([

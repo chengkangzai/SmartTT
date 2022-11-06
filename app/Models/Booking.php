@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Spatie\Activitylog\LogOptions;
@@ -55,6 +56,11 @@ class Booking extends Model
     public function payment(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function tour(): HasOneThrough
+    {
+        return $this->hasOneThrough(Tour::class, Package::class, 'id', 'id', 'package_id', 'tour_id');
     }
 
     public function getActivitylogOptions(): LogOptions

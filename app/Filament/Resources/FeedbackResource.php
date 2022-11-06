@@ -14,6 +14,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -104,7 +105,7 @@ class FeedbackResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                BooleanColumn::make('is_listed')
+                IconColumn::make('is_listed')
                     ->label(__('Is Listed'))
                     ->visible(auth()->user()->isInternalUser()),
             ]);

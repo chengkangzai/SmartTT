@@ -19,6 +19,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Log;
 use Str;
 
 class TourResource extends Resource
@@ -153,17 +154,16 @@ class TourResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $categoryOption = Tour::select('category')
-            ->distinct()
-            ->pluck('category')
-            ->mapWithKeys(fn ($value) => [$value => $value])
+        $categories = app(TourSetting::class)->category;
+        $categoryOption = collect($categories)
+            ->mapWithKeys(fn ($item) => [$item => $item])
             ->toArray();
 
         return $table
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumbnail')
                     ->label(__('Thumbnail'))
-                    ->rounded()
+                    ->circular()
                     ->collection('thumbnail'),
                 Tables\Columns\TextColumn::make('name')
                     ->limit(30)
@@ -182,7 +182,8 @@ class TourResource extends Resource
                 Tables\Columns\TextColumn::make('nights')
                     ->label(__('Nights'))
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean()
                     ->visible(auth()->user()->isInternalUser())
                     ->label(__('Active')),
             ])
@@ -190,7 +191,7 @@ class TourResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label(__('Active'))
-                    ->column('is_active'),
+                    ->attribute('is_active'),
                 Tables\Filters\Filter::make('created_at')
                     ->form([
                         Forms\Components\DatePicker::make('created_from'),
@@ -209,7 +210,7 @@ class TourResource extends Resource
                     }),
                 Tables\Filters\SelectFilter::make('category')
                     ->options($categoryOption)
-                    ->column('category'),
+                    ->attribute('category'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
