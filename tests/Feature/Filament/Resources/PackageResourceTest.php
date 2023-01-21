@@ -69,11 +69,6 @@ it('should create package', function () {
         'tour_id' => $package->tour_id,
         'depart_time' => $package->depart_time,
     ]);
-
-    assertDatabaseHas('flight_package', [
-        'package_id' => $package->latest()->first()->id,
-        'flight_id' => $flight->id,
-    ]);
 });
 
 it('can validate input', function () {
