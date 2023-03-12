@@ -12,6 +12,7 @@
                 <div class="aspect-video w-full">
                     <a href="{{ route('front.tours', $tour) }}">
                         <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() }}"
+                            src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
                             alt="Image of {{ $tour->name }}" class="aspect-video w-full" />
                     </a>
                 </div>

@@ -18,7 +18,6 @@ $siteMode = $generalSetting->site_mode;
                 @foreach ($tour->activePackages as $category)
                     <option value="{{ $category->id }}">
                         {{ $category->depart_time->format('Y-m-d') }}
-                        {{ $category->price }}
                     </option>
                 @endforeach
             </select>
@@ -26,7 +25,7 @@ $siteMode = $generalSetting->site_mode;
     </div>
     <div class="flex w-full flex-col gap-1 border-b px-4 py-2">
         @foreach ($tour->packages->find($packageId)->packagePricing as $packagePrice)
-            <div class="flex w-full flex-row text-lg">
+            <div class="flex w-full flex-row text-lg gap-20">
                 <div class="grow md:pr-4">
                     {{ $packagePrice->name }}
                 </div>
