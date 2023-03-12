@@ -126,6 +126,7 @@
                         class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
                         <a href="{{ route('front.tours', $tour) }}" class="max-w-screen-sm md:max-w-xs">
                             <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() ?? '#' }}"
+                                 src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
                                 alt="Image of {{ $tour->name }}"
                                 class="aspect-video rounded-t-lg md:rounded-t-none md:rounded-l-lg" />
                         </a>
