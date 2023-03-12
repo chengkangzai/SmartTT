@@ -4,6 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\FlightSetting;
+use Cache;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Pages\SettingsPage;
@@ -95,5 +96,10 @@ class ManageFlightSetting extends SettingsPage
                 ->searchable()
                 ->required(),
         ];
+    }
+
+    public function afterSave(): void
+    {
+        Cache::clear();
     }
 }
