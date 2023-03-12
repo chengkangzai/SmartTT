@@ -31,13 +31,7 @@ Route::as('front.')->group(function () {
 });
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
-
     Route::get('msOAuth', [MSOauthController::class, 'signin'])->name('msOAuth.signin');
     Route::get('msOAuth/callback', [MSOauthController::class, 'callback'])->name('msOAuth.callback');
     Route::get('msOAuth/disconnect', [MSOauthController::class, 'disconnect'])->name('msOAuth.disconnect');
-
-    Route::get('reports/{mode}/index', [ReportController::class, 'index'])->name('reports.index');
-    Route::post('reports/{mode}/export', [ReportController::class, 'export'])->name('reports.export');
 });
