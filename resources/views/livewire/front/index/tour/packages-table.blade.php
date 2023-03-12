@@ -1,6 +1,6 @@
 @php
-/** @var \App\Models\Package $package */
-$siteMode = app(\App\Models\Settings\GeneralSetting::class)->site_mode;
+    /** @var \App\Models\Package $package */
+    $siteMode = app(\App\Models\Settings\GeneralSetting::class)->site_mode;
 @endphp
 <div class="container mx-auto" id="packages">
     <h3 class="px-2 py-4 text-3xl font-bold">{{ __('Packages') }}</h3>

@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\Settings\GeneralSetting $setting */
+    /** @var \App\Models\Settings\GeneralSetting $setting */
 @endphp
 
 <div class="p-4">

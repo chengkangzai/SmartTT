@@ -67,7 +67,8 @@ class PackageRelationManager extends RelationManager
                     ->label(__('Departure Time'))
                     ->sortable()
                     ->dateTime(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean()
                     ->label(__('Active')),
                 Tables\Columns\TextColumn::make('flight.airline')
                     ->label(__('Airline'))

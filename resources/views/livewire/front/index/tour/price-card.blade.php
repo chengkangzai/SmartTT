@@ -1,7 +1,7 @@
 @php
-$generalSetting = app(\App\Models\Settings\GeneralSetting::class);
-$currency = $generalSetting->default_currency;
-$siteMode = $generalSetting->site_mode;
+    $generalSetting = app(\App\Models\Settings\GeneralSetting::class);
+    $currency = $generalSetting->default_currency;
+    $siteMode = $generalSetting->site_mode;
 @endphp
 <div
     class="z-10 mx-auto flex w-full flex-col rounded-xl border bg-white py-2 shadow-xl md:-mt-80 md:w-max md:py-4 md:px-4">
@@ -25,7 +25,7 @@ $siteMode = $generalSetting->site_mode;
     </div>
     <div class="flex w-full flex-col gap-1 border-b px-4 py-2">
         @foreach ($tour->packages->find($packageId)->packagePricing as $packagePrice)
-            <div class="flex w-full flex-row text-lg gap-20">
+            <div class="flex w-full flex-row gap-20 text-lg">
                 <div class="grow md:pr-4">
                     {{ $packagePrice->name }}
                 </div>

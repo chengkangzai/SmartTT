@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\Tour $tour */
+    /** @var \App\Models\Tour $tour */
 @endphp
 
 @extends('front.layouts.app')

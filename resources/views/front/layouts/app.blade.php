@@ -1,9 +1,9 @@
 @php
-$setting = app(App\Models\Settings\GeneralSetting::class);
-$site_name = $setting->site_name;
-$language = $setting->default_language;
-$multi_language_enable = $setting->multi_language_enable;
-$chat_bot_enable = $setting->chat_bot_enable;
+    $setting = app(App\Models\Settings\GeneralSetting::class);
+    $site_name = $setting->site_name;
+    $language = $setting->default_language;
+    $multi_language_enable = $setting->multi_language_enable;
+    $chat_bot_enable = $setting->chat_bot_enable;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ $language }}">
@@ -55,7 +55,7 @@ $chat_bot_enable = $setting->chat_bot_enable;
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        <svg viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                                        <svg viewBox="0 0 20 20" :class="{ 'rotate-180': open, 'rotate-0': !open }"
                                             class="inline h-4 w-4 transform fill-current transition-transform duration-200">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z">
@@ -111,7 +111,7 @@ $chat_bot_enable = $setting->chat_bot_enable;
                             </svg>
                         </button>
                     </div>
-                    <nav :class="{'flex': open, 'hidden': !open}"
+                    <nav :class="{ 'flex': open, 'hidden': !open }"
                         class="hidden flex-grow flex-col gap-2 py-2 text-center md:flex md:flex-row md:justify-end md:py-0">
                         @auth
                             <a href="{{ route('filament.auth.login') }}"
@@ -148,7 +148,7 @@ $chat_bot_enable = $setting->chat_bot_enable;
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        <svg viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+                                        <svg viewBox="0 0 20 20" :class="{ 'rotate-180': open, 'rotate-0': !open }"
                                             class="inline h-4 w-4 transform fill-current transition-transform duration-200">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z">

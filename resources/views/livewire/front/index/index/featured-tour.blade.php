@@ -13,6 +13,7 @@
                     <a href="{{ route('front.tours', $tour) }}">
                         <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() }}"
                             src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
+                            onload="window.requestAnimationFrame(function(){if(!(size=getBoundingClientRect().width))return;onload=null;sizes=Math.ceil(size/window.innerWidth*100)+'vw';});"
                             alt="Image of {{ $tour->name }}" class="aspect-video w-full" />
                     </a>
                 </div>
