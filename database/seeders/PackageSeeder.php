@@ -6,13 +6,10 @@ use App\Models\Flight;
 use App\Models\Package;
 use App\Models\PackagePricing;
 use App\Models\Settings\PackageSetting;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Seeder;
 
 class PackageSeeder extends Seeder
 {
-    use HasFactory;
-
     public function run()
     {
         Package::factory()->count(50)->afterCreating(function (Package $package) {

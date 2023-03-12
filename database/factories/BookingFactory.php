@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Booking;
 use App\Models\BookingGuest;
 use App\Models\Package;
-use App\Models\PackagePricing;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
@@ -19,7 +18,7 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => User::where('id', '>', 1)->inRandomOrder()->first()->id,
-            'package_id' => Package::count() > 1 ? Package::inRandomOrder()->first()->id : Package::factory()->create()->id,
+            'package_id' => Package::count() > 1 ? Package::inRandomOrder()->first()->id : Package::factory()->hasPackagePricing(3)->create()->id,
             'total_price' => rand(100, 1000) * 100,
             'discount' => 0,
             'adult' => rand(1, 10),
@@ -36,7 +35,7 @@ class BookingFactory extends Factory
                 ->afterCreating(function (BookingGuest $guest) use ($booking) {
                     $guest->package_pricing_id = $guest->is_child
                         ? null
-                        : PackagePricing::factory(['package_id' => $booking->package_id])->create()->id;
+                        : $booking->package->packagePricing()->inRandomOrder()->first()->id;
                 })
                 ->create([
                     'booking_id' => $booking->id,

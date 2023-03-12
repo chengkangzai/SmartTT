@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Tour;
 use File;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Str;
 
@@ -23,8 +24,9 @@ class TourSeeder extends Seeder
 
     public function run()
     {
-        Tour::insert([
-            [
+        Tour::factory()
+            ->count(15)
+            ->state(new Sequence([
                 'tour_code' => '5BKK',
                 'name' => '5D4N Bangkok + Hua Hin Tour',
                 'slug' => Str::slug('5D4N Bangkok + Hua Hin Tour'),
@@ -129,8 +131,10 @@ class TourSeeder extends Seeder
                 'category' => 'Exotic',
                 'days' => 10,
                 'nights' => 7,
-            ],
-        ]);
+            ])
+            )
+            ->create();
+
         $this->tours = Tour::all();
 
         $this->mapCountryToTour();
@@ -144,15 +148,20 @@ class TourSeeder extends Seeder
     //region Map Country to Tour
     private function attachCountry(string $touCode, $country)
     {
-        $tour = $this->tours->where('tour_code', $touCode)->first();
+        $tour = $this->tours->firstWhere('tour_code', $touCode);
+
         if (is_array($country)) {
-            $this->countries->whereIn('name', $country)->each(function (Country $country) use ($tour) {
-                $tour->countries()->attach($country->id);
-            });
+            $this->countries
+                ->whereIn('name', $country)
+                ->each(function (Country $country) use ($tour) {
+                    $tour->countries()->attach($country->id);
+                });
         } else {
-            $this->countries->where('name', $country)->each(function (Country $country) use ($tour) {
-                $tour->countries()->attach($country->id);
-            });
+            $this->countries
+                ->where('name', $country)
+                ->each(function (Country $country) use ($tour) {
+                    $tour->countries()->attach($country->id);
+                });
         }
     }
 
@@ -288,11 +297,11 @@ class TourSeeder extends Seeder
         ];
         foreach ($des as $de) {
             /** @var Tour $tour */
-            $tour = $this->tours->where('tour_code', $de[0])->first();
-            collect($de[1])->each(function ($a, $b) use ($tour) {
+            $tour = $this->tours->firstWhere('tour_code', $de[0]);
+            collect($de[1])->each(function ($title, $description) use ($tour) {
                 $tour->description()->create([
-                    'place' => $b,
-                    'description' => $a,
+                    'place' => $description,
+                    'description' => $title,
                     'order' => $tour->description()->count(),
                 ]);
             });
