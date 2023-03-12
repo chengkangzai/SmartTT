@@ -3,6 +3,7 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\PackageSetting;
+use Cache;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -74,5 +75,10 @@ class ManagePackageSetting extends SettingsPage
                     ->columns(6),
             ]),
         ];
+    }
+
+    public function afterSave(): void
+    {
+        Cache::clear();
     }
 }

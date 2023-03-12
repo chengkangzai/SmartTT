@@ -4,7 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\GeneralSetting;
-use Artisan;
+use Cache;
 use Carbon\CarbonTimeZone;
 use Closure;
 use DateTimeZone;
@@ -252,8 +252,11 @@ class ManageGeneralSetting extends SettingsPage
             file_put_contents(base_path('.env'), $envFile);
         }
 
-        Artisan::call('cache:clear');
-
         return $data;
+    }
+
+    public function afterSave(): void
+    {
+        Cache::clear();
     }
 }

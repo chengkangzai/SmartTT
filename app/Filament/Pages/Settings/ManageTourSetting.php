@@ -4,6 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
+use Cache;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -91,5 +92,10 @@ class ManageTourSetting extends SettingsPage
         }
 
         return $data;
+    }
+
+    public function afterSave(): void
+    {
+        Cache::clear();
     }
 }

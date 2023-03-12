@@ -3,6 +3,7 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\BookingSetting;
+use Cache;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
@@ -64,5 +65,10 @@ class ManageBookingSetting extends SettingsPage
                 ->disabled(auth()->user()->cannot('Edit Setting'))
                 ->options($paymentMethods),
         ];
+    }
+
+    public function afterSave(): void
+    {
+        Cache::clear();
     }
 }
