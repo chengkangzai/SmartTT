@@ -59,7 +59,8 @@ class GuestRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name'))
                     ->searchable(),
-                Tables\Columns\BooleanColumn::make('is_child')
+                Tables\Columns\IconColumn::make('is_child')
+                    ->boolean()
                     ->label(__('Is Child')),
                 Tables\Columns\TextColumn::make('packagePricing.price')
                     ->label(__('Price'))

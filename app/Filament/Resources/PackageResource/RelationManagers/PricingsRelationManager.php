@@ -83,7 +83,8 @@ class PricingsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('available_capacity')
                     ->label(__('Available Capacity'))
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\IconColumn::make('is_active')
+                    ->boolean()
                     ->label(__('Active')),
             ])
             ->filters([
