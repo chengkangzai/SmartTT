@@ -1,5 +1,5 @@
 @php
-/** @var \App\Models\Tour $tour */
+    /** @var \App\Models\Tour $tour */
 @endphp
 @section('title')
     {{ __('Search Tour') }}
@@ -28,13 +28,13 @@
                                 </label>
                                 <input type="date" class="w-full rounded-lg" id="date_from"
                                     wire:model.debounce="dateFrom" min="{{ now()->format('Y-m-d') }}"
-                                    max="{{ $latestDepartTime }}"
-                                    value="{{ now()->addMonth()->format('Y-m-d') }}" />
+                                    max="{{ $latestDepartTime }}" value="{{ now()->addMonth()->format('Y-m-d') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="date_to" class="block px-2 text-sm opacity-70">{{ __('Date To') }}</label>
-                                <input type="date" class="w-full rounded-lg" id="date_to" wire:model.debounce="dateTo"
-                                    min="{{ now()->format('Y-m-d') }}" max="{{ $latestDepartTime }}"
+                                <input type="date" class="w-full rounded-lg" id="date_to"
+                                    wire:model.debounce="dateTo" min="{{ now()->format('Y-m-d') }}"
+                                    max="{{ $latestDepartTime }}"
                                     value="{{ now()->addMonths(2)->format('Y-m-d') }}" />
                             </div>
                         </div>
@@ -45,8 +45,7 @@
                     <div class="flex flex-col md:w-full">
                         <div class="flex flex-row justify-between gap-2 md:w-full">
                             <div class="w-full md:flex md:flex-col md:gap-1">
-                                <label for="price_from"
-                                    class="px-2 text-sm opacity-70">{{ __('Price From') }}</label>
+                                <label for="price_from" class="px-2 text-sm opacity-70">{{ __('Price From') }}</label>
                                 <input type="number" class="w-full rounded-lg" id="price_from" step="50"
                                     wire:model.debounce="priceFrom" placeholder="{{ __('Price From') }}" />
                             </div>
@@ -75,8 +74,7 @@
                     <input value="{{ __('Search') }}" type="submit"
                         class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
                     <small>{{ __('Powered by') }}
-                        <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}"
-                            alt="Powered By Algolia" />
+                        <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}" alt="Powered By Algolia" />
                     </small>
                 </div>
             </div>
@@ -95,14 +93,16 @@
                                     {{ __('Price From') }}
                                 </label>
                                 <input type="number" class="w-full rounded-lg" id="price_from" step="50"
-                                    wire:model.debounce="priceFrom" min="0" placeholder="{{ __('Price From') }}" />
+                                    wire:model.debounce="priceFrom" min="0"
+                                    placeholder="{{ __('Price From') }}" />
                             </div>
                             <div class="w-full md:flex md:flex-col md:gap-1">
                                 <label for="price_to" class="block px-2 text-sm opacity-70">
                                     {{ __('Price To') }}
                                 </label>
                                 <input type="number" class="w-full rounded-lg" id="price_to" step="50"
-                                    wire:model.debounce="priceTo" min="0" placeholder="{{ __('Price To') }}" />
+                                    wire:model.debounce="priceTo" min="0"
+                                    placeholder="{{ __('Price To') }}" />
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,8 @@
                         class="flex w-full flex-col gap-2 rounded-lg shadow-md transition duration-300 hover:scale-105 md:flex-row">
                         <a href="{{ route('front.tours', $tour) }}" class="max-w-screen-sm md:max-w-xs">
                             <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() ?? '#' }}"
-                                 src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
+                                src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
+                                onload="window.requestAnimationFrame(function(){if(!(size=getBoundingClientRect().width))return;onload=null;sizes=Math.ceil(size/window.innerWidth*100)+'vw';});"
                                 alt="Image of {{ $tour->name }}"
                                 class="aspect-video rounded-t-lg md:rounded-t-none md:rounded-l-lg" />
                         </a>

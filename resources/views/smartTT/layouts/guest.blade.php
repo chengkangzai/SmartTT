@@ -1,7 +1,7 @@
 @php
-$setting = app(App\Models\Settings\GeneralSetting::class);
-$site_name = $setting->site_name;
-$language = $setting->default_language;
+    $setting = app(App\Models\Settings\GeneralSetting::class);
+    $site_name = $setting->site_name;
+    $language = $setting->default_language;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ $language }}">
