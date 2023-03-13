@@ -11,7 +11,7 @@
                     @if ($paymentMethod == 'stripe')
                         <h3>{{ __('Payment Processing') }}</h3>
                         <span class="d-block">{{ __('You have successfully made a payment') }}</span>
-                        <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
+                        <h3>{{ money($paymentAmount, $defaultCurrency) }}</h3>
                         <p>{{ __('The payment has been successfully processed') }}</p>
                         <p>{{ __('You will receive an email confirmation shortly') }}</p>
                         <a href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}" class="btn btn-outline-primary"
@@ -21,7 +21,7 @@
                     @endif
                     @if ($paymentMethod == 'manual')
                         <h3>{{ __('Booking Paid') }}</h3>
-                        <h3> {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}</h3>
+                        <h3>{{ money($paymentAmount, $defaultCurrency) }}</h3>
                         <a href="{{ $payment->getFirstMediaUrl('invoices') ?? '#' }}" class="btn btn-outline-primary"
                             target="_blank">
                             {{ __('Download Invoice') }}

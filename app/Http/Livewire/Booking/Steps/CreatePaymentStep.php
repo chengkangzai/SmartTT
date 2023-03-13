@@ -66,7 +66,7 @@ class CreatePaymentStep extends StepComponent
     public function mount()
     {
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
 
         $state = $this->state()->all();
         $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'] ?? 1;
@@ -86,7 +86,7 @@ class CreatePaymentStep extends StepComponent
 
     private function getReadyForPayment(): void
     {
-        $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax;
+        $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax * 100;
 
         $this->updateOrCreatePayment($this->totalPrice, $reservation_charge_per_pax);
         $this->paymentAmount = $this->payment->amount;

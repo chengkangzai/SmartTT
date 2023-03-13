@@ -35,9 +35,12 @@
 
             @if ($paymentMethod == 'stripe')
                 <span class="my-2">{{ __('Credit/Debit Card Information') }}</span>
+                    <input type="text" class="hidden" id="billing-name" wire:model="cardHolderName" value="{{ $cardHolderName }}"
+                         aria-label="billing name" />
+
                 <div>
                     <div id="card-element" class="form-control py-2"></div>
-                    <div class="alert alert-danger mt-4 d-none" id="card-error"></div>
+{{--                    <div class="alert alert-danger mt-4 d-none" id="card-error"></div>--}}
                 </div>
             @endif
 
@@ -84,7 +87,7 @@
             @endif
 
             <p class="my-3">
-                {{ __('Payable : ') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                {{ __('Payable : ') }} {{ money($paymentAmount, $defaultCurrency) }}
             </p>
             <p>
                 @if ($paymentType == 'reservation')
@@ -102,13 +105,13 @@
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status"
                         aria-hidden="true"></span>
-                    {{ __('Pay') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                    {{ __('Pay') }} {{ money($paymentAmount, $defaultCurrency) }}
                 </button>
             @endif
             @if ($paymentMethod == 'manual')
                 <button type="button" class="btn btn-primary" wire:click="nextStep" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Receive') }} {{ $defaultCurrency }} {{ number_format($paymentAmount, 2) }}
+                    {{ __('Receive') }} {{ money($paymentAmount, $defaultCurrency) }}
                 </button>
             @endif
         </div>
