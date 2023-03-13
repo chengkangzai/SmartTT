@@ -44,16 +44,16 @@
                                             @if ($loop->first) selected @endif>
                                             {{ $pricing['name'] }}
                                             ({{ $pricing['available_capacity'] . ' ' . __('Seat Left') }})
-                                            ({{ $defaultCurrency }} {{ money($pricing['price'], 'MYR') }})
+                                            ({{ money($pricing['price'], $defaultCurrency) }})
                                         </option>
                                     @endforeach
                                 </select>
                             @else
-                                <p class="float-end"> {{ money($guest['price'], 'MYR') }}</p>
+                                <p class="float-end"> {{ money($guest['price'], $defaultCurrency) }}</p>
                             @endif
                         </td>
                         <td>
-                            <p>{{ $defaultCurrency }} {{ money($guest['price'], 'MYR') }}</p>
+                            <p>{{ money($guest['price'], $defaultCurrency) }}</p>
                         </td>
                         <td>
                             <button wire:click="removeGuest({{ $i }})" class="btn btn-outline-danger"
@@ -72,7 +72,7 @@
                         <p class="float-end fw-bold ">{{ __('Total Price') }}</p>
                     </td>
                     <td colspan="2">
-                        <p class="fw-bold">{{ $defaultCurrency }} {{ money($totalPrice, 'MYR') }}</p>
+                        <p class="fw-bold">{{ money($totalPrice, $defaultCurrency) }}</p>
                     </td>
             </tfoot>
         </table>

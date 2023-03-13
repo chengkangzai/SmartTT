@@ -38,7 +38,7 @@ class RegisterBookingAndGuestStep extends StepComponent
     {
         $this->package = $this->state()->forStep('choose-package-step')['package'] ?? 1;
         $this->updatePricings();
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
         $this->charge_per_child = app(BookingSetting::class)->charge_per_child;
         if (count($this->guests) == 0) {
             $this->addNewGuest();

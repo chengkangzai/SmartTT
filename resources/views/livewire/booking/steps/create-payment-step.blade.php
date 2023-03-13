@@ -87,7 +87,7 @@
             @endif
 
             <p class="my-3">
-                {{ __('Payable : ') }} {{ money($paymentAmount, 'MYR') }}
+                {{ __('Payable : ') }} {{ money($paymentAmount, $defaultCurrency) }}
             </p>
             <p>
                 @if ($paymentType == 'reservation')
@@ -105,13 +105,13 @@
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span id="payment-button-spinner" class="spinner-border spinner-border-sm d-none" role="status"
                         aria-hidden="true"></span>
-                    {{ __('Pay') }} {{ money($paymentAmount, 'MYR') }}
+                    {{ __('Pay') }} {{ money($paymentAmount, $defaultCurrency) }}
                 </button>
             @endif
             @if ($paymentMethod == 'manual')
                 <button type="button" class="btn btn-primary" wire:click="nextStep" wire:loading.attr="disabled">
                     <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    {{ __('Receive') }} {{ money($paymentAmount, 'MYR') }}
+                    {{ __('Receive') }} {{ money($paymentAmount, $defaultCurrency) }}
                 </button>
             @endif
         </div>

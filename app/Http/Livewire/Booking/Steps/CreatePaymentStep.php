@@ -66,7 +66,7 @@ class CreatePaymentStep extends StepComponent
     public function mount()
     {
         $this->paymentMethod = auth()->user()->hasRole('Customer') ? Payment::METHOD_STRIPE : 'manual';
-        $this->defaultCurrency = app(GeneralSetting::class)->default_currency_symbol;
+        $this->defaultCurrency = app(GeneralSetting::class)->default_currency;
 
         $state = $this->state()->all();
         $this->bookingId = $state['confirm-booking-detail-step']['booking']['id'] ?? 1;
