@@ -19,14 +19,14 @@
         document.getElementById('payment-button').disabled = true;
         document.getElementById('payment-button-spinner').classList.remove('d-none');
         stripe.confirmCardSetup(clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    name: document.getElementById('billing-name').value,
-                },
-            }
-        })
-            .then(function (result) {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: document.getElementById('billing-name').value,
+                    },
+                }
+            })
+            .then(function(result) {
                 if (result.error) {
                     // document.getElementById('card-error').textContent = result.error.message;
                     // document.getElementById('card-error').classList.remove('d-none');
