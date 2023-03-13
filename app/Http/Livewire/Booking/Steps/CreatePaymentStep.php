@@ -86,7 +86,7 @@ class CreatePaymentStep extends StepComponent
 
     private function getReadyForPayment(): void
     {
-        $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax;
+        $reservation_charge_per_pax = app(BookingSetting::class)->reservation_charge_per_pax * 100;
 
         $this->updateOrCreatePayment($this->totalPrice, $reservation_charge_per_pax);
         $this->paymentAmount = $this->payment->amount;

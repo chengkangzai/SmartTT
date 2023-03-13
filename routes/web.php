@@ -3,9 +3,7 @@
 use App\Http\Controllers\BotManController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MSOauthController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicIndexController;
-use App\Http\Controllers\ReportController;
 use App\Http\Livewire\Front\Index\Tour\SearchTourPage;
 use Illuminate\Support\Facades\Route;
 
