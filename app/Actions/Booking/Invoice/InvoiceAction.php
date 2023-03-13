@@ -52,7 +52,7 @@ class InvoiceAction
                 return (new InvoiceItem())
                     ->title($g->name)
                     ->description($g->packagePricing?->name ?? __('Child'))
-                    ->pricePerUnit($g->packagePricing->price ?? $charge);
+                    ->pricePerUnit($g->packagePricing->price / 100 ?? $charge);
             })
             ->toArray();
     }
