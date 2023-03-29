@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         colors="true"
->
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" bootstrap="vendor/autoload.php"
+         colors="true" cacheDirectory=".phpunit.cache">
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
@@ -11,33 +9,11 @@
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
-        <testsuite name="Actions">
-            <directory suffix="Test.php">./tests/Feature/Actions</directory>
-        </testsuite>
-        <testsuite name="Controllers">
-            <directory suffix="Test.php">./tests/Feature/Controllers</directory>
-        </testsuite>
-        <testsuite name="Livewires">
-            <directory suffix="Test.php">./tests/Feature/Livewires</directory>
-        </testsuite>
-        <testsuite name="Filament">
-            <directory suffix="Test.php">./tests/Feature/Filament</directory>
-        </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <include>
             <directory suffix=".php">./app</directory>
         </include>
-        <exclude>
-            <directory suffix=".php">./app/Providers</directory>
-            <directory suffix=".php">./app/Http/Middleware</directory>
-            <directory suffix=".php">./app/Http/Kernel</directory>
-            <directory suffix=".php">./app/Http/Controllers/Auth/</directory>
-            <directory suffix=".php">./app/Http/Notifications</directory>
-            <directory suffix=".php">./app/Http/Jobs</directory>
-            <directory suffix=".php">./app/Console/Kernel</directory>
-            <file>./app/Http/Controllers/Controller</file>
-        </exclude>
     </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>
@@ -45,8 +21,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="DB_CONNECTION" value="mysql"/>
         <env name="DB_DATABASE" value="test_db"/>
-<!--        <env name="DB_CONNECTION" value="sqlite"/>-->
-<!--        <env name="DB_DATABASE" value=":memory:"/>-->
+        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
+        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

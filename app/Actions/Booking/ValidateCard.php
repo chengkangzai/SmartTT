@@ -19,7 +19,7 @@ trait ValidateCard
             'payment_type' => 'required',
             'billing_name' => 'required',
             'billing_phone' => 'required',
-        ], customAttributes: [
+        ], attributes: [
             'card_holder_name' => __('Card Holder Name'),
             'card_number' => __('Card Number'),
             'card_expiry_date' => __('Card Expiry'),
