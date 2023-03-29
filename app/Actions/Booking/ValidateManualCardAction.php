@@ -20,7 +20,7 @@ class ValidateManualCardAction
         Validator::make(
             [$field => $value],
             [$field => $this->validateCardRule[$field]],
-            customAttributes: [
+            attributes: [
                 'cardHolderName' => __('Card Holder Name'),
                 'cardNumber' => __('Card Number'),
                 'cardExpiry' => __('Card Expiry'),

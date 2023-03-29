@@ -17,7 +17,7 @@ class ValidateBookingGuestAction
             'guests.*.pricing' => 'required|integer',
             'guests.*.price' => 'required|numeric|min:1',
             'guests.*.is_child' => 'required|boolean',
-        ], customAttributes: [
+        ], attributes: [
             'guests.*.name' => __('Guest Name'),
             'guests.*.pricing' => __('Pricing'),
             'guests.*.price' => __('Price'),

@@ -30,9 +30,9 @@ class Flight extends Model
         'name',
     ];
 
-    protected $dates = [
-        'departure_date',
-        'arrival_date',
+    protected $casts = [
+        'departure_date' => 'datetime',
+        'arrival_date' => 'datetime',
     ];
 
     public function packages(): BelongsToMany

@@ -71,9 +71,9 @@ class Payment extends Model implements HasMedia
         'billing_phone',
     ];
 
-    protected $dates = [
-        'paid_at',
-        'deleted_at',
+    public $casts = [
+        'paid_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function amount(): Attribute

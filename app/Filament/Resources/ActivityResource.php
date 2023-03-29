@@ -156,7 +156,7 @@ class ActivityResource extends Resource
                     ->hidden(fn (Component $livewire) => $livewire instanceof ActivitiesRelationManager)
                     ->label(__('Subject'))
                     ->formatStateUsing(function (TextColumn $column) {
-                        return trans('constant.model.'.$column->getRecord()->subject_type) ?? __('System');
+                        return trans('constant.model.'.$column->getRecord()->subject_type) ?: __('System');
                     }),
                 TextColumn::make('created_at')
                     ->label(__('Date Time'))

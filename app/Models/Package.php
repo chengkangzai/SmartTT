@@ -26,8 +26,8 @@ class Package extends Model
         'depart_time',
     ];
 
-    protected $dates = [
-        'depart_time',
+    protected $casts = [
+        'depart_time' => 'datetime',
     ];
 
     public function price(): Attribute
