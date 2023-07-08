@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Country;
 use App\Models\Tour;
-use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class TourSeeder extends Seeder
