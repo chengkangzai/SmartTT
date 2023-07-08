@@ -31,9 +31,9 @@ class LatestUser extends BaseWidget
     public static function canView(): bool
     {
         return auth()->user()
-                ->roles
-                ->pluck('name')
-                ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
-                ->isNotEmpty();
+            ->roles
+            ->pluck('name')
+            ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+            ->isNotEmpty();
     }
 }
