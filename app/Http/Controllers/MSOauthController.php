@@ -88,6 +88,6 @@ class MSOauthController extends Controller
         auth()->user()->msOauth()->delete();
         $this->tokenService->clearTokens(auth()->user());
 
-        return redirect()->route('profile.show');
+        return to_route('profile.show');
     }
 }
