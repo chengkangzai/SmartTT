@@ -29,11 +29,11 @@ it('should be mountable', function () {
         ->assertSet(
             'cheapestPackagePricing',
             $tour
-            ->activePackages
-            ->map(function ($package) {
-                return $package->packagePricing->sortBy('price')->first();
-            })
-            ->sortBy('price')
-            ->first()
+                ->activePackages
+                ->map(function ($package) {
+                    return $package->packagePricing->sortBy('price')->first();
+                })
+                ->sortBy('price')
+                ->first()
         );
 });

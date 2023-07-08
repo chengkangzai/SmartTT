@@ -3,8 +3,8 @@
 namespace App\Actions\Booking;
 
 use App\Models\Payment;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Validator;
 
 trait ValidateCash
 {

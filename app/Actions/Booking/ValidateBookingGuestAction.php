@@ -2,8 +2,8 @@
 
 namespace App\Actions\Booking;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Validator;
 
 class ValidateBookingGuestAction
 {

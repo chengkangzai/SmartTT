@@ -3,10 +3,10 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\BookingSetting;
-use Cache;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
+use Illuminate\Support\Facades\Cache;
 
 class ManageBookingSetting extends SettingsPage
 {

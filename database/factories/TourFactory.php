@@ -7,7 +7,7 @@ use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
-use Str;
+use Illuminate\Support\Str;
 
 class TourFactory extends Factory
 {

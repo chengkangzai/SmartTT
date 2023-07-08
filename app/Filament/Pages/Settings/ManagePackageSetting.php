@@ -3,12 +3,12 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\PackageSetting;
-use Cache;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;
+use Illuminate\Support\Facades\Cache;
 
 class ManagePackageSetting extends SettingsPage
 {

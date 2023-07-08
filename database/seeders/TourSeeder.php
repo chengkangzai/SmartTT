@@ -4,11 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Country;
 use App\Models\Tour;
-use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class TourSeeder extends Seeder
 {

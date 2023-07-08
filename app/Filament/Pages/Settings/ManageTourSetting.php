@@ -4,12 +4,12 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
-use Cache;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\SettingsPage;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class ManageTourSetting extends SettingsPage
