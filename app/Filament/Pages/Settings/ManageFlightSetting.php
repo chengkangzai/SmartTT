@@ -4,7 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\FlightSetting;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Pages\SettingsPage;

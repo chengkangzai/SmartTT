@@ -4,7 +4,7 @@ namespace App\Filament\Pages\Settings;
 
 use App\Models\Country;
 use App\Models\Settings\GeneralSetting;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 use Carbon\CarbonTimeZone;
 use Closure;
 use DateTimeZone;

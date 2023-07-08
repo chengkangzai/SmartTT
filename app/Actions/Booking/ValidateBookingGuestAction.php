@@ -3,7 +3,7 @@
 namespace App\Actions\Booking;
 
 use Illuminate\Validation\ValidationException;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ValidateBookingGuestAction
 {

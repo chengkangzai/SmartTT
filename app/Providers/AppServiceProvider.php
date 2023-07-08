@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App;
+use Illuminate\Support\Facades\App;
 use Filament\Facades\Filament;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Scout\Builder;
-use URL;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {

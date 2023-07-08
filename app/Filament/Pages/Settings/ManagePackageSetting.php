@@ -3,7 +3,7 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Settings\PackageSetting;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;

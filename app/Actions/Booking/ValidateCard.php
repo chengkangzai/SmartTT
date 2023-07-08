@@ -4,7 +4,7 @@ namespace App\Actions\Booking;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 trait ValidateCard
 {

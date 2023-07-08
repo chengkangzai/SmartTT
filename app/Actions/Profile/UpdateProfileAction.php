@@ -2,6 +2,7 @@
 
 namespace App\Actions\Profile;
 
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -9,7 +10,7 @@ class UpdateProfileAction
 {
     public function execute(array $data, User $user): User
     {
-        $data = \Validator::make($data, [
+        $data = Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|email|string|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|string|confirmed|min:8',
