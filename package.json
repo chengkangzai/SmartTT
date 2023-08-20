@@ -12,7 +12,7 @@
         "format-tailwind": "blade-formatter --write resources/views/front/**/*.blade.php --sort-tailwindcss-classes && blade-formatter --write resources/views/livewire/front/**/*.blade.php --sort-tailwindcss-classes"
     },
     "devDependencies": {
-        "@coreui/coreui": "^4.0.2",
+        "@coreui/coreui": "4.2.6",
         "@popperjs/core": "^2.10.2",
         "@tailwindcss/forms": "^0.5.2",
         "autoprefixer": "^10.4.7",
