@@ -39,7 +39,7 @@ class SearchTourCard extends Component
         $package = Package::active()->latest('depart_time')->first();
         if ($package) {
             $this->latestDepartTime = $package->depart_time->format('Y-m-d');
-        }else{
+        } else {
             $this->latestDepartTime = now()->format('Y-m-d');
         }
 
@@ -51,6 +51,7 @@ class SearchTourCard extends Component
         if ($pricings->isEmpty()) {
             $this->priceFrom = 0;
             $this->priceTo = 0;
+
             return;
         }
 

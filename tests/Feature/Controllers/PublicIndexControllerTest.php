@@ -55,7 +55,7 @@ it('should return search view', function () {
         ->assertSeeLivewire(PackagesTable::class)
         ->assertViewHas([
             'tour' => $tour,
-            'des' => $tour->description->map(fn($description) => [
+            'des' => $tour->description->map(fn ($description) => [
                 'question' => $description->place,
                 'answer' => $description->description,
             ]),
