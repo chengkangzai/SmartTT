@@ -10,7 +10,7 @@ use Database\Seeders\TourSeeder;
 
 use function Pest\Laravel\seed;
 
-beforeEach(function () {
+it('should be mountable', function () {
     seed([
         CountrySeeder::class,
         TourSeeder::class,
@@ -19,9 +19,12 @@ beforeEach(function () {
         FlightSeeder::class,
         PackageSeeder::class,
     ]);
+    Livewire::test(SearchTourCard::class)
+        ->assertSuccessful();
 });
 
-it('should be mountable', function () {
+it('should render if even no record', function () {
     Livewire::test(SearchTourCard::class)
+        ->assertOk()
         ->assertSuccessful();
 });

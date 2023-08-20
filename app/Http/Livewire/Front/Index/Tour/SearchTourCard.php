@@ -27,21 +27,35 @@ class SearchTourCard extends Component
 
     public int $priceTo;
 
-    public function mount()
+    public function mount(): void
     {
         $this->imageUrl = Media::whereCollectionName('thumbnail')
             ->whereModelType(Tour::class)
             ->inRandomOrder()
             ?->first()
-            ?->getUrl() ?? '#';
+            ?->getUrl() ?? 'https://via.placeholder.com/640x480.png';
 
         $this->countries = Country::select(['id', 'name'])->has('tours')->get();
-        $this->latestDepartTime = Package::active()->latest('depart_time')->first()->depart_time->format('Y-m-d');
+        $package = Package::active()->latest('depart_time')->first();
+        if ($package) {
+            $this->latestDepartTime = $package->depart_time->format('Y-m-d');
+        } else {
+            $this->latestDepartTime = now()->format('Y-m-d');
+        }
 
-        $sortByPrice = PackagePricing::with('activePackage:id')
+        $pricings = PackagePricing::with('activePackage:id')
             ->select(['id', 'price'])
             ->orderBy('price')
-            ->get()
+            ->get();
+
+        if ($pricings->isEmpty()) {
+            $this->priceFrom = 0;
+            $this->priceTo = 0;
+
+            return;
+        }
+
+        $sortByPrice = $pricings
             ->pluck('price')
             ->map(fn ($price) => (int) $price / 100);
 

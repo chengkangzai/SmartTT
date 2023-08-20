@@ -32,6 +32,13 @@ it('should return index view', function () {
         ->assertViewIs('front.index.index');
 });
 
+it('should return page even if no data', function () {
+    Tour::query()->delete();
+    $this
+        ->get(route('front.index'))
+        ->assertViewIs('front.index.index');
+});
+
 it('should return search view', function () {
     $tour = Tour::whereHas('activePackages')->first()->load([
         'activePackages:id,tour_id,depart_time,is_active',
@@ -41,17 +48,16 @@ it('should return search view', function () {
         'description',
         'countries:id,name',
     ]);
+
     $this
         ->get(route('front.tours', $tour))
         ->assertViewIs('front.index.tours')
         ->assertSeeLivewire(PackagesTable::class)
         ->assertViewHas([
             'tour' => $tour,
-            'des' => $tour->description->map(function ($description) {
-                return [
-                    'question' => $description->place,
-                    'answer' => $description->description,
-                ];
-            }),
+            'des' => $tour->description->map(fn ($description) => [
+                'question' => $description->place,
+                'answer' => $description->description,
+            ]),
         ]);
 });

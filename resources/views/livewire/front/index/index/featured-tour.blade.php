@@ -6,7 +6,7 @@
         </h2>
     </div>
     <div class="container mx-auto my-4 grid items-stretch gap-4 md:grid-cols-3">
-        @foreach ($tours as $tour)
+        @forelse  ($tours as $tour)
             <div
                 class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
                 <div class="aspect-video w-full">
@@ -30,7 +30,13 @@
                     {{ __('View Details') }}
                 </a>
             </div>
-        @endforeach
+        @empty
+            <div class="container mx-auto py-10">
+                <h2 class="text-3xl font-extrabold text-center text-gray-600">
+                    {{ __('No tours found') }}
+                </h2>
+            </div>
+        @endforelse
     </div>
     @if ($stillCanLoad)
         <div class="container mx-auto py-2">
