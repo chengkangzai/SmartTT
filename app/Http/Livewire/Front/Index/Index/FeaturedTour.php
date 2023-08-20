@@ -20,7 +20,7 @@ class FeaturedTour extends Component
 
     public bool $stillCanLoad = true;
 
-    public function mount()
+    public function mount(): void
     {
         $this->getTours();
     }
@@ -30,7 +30,7 @@ class FeaturedTour extends Component
         return view('livewire.front.index.index.featured-tour');
     }
 
-    public function loadMore()
+    public function loadMore(): void
     {
         $this->limit += 6;
         $this->getTours();
