@@ -51,6 +51,10 @@ class FeaturedTour extends Component
             ->limit($this->limit)
             ->get();
 
+        if ($this->tours->count() <= 0) {
+            $this->stillCanLoad = false;
+        }
+
         $totalCanLoad = Tour::active()->whereHas('activePackages.activePricings')->count();
         if ($totalCanLoad < $this->limit) {
             $this->stillCanLoad = false;

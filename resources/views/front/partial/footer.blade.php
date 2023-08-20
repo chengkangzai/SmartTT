@@ -78,8 +78,12 @@
                         <p class="text-2xl font-semibold">{{ __('Tours') }}</p>
                         <a href="{{ route('front.index') }}">{{ __('Front Page') }}</a>
                         <a href="{{ route('front.search') }}">{{ __('Search Tours') }}</a>
-                        <a
-                            href="{{ route('front.tours', \App\Models\Tour::inRandomOrder()->first()) }}">{{ __('Feeling Lucky') }}</a>
+                        @php
+                            $tour = \App\Models\Tour::inRandomOrder()->first();
+                        @endphp
+                        @if($tour)
+                            <a href="{{ route('front.tours', $tour) }}">{{ __('Feeling Lucky') }}</a>
+                        @endif
                     </div>
                 </div>
             </div>
