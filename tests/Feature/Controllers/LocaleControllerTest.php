@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\User;
 use Database\Seeders\TourSeeder;
-use function Pest\Laravel\actingAs;
+
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 
