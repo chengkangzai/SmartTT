@@ -4,13 +4,14 @@ use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Filament\Pages\Actions\DeleteAction;
+use Phpsa\FilamentAuthentication\Resources\UserResource;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use Phpsa\FilamentAuthentication\Resources\UserResource;
 
 beforeEach(function () {
     seed([

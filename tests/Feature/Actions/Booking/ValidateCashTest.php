@@ -3,6 +3,7 @@
 use App\Actions\Booking\ValidateCash;
 use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
+
 use function PHPUnit\Framework\assertNotEmpty;
 
 it('should validate valid data', function () {
