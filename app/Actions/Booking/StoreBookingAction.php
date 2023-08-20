@@ -4,6 +4,7 @@ namespace App\Actions\Booking;
 
 use App\Models\Booking;
 use App\Models\User;
+
 use function collect;
 
 class StoreBookingAction

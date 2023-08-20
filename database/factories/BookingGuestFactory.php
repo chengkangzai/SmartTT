@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\BookingGuest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
+
 use function rand;
 
 class BookingGuestFactory extends Factory

@@ -13,6 +13,7 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\TourSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Illuminate\Validation\ValidationException;
+
 use function Pest\Laravel\seed;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertNotEmpty;

@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
-use function app;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Settings\BookingSetting;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
+
+use function app;
 
 class PaymentFactory extends Factory
 {
