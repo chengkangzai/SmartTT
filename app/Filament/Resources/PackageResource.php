@@ -8,6 +8,7 @@ use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManage
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Package;
 use App\Models\Settings\PackageSetting;
+use Arr;
 use Closure;
 use Filament\Forms;
 use Filament\Notifications\Notification;
@@ -56,8 +57,7 @@ class PackageResource extends Resource
                     ->multiple()
                     ->hiddenOn(['view'])
                     ->relationship('flight', 'name')
-                    ->label(__('Flight'))
-                    ->required(),
+                    ->label(__('Flight')),
                 Forms\Components\Toggle::make('is_active')
                     ->inline(false)
                     ->label(__('Active'))
@@ -77,6 +77,7 @@ class PackageResource extends Resource
                                 ->required(),
                             Forms\Components\TextInput::make('capacity')
                                 ->reactive()
+                                ->numeric()
                                 ->afterStateUpdated(function (Closure $get, Closure $set, string $context) {
                                     if ($context === 'create') {
                                         $set('total_capacity', $get('capacity'));
@@ -86,18 +87,22 @@ class PackageResource extends Resource
                                 ->label(__('Capacity'))
                                 ->columnSpan(2)
                                 ->required(),
-                            Forms\Components\Hidden::make('total_capacity'),
-                            Forms\Components\Hidden::make('available_capacity'),
                             Forms\Components\Toggle::make('is_active')
                                 ->label(__('Active'))
                                 ->columnSpan(1)
                                 ->inline(false)
                                 ->required(),
+                            Forms\Components\Hidden::make('total_capacity'),
+                            Forms\Components\Hidden::make('available_capacity'),
                         ])
-                        ->collapsed()
+                        ->collapsible()
                         ->columnSpan(2)
                         ->defaultItems(3)
-                        ->default(app(PackageSetting::class)->default_pricing)
+                        ->default(Arr::map(app(PackageSetting::class)->default_pricing, fn ($data) => [
+                            ...$data,
+                            'total_capacity' => $data['capacity'],
+                            'available_capacity' => $data['capacity'],
+                        ]))
                         ->columns(8),
                 ])
                     ->hiddenOn(['view', 'edit']),
