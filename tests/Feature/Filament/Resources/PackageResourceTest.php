@@ -77,14 +77,12 @@ it('can validate input', function () {
         ->fillForm([
             'tour_id' => null,
             'depart_time' => null,
-            'flight_id' => null,
             'is_active' => null,
         ])
         ->call('create')
         ->assertHasFormErrors([
             'tour_id',
             'depart_time',
-            'flight_id',
             'is_active',
         ]);
 });
