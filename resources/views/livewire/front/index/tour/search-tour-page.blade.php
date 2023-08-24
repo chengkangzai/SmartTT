@@ -149,7 +149,6 @@
                             </div>
                             <div class="flex flex-row-reverse content-center text-xl font-medium">
                                 <span class="my-auto text-xl font-extrabold md:text-3xl">
-                                    {{ $default_currency_symbol }}
                                     {{ $this->getCheapestPrice($tour) }}
                                 </span>
                                 <p class="my-auto px-2">{{ __('Price start from') }}</p>
