@@ -2,7 +2,7 @@
     <div class="bg-gray-100 px-4 pb-2">
         <div class="container mx-auto py-10">
             <h2
-                class="inline border-b-2 border-b-violet-500 bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-border text-3xl font-extrabold text-transparent underline underline-offset-8">
+                class="inline border-b-2 border-b-violet-500 bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-3xl font-extrabold text-transparent underline underline-offset-8">
                 {{ __('Featured Tour') }}
             </h2>
         </div>
