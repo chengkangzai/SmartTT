@@ -81,7 +81,7 @@
                         @php
                             $tour = \App\Models\Tour::inRandomOrder()->first();
                         @endphp
-                        @if($tour)
+                        @if ($tour)
                             <a href="{{ route('front.tours', $tour) }}">{{ __('Feeling Lucky') }}</a>
                         @endif
                     </div>

@@ -1,4 +1,4 @@
-@if($tours->isNotEmpty())
+@if ($tours->isNotEmpty())
     <div class="bg-gray-100 px-4 pb-2">
         <div class="container mx-auto py-10">
             <h2
@@ -7,15 +7,15 @@
             </h2>
         </div>
         <div class="container mx-auto my-4 grid items-stretch gap-4 md:grid-cols-3">
-            @foreach  ($tours as $tour)
+            @foreach ($tours as $tour)
                 <div
                     class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105">
                     <div class="aspect-video w-full">
                         <a href="{{ route('front.tours', $tour) }}">
                             <img srcset="{{ $tour->getFirstMedia('thumbnail')?->responsiveImages()?->getSrcset() }}"
-                                 src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
-                                 onload="window.requestAnimationFrame(function(){if(!(size=getBoundingClientRect().width))return;onload=null;sizes=Math.ceil(size/window.innerWidth*100)+'vw';});"
-                                 alt="Image of {{ $tour->name }}" class="aspect-video w-full"/>
+                                src="{{ $tour->getFirstMediaUrl('thumbnail') }}"
+                                onload="window.requestAnimationFrame(function(){if(!(size=getBoundingClientRect().width))return;onload=null;sizes=Math.ceil(size/window.innerWidth*100)+'vw';});"
+                                alt="Image of {{ $tour->name }}" class="aspect-video w-full" />
                         </a>
                     </div>
                     <div class="p-4 text-center md:px-7 md:pb-0">
@@ -27,7 +27,7 @@
 
                     </div>
                     <a href="{{ route('front.tours', $tour) }}"
-                       class="mx-auto mb-6 w-fit rounded-full border py-2 px-7 text-base font-medium transition hover:border-black hover:bg-white hover:text-black">
+                        class="mx-auto mb-6 w-fit rounded-full border py-2 px-7 text-base font-medium transition hover:border-black hover:bg-white hover:text-black">
                         {{ __('View Details') }}
                     </a>
                 </div>
@@ -36,11 +36,10 @@
         @if ($stillCanLoad)
             <div class="container mx-auto py-2">
                 <button class="mx-auto block animate-bounce rounded px-4 py-2 text-center hover:bg-gray-200"
-                        wire:click="loadMore">
+                    wire:click="loadMore">
                     {{ __('More') }} &downarrow;
                 </button>
             </div>
         @endif
     </div>
 @endif
-
