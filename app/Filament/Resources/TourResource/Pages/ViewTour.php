@@ -18,6 +18,7 @@ class ViewTour extends ViewRecord
             Actions\DeleteAction::make(),
             Action::make('Itinerary')
                 ->label(__('Itinerary'))
+                ->icon('heroicon-o-eye')
                 ->url(fn () => $this->record->getFirstMediaUrl('itinerary'))
                 ->openUrlInNewTab(),
         ];
