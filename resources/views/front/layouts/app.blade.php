@@ -17,7 +17,8 @@
     <meta name="theme-color" content="#ffffff">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('tailwind/app.css') }}" rel="stylesheet">
-    <link rel='icon' href='/icon.gif' type='image/gif' sizes='16x16'>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script defer src="{{ asset('js/alpine.js') }}"></script>
     @livewireStyles
