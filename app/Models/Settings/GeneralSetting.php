@@ -33,6 +33,10 @@ class GeneralSetting extends Settings
 
     public array $supported_site_mode;
 
+    /**
+     * @var string
+     * @example 'Maintenance', 'Enquiry', 'Booking'
+     */
     public string $site_mode;
 
     public bool $facebook_enable;
