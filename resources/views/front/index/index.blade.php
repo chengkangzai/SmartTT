@@ -98,4 +98,5 @@
         </div>
     </section>
     <livewire:front.index.index.featured-tour />
+    <livewire:make-feedback />
 @endsection

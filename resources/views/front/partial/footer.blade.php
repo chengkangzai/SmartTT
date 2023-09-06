@@ -88,36 +88,36 @@
                 </div>
             </div>
             @php
-                $setting=app(\App\Models\Settings\GeneralSetting::class);
+                $setting = app(\App\Models\Settings\GeneralSetting::class);
             @endphp
-            @if($setting->facebook_enable || $setting->instagram_enable || $setting->twitter_enable || $setting->whatsapp_enable)
+            @if ($setting->facebook_enable || $setting->instagram_enable || $setting->twitter_enable || $setting->whatsapp_enable)
                 <div class="hidden border md:mx-8 md:flex"></div>
                 <div class="mx-auto w-full p-5">
                     <h6 class="py-4 text-center text-2xl font-bold">{{ __('Follow Us On') }}</h6>
                     <div class="mx-auto flex flex-row justify-between gap-8 md:py-8">
-                        @if($setting->facebook_enable)
-                            <a href="{{$setting->facebook_link}}" target="_blank" rel="noopener noreferrer">
+                        @if ($setting->facebook_enable)
+                            <a href="{{ $setting->facebook_link }}" target="_blank" rel="noopener noreferrer">
                                 <svg class="h-8 w-8">
                                     <use xlink:href="{{ asset('icons/brand.svg#cib-facebook') }}"></use>
                                 </svg>
                             </a>
                         @endif
-                        @if($setting->instagram_enable)
-                            <a href="{{$setting->instagram_link}}" target="_blank" rel="noopener noreferrer">
+                        @if ($setting->instagram_enable)
+                            <a href="{{ $setting->instagram_link }}" target="_blank" rel="noopener noreferrer">
                                 <svg class="h-8 w-8">
                                     <use xlink:href="{{ asset('icons/brand.svg#cib-instagram') }}"></use>
                                 </svg>
                             </a>
                         @endif
-                        @if($setting->twitter_enable)
-                            <a href="{{$setting->twitter_link}}" target="_blank" rel="noopener noreferrer">
+                        @if ($setting->twitter_enable)
+                            <a href="{{ $setting->twitter_link }}" target="_blank" rel="noopener noreferrer">
                                 <svg class="h-8 w-8">
                                     <use xlink:href="{{ asset('icons/brand.svg#cib-twitter') }}"></use>
                                 </svg>
                             </a>
                         @endif
-                        @if($setting->whatsapp_enable)
-                            <a href="{{$setting->whatsapp_link}}" target="_blank" rel="noopener noreferrer">
+                        @if ($setting->whatsapp_enable)
+                            <a href="{{ $setting->whatsapp_link }}" target="_blank" rel="noopener noreferrer">
                                 <svg class="h-8 w-8">
                                     <use xlink:href="{{ asset('icons/brand.svg#cib-whatsapp') }}"></use>
                                 </svg>
