@@ -15,9 +15,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Payment extends Model implements HasMedia
 {
     use HasFactory;
-    use SoftDeletes;
-    use LogsActivity;
     use InteractsWithMedia;
+    use LogsActivity;
+    use SoftDeletes;
 
     public const STATUS_PENDING = 'pending';
 

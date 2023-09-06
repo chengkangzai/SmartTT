@@ -14,9 +14,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Feedback extends Model implements HasMedia
 {
     use HasFactory;
-    use SoftDeletes;
     use InteractsWithMedia;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'content',

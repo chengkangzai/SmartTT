@@ -15,9 +15,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Booking extends Model
 {
-    use SoftDeletes;
     use HasFactory;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',

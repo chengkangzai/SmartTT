@@ -37,7 +37,7 @@ class InvoiceAction
             'phone' => $this->generalSetting->company_phone,
             'address' => $this->generalSetting->company_address ?? '',
             'custom_fields' => [
-                'business id' => $this->generalSetting->business_registration_no ??'' ,
+                'business id' => $this->generalSetting->business_registration_no ?? '',
             ],
         ]);
 

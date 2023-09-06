@@ -14,8 +14,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Flight extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'departure_date',

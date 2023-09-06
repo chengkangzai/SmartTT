@@ -16,12 +16,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use Notifiable;
-    use HasRoles;
-    use HasFactory;
-    use SoftDeletes;
-    use LogsActivity;
     use Billable;
+    use HasFactory;
+    use HasRoles;
+    use LogsActivity;
+    use Notifiable;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',

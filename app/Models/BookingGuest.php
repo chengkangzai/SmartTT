@@ -12,8 +12,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class BookingGuest extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
 
     public $fillable = [
         'name',

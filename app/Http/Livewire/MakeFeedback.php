@@ -7,12 +7,11 @@ use Livewire\Component;
 
 class MakeFeedback extends Component
 {
-    public string $name='';
+    public string $name = '';
 
     public string $feedback;
 
     public $showSuccessMessage = false;
-
 
     public array $rules = [
         'name' => ['string', 'max:255'],

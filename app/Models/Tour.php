@@ -17,10 +17,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Tour extends Model implements HasMedia
 {
     use HasFactory;
-    use SoftDeletes;
     use InteractsWithMedia;
     use LogsActivity;
     use Searchable;
+    use SoftDeletes;
 
     protected $fillable = [
         'tour_code',

@@ -17,8 +17,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Package extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'tour_id',

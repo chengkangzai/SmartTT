@@ -104,7 +104,7 @@ class BotManController extends Controller
             $company_email = $setting->company_email;
 
             $bot->types();
-            if ($company_address){
+            if ($company_address) {
                 $bot->reply(__('Our company locate at : ').$company_address);
             }
             $bot->reply(__('Our phone number is : ').$company_phone);
