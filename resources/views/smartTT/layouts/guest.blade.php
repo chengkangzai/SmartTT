@@ -20,7 +20,7 @@
 
     <header class="header position-sticky top-0">
         <a class="header-brand" href="{{ route('front.index') }}">
-            <img src="{{ asset('button_smart-tt.png') }}" height="24" class="d-inline-block align-top"
+            <img src="{{ asset('landscape_logo.png') }}" height="24" class="d-inline-block align-top"
                 alt="Brand Logo">
         </a>
         <ul class="header-nav mr-auto">

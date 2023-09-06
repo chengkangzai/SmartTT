@@ -30,7 +30,7 @@ class InvoiceAction
         $this->invoice = Invoice::make()
             ->currencySymbol($this->generalSetting->default_currency_symbol)
             ->currencyCode($this->generalSetting->default_currency)
-            ->logo(public_path('button_smart-tt.png'));
+            ->logo(public_path('landscape_logo.png'));
 
         $this->client = new Party([
             'name' => $this->generalSetting->company_name,

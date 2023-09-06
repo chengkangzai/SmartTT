@@ -2,7 +2,7 @@
 
     <li class="d-block d-md-none nav-item">
         <a class="nav-link" href="{{ route('front.index') }}">
-            <img src="{{ asset('button_smart-tt.png') }}" alt="" height="40">
+            <img src="{{ asset('landscape_logo.png') }}" alt="" height="40">
         </a>
         <div style="border: 1"></div>
     </li>

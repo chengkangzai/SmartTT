@@ -56,7 +56,7 @@
             <div class="mx-auto w-full border-b-2 p-5 md:border-none">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-center">
-                        <img src="{{ asset('button_smart-tt.png') }}" alt="Site Logo" class="inline w-32">
+                        <img src="{{ asset('landscape_logo.png') }}" alt="Site Logo" class="inline w-32">
                     </div>
                     <h3 class="py-4 text-center text-3xl font-bold">{{ $site_name }}</h3>
                     <p class="text-center text-gray-800">
