@@ -141,13 +141,11 @@ class ManageGeneralSetting extends SettingsPage
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             TextInput::make('business_registration_no')
                                 ->label(__('setting.general.business_registration_no'))
-                                ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting')),
                             Textarea::make('company_address')
                                 ->label(__('setting.general.company_address'))
                                 ->columnSpan(2)
-                                ->required()
                                 ->maxLength(255)
                                 ->disabled(auth()->user()->cannot('Edit Setting'))
                                 ->rows(4),
