@@ -41,12 +41,9 @@ class FeaturedTour extends Component
         $this->tours = Tour::query()
             ->with([
                 'media',
-                'activePackages:id,is_active,depart_time',
-                'activePackages.activePricings:id,price,package_id',
                 'countries:id,name',
             ])
             ->active()
-            ->whereHas('activePackages.activePricings')
             ->select(['id', 'name', 'slug'])
             ->limit($this->limit)
             ->get();
@@ -55,7 +52,7 @@ class FeaturedTour extends Component
             $this->stillCanLoad = false;
         }
 
-        $totalCanLoad = Tour::active()->whereHas('activePackages.activePricings')->count();
+        $totalCanLoad = Tour::active()->count();
         if ($totalCanLoad < $this->limit) {
             $this->stillCanLoad = false;
         }
