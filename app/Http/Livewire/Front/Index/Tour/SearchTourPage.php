@@ -26,7 +26,7 @@ class SearchTourPage extends Component
         'category',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->categories = Tour::query()
             ->select('category')
