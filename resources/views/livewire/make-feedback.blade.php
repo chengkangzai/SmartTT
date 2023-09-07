@@ -6,8 +6,8 @@
 
         @if($showSuccessMessage)
             <div class="alert alert-success mb-4" role="alert">
-                <strong class="font-bold">Thank you!</strong>
-                <span class="block sm:inline">Your feedback has been submitted.</span>
+                <strong class="font-bold">{{__('Thank you!')}}</strong>
+                <span class="block sm:inline">{{__('Your feedback has been submitted.')}}</span>
             </div>
         @endif
 
@@ -43,7 +43,7 @@
                 </button>
                 <span wire:loading wire:target="submit" class="ml-2">
                     <div class="spinner-border w-4 h-4" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                        <span class="visually-hidden">{{__('Loading')}}...</span>
                     </div>
                 </span>
             </div>
