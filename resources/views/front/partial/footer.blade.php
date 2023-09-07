@@ -66,7 +66,7 @@
                         {{ $setting->company_email }}
                     </p>
                     <p class="text-center text-gray-800">
-                        @if(str($setting->company_address)->isNotEmpty())
+                        @if (str($setting->company_address)->isNotEmpty())
                             {!! str($setting->company_address)->replace(',', ', <br>') !!}
                         @endif
                     </p>
