@@ -40,6 +40,7 @@ jobs:
       - name: Migrate database
         run: |
           mysql --version
+          php artisan migrate
 
       - name: Execute tests
         run: composer test

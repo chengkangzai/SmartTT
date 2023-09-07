@@ -12,8 +12,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class TourDescription extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $table = 'tour_description';
 

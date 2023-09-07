@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Settings\GeneralSetting;
 use App\Models\User;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -30,10 +31,12 @@ class LatestUser extends BaseWidget
 
     public static function canView(): bool
     {
-        return auth()->user()
-            ->roles
-            ->pluck('name')
-            ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
-            ->isNotEmpty();
+        return app(GeneralSetting::class)->site_mode !== 'Enquiry' &&
+            auth()
+                ->user()
+                ->roles
+                ->pluck('name')
+                ->filter(fn ($name) => str($name)->contains(['Manager', 'Super Admin', 'Staff']))
+                ->isNotEmpty();
     }
 }

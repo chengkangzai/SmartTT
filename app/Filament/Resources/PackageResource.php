@@ -7,6 +7,7 @@ use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers\FlightRelationManager;
 use App\Filament\Resources\PackageResource\RelationManagers\PricingsRelationManager;
 use App\Models\Package;
+use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\PackageSetting;
 use Arr;
 use Closure;
@@ -251,5 +252,10 @@ class PackageResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function canViewAny(): bool
+    {
+        return parent::canViewAny() && app(GeneralSetting::class)->site_mode !== 'Enquiry';
     }
 }

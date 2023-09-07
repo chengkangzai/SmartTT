@@ -56,7 +56,7 @@
             <div class="mx-auto w-full border-b-2 p-5 md:border-none">
                 <div class="flex flex-col">
                     <div class="flex items-center justify-center">
-                        <img src="{{ asset('button_smart-tt.png') }}" alt="Site Logo" class="inline w-32">
+                        <img src="{{ asset('landscape_logo.png') }}" alt="Site Logo" class="inline w-32">
                     </div>
                     <h3 class="py-4 text-center text-3xl font-bold">{{ $site_name }}</h3>
                     <p class="text-center text-gray-800">
@@ -66,7 +66,9 @@
                         {{ $setting->company_email }}
                     </p>
                     <p class="text-center text-gray-800">
-                        {!! str($setting->company_address)->replace(',', ', <br>') !!}
+                        @if (str($setting->company_address)->isNotEmpty())
+                            {!! str($setting->company_address)->replace(',', ', <br>') !!}
+                        @endif
                     </p>
                 </div>
             </div>
@@ -81,30 +83,52 @@
                         @php
                             $tour = \App\Models\Tour::inRandomOrder()->first();
                         @endphp
-                        @if($tour)
+                        @if ($tour)
                             <a href="{{ route('front.tours', $tour) }}">{{ __('Feeling Lucky') }}</a>
                         @endif
                     </div>
                 </div>
             </div>
-            <div class="hidden border md:mx-8 md:flex"></div>
-            <div class="mx-auto w-full p-5">
-                <h6 class="py-4 text-center text-2xl font-bold">{{ __('Supported Payments') }}</h6>
-                <div class="mx-auto flex flex-row justify-between gap-8 md:py-8">
-                    <svg class="h-8 w-8">
-                        <use xlink:href="{{ asset('icons/brand.svg#cib-cc-stripe') }}"></use>
-                    </svg>
-                    <svg class="h-8 w-8">
-                        <use xlink:href="{{ asset('icons/brand.svg#cib-cc-amex') }}"></use>
-                    </svg>
-                    <svg class="h-8 w-8">
-                        <use xlink:href="{{ asset('icons/brand.svg#cib-cc-mastercard') }}"></use>
-                    </svg>
-                    <svg class="h-8 w-8">
-                        <use xlink:href="{{ asset('icons/brand.svg#cib-cc-visa') }}"></use>
-                    </svg>
+            @php
+                $setting = app(\App\Models\Settings\GeneralSetting::class);
+            @endphp
+            @if ($setting->facebook_enable || $setting->instagram_enable || $setting->twitter_enable || $setting->whatsapp_enable)
+                <div class="hidden border md:mx-8 md:flex"></div>
+                <div class="mx-auto w-full p-5">
+                    <h6 class="py-4 text-center text-2xl font-bold">{{ __('Follow Us On') }}</h6>
+                    <div class="mx-auto flex flex-row justify-between gap-8 md:py-8">
+                        @if ($setting->facebook_enable)
+                            <a href="{{ $setting->facebook_link }}" target="_blank" rel="noopener noreferrer">
+                                <svg class="h-8 w-8">
+                                    <use xlink:href="{{ asset('icons/brand.svg#cib-facebook') }}"></use>
+                                </svg>
+                            </a>
+                        @endif
+                        @if ($setting->instagram_enable)
+                            <a href="{{ $setting->instagram_link }}" target="_blank" rel="noopener noreferrer">
+                                <svg class="h-8 w-8">
+                                    <use xlink:href="{{ asset('icons/brand.svg#cib-instagram') }}"></use>
+                                </svg>
+                            </a>
+                        @endif
+                        @if ($setting->twitter_enable)
+                            <a href="{{ $setting->twitter_link }}" target="_blank" rel="noopener noreferrer">
+                                <svg class="h-8 w-8">
+                                    <use xlink:href="{{ asset('icons/brand.svg#cib-twitter') }}"></use>
+                                </svg>
+                            </a>
+                        @endif
+                        @if ($setting->whatsapp_enable)
+                            <a href="{{ $setting->whatsapp_link }}" target="_blank" rel="noopener noreferrer">
+                                <svg class="h-8 w-8">
+                                    <use xlink:href="{{ asset('icons/brand.svg#cib-whatsapp') }}"></use>
+                                </svg>
+                            </a>
+                        @endif
+
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ use App\Filament\Resources\AirportResource\Pages;
 use App\Filament\Resources\AirportResource\RelationManagers\FlightsAsArrivalRelationManager;
 use App\Filament\Resources\AirportResource\RelationManagers\FlightsAsDepartureRelationManager;
 use App\Models\Airport;
+use App\Models\Settings\GeneralSetting;
 use DateTimeZone;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -144,5 +145,10 @@ class AirportResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function canViewAny(): bool
+    {
+        return parent::canViewAny() && app(GeneralSetting::class)->site_mode !== 'Enquiry';
     }
 }

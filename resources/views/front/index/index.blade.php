@@ -8,7 +8,36 @@
 @endsection
 
 @section('content')
-    <livewire:front.index.tour.search-tour-card />
+    <div class="grid w-full place-items-center bg-cover bg-center bg-no-repeat py-20 opacity-90 md:py-40"
+        style="background-image: url('{{ $imageUrl }}');">
+        <div class="container bg-white/30 p-3 md:rounded">
+            <button class="rounded-t bg-white px-4 py-2 font-bold text-blue-900 hover:bg-gray-100">
+                <svg class="mr-2 inline h-5 w-5">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-beach-access') }}"></use>
+                </svg>
+                {{ __('Tours') }}
+            </button>
+            <form action="{{ route('front.search') }}" method="GET">
+                <div class="flex flex-col gap-2 bg-white p-2 md:flex-row md:rounded">
+                    <div class="w-full rounded-lg border p-2">
+                        <h3 class="px-2 pb-1 text-lg font-bold">{{ __('Keyword') }}</h3>
+                        <div class="flex w-full flex-col gap-1">
+                            <input type="text" class="rounded-lg" id="q" name="q"
+                                aria-label="{{ __('Keyword') }}" placeholder="{{ __('Keyword') }}">
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <input value="{{ __('Search') }}" type="submit"
+                            class="my-auto rounded bg-green-500 py-2 px-4 text-white hover:bg-green-600 hover:text-gray-50">
+                        <small>{{ __('Powered by') }}
+                            <img class="d-inline h-4" src="{{ asset('icons/algolia.png') }}" alt="Powered By Algolia" />
+                        </small>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap">
@@ -69,4 +98,5 @@
         </div>
     </section>
     <livewire:front.index.index.featured-tour />
+    <livewire:make-feedback />
 @endsection

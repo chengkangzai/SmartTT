@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -15,6 +16,13 @@ class StatsOverview extends BaseWidget
 
     protected function getCards(): array
     {
+        if (app(GeneralSetting::class)->site_mode == 'Enquiry') {
+            return [
+                Card::make(__('Active Tours'), Tour::active()->count()),
+                Card::make(__('Total Tours'), Tour::count()),
+            ];
+        }
+
         return [
             Card::make(__('Users'), User::count()),
             Card::make(__('Bookings'), Booking::active()->count()),

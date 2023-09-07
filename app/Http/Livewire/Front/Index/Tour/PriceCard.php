@@ -21,20 +21,22 @@ class PriceCard extends Component
 
     public PackagePricing $cheapestPackagePricing;
 
-    public function mount(Tour $tour)
+    public function mount(Tour $tour): void
     {
         $this->tour = $tour;
 
         $this->default_currency_symbol = app(GeneralSetting::class)->default_currency_symbol;
 
-        $this->packageId = $tour->activePackages->first()->id;
-        $this->cheapestPackagePricing = $tour
-            ->activePackages
-            ->map(function ($package) {
-                return $package->activePricings->sortBy('price')->first();
-            })
-            ->sortBy('price')
-            ->first();
+        if (app(GeneralSetting::class)->site_mode !== 'Enquiry') {
+            $this->packageId = $tour->activePackages->first()->id;
+            $this->cheapestPackagePricing = $tour
+                ->activePackages
+                ->map(function ($package) {
+                    return $package->activePricings->sortBy('price')->first();
+                })
+                ->sortBy('price')
+                ->first();
+        }
     }
 
     public function render(): Factory|View|Application

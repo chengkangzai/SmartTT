@@ -12,9 +12,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Airline extends Model
 {
-    use SoftDeletes;
     use HasFactory;
     use LogsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',

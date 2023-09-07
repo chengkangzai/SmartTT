@@ -14,8 +14,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class PackagePricing extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
 
     public $fillable = [
         'package_id',

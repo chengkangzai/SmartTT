@@ -133,4 +133,9 @@ class BookingResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function canViewAny(): bool
+    {
+        return parent::canViewAny() && app(GeneralSetting::class)->site_mode !== 'Enquiry';
+    }
 }

@@ -16,7 +16,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel='icon' href='/icon.gif' type='image/gif' sizes='16x16'>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script defer src="{{ asset('js/alpine.js') }}"></script>
     @livewireStyles
@@ -26,11 +27,11 @@
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
             <a href="{{ route('front.index') }}" class="sidebar-brand-full">
-                <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="118">
+                <img src="{{ asset('landscape_logo.png') }}" alt="logo" width="118">
             </a>
 
             <a href="{{ route('front.index') }}" class="sidebar-brand-narrow">
-                <img src="{{ asset('button_smart-tt.png') }}" alt="logo" width="46">
+                <img src="{{ asset('landscape_logo.png') }}" alt="logo" width="46">
             </a>
         </div>
         @include('smartTT.layouts.navigation')
