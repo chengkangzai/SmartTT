@@ -96,7 +96,7 @@
                 <div class="hidden border md:mx-8 md:flex"></div>
                 <div class="mx-auto w-full p-5">
                     <h6 class="py-4 text-center text-2xl font-bold">{{ __('Follow Us On') }}</h6>
-                    <div class="mx-auto flex flex-row justify-between gap-8 md:py-8">
+                    <div class="mx-auto flex flex-row justify-center gap-8 md:py-8">
                         @if ($setting->facebook_enable)
                             <a href="{{ $setting->facebook_link }}" target="_blank" rel="noopener noreferrer">
                                 <svg class="h-8 w-8">
