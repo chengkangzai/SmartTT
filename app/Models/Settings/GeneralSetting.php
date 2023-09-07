@@ -23,13 +23,13 @@ class GeneralSetting extends Settings
 
     public string $company_name;
 
-    public string $company_address;
+    public ?string $company_address;
 
     public string $company_phone;
 
     public string $company_email;
 
-    public string $business_registration_no;
+    public ?string $business_registration_no;
 
     public array $supported_site_mode;
 
