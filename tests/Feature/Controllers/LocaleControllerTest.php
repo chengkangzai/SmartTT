@@ -16,7 +16,7 @@ it('should use the default locale and see Featured Tour', function () {
 
     get('/')
         ->assertSee('Tours')
-        ->assertDontSeeText('Featured Tour');
+        ->assertSeeText('Featured Tour');
 });
 
 it('should change the locale', function () {
