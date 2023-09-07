@@ -39,6 +39,7 @@ jobs:
 
       - name: Migrate database
         run: |
+          php artisan migrate --force
           mysql --version
 
       - name: Execute tests
