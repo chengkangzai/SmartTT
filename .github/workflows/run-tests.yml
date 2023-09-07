@@ -34,12 +34,12 @@ jobs:
 
       - name: Prepare Laravel Application
         run: |
+          php artisan migrate --force
           php artisan key:generate
           php artisan --version
 
       - name: Migrate database
         run: |
-          php artisan migrate --force
           mysql --version
 
       - name: Execute tests
