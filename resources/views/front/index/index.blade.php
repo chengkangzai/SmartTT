@@ -104,16 +104,17 @@
         </div>
     </section>
     <livewire:front.index.index.featured-tour/>
-    <h2 class="my-5 text-center text-3xl font-bold">
-        {{ __('Feedbacks') }}
-    </h2>
-    <div x-data="{ modalOpen: false, currentFeedback: {} }">
+    @if($feedbacks->isNotEmpty())
+        <h2 class="my-5 text-center text-3xl font-bold">
+            {{ __('Feedbacks') }}
+        </h2>
+        <div x-data="{ modalOpen: false, currentFeedback: {} }">
 
-        <div class="swiper mySwiper container py-2">
-            <div class="swiper-wrapper py-5">
-                @foreach ($feedbacks as $feedback)
-                    <div class="swiper-slide rounded-lg border bg-white p-5 shadow-md hover:cursor-pointer"
-                         @click="modalOpen = true; currentFeedback = {
+            <div class="swiper mySwiper container py-2">
+                <div class="swiper-wrapper py-5">
+                    @foreach ($feedbacks as $feedback)
+                        <div class="swiper-slide rounded-lg border bg-white p-5 shadow-md hover:cursor-pointer"
+                             @click="modalOpen = true; currentFeedback = {
                              name: '{{ $feedback->name }}',
                              content: '{{ $feedback->content }}',
                              images: [
@@ -124,78 +125,79 @@
                                      }, @endforeach
                              ]
                          }">
-                        <div class="mb-4 flex items-start">
-                            <div class="w-16 flex-none">
-                                <img
-                                    src="{{ 'https://ui-avatars.com/api/?name=' . urlencode($feedback->name) . '&size=64' }}"
-                                    alt="{{ $feedback->name }}'s Image"
-                                    class="h-16 w-16 rounded-full border-2 border-gray-300"/>
-                            </div>
-                            <div class="ml-4 flex-grow">
-                                <p class="line font-bold">{{ $feedback->name }}</p>
-                                <p class="text-gray-600">{{ $feedback->content }}</p>
+                            <div class="mb-4 flex items-start">
+                                <div class="w-16 flex-none">
+                                    <img
+                                        src="{{ 'https://ui-avatars.com/api/?name=' . urlencode($feedback->name) . '&size=64' }}"
+                                        alt="{{ $feedback->name }}'s Image"
+                                        class="h-16 w-16 rounded-full border-2 border-gray-300"/>
+                                </div>
+                                <div class="ml-4 flex-grow">
+                                    <p class="line font-bold">{{ $feedback->name }}</p>
+                                    <p class="text-gray-600">{{ $feedback->content }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
-        </div>
 
-        <!-- Modal -->
-        <div :class="{ 'hidden': !modalOpen }" x-cloak x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-             x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 transition-all duration-300 ease-in-out">
-            <div class="relative w-full max-w-lg rounded-md bg-white p-6 shadow-md"
-                 @keydown.escape.window="modalOpen = false">
-                <button @click="modalOpen = false"
-                        class="absolute top-2 right-2 rounded-full px-4 py-2 text-xl hover:bg-gray-200">&times;
-                </button>
-                <h2 class="mb-4 text-xl" x-text="currentFeedback.name"></h2>
-                <p x-text="currentFeedback.content"></p>
+            <!-- Modal -->
+            <div :class="{ 'hidden': !modalOpen }" x-cloak x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 transition-all duration-300 ease-in-out">
+                <div class="relative w-full max-w-lg rounded-md bg-white p-6 shadow-md"
+                     @keydown.escape.window="modalOpen = false">
+                    <button @click="modalOpen = false"
+                            class="absolute top-2 right-2 rounded-full px-4 py-2 text-xl hover:bg-gray-200">&times;
+                    </button>
+                    <h2 class="mb-4 text-xl" x-text="currentFeedback.name"></h2>
+                    <p x-text="currentFeedback.content"></p>
 
-                <div x-intersect="new Swiper($refs.swiperContainer, {
+                    <div x-intersect="new Swiper($refs.swiperContainer, {
                     pagination: {
                         el: $refs.swiperPagination,
                     },
                     loop: true,
                     rewind: true,
                 });">
-                    <div class="swiper container py-2" x-ref="swiperContainer">
-                        <div class="swiper-wrapper">
-                            <template x-for="(image, index) in currentFeedback.images" :key="index">
-                                <div class="swiper-slide rounded-xl border bg-white shadow-md">
-                                    <img :src="image.url" :alt="image.alt"
-                                         class="h-64 w-full rounded-xl object-cover"/>
-                                </div>
-                            </template>
+                        <div class="swiper container py-2" x-ref="swiperContainer">
+                            <div class="swiper-wrapper">
+                                <template x-for="(image, index) in currentFeedback.images" :key="index">
+                                    <div class="swiper-slide rounded-xl border bg-white shadow-md">
+                                        <img :src="image.url" :alt="image.alt"
+                                             class="h-64 w-full rounded-xl object-cover"/>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="swiper-pagination" x-ref="swiperPagination"></div>
                         </div>
-                        <div class="swiper-pagination" x-ref="swiperPagination"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            pagination: {
-                el: ".swiper-pagination",
-            },
-            loop: true,
-            rewind: true,
-            slidesPerView: 1,
-            breakpoints: {
-                768: {
-                    slidesPerView: 3,
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                pagination: {
+                    el: ".swiper-pagination",
                 },
-            },
-            spaceBetween: 15,
-            autoheight: true,
-        });
-    </script>
+                loop: true,
+                rewind: true,
+                slidesPerView: 1,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 3,
+                    },
+                },
+                spaceBetween: 15,
+                autoheight: true,
+            });
+        </script>
+    @endif
 
     <livewire:make-feedback/>
 @endsection
