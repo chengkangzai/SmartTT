@@ -15,12 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@yield('title') - {{ $site_name }}</title>
     <meta name="theme-color" content="#ffffff">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('tailwind/app.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="{{ asset('js/alpine.js') }}"></script>
+
     @livewireStyles
     @stack('style')
 </head>
