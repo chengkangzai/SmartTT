@@ -37,7 +37,7 @@
             @endforeach
         </div>
     @endif
-    <div class="mx-auto py-2">
+    <div class="mx-auto flex flex-col justify-center py-2">
         @if ($siteMode == 'Online Booking')
             <a href="{{ $this->generateBookNowLink($packageId) }}"
                 class="block rounded-xl bg-green-500 px-8 py-2 font-bold decoration-0">
@@ -50,6 +50,13 @@
                 class="block rounded-xl bg-green-500 px-8 py-2 font-bold">
                 {{ __('Enquiry Now!') }}
             </button>
+        @endif
+        @if (config('services.extra.deposit.enabled'))
+            <small class="mt-2">
+                {{ __('Deposit of :percentage is required to confirm this tour.', [
+                    'percentage' => config('services.extra.deposit.percentage') . '%',
+                ]) }}
+            </small>
         @endif
     </div>
 </div>

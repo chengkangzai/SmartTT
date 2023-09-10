@@ -35,4 +35,11 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'extra' => [
+        'deposit' => [
+            'enabled' => env('DEPOSIT_ENABLED', false),
+            'percentage' => env('DEPOSIT_PERCENTAGE', 50),
+        ],
+    ],
 ];
