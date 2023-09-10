@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/alpine.js": "/js/alpine.js",
     "/js/chart.js": "/js/chart.js",
+    "/css/filament.css": "/css/filament.css",
     "/tailwind/app.css": "/tailwind/app.css",
     "/booking_css/booking_css.css": "/booking_css/booking_css.css",
     "/css/app.css": "/css/app.css"

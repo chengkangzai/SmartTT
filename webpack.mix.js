@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('node_modules/chart.js/dist/chart.js', 'public/js/chart.js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/booking_css.scss', 'public/booking_css')
+    .css('resources/css/filament.css', 'public/css')
     .postCss("resources/css/app.css", "public/tailwind", [
         require("tailwindcss"),
     ])

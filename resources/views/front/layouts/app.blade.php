@@ -16,6 +16,7 @@
     <title>@yield('title') - {{ $site_name }}</title>
     <meta name="theme-color" content="#ffffff">
     <link href="{{ asset('tailwind/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/filament.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
