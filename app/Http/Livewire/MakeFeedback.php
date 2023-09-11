@@ -3,35 +3,74 @@
 namespace App\Http\Livewire;
 
 use App\Models\Feedback;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class MakeFeedback extends Component
+class MakeFeedback extends Component implements HasForms
 {
-    public string $name = '';
+    use InteractsWithForms;
 
-    public string $feedback;
+    public array $images = [];
+
+    public string $name;
+
+    public string $content;
+
+    public Feedback $feedback;
 
     public $showSuccessMessage = false;
 
-    public array $rules = [
-        'name' => ['string', 'max:255'],
-        'feedback' => ['required', 'string', 'max:255'],
-    ];
+    protected function getFormSchema(): array
+    {
+        return [
+            TextInput::make('name')
+                ->label(__('Name')),
+
+            Textarea::make('content')
+                ->validationAttribute('feedback')
+                ->label(__('Content'))
+                ->columnSpan(2)
+                ->required(),
+
+            SpatieMediaLibraryFileUpload::make('images')
+                ->model(Feedback::class)
+                ->placeholder(__('Drag & Drop your file or browse'))
+                ->label(__('Images'))
+                ->multiple()
+                ->collection('images')
+                ->acceptedFileTypes([
+                    'image/*',
+                ]),
+        ];
+    }
 
     public function submit(): void
     {
-        $this->validate();
+        $data = $this->form->getState();
 
-        Feedback::create([
-            'name' => $this->name,
-            'content' => $this->feedback,
+        $feedback = Feedback::create([
+            'name' => $data['name'],
+            'content' => $data['content'],
         ]);
 
-        $this->showSuccessMessage = true;
+        foreach ($this->images as $media) {
+            $feedback->addMedia($media)->toMediaCollection('images');
+        }
 
+        $this->showSuccessMessage = true;
     }
 
-    public function render()
+    protected function getFormModel(): string
+    {
+        return Feedback::class;
+    }
+
+    public function render(): View
     {
         return view('livewire.make-feedback');
     }

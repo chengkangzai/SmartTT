@@ -92,20 +92,26 @@ class FeedbackResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Name'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('content')
+                    ->label(__('Content'))
                     ->limit(50)
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('user.name')
+                    ->label(__('User'))
                     ->searchable()
                     ->sortable(),
 
                 IconColumn::make('is_listed')
                     ->label(__('Is Listed'))
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->boolean()
                     ->visible(auth()->user()->isInternalUser()),
             ]);
     }

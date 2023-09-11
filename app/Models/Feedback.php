@@ -34,4 +34,9 @@ class Feedback extends Model implements HasMedia
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeListed($query)
+    {
+        return $query->where('is_listed', true);
+    }
 }

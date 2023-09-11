@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use App\Models\Settings\GeneralSetting;
 use App\Models\Tour;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -16,8 +17,11 @@ class PublicIndexController extends Controller
             ?->first()
             ?->getUrl() ?? 'https://via.placeholder.com/640x480.png';
 
+        $feedbacks = Feedback::listed()->get();
+
         return view('front.index.index', [
             'imageUrl' => $imageUrl,
+            'feedbacks' => $feedbacks,
         ]);
     }
 
@@ -44,6 +48,9 @@ class PublicIndexController extends Controller
                 'answer' => $description->description,
             ]);
 
-        return view('front.index.tours', compact('tour', 'des'));
+        return view('front.index.tours', [
+            'tour' => $tour,
+            'des' => $des,
+        ]);
     }
 }
