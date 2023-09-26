@@ -33,6 +33,7 @@
         "microsoft/microsoft-graph": "^1.105",
         "owenvoke/blade-fontawesome": "^2.4.1",
         "phpsa/filament-authentication": "^2.4.2",
+        "ralphjsmit/laravel-seo": "*",
         "spatie/laravel-activitylog": "^4.7.3",
         "spatie/laravel-livewire-wizard": "^1.2.0",
         "spatie/laravel-medialibrary": "^10.12.2",

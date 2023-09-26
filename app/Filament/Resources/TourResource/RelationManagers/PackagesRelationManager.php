@@ -3,10 +3,12 @@
 namespace App\Filament\Resources\TourResource\RelationManagers;
 
 use App\Filament\Resources\PackageResource;
+use App\Models\Settings\GeneralSetting;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PackagesRelationManager extends RelationManager
@@ -45,5 +47,10 @@ class PackagesRelationManager extends RelationManager
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    protected function canView(Model $record): bool
+    {
+        return app(GeneralSetting::class)->site_mode !== 'Enquiry';
     }
 }
