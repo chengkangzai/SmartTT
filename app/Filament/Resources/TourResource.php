@@ -6,7 +6,6 @@ use App\Filament\Resources\ActivitiesRelationManagerResource\RelationManagers\Ac
 use App\Filament\Resources\TourResource\Pages;
 use App\Filament\Resources\TourResource\RelationManagers\DescriptionRelationManager;
 use App\Filament\Resources\TourResource\RelationManagers\PackagesRelationManager;
-use App\Models\Settings\GeneralSetting;
 use App\Models\Settings\TourSetting;
 use App\Models\Tour;
 use Closure;
@@ -252,7 +251,7 @@ class TourResource extends Resource
     {
         return [
             DescriptionRelationManager::class,
-                PackagesRelationManager::class
+            PackagesRelationManager::class,
         ]
             + (auth()->user()?->can('Audit Tour') ? [ActivitiesRelationManager::class] : []);
     }
