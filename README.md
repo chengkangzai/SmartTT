@@ -1,7 +1,29 @@
 # SmartTT
+Welcome to the GitHub page for SmartTT! This web-based application is crafted to help travel agencies streamline their operations and provide customers with a smooth booking experience. As the travel industry begins to bounce back from the COVID-19 pandemic disruptions, SmartTT stands out as a vital tool for boosting efficiency and enhancing service delivery.
 
-SmartTT is a simple, fast, and powerful tool for managing your travel agencies and bring it to online business with
-ease!
+## Introduction
+The travel sector has been hit hard by the pandemic, with restrictions greatly reducing face-to-face interactions and travel. Traditional booking methods like phone calls and walk-ins have become inefficient. SmartTT revolutionizes this process by offering an online platform where everything from booking to payment can be handled with ease.
+
+## Demo
+Check out SmartTT live in action here: [Demo](https://smarttt.chengkangzai.com/).
+
+## Goals / Features
+- [x] **User Authentication** : Secure login systems for all users.
+- [x] **Profile Management**: Easily manage user profiles.
+- [x] **Role-Based Authorization**: Ensures users only access appropriate features.
+- [x] **Tour and Trips Management**: Create and manage listings.
+- [x] **Booking Management**: Efficient handling of all bookings.
+- [x] **Automated Invoices and Receipts**: Automates documentation.
+- [x] **Sales Reporting**: Detailed insights into your business performance.
+- [x] **Manual Flight Management**: Oversee flight arrangements manually.
+- [x] **Calendar Synchronization**: Currently supports Microsoft Calendar (Gmail and iCloud coming soon).
+- [x] **Automated Chatbot**: Guides users in choosing tours.
+- [x] **Multi-language Support**: Available in English, Chinese, and Malay. Contributions for more languages are welcome! 
+- [ ] Google Flight API integration.
+- [ ] Social media scheduling for announcements.
+- [ ] Comprehensive API for third-party integrations.
+- [ ] Development of a mobile application.
+
 
 ## Getting Started
 
@@ -13,63 +35,45 @@ ease!
 - [NPM](https://www.npmjs.com/get-npm)
 - [MySQL](https://www.mysql.com/products/workbench/)
 
-#### Setting up
+### Develepment / Deployment
 
-Go into the repo
+1. Clone the repository with git or GitHub Desktop.
+2. Go into the repo
 
 ```shell
+git clone https://github.com/chengkangzai/SmartTT.git
 cd SmartTT
 ```
 
-Copy and Setting up the environment file
+3. Copy the example environment file and Setting up the environment file
 
 ```shell
 cp .env.example .env
 ```
 
-Now you have to fill up the environment file by your IDE/Code Editor
+4. Now you have to fill up the environment file by your IDE/Code Editor
 
-#### Installing Dependencies
+5. Installing Dependencies
 
-Assume you have installed Composer and Node and NPM
+> [!IMPORTANT]  
+> Please ensure you have installed Composer, Node and npm.
 
-Installing Composer dependencies
-
-```shell
- composer install
-```
-
-Installing NPM dependencies and build it
+6. Installing dependencies
 
 ```shell
+composer install
 npm install
 npm run dev
 ```
-
-#### Setting up laravel
-
-Generate Application Key
+7. Set up database
 
 ```shell
 php artisan key:generate
-```
-
-Migrate the database and seed the data
-
-```shell
 php artisan migrate --seed
-```
-
-To generate responsive image, invoice, receipt,
-This command will take awhile to run
-```shell
 php artisan queue:work
 ```
 
-
-#### FINALLY
-
-Server the application
+8. Server the application
 
 ```shell
 php artisan server
@@ -83,7 +87,10 @@ visit `http://localhost:8000` to see the website
 composer test
 ```
 
-### Algolia
+<details>
+  <summary>Additional Enviroment File Configuration</summary>
+
+### [Algolia](https://www.algolia.com/)
 
 To set up Algolia, you need to register the application on Algolia and get the API key and Application ID.
 Otherwise, you will not be able to use the search feature.
@@ -94,7 +101,7 @@ ALGOLIA_APP_ID=xxxxx
 ALGOLIA_SECRET=xxxxx
 ```
 
-### Stripe API
+### [Stripe API](https://stripe.com/) (Optional, if you dont collect money online)
 
 To set up Stripe, you need to register the application on Stripe and get the API key.
 Otherwise, you will not be able to use the payment feature.
@@ -106,7 +113,7 @@ STRIPE_SECRET=xxxxx
 STRIPE_WEBHOOK_SECRET=xxxxx
 ```
 
-### Microsoft Graph API
+### [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview) (Optinal, this will disallow customer to sync event to their calendar)
 
 To set up Microsoft Graph to synchronize calendar, you need to register the application on Microsoft Graph and get the
 API key.
@@ -124,7 +131,7 @@ OAUTH_AUTHORIZE_ENDPOINT=/oauth2/v2.0/authorize
 OAUTH_TOKEN_ENDPOINT=/oauth2/v2.0/token
 ```
 
-### Dialogflow
+### [Dialogflow](https://cloud.google.com/dialogflow) (Optional, this will power the ChatBot)
 
 To set up Dialogflow, you need to register the application on Dialogflow and get the service account json file from
 Google cloud Platform.
@@ -163,5 +170,28 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="admin@smartTT.com"
 MAIL_FROM_NAME=${APP_NAME}
 ```
+</details>
+
+
+## Changelog
+
+Please see [CHANGELOG](https://github.com/chengkangzai/SmartTT/releases) for more information on what has changed recently.
+
+## Contributing & Code of Conduct
+
+Please see [CONTRIBUTING](https://github.com/chengkangzai/SmartTT/blob/master/.github/CONTRIBUTING.md) for details.
+
+## Security Vulnerabilities
+
+Please review [our security policy](https://github.com/chengkangzai/SmartTT/blob/master/.github/SECURITY.md) on how to report security vulnerabilities.
+
+## Credits
+
+- [All Contributors](https://github.com/chengkangzai/SmartTT/graphs/contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](https://github.com/chengkangzai/SmartTT/blob/master/LICENSE) for more information.
+
 
 
