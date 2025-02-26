@@ -22,9 +22,9 @@ beforeEach(function () {
 });
 
 it('should render feedback index page', function () {
-    get(FeedbackResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(FeedbackResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list feedback component ', function () {
     $feedbacks = Feedback::factory()->count(10)->create();
@@ -34,9 +34,9 @@ it('should render list feedback component ', function () {
 });
 
 it('should render feedback create page', function () {
-    get(FeedbackResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(FeedbackResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create feedback', function () {
     $feedback = Feedback::factory()->make();
@@ -62,10 +62,10 @@ it('can validate input', function () {
 });
 
 it('should render feedback view page', function () {
-    get(FeedbackResource::getUrl('view', [
-        'record' => Feedback::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(FeedbackResource::getUrl('view', [
+    'record' => Feedback::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view feedback record ', function () {
     $feedback = Feedback::factory()->create();
@@ -82,10 +82,10 @@ it('should render page to view feedback record ', function () {
 });
 
 it('should render feedback edit page', function () {
-    get(FeedbackResource::getUrl('edit', [
-        'record' => Feedback::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(FeedbackResource::getUrl('edit', [
+    'record' => Feedback::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show feedback record in edit view', function () {
     $feedback = Feedback::factory()->create();

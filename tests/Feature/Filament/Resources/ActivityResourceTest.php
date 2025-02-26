@@ -20,15 +20,15 @@ beforeEach(function () {
 });
 
 it('should render activity index page', function () {
-    get(ActivityResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(ActivityResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render activity view page', function () {
-    get(ActivityResource::getUrl('view', [
-        'record' => Activity::create(['description' => 'test']),
-    ]))->assertSuccessful();
-});
+get(ActivityResource::getUrl('view', [
+    'record' => Activity::create(['description' => 'test']),
+]))->assertSuccessful();
+    });
 
 it('should render page to view activity record ', function () {
     $activity = Activity::create(['description' => 'test']);

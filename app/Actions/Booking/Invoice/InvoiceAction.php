@@ -50,7 +50,7 @@ class InvoiceAction
 
         return $guests
             ->map(function (BookingGuest $g) use ($charge) {
-                return (new InvoiceItem())
+                return (new InvoiceItem)
                     ->title($g->name)
                     ->description($g->packagePricing?->name ?? __('Child'))
                     ->pricePerUnit($g->packagePricing?->price ? $g->packagePricing->price / 100 : $charge);

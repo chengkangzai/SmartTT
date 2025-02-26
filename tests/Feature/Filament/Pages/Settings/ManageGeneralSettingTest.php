@@ -23,6 +23,6 @@ it('should be mountable', function () {
 });
 
 it('should render page', function () {
-    get(ManageGeneralSetting::getUrl())
-        ->assertSuccessful();
-});
+get(ManageGeneralSetting::getUrl())
+->assertSuccessful();
+    });

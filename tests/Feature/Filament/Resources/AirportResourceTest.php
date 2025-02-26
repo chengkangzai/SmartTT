@@ -23,9 +23,9 @@ beforeEach(function () {
 });
 
 it('should render airport index page', function () {
-    get(AirportResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(AirportResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list airport component ', function () {
     $airports = Airport::factory()->count(10)->create();
@@ -35,9 +35,9 @@ it('should render list airport component ', function () {
 });
 
 it('should render airport create page', function () {
-    get(AirportResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(AirportResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create airport', function () {
     $airport = Airport::factory()->make();
@@ -97,10 +97,10 @@ it('can validate input', function () {
 });
 
 it('should render airport view page', function () {
-    get(AirportResource::getUrl('view', [
-        'record' => Airport::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(AirportResource::getUrl('view', [
+    'record' => Airport::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view airport record ', function () {
     $airport = Airport::factory()->create();
@@ -122,10 +122,10 @@ it('should render page to view airport record ', function () {
 });
 
 it('should render airport edit page', function () {
-    get(AirportResource::getUrl('edit', [
-        'record' => Airport::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(AirportResource::getUrl('edit', [
+    'record' => Airport::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show airport record in edit view', function () {
     $airport = Airport::factory()->create();
@@ -167,7 +167,7 @@ it('should edit airport', function () {
         ->call('save')
         ->assertHasNoFormErrors();
     expect($airport->refresh());
-    //;
+    // ;
 });
 
 it('should delete airport', function () {

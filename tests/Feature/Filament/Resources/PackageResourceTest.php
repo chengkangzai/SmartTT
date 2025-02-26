@@ -26,9 +26,9 @@ beforeEach(function () {
 });
 
 it('should render package index page', function () {
-    get(PackageResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(PackageResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list package component ', function () {
     $packages = Package::factory()->count(10)->create();
@@ -38,9 +38,9 @@ it('should render list package component ', function () {
 });
 
 it('should render package create page', function () {
-    get(PackageResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(PackageResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create package', function () {
     $package = Package::factory()->make();
@@ -88,10 +88,10 @@ it('can validate input', function () {
 });
 
 it('should render package view page', function () {
-    get(PackageResource::getUrl('view', [
-        'record' => Package::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(PackageResource::getUrl('view', [
+    'record' => Package::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view package record ', function () {
     $package = Package::factory()
@@ -112,10 +112,10 @@ it('should render page to view package record ', function () {
 });
 
 it('should render package edit page', function () {
-    get(PackageResource::getUrl('edit', [
-        'record' => Package::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(PackageResource::getUrl('edit', [
+    'record' => Package::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show package record in edit view', function () {
     $package = Package::factory()

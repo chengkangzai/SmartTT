@@ -22,9 +22,9 @@ beforeEach(function () {
 });
 
 it('should render user index page', function () {
-    get(UserResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(UserResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list user component ', function () {
     $users = User::factory()->count(5)->create();
@@ -34,9 +34,9 @@ it('should render list user component ', function () {
 });
 
 it('should render user create page', function () {
-    get(UserResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(UserResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create user', function () {
     $user = User::factory()->make();
@@ -72,10 +72,10 @@ it('can validate input', function () {
 });
 
 it('should render user view page', function () {
-    get(UserResource::getUrl('view', [
-        'record' => User::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(UserResource::getUrl('view', [
+    'record' => User::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view user record ', function () {
     $user = User::factory()->create();
@@ -90,10 +90,10 @@ it('should render page to view user record ', function () {
 });
 
 it('should render user edit page', function () {
-    get(UserResource::getUrl('edit', [
-        'record' => User::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(UserResource::getUrl('edit', [
+    'record' => User::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show user record in edit view', function () {
     $user = User::factory()->create();

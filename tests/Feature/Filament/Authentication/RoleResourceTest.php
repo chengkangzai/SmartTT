@@ -23,9 +23,9 @@ beforeEach(function () {
 });
 
 it('should render role index page', function () {
-    get(RoleResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(RoleResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list role component ', function () {
     $roles = Role::all();
@@ -35,12 +35,12 @@ it('should render list role component ', function () {
 });
 
 it('should render role create page', function () {
-    get(RoleResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(RoleResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create role', function () {
-    $role = new Role();
+    $role = new Role;
     $role->name = 'test';
     $role->guard_name = 'web';
 
@@ -58,7 +58,7 @@ it('should create role', function () {
     ]);
 });
 //
-//it('can validate input', function () {
+// it('can validate input', function () {
 //    livewire(RoleResource\Pages\CreateRole::class)
 //        ->fillForm([
 //            'name' => null,
@@ -70,13 +70,13 @@ it('should create role', function () {
 //            'email',
 //            'password',
 //        ]);
-//});
+// });
 
 it('should render role view page', function () {
-    get(RoleResource::getUrl('view', [
-        'record' => Role::get()->first()->id,
-    ]))->assertSuccessful();
-});
+get(RoleResource::getUrl('view', [
+    'record' => Role::get()->first()->id,
+]))->assertSuccessful();
+    });
 
 it('should render page to view role record ', function () {
     $role = Role::get()->first();
@@ -91,10 +91,10 @@ it('should render page to view role record ', function () {
 });
 
 it('should render role edit page', function () {
-    get(RoleResource::getUrl('edit', [
-        'record' => Role::get()->get(2)->id,
-    ]))->assertSuccessful();
-});
+get(RoleResource::getUrl('edit', [
+    'record' => Role::get()->get(2)->id,
+]))->assertSuccessful();
+    });
 
 it('should render page to show role record in edit view', function () {
     $role = Role::get()->get(2);
@@ -111,7 +111,7 @@ it('should render page to show role record in edit view', function () {
 
 it('should edit role', function () {
     $role = Role::get()->get(2);
-    $newRole = new Role();
+    $newRole = new Role;
     $newRole->name = 'test';
     $newRole->guard_name = 'web';
 

@@ -24,6 +24,6 @@ it('should be mountable', function () {
 });
 
 it('should render page', function () {
-    get(ManageTourSetting::getUrl())
-        ->assertSuccessful();
-});
+get(ManageTourSetting::getUrl())
+->assertSuccessful();
+    });

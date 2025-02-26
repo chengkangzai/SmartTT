@@ -23,6 +23,6 @@ it('should be mountable', function () {
 });
 
 it('should render page', function () {
-    get(ManageBookingSetting::getUrl())
-        ->assertSuccessful();
-});
+get(ManageBookingSetting::getUrl())
+->assertSuccessful();
+    });

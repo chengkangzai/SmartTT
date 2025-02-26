@@ -20,9 +20,9 @@ beforeEach(function () {
 });
 
 it('should render booking index page', function () {
-    get(BookingResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(BookingResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list booking component ', function () {
     $bookings = Booking::factory()->count(10)->create();
@@ -32,15 +32,15 @@ it('should render list booking component ', function () {
 });
 
 it('should render booking create page', function () {
-    get(BookingResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(BookingResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should render booking view page', function () {
-    get(BookingResource::getUrl('view', [
-        'record' => Booking::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(BookingResource::getUrl('view', [
+    'record' => Booking::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view booking record ', function () {
     $booking = Booking::factory()->create();

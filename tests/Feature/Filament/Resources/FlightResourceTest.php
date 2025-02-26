@@ -23,9 +23,9 @@ beforeEach(function () {
 });
 
 it('should render flight index page', function () {
-    get(FlightResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(FlightResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list flight component ', function () {
     $flights = Flight::factory()->count(10)->create();
@@ -35,9 +35,9 @@ it('should render list flight component ', function () {
 });
 
 it('should render flight create page', function () {
-    get(FlightResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(FlightResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create flight', function () {
     $flight = Flight::factory()->make();
@@ -93,10 +93,10 @@ it('can validate input', function () {
 });
 
 it('should render flight view page', function () {
-    get(FlightResource::getUrl('view', [
-        'record' => Flight::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(FlightResource::getUrl('view', [
+    'record' => Flight::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view flight record ', function () {
     $flight = Flight::factory()->create();
@@ -117,10 +117,10 @@ it('should render page to view flight record ', function () {
 });
 
 it('should render flight edit page', function () {
-    get(FlightResource::getUrl('edit', [
-        'record' => Flight::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(FlightResource::getUrl('edit', [
+    'record' => Flight::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show flight record in edit view', function () {
     $flight = Flight::factory()->create();

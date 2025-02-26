@@ -25,9 +25,9 @@ beforeEach(function () {
 });
 
 it('should render tour index page', function () {
-    get(TourResource::getUrl('index'))
-        ->assertSuccessful();
-});
+get(TourResource::getUrl('index'))
+->assertSuccessful();
+    });
 
 it('should render list tour component ', function () {
     $tours = Tour::factory()->count(10)->create();
@@ -37,9 +37,9 @@ it('should render list tour component ', function () {
 });
 
 it('should render tour create page', function () {
-    get(TourResource::getUrl('create'))
-        ->assertSuccessful();
-});
+get(TourResource::getUrl('create'))
+->assertSuccessful();
+    });
 
 it('should create tour', function () {
     $tour = Tour::factory()->make();
@@ -77,10 +77,10 @@ it('can validate input', function () {
 });
 
 it('should render tour view page', function () {
-    get(TourResource::getUrl('view', [
-        'record' => Tour::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(TourResource::getUrl('view', [
+    'record' => Tour::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to view tour record ', function () {
     $tour = Tour::factory()->create();
@@ -100,10 +100,10 @@ it('should render page to view tour record ', function () {
 });
 
 it('should render tour edit page', function () {
-    get(TourResource::getUrl('edit', [
-        'record' => Tour::factory()->create(),
-    ]))->assertSuccessful();
-});
+get(TourResource::getUrl('edit', [
+    'record' => Tour::factory()->create(),
+]))->assertSuccessful();
+    });
 
 it('should render page to show tour record in edit view', function () {
     $tour = Tour::factory()->create();
