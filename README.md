@@ -25,6 +25,10 @@ Check out SmartTT live in action here: [Demo](https://smarttt.chengkangzai.com/)
 - [ ] Development of a mobile application.
 
 
+[//]: # (Please note that we need to see relevant documentation or a project description to support a project with a free license. 
+It can be a detailed README file that outlines project goals, features, installation guidelines, deployment details, etc. 
+In addition, we encourage open-source projects to have a code of conduct and contributing guidelines.)
+
 ## Getting Started
 
 ### Requirement
@@ -178,6 +182,27 @@ MAIL_FROM_NAME=${APP_NAME}
 Please see [CHANGELOG](https://github.com/chengkangzai/SmartTT/releases) for more information on what has changed recently.
 
 ## Contributing & Code of Conduct
+
+Please see [CONTRIBUTING](https://github.com/chengkangzai/SmartTT/blob/master/.github/CONTRIBUTING.md) for details.
+
+## Security Vulnerabilities
+
+Please review [our security policy](https://github.com/chengkangzai/SmartTT/blob/master/.github/SECURITY.md) on how to report security vulnerabilities.
+
+## Credits
+
+- [All Contributors](https://github.com/chengkangzai/SmartTT/graphs/contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](https://github.com/chengkangzai/SmartTT/blob/master/LICENSE) for more information.
+
+
+## Changelog
+
+Please see [CHANGELOG](https://github.com/chengkangzai/SmartTT/releases) for more information on what has changed recently.
+
+## Contributing
 
 Please see [CONTRIBUTING](https://github.com/chengkangzai/SmartTT/blob/master/.github/CONTRIBUTING.md) for details.
 
