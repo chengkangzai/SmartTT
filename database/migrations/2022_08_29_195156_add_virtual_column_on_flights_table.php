@@ -12,7 +12,7 @@ return new class extends Migration
             $table->string('airline')->after('airline_id')->nullable();
         });
 
-        //update all flights with the airline name
+        // update all flights with the airline name
         DB::table('flights')->update(['airline' => DB::raw('(SELECT name FROM airlines WHERE id = flights.airline_id)')]);
 
         Schema::table('flights', function (Blueprint $table) {

@@ -12,7 +12,7 @@ class MicrosoftGraphService
 
     public function __construct()
     {
-        $this->tokenService = new TokenService();
+        $this->tokenService = new TokenService;
     }
 
     public function getOAuthClient(): GenericProvider
@@ -32,7 +32,7 @@ class MicrosoftGraphService
     {
         $accessToken = $this->tokenService->getAccessToken($user);
 
-        return (new MicrosoftGraph())
+        return (new MicrosoftGraph)
             ->setAccessToken($accessToken);
     }
 }

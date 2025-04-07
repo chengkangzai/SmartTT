@@ -43,7 +43,7 @@ class BotManController extends Controller
     private function registerSuggestTourHandler(BotMan $botman, DialogFlowV2 $dialogFlow)
     {
         $botman->hears('input.suggest_tour', function (BotMan $bot) {
-            $bot->startConversation(new SuggestTourConversation());
+            $bot->startConversation(new SuggestTourConversation);
         })->middleware($dialogFlow);
     }
 

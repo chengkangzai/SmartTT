@@ -19,7 +19,7 @@ use Stripe\SetupIntent;
 
 class AddPaymentOnBooking extends Component
 {
-    //region Step 1
+    // region Step 1
     public string $billingName = '';
 
     public string $billingPhone = '';
@@ -28,9 +28,9 @@ class AddPaymentOnBooking extends Component
         'billingName' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z ]+$/'],
         'billingPhone' => ['required', 'string', 'max:255', 'regex:/^[0-9]{10,13}$/'],
     ];
-    //endregion
+    // endregion
 
-    //region Step 2
+    // region Step 2
     public string $paymentType = Payment::TYPE_REMAINING;
 
     public string $paymentMethod;
@@ -54,7 +54,7 @@ class AddPaymentOnBooking extends Component
     public Payment $payment;
 
     private SetupIntent $paymentIntent;
-    //endregion
+    // endregion
 
     public Booking $booking;
 
@@ -81,7 +81,7 @@ class AddPaymentOnBooking extends Component
         return view('livewire.booking.add-payment-on-booking');
     }
 
-    //region Step 1
+    // region Step 1
     public function validateBilling(string $field)
     {
         $this->validate([
@@ -105,9 +105,9 @@ class AddPaymentOnBooking extends Component
         $this->currentStep++;
         $this->getReadyForPayment();
     }
-    //endregion
+    // endregion
 
-    //region Step 2 Payment
+    // region Step 2 Payment
     public function getReadyForPayment()
     {
         if ($this->paymentMethod == Payment::METHOD_STRIPE) {
@@ -187,7 +187,7 @@ class AddPaymentOnBooking extends Component
         $this->payment = app(GenerateInvoiceAction::class)->execute($this->payment);
     }
 
-    //endregion
+    // endregion
 
     public function finish()
     {

@@ -33,6 +33,6 @@ it('should be able to generate invoice item for each guest', function () {
         ->shouldAllowMockingProtectedMethods()
         ->shouldReceive('getItems')
         ->andReturn([
-            (new InvoiceItem()),
+            (new InvoiceItem),
         ]);
 });

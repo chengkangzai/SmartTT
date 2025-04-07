@@ -33,7 +33,7 @@ class PaymentSuccessNotification extends Notification implements ShouldQueue
     {
         $currency = app(GeneralSetting::class)->default_currency;
 
-        return (new MailMessage())
+        return (new MailMessage)
             ->line(__('Hi :name,', ['name' => $notifiable->name]))
             ->line(__('Your payment of '.$currency.' :amount has been successful.', ['amount' => number_format($this->payment->amount, 2)]))
             ->action(__('View Receipt'), $this->payment->getFirstMedia('receipts')->getUrl())
