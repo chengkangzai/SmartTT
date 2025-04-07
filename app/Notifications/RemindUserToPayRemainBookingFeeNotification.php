@@ -32,7 +32,7 @@ class RemindUserToPayRemainBookingFeeNotification extends Notification implement
 
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage())
+        return (new MailMessage)
             ->subject(__('Kindly pay your remaining booking fee'))
             ->line(__('Hi :name,', ['name' => $notifiable->name]))
             ->line(__('You have a booking on :date for :package.', [

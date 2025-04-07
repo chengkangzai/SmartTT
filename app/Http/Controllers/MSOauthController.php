@@ -23,8 +23,8 @@ class MSOauthController extends Controller
 
     public function __construct()
     {
-        $this->MSGraphService = new MicrosoftGraphService();
-        $this->tokenService = new TokenService();
+        $this->MSGraphService = new MicrosoftGraphService;
+        $this->tokenService = new TokenService;
     }
 
     public function signin(): RedirectResponse
@@ -60,7 +60,7 @@ class MSOauthController extends Controller
                 $accessToken = $oauthClient->getAccessToken('authorization_code', [
                     'code' => $authCode,
                 ]);
-                $user = (new Graph())
+                $user = (new Graph)
                     ->setAccessToken($accessToken->getToken())
                     ->createRequest('GET', '/me?$select=displayName,mail,mailboxSettings,userPrincipalName')
                     ->setReturnType(User::class)

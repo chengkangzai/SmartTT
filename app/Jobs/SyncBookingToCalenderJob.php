@@ -42,7 +42,7 @@ class SyncBookingToCalenderJob implements ShouldQueue
     {
         $this->booking = $booking;
         $this->user = $user;
-        $this->graph = (new MicrosoftGraphService())->getGraph($booking->user);
+        $this->graph = (new MicrosoftGraphService)->getGraph($booking->user);
 
         $this->timeZone = app(GeneralSetting::class)->default_timezone;
         $this->companyName = app(GeneralSetting::class)->company_name;
